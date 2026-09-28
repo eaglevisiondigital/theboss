@@ -15,12 +15,14 @@ const menu = [
 export default function SiteHeader(){
   return <header className={styles.header}>
     <Link className={styles.brand} href="/" aria-label="BOSS PLUS home">
-      <span>BOSS</span><strong>PLUS</strong>
+      <span className={styles.brandWords}><span>BOSS</span><strong>PLUS</strong></span>
+      <small>THE BOSS ECOSYSTEM</small>
     </Link>
 
     <nav className={styles.nav} aria-label="Primary navigation">
       <Link href="/fundraising">Fundraising</Link>
       <Link href="/boss-bucks">Boss Bucks</Link>
+      <Link href="/money-board">Money Board</Link>
       <Link href="/engage">Engage</Link>
       <Link href="/sports-teams">Sports Teams</Link>
       <Link href="/organizations">Organizations</Link>
@@ -29,7 +31,7 @@ export default function SiteHeader(){
 
     <div className={styles.actions}>
       <Link className={styles.login} href="/contact">Contact</Link>
-      <Link className={styles.cta} href="/get-started">Get Started</Link>
+      <Link className={styles.cta} href="/get-started">Get Started <span>→</span></Link>
     </div>
 
     <details className={styles.mobileMenu}>
