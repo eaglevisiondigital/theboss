@@ -42,6 +42,7 @@
 - Add dedicated merchant intake and fundraising intake variants if needed.
 - Confirm production contact destinations.
 - Trigger Netlify preview build from the approved build branch.
+- Premium form styling completed across Get Started, Fundraising, Merchant, Sales Rep, and Contact flows.
 - Hosted responsive QA.
 - Accessibility, metadata, and form validation pass.
 
