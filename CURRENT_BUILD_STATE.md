@@ -25,6 +25,9 @@
 - Thank-you flow added.
 - Audience segmentation and merchant experience expanded.
 - Governance docs added.
+- Shared site header/footer components added.
+- General contact flow added.
+- Privacy and Terms placeholders added for pre-launch routing.
 
 ## Pending before preview release
 - Commit exact approved BOSS PLUS and vertical logo image assets into `/public/brand`.
