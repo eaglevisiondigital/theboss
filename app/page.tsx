@@ -55,7 +55,7 @@ export default function Home(){
         <div className={exact.copy}>
           <div className={exact.kicker}>THE BOSS ECOSYSTEM</div>
           <h1>FUNDRAISE<br/>LIKE A <span>BOSS.</span></h1>
-          <h2>Helping Support, Engage & Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
+          <h2>Helping Support, Engage &<br/>Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
 
           <div className={exact.pillars}>
             <div className={exact.pillar}>
