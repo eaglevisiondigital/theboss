@@ -48,3 +48,79 @@ footer{padding:45px 6vw;background:#08080a;display:grid;grid-template-columns:1f
 @media(max-width:1100px){.product-grid,.path-grid{grid-template-columns:repeat(2,1fr)}.stage-grid{grid-template-columns:1fr}.split-section{grid-template-columns:1fr}.merchant-panel{grid-template-columns:1fr}.product-card:last-child,.path-card:last-child{grid-column:span 2}.nav-shell nav{display:none}}
 @media(max-width:700px){.nav-shell{padding:0 20px;height:68px}.nav-cta{padding:10px 14px}.hero{padding:86px 22px 50px;min-height:auto}.hero h1{font-size:57px}.hero-copy{font-size:17px}.hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hero-proof i{display:none}.hero-stage{margin-top:45px}.stage-main,.stage-card{min-height:180px;padding:24px}.stage-title{font-size:38px}.section,.split-section{padding:78px 22px}.section-head{display:block}.section-head>p{margin-top:24px}.product-grid,.path-grid{grid-template-columns:1fr}.product-card:last-child,.path-card:last-child{grid-column:auto}.product-card{min-height:360px}.split-copy h2,.section-head h2,.merchant-panel h2,.cta-band h2{font-size:43px}.money-board{transform:none;padding:18px}.amount-grid{grid-template-columns:repeat(3,1fr)}.merchant-panel{padding:30px 22px}.merchant-orbit{min-height:290px}.cta-band{display:block;padding:70px 22px}.cta-actions{margin-top:30px}footer{grid-template-columns:1fr;gap:18px;text-align:left}.footer-copy,.footer-meta{text-align:left}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Premium image-led homepage pass */
+.hero-photo{min-height:900px;display:flex;align-items:flex-end;padding-bottom:90px;isolation:isolate}
+.hero-photo-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-3}
+.hero-photo-overlay{position:absolute;inset:0;z-index:-2;background:
+linear-gradient(90deg,rgba(8,8,10,.96) 0%,rgba(8,8,10,.82) 40%,rgba(8,8,10,.2) 75%,rgba(8,8,10,.1) 100%),
+linear-gradient(180deg,rgba(8,8,10,.18) 0%,rgba(8,8,10,.2) 55%,#09090b 100%)}
+.hero-content{position:relative;max-width:920px;z-index:2}
+.hero-photo h1{max-width:980px}
+.hero-photo h1 span{-webkit-text-stroke:0;color:#fff}
+.hero-floating{position:absolute;right:6vw;bottom:75px;width:min(430px,36vw);padding:22px;border:1px solid rgba(255,255,255,.16);background:rgba(15,15,18,.76);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.hero-float-label{font-size:9px;letter-spacing:.18em;color:#ff7625;font-weight:900;margin-bottom:14px}
+.hero-float-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hero-float-grid>div{padding:13px 10px;border-radius:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.hero-float-grid small{display:block;color:#777;font-size:8px;font-weight:900;letter-spacing:.15em}
+.hero-float-grid strong{display:block;margin-top:5px;font-size:12px;line-height:1.1}
+
+.visual-story{background:#09090b;padding:0 3vw 80px;display:grid;grid-template-columns:1.25fr .75fr .75fr;gap:14px}
+.visual-card{position:relative;min-height:440px;overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.09);background:#151518}
+.visual-card-wide{min-height:520px}
+.visual-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.visual-card:hover img{transform:scale(1.035)}
+.visual-card-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,8,10,.88) 100%)}
+.visual-card-copy{position:absolute;left:28px;right:28px;bottom:27px}
+.visual-card-copy span{font-size:9px;letter-spacing:.18em;font-weight:900;color:#ff7625}
+.visual-card-copy h2{font-size:clamp(25px,3vw,46px);line-height:.95;letter-spacing:-.05em;margin:9px 0 17px}
+.visual-card-copy a{font-size:12px;font-weight:900;color:#fff}
+
+.impact-banner{position:relative;min-height:560px;display:flex;align-items:flex-end;padding:70px 7vw;overflow:hidden}
+.impact-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.impact-banner-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,10,.94),rgba(8,8,10,.55) 55%,rgba(8,8,10,.2))}
+.impact-banner-copy{position:relative;max-width:820px}
+.impact-banner h2{font-size:clamp(48px,6vw,82px);line-height:.93;letter-spacing:-.06em;margin:15px 0}
+.impact-banner p{max-width:700px;color:#d0d0d4;font-size:18px;line-height:1.6}
+
+.fundraising-visual-stack{position:relative;display:grid;gap:18px;align-self:center}
+.fundraising-photo{position:relative;height:310px;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.fundraising-photo img{width:100%;height:100%;object-fit:cover}
+.fundraising-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,8,10,.82))}
+.fundraising-photo-label{position:absolute;z-index:2;left:24px;right:24px;bottom:22px}
+.fundraising-photo-label span{display:block;color:#ff7625;font-size:9px;font-weight:900;letter-spacing:.16em}
+.fundraising-photo-label strong{display:block;font-size:27px;letter-spacing:-.035em;margin-top:5px}
+.fundraising-visual-stack .money-board{transform:none}
+
+.audience-photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.audience-photo-card{position:relative;min-height:430px;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.audience-photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.audience-photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,8,10,.9))}
+.audience-photo-card span{position:absolute;z-index:2;left:24px;bottom:24px;font-size:24px;font-weight:900;letter-spacing:-.04em}
+.audience-photo-card:hover img{transform:scale(1.04)}
+
+.merchant-panel-image{background:
+radial-gradient(circle at 82% 20%,rgba(255,105,0,.10),transparent 25%),
+#fff}
+
+@media(max-width:1100px){
+  .hero-photo{min-height:820px}
+  .hero-floating{position:relative;right:auto;bottom:auto;width:100%;max-width:720px;margin-top:38px}
+  .visual-story{grid-template-columns:1fr 1fr}
+  .visual-card-wide{grid-column:1/-1}
+  .audience-photo-grid{grid-template-columns:1fr 1fr}
+  .audience-photo-card:last-child{grid-column:1/-1}
+}
+@media(max-width:700px){
+  .hero-photo{min-height:760px;align-items:flex-end;padding:90px 22px 46px}
+  .hero-photo-overlay{background:linear-gradient(180deg,rgba(8,8,10,.36) 0%,rgba(8,8,10,.74) 48%,#09090b 100%)}
+  .hero-floating{padding:16px}
+  .hero-float-grid{grid-template-columns:1fr}
+  .visual-story{grid-template-columns:1fr;padding:0 14px 55px}
+  .visual-card,.visual-card-wide{grid-column:auto;min-height:420px}
+  .impact-banner{min-height:520px;padding:55px 22px}
+  .impact-banner-overlay{background:linear-gradient(180deg,rgba(8,8,10,.24),rgba(8,8,10,.88) 70%)}
+  .audience-photo-grid{grid-template-columns:1fr}
+  .audience-photo-card,.audience-photo-card:last-child{grid-column:auto;min-height:390px}
+  .fundraising-photo{height:250px}
+}
