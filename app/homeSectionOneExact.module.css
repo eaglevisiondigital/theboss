@@ -392,3 +392,11 @@
     ) !important;
   }
 }
+
+
+/* Use the exact uploaded hero artwork with no recompression */
+.hero{
+  background-image:url("/images/hero-athletes.png") !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
