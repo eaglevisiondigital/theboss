@@ -23,9 +23,9 @@ export default function Home() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#ecosystem">Ecosystem</a>
-          <a href="#fundraising">Fundraising</a>
+          <a href="/fundraising">Fundraising</a>
           <a href="#audiences">Who It’s For</a>
-          <a href="#merchants">Merchants</a>
+          <a href="/merchants">Merchants</a>
         </nav>
         <a className="nav-cta" href="#start">Get Started</a>
       </header>
@@ -162,8 +162,8 @@ export default function Home() {
           <p>Tell us who you are and what you want to accomplish. We’ll help you find the right path.</p>
         </div>
         <div className="cta-actions">
-          <a className="button white" href="mailto:info@theboss.biz?subject=Boss%20Get%20Started">Get Started <span>→</span></a>
-          <a className="button ghost" href="mailto:info@theboss.biz?subject=Boss%20Demo">Request a Demo</a>
+          <a className="button white" href="/get-started">Get Started <span>→</span></a>
+          <a className="button ghost" href="/get-started">Request a Demo</a>
         </div>
       </section>
 
