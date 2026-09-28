@@ -1,9 +1,11 @@
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 const products = [
-  {k:"01", name:"Boss Bucks Discounts", line:"Save like a Boss.", desc:"Digital savings that connect supporters to local, regional and nationwide value.", cta:"Explore Boss Bucks"},
-  {k:"02", name:"Boss Fundraising", line:"Fundraise like a Boss.", desc:"Modern campaigns for teams, schools, youth groups, nonprofits and community organizations.", cta:"Raise More"},
-  {k:"03", name:"Boss Money Board", line:"Give like a Boss.", desc:"A visual fundraising experience built to turn small steps into measurable progress.", cta:"See Money Board"},
-  {k:"04", name:"Boss Engage", line:"Engage like a Boss.", desc:"Schedules, registrations, communication, documents, rosters and community in one connected experience.", cta:"Meet Boss Engage"},
-  {k:"05", name:"Boss Family Hub", line:"Keep it all together like a Boss.", desc:"One family account across children, teams, organizations, schedules, fundraising and rewards.", cta:"Explore Family Hub"}
+  {k:"01", name:"Boss Bucks Discounts", line:"Save like a Boss.", desc:"Digital savings that connect supporters to local, regional and nationwide value.", cta:"Explore Boss Bucks", href:"/boss-bucks"},
+  {k:"02", name:"Boss Fundraising", line:"Fundraise like a Boss.", desc:"Modern campaigns for teams, schools, youth groups, nonprofits and community organizations.", cta:"Raise More", href:"/fundraising"},
+  {k:"03", name:"Boss Money Board", line:"Give like a Boss.", desc:"A visual fundraising experience built to turn small steps into measurable progress.", cta:"See Money Board", href:"/money-board"},
+  {k:"04", name:"Boss Engage", line:"Engage like a Boss.", desc:"Schedules, registrations, communication, documents, rosters and community in one connected experience.", cta:"Meet Boss Engage", href:"/engage"},
+  {k:"05", name:"Boss Family Hub", line:"Keep it all together like a Boss.", desc:"One family account across children, teams, organizations, schedules, fundraising and rewards.", cta:"Explore Family Hub", href:"/family-hub"}
 ];
 
 const paths = [
@@ -17,20 +19,7 @@ const paths = [
 export default function Home() {
   return (
     <main>
-      <header className="nav-shell">
-        <a className="brand" href="#top" aria-label="BOSS PLUS home">
-          <span className="brand-word">BOSS</span><span className="brand-plus">PLUS</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#ecosystem">Ecosystem</a>
-          <a href="/fundraising">Fundraising</a>
-          <a href="#audiences">Who It’s For</a>
-          <a href="/merchants">Merchants</a>
-        </nav>
-        <a className="nav-cta" href="#start">Get Started</a>
-      </header>
-
-      <section className="hero" id="top">
+      <SiteHeader/>\n\n      <section className="hero" id="top">
         <div className="hero-glow" />
         <div className="eyebrow">THE BOSS ECOSYSTEM</div>
         <h1>Build a stronger<br/><span>tomorrow together.</span></h1>
@@ -83,7 +72,7 @@ export default function Home() {
               <h3>{p.name}</h3>
               <div className="product-line">{p.line}</div>
               <p>{p.desc}</p>
-              <a href="#start">{p.cta} <span>→</span></a>
+              <a href={p.href}>{p.cta} <span>→</span></a>
             </article>
           ))}
         </div>
@@ -167,11 +156,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
-        <div className="footer-brand"><b>BOSS <span>PLUS</span></b><small>THE BOSS ECOSYSTEM</small></div>
-        <div className="footer-copy">Stronger communities. Brighter tomorrows.</div>
-        <div className="footer-meta">© 2026 BOSS PLUS. All rights reserved.</div>
-      </footer>
-    </main>
+      <SiteFooter/>\n    </main>
   );
 }
