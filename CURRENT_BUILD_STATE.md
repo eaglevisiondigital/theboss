@@ -33,6 +33,11 @@
 - Commit exact approved BOSS PLUS and vertical logo image assets into `/public/brand`.
 - Replace temporary typographic/product icon placeholders with official artwork.
 - Add approved photography and approved product mockups.
+- Execute image-led homepage redesign using approved BOSS PLUS visual world.
+- Integrate exact approved BOSS PLUS and vertical logos across header, product cards, and product pages.
+- Build richer product visual sections for Boss Bucks, Fundraising, Money Board, Engage, and Family Hub.
+- Add premium audience photography and stronger sports / organizations / merchant storytelling.
+- Add subtle motion and premium interactive polish after imagery is in place.
 - Add deeper navigation/footer system across product and audience pages.
 - Add dedicated merchant intake and fundraising intake variants if needed.
 - Confirm production contact destinations.
