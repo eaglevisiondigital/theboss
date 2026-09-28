@@ -17,7 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/get-started",
     "/fundraising/get-started",
     "/merchant-partner",
-    "/sales-rep"
+    "/sales-rep",
+    "/contact",
+    "/privacy",
+    "/terms"
   ];
 
   return routes.map((route) => ({
