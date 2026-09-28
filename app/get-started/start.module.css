@@ -1,1 +1,36 @@
-.page{min-height:100vh;background:#f6f4f0;color:#111}.nav{height:72px;background:#0b0b0d;color:#fff;padding:0 5vw;display:flex;align-items:center}.nav a:last-child{margin-left:auto;color:#aaa;font-size:12px}.nav b{font-size:23px;letter-spacing:-.05em}.nav b span{color:#ff5a00}.intro{padding:85px 7vw 50px;background:#0b0b0d;color:#fff}.eyebrow{font-size:10px;letter-spacing:.22em;color:#ff6d1a;font-weight:900}.intro h1{font-size:clamp(50px,7vw,92px);letter-spacing:-.065em;line-height:.9;margin:18px 0;max-width:1000px}.intro p{color:#b4b4ba;max-width:700px;font-size:18px;line-height:1.6}.formWrap{padding:65px 7vw 100px}.formWrap form{max-width:920px;background:#fff;border:1px solid #e0dcd5;border-radius:28px;padding:36px;box-shadow:0 24px 60px rgba(0,0,0,.06)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid label{font-size:12px;font-weight:800;color:#333;display:grid;gap:8px}.grid input,.grid select,.grid textarea{font:inherit;font-weight:500;border:1px solid #d8d4cd;border-radius:12px;padding:14px;background:#fbfaf8;outline:none}.grid input:focus,.grid select:focus,.grid textarea:focus{border-color:#ff6b12;box-shadow:0 0 0 3px rgba(255,91,0,.1)}.full{grid-column:1/-1}.formWrap button{margin-top:25px;background:linear-gradient(135deg,#ff7800,#ff4e00);border:0;color:#fff;border-radius:999px;padding:16px 23px;font-weight:900;cursor:pointer}.note{font-size:11px;color:#888;margin-top:18px}.hidden{display:none}@media(max-width:650px){.intro,.formWrap{padding-left:22px;padding-right:22px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.formWrap form{padding:24px}}
+.page{min-height:100vh;background:#f5f3ef;color:#111}
+.nav{height:72px;background:#0b0b0d;color:#fff;padding:0 5vw;display:flex;align-items:center}
+.nav a:last-child{margin-left:auto;color:#aaa;font-size:12px}
+.nav b{font-size:23px;letter-spacing:-.05em}.nav b span{color:#ff5a00}
+.intro{position:relative;overflow:hidden;padding:100px 7vw 72px;background:
+radial-gradient(circle at 85% 20%,rgba(255,96,0,.22),transparent 28%),
+linear-gradient(135deg,#0b0b0d,#111116 65%,#171719);color:#fff}
+.intro:after{content:"";position:absolute;right:-120px;bottom:-150px;width:430px;height:430px;border-radius:50%;border:1px solid rgba(255,110,0,.18);box-shadow:0 0 120px rgba(255,90,0,.08)}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:#ff6d1a;font-weight:900}
+.intro h1{font-size:clamp(50px,7vw,92px);letter-spacing:-.065em;line-height:.9;margin:18px 0;max-width:1050px;position:relative;z-index:2}
+.intro p{color:#b4b4ba;max-width:720px;font-size:18px;line-height:1.6;position:relative;z-index:2}
+.formWrap{padding:65px 7vw 110px;position:relative}
+.formWrap:before{content:"";position:absolute;inset:0;background:
+linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.formWrap form{position:relative;z-index:2;max-width:980px;margin:0 auto;background:#fff;border:1px solid #dfdbd4;border-radius:30px;padding:40px;box-shadow:0 30px 75px rgba(0,0,0,.07)}
+.formWrap form:before{content:"Tell us a little about you";display:block;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#ff5a00;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid label{font-size:12px;font-weight:800;color:#333;display:grid;gap:8px}
+.grid input,.grid select,.grid textarea{font:inherit;font-weight:500;border:1px solid #d8d4cd;border-radius:13px;padding:15px;background:#fbfaf8;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.grid textarea{resize:vertical;min-height:115px}
+.grid input:hover,.grid select:hover,.grid textarea:hover{background:#fff}
+.grid input:focus,.grid select:focus,.grid textarea:focus{border-color:#ff6b12;box-shadow:0 0 0 3px rgba(255,91,0,.1);background:#fff}
+.full{grid-column:1/-1}
+.formWrap fieldset{background:#fbfaf8}
+.formWrap button{margin-top:28px;background:linear-gradient(135deg,#ff7800,#ff4e00);border:0;color:#fff;border-radius:999px;padding:16px 24px;font-weight:900;cursor:pointer;box-shadow:0 12px 30px rgba(255,90,0,.22);transition:transform .2s ease,box-shadow .2s ease}
+.formWrap button:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(255,90,0,.3)}
+.note{font-size:11px;color:#888;margin-top:18px;line-height:1.55}
+.hidden{display:none}
+@media(max-width:650px){
+  .intro,.formWrap{padding-left:22px;padding-right:22px}
+  .intro{padding-top:72px;padding-bottom:55px}
+  .grid{grid-template-columns:1fr}.full{grid-column:auto}
+  .formWrap form{padding:24px;border-radius:22px}
+  .formWrap{padding-top:34px}
+}
