@@ -1,246 +1,141 @@
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
+const sportsHero = "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=2200&q=88";
+const football = "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1000&q=84";
+const youth = "https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=1000&q=84";
+const school = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=84";
+const church = "https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1000&q=84";
+const community = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1000&q=84";
+const merchant = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=84";
+const player = "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=84";
 
-const products = [
-  {k:"01", name:"Boss Bucks Discounts", line:"Save like a Boss.", desc:"Digital savings that connect supporters to local, regional and nationwide value.", cta:"Explore Boss Bucks", href:"/boss-bucks"},
-  {k:"02", name:"Boss Fundraising", line:"Fundraise like a Boss.", desc:"Modern campaigns for teams, schools, youth groups, nonprofits and community organizations.", cta:"Raise More", href:"/fundraising"},
-  {k:"03", name:"Boss Money Board", line:"Give like a Boss.", desc:"A visual fundraising experience built to turn small steps into measurable progress.", cta:"See Money Board", href:"/money-board"},
-  {k:"04", name:"Boss Engage", line:"Engage like a Boss.", desc:"Schedules, registrations, communication, documents, rosters and community in one connected experience.", cta:"Meet Boss Engage", href:"/engage"},
-  {k:"05", name:"Boss Family Hub", line:"Keep it all together like a Boss.", desc:"One family account across children, teams, organizations, schedules, fundraising and rewards.", cta:"Explore Family Hub", href:"/family-hub"}
+const audiences = [
+  ["Sports Teams","Build stronger teams on and off the field.",football],
+  ["Youth Groups","More than activities. A higher purpose.",youth],
+  ["Schools","Support students. Create opportunities.",school],
+  ["Churches","Strengthen faith. Build community.",church],
+  ["Community Organizations","Local impact. Lasting change.",community]
 ];
 
-const communityHero = "https://images.unsplash.com/photo-1786604455362-321b116175a4?auto=format&fit=crop&w=2200&q=86";
-const sportsPhoto = "https://images.unsplash.com/photo-1771308378506-7f394413342c?auto=format&fit=crop&w=1600&q=84";
-const volunteerPhoto = "https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=1600&q=84";
-const familyPhoto = "https://images.unsplash.com/photo-1770155591037-089cd17697a0?auto=format&fit=crop&w=1600&q=84";
+const passions = ["Football","Basketball","Soccer","Volleyball","Softball","Track","Cheer","Band","More"];
 
-export default function Home() {
-  return (
-    <main>
-      <SiteHeader/>
+export default function Home(){
+  return <main className="boss-home">
+    <header className="boss-home-nav">
+      <a className="boss-home-brand" href="/"><span className="boss-mark">B</span><span><b>THE BOSS</b><small>PEOPLE. PURPOSE. POSSIBILITIES.</small></span></a>
+      <nav>
+        <a href="/">Home</a><a href="/fundraising">Fundraising</a><a href="/boss-bucks">Boss Bucks</a><a href="/engage">Boss Engage</a><a href="/organizations">Organizations</a><a href="/how-it-works">Resources</a><a href="/contact">Contact</a>
+      </nav>
+      <div className="boss-home-actions"><a className="demo" href="/get-started">Book a Demo</a><a className="start" href="/get-started">Get Started →</a></div>
+    </header>
 
-      <section className="hero hero-photo" id="top">
-        <img className="hero-photo-bg" src={communityHero} alt="People gathering together outdoors in warm evening light" />
-        <div className="hero-photo-overlay"/>
-        <div className="hero-content">
-          <div className="eyebrow">THE BOSS ECOSYSTEM</div>
-          <h1>Stronger communities.<br/><span>Brighter tomorrows.</span></h1>
-          <p className="hero-copy">
-            One connected ecosystem for saving money, raising money, engaging people and creating more opportunity for teams, organizations and families.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href="/get-started">Get Started <span>→</span></a>
-            <a className="button secondary" href="#ecosystem">Explore the Ecosystem</a>
-          </div>
-          <div className="hero-proof" aria-label="Core platform pillars">
-            <span>Save Money</span><i/>
-            <span>Raise Money</span><i/>
-            <span>Build Community</span><i/>
-            <span>Create Opportunity</span>
-          </div>
+    <section className="boss-hero">
+      <img src={sportsHero} alt="Youth athletes together at sunset"/>
+      <div className="boss-hero-shade"/>
+      <div className="boss-hero-copy">
+        <div className="boss-kicker">THE BOSS ECOSYSTEM</div>
+        <h1>FUNDRAISE<br/>LIKE A <span>BOSS.</span></h1>
+        <h2>Helping Support, Engage & Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
+        <div className="boss-hero-pillars">
+          <div><i>♥</i><b>Fundraise<br/>Like a Boss.</b></div>
+          <div><i>●●●</i><b>Engage<br/>Like a Boss.</b></div>
+          <div><i>$</i><b>Save<br/>Like a Boss.</b></div>
         </div>
+        <div className="boss-hero-buttons"><a href="/get-started">Get Started →</a><a className="ghost" href="/how-it-works">▶ See How It Works</a></div>
+      </div>
+      <div className="boss-handwritten">Same Passion.<br/>Bigger<br/>Possibilities.</div>
+    </section>
 
-        <div className="hero-floating">
-          <div className="hero-float-label">ONE APP. MORE WAYS TO MAKE A DIFFERENCE.</div>
-          <div className="hero-float-grid">
-            <div><small>SAVE</small><strong>Boss Bucks</strong></div>
-            <div><small>RAISE</small><strong>Fundraising</strong></div>
-            <div><small>ENGAGE</small><strong>Boss Engage</strong></div>
-          </div>
-        </div>
-      </section>
+    <section className="boss-audience-strip">
+      <div className="boss-section-title"><h2>FOR <span>TEAMS, SCHOOLS, CHURCHES</span> & COMMUNITY ORGANIZATIONS</h2><p>One platform. Every passion. A bigger impact.</p></div>
+      <div className="boss-audience-grid">
+        {audiences.map(([name,desc,img])=><a href={name==="Sports Teams"?"/sports-teams":"/organizations"} className="boss-audience-card" key={name}>
+          <img src={img} alt={name}/>
+          <div><b>{name}</b><p>{desc}</p></div>
+        </a>)}
+      </div>
+    </section>
 
-      <section className="visual-story">
-        <article className="visual-card visual-card-wide">
-          <img src={sportsPhoto} alt="Youth basketball team and coach huddled together" />
-          <div className="visual-card-shade"/>
-          <div className="visual-card-copy">
-            <span>SPORTS TEAMS</span>
-            <h2>Organize your sports team like a Boss.</h2>
-            <a href="/sports-teams">Explore Sports Teams →</a>
-          </div>
-        </article>
-        <article className="visual-card">
-          <img src={volunteerPhoto} alt="Volunteers organizing boxes for community distribution" />
-          <div className="visual-card-shade"/>
-          <div className="visual-card-copy">
-            <span>ORGANIZATIONS</span>
-            <h2>Build community like a Boss.</h2>
-            <a href="/organizations">Explore Organizations →</a>
-          </div>
-        </article>
-        <article className="visual-card">
-          <img src={familyPhoto} alt="Children watching and supporting a youth sports game" />
-          <div className="visual-card-shade"/>
-          <div className="visual-card-copy">
-            <span>FAMILIES</span>
-            <h2>Keep it all together like a Boss.</h2>
-            <a href="/family-hub">Explore Family Hub →</a>
-          </div>
-        </article>
-      </section>
+    <section className="boss-bucks-home">
+      <div className="boss-phone-mock">
+        <div className="boss-phone-notch"/>
+        <div className="boss-app-head">BOSS BUCKS <span>DISCOUNTS</span></div>
+        <div className="boss-deal-feature"><small>FEATURED DEAL</small><strong>$5 OFF</strong><b>ANY PURCHASE</b><span>UNLIMITED USE</span></div>
+        <div className="boss-mini-deals"><div>$1 OFF</div><div>$2 OFF</div><div>$2 OFF</div></div>
+        <div className="boss-mini-nav"><span>Home</span><span>Deals</span><span>Near Me</span><span>Favorites</span><span>Account</span></div>
+      </div>
+      <div className="boss-bucks-copy">
+        <div className="boss-kicker">BOSS BUCKS DIGITAL DISCOUNTS</div>
+        <h2>BOSS BUCKS<br/><span>DIGITAL DISCOUNTS</span></h2>
+        <h3>Raise, Save, Support Expenses Like a Boss.</h3>
+        <p>Boss Bucks is our digital discount card that helps people support your team or organization while enjoying valuable savings all year long.</p>
+        <ul>
+          <li>Save at local restaurants, entertainment, travel and more</li>
+          <li>Help families offset team-related costs</li>
+          <li>Support local businesses</li>
+          <li>Give supporters a real reason to stay connected</li>
+        </ul>
+        <div className="boss-trial-card">
+          <b>Want a no-selling fundraising option?</b>
+          <p>Give away free 30–90 day digital trials. Supporters can donate immediately, and donations of $25 or more can include a free digital card as a thank-you. Smaller donors can give now and purchase later, creating two ways for your organization to raise funds.</p>
+        </div>
+        <a className="boss-orange-button" href="/boss-bucks">Learn More →</a>
+      </div>
+      <div className="boss-bucks-photo">
+        <img src={player} alt="Young athlete holding a phone"/>
+        <div className="boss-handwritten small">Real Savings.<br/>Real Support.<br/>Real Impact.</div>
+      </div>
+      <div className="boss-category-row"><span>Restaurants</span><span>Travel</span><span>Shopping</span><span>Fuel & Auto</span><span>Haircuts</span><span>Entertainment</span></div>
+    </section>
 
-      <section className="section light" id="ecosystem">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow dark">ONE PLATFORM. MULTIPLE WAYS TO GROW.</div>
-            <h2>The ecosystem is the advantage.</h2>
-          </div>
-          <p>Every product can stand on its own, but the bigger opportunity happens when fundraising, discounts, engagement and family participation work together.</p>
-        </div>
-        <div className="product-grid">
-          {products.map((p)=>(
-            <article className="product-card" key={p.name}>
-              <div className="product-number">{p.k}</div>
-              <div className="product-icon-slot" aria-hidden="true">B+</div>
-              <h3>{p.name}</h3>
-              <div className="product-line">{p.line}</div>
-              <p>{p.desc}</p>
-              <a href={p.href}>{p.cta} <span>→</span></a>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section className="boss-money-home">
+      <div className="boss-money-copy">
+        <h2>THE DIGITAL<br/><span>MONEY BOARD</span></h2>
+        <h3>Small Amounts. Big Impact.</h3>
+        <p>We have all seen the paper calendar or whiteboard fundraiser where people choose a dollar amount. The Boss Digital Money Board turns that familiar idea into a one-of-a-kind, state-of-the-art digital fundraising experience.</p>
+        <p>Set your goal, starting amount and increment. The system creates your custom board, tracks every contribution and connects each donation to the right player, individual or family.</p>
+        <a className="boss-orange-button" href="/money-board">Learn More →</a>
+      </div>
+      <div className="boss-money-device">
+        <div className="boss-money-device-top"><small>THE</small><b>MONEY BOARD</b><span>SMALL AMOUNTS. BIG IMPACT.</span></div>
+        <div className="boss-money-progress"><strong>$8,425</strong><span>56% FUNDED</span><strong>$15,000</strong></div>
+        <div className="boss-money-modes"><b>DONATE</b><b>SPIN</b></div>
+        <div className="boss-money-tiles">{["$5","$10","$15","$20","$25","$30","$40","$50","$75"].map((v,i)=><span className={i===1||i===4?"paid":""} key={v}>{v}<small>{i===1||i===4?"FUNDED":"AVAILABLE"}</small></span>)}</div>
+      </div>
+      <div className="boss-money-side">
+        <img src={player} alt="Athlete celebrating"/>
+        <ul>
+          <li>Custom digital money board for your team</li>
+          <li>Set your goal, start amount & increments</li>
+          <li>Leaderboard & family/fan support</li>
+          <li>Optional free Boss Bucks thank-you cards</li>
+          <li>Track progress in real time</li>
+        </ul>
+        <div className="boss-money-note">FUNDRAISING<br/>MADE SIMPLE.<br/>MORE SUPPORT.<br/>BIGGER IMPACT.</div>
+      </div>
+    </section>
 
-      <section className="impact-banner">
-        <img src={volunteerPhoto} alt="Community volunteers working together" />
-        <div className="impact-banner-overlay"/>
-        <div className="impact-banner-copy">
-          <div className="eyebrow">REAL PEOPLE. REAL IMPACT.</div>
-          <h2>Different organizations. Same mission. A brighter tomorrow.</h2>
-          <p>Boss is built to help people fund what matters, connect their communities and create more opportunity long after one campaign ends.</p>
-        </div>
-      </section>
+    <section className="boss-engage-home">
+      <div className="boss-engage-title"><h2>BOSS <span>ENGAGE</span></h2><p>ALL-IN-ONE TEAM & FAMILY HUB</p><a href="/engage">Learn More →</a></div>
+      <div className="boss-engage-tools">
+        {["Registration & Rosters","Payments & Fundraising","Schedules & Calendars","Chats & Messaging","Livestream & Media","Playbooks & Resources","Team & Fan Gear","Courses & Training"].map((x,i)=><div key={x}><i>{["●","▣","▦","●","▶","▤","◆","◆"][i]}</i><span>{x}</span></div>)}
+      </div>
+    </section>
 
-      <section className="split-section" id="fundraising">
-        <div className="split-copy">
-          <div className="eyebrow">BOSS FUNDRAISING</div>
-          <h2>Fundraising should build more than a campaign total.</h2>
-          <p>
-            Boss helps organizations raise now while building a connected supporter base for what comes next.
-          </p>
-          <div className="feature-list">
-            <div><b>01</b><span><strong>Participant attribution</strong>Every link and QR code can connect support to the right person and organization.</span></div>
-            <div><b>02</b><span><strong>Digital Money Board</strong>Visual giving with available, reserved and funded amounts.</span></div>
-            <div><b>03</b><span><strong>Digital membership</strong>Supporters can move directly into Boss Bucks access and future renewals.</span></div>
-            <div><b>04</b><span><strong>More ways to support</strong>Donations, digital savings, merchandise and future campaign products.</span></div>
-          </div>
-          <a className="button primary" href="/fundraising/get-started">Start a Fundraiser <span>→</span></a>
-        </div>
-        <div className="fundraising-visual-stack">
-          <div className="fundraising-photo">
-            <img src={sportsPhoto} alt="Coach leading a youth basketball team huddle" />
-            <div className="fundraising-photo-label"><span>TEAMS RAISE MORE</span><strong>People rally around people.</strong></div>
-          </div>
-          <div className="money-board">
-            <div className="board-top">
-              <div><small>RIVERSIDE TIGERS</small><strong>Digital Money Board</strong></div>
-              <span>68% Funded</span>
-            </div>
-            <div className="progress"><i/></div>
-            <div className="money-stats">
-              <div><small>RAISED</small><strong>$3,420</strong></div>
-              <div><small>GOAL</small><strong>$5,000</strong></div>
-            </div>
-            <div className="amount-grid">
-              {["$1","$5","$10","$20","$25","$50","$75","$100","$125","$150","$200","$250"].map((v,i)=>
-                <div className={i===4||i===7||i===10?"claimed":""} key={v}>{v}{(i===4||i===7||i===10)&&<small>FUNDED</small>}</div>
-              )}
-            </div>
-            <div className="board-actions"><button>Donate</button><button className="outline">Spin</button></div>
-          </div>
-        </div>
-      </section>
+    <section className="boss-passions">
+      <div className="boss-passions-title">SUPPORTING <span>EVERY PASSION</span></div>
+      <div className="boss-passions-row">{passions.map((x,i)=><div key={x}><img src={[football,sportsHero,youth,player,football,youth,player,school,community][i]} alt={x}/><b>{x}</b></div>)}</div>
+      <div className="boss-passions-note">DIFFERENT<br/>PASSIONS.<br/>SAME MISSION.</div>
+    </section>
 
-      <section className="section dark-section" id="audiences">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow">WHO BOSS IS FOR</div>
-            <h2>One platform. Many ways to belong.</h2>
-          </div>
-          <p>Boss is broader than sports. Teams, schools, youth groups, nonprofits, families, supporters and merchants can each enter through the experience that fits them.</p>
-        </div>
-        <div className="audience-photo-grid">
-          <a href="/sports-teams" className="audience-photo-card"><img src={sportsPhoto} alt="Youth sports team"/><span>Sports Teams</span></a>
-          <a href="/organizations" className="audience-photo-card"><img src={volunteerPhoto} alt="Community volunteers"/><span>Organizations</span></a>
-          <a href="/family-hub" className="audience-photo-card"><img src={familyPhoto} alt="Family supporting youth sports"/><span>Families & Supporters</span></a>
-        </div>
-      </section>
+    <section className="boss-merchants-home">
+      <div><h2>LOCAL BUSINESSES MAKE A BIGGER IMPACT</h2><p>Partner with Boss Bucks and reach families, fans and your community while supporting a great cause.</p><a href="/merchant-partner">Become a Partner →</a></div>
+      <div className="boss-merchant-cats"><span>Restaurants</span><span>Entertainment</span><span>Travel & Hotels</span><span>Fuel & Auto</span><span>Haircuts & Salons</span><span>Local Services</span></div>
+    </section>
 
-      <section className="proof-suite">
-        <div className="proof-suite-head">
-          <div>
-            <div className="eyebrow">BUILT TO KEEP PEOPLE MOVING</div>
-            <h2>More participation. More visibility. More momentum.</h2>
-          </div>
-          <p>Boss is designed to make progress visible, celebrate involvement and create more ways for teams, families and organizations to stay engaged.</p>
-        </div>
-        <div className="proof-suite-grid">
-          <article className="proof-panel leaderboard-panel">
-            <div className="proof-kicker">LEADERBOARDS</div>
-            <h3>Celebrate progress.</h3>
-            <div className="leader-list">
-              <div><span>1</span><b>Riverside Tigers</b><strong>$4,320</strong></div>
-              <div><span>2</span><b>Westfield Wildcats</b><strong>$3,910</strong></div>
-              <div><span>3</span><b>Central Panthers</b><strong>$2,960</strong></div>
-              <div><span>4</span><b>North Ridge</b><strong>$2,540</strong></div>
-            </div>
-          </article>
-
-          <article className="proof-panel rewards-panel">
-            <div className="proof-kicker">REWARDS & BADGES</div>
-            <h3>Recognize what matters.</h3>
-            <div className="badge-grid">
-              <span>★<small>Top Fundraiser</small></span>
-              <span>◆<small>Team Player</small></span>
-              <span>♥<small>Community Hero</small></span>
-              <span>▲<small>Goal Reached</small></span>
-              <span>✦<small>Most Improved</small></span>
-              <span>●<small>Boss Supporter</small></span>
-            </div>
-          </article>
-
-          <article className="proof-panel store-panel">
-            <div className="proof-kicker">TEAM / ORG STORES</div>
-            <h3>Show your pride.</h3>
-            <div className="store-items">
-              <div className="merch-card"><div className="merch-shirt">BOSS</div><small>Team Hoodie</small><b>$35</b></div>
-              <div className="merch-card"><div className="merch-hat">B</div><small>Team Hat</small><b>$25</b></div>
-              <div className="merch-card"><div className="merch-bottle">BOSS</div><small>Water Bottle</small><b>$18</b></div>
-            </div>
-            <a href="/organizations">Explore Stores →</a>
-          </article>
-        </div>
-      </section>
-
-      <section className="section light" id="merchants">
-        <div className="merchant-panel merchant-panel-image">
-          <div>
-            <div className="eyebrow dark">MERCHANTS & DISCOUNTS</div>
-            <h2>Support local. Get discovered. Create value.</h2>
-            <p>Boss Bucks helps participating merchants become part of the value families and supporters receive from the ecosystem.</p>
-            <a className="button primary" href="/merchant-partner">Become a Merchant Partner <span>→</span></a>
-          </div>
-          <div className="merchant-orbit">
-            <div className="orbit-center">B+</div>
-            <span className="o1">DINING</span><span className="o2">TRAVEL</span><span className="o3">AUTO</span><span className="o4">FAMILY</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-band" id="start">
-        <div>
-          <div className="eyebrow">PEOPLE. PURPOSE. POSSIBILITIES.</div>
-          <h2>Ready to do it like a Boss?</h2>
-          <p>Tell us who you are and what you want to accomplish. We’ll help you find the right path.</p>
-        </div>
-        <div className="cta-actions">
-          <a className="button white" href="/get-started">Get Started <span>→</span></a>
-          <a className="button ghost" href="/get-started">Request a Demo</a>
-        </div>
-      </section>
-
-      <SiteFooter/>
-    </main>
-  );
+    <footer className="boss-home-footer">
+      <div className="boss-home-brand footer"><span className="boss-mark">B</span><span><b>THE BOSS</b><small>PEOPLE. PURPOSE. POSSIBILITIES.</small></span></div>
+      <nav><a href="/">Home</a><a href="/fundraising">Fundraising</a><a href="/boss-bucks">Boss Bucks</a><a href="/engage">Boss Engage</a><a href="/organizations">Organizations</a><a href="/how-it-works">Resources</a><a href="/contact">Contact</a></nav>
+      <div className="boss-footer-impact">Let’s Make a <b>Bigger Impact Together.</b></div>
+      <div className="boss-footer-bottom">© 2026 The Boss. All rights reserved. <span>Stronger Communities. Brighter Possibilities.</span></div>
+    </footer>
+  </main>
 }
