@@ -167,6 +167,52 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="proof-suite">
+        <div className="proof-suite-head">
+          <div>
+            <div className="eyebrow">BUILT TO KEEP PEOPLE MOVING</div>
+            <h2>More participation. More visibility. More momentum.</h2>
+          </div>
+          <p>Boss is designed to make progress visible, celebrate involvement and create more ways for teams, families and organizations to stay engaged.</p>
+        </div>
+        <div className="proof-suite-grid">
+          <article className="proof-panel leaderboard-panel">
+            <div className="proof-kicker">LEADERBOARDS</div>
+            <h3>Celebrate progress.</h3>
+            <div className="leader-list">
+              <div><span>1</span><b>Riverside Tigers</b><strong>$4,320</strong></div>
+              <div><span>2</span><b>Westfield Wildcats</b><strong>$3,910</strong></div>
+              <div><span>3</span><b>Central Panthers</b><strong>$2,960</strong></div>
+              <div><span>4</span><b>North Ridge</b><strong>$2,540</strong></div>
+            </div>
+          </article>
+
+          <article className="proof-panel rewards-panel">
+            <div className="proof-kicker">REWARDS & BADGES</div>
+            <h3>Recognize what matters.</h3>
+            <div className="badge-grid">
+              <span>★<small>Top Fundraiser</small></span>
+              <span>◆<small>Team Player</small></span>
+              <span>♥<small>Community Hero</small></span>
+              <span>▲<small>Goal Reached</small></span>
+              <span>✦<small>Most Improved</small></span>
+              <span>●<small>Boss Supporter</small></span>
+            </div>
+          </article>
+
+          <article className="proof-panel store-panel">
+            <div className="proof-kicker">TEAM / ORG STORES</div>
+            <h3>Show your pride.</h3>
+            <div className="store-items">
+              <div className="merch-card"><div className="merch-shirt">BOSS</div><small>Team Hoodie</small><b>$35</b></div>
+              <div className="merch-card"><div className="merch-hat">B</div><small>Team Hat</small><b>$25</b></div>
+              <div className="merch-card"><div className="merch-bottle">BOSS</div><small>Water Bottle</small><b>$18</b></div>
+            </div>
+            <a href="/organizations">Explore Stores →</a>
+          </article>
+        </div>
+      </section>
+
       <section className="section light" id="merchants">
         <div className="merchant-panel merchant-panel-image">
           <div>
