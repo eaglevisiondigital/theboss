@@ -20,47 +20,76 @@ const passions = ["Football","Basketball","Soccer","Volleyball","Softball","Trac
 
 export default function Home(){
   return <main className="boss-home">
-    <section aria-label="BOSS homepage introduction">
-      <div className={exact.exactWrap}>
-        <a className={`${exact.hotspot} ${exact.logo}`} href="/" aria-label="The Boss home"/>
-        <a className={`${exact.hotspot} ${exact.home}`} href="/" aria-label="Home"/>
-        <a className={`${exact.hotspot} ${exact.fundraising}`} href="/fundraising" aria-label="Fundraising"/>
-        <a className={`${exact.hotspot} ${exact.bucks}`} href="/boss-bucks" aria-label="Boss Bucks"/>
-        <a className={`${exact.hotspot} ${exact.engage}`} href="/engage" aria-label="Boss Engage"/>
-        <a className={`${exact.hotspot} ${exact.organizations}`} href="/organizations" aria-label="Organizations"/>
-        <a className={`${exact.hotspot} ${exact.resources}`} href="/how-it-works" aria-label="Resources"/>
-        <a className={`${exact.hotspot} ${exact.contact}`} href="/contact" aria-label="Contact"/>
-        <a className={`${exact.hotspot} ${exact.demo}`} href="/get-started" aria-label="Book a Demo"/>
-        <a className={`${exact.hotspot} ${exact.startTop}`} href="/get-started" aria-label="Get Started"/>
-        <a className={`${exact.hotspot} ${exact.startHero}`} href="/get-started" aria-label="Get Started"/>
-        <a className={`${exact.hotspot} ${exact.how}`} href="/how-it-works" aria-label="See How It Works"/>
-        <a className={`${exact.hotspot} ${exact.sports}`} href="/sports-teams" aria-label="Sports Teams"/>
-        <a className={`${exact.hotspot} ${exact.youth}`} href="/organizations" aria-label="Youth Groups"/>
-        <a className={`${exact.hotspot} ${exact.school}`} href="/organizations" aria-label="Schools"/>
-        <a className={`${exact.hotspot} ${exact.church}`} href="/organizations" aria-label="Churches"/>
-        <a className={`${exact.hotspot} ${exact.community}`} href="/organizations" aria-label="Community Organizations"/>
-      </div>
+    <section className={exact.sectionOne} aria-label="BOSS homepage introduction">
+      <header className={exact.header}>
+        <a className={exact.brand} href="/" aria-label="The Boss home">
+          <span className={exact.brandIcon}>B</span>
+          <span className={exact.brandText}><b>THE BOSS</b><small>PEOPLE. PURPOSE. POSSIBILITIES.</small></span>
+        </a>
 
-      <div className={exact.mobileWrap}>
-        <div className={exact.mobileHero}>
-          <div className="boss-kicker">THE BOSS ECOSYSTEM</div>
+        <nav className={exact.nav} aria-label="Homepage navigation">
+          <a href="/">Home</a>
+          <a href="/fundraising">Fundraising</a>
+          <a href="/boss-bucks">Boss Bucks</a>
+          <a href="/engage">Boss Engage</a>
+          <a href="/organizations">Organizations</a>
+          <a href="/how-it-works">Resources</a>
+          <a href="/contact">Contact</a>
+        </nav>
+
+        <div className={exact.actions}>
+          <a className={exact.demo} href="/get-started">Book a Demo</a>
+          <a className={exact.start} href="/get-started">Get Started →</a>
+        </div>
+
+        <details className={exact.mobileMenu}>
+          <summary aria-label="Open navigation"><span></span><span></span><span></span></summary>
+          <div className={exact.mobilePanel}>
+            <a href="/">Home</a><a href="/fundraising">Fundraising</a><a href="/boss-bucks">Boss Bucks</a><a href="/engage">Boss Engage</a><a href="/organizations">Organizations</a><a href="/how-it-works">Resources</a><a href="/contact">Contact</a><a href="/get-started">Get Started</a>
+          </div>
+        </details>
+      </header>
+
+      <div className={exact.hero}>
+        <div className={exact.orangeSlash}/>
+        <div className={exact.copy}>
+          <div className={exact.kicker}>THE BOSS ECOSYSTEM</div>
           <h1>FUNDRAISE<br/>LIKE A <span>BOSS.</span></h1>
           <h2>Helping Support, Engage & Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
-          <div className={exact.mobilePillars}>
-            <div>Fundraise<br/>Like a Boss.</div>
-            <div>Engage<br/>Like a Boss.</div>
-            <div>Save<br/>Like a Boss.</div>
+
+          <div className={exact.pillars}>
+            <div className={exact.pillar}><span className={exact.pillarIcon}>♥</span><b>Fundraise<br/>Like a Boss.</b></div>
+            <div className={exact.pillar}><span className={exact.pillarIcon}>●●●</span><b>Engage<br/>Like a Boss.</b></div>
+            <div className={exact.pillar}><span className={exact.pillarIcon}>$</span><b>Save<br/>Like a Boss.</b></div>
           </div>
-          <div className={exact.mobileButtons}><a href="/get-started">Get Started →</a><a href="/how-it-works">See How It Works</a></div>
+
+          <div className={exact.heroButtons}>
+            <a href="/get-started">Get Started →</a>
+            <a href="/how-it-works">▶ See How It Works</a>
+          </div>
         </div>
-        <div className={exact.mobileAudience}>
-          <h3>FOR <span>TEAMS, SCHOOLS, CHURCHES</span> & COMMUNITY ORGANIZATIONS</h3>
+
+        <div className={exact.handwritten}>Same Passion.<br/>Bigger<br/>Possibilities.</div>
+      </div>
+
+      <div className={exact.audience}>
+        <div className={exact.audienceTitle}>
+          <h2>FOR <span>TEAMS, SCHOOLS, CHURCHES</span> & COMMUNITY ORGANIZATIONS</h2>
           <p>One platform. Every passion. A bigger impact.</p>
-          <div className={exact.mobileGrid}>
-            {audiences.map(([name,desc,img])=><a className={exact.mobileCard} href={name==="Sports Teams"?"/sports-teams":"/organizations"} key={name}>
-              <img src={img} alt={name}/><div><b>{name}</b><small>{desc}</small></div>
-            </a>)}
-          </div>
+        </div>
+
+        <div className={exact.grid}>
+          {audiences.map(([name,desc],i)=>{
+            const imageClass=[exact.img1,exact.img2,exact.img3,exact.img4,exact.img5][i];
+            const icon=["◒","●●●","◆","♜","●●●"][i];
+            return <a href={name==="Sports Teams"?"/sports-teams":"/organizations"} className={exact.card} key={name}>
+              <div className={`${exact.image} ${imageClass}`}/>
+              <div className={exact.cardBottom}>
+                <span className={exact.circleIcon}>{icon}</span>
+                <span className={exact.cardText}><b>{name}</b><small>{desc}</small></span>
+              </div>
+            </a>
+          })}
         </div>
       </div>
     </section>
