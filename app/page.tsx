@@ -58,14 +58,32 @@ export default function Home(){
           <h2>Helping Support, Engage & Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
 
           <div className={exact.pillars}>
-            <div className={exact.pillar}><span className={exact.pillarIcon}>♥</span><b>Fundraise<br/>Like a Boss.</b></div>
-            <div className={exact.pillar}><span className={exact.pillarIcon}>●●●</span><b>Engage<br/>Like a Boss.</b></div>
-            <div className={exact.pillar}><span className={exact.pillarIcon}>$</span><b>Save<br/>Like a Boss.</b></div>
+            <div className={exact.pillar}>
+              <span className={exact.pillarIcon}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path className={exact.fill} d="M12 21s-7-4.4-9.4-8.6C.7 9 .9 5.8 3.2 4.1c2.3-1.7 5.2-1.1 6.8 1 1.6-2.1 4.5-2.7 6.8-1 2.3 1.7 2.5 4.9.6 8.3C19 16.6 12 21 12 21z"/></svg>
+              </span>
+              <b>Fundraise<br/>Like a Boss.</b>
+            </div>
+            <div className={exact.pillar}>
+              <span className={exact.pillarIcon}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="12" cy="6" r="3"/>
+                  <path d="M3.5 19c.4-3.2 2.2-5 4.8-5s4.4 1.8 4.8 5"/><path d="M10.8 19c.4-3.2 2.2-5 4.8-5s4.4 1.8 4.8 5"/>
+                </svg>
+              </span>
+              <b>Engage<br/>Like a Boss.</b>
+            </div>
+            <div className={exact.pillar}>
+              <span className={exact.pillarIcon}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M16 7.2c-.8-1.2-2.1-2-4-2-2.4 0-4 1.2-4 3 0 4.8 8 2 8 7 0 1.9-1.7 3.2-4.4 3.2-2.1 0-3.8-.8-4.8-2.2"/></svg>
+              </span>
+              <b>Save<br/>Like a Boss.</b>
+            </div>
           </div>
 
           <div className={exact.heroButtons}>
             <a href="/get-started">Get Started →</a>
-            <a href="/how-it-works">▶ See How It Works</a>
+            <a href="/how-it-works"><span className={exact.playIcon}>▶</span>See How It Works</a>
           </div>
         </div>
 
