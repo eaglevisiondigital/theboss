@@ -51,9 +51,7 @@ export default function NetlifyForm({
       <input type="hidden" name="form-name" value={name} />
       {children}
       {error ? <p role="alert">{error}</p> : null}
-      <button type="submit" disabled={submitting}>
-        {submitting ? "Sending..." : "Submit"}
-      </button>
+      {submitting ? <p aria-live="polite">Sending...</p> : null}
     </form>
   );
 }
