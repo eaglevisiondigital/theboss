@@ -36,11 +36,9 @@ export default function Page(){
           </div>
         </div>
         <div className={s.devicePanel}>
-          <div>
-            <div className={s.cards} style={{gridTemplateColumns:"1fr"}}>
-              <article className={s.card}><b>LOCAL / HOME MARKET</b><h3>Start with savings that matter nearby.</h3><p>Home-market access can connect supporters to restaurants, entertainment, services and other participating merchants in the area they actually use.</p></article>
-              <article className={s.card}><b>EXPANDABLE ACCESS</b><h3>Local. Metro. Statewide. Nationwide.</h3><p>The platform is designed to support broader geographic access as the merchant network and membership offering grow.</p></article>
-            </div>
+          <div className={s.cards} style={{gridTemplateColumns:"1fr"}}>
+            <article className={s.card}><b>LOCAL / HOME MARKET</b><h3>Start with savings that matter nearby.</h3><p>Home-market access can connect supporters to restaurants, entertainment, services and other participating merchants in the area they actually use.</p></article>
+            <article className={s.card}><b>EXPANDABLE ACCESS</b><h3>Local. Metro. Statewide. Nationwide.</h3><p>The platform is designed to support broader geographic access as the merchant network and membership offering grow.</p></article>
           </div>
         </div>
       </div>
