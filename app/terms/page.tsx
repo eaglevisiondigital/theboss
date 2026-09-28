@@ -1,0 +1,3 @@
+import SiteHeader from "@/components/SiteHeader";import SiteFooter from "@/components/SiteFooter";import s from "../product.module.css";
+export const metadata={title:"Terms"};
+export default function Page(){return <main className={s.page}><SiteHeader/><section className={s.hero}><div className={s.eyebrow}>TERMS</div><h1>Terms for the Boss ecosystem.</h1><p>This page is a pre-launch placeholder for the formal BOSS PLUS website terms. It will be replaced with approved legal terms before production launch.</p></section><section className={s.panel}><h2>Pre-launch notice</h2><p>The website is still in preview development. Do not treat this placeholder as final legal terms.</p></section><SiteFooter/></main>}
