@@ -151,3 +151,17 @@ radial-gradient(circle at 82% 20%,rgba(255,105,0,.10),transparent 25%),
 .store-panel>a{display:inline-block;margin-top:22px;color:#ff7625;font-size:12px;font-weight:900;position:relative;z-index:2}
 @media(max-width:1000px){.proof-suite-head{display:block}.proof-suite-head>p{margin-top:20px}.proof-suite-grid{grid-template-columns:1fr}.proof-panel{min-height:auto}}
 @media(max-width:620px){.proof-suite{padding:75px 22px}.badge-grid{grid-template-columns:repeat(2,1fr)}.store-items{grid-template-columns:1fr 1fr}.merch-card:last-child{grid-column:1/-1}}
+
+/* Motion and interaction polish */
+@keyframes bossFadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bossGlow{0%,100%{box-shadow:0 0 0 rgba(255,90,0,0)}50%{box-shadow:0 0 55px rgba(255,90,0,.16)}}
+.hero-content,.hero-floating,.visual-card,.product-card,.proof-panel,.merchant-panel,.impact-banner-copy{animation:bossFadeUp .72s ease both}
+.hero-floating{animation-delay:.08s}.visual-card:nth-child(2){animation-delay:.08s}.visual-card:nth-child(3){animation-delay:.14s}
+.product-card:nth-child(2){animation-delay:.05s}.product-card:nth-child(3){animation-delay:.1s}.product-card:nth-child(4){animation-delay:.15s}.product-card:nth-child(5){animation-delay:.2s}
+.product-card,.proof-panel,.merchant-panel,.money-board,.devicePanel{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.product-card:hover,.proof-panel:hover,.merchant-panel:hover{transform:translateY(-6px)}
+.money-board:hover,.devicePanel:hover{transform:translateY(-4px);box-shadow:0 35px 80px rgba(0,0,0,.28)}
+.button.primary{animation:bossGlow 4.8s ease-in-out infinite}
+a,button{outline-offset:4px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #ff7625}
+@media(prefers-reduced-motion:reduce){.hero-content,.hero-floating,.visual-card,.product-card,.proof-panel,.merchant-panel,.impact-banner-copy,.button.primary{animation:none!important}.product-card,.proof-panel,.merchant-panel,.money-board,.devicePanel{transition:none!important}}
