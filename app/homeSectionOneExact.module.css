@@ -400,3 +400,12 @@
   background-size:cover !important;
   background-repeat:no-repeat !important;
 }
+
+
+/* Exact source hero image, unmodified */
+.hero{
+  background-image:url("/images/hero-athletes.png") !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+  background-position:center center !important;
+}
