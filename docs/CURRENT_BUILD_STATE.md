@@ -24,6 +24,9 @@ or a claim that the new application is running in production.
   output `.next`, previews disabled. Both public website site settings compare
   unchanged. Existing platform root publication remains; the shell is not hosted.
   Details: [Netlify configuration](PHASE_1A_NETLIFY.md).
+  Draft PR #3 also caused an automatic repository-root preview on `bossplus`
+  under its existing policy. That is not a platform preview. All three published
+  deployment pointers were rechecked after the PR and remain unchanged.
 
 ## Implemented
 
@@ -60,6 +63,10 @@ or a claim that the new application is running in production.
 - Git whitespace checks passed. Website branches remain outside this branch's
   ancestry and no website build input was changed. Final remote ref/PR checks,
   CI results and exact commit are recorded in the completion report.
+- GitHub Actions push and PR validation passed for implementation commit
+  `1db9619672608a562a7ec1d7fcde923cc60bebf7`. Final documentation updates do not
+  change application code. The workflow also validates the platform technical
+  documentation paths so subsequent documentation commits receive checks.
 
 ## Planned and pending main Chat approval
 

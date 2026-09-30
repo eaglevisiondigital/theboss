@@ -1,6 +1,6 @@
 # Phase 1A Netlify platform isolation
 
-Verified and configured September 30, 2026 (America/Chicago). Only the existing `thebossplatform` site was changed. No deploy was triggered, no environment values were retrieved or written, and no domain or public website configuration was changed.
+Verified and configured September 30, 2026 (America/Chicago). Only the existing `thebossplatform` site's settings were changed. No manual or platform deployment was triggered, no environment values were retrieved or written, and no domain or public website configuration was changed. Opening the draft PR subsequently triggered an automatic `bossplus` website preview under its existing policy, described below.
 
 ## Implemented and verified
 
@@ -34,6 +34,8 @@ The project reader's current-deploy pointer remains `6abcceeae6153d4425c55b1d`, 
 Stopped builds prevent Netlify production builds, branch builds and deploy previews on Git pushes or build triggers. Local/manual upload remains possible, but was not used. No site was unpublished or deleted. [Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/).
 
 The Phase 1A draft PR targets `main`, while this platform site is bound to `build/boss-platform-v1`. It intentionally receives no platform deploy preview. If previews are later enabled with the default target policy, only PRs against the configured production branch would qualify. Do not re-enable `main` as a branch-deploy branch just to obtain a preview: that would rebuild the website baseline in the platform path. Choose an approved platform review/release flow and isolated preview backend first.
+
+After draft PR #3 opened, the unchanged `bossplus` site's existing PR-to-main policy automatically produced [website preview #3](https://deploy-preview-3--bossplus.netlify.app), deploy `6abce14c4ead130008be679e`. It uses that site's repository-root static pipeline, not the nested Next.js platform pipeline, and is not platform/auth validation. No public website setting was changed to cause or suppress it. A post-PR reader check confirmed all three current published deployment pointers above remain unchanged. Future website/platform PR filtering needs an approved integration decision; this assignment does not change website policies.
 
 No Supabase project branch, staging database, auth callback URL, production domain or customer account was created. Future preview credentials must be context-specific and must never include privileged production credentials. The shell's framework noindex controls cover server responses; the nested Netlify header covers static responses. These remain local implementation until a reviewed deployment succeeds.
 

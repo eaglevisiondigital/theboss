@@ -5,11 +5,21 @@ on:
     paths:
       - "apps/platform/**"
       - ".github/workflows/platform-validation.yml"
+      - "docs/CURRENT_BUILD_STATE.md"
+      - "docs/PHASE_1A_NETLIFY.md"
+      - "docs/PLATFORM_PREPARATION.md"
+      - "docs/SECURITY_MODEL.md"
+      - "docs/SOURCE_PROVENANCE.md"
   push:
     branches: ["build/boss-platform-v1"]
     paths:
       - "apps/platform/**"
       - ".github/workflows/platform-validation.yml"
+      - "docs/CURRENT_BUILD_STATE.md"
+      - "docs/PHASE_1A_NETLIFY.md"
+      - "docs/PLATFORM_PREPARATION.md"
+      - "docs/SECURITY_MODEL.md"
+      - "docs/SOURCE_PROVENANCE.md"
 
 permissions:
   contents: read
