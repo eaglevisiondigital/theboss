@@ -1,10 +1,10 @@
 # AGENTS.md
 
 ## Project
-BOSS PLUS / The Boss website.
+THE BOSS ecosystem website. Boss Plus is the approved app/icon identity.
 
 ## Non-negotiable brand rules
-- Master brand: BOSS PLUS.
+- Master brand: THE BOSS. This supersedes the earlier BOSS PLUS master-brand decision.
 - Official app icon is the approved orange B+ icon supplied by the owner. Do not redraw, reinterpret or substitute it.
 - Product families: Boss Bucks Discounts, Boss Fundraising, Boss Money Board, Boss Engage, Boss Family Hub.
 - Use exact approved logo artwork once committed to /public/brand.

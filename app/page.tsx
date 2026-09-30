@@ -1,199 +1,43 @@
-import exact from "./homeSectionOneExact.module.css";
-const sportsHero = "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=2200&q=88";
-const football = "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1000&q=84";
-const youth = "https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=1000&q=84";
-const school = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=84";
-const church = "https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1000&q=84";
-const community = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1000&q=84";
-const merchant = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=84";
-const player = "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=84";
+import Image from "next/image";
+import Link from "next/link";
+import ApprovedHeader from "@/components/ApprovedHeader";
+import ReferencePhoto from "@/components/ReferencePhoto";
+import s from "./approvedHome.module.css";
 
-const audiences = [
-  ["Sports Teams","Build stronger teams on and off the field.",football],
-  ["Youth Groups","More than activities. A higher purpose.",youth],
-  ["Schools","Support students. Create opportunities.",school],
-  ["Churches","Strengthen faith. Build community.",church],
-  ["Community Organizations","Local impact. Lasting change.",community]
+const pillars = [
+  { title: "Fundraise", description: "Cards, donations and the Digital Money Board.", href: "/fundraising", crop: "24 470 243 97", alt: "Football players gathering with their team", icon: "fundraise" },
+  { title: "Save", description: "Useful discounts and value toward approved costs.", href: "/boss-bucks", crop: "288 470 236 97", alt: "A woman enjoying a day in her community", icon: "save" },
+  { title: "Engage", description: "Teams, schedules and families connected.", href: "/engage", crop: "541 470 231 97", alt: "A coach bringing young athletes together", icon: "engage" },
 ];
-
-const passions = ["Football","Basketball","Soccer","Volleyball","Softball","Track","Cheer","Band","More"];
-
-export default function Home(){
-  return <main className="boss-home">
-    <section className={exact.sectionOne} aria-label="BOSS homepage introduction">
-      <header className={exact.header}>
-        <a className={exact.brand} href="/" aria-label="The Boss home">
-          <span className={exact.brandIcon}>B</span>
-          <span className={exact.brandText}><b>THE BOSS</b><small>PEOPLE. PURPOSE. POSSIBILITIES.</small></span>
-        </a>
-
-        <nav className={exact.nav} aria-label="Homepage navigation">
-          <a href="/">Home</a>
-          <a href="/fundraising">Fundraising</a>
-          <a href="/boss-bucks">Boss Bucks</a>
-          <a href="/engage">Boss Engage</a>
-          <a href="/organizations">Organizations</a>
-          <a href="/how-it-works">Resources</a>
-          <a href="/contact">Contact</a>
-        </nav>
-
-        <div className={exact.actions}>
-          <a className={exact.demo} href="/get-started">Book a Demo</a>
-          <a className={exact.start} href="/get-started">Get Started →</a>
+function PillarIcon({ kind }: { kind: string }) {
+  return <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+    {kind === "fundraise" ? <><rect x="5" y="19" width="5" height="10" rx=".7"/><rect x="13" y="12" width="5" height="17" rx=".7"/><rect x="21" y="5" width="5" height="24" rx=".7"/></> :
+      kind === "save" ? <path d="M16 28 4.6 16.6C-2.8 8.9 8 0 16 9c8-9 18.8-.1 11.4 7.6Z"/> :
+      <><circle cx="16" cy="10" r="5"/><circle cx="6" cy="9" r="3.6"/><circle cx="26" cy="9" r="3.6"/><path d="M8 28v-6c0-5 3-7 8-7s8 2 8 7v6ZM1 24v-6c0-3 2-5 5-5 2 0 3 .8 4 2-3 2-4 4-4 9ZM26 24c0-5-1-7-4-9 1-1.2 2-2 4-2 3 0 5 2 5 5v6Z"/></>}
+  </svg>;
+}
+export default function Home() {
+  return <div className={s.home}>
+    <a className={s.skipLink} href="#main">Skip to content</a>
+    <ApprovedHeader/>
+    <main id="main">
+      <section className={s.hero} aria-labelledby="hero-title">
+        <div className={s.heroPhoto}><Image src="/images/approved/hero-team.png" alt="Young athletes in black and orange uniforms gathering together" fill priority sizes="100vw" quality={90}/></div>
+        <div className={s.heroShade}/>
+        <div className={s.heroCopy}>
+          <h1 id="hero-title">Fundraise<br/>Like a <span>Boss.</span></h1>
+          <p className={s.heroBenefit}>Raise money. Help cover family costs.<br className={s.desktopBreak}/> Keep your community connected.</p>
+          <p className={s.heroAudience}>For teams, schools, churches, camps<br className={s.desktopBreak}/> and community organizations.</p>
+          <div className={s.heroActions}><Link className={s.primary} href="/fundraising/get-started">Start Fundraising</Link><a className={s.secondary} href="#ecosystem">Explore The Boss</a></div>
         </div>
-
-        <details className={exact.mobileMenu}>
-          <summary aria-label="Open navigation"><span></span><span></span><span></span></summary>
-          <div className={exact.mobilePanel}>
-            <a href="/">Home</a><a href="/fundraising">Fundraising</a><a href="/boss-bucks">Boss Bucks</a><a href="/engage">Boss Engage</a><a href="/organizations">Organizations</a><a href="/how-it-works">Resources</a><a href="/contact">Contact</a><a href="/get-started">Get Started</a>
-          </div>
-        </details>
-      </header>
-
-      <div className={exact.hero}>
-        <div className={exact.orangeSlash}/>
-        <div className={exact.copy}>
-          <div className={exact.kicker}>THE BOSS ECOSYSTEM</div>
-          <h1>FUNDRAISE<br/>LIKE A <span>BOSS.</span></h1>
-          <h2>Helping Support, Engage &<br/>Empower Kids and Youth.<br/><strong>Investing in Their Future.</strong></h2>
-
-          <div className={exact.pillars}>
-            <div className={exact.pillar}>
-              <span className={exact.pillarIcon}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path className={exact.fill} d="M12 21s-7-4.4-9.4-8.6C.7 9 .9 5.8 3.2 4.1c2.3-1.7 5.2-1.1 6.8 1 1.6-2.1 4.5-2.7 6.8-1 2.3 1.7 2.5 4.9.6 8.3C19 16.6 12 21 12 21z"/></svg>
-              </span>
-              <b>Fundraise<br/>Like a Boss.</b>
-            </div>
-            <div className={exact.pillar}>
-              <span className={exact.pillarIcon}>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="12" cy="6" r="3"/>
-                  <path d="M3.5 19c.4-3.2 2.2-5 4.8-5s4.4 1.8 4.8 5"/><path d="M10.8 19c.4-3.2 2.2-5 4.8-5s4.4 1.8 4.8 5"/>
-                </svg>
-              </span>
-              <b>Engage<br/>Like a Boss.</b>
-            </div>
-            <div className={exact.pillar}>
-              <span className={exact.pillarIcon}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M16 7.2c-.8-1.2-2.1-2-4-2-2.4 0-4 1.2-4 3 0 4.8 8 2 8 7 0 1.9-1.7 3.2-4.4 3.2-2.1 0-3.8-.8-4.8-2.2"/></svg>
-              </span>
-              <b>Save<br/>Like a Boss.</b>
-            </div>
-          </div>
-
-          <div className={exact.heroButtons}>
-            <a href="/get-started">Get Started →</a>
-            <a href="/how-it-works"><span className={exact.playIcon}>▶</span>See How It Works</a>
-          </div>
-        </div>
-
-        <div className={exact.handwritten}>Same Passion.<br/>Bigger<br/>Possibilities.</div>
-      </div>
-
-      <div className={exact.audience}>
-        <div className={exact.audienceTitle}>
-          <h2>FOR <span>TEAMS, SCHOOLS, CHURCHES</span> & COMMUNITY ORGANIZATIONS</h2>
-          <p>One platform. Every passion. A bigger impact.</p>
-        </div>
-
-        <div className={exact.grid}>
-          {audiences.map(([name,desc],i)=>{
-            const imageClass=[exact.img1,exact.img2,exact.img3,exact.img4,exact.img5][i];
-            const icon=["◒","●●●","◆","♜","●●●"][i];
-            return <a href={name==="Sports Teams"?"/sports-teams":"/organizations"} className={exact.card} key={name}>
-              <div className={`${exact.image} ${imageClass}`}/>
-              <div className={exact.cardBottom}>
-                <span className={exact.circleIcon}>{icon}</span>
-                <span className={exact.cardText}><b>{name}</b><small>{desc}</small></span>
-              </div>
-            </a>
-          })}
-        </div>
-      </div>
-    </section>
-
-    <section className="boss-bucks-home">
-      <div className="boss-phone-mock">
-        <div className="boss-phone-notch"/>
-        <div className="boss-app-head">BOSS BUCKS <span>DISCOUNTS</span></div>
-        <div className="boss-deal-feature"><small>FEATURED DEAL</small><strong>$5 OFF</strong><b>ANY PURCHASE</b><span>UNLIMITED USE</span></div>
-        <div className="boss-mini-deals"><div>$1 OFF</div><div>$2 OFF</div><div>$2 OFF</div></div>
-        <div className="boss-mini-nav"><span>Home</span><span>Deals</span><span>Near Me</span><span>Favorites</span><span>Account</span></div>
-      </div>
-      <div className="boss-bucks-copy">
-        <div className="boss-kicker">BOSS BUCKS DIGITAL DISCOUNTS</div>
-        <h2>BOSS BUCKS<br/><span>DIGITAL DISCOUNTS</span></h2>
-        <h3>Raise, Save, Support Expenses Like a Boss.</h3>
-        <p>Boss Bucks is our digital discount card that helps people support your team or organization while enjoying valuable savings all year long.</p>
-        <ul>
-          <li>Save at local restaurants, entertainment, travel and more</li>
-          <li>Help families offset team-related costs</li>
-          <li>Support local businesses</li>
-          <li>Give supporters a real reason to stay connected</li>
-        </ul>
-        <div className="boss-trial-card">
-          <b>Want a no-selling fundraising option?</b>
-          <p>Give away free 30–90 day digital trials. Supporters can donate immediately, and donations of $25 or more can include a free digital card as a thank-you. Smaller donors can give now and purchase later, creating two ways for your organization to raise funds.</p>
-        </div>
-        <a className="boss-orange-button" href="/boss-bucks">Learn More →</a>
-      </div>
-      <div className="boss-bucks-photo">
-        <img src={player} alt="Young athlete holding a phone"/>
-        <div className="boss-handwritten small">Real Savings.<br/>Real Support.<br/>Real Impact.</div>
-      </div>
-      <div className="boss-category-row"><span>Restaurants</span><span>Travel</span><span>Shopping</span><span>Fuel & Auto</span><span>Haircuts</span><span>Entertainment</span></div>
-    </section>
-
-    <section className="boss-money-home">
-      <div className="boss-money-copy">
-        <h2>THE DIGITAL<br/><span>MONEY BOARD</span></h2>
-        <h3>Small Amounts. Big Impact.</h3>
-        <p>We have all seen the paper calendar or whiteboard fundraiser where people choose a dollar amount. The Boss Digital Money Board turns that familiar idea into a one-of-a-kind, state-of-the-art digital fundraising experience.</p>
-        <p>Set your goal, starting amount and increment. The system creates your custom board, tracks every contribution and connects each donation to the right player, individual or family.</p>
-        <a className="boss-orange-button" href="/money-board">Learn More →</a>
-      </div>
-      <div className="boss-money-device">
-        <div className="boss-money-device-top"><small>THE</small><b>MONEY BOARD</b><span>SMALL AMOUNTS. BIG IMPACT.</span></div>
-        <div className="boss-money-progress"><strong>$8,425</strong><span>56% FUNDED</span><strong>$15,000</strong></div>
-        <div className="boss-money-modes"><b>DONATE</b><b>SPIN</b></div>
-        <div className="boss-money-tiles">{["$5","$10","$15","$20","$25","$30","$40","$50","$75"].map((v,i)=><span className={i===1||i===4?"paid":""} key={v}>{v}<small>{i===1||i===4?"FUNDED":"AVAILABLE"}</small></span>)}</div>
-      </div>
-      <div className="boss-money-side">
-        <img src={player} alt="Athlete celebrating"/>
-        <ul>
-          <li>Custom digital money board for your team</li>
-          <li>Set your goal, start amount & increments</li>
-          <li>Leaderboard & family/fan support</li>
-          <li>Optional free Boss Bucks thank-you cards</li>
-          <li>Track progress in real time</li>
-        </ul>
-        <div className="boss-money-note">FUNDRAISING<br/>MADE SIMPLE.<br/>MORE SUPPORT.<br/>BIGGER IMPACT.</div>
-      </div>
-    </section>
-
-    <section className="boss-engage-home">
-      <div className="boss-engage-title"><h2>BOSS <span>ENGAGE</span></h2><p>ALL-IN-ONE TEAM & FAMILY HUB</p><a href="/engage">Learn More →</a></div>
-      <div className="boss-engage-tools">
-        {["Registration & Rosters","Payments & Fundraising","Schedules & Calendars","Chats & Messaging","Livestream & Media","Playbooks & Resources","Team & Fan Gear","Courses & Training"].map((x,i)=><div key={x}><i>{["●","▣","▦","●","▶","▤","◆","◆"][i]}</i><span>{x}</span></div>)}
-      </div>
-    </section>
-
-    <section className="boss-passions">
-      <div className="boss-passions-title">SUPPORTING <span>EVERY PASSION</span></div>
-      <div className="boss-passions-row">{passions.map((x,i)=><div key={x}><img src={[football,sportsHero,youth,player,football,youth,player,school,community][i]} alt={x}/><b>{x}</b></div>)}</div>
-      <div className="boss-passions-note">DIFFERENT<br/>PASSIONS.<br/>SAME MISSION.</div>
-    </section>
-
-    <section className="boss-merchants-home">
-      <div><h2>LOCAL BUSINESSES MAKE A BIGGER IMPACT</h2><p>Partner with Boss Bucks and reach families, fans and your community while supporting a great cause.</p><a href="/merchant-partner">Become a Partner →</a></div>
-      <div className="boss-merchant-cats"><span>Restaurants</span><span>Entertainment</span><span>Travel & Hotels</span><span>Fuel & Auto</span><span>Haircuts & Salons</span><span>Local Services</span></div>
-    </section>
-
-    <footer className="boss-home-footer">
-      <div className="boss-home-brand footer"><span className="boss-mark">B</span><span><b>THE BOSS</b><small>PEOPLE. PURPOSE. POSSIBILITIES.</small></span></div>
-      <nav><a href="/">Home</a><a href="/fundraising">Fundraising</a><a href="/boss-bucks">Boss Bucks</a><a href="/engage">Boss Engage</a><a href="/organizations">Organizations</a><a href="/how-it-works">Resources</a><a href="/contact">Contact</a></nav>
-      <div className="boss-footer-impact">Let’s Make a <b>Bigger Impact Together.</b></div>
-      <div className="boss-footer-bottom">© 2026 The Boss. All rights reserved. <span>Stronger Communities. Brighter Possibilities.</span></div>
-    </footer>
-  </main>
+      </section>
+      <section id="ecosystem" className={s.ecosystem} aria-labelledby="ecosystem-title">
+        <div className={s.ecosystemHeading}><h2 id="ecosystem-title">The Boss <span>Ecosystem</span></h2><p>Start with what you need. Grow with The Boss.</p></div>
+        <div className={s.pillars}>{pillars.map(pillar => <Link className={s.pillar} href={pillar.href} key={pillar.title}>
+          <div className={s.pillarIntro}><span className={s.pillarIcon}><PillarIcon kind={pillar.icon}/></span><div><h3>{pillar.title}<br/>Like a Boss.</h3><p>{pillar.description}</p></div></div>
+          <ReferencePhoto crop={pillar.crop} alt={pillar.alt} className={s.pillarPhoto}/>
+        </Link>)}</div>
+      </section>
+    </main>
+  </div>;
 }

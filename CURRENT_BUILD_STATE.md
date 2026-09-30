@@ -1,3 +1,11 @@
+## September 30 approved homepage checkpoint
+
+Desktop homepage approved. `build/approved-homepage` implements header, hero and
+first ecosystem section only. Mobile adaptation is prepared for review. See
+`docs/design/approved-homepage.md` for source artwork, current scope, and family
+Boss Bucks integrity constraints. Older homepage and interiors are retained on
+`build/premium-site-v1`. Production cutover remains pending hosted preview approval.
+
 # Current Build State
 
 ## Branch

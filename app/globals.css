@@ -1,3 +1,7 @@
+@font-face{font-family:"Boss Inter";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/inter-400.woff2") format("woff2")}
+@font-face{font-family:"Boss Inter";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/inter-500.woff2") format("woff2")}
+@font-face{font-family:"Boss Inter";font-style:normal;font-weight:800;font-display:swap;src:url("/fonts/inter-800.woff2") format("woff2")}
+@font-face{font-family:"Boss Inter";font-style:normal;font-weight:900;font-display:swap;src:url("/fonts/inter-900.woff2") format("woff2")}
 :root{
   --orange:#ff5a00;
   --orange2:#ff7a00;

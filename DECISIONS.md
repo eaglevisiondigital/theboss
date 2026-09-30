@@ -1,3 +1,14 @@
+## September 30, 2026: approved desktop direction
+
+- THE BOSS is the master website brand; Boss Plus is the approved app/icon identity.
+- The owner approved `public/design/approved-desktop.png` as the desktop homepage.
+- Follow the supplied master handoff: mobile adaptation, then header/hero/first section,
+  Netlify preview, fidelity review, then remaining homepage sections.
+- Photographic realism is a hard requirement for every image.
+- Family Boss Bucks cover approved costs and cannot cash out. Eligible organizational
+  proceeds alone can bank-settle. Gas and restaurant gift cards are coming soon.
+- The website frontend is being rebuilt; platform/backend strategy is preserved.
+
 # Decisions
 
 1. Repository: `eaglevisiondigital/theboss`.
