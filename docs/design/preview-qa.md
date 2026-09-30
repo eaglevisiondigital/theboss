@@ -30,7 +30,25 @@ Local production-build verification passed:
 This is targeted responsive/functional/visual QA, not a comprehensive accessibility
 certification. Existing interior pages remain the earlier foundation.
 
-Hosted full-homepage verification is recorded after the Git preview completes.
+## Hosted full-homepage verification
+
+Application commit: `9b2216dae74655d6173cbbb3e52b7469ef25daa5`.
+Netlify deploy: `6abcf6b6d77c270007defa3c`, state ready, deploy-preview context.
+
+- Hosted responsive checks passed at 1440, 1024, 768, 390 and 320 pixels.
+- Full desktop and phone renders were visually inspected against the approved art.
+- All eight sections and the approved-cost/gift-card messaging rendered correctly.
+- All 15 homepage destinations returned HTTP 200 through browser navigation.
+- Product CTA clicks, Explore anchor and mobile navigation passed.
+- No browser runtime errors were observed.
+- Phone hero imagery was independently checked after decoding; its crop and full
+  athlete group render correctly. An initial full-page screenshot paint artifact
+  was checked with a fresh phone browser context, not treated as a site defect.
+- A direct-request DNS error in the QA client was bypassed using normal browser
+  navigation for the remaining link checks. No site change was required.
+
+The hosted application content and tested local tree matched. Later QA-record
+commits change documentation only and do not change the verified application.
 
 ## Preserved first-slice verification
 
