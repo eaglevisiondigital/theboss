@@ -1,33 +1,53 @@
-# Approved homepage first-slice review
+# Approved homepage review
 
-Live preview: https://deploy-preview-2--bossplus.netlify.app
-Verified application commit: 14c53fb1d1a7dc11a8461702060cdb68fe4366b1
-Netlify deploy: 6abcce7d9fe17f0008439b91
+Review URL: https://deploy-preview-2--bossplus.netlify.app
+Branch: `build/approved-homepage`; draft PR #2.
 
-The header, hero and ecosystem section have been compared visually with the
-approved desktop reference. The phone and tablet photo crop keeps the full group
-visible. This checkpoint intentionally stops after the first major section,
-following the supplied master handoff. Remaining homepage sections and interior
-page redesigns are the next phase. This is a review preview, not production.
+## Full homepage verification, September 30, 2026
 
-## Completed checks
+The complete approved homepage is implemented. Its desktop composition was
+compared visually with `public/design/approved-desktop.png`; deliberate stacked
+phone layouts preserve the photographic/product treatment.
 
-- Production build and TypeScript validation passed.
-- Netlify build passed using Next.js Runtime 5.16.0 and generated its server handler.
-- Hosted browser checks passed at 1440, 768, 390 and 320 pixel widths.
-- No horizontal overflow; hero image loaded; all three ecosystem cards rendered.
-- Explore anchor, fundraising CTA and mobile navigation links worked.
-- Mobile menu opened and closed, including Escape dismissal and focus return.
-- Form field serialization, success redirect and failure feedback passed with
-  intercepted responses. No real submission was sent.
-- Netlify form registration and honeypots were verified through the connected API.
-- Tested local code and saved repository tree matched.
+Local production-build verification passed:
 
-An existing form bug was fixed by retaining the form element before the asynchronous
-request, so a successful request can reset the form and navigate to the thank-you page.
-The explicit Netlify Next.js runtime configuration corrected the initial preview 404.
+- Next.js production build, type validation and static route generation.
+- Browser checks at 1440, 1024, 768, 390 and 320 pixel viewport widths.
+- Eight homepage sections, including all remaining product/family/merchant sections.
+- No horizontal overflow at any tested width; loaded hero and approved artwork.
+- Visual inspection of desktop and phone renders, including phone overlaps and crops.
+- All 15 distinct homepage destinations returned HTTP 200.
+- Product CTAs navigated to Boss Bucks, Money Board, Engage and merchant intake.
+- Mobile navigation opening, Escape dismissal and navigation worked.
+- Explore anchor worked; no browser runtime errors were observed.
+- Approved-cost, no personal cash/bank-transfer and organization-settlement copy present.
+- Gas and restaurant gift cards visibly marked coming soon.
+- Product screens labeled illustrative; Engage schedule labeled platform vision.
+- Semantic headings, image descriptions, footer landmark and visible keyboard focus.
+- White action text uses a deeper brand orange with 4.56:1 contrast.
+- `git diff --check` passed. No dependency changes or backend/payment writes.
 
-The full approved homepage still includes Boss Bucks Discounts, Digital Money Board,
-Family Boss Bucks for approved costs, upcoming gas/restaurant gift cards, Engage,
-merchant partnership and final CTA/footer. The family-wallet and organization-only
-bank-settlement rules remain in `approved-homepage.md` for that implementation.
+This is targeted responsive/functional/visual QA, not a comprehensive accessibility
+certification. Existing interior pages remain the earlier foundation.
+
+Hosted full-homepage verification is recorded after the Git preview completes.
+
+## Preserved first-slice verification
+
+First-slice application commit: 14c53fb1d1a7dc11a8461702060cdb68fe4366b1.
+Netlify deploy: 6abcce7d9fe17f0008439b91.
+
+The original header, hero and ecosystem preview passed hosted desktop/tablet/phone
+checks. Netlify Next.js Runtime 5.16.0 generated the server handler and corrected
+the initial routing 404. Form serialization, success navigation and failure
+feedback passed with intercepted responses; no real submission was sent.
+
+The existing form fix retains the form element before the async request so a
+successful response can reset the form and navigate to the thank-you page.
+
+## Release boundary
+
+This is a review preview. No production cutover or merge has occurred. Wallet,
+payment confirmation, organization settlement and gift-card redemption require
+the separately approved platform implementation. Legal/contact/abuse-prevention
+and interior-page review remain production prerequisites.

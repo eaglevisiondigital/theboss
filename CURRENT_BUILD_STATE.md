@@ -1,71 +1,51 @@
-## Verified Netlify preview
-
-https://deploy-preview-2--bossplus.netlify.app
-
-Header, hero and ecosystem section are implemented and visually checked against
-the approved desktop design. Hosted desktop/tablet/phone checks and simulated
-form success/error checks passed. See `docs/design/preview-qa.md`. The remaining
-homepage sections and interior redesigns are next; production remains pending
-owner approval of the hosted preview.
-
-## September 30 approved homepage checkpoint
-
-Desktop homepage approved. `build/approved-homepage` implements header, hero and
-first ecosystem section only. Mobile adaptation is prepared for review. See
-`docs/design/approved-homepage.md` for source artwork, current scope, and family
-Boss Bucks integrity constraints. Older homepage and interiors are retained on
-`build/premium-site-v1`. Production cutover remains pending hosted preview approval.
-
 # Current Build State
 
-## Branch
-`build/premium-site-v1`
+## Active website branch and preview
 
-## Completed
-- Repository initialized.
-- Premium visual system established.
-- Homepage v1 implemented.
-- Responsive desktop/tablet/mobile behavior implemented.
-- Initial SEO metadata and preview-safe robots policy added.
-- Core ecosystem sections implemented.
-- Dedicated pages added for:
-  - Boss Bucks Discounts
-  - Boss Fundraising
-  - Boss Money Board
-  - Boss Engage
-  - Boss Family Hub
-  - Sports Teams
-  - Organizations
-  - Merchants & Discounts
-  - How It Works
-  - The Boss Ecosystem / About
-- Netlify-ready Get Started form with honeypot spam protection added.
-- Thank-you flow added.
-- Audience segmentation and merchant experience expanded.
-- Governance docs added.
-- Shared site header/footer components added.
-- General contact flow added.
-- Privacy and Terms placeholders added for pre-launch routing.
+- Repository: `eaglevisiondigital/theboss`.
+- Website branch: `build/approved-homepage`.
+- Draft PR: #2.
+- Review URL: https://deploy-preview-2--bossplus.netlify.app
+- Netlify website project: `bossplus`, `bc4662a5-57c4-4fdc-8754-aa1be8aa9a8a`.
+- Earlier public frontend is preserved on `build/premium-site-v1`.
+- Production cutover and merge remain pending owner approval.
 
-## Pending before preview release
-- Commit exact approved BOSS PLUS and vertical logo image assets into `/public/brand`.
-- Replace temporary typographic/product icon placeholders with official artwork.
-- Add approved photography and approved product mockups.
-- Execute image-led homepage redesign using approved BOSS PLUS visual world.
-- Integrate exact approved BOSS PLUS and vertical logos across header, product cards, and product pages.
-- Build richer product visual sections for Boss Bucks, Fundraising, Money Board, Engage, and Family Hub.
-- Add premium audience photography and stronger sports / organizations / merchant storytelling.
-- Add subtle motion and premium interactive polish after imagery is in place.
-- Add deeper navigation/footer system across product and audience pages.
-- Add dedicated merchant intake and fundraising intake variants if needed.
-- Confirm production contact destinations.
-- Trigger Netlify preview build from the approved build branch.
-- Premium form styling completed across Get Started, Fundraising, Merchant, Sales Rep, and Contact flows.
-- Hosted responsive QA.
-- Accessibility, metadata, and form validation pass.
+## September 30, 2026 homepage completion
 
-## Hosting
-Existing Netlify project: `bossplus`
-Site ID: `bc4662a5-57c4-4fdc-8754-aa1be8aa9a8a`
+The full approved desktop homepage is implemented as responsive semantic HTML:
+header, photographic hero, three ecosystem cards, Boss Bucks Discounts, Digital
+Money Board, Family Boss Bucks approved costs, coming-soon gas and restaurant
+gift cards, Boss Engage, merchant invitation, final CTA and footer.
 
-Production cutover is not authorized until hosted preview approval.
+The exact approved raster remains the visual source of truth at
+`public/design/approved-desktop.png`. Product and photographic crops reuse that
+artwork; the hero uses its approved standalone asset. Photography keeps the
+approved photographic appearance. Product examples are labeled illustrative.
+All navigation and CTA destinations use the existing routes and lead forms.
+
+Family and participant balances remain restricted to approved spending, with no
+cash withdrawals or personal bank transfers. Only eligible team and organization
+proceeds may transfer to approved organizational bank accounts. Discount
+membership and earned Boss Bucks value have separate homepage explanations.
+Gift cards are visibly marked coming soon. No wallet or payment backend was added.
+
+See `docs/design/approved-homepage.md` and `docs/design/preview-qa.md` for the
+implementation contract and verification record.
+
+## Preserved foundation
+
+Existing product, audience and company routes, Netlify intake forms, thank-you
+flow, SEO metadata, preview noindex policy and architecture/security documentation
+remain available. The prior form success-handler fix remains intact.
+
+## Next work
+
+1. Owner reviews the completed homepage preview.
+2. Prepare and review the first major interior-page mockup, preferably Boss Bucks
+   or Fundraising, then implement through the established mockup/QA process.
+3. Extend the approved website identity and current scope through interior pages.
+4. Complete production contact, legal, abuse prevention and launch configuration.
+5. Progressive integration with the separately released Boss platform.
+
+Interior pages retain the earlier foundation and are not yet redesigned to match
+the approved homepage. Public website work preserves the platform/backend strategy.

@@ -25,3 +25,5 @@
 /* Give the entire group room on tablets and phones. */
 @media(min-width:621px) and (max-width:850px){.hero{display:block;padding-top:58vw;min-height:0}.heroPhoto{height:63vw;left:-57%;width:157%;bottom:auto}.heroPhoto img{object-position:right top}.heroShade{background:linear-gradient(180deg,transparent 0,transparent 40vw,rgba(8,12,13,.75) 55vw,var(--boss-ink) 63vw)}.heroCopy{width:100%;margin:0;padding:0 32px 32px}.heroCopy h1{font-size:72px}.heroBenefit{font-size:21px}.heroAudience{font-size:18px}.heroActions{gap:16px}.primary,.secondary{font-size:18px;padding:14px 25px}.desktopBreak{display:none}}
 @media(max-width:620px){.heroPhoto{height:63vw}.heroShade{background:linear-gradient(180deg,transparent 0,transparent 40vw,rgba(8,12,13,.75) 55vw,var(--boss-ink) 68vw)}}
+/* A deeper brand orange keeps white CTA labels legible at phone text sizes. */
+.primary,.headerCta{background:#d54200;border-color:#d54200}.primary:hover,.headerCta:hover{background:#ba3700;border-color:#ba3700}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ApprovedHeader from "@/components/ApprovedHeader";
 import ReferencePhoto from "@/components/ReferencePhoto";
+import ApprovedHomepageSections from "@/components/ApprovedHomepageSections";
 import s from "./approvedHome.module.css";
 
 const pillars = [
@@ -38,6 +39,7 @@ export default function Home() {
           <ReferencePhoto crop={pillar.crop} alt={pillar.alt} className={s.pillarPhoto}/>
         </Link>)}</div>
       </section>
+      <ApprovedHomepageSections/>
     </main>
   </div>;
 }
