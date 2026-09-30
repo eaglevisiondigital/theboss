@@ -1,12 +1,46 @@
 # Current build state
 
-Current Phase 1B checkpoint, September 30, 2026: the shell is hosted on the
-dedicated platform site. Public configuration is installed and builds active.
-Hosted POST-origin and early-redirect-header defects are repaired in code;
-repaired deployment retest and controlled-account tests remain pending. See
-[Phase 1B hosted validation](PHASE_1B_HOSTED_VALIDATION.md) for current status.
-The Phase 1A evidence below is a historical baseline, including its deployment
-hold. No business model or production data schema is approved by this document.
+Phase 1B checkpoint, September 30, 2026. The dedicated platform is published at
+[thebossplatform.netlify.app](https://thebossplatform.netlify.app).
+
+## IMPLEMENTED
+
+Public Supabase configuration and server-only approved platform origin are scoped
+to the dedicated site's production context. Platform builds are active; previews
+remain disabled. Hosted POST-origin and early-redirect-header defects are fixed,
+with six regression tests. No business schema or authorization model is created.
+
+## VERIFIED HOSTED
+
+The repair deployment passed all 25 HTTP checks for public routes, unauthenticated
+guards, invalid/malformed login, origins, redirects, headers and private caching.
+Invalid-session cookie cleanup used Secure/SameSite Lax/root path and no Domain.
+Hosted desktop/mobile screens and browser protected-route navigation were checked.
+All 22 local tests, typecheck, lint, production build and repair-commit CI passed.
+Both public website production deployments/configurations remain unchanged.
+
+## UNVERIFIED
+
+Valid login, authenticated SSR/navigation/reload, session issuance, refresh and
+authenticated logout await one controlled test identity. The dashboard is signed out; connector
+Auth-user/config tools are unavailable. No Auth policy was changed. Private
+Auth/SMTP/callback/session settings also await dashboard access.
+
+## PENDING ARCHITECTURE
+
+Identity, organizations, households, participants, permissions, entitlements,
+private storage and all business modules require the main Boss Chat's approved
+architecture. No business authority follows from authentication alone.
+
+See [Phase 1B hosted validation](PHASE_1B_HOSTED_VALIDATION.md) for detailed
+verified results and remaining manual steps. Final commit/deployment/CI metadata
+is in the completion report.
+
+## Historical Phase 1A baseline
+
+The material below records Phase 1A, including its former deployment hold and
+then-current website SHAs. Phase 1B status above supersedes those operational
+statements; the truncated source brief remains unchanged.
 
 ## Verified infrastructure
 

@@ -54,8 +54,10 @@ Required public configuration is provisioned for the dedicated platform's
 production context, builds are active and previews remain disabled. The canonical
 publishable key successfully retrieves public Auth settings; no privileged key
 was fetched. Hosted public routes and unauthenticated guards were tested. Initial
-POST-origin and redirect-header defects are repaired in code, pending redeployment
-and hosted retest. Real login, private Auth/SMTP/callback settings, authenticated
+POST-origin and redirect-header defects are fixed and all 25 hosted HTTP retests
+passed. Invalid-session cookie cleanup was observed with Secure/SameSite Lax and
+no Domain, and anonymous auth responses had private/CDN no-store instructions.
+These checks do not establish authenticated cache isolation. Real login, private Auth/SMTP/callback settings, authenticated
 cookie writes, refresh and authenticated logout are still unverified. No staging
 backend or custom platform domain was created. Server credentials must never be put in `NEXT_PUBLIC_` variables or
 untrusted preview contexts. Public build-log policy needs review before launch.
