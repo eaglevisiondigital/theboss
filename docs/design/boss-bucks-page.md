@@ -1,6 +1,6 @@
 # Boss Bucks interior page design
 
-Status: proposed desktop mockup, awaiting owner design approval.
+Status: desktop mockup approved by the owner on September 30, 2026. Responsive implementation complete; publication requested.
 Reference: `boss-bucks-desktop-proposed.png`.
 
 The owner approved the full homepage and directed continuation with interior
@@ -48,8 +48,23 @@ is illustrative and must not imply actual customers or merchant partnerships.
   belong on the separately reviewed Fundraising page.
 - Preserve the existing lead forms and routes. No platform/backend/payment changes.
 - Adapt the desktop design to phones, then implement and compare actual browser renders.
-- Review preview only. Production cutover remains a separate owner decision.
+- Owner explicitly approved implementation and going live on September 30, 2026.
 
 The proposed raster was created with the built-in Imagegen tool, using the approved
-homepage and approved Boss Bucks Discounts screen as references. No new live page
-was published in this design checkpoint.
+homepage and approved Boss Bucks Discounts screen as references. The original design checkpoint preceded implementation.
+
+## Implementation and verification
+
+Semantic HTML implements all marketing copy, expense values, controls and rules.
+The original approved discount source supplies the product preview. An SVG viewBox
+displays the family photo from the approved mockup. The built-in Imagegen tool
+prepared `public/images/approved/boss-bucks-hero.png` from that mockup. Prompt:
+Extract the top hero photo, remove webpage text and controls, preserve the family,
+poses, sunset field, black/orange clothing and photographic realism, with dark
+negative space on the left. The image is illustrative campaign artwork.
+
+Production build and TypeScript checks passed. Chromium checks at 1440, 1024,
+768, 390 and 320 pixels passed: no horizontal overflow, one h1, loaded images,
+12 HTTP-200 route destinations, section anchor, mobile navigation/Escape and
+no page runtime errors. Visual comparison prompted a larger phone presentation
+and adjusted desktop family heading. Hosted verification follows publication.

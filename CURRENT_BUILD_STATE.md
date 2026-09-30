@@ -38,14 +38,22 @@ Existing product, audience and company routes, Netlify intake forms, thank-you
 flow, SEO metadata, preview noindex policy and architecture/security documentation
 remain available. The prior form success-handler fix remains intact.
 
+## Boss Bucks interior page
+
+Owner approved the proposed desktop design and requested implementation and going
+live on September 30, 2026. The responsive page is implemented at `/boss-bucks`.
+It includes discount membership vs earned value, approved family costs, coming-soon
+gift cards, fundraising steps and separate family/organization spending rules.
+See `docs/design/boss-bucks-page.md` for asset provenance and verification.
+
 ## Next work
 
-1. Owner reviews the completed homepage preview.
-2. Prepare and review the first major interior-page mockup, preferably Boss Bucks
-   or Fundraising, then implement through the established mockup/QA process.
-3. Extend the approved website identity and current scope through interior pages.
+1. Verify hosted Boss Bucks publication and record its release checkpoint.
+2. Prepare the Fundraising interior mockup for owner review.
+3. Extend the approved website identity through remaining interior pages.
 4. Complete production contact, legal, abuse prevention and launch configuration.
 5. Progressive integration with the separately released Boss platform.
 
-Interior pages retain the earlier foundation and are not yet redesigned to match
-the approved homepage. Public website work preserves the platform/backend strategy.
+Other interior pages retain the earlier foundation. Public website work preserves
+the platform/backend strategy. Wallet and payment functionality is not added by
+this website release.

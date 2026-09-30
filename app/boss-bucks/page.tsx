@@ -1,53 +1,33 @@
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import s from "../product.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import ApprovedHeader from "@/components/ApprovedHeader";
+import ApprovedFooter from "@/components/ApprovedFooter";
+import CostIcon from "@/components/CostIcon";
+import home from "../approvedHome.module.css";
+import s from "./bossBucks.module.css";
 
-export const metadata={title:"Boss Bucks Discounts"};
-
-export default function Page(){
-  return <main className={s.page}>
-    <SiteHeader/>
-    <section className={s.visualHero}>
-      <div className={s.heroCopy}>
-        <div className={s.eyebrow}>BOSS BUCKS DISCOUNTS</div>
-        <h1>Save like a Boss.</h1>
-        <p>Digital discounts designed to give supporters real ongoing value while helping teams and organizations build a stronger long-term community around every fundraiser.</p>
-        <div className={s.actions}><a href="/get-started">Get Boss Bucks →</a><a href="/fundraising">Use It With Fundraising</a></div>
-      </div>
-      <div className={s.photoStage}>
-        <img src="https://images.unsplash.com/photo-1721238026871-760ff15739dc?auto=format&fit=crop&w=1600&q=84" alt="People enjoying a local restaurant experience"/>
-        <div className={s.photoLabel}><small>LOCAL VALUE. REAL SAVINGS.</small><strong>Useful benefits people want to keep using.</strong></div>
-      </div>
+export const metadata = {title:"Boss Bucks | Save Like a Boss", description:"Discover Boss Bucks Discounts and learn how earned Boss Bucks help families cover approved sports, camps, gear and travel costs."};
+function Icon({kind}:{kind:string}) {return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{kind==="tag"?<><path d="M3 17 17 3h12v12L15 29 3 17Z"/><circle cx="23" cy="9" r="2"/></>:kind==="people"?<><circle cx="16" cy="9" r="4"/><circle cx="5" cy="11" r="3"/><circle cx="27" cy="11" r="3"/><path d="M9 28v-8c0-7 14-7 14 0v8H9ZM2 27v-8h4m24 8v-8h-4"/></>:kind==="pin"?<><path d="M26 13c0 8-10 17-10 17S6 21 6 13a10 10 0 0 1 20 0Z"/><circle cx="16" cy="12" r="3"/></>:kind==="rules"?<><rect x="7" y="3" width="18" height="26" rx="2"/><path d="M12 10h8m-8 6h8m-8 6h5"/></>:kind==="building"?<><path d="M7 29V3h13v26M20 13h7v16M3 29h27M11 8h5m-5 6h5m-5 6h5m-4 9v-4h4v4"/></>:<><path d="M5 28V20m7 8V14m8 14V8m7 20V3" strokeWidth="4"/></>}</svg>}
+const costs=[['sports','Sports fees'],['gear','Team gear'],['camps','Camps'],['travel','Travel']];
+export default function Page(){return <div className={home.home}>
+  <a href="#main-content" className={home.skipLink}>Skip to content</a><ApprovedHeader/>
+  <main id="main-content" className={s.page}>
+    <section className={s.hero} aria-labelledby="hero-title">
+      <Image src="/images/approved/boss-bucks-hero.png" alt="A family celebrating their young softball athlete at sunset" fill priority sizes="100vw" className={s.heroPhoto}/>
+      <div className={s.heroCopy}><p className={s.eyebrow}>BOSS BUCKS</p><h1 id="hero-title">Save Like a <span>Boss.</span></h1><p className={s.heroLead}>Everyday discounts. Fundraising<br className={s.desktopBreak}/> value toward approved family costs.</p><div className={s.actions}><Link className={s.button} href="/get-started">Start Fundraising</Link><a className={s.outline} href="#how-it-works">See How It Works</a></div></div>
     </section>
-
-    <section className={s.productStage}>
-      <div className={s.productStageHead}><div><div className={s.eyebrow}>DIGITAL EXPERIENCE</div><h2>A discount membership built for everyday use.</h2></div><p>The approved Boss Bucks direction is mobile-first, clear, fast and location-aware, with featured deals, nearby savings and an easy path back into the broader Boss ecosystem.</p></div>
-      <div className={s.deviceGrid}>
-        <div className={s.devicePanel}>
-          <div className={s.phone}>
-            <div className={s.phoneTop}/>
-            <div className={s.appBar}>BOSS BUCKS DISCOUNTS</div>
-            <div className={s.phoneBody}>
-              <div className={s.deal}><small>FEATURED DEAL</small><strong>20% OFF</strong><p>Local dining favorite</p><span>UNLIMITED USE</span></div>
-              <div className={s.deal}><small>NEAR YOU</small><strong>Save $8</strong><p>Family entertainment</p><span>2.4 mi away</span></div>
-              <div className={s.deal}><small>LOCAL FAVORITE</small><strong>BOGO</strong><p>Quick-service restaurant</p><span>Nearby</span></div>
-            </div>
-            <div className={s.phoneNav}><span>Home</span><span>Deals</span><span>Near Me</span><span>Favorites</span><span>Account</span></div>
-          </div>
-        </div>
-        <div className={s.devicePanel}>
-          <div className={s.cards} style={{gridTemplateColumns:"1fr"}}>
-            <article className={s.card}><b>LOCAL / HOME MARKET</b><h3>Start with savings that matter nearby.</h3><p>Home-market access can connect supporters to restaurants, entertainment, services and other participating merchants in the area they actually use.</p></article>
-            <article className={s.card}><b>EXPANDABLE ACCESS</b><h3>Local. Metro. Statewide. Nationwide.</h3><p>The platform is designed to support broader geographic access as the merchant network and membership offering grow.</p></article>
-          </div>
-        </div>
-      </div>
+    <section className={s.benefits} id="how-it-works" aria-labelledby="benefits-title"><h2 id="benefits-title">Two ways <span>Boss Bucks</span> helps your family.</h2><div className={s.twoCards}>
+      <article className={s.benefitCard}><div className={s.iconCircle}><Icon kind="tag"/></div><div><h3>Boss Bucks<br/>Discounts</h3><p>Save through participating<br className={s.desktopBreak}/> merchant offers.</p></div></article>
+      <article className={s.benefitCard}><div className={s.iconCircle}><Icon kind="people"/></div><div><h3>Earned Boss Bucks</h3><p>Raise value through approved campaigns. Apply it toward approved costs.</p></div></article>
+    </div></section>
+    <section className={s.discounts} aria-labelledby="discounts-title"><figure className={s.phone}><svg viewBox="175 0 745 1402" role="img" aria-label="Illustrative Boss Bucks Discounts app with featured offers, nearby deals and favorites"><image href="/images/approved/boss-bucks-discounts.jpeg" width="1122" height="1402"/></svg><figcaption>Illustrative product preview. Offers shown are examples.</figcaption></figure><div className={s.discountCopy}><h2 id="discounts-title">Boss Bucks Discounts<br/><span>Save Like a Boss.</span></h2><p className={s.lead}>Find nearby deals, understand offer rules and make everyday spending go further.</p><ul className={s.features}>
+      {[["deals","Local deals and featured offers","Discover offers from participating businesses."],["pin","Nearby savings and favorites","Find deals near you and save your favorites."],["rules","Clear restrictions and redemption rules","See offer details, validity and how to redeem before you use."]].map(([kind,title,copy])=><li key={kind}><div className={s.iconCircle}><Icon kind={kind}/></div><div><h3>{title}</h3><p>{copy}</p></div></li>)}
+      </ul><div className={s.coverage}><Icon kind="pin"/><div><strong>Local · Metro · Statewide · Nationwide</strong><p>Coverage varies by membership.</p></div></div></div></section>
+    <section className={s.family} aria-labelledby="family-title"><div className={s.familyRow}><svg className={s.familyPhoto} viewBox="0 1065 326 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Parents supporting their young softball athlete"><image href="/design/boss-bucks-approved.png" width="795" height="1978"/></svg><div className={s.familyCopy}><h2 id="family-title">Help cover<br/><span>approved costs.</span></h2><p>Fundraise toward sports fees, registration, team gear, children’s and youth camps, tournaments and eligible travel.</p><div className={s.costs}>{costs.map(([kind,label])=><div key={kind}><CostIcon kind={kind}/><span>{label}</span></div>)}</div></div><aside className={s.expense} aria-label="Illustrative family expense example"><h3>Family Boss Bucks</h3><p>Illustrative example</p><dl><div><dt>Sports registration</dt><dd>$450</dd></div><div><dt>Boss Bucks applied</dt><dd className={s.applied}>$300</dd></div><div><dt>Remaining cost</dt><dd className={s.remaining}>$150</dd></div></dl></aside></div>
+      <div className={s.giftCards}><div className={s.giftIcons}><CostIcon kind="gas"/><CostIcon kind="meal"/></div><strong>Coming soon</strong><div><p>Use Boss Bucks to purchase gas and restaurant gift cards.</p><small>Approved spending rules apply.</small></div></div>
     </section>
-
-    <section className={s.panel}><h2>More than a digital discount card.</h2><p>Boss Bucks is being built as a recurring digital membership experience that can grow with supporters beyond the original campaign.</p><div className={s.cards}><article className={s.card}><b>LOCAL VALUE</b><h3>Useful savings close to home.</h3><p>Participating restaurants, services, entertainment and merchants can create everyday reasons to keep using Boss.</p></article><article className={s.card}><b>GEOGRAPHIC ACCESS</b><h3>Local to nationwide.</h3><p>The platform architecture supports home-market access with future metro, statewide and nationwide membership tiers.</p></article><article className={s.card}><b>DIGITAL FIRST</b><h3>Built for renewals.</h3><p>Supporters can register through a team or participant and continue digitally after the fundraiser is over.</p></article></div></section>
-
-    <section className={s.dark}><h2>A fundraiser can be the beginning.</h2><p>Teams can introduce supporters to Boss Bucks through a direct purchase or promotional access period while preserving credit for the organization and participant.</p><div className={s.steps}><div className={s.step}><span>01</span><h3>Share</h3><p>A participant shares a unique fundraising link or QR code.</p></div><div className={s.step}><span>02</span><h3>Register</h3><p>The supporter creates an account and attribution stays connected.</p></div><div className={s.step}><span>03</span><h3>Save</h3><p>The supporter activates Boss Bucks and begins using eligible discounts.</p></div><div className={s.step}><span>04</span><h3>Continue</h3><p>Future renewal can extend the relationship well beyond the campaign.</p></div></div></section>
-    <section className={s.cta}><h2>Save more. Support more.</h2><a href="/get-started">Get Started →</a></section>
-    <SiteFooter/>
-  </main>
-}
+    <section className={s.fundraise} aria-labelledby="fundraise-title"><div><h2 id="fundraise-title">Fundraise<br/>Like a <span>Boss.</span></h2><p>Card sales, trial invitations, donations and the Money Board connect supporters to your goals.</p><Link className={s.button} href="/fundraising">Explore Boss Fundraising</Link></div><ol className={s.steps}>{[["Join a campaign","Choose your team or organization and get started."],["Raise Boss Bucks","Invite support through cards, donations and the Money Board."],["Apply to approved costs","Use raised value toward eligible expenses."]].map(([title,copy],i)=><li key={title}><span>{i+1}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></section>
+    <section className={s.integrity} aria-labelledby="integrity-title"><h2 id="integrity-title">Raised for a purpose. <span>Used for that purpose.</span></h2><div className={s.twoCards}><article className={s.integrityCard}><div className={s.iconCircle}><Icon kind="people"/></div><div><h3>Families &amp; participants</h3><p>Apply Boss Bucks to approved costs.<br/>No cash withdrawals or personal bank transfers.</p></div></article><article className={s.integrityCard}><div className={s.iconCircle}><Icon kind="building"/></div><div><h3>Teams &amp; organizations</h3><p>Only eligible organization proceeds can transfer to an approved organization bank account.</p></div></article></div><p className={s.vision}>Platform vision. Campaign availability and approved spending options vary. Family and organization balances are separate.</p></section>
+    <section className={s.finalCta}><h2>Fundraise <span>Like a Boss.</span></h2><p>Help your family save and fund the activities that matter.</p><Link className={s.button} href="/get-started">Start Fundraising</Link></section>
+  </main><ApprovedFooter/>
+</div>}
