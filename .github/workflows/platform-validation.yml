@@ -1,0 +1,40 @@
+name: Platform foundation validation
+
+on:
+  pull_request:
+    paths:
+      - "apps/platform/**"
+      - ".github/workflows/platform-validation.yml"
+  push:
+    branches: ["build/boss-platform-v1"]
+    paths:
+      - "apps/platform/**"
+      - ".github/workflows/platform-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: apps/platform
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Format-only fixtures for compilation. Not working API credentials.
+      # This workflow never deploys or authenticates against the backend.
+      NEXT_PUBLIC_SUPABASE_URL: "https://ilykgwgmxtrrikreacrz.supabase.co"
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_aA9bB8cC7dD6eE5fF4gG3hH2iI1jJ0kK"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: apps/platform/.nvmrc
+          cache: npm
+          cache-dependency-path: apps/platform/package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run validate
