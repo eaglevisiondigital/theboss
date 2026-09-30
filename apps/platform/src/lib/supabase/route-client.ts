@@ -1,5 +1,6 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
+import type { Database } from "./database.types";
 import { type NextRequest, NextResponse } from "next/server";
 import { getPublicEnvironment } from "../env/public";
 import { getServerEnvironment } from "../env/server";
@@ -10,7 +11,7 @@ export function createRouteClient(request: NextRequest) {
   const environment = getPublicEnvironment();
   const serverEnvironment = getServerEnvironment();
   const sessionResponse = preventAuthCaching(new NextResponse(null));
-  const client = createServerClient(environment.supabaseUrl, environment.supabasePublishableKey, {
+  const client = createServerClient<Database>(environment.supabaseUrl, environment.supabasePublishableKey, {
     cookieOptions: getAuthCookieOptions(request, serverEnvironment.platformOrigin),
     global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }) },
     cookies: {

@@ -1,4 +1,75 @@
-# Platform shell security
+# Boss platform security
+
+## IMPLEMENTED
+
+The foundation is applied to the canonical Boss project: 22 exposed application
+tables, all with RLS enabled and explicit access grants. The complete local A–P
+suite passes 642 assertions; 269 additional role checks pass locally and live,
+with transaction rollback and zero fixtures afterward. Hierarchy concurrency
+checks pass at three isolation levels. See `CURRENT_BUILD_STATE.md`.
+
+Anonymous users have no application table access or private helper execution.
+Authenticated clients receive SELECT only; every read requires a canonical active
+Boss identity plus the appropriate relationship or explicit scoped permission.
+Catalog definitions require that identity but no tenant relationship.
+An Auth login alone, membership label, module activation, entitlement, visibility
+field or feature flag never grants broad access. No public identity projection or
+automatic publication policy exists. Private team visibility is the default.
+
+Private person DOB/contact information is restricted to self, currently verified
+explicit guardian profile authority, or platform `person.profile.view`.
+Household membership does not establish guardian authority. Scoped participant
+metadata access does not reveal another person's private canonical profile.
+
+The private `boss_private` schema contains invoker integrity functions and small
+caller-bound definer lookups. Definers are needed to resolve canonical mapping,
+relationship and permission records without recursive policies; they are not
+general read/write or impersonation endpoints. All use an empty search path,
+fully qualified references, database-owned mapping/role records and restricted
+EXECUTE. No user-editable metadata supplies authority. Private schema USAGE does
+not itself add it to PostgREST exposed-schema configuration. Spoofing, missing
+identity, anonymous claims and temporary-object shadowing are covered by the
+passing test matrix. Live checks exercise database roles; they do not emulate
+HTTP routing or JWT signature verification.
+
+Role scope and actual resource context are validated, including same-tenant
+composite FKs. Unit permissions are exact; there is no implicit descendant
+inheritance. Lifecycle windows and status checks invalidate relationship/role
+authority. Historical self-relationship reads do not activate membership-based
+entitlements. Cross-tenant writes also fail structurally under trusted writers.
+
+Authenticated mutation grants/policies are deliberately absent. The trusted
+`service_role` writer receives explicit CRUD for foundation records but no
+TRUNCATE; audit access is SELECT/INSERT only. No service key is retrieved or
+added to the application. A platform person role does not become a database
+BYPASSRLS role. Audit UPDATE/DELETE/TRUNCATE guards reject casual history rewrites;
+superusers/database owners remain an operational trust boundary.
+
+The migration owner's future table/sequence/function grants are hardened.
+Managed `supabase_admin` future defaults are outside its ownership and remain
+unchanged; every new application object explicitly sets ACLs. Existing managed
+Auth/Storage settings, functions and policies are not modified.
+
+Configuration JSON is for low-risk settings; audit JSON must be safe structured
+context. Neither is a credential store or public profile store. Automatic audit
+capture, secure business mutation paths and field-level consent projections
+need their own reviewed implementation. Transactional test fixtures are separate
+from production catalog migrations; no real identity is provisioned or assigned
+authority by a seed.
+
+The approved initial role-permission matrix has 112 explicit potential-capability
+pairs and validates the role's permitted scope kinds. Live advisors report no new
+schema security warning; separate existing Auth findings are unchanged. Required
+FK/scoped-query indexes are retained despite fresh-schema unused-index information.
+
+## APPROVED BUT NOT IMPLEMENTED
+
+Authenticated management workflows, automatic audit capture, canonical identity
+provisioning and consent are not implemented. Organization household grants cannot infer an unmodeled
+tenant-family relationship; those reads stay protected by current household RLS.
+No out-of-scope business module is included.
+
+## Historical Phase 1B shell controls and limits
 
 Technical foundation through Phase 1B hosted validation. This document is not a final authorization
 matrix or a production-readiness certification. No business table, policy,
@@ -80,7 +151,7 @@ enumeration telemetry. Review upstream Auth rate limits and operational abuse
 controls before enabling authentication. It does not certify recovery, backup,
 incident response, access logging or production availability.
 
-## Future requirements, not implemented
+## Historical Phase 1B future requirements
 
 Approved data-model work must establish RLS and explicit least-privilege grants,
 deny-by-default organization/team/household/merchant isolation, minor privacy,

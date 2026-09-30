@@ -1,5 +1,6 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
+import type { Database } from "./database.types";
 import { cookies } from "next/headers";
 import { getPublicEnvironment } from "../env/public";
 import { getServerEnvironment } from "../env/server";
@@ -11,7 +12,7 @@ export async function createClient() {
   const serverEnvironment = getServerEnvironment();
   const cookieStore = await cookies();
 
-  return createServerClient(environment.supabaseUrl, environment.supabasePublishableKey, {
+  return createServerClient<Database>(environment.supabaseUrl, environment.supabasePublishableKey, {
     cookieOptions: {
       path: "/",
       sameSite: "lax",

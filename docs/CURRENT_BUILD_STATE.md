@@ -1,6 +1,89 @@
 # Current build state
 
-Phase 1B checkpoint, September 30, 2026. The dedicated platform is published at
+## Phase 2A core schema and RLS foundation
+
+### IMPLEMENTED AND VERIFIED LIVE
+
+Six canonical migrations are applied to the verified Boss Supabase project
+`the-boss-platform`, ref `ilykgwgmxtrrikreacrz`, region `us-east-1`.
+Repository migration filenames match the observed hosted history; reconciliation
+preserved the reviewed SQL bytes and migration order.
+
+| Migration version | Foundation |
+| --- | --- |
+| `20260930212353` | Grant hardening |
+| `20260930212410` | Identity and organizations |
+| `20260930212417` | Relationships, access and governance |
+| `20260930212421` | Integrity triggers |
+| `20260930212426` | Authorization helpers and RLS |
+| `20260930212430` | Approved catalog seeds |
+
+The 22 approved tables have 167 constraints (22 primary keys, 45 foreign keys,
+79 checks and 21 unique constraints), 35 explicit indexes (78 total including
+constraint indexes), 26 integrity triggers, and 22 authenticated SELECT policies.
+Every public table has RLS. Anonymous access and all client mutation grants/policies
+are absent. Seventeen private functions include ten narrowly caller-bound definers;
+only twelve reviewed policy helpers are executable by authenticated clients.
+
+Catalog seeds contain 19 roles, 17 foundation permissions, 112 approved mappings
+and 13 module definitions. All 18 non-catalog tables are empty. No real Boss
+identity/account mapping, tenant, household, team, role assignment, module
+activation or customer record is seeded. Existing managed Auth identities,
+Storage and Edge Functions are preserved; no Auth policy or environment changed.
+
+### VERIFIED DATABASE ACCEPTANCE
+
+The complete A–P suite passed 642 assertions in three fresh PostgreSQL 17.11
+runs. The last two also passed 269 DML-only verification assertions and coordinated
+hierarchy concurrency checks: READ COMMITTED rejected a cycle with `23514`;
+REPEATABLE READ/SERIALIZABLE rejected stale writes with `40001`. Every run rolled
+back fixtures and removed its private Unix-socket cluster.
+
+The 269-assertion verification then passed on canonical hosted PostgreSQL 17,
+using actual `anon` and `authenticated` database roles with synthetic request
+claims. All synthetic records rolled back and cleanup counts were zero.
+These SQL checks model Data API database-role enforcement; they do not certify
+HTTP JWT signature verification or production load performance.
+
+Live advisors found no new schema security warning, missing RLS or unindexed FK.
+The separate existing Auth security warning and connection-allocation information
+remain unchanged. Fresh-schema unused-index information is retained for workload
+review: those indexes support integrity and scoped retrieval, and an empty
+operational schema cannot establish production index usefulness.
+
+### APPLICATION AND PUBLICATION
+
+Public-schema TypeScript types are generated from the validated live project at
+`apps/platform/src/lib/supabase/database.types.ts`. All four existing browser/SSR
+adapters use that Database generic; no new query, UI, mutation API or privileged
+credential is introduced. Local typecheck, zero-warning lint, all 22 application tests and the production
+build pass with locked dependencies and synthetic public build configuration.
+Final branch/CI metadata is recorded in the assignment completion report and
+[PR #3](https://github.com/eaglevisiondigital/theboss/pull/3).
+The validation workflow includes the isolated PostgreSQL 17 SQL/concurrency job.
+
+The branch remains `build/boss-platform-v1`, starting this assignment at
+`d560e46e307a9c6aa18e9c402eacff312c4eeea6`. PR #3 must stay OPEN/DRAFT/UNMERGED.
+Public website code, configurations and production deployment pointers are
+preserved. The private source brief remains outside the public repository.
+
+### APPROVED BUT NOT IMPLEMENTED
+
+Canonical identity provisioning, authorized audited mutation workflows,
+delegation, consent and publication projections require a subsequent assignment.
+Organization household permissions remain potential capabilities without an
+approved tenant-family resource anchor. Unit-scoped authority does not invent an
+organization membership unit relationship. No descendant-unit inheritance exists.
+
+### FUTURE
+
+Fundraising, Boss Bucks, payments, Money Board, commerce, registration, messaging,
+Storage/document workflows and all other business modules remain outside Phase 2A.
+Phase 2A ends with this foundation; Phase 2B is not started.
+
+## Historical Phase 1B checkpoint
+
+The dedicated platform is published at
 [thebossplatform.netlify.app](https://thebossplatform.netlify.app).
 
 ## IMPLEMENTED
