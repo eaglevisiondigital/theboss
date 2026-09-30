@@ -18,10 +18,12 @@ export default function NetlifyForm({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting) return;
+    const form = event.currentTarget;
     setSubmitting(true);
     setError("");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const body = new URLSearchParams();
 
     formData.forEach((value, key) => {
@@ -37,7 +39,7 @@ export default function NetlifyForm({
 
       if (!response.ok) throw new Error("Submission failed");
 
-      event.currentTarget.reset();
+      form.reset();
       router.push("/thanks");
     } catch {
       setError("We could not submit the form. Please try again.");
