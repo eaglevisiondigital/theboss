@@ -4,11 +4,36 @@ import { NextResponse } from "next/server";
 import { getHealthStatus } from "../src/lib/health";
 import { copySessionResponse } from "../src/lib/supabase/response";
 import { PUBLIC_ENVIRONMENT_FIXTURE } from "./fixtures";
+import { GET as getHealthRoute } from "../src/app/health/route";
 
 test("health reports configuration readiness without credentials or backend calls", () => {
   assert.deepEqual(getHealthStatus(PUBLIC_ENVIRONMENT_FIXTURE), { status: "ok", httpStatus: 200 });
   assert.deepEqual(getHealthStatus({}), { status: "unconfigured", httpStatus: 503 });
   assert.deepEqual(getHealthStatus({ ...PUBLIC_ENVIRONMENT_FIXTURE, NODE_ENV: "unknown" }), { status: "unconfigured", httpStatus: 503 });
+});
+
+test("actual health route validates the full hosted production configuration", async () => {
+  const names = ["NODE_ENV", "NETLIFY", "BOSS_PLATFORM_ORIGIN", "NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"];
+  const original = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  try {
+    Object.assign(process.env, PUBLIC_ENVIRONMENT_FIXTURE, {
+      NODE_ENV: "production", NETLIFY: "true", BOSS_PLATFORM_ORIGIN: "https://platform.boss.invalid",
+    });
+    const ready = await getHealthRoute();
+    assert.equal(ready.status, 200);
+    assert.deepEqual(await ready.json(), { status: "ok" });
+    assert.match(ready.headers.get("Cache-Control") ?? "", /private, no-store/);
+    delete process.env.BOSS_PLATFORM_ORIGIN;
+    assert.equal((await getHealthRoute()).status, 503);
+    Object.assign(process.env, { BOSS_PLATFORM_ORIGIN: "http://localhost:3000" });
+    assert.equal((await getHealthRoute()).status, 503);
+  } finally {
+    for (const name of names) {
+      const value = original[name];
+      if (value === undefined) delete process.env[name];
+      else Object.assign(process.env, { [name]: value });
+    }
+  }
 });
 
 test("redirects retain refreshed session cookies and prohibit shared caching", () => {

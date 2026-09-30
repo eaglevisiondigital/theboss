@@ -4,13 +4,14 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getPublicEnvironment } from "../env/public";
 import { getServerEnvironment } from "../env/server";
 import { copySessionResponse, preventAuthCaching } from "./response";
+import { getAuthCookieOptions } from "../auth/request-origin";
 
 export function createRouteClient(request: NextRequest) {
   const environment = getPublicEnvironment();
-  getServerEnvironment();
+  const serverEnvironment = getServerEnvironment();
   const sessionResponse = preventAuthCaching(new NextResponse(null));
   const client = createServerClient(environment.supabaseUrl, environment.supabasePublishableKey, {
-    cookieOptions: { path: "/", sameSite: "lax", secure: request.nextUrl.protocol === "https:" },
+    cookieOptions: getAuthCookieOptions(request, serverEnvironment.platformOrigin),
     global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }) },
     cookies: {
       getAll: () => request.cookies.getAll(),

@@ -10,6 +10,7 @@ on:
       - "docs/PLATFORM_PREPARATION.md"
       - "docs/SECURITY_MODEL.md"
       - "docs/SOURCE_PROVENANCE.md"
+      - "docs/PHASE_1B_HOSTED_VALIDATION.md"
   push:
     branches: ["build/boss-platform-v1"]
     paths:
@@ -20,6 +21,7 @@ on:
       - "docs/PLATFORM_PREPARATION.md"
       - "docs/SECURITY_MODEL.md"
       - "docs/SOURCE_PROVENANCE.md"
+      - "docs/PHASE_1B_HOSTED_VALIDATION.md"
 
 permissions:
   contents: read
@@ -37,6 +39,7 @@ jobs:
       # This workflow never deploys or authenticates against the backend.
       NEXT_PUBLIC_SUPABASE_URL: "https://ilykgwgmxtrrikreacrz.supabase.co"
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_aA9bB8cC7dD6eE5fF4gG3hH2iI1jJ0kK"
+      BOSS_PLATFORM_ORIGIN: "https://platform.boss.invalid"
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:

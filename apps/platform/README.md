@@ -19,7 +19,10 @@ npm run dev
 The example key is a placeholder and intentionally fails validation. Do not
 commit `.env.local`. Required configuration is
 `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`; no server
-secret is required. The URL must identify the dedicated Boss project. Both
+secret is required. Server-only `BOSS_PLATFORM_ORIGIN` is a non-secret, approved
+application origin required in production. Use the actual HTTPS platform origin
+on Netlify or the example loopback origin locally; do not derive it from forwarded
+headers. The URL must identify the dedicated Boss project. Both public
 variables must be available for the build and server runtime, and changing
 public values requires a rebuild. Never introduce privileged browser variables.
 
@@ -68,9 +71,10 @@ No test should submit real credentials, create users or mutate the backend.
 ## Deployment and assets
 
 The `thebossplatform` site's base is `apps/platform`; its nested config builds
-this package and publishes `.next`. Builds are held and previews disabled until
-authorized configuration and preview/Auth settings are ready. Nothing is hosted
-from this shell yet. See `../../docs/PHASE_1A_NETLIFY.md`.
+this package and publishes `.next`. Phase 1B supplied the approved public
+configuration, activated builds and published the shell at its existing Netlify
+URL. Previews remain disabled. Hosted defects and test limits are tracked in
+`../../docs/PHASE_1B_HOSTED_VALIDATION.md`; the Phase 1A deployment hold is historical.
 
 Branding is plain text and fonts are system fonts because approved artwork/font
 assets are absent from the selected main baseline. No logo or draft website

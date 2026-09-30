@@ -5,17 +5,20 @@ import { getServerEnvironment } from "../env/server";
 import { getLoginPath, getSafeNextPath } from "../auth/redirects";
 import { getVerifiedIdentity } from "../auth/verified-identity";
 import { copySessionResponse, preventAuthCaching } from "./response";
+import { getAuthCookieOptions, getRequestOrigin } from "../auth/request-origin";
 
 export async function updateSession(request: NextRequest) {
   let response = preventAuthCaching(NextResponse.next({ request }));
   const protectedPath = request.nextUrl.pathname === "/app" || request.nextUrl.pathname.startsWith("/app/");
   let identity = null;
   let configured = true;
+  let origin = new URL(request.url).origin;
   try {
     const environment = getPublicEnvironment();
-    getServerEnvironment();
+    const serverEnvironment = getServerEnvironment();
+    origin = getRequestOrigin(request, serverEnvironment.platformOrigin);
     const client = createServerClient(environment.supabaseUrl, environment.supabasePublishableKey, {
-      cookieOptions: { path: "/", sameSite: "lax", secure: request.nextUrl.protocol === "https:" },
+      cookieOptions: getAuthCookieOptions(request, serverEnvironment.platformOrigin),
       global: { fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }) },
       cookies: {
         getAll: () => request.cookies.getAll(),
@@ -37,7 +40,7 @@ export async function updateSession(request: NextRequest) {
 
   if (protectedPath && !identity) {
     const next = getSafeNextPath(`${request.nextUrl.pathname}${request.nextUrl.search}`);
-    const login = new URL(getLoginPath(next, configured ? undefined : "unavailable"), request.url);
+    const login = new URL(getLoginPath(next, configured ? undefined : "unavailable"), origin);
     return copySessionResponse(response, NextResponse.redirect(login));
   }
 

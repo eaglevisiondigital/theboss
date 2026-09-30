@@ -1,14 +1,25 @@
+import { getRequestOrigin } from "./request-origin";
+
 const MAX_LOGIN_BODY_BYTES = 16_384;
 
-export function isSameOriginPost(request: Request): boolean {
+export function isSameOriginPost(request: Request, configuredOrigin?: string): boolean {
   if (request.method !== "POST") return false;
   const origin = request.headers.get("origin");
   const fetchSite = request.headers.get("sec-fetch-site");
   if (!origin || (fetchSite && fetchSite !== "same-origin")) return false;
   try {
+    if (configuredOrigin) {
+      const approved = new URL(configuredOrigin);
+      const host = request.headers.get("host")?.toLowerCase();
+      const defaultPort = approved.protocol === "https:" ? "443" : "80";
+      if (
+        !host || (host !== approved.host &&
+          (approved.port || host !== `${approved.hostname}:${defaultPort}`))
+      ) return false;
+    }
     const parsedOrigin = new URL(origin);
     return (
-      parsedOrigin.origin === new URL(request.url).origin &&
+      parsedOrigin.origin === getRequestOrigin(request, configuredOrigin) &&
       parsedOrigin.href === `${parsedOrigin.origin}/`
     );
   } catch {

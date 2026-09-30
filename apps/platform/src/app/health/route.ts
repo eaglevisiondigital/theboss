@@ -10,6 +10,8 @@ export async function GET() {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     NODE_ENV: process.env.NODE_ENV,
+    BOSS_PLATFORM_ORIGIN: process.env.BOSS_PLATFORM_ORIGIN,
+    NETLIFY: process.env.NETLIFY,
   });
   return preventAuthCaching(NextResponse.json({ status: health.status }, { status: health.httpStatus }));
 }

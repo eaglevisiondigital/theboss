@@ -1,8 +1,12 @@
 # Current build state
 
-Phase 1A checkpoint, September 30, 2026. Implementation stops at the platform
-shell. This is a technical status record, not approval of the business model
-or a claim that the new application is running in production.
+Current Phase 1B checkpoint, September 30, 2026: the shell is hosted on the
+dedicated platform site. Public configuration is installed and builds active.
+Hosted POST-origin and early-redirect-header defects are repaired in code;
+repaired deployment retest and controlled-account tests remain pending. See
+[Phase 1B hosted validation](PHASE_1B_HOSTED_VALIDATION.md) for current status.
+The Phase 1A evidence below is a historical baseline, including its deployment
+hold. No business model or production data schema is approved by this document.
 
 ## Verified infrastructure
 

@@ -49,9 +49,24 @@ test("rejects other public privileged variable names and secret key values", () 
   }
 });
 
-test("server parser exposes only the validated runtime mode", () => {
-  assert.deepEqual(parseServerEnvironment({ NODE_ENV: "production", DATABASE_PASSWORD: "private-value" }), {
+test("server parser exposes only validated runtime mode and approved app origin", () => {
+  assert.deepEqual(parseServerEnvironment({ NODE_ENV: "production", BOSS_PLATFORM_ORIGIN: "https://platform.boss.invalid/", DATABASE_PASSWORD: "private-value" }), {
     nodeEnvironment: "production",
+    platformOrigin: "https://platform.boss.invalid",
   });
   assert.throws(() => parseServerEnvironment({ NODE_ENV: "unrecognized" }), EnvironmentConfigurationError);
+});
+
+test("production requires a single safe app origin and Netlify rejects loopback HTTP", () => {
+  assert.throws(() => parseServerEnvironment({ NODE_ENV: "production" }), /BOSS_PLATFORM_ORIGIN/);
+  for (const origin of [
+    "http://platform.boss.invalid", "https://platform.boss.invalid/path",
+    "https://platform.boss.invalid?next=other", "https://platform.boss.invalid#fragment",
+    "https://user:private@platform.boss.invalid", "https://*.boss.invalid", "not-a-url",
+  ]) {
+    assert.throws(() => parseServerEnvironment({ NODE_ENV: "production", BOSS_PLATFORM_ORIGIN: origin }),
+      (error: unknown) => error instanceof EnvironmentConfigurationError && !error.message.includes(origin));
+  }
+  assert.equal(parseServerEnvironment({ NODE_ENV: "production", BOSS_PLATFORM_ORIGIN: "http://localhost:3000" }).platformOrigin, "http://localhost:3000");
+  assert.throws(() => parseServerEnvironment({ NODE_ENV: "production", NETLIFY: "true", BOSS_PLATFORM_ORIGIN: "http://localhost:3000" }));
 });

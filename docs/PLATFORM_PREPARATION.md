@@ -1,7 +1,8 @@
 # Platform preparation
 
-Status: Phase 1A shell implemented, pending configured deployment and main Chat
-review. Source provenance is in `SOURCE_PROVENANCE.md`; private handoffs remain
+Status: Phase 1A shell implemented and Phase 1B hosted validation in progress,
+pending controlled-account tests and main Chat review. Source provenance is in
+`SOURCE_PROVENANCE.md`; private handoffs remain
 outside this repository. No product data model is approved by this document.
 
 ## Approved and implemented
@@ -17,7 +18,8 @@ outside this repository. No product data model is approved by this document.
   validation, SSR refresh, cookies and private-cache controls establish an
   authentication foundation. Business authorization remains unimplemented.
 - Only the separate platform Netlify site was configured. See
-  `PHASE_1A_NETLIFY.md` for verified settings and the deployment hold.
+  `PHASE_1A_NETLIFY.md` for the historical hold and `PHASE_1B_HOSTED_VALIDATION.md`
+  for active builds, installed public configuration and hosted findings.
 
 ## Build and package isolation
 
@@ -36,10 +38,10 @@ website regression and path/configuration tests.
 
 ## Planned, requiring a later assignment
 
-- Supply authorized public platform configuration and review Supabase provider,
-  signup, origin and callback settings. Real authentication has not been tested.
-- Reactivate platform builds only after configuration is ready. Check the actual
-  Netlify SSR adapter, headers, redirects, refresh and logout in a hosted test.
+- Complete controlled-account testing and the private Auth configuration review.
+  Public provider/signup/confirmation settings were read without modification.
+- Verify repaired origin/header behavior on the actual Netlify deployment, then
+  test authenticated SSR, refresh, cookie propagation and logout with a safe account.
 - Approve a preview backend and review/release strategy; previews are disabled
   while those choices are unresolved. No production domain is invented.
 - Supply approved branding assets if replacing temporary text branding/system

@@ -11,7 +11,7 @@ const platformDirectory = process.cwd();
 const platformRequire = createRequire(join(platformDirectory, "package.json"));
 const tsxLoader = platformRequire.resolve("tsx");
 const checkEnvironmentScript = resolve(platformDirectory, "scripts/check-env.ts");
-const validConfiguration = `NEXT_PUBLIC_SUPABASE_URL=${PUBLIC_ENVIRONMENT_FIXTURE.NEXT_PUBLIC_SUPABASE_URL}\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${PUBLIC_ENVIRONMENT_FIXTURE.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}\n`;
+const validConfiguration = `NEXT_PUBLIC_SUPABASE_URL=${PUBLIC_ENVIRONMENT_FIXTURE.NEXT_PUBLIC_SUPABASE_URL}\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${PUBLIC_ENVIRONMENT_FIXTURE.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}\nBOSS_PLATFORM_ORIGIN=https://platform.boss.invalid\n`;
 const invalidConfiguration = "NEXT_PUBLIC_SUPABASE_URL=https://other-project.supabase.co\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=replace_with_canonical_publishable_key\n";
 
 function runCheck(files: Record<string, string>, extraEnvironment: Record<string, string> = {}) {
@@ -20,7 +20,7 @@ function runCheck(files: Record<string, string>, extraEnvironment: Record<string
     for (const [name, contents] of Object.entries(files)) writeFileSync(join(directory, name), contents);
     const environment = { ...process.env };
     for (const name of Object.keys(environment)) {
-      if (name.startsWith("NEXT_PUBLIC_") || name.startsWith("__NEXT_") || name === "NODE_ENV" || name === "npm_lifecycle_event") {
+      if (name.startsWith("NEXT_PUBLIC_") || name.startsWith("__NEXT_") || name === "BOSS_PLATFORM_ORIGIN" || name === "NODE_ENV" || name === "npm_lifecycle_event") {
         delete environment[name];
       }
     }

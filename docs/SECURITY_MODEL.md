@@ -1,6 +1,6 @@
 # Platform shell security
 
-Phase 1A technical controls only. This document is not a final authorization
+Technical foundation through Phase 1B hosted validation. This document is not a final authorization
 matrix or a production-readiness certification. No business table, policy,
 privileged credential or real user was created.
 
@@ -22,10 +22,16 @@ privileged credential or real user was created.
   SameSite Lax and Secure on HTTPS. Browser-readable cookies follow Supabase's
   browser/SSR design; they are not presented as HttpOnly cookies.
 - Password login and local-browser logout use POST only, require an explicit
-  matching Origin, check fetch-site metadata when provided, and return generic
+  matching server-approved Origin and non-forwarded Host, check fetch-site metadata
+  when provided, and return generic
   errors. Login input is bounded and duplicate credentials rejected. Redirect
   targets stay within local `/app` paths. No signup, OAuth, recovery or callback
   workflow is enabled by this shell.
+- Production requires server-only, non-secret `BOSS_PLATFORM_ORIGIN`. It fixes
+  the observed hosted POST rejection while controlling redirect destinations and
+  Secure cookies. Arbitrary forwarding headers do not determine these decisions.
+  A shared header policy is applied directly to early proxy responses because
+  hosted redirects otherwise bypassed the framework's configured headers.
 - All surfaces are noindex. Security headers enforce frame denial, CSP
   frame-ancestors/base/form/object restrictions, MIME sniffing prevention,
   referrer policy, limited browser capabilities and HTTPS HSTS. A stricter
@@ -44,11 +50,14 @@ checks, relationship and entitlement checks and reviewed database policies.
 Logout affects the current browser only; cross-device policy is not settled.
 No business action is authorized merely by reaching this shell.
 
-Required public configuration has not been provisioned. Netlify platform builds
-are stopped and previews disabled. Real login, credentials/project pairing,
-provider/SMTP settings, callback origins, hosted cookie Secure/origin behavior,
-refresh and logout are unverified. No staging backend or platform domain was
-created. Server credentials must never be put in `NEXT_PUBLIC_` variables or
+Required public configuration is provisioned for the dedicated platform's
+production context, builds are active and previews remain disabled. The canonical
+publishable key successfully retrieves public Auth settings; no privileged key
+was fetched. Hosted public routes and unauthenticated guards were tested. Initial
+POST-origin and redirect-header defects are repaired in code, pending redeployment
+and hosted retest. Real login, private Auth/SMTP/callback settings, authenticated
+cookie writes, refresh and authenticated logout are still unverified. No staging
+backend or custom platform domain was created. Server credentials must never be put in `NEXT_PUBLIC_` variables or
 untrusted preview contexts. Public build-log policy needs review before launch.
 
 This shell does not add custom abuse/rate-limiting infrastructure or account
@@ -63,6 +72,8 @@ deny-by-default organization/team/household/merchant isolation, minor privacy,
 private Storage policies, scoped roles, verified relationships and entitlements.
 Authentication and hidden UI controls cannot replace those protections. Review
 default grants before creating any exposed table or privileged function.
+The Phase 1B read-only audit found broad default public privileges but no business
+relations. Those defaults do not establish deny-by-default security for future tables.
 
 Audit logs, webhook signature verification, financial idempotency, ledger
 integrity, reversal behavior and transactional unique Money Board claims require

@@ -1,5 +1,9 @@
 # Phase 1A Netlify platform isolation
 
+Historical Phase 1A checkpoint. Phase 1B authorizes public configuration and
+platform build reactivation; see [current hosted validation](PHASE_1B_HOSTED_VALIDATION.md).
+The stopped-build state below records the safe hold before that authorization.
+
 Verified and configured September 30, 2026 (America/Chicago). Only the existing `thebossplatform` site's settings were changed. No manual or platform deployment was triggered, no environment values were retrieved or written, and no domain or public website configuration was changed. Opening the draft PR subsequently triggered an automatic `bossplus` website preview under its existing policy, described below.
 
 ## Implemented and verified

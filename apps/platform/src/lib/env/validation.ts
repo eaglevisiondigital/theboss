@@ -10,6 +10,7 @@ export type PublicEnvironment = Readonly<{
 
 export type ServerEnvironment = Readonly<{
   nodeEnvironment: "development" | "test" | "production";
+  platformOrigin?: string;
 }>;
 
 export class EnvironmentConfigurationError extends Error {
@@ -70,11 +71,37 @@ export function parsePublicEnvironment(source: EnvironmentSource): PublicEnviron
 
 export function parseServerEnvironment(source: EnvironmentSource): ServerEnvironment {
   const nodeEnvironment = source.NODE_ENV ?? "development";
+  const issues: string[] = [];
   if (
     nodeEnvironment !== "development" && nodeEnvironment !== "test" &&
     nodeEnvironment !== "production"
   ) {
-    throw new EnvironmentConfigurationError(["NODE_ENV must be development, test, or production"]);
+    issues.push("NODE_ENV must be development, test, or production");
   }
-  return Object.freeze({ nodeEnvironment });
+  const originValue = source.BOSS_PLATFORM_ORIGIN?.trim();
+  let platformOrigin: string | undefined;
+  if (!originValue && nodeEnvironment === "production") {
+    issues.push("BOSS_PLATFORM_ORIGIN is required in production");
+  } else if (originValue) {
+    try {
+      const url = new URL(originValue);
+      const localHttp = url.protocol === "http:" && source.NETLIFY !== "true" &&
+        ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname);
+      if (
+        (url.protocol !== "https:" && !localHttp) || url.pathname !== "/" ||
+        url.search || url.hash || url.username || url.password || url.hostname.includes("*")
+      ) {
+        issues.push("BOSS_PLATFORM_ORIGIN must be one approved HTTPS origin (HTTP loopback is local only)");
+      } else {
+        platformOrigin = url.origin;
+      }
+    } catch {
+      issues.push("BOSS_PLATFORM_ORIGIN must be a valid approved origin");
+    }
+  }
+  if (issues.length > 0) throw new EnvironmentConfigurationError(issues);
+  return Object.freeze({
+    nodeEnvironment: nodeEnvironment as ServerEnvironment["nodeEnvironment"],
+    ...(platformOrigin ? { platformOrigin } : {}),
+  });
 }
