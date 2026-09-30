@@ -83,28 +83,61 @@ preservation baseline. The pre-existing `bossplus` PR-to-main policy still creat
 root website previews for platform PR updates. Recommend a separately reviewed
 path-filter/release policy; this phase does not change website settings.
 
-## UNVERIFIED: controlled-account and dashboard checks
+## VERIFIED HOSTED: controlled authenticated session
 
-The connector exposes no Auth-user creation or Auth configuration tool and the
-dashboard is signed out. No test user is available. Dashboard sign-in and human
-entry of a new test-account password were requested. No email address or
-credential was invented, no signup/confirmation setting weakened and no Auth
-user or business record created.
+The project owner supplied one controlled, confirmed, non-customer Auth identity.
+The human entered the password and submitted login directly in the hosted browser;
+no password or token/session value was requested, read, recorded or published
+by the agent.
 
-Valid login, authenticated SSR/navigation/reload, session-cookie issuance,
-refresh-token exchange/cookie propagation and authenticated logout require that
-controlled account. Site URL, redirect/callback allowlist, recovery, MFA, SMTP
-and private JWT/session policy remain unverified pending dashboard access.
+- Valid login and authenticated Home/Account rendering passed. Normal navigation,
+  full Account reload and a direct protected request in a new browser tab retained
+  the authenticated session. The browser client helper is not instantiated by
+  this shell; fresh requests exercise SSR authentication.
+- Real server refresh passed after the configured access-token lifetime,
+  without changing global security settings or editing session/token data. An
+  immediate read-only baseline showed no prior refresh. Protected full reload
+  remained authenticated; the session refresh timestamp advanced, a new refresh
+  record appeared and the previous record was revoked, with no new login/session.
+- A subsequent fresh protected request, after the reuse interval, remained
+  authenticated. The refresh timestamp and rotation counts stayed exactly
+  unchanged, supporting functional persistence of the renewed browser session
+  rather than another server refresh using an old parent token.
+- Authenticated POST logout returned the browser to login. Fresh full requests to
+  both protected routes then redirected to login with safe local return paths.
+- Independent anonymous requests after authenticated access also redirected to
+  login; no authenticated page was delivered to those anonymous requests.
 
-Do not call this end-to-end authentication proven until those tests pass.
-Use natural expiry or isolated test-session expiry metadata to induce refresh;
-do not change global JWT/session policy, expose tokens or add a debug endpoint.
+Dashboard URL, email/recovery, MFA, SMTP and JWT/session policy were inspected
+read-only. No Auth setting was changed, no recovery email was sent and no
+credential/signing key was retrieved. Development-oriented email redirect/SMTP
+settings and account-security choices require a separate operational decision
+before enabling email-driven production flows. Private details stay in the
+completion report outside this repository.
+
+## UNVERIFIED: direct cookie/header inspection
+
+Real cookie-backed session issuance, persistence, refresh propagation and logout
+are verified functionally. Valid-session cookie attributes and authenticated
+response Cache-Control/CDN headers have not been directly inspected: the browser
+API exposes neither, and native app inspection is blocked. Human metadata-only
+inspection was requested; no values, raw headers or HAR export were requested.
+Earlier synthetic invalid-session deletion attributes and anonymous private-cache
+headers do not substitute for these remaining observations.
+
+Do not call every Phase 1B acceptance check complete, or certify production
+readiness, until these limited metadata checks are supplied. No diagnostic
+endpoint, token instrumentation or weakened Auth policy was added to bypass the
+inspection boundary.
 
 ## Backend safety
 
-Read-only baseline and post-test audit: healthy canonical Boss project in us-east-1, no business
+Initial Phase 1B baseline and post-test audit: healthy canonical Boss project in us-east-1, no business
 relations/functions/policies, migrations, buckets/objects or Edge Functions; Auth
-users zero; security advisors clear. Auth connection allocation has one
+users zero and security advisors clear at that earlier checkpoint. The later
+controlled-account acceptance uses one owner-created Auth identity; no business
+inventory or grants changed. Its current account-security advisor finding was
+left unchanged pending operational review. Auth connection allocation has one
 informational performance advisory. [Supabase production guidance](https://supabase.com/docs/guides/deployment/going-into-prod).
 Default public grants are broad; explicit grants/RLS must precede future business
 schema work. No grants were changed. PostgreSQL 17.6 is live; operational review

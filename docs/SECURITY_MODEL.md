@@ -2,7 +2,8 @@
 
 Technical foundation through Phase 1B hosted validation. This document is not a final authorization
 matrix or a production-readiness certification. No business table, policy,
-privileged credential or real user was created.
+privileged credential was added. One owner-supplied controlled Auth identity was
+used for hosted acceptance; no customer or business record was created.
 
 ## Implemented
 
@@ -57,10 +58,22 @@ was fetched. Hosted public routes and unauthenticated guards were tested. Initia
 POST-origin and redirect-header defects are fixed and all 25 hosted HTTP retests
 passed. Invalid-session cookie cleanup was observed with Secure/SameSite Lax and
 no Domain, and anonymous auth responses had private/CDN no-store instructions.
-These checks do not establish authenticated cache isolation. Real login, private Auth/SMTP/callback settings, authenticated
-cookie writes, refresh and authenticated logout are still unverified. No staging
-backend or custom platform domain was created. Server credentials must never be put in `NEXT_PUBLIC_` variables or
-untrusted preview contexts. Public build-log policy needs review before launch.
+The subsequent controlled-account test passed valid login, authenticated SSR
+Home/Account, navigation/reload/fresh server requests, natural-expiry server
+refresh with rotation and persistent renewed-session state, authenticated POST
+logout and post-logout guards. Anonymous-after-auth requests did not receive
+protected content. Password entry stayed with the human, and no token/session
+value was captured. Private Auth settings were reviewed without changes.
+
+Direct valid-session cookie attributes and authenticated response cache/CDN
+headers remain unverified because the browser tools expose no inspection API.
+Functional session persistence and prior invalid-session cookie/cache observations
+are not a substitute. No debug endpoint or security-policy weakening was used.
+No staging backend or custom platform domain was created. Server credentials must
+never be put in `NEXT_PUBLIC_` variables or untrusted preview contexts. Auth email
+redirect/SMTP/account-security defaults and public build-log policy still need
+operational review before launch. The current account-security advisor finding
+was left unchanged pending that review.
 
 This shell does not add custom abuse/rate-limiting infrastructure or account
 enumeration telemetry. Review upstream Auth rate limits and operational abuse

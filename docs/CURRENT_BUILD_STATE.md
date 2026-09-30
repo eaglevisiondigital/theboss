@@ -19,12 +19,22 @@ Hosted desktop/mobile screens and browser protected-route navigation were checke
 All 22 local tests, typecheck, lint, production build and repair-commit CI passed.
 Both public website production deployments/configurations remain unchanged.
 
+Controlled-account acceptance subsequently passed valid login, authenticated
+Home/Account, navigation, full reload and a fresh browser-tab server request.
+Natural-expiry server refresh and renewed-session persistence passed using
+protected requests plus read-only refresh timestamps/rotation counts. Authenticated
+POST logout passed, followed by login redirects from both protected routes.
+Password entry remained with the human; no credential/token/session values were
+retrieved or included in artifacts. Private Auth settings were reviewed read-only.
+
 ## UNVERIFIED
 
-Valid login, authenticated SSR/navigation/reload, session issuance, refresh and
-authenticated logout await one controlled test identity. The dashboard is signed out; connector
-Auth-user/config tools are unavailable. No Auth policy was changed. Private
-Auth/SMTP/callback/session settings also await dashboard access.
+Direct valid-session cookie attribute and authenticated response cache/CDN-header
+inspection remains unavailable through the current browser API. Metadata-only
+human inspection was requested. Cookie-backed persistence/refresh/logout and
+anonymous-after-auth isolation are verified; those do not replace direct header
+observations. No Auth setting changed. Email redirect/SMTP/account-security
+configuration needs its later operational review before production email flows.
 
 ## PENDING ARCHITECTURE
 
