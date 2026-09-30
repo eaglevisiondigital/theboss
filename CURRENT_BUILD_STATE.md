@@ -1,3 +1,13 @@
+## Verified Netlify preview
+
+https://deploy-preview-2--bossplus.netlify.app
+
+Header, hero and ecosystem section are implemented and visually checked against
+the approved desktop design. Hosted desktop/tablet/phone checks and simulated
+form success/error checks passed. See `docs/design/preview-qa.md`. The remaining
+homepage sections and interior redesigns are next; production remains pending
+owner approval of the hosted preview.
+
 ## September 30 approved homepage checkpoint
 
 Desktop homepage approved. `build/approved-homepage` implements header, hero and
