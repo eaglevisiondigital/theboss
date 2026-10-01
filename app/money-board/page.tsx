@@ -1,41 +1,20 @@
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import s from "../product.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import ApprovedHeader from "@/components/ApprovedHeader";
+import ApprovedFooter from "@/components/ApprovedFooter";
+import home from "../approvedHome.module.css";
+import s from "./moneyBoard.module.css";
 
-export const metadata={title:"Boss Money Board"};
-
-export default function Page(){
-  const tiles=["$1","$5","$10","$20","$25","$50","$75","$100","$125","$150","$200","$250"];
-  return <main className={s.page}>
-    <SiteHeader/>
-    <section className={s.visualHero}>
-      <div className={s.heroCopy}><div className={s.eyebrow}>BOSS MONEY BOARD</div><h1>Give like a Boss.</h1><p>A visual fundraising experience that turns a goal into simple, understandable giving opportunities supporters can fund one amount at a time.</p><div className={s.actions}><a href="/get-started">Start a Money Board →</a><a href="/fundraising">Boss Fundraising</a></div></div>
-      <div className={s.photoStage}><img src="https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=1600&q=84" alt="Community volunteers working together"/><div className={s.photoLabel}><small>SMALL STEPS. BIG IMPACT.</small><strong>Make progress visible from the first gift.</strong></div></div>
-    </section>
-
-    <section className={s.productStage}>
-      <div className={s.productStageHead}><div><div className={s.eyebrow}>SIGNATURE FUNDRAISING EXPERIENCE</div><h2>Watch the board fill in real time.</h2></div><p>The Money Board can operate on its own or become part of a larger Boss fundraising campaign with participant pages, attribution, direct giving and digital savings.</p></div>
-      <div className={s.deviceGrid}>
-        <div className={s.devicePanel}>
-          <div className={s.boardMock}>
-            <div className={s.boardMockHeader}><div><small>RIVERSIDE TIGERS</small><strong>Money Board</strong></div><b>68%</b></div>
-            <div className={s.mockStats}><div><small>RAISED</small><strong>$3,420</strong></div><div><small>GOAL</small><strong>$5,000</strong></div><div><small>SUPPORTERS</small><strong>32</strong></div></div>
-            <div className={s.boardTiles}>{tiles.map((v,i)=><span key={v} className={[4,7,10].includes(i)?s.funded:""}>{v}</span>)}</div>
-          </div>
-        </div>
-        <div className={s.devicePanel}>
-          <div className={s.cards} style={{gridTemplateColumns:"1fr"}}>
-            <article className={s.card}><b>DONATE MODE</b><h3>Choose an amount and make an impact.</h3><p>Supporters can select available amounts while funded amounts remain permanently claimed.</p></article>
-            <article className={s.card}><b>SPIN MODE</b><h3>Add energy to the experience.</h3><p>A randomized selection option can make participation fun while still respecting the configured board rules.</p></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section className={s.panel}><h2>Small steps can create big impact.</h2><p>Administrators choose the fundraising goal, starting amount and increment. The builder can calculate the board structure and estimated economics before launch.</p><div className={s.cards}><article className={s.card}><b>AVAILABLE</b><h3>Open amounts are clear.</h3><p>Supporters can immediately see which amounts are still available to fund.</p></article><article className={s.card}><b>RESERVED</b><h3>Protect in-progress giving.</h3><p>Reserved states help prevent conflicting selections while a supporter completes checkout.</p></article><article className={s.card}><b>FUNDED</b><h3>Celebrate every contribution.</h3><p>Paid amounts become permanently funded and can display donor or anonymous attribution where appropriate.</p></article></div></section>
-
-    <section className={s.dark}><h2>Built to work alone or with the full campaign.</h2><p>Money Board can operate as the signature fundraiser or alongside Boss Bucks, direct donations and other Boss fundraising products.</p><div className={s.steps}><div className={s.step}><span>01</span><h3>Set the Goal</h3><p>Choose the campaign target and board structure.</p></div><div className={s.step}><span>02</span><h3>Launch</h3><p>Share the organization, team or participant fundraising experience.</p></div><div className={s.step}><span>03</span><h3>Fund</h3><p>Supporters choose an available amount and complete giving.</p></div><div className={s.step}><span>04</span><h3>Track</h3><p>Progress, participation and attribution remain visible as the board fills.</p></div></div></section>
-    <section className={s.cta}><h2>Turn generosity into visible progress.</h2><a href="/get-started">Create a Money Board →</a></section>
-    <SiteFooter/>
-  </main>
-}
+export const metadata={title:"Digital Money Board | Fundraise Like a Boss",description:"Help your supporters give like a Boss. Bring Donate, Spin, visible progress and participant sharing together on one digital fundraising board."};
+function Photo({crop,alt,className}:{crop:string;alt?:string;className?:string}){return <svg viewBox={crop} preserveAspectRatio="xMidYMid slice" role={alt?"img":undefined} aria-label={alt} aria-hidden={alt?undefined:true} className={className}><image href="/design/money-board-approved.png" width="743" height="2116"/></svg>}
+function Icon({kind}:{kind:string}){return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{kind==="heart"?<path fill="currentColor" stroke="none" d="M16 29 4 17C-5 7 8-3 16 7 24-3 37 7 28 17L16 29Z"/>:kind==="spin"?<><circle cx="16" cy="16" r="13"/><path d="M16 3v26M3 16h26M7 7l18 18M7 25 25 7"/></>:kind==="link"?<><path d="m13 11 5-5a7 7 0 0 1 10 10l-5 5M19 21l-5 5A7 7 0 0 1 4 16l5-5M11 21l10-10"/></>:kind==="bars"?<path d="M5 28V20m7 8V14m8 14V8m7 20V3" strokeWidth="4"/>:<><path d="M16 3a13 13 0 1 0 0 26h3a4 4 0 0 0 3-7c-2-2-1-5 2-5h2c7 0 2-14-10-14Z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="8" r="1"/><circle cx="21" cy="11" r="1"/></>}</svg>}
+const features=[["palette","Campaign branding","Show your team’s identity and mission."],["link","Participant links + QR codes","Make it easy to support a specific team member."],["bars","Progress + reporting","See campaign and participant activity in one place."]];
+export default function Page(){return <div className={home.home}><a className={home.skipLink} href="#main-content">Skip to content</a><ApprovedHeader/><main id="main-content" className={s.page}>
+<section className={s.hero} aria-labelledby="hero-title"><Image src="/images/approved/money-board-hero.png" alt="Young football players looking out over the field at sunset" fill priority sizes="100vw" className={s.heroPhoto}/><div className={s.heroCopy}><h1 id="hero-title"><small>Help your supporters</small>Give like<br/>a <span>Boss.</span></h1><p className={s.heroLead}>A signature fundraising experience.<br/>Only from Boss.</p><p className={s.heroDescription}>Bring Donate, Spin, visible progress and participant sharing together on one digital board.</p><div className={s.actions}><Link href="/fundraising/get-started" className={s.button}>Start a Money Board</Link><a href="#how-it-works" className={s.outline}>See How It Works</a></div></div><figure className={s.phone}><svg viewBox="154 33 722 1466" role="img" aria-label="Illustrative Digital Money Board with fundraising progress, Donate and Spin modes, available and claimed amounts"><defs><clipPath id="money-phone-clip"><rect x="154" y="33" width="722" height="1466" rx="125"/></clipPath></defs><image href="/images/approved/money-board.jpeg" width="1024" height="1536" clipPath="url(#money-phone-clip)"/></svg><figcaption>Illustrative product preview. Amounts and names are examples.</figcaption></figure></section>
+<section className={s.modes} aria-labelledby="modes-title"><h2 id="modes-title">One board. <span>More ways to engage.</span></h2><div className={s.modeGrid}><article><div className={s.modeHeading}><div className={s.circle}><Icon kind="heart"/></div><div><h3>Donate</h3><p>Let supporters choose an amount.</p></div></div><div className={s.sampleTiles} aria-label="Illustrative available amounts">{[25,50,100].map(amount=><div key={amount}><strong>${amount}</strong><span>AVAILABLE</span><b aria-hidden="true">›</b></div>)}</div><p className={s.caption}>Give supporters a clear, simple way to select an available amount and complete their gift.</p></article><article><div className={s.modeHeading}><div className={s.circle}><Icon kind="spin"/></div><div><h3>Spin</h3><p>Add a new way to participate.</p></div></div><div className={s.spinPreview} role="img" aria-label="Illustrative Spin suggestion of 30 dollars, reviewed before giving"><span>$25</span><strong><i aria-hidden="true">‹</i> $30 <i aria-hidden="true">›</i></strong><span>$50</span></div><p className={s.caption}>Supporters can get a suggested amount and review it before giving.</p></article></div></section>
+<section className={s.states} aria-labelledby="states-title"><h2 id="states-title">Every amount has a <span>clear status.</span></h2><div className={s.stateGrid}>{[["25","AVAILABLE","Available","Ready for a supporter.","›"],["50","RESERVED","Reserved","Held briefly during checkout.","◷"],["100","CLAIMED","Claimed","Confirmed gifts stay claimed.","✓"]].map(([amount,state,title,copy,symbol],i)=><article key={state} className={[s.state,s['state'+i]].join(' ')}><div className={s.stateTile}><strong>${amount}</strong><span>{state}</span>{i===2&&<small>by Anonymous</small>}<b aria-hidden="true">{symbol}</b></div><div className={s.stateCopy}><i aria-hidden="true"/><div><h3>{title}</h3><p>{copy}</p></div></div></article>)}</div><p className={s.recognition}>Offer public or anonymous recognition where enabled.</p></section>
+<section className={s.sharing} aria-labelledby="sharing-title"><Photo crop="331 1133 412 145" className={s.sharingPhoto}/><div className={s.sharingCopy}><h2 id="sharing-title">Your team.<br/>Your people.<br/>Your <span>progress.</span></h2><p>Keep each share connected to the right team and participant.</p></div><div className={s.featureGrid}>{features.map(([kind,title,copy])=><article key={kind}><div className={s.icon}><Icon kind={kind}/></div><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><p className={s.vision}>Platform vision. Features vary by campaign.</p></section>
+<section id="how-it-works" className={s.steps} aria-labelledby="steps-title"><h2 id="steps-title">Set the goal. <span>Share the board.</span></h2><div className={s.stepsBody}><ol>{[["Build your board","Choose your goal and set your amounts."],["Share your link","Get a custom link or QR code to share with supporters."],["Follow the progress","See campaign and participant activity as gifts come in."]].map(([title,copy],i)=><li key={title}><span>{i+1}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol><figure><Photo crop="289 1464 446 245" alt="Illustrative organizer dashboard with a Money Board, campaign progress and participant reporting"/><figcaption>Illustrative campaign preview.</figcaption></figure></div></section>
+<section className={s.ecosystem} aria-labelledby="ecosystem-title"><Photo crop="0 1730 380 169" alt="A mother with her young athlete" className={s.familyPhoto}/><div><h2 id="ecosystem-title">Part of something<br/><span>bigger.</span></h2><p>Use the Money Board on its own or alongside Boss Bucks cards, digital trials and direct donations.</p><Link href="/fundraising" className={s.button}>Explore Boss Fundraising <span aria-hidden="true">›</span></Link></div></section>
+<section className={s.finalCta}><h2>Fundraise <span>Like a Boss.</span></h2><p>Give your supporters a distinctive way to rally around your goal.</p><Link href="/fundraising/get-started" className={s.button}>Start a Money Board</Link></section>
+</main><ApprovedFooter/></div>}
