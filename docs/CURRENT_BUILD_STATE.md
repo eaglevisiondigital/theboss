@@ -32,12 +32,17 @@ See [operational procedures and limits](OPERATIONAL_CORE.md).
 The final complete local run passed 1,776 SQL assertions and five coordinated
 concurrency cases. Application typecheck, zero-warning lint, all 28 tests and the
 production build pass with locked dependencies and synthetic public configuration.
+The final application run used an identical isolated temporary source copy because
+local synced dependency directories contained duplicate generated type folders;
+clean CI installations also passed both jobs.
 The canonical project has all three migrations, a successful transactional
 live verifier with zero fixture remnants, and an explicitly authorized controlled
 canonical account with one approved platform-administrator grant and three audit
 events. Public database types were regenerated live. The equivalent scoped-people
 query optimization passed 2,000-row isolation and search regressions.
-Hosted UI acceptance and final CI evidence remain pending. Starting branch
+Hosted acceptance passed on the deployed implementation commit
+`d364d6ee602e7ba7855548d95c9b9601477cf0e1`. Both push and PR validation runs
+passed their application and database jobs. Starting branch
 SHA: `20acee683f67b854ecefd6c7c91a87a3b8a6a3f8`. The branch remains
 `build/boss-platform-v1`; [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3)
 must remain OPEN/DRAFT/UNMERGED. Public website releases are separate and preserved.
@@ -53,9 +58,45 @@ completed without errors and all seven synthetic cleanup counts were zero.
 SQL role tests model database authorization; hosted acceptance verifies actual
 signed browser sessions separately. Security advisors retain the existing Auth
 leaked-password warning and an intentional private receipt RLS-without-policy
-information item. Performance advisors report 23 unused-index information items
+information item. Performance advisors report 19 unused-index information items
 and the existing absolute Auth connection allocation information; no warning,
 missing FK index or schema security warning was introduced. No Auth setting changed.
+
+### HOSTED ACCEPTANCE
+
+The controlled administrator's existing valid signed session opened every
+authorized admin route and retained the canonical identity across navigation,
+account access and a full page reload. Hosted forms created a clearly labeled
+test organization, activated Sports configuration, created a sport unit, season
+and team, and created synthetic people without Auth accounts. Household setup,
+an atomic person/participant/household/explicit-guardian batch, guardian
+verification, organization memberships, athlete team membership and atomic coach
+membership plus exact-team role all passed. The read-only audit showed matching
+actor/action/resource/time/context fields without before/after payloads.
+
+A duplicate organization slug returned only the safe UI error and created no
+extra organization. Switching between two clearly labeled test organizations
+cleared the prior team context. A nonexistent organization deep link exposed
+no records or mutation controls. Cross-tenant, exact-scope, guardian isolation,
+role escalation and direct-write failures passed the transactional local/live
+database-role suites; the one hosted account is globally authorized, so it was
+not presented as a restricted-tenant HTTP negative test.
+
+Desktop at 1280 pixels and mobile at 390/320 pixels had no horizontal page overflow.
+At 320 pixels all visible form controls fit the page, and keyboard Tab moved into
+the next labeled family field. A team-membership metadata change saved on mobile.
+Browser console inspection found zero entries. No password, access/refresh token,
+cookie/session value, production secret or private request attachment was captured,
+stored, printed or committed during this assignment. Managed service log histories
+were not exhaustively inspected. No production environment variable changed.
+
+The retained acceptance data is explicitly marked CONTROLLED TEST: two
+organizations, three synthetic people, one unit/season/team/household/participant,
+two household memberships, one verified guardian, two organization memberships,
+two team memberships, one exact-team coach role and one Sports configuration.
+Synthetic people have no Auth mapping. Together with the controlled bootstrap,
+the database contains 24 append-only audits and 17 completed mutation receipts.
+No real youth data was used. Transactional verifier fixtures remain absent.
 
 ### PLANNED / FUTURE
 
