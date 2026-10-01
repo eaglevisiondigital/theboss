@@ -52,10 +52,57 @@ actual workload review. No Auth security protection was weakened.
 
 ### HOSTED PUBLICATION
 
-The validated implementation is being published for controlled desktop/mobile
-acceptance. Hosted results and final deployment/CI references are recorded after
-that acceptance; database-role verification alone does not certify signed HTTP
-behavior. Starting SHA: `51680bc2c34e60bf25129d07d685fc6632f2ea25`.
+The production platform deployment is ready on implementation SHA
+`e08f8a09f7c2568da80f5378d5f8dd28cd441366`, Netlify deploy
+`6abe8743e7d3f80008b75106`. Both push and PR validation runs passed their
+application and database jobs. Hosted signed-session acceptance passed Calendar
+activation/settings, private venue/resource creation, organization and team
+events, one shared three-team event, finite weekly recurrence, one moved
+occurrence, conflict preview plus explicit audited override, public publication,
+and creation of a three-day all-day camp from the mobile form. Six canonical
+events are retained as clearly labeled controlled test data; the shared event has
+one ID and three targets. Rescheduling retained that ID and all three team views
+showed the same new 6 PM time. The weekly series has one durable exception.
+
+Personal/family projection deduplicated the shared occurrence; the third-child
+filter excluded Falcons-only and Wildcats-only events. The controlled account
+has explicit verified relationships to three synthetic participants for these
+tests. It also remains a platform administrator, so these signed UI checks are
+not presented as restricted-guardian HTTP isolation tests. Actual database-role
+guardian, household-only, coach, exact-unit and expired-role isolation passed
+both local and live transactional suites.
+
+An actual anonymous database-role query over the retained hosted records returned
+only the one explicitly published public event. Member/restricted series,
+private venue/resource metadata, arrival, description, instructions and reminders
+were absent. Anonymous table reads and writes remain closed. This is database
+publication verification, not an anonymous signed HTTP session or follower product.
+
+Desktop at 1280 pixels passed Month, Week, Day and Agenda navigation, keyboard
+event opening with detail-heading focus, and date jumping. Mobile at 390 and
+320 pixels uses an agenda with day navigation. No horizontal page overflow was
+observed; long titles and three team labels wrap, Calendar tabs are at least 44
+pixels tall, event detail fits the page, and keyboard Tab reaches the next labeled
+form field. The mobile-created camp appears on all three included days.
+Browser console inspection found zero entries and no credential-value pattern.
+No password, real access/refresh token, cookie/session value or privileged key
+was retrieved, captured, printed or committed. Managed service log histories were
+not exhaustively inspected. Public website code and configurations are unchanged.
+
+### REMAINING HOSTED ACCEPTANCE
+
+A restricted-role signed HTTP mutation-denial test remains pending explicit
+permission to temporarily alter the controlled account's live grants. Automatic
+approval review rejected disabling its existing platform-administrator grant and
+adding an expiring exact-Falcons head-coach grant because the assignment did not
+specifically authorize that live access change. No role assignment changed.
+A valid stale admin form and reviewed restore procedure are prepared. Current
+administrator access is intact; the temporary coach grant does not exist.
+Database-role denial is verified independently, and is not claimed to replace
+this remaining hosted negative test. Phase 3A is not marked fully accepted until
+that test is resolved. No later phase is started.
+
+Starting SHA: `51680bc2c34e60bf25129d07d685fc6632f2ea25`.
 Branch: `build/boss-platform-v1`.
 [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3) remains
 OPEN/DRAFT/UNMERGED. Public website releases remain separate.
