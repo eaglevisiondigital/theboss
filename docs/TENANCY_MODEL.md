@@ -86,23 +86,57 @@ reading history does not reactivate its authority.
 ### Mutation boundary
 
 Client Data API roles cannot create, update, delete or truncate foundation rows.
-Only the migration owner and trusted server-side `service_role` writers can
-populate the model. Service role bypasses RLS and therefore is a privileged
+The migration owner and trusted server-side `service_role` writers remain
+privileged operational boundaries. Phase 2B additionally supplies finite protected
+RPC commands evaluated as the verified authenticated caller's canonical identity
+and exact permissions; clients still cannot mutate tables directly. Service role bypasses RLS and therefore is a privileged
 boundary requiring independent server authorization, input validation and audit
 context in future workflows. Its credentials must never enter browser code.
 Audit grants and triggers further restrict service writers to appending events.
-No administrative write endpoint is implemented in Phase 2A.
+Phase 2A added no administrative write endpoint. Phase 2B uses a public invoker
+RPC wrapper with a private definer dispatcher; no privileged application key is
+retrieved or required.
 
 Explicit object ACLs and hardened `postgres` future defaults prevent accidental
 client grants. Managed owners' defaults are a separate documented operational
 boundary; application migrations must continue to declare grants/revokes and RLS.
 
+### Phase 2B operational context
+
+Organization selection is a navigation preference, never an authorization grant.
+Every deep link and mutation resolves current identity, actual resource and scope.
+Scoped people discovery reveals approved names through real current organization/
+team relationships while underlying private person rows remain protected. An
+ordinary user cannot search the global people directory. Scoped discovery starts
+with authorized relationship IDs before canonical person lookup. Explicit global
+read keys separately permit bounded, safe unit/team/audit lifecycle projections,
+including archived resources; they do not change base table RLS or grant scoped
+callers inactive-resource authority. Global substring search, directory pagination
+and load validation at the eventual million-user scale remain future work.
+
+Organization, unit, season and team creation/editing, memberships and scoped roles
+use existing approved capabilities. Teams and seasons keep tenant/unit/season
+identity attachments immutable after creation. Unit hierarchy changes retain the
+same-tenant and cycle guards and introduce no descendant inheritance. Existing
+relationships are ended/inactivated and replaced instead of repointed.
+
+Household management stays explicitly platform scoped because no approved
+organization-household authority anchor exists. Household membership does not
+imply guardian authority or access to another person's private profile. Guardian
+verification/capabilities are explicit, with only the approved dependent name
+update supported by the current `can_manage_profile` flag.
+
+Transactional commands validate references and target relationships inside the
+database and append audit events with the actual organization/unit/team/person/
+household context. Role grants require every target permission at that same
+scope, preventing context selection or guessed resource IDs from widening power.
+
 ## APPROVED BUT NOT IMPLEMENTED
 
-Future authorized workflows can combine permission, relationship, module,
-entitlement, visibility and context. Public publication needs an approved safe
-projection and explicit policy. Tenant administration, relationship provisioning
-and unit-scope inheritance beyond exact matches need subsequent approved work.
+Future module workflows must combine their applicable permission, relationship,
+module, entitlement, visibility and context. Anonymous publication needs an
+approved safe projection/policy. Tenant-family authority and unit inheritance
+beyond exact matches remain unresolved; Phase 2B does not infer either.
 
 ## FUTURE
 

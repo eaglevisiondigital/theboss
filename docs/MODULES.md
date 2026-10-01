@@ -2,12 +2,14 @@
 
 ## IMPLEMENTED
 
-Phase 2A implements the capability/access/rollout data foundation only. These
+Phase 2A implements the capability/access/rollout data foundation. Phase 2B
+adds authorized organization module activation administration, without implementing
+business modules. These
 three concerns remain separate from authorization. Deployment and validation
 status is recorded in [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
 All six foundation migrations are applied to the canonical Boss project. Live
-inspection verified 13 module definitions and no operational activations,
-entitlements or feature flags after fixture rollback. The live suite passed 269
+inspection at the Phase 2A checkpoint verified 13 module definitions and no
+operational activations, entitlements or feature flags after fixture rollback. The live suite passed 269
 assertions. The final disposable run passed 911 SQL assertions and three
 concurrent hierarchy checks, with no cycle and verified fixture/cluster cleanup.
 Application and CI validation remain separate from these database results.
@@ -24,7 +26,8 @@ role-permission mappings. Those potential capabilities require a valid active
 assignment in its permitted scope; no real assignments are seeded. Organization
 owner/administrator and athletic director use organization scope, program/sport
 administrators use exact organization-unit scope, and team roles use team scope.
-These mappings implement no business module or client write API.
+These mappings implement no business module or direct client table write API.
+Phase 2B administration uses protected, audited RPC commands.
 
 ### Modules
 
@@ -42,6 +45,21 @@ old period and create another. The `organization_module_active` helper checks th
 caller's authorized subject visibility, an active module and a current active
 activation. It does not grant permission to read any other data.
 
+### Phase 2B activation administration
+
+The organization admin view shows each catalog module's current activation as
+active/inactive and separately identifies its implementation as future/not
+implemented. Activation/deactivation is a validated, audited transactional
+operation with same-organization references. It creates or updates the current
+activation period; immutable historical keys remain intact. Request replays do
+not duplicate writes or audits.
+
+Sports activation can be recorded alongside the approved organizational sports
+foundation: units, seasons, teams, participants and rosters. Activation supplies no
+permission by itself and does not enable schedules, registration, games, scoring,
+statistics, livestreaming or any other sports module workflow. There are no fake
+business-module screens or navigation links.
+
 ### Entitlements
 
 An entitlement targets an organization, person, household or explicit membership.
@@ -57,7 +75,9 @@ Seeing one's historical membership or its entitlement row does not activate
 product access. An entitlement does not replace scoped permission or authorize
 an unrelated organization, team, person or household.
 No entitlement purchasing, assignment UI, pricing engine or commercial workflow
-is implemented.
+is implemented. Optional entitlement administration is deferred: no approved
+entitlement-management key exists, and the Phase 2B core acceptance workflow
+does not require it. No broader permission is invented.
 
 ### Feature flags
 
@@ -77,7 +97,10 @@ authorizes access. No RLS predicate uses a flag or entitlement as a permission.
 Product-access tables have RLS and explicit client SELECT grants only. Catalog
 reads require a usable canonical identity. Organization activations, entitlements
 and overrides remain subject/context restricted. Trusted server writers may
-populate them; there is no client write API or module administration UI.
+populate them under the trusted boundary. Phase 2B adds a protected `module.set`
+operation and module administration UI using organization-wide
+`organization.manage`; unit/team grants cannot activate an entire organization
+module. Direct client table mutation remains denied.
 See [SECURITY_MODEL.md](SECURITY_MODEL.md) and
 [PERMISSIONS_MODEL.md](PERMISSIONS_MODEL.md).
 

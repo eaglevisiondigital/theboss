@@ -33,10 +33,23 @@ create table auth.users (
   created_at timestamptz,
   updated_at timestamptz,
   phone text,
+  banned_until timestamptz,
+  deleted_at timestamptz,
   is_anonymous boolean not null default false
 );
 revoke all on auth.users from public, anon, authenticated, service_role;
 grant select, insert, update, delete, truncate, references on auth.users to postgres;
+
+-- Sensitive operational RPCs validate the signed session_id against Auth's
+-- session ownership and absolute expiry. These minimal synthetic rows emulate
+-- only that lookup. They contain no refresh tokens, passwords or credentials.
+create table auth.sessions (
+  id uuid not null primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  not_after timestamptz
+);
+revoke all on auth.sessions from public, anon, authenticated, service_role;
+grant select, insert, update, delete, truncate, references on auth.sessions to postgres;
 
 create function auth.uid()
 returns uuid

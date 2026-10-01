@@ -3,8 +3,9 @@
 ## IMPLEMENTED
 
 The Phase 2A approved architecture is expressed in 22 application tables and six
-canonical migrations under `supabase/migrations`. No new business module is
-implemented. Applied/live status and validation results belong in
+immutable canonical migrations. Phase 2B adds operational RPC migrations under
+`supabase/migrations`, preserving that schema's RLS and approved role matrix. No
+new business module is implemented. Applied/live status and validation results belong in
 `CURRENT_BUILD_STATE.md`; migration files alone do not establish deployment.
 
 | Technical choice | Reason and limit |
@@ -19,7 +20,7 @@ implemented. Applied/live status and validation results belong in
 | Per-tenant serialized hierarchy edits | Prevent concurrent cycles, including stale repeatable-read snapshots; rare structural writes update the shared organization row |
 | Immutable role scope definitions | Avoid a global catalog-row write bottleneck on every scoped assignment; a reviewed migration is needed to change permitted kinds |
 | Private caller-bound authorization helpers | Avoid recursive RLS across mapping/relationship/grant tables without exposing an impersonation RPC |
-| Authenticated SELECT only | Mutations need reviewed workflows and audit capture; management permission names alone do not enable writes |
+| Authenticated table SELECT only | Finite authenticated RPC commands validate caller, permission and context; no direct client table mutation grants or policies are added |
 | No anonymous publication policies | A `public` visibility value is insufficient to publish data without an approved projection/workflow |
 | Opaque historical Auth actor ID on audits | Preserves provenance after Auth deletion; live identity ownership remains the strong FK in `user_accounts` |
 | Audit UPDATE/DELETE/TRUNCATE guard | Casual rewrites are rejected even by a trusted writer; database owners can still change DDL under an operational process |
@@ -44,6 +45,28 @@ EXECUTE default cannot be removed by a per-schema revoke alone, so future
 `postgres` functions require explicit grants. Existing Auth/Storage functions and
 managed owner defaults are unaffected.
 
+### Phase 2B operational implementation choices
+
+| Technical choice | Reason and limit |
+| --- | --- |
+| Protected authenticated RPCs | Atomic database validation and audit capture without a service credential, direct client table grants or wider role mappings |
+| Strict managed Auth session checks | Sensitive operations require the current signed session and eligible Auth user, in addition to canonical identity |
+| Explicit self provisioning and account link | Auth UID/canonical UUID are strong identifiers; email/name matches never silently merge people or confer roles |
+| Bounded typed batch with prior-result references | Multi-record family, organization and staff/role workflows commit together or roll back together |
+| Private per-actor request receipts | Identical requests replay only after current authorization; no duplicate committed records or audit events |
+| Physical resource anchors for period checks | Concurrent relationship mutations use fresh snapshots or fail safely at higher isolation levels |
+| Existing exact role permissions for delegation | `roles.assign` and every target permission are required at the actual permitted scope; role names alone confer no grant authority |
+| Names-only scoped discovery | Operational organization/roster discovery does not reveal DOB/contact fields or create ordinary global person search |
+| Household administration remains platform scoped | The approved schema has no tenant-household authority anchor; tenant grants cannot claim global families |
+| Immutable season/team attachments | Unit/season references are assigned at creation, retaining the Phase 2A historical identity constraints |
+| Deferred optional entitlement administration | No approved management key exists and core acceptance does not need an invented permission |
+| Safe audit projection | Actor/action/resource/time/scope and field names are recorded; raw profile payloads and credential/session values are excluded |
+
+The one-time controlled bootstrap is documented and audited separately. It uses
+an existing approved platform role, does not weaken Auth settings, and introduces
+no account-specific application bypass. Current test/live/deployment evidence is
+recorded in `CURRENT_BUILD_STATE.md`, not inferred from migration source alone.
+
 ## APPROVED BUT NOT IMPLEMENTED
 
 Global households have no approved tenant authority anchor; organization-scoped
@@ -52,14 +75,16 @@ Unit-scoped roles cannot read organization membership lists through a unit
 assignment because those membership rows lack a unit resource context. These
 limits preserve the approved model rather than inventing relationships.
 
-No descendant-unit authority, consent process, operational correction/deletion
-workflow, public identity projection, automatic audit capture, product pricing,
-module-specific entitlement rule or feature-flag override evaluator is invented.
+No descendant-unit authority, consent process, operational account-rebinding/
+deletion workflow, anonymous identity projection, product pricing, module-specific
+entitlement rule or feature-flag override evaluator is invented. Phase 2B audit
+capture and protected name projections implement only the approved operational
+core.
 
 ## FUTURE
 
-The next assignment should settle canonical identity provisioning, tenant-family
-resource context and delegation rules, then implement a minimal authorized, audited
-server mutation path with meaningful acceptance tests. Business modules remain
-separate future assignments. Existing Auth/email/session operational findings
+Tenant-family authority, sensitive-field consent and later business-module rules
+remain decisions for the main Boss chat. Phase 2B's explicit provisioning, finite
+mutation API and permission-subset delegation are implemented within the approved
+foundation. Business modules remain separate future assignments. Existing Auth/email/session operational findings
 and Phase 1B direct cookie/header inspection limits remain separate work.

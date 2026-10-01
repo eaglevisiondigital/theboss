@@ -4,11 +4,14 @@
 
 Phase 2A implements 22 foundation tables in `public`, with explicit grants and RLS
 on every table. All six migrations are applied to the canonical Boss Supabase
-project, `the-boss-platform` (`ilykgwgmxtrrikreacrz`). The SQL files in
-[supabase/migrations](../supabase/migrations/) match its migration history.
-This document describes their implementation;
+project, `the-boss-platform` (`ilykgwgmxtrrikreacrz`). Their applied SQL is recorded in [supabase/migrations](../supabase/migrations/).
+The six Phase 2A files remain immutable. Phase 2B adds operational RPC migrations;
+application, live migration and acceptance status are tracked separately. This
+document describes the implemented model;
 [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md) records deployment and validation
-status. There is no automatic Auth-to-person provisioning or business-module UI.
+status. Phase 2B implements explicit identity provisioning and operational admin
+UI. No Auth trigger silently provisions identities or roles, and no business
+module UI is implemented.
 The final fresh PostgreSQL 17 run passed 911 SQL assertions: 642 across categories
 A–P and 269 no-DDL verification assertions. Three coordinated hierarchy checks
 also passed, with no cycle and all fixtures and the temporary cluster removed.
@@ -40,7 +43,8 @@ mapping. The mapping supplies identity, not authority from user-editable metadat
 Deleting an Auth user sets its mapping to null and an integrity trigger makes
 that account inactive. The Boss account/person records and historical references
 remain. An existing account cannot be rebound to a different Auth identity;
-relinking workflows are outside Phase 2A.
+Phase 2B permits an explicit, audited first link to an eligible verified Auth
+identity. Rebinding an existing mapping remains prohibited.
 
 `participants.person_id` is unique and non-null. Team or season changes do not
 create a new participant. The optional participant reference on a team membership
@@ -87,7 +91,8 @@ assignments; program and sport administrators accept organization-unit assignmen
 team roles accept team assignments. Finance and merchant-network staff have no
 foundation permission mappings. No real person, account or role assignment is
 seeded. Management permission keys describe potential authority without opening
-client writes or implementing a management workflow.
+direct client table writes. Phase 2B implements the finite protected operational
+workflows described below, without changing these mappings.
 
 Entitlements have organization, person, household or membership subjects.
 `membership_kind` disambiguates organization/team/household membership subjects;
@@ -120,12 +125,51 @@ Visibility vocabulary is `public`, `authenticated`, `member`, `restricted` and
 classification, not a publishing grant. No foundation table is anonymously exposed.
 See [TENANCY_MODEL.md](TENANCY_MODEL.md) and [SECURITY_MODEL.md](SECURITY_MODEL.md).
 
+### Phase 2B operational records and writes
+
+The 22 public foundation tables and their SELECT RLS policies are preserved.
+`boss_admin_mutate` exposes a finite command set for explicit self provisioning,
+account linking, organizations, module activation, units, seasons, teams, names,
+households, participants, guardians, memberships and scoped role assignments.
+Commands contain only approved fields and typed references to earlier results.
+A bounded batch is one PostgreSQL transaction, so a later failure rolls back its
+records, audit events and receipt.
+
+Self provisioning requires a confirmed, non-anonymous, current managed Auth
+identity and session. It creates a new canonical person/account pair without a
+role. An existing strong Auth mapping is reused. A matching canonical email
+requires administrative review; email/name matching never silently merges people.
+Account linking requires platform `person.profile.manage`, explicit canonical
+person/Auth identifiers and an eligible Auth account. Existing mappings cannot be
+rebound. People and participants may be created without Auth.
+
+Operational person writes and scoped discovery expose names only, excluding DOB,
+email and phone. Scoped discovery resolves actual active organization/roster
+relationships. Household membership does not establish guardian authority;
+verification and stored capability changes require the existing explicit platform
+permissions. No registration, document, waiver or payment workflow is enabled by
+those flags.
+
+Season parent units and team parent-unit/season attachments are selected at
+creation and remain immutable. Existing relationships retain their identity/type/
+start; ending/inactivation followed by a new record preserves history. Active
+period collisions and duplicate primary contacts are rejected. Physical resource
+anchor updates serialize relationship checks, including stale repeatable-read
+snapshots, without altering business fields.
+
+Each significant mutation appends an actor-bound event with operation, resource,
+actual scope, request identifier and changed field names. Raw input profiles,
+credentials and session values are not audit payloads. A private RLS-protected
+`boss_private.admin_operation_receipts` table provides per-actor request
+idempotency. No client table ACL permits receipt access. Retries require identical
+input and current authorization, and do not duplicate committed records/events.
+
 ## APPROVED BUT NOT IMPLEMENTED
 
-The foundation supports future server workflows that combine relationships,
-permissions, product access, visibility and resource context. Account/person
-provisioning, controlled administrative mutations, public publishing, granular
-identity projections and full consent/retention workflows require subsequent work.
+Public publishing, sensitive-field consent projections, full consent/retention
+workflows and tenant-family authority relationships still require approved
+direction. No descendant-unit inheritance or account-rebinding correction flow
+is inferred from the operational API.
 
 ## FUTURE
 

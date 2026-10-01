@@ -17,6 +17,7 @@ on:
       - "docs/TENANCY_MODEL.md"
       - "docs/DECISIONS.md"
       - "docs/MODULES.md"
+      - "docs/OPERATIONAL_CORE.md"
   push:
     branches: ["build/boss-platform-v1"]
     paths:
@@ -34,6 +35,7 @@ on:
       - "docs/TENANCY_MODEL.md"
       - "docs/DECISIONS.md"
       - "docs/MODULES.md"
+      - "docs/OPERATIONAL_CORE.md"
 
 permissions:
   contents: read

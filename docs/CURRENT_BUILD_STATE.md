@@ -1,6 +1,71 @@
 # Current build state
 
-## Phase 2A core schema and RLS foundation
+## Phase 2B operational core
+
+### IMPLEMENTED
+
+Phase 2B adds explicit canonical provisioning/linking, protected transactional
+mutations and safe admin read projections. Home, Organizations, People, Families,
+Teams, Access, Audit and Account expose tools from current permissions and actual
+resource context. Organization selection does not change authority. All 22 public
+table policies and SELECT-only authenticated table grants remain unchanged;
+the 19-role/17-permission/112-mapping catalog remains the approved Phase 2A model.
+
+Three new migrations add authenticated-only invoker RPCs backed by private,
+caller-bound authorization and a private receipt table. Mutations validate a live
+confirmed non-anonymous Auth session plus active canonical identity, exact scope,
+actual references and allowed fields. Atomic batches, type-checked earlier-resource
+references, retry fingerprints, overlap guards and safe audit capture are included.
+No privileged key, production secret or new environment variable is introduced.
+
+Organizations/modules/units/seasons/teams, names-only people, households,
+participants, explicit guardians, historical memberships and role assignments
+have authorized administration. Verified guardian profile management permits only
+dependent name edits. Household membership implies no guardian authority.
+Delegation checks every target-role permission at the actual target scope.
+Existing team season/parent and relationship identity keys remain immutable.
+All later module products remain unavailable even when configuration is active.
+See [operational procedures and limits](OPERATIONAL_CORE.md).
+
+### VALIDATION AND PUBLICATION
+
+The final complete local run passed 1,776 SQL assertions and five coordinated
+concurrency cases. Application typecheck, zero-warning lint, all 28 tests and the
+production build pass with locked dependencies and synthetic public configuration.
+The canonical project has all three migrations, a successful transactional
+live verifier with zero fixture remnants, and an explicitly authorized controlled
+canonical account with one approved platform-administrator grant and three audit
+events. Public database types were regenerated live. The equivalent scoped-people
+query optimization passed 2,000-row isolation and search regressions.
+Hosted UI acceptance and final CI evidence remain pending. Starting branch
+SHA: `20acee683f67b854ecefd6c7c91a87a3b8a6a3f8`. The branch remains
+`build/boss-platform-v1`; [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3)
+must remain OPEN/DRAFT/UNMERGED. Public website releases are separate and preserved.
+
+| Applied Phase 2B version | Migration |
+| --- | --- |
+| `20261001134826` | Protected operational mutations and private receipts |
+| `20261001134845` | Safe permission-aware admin read projections |
+| `20261001140101` | Authorized candidate-first scoped people discovery |
+
+The existing six Phase 2A migrations remain unchanged. Hosted DML-only checks
+completed without errors and all seven synthetic cleanup counts were zero.
+SQL role tests model database authorization; hosted acceptance verifies actual
+signed browser sessions separately. Security advisors retain the existing Auth
+leaked-password warning and an intentional private receipt RLS-without-policy
+information item. Performance advisors report 23 unused-index information items
+and the existing absolute Auth connection allocation information; no warning,
+missing FK index or schema security warning was introduced. No Auth setting changed.
+
+### PLANNED / FUTURE
+
+Entitlement administration is deferred because it is unnecessary for this slice
+and no approved entitlement-management permission exists. Tenant-family authority
+anchors, invitations/email onboarding, reviewed identity corrections, consent,
+publication and all business modules require separate direction. Phase 2B ends
+after its operational core is validated and published; no next module is started.
+
+## Historical Phase 2A core schema and RLS foundation
 
 ### IMPLEMENTED AND VERIFIED LIVE
 

@@ -207,3 +207,139 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Boss operational administration uses the existing platform palette. */
+select, textarea { font: inherit; color: var(--ink); }
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--orange-dark);
+  outline-offset: 4px;
+}
+button:disabled { cursor: wait; opacity: .65; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.admin-shell .app-header { background: #111310; color: var(--surface); border: 0; }
+.admin-shell .app-header-inner { min-height: 86px; gap: 30px; }
+.workspace-label { color: #b9bdb2; font-size: 11px; letter-spacing: .6px; }
+.admin-shell .app-header .button-outline { color: white; border-color: #65695e; }
+.admin-shell .app-header .button-outline:hover { background: #2b2e27; border-color: #a5aa9a; }
+.admin-shell .app-navigation { height: 58px; gap: 34px; overflow-x: auto; scrollbar-width: thin; }
+.admin-shell .navigation-link { color: #c3c7bc; white-space: nowrap; min-height: 48px; }
+.admin-shell .navigation-link:hover, .admin-shell .navigation-link[aria-current="page"] { color: #fff; }
+.admin-shell .app-main { padding-block: 46px 72px; }
+.admin-shell .app-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.admin-page-heading { margin-bottom: 28px; }
+.organization-context { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 20px 24px; background: #edede5; border: 1px solid #dcddd3; border-radius: 7px; margin-bottom: 34px; }
+.context-caption { margin-top: 5px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+.organization-context > .form-field { width: min(400px, 50%); }
+.form-field select, .record-search input, .scope-choice select { width: 100%; min-height: 48px; padding: 12px 14px; font-size: 16px; line-height: 22px; border: 1px solid #b8bab0; border-radius: 4px; background: white; min-width: 0; }
+.workspace-intro { background: #171916; color: white; padding: 38px 42px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 32px; overflow: hidden; }
+.workspace-intro h2 { margin-top: 20px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -1px; line-height: 1.2; }
+.workspace-intro p:not(.eyebrow) { color: #c8ccbf; max-width: 470px; margin-top: 15px; font-size: 14px; line-height: 1.7; }
+.workspace-intro .eyebrow { color: #c8ccbf; }
+.workspace-word { font-size: 88px; font-weight: 900; line-height: 1; letter-spacing: -6px; color: var(--orange); transform: rotate(-7deg); }
+.workspace-cards { margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.workspace-card { padding: 28px; background: white; border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; min-width: 0; }
+.workspace-card:hover { border-color: #bb4a00; }
+.workspace-card h2 { margin-top: 19px; font-size: 24px; letter-spacing: -.8px; }
+.workspace-card p { margin-top: 12px; margin-bottom: 28px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+.card-link { margin-top: auto; font-size: 12px; font-weight: 700; display: flex; gap: 12px; align-items: center; }
+.card-link > span { margin-left: auto; font-size: 18px; color: var(--orange-dark); }
+.admin-section { margin-top: 40px; }
+.section-heading { margin-bottom: 20px; }
+.section-heading h2 { font-size: 24px; line-height: 1.3; letter-spacing: -.7px; }
+.section-heading p { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 720px; margin-top: 8px; }
+.workflow-steps { padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; counter-reset: setup; }
+.workflow-steps li { counter-increment: setup; font-size: 13px; line-height: 1.7; padding: 18px 20px; border: 1px solid var(--line); border-radius: 5px; background: white; display: flex; align-items: center; gap: 14px; }
+.workflow-steps li::before { content: counter(setup, decimal-leading-zero); font-size: 11px; font-weight: 700; color: var(--orange-dark); }
+.create-card { border: 1px solid #c8cabf; border-radius: 7px; background: white; margin-bottom: 18px; overflow: hidden; }
+.create-card > summary { cursor: pointer; display: flex; align-items: center; gap: 13px; min-height: 58px; padding: 16px 22px; font-weight: 700; font-size: 13px; list-style: none; }
+.create-card > summary::-webkit-details-marker { display: none; }
+.create-card > summary:hover { background: #f8f5ef; }
+.create-card > summary:focus-visible { outline-offset: -4px; }
+.create-card[open] > summary { border-bottom: 1px solid var(--line); }
+.plus-mark { width: 25px; height: 25px; border-radius: 50%; color: var(--orange-dark); background: #fff0e4; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 400; flex: 0 0 25px; }
+.create-card[open] .plus-mark { transform: rotate(45deg); }
+.create-card-content { padding: 26px; }
+.admin-form-heading { margin-bottom: 22px; }
+.admin-form-heading h3 { font-size: 19px; letter-spacing: -.4px; line-height: 1.4; margin: 0; }
+.admin-form-heading p { font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 8px; max-width: 660px; }
+.admin-fieldset { padding: 0; margin: 0 0 22px; border: 0; min-width: 0; }
+.admin-fieldset legend { font-size: 13px; font-weight: 700; margin-bottom: 15px; }
+.admin-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; }
+.admin-fields .form-field { align-content: start; min-width: 0; }
+.field-hint { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.checkbox-field { padding-top: 8px; }
+.checkbox-field label { display: flex; gap: 12px; align-items: flex-start; min-height: 32px; cursor: pointer; }
+.checkbox-field input { width: 19px; height: 19px; min-height: 19px; padding: 0; accent-color: var(--orange-dark); margin: 0; flex: 0 0 19px; }
+.admin-form-footer { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; padding-top: 6px; }
+.save-notice { color: #276232; font-size: 12px; line-height: 1.7; max-width: 440px; }
+.save-error { color: #873900; }
+.empty-state { background: white; border: 1px dashed #c8cabf; padding: 26px; border-radius: 6px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+.record-list { display: grid; gap: 14px; }
+.record-card { min-width: 0; border: 1px solid var(--line); background: white; border-radius: 7px; padding: 24px; }
+.record-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.record-heading h3 { margin: 0; font-size: 17px; line-height: 1.4; letter-spacing: -.4px; overflow-wrap: anywhere; }
+.status-pill { font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; background: #eeeee8; color: #565b4b; padding: 7px 9px; border-radius: 4px; white-space: nowrap; }
+.status-active { background: #e9f1e5; color: #31522b; }
+.status-pending { background: #fff0dd; color: #784400; }
+.status-suspended, .status-archived { background: #f2e9e5; color: #6f4435; }
+.record-meta { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 20px 0 0; }
+.record-meta > div { min-width: 90px; max-width: 100%; }
+.record-meta dt { color: var(--muted); font-size: 10px; margin-bottom: 7px; }
+.record-meta dd { margin: 0; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.record-note { margin-top: 16px; font-size: 11px; color: var(--muted); }
+.record-edit { margin-top: 18px; border-top: 1px solid #edeee8; }
+.record-edit > summary { min-height: 46px; padding: 15px 0 8px; font-size: 12px; line-height: 1.5; font-weight: 700; color: var(--orange-dark); cursor: pointer; }
+.record-edit[open] > summary { margin-bottom: 19px; }
+.module-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.module-card { background: white; padding: 24px; border: 1px solid var(--line); border-radius: 7px; min-width: 0; }
+.module-future { font-size: 11px; line-height: 1.7; color: var(--muted); margin-top: 13px; margin-bottom: 22px; }
+.module-card .admin-form-heading { display: none; }
+.module-card .admin-fields { grid-template-columns: 1fr; }
+.module-card .admin-fieldset { margin-bottom: 12px; }
+.module-card .button { min-height: 42px; padding: 10px 16px; font-size: 12px; }
+.record-search { margin-bottom: 22px; max-width: 600px; }
+.record-search > label { font-size: 12px; font-weight: 700; display: block; margin-bottom: 9px; }
+.record-search > div { display: flex; gap: 12px; }
+.scope-choice { display: grid; gap: 9px; max-width: 400px; margin-bottom: 24px; }
+.scope-choice > label { font-size: 12px; font-weight: 700; }
+.workflow-option { margin-bottom: 24px; }
+.workflow-option label { display: flex; align-items: flex-start; gap: 12px; font-size: 12px; line-height: 1.7; font-weight: 700; cursor: pointer; }
+.workflow-option input { width: 19px; height: 19px; accent-color: var(--orange-dark); flex: 0 0 19px; margin: 0; }
+
+@media (max-width: 1000px) {
+  .workspace-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .workspace-intro { padding: 32px; }
+  .workspace-word { font-size: 70px; }
+  .workflow-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .admin-shell .app-header-inner { min-height: 82px; padding-block: 18px; flex-wrap: nowrap; gap: 18px; }
+  .workspace-label { display: none; }
+  .admin-shell .logout-form { order: initial; }
+  .admin-shell .app-navigation { height: 54px; gap: 25px; }
+  .admin-shell .app-main { padding-block: 34px 56px; }
+  .organization-context { padding: 18px; gap: 15px; flex-direction: column; align-items: stretch; }
+  .organization-context > .form-field { width: 100%; }
+  .workspace-intro { padding: 28px; }
+  .workspace-word { display: none; }
+  .workspace-cards, .module-grid { grid-template-columns: 1fr; }
+  .workspace-card { padding: 24px; }
+  .admin-section { margin-top: 32px; }
+  .section-heading h2 { font-size: 22px; }
+  .admin-fields { grid-template-columns: 1fr; gap: 19px; }
+  .create-card-content { padding: 22px; }
+  .record-card, .module-card { padding: 22px; }
+  .record-heading { align-items: flex-start; }
+  .workflow-steps { grid-template-columns: 1fr; }
+  .admin-form-footer { align-items: stretch; flex-direction: column; }
+  .record-search > div { gap: 8px; }
+  .record-search .button { padding-inline: 14px; }
+}
+
+@media (max-width: 400px) {
+  .admin-shell .app-header .button { padding-inline: 13px; }
+  .create-card-content, .record-card, .module-card { padding: 18px; }
+  .create-card > summary { padding-inline: 18px; }
+  .admin-shell .app-footer { font-size: 10px; }
+}

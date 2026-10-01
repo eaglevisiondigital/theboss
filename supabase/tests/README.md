@@ -1,4 +1,4 @@
-# Phase 2A database tests
+# Boss core database tests
 
 Run from the repository root with PostgreSQL 17 binaries installed:
 
@@ -13,7 +13,7 @@ Supabase key, Docker daemon or network service is required.
 
 The runner initializes a fresh cluster under a private temporary directory,
 binds only a Unix socket with permissions `0700`, rejects host connections,
-applies every canonical migration in order and runs the Phase 2A SQL tests.
+applies every canonical migration in order and runs the Phase 2A/2B SQL tests.
 It then runs the hierarchy concurrency helper against that same disposable
 cluster. The helper coordinates two independent sessions and removes its local
 synthetic hierarchy records after the checks.
@@ -26,7 +26,7 @@ the canonical hosted project. No fixtures belong in production migrations.
 Repetitive assertion output is captured in the private temporary directory.
 The runner displays the assertion count, category totals and fixture cleanup
 result produced by SQL; SQL errors remain visible on stderr. It does not hard-code
-a passing count. The final fresh-cluster run passed 911 SQL assertions: 642
+a passing count. The historical Phase 2A fresh-cluster run passed 911 SQL assertions: 642
 across categories A–P and 269 in `phase2a_live_verification.sql`. Its three
 coordinated hierarchy checks also passed:
 READ COMMITTED rejected the unsafe edit with `23514`; REPEATABLE READ and
@@ -61,6 +61,31 @@ cookies, Storage or managed extensions. Canonical project migration verification
 advisors and separately documented hosted checks complement these tests.
 Never apply the local bootstrap to a managed project.
 
+## Phase 2B operational coverage
+
+The final fresh-cluster run passed 1,776 SQL assertions: the unchanged 642 Phase 2A
+assertions and 269 Phase 2A live-verifier assertions, 314 Phase 2B live-verifier
+assertions, 523 Phase 2B operation/read assertions, and 28 actual bootstrap-source
+assertions. Categories A–R cover authorization, exact scope, isolation, guardian
+separation, direct-write denial, audit, rollback, forged resource IDs, revoked
+sessions and retry reauthorization. Read tests include 2,000 unrelated canonical
+people, guardian deduplication, inactive dependents and contextual/global search.
+
+After transactional SQL tests, `phase2b_bootstrap.sh` executes the real trusted
+bootstrap source with isolated identities; it does not maintain a test copy of
+the procedure. `phase2b_mutation_concurrency.sh` coordinates two RPC writers at
+READ COMMITTED and REPEATABLE READ. Exactly one succeeds; the other receives a
+safe conflict, and one membership/audit/receipt remains. These two checks and the
+three original hierarchy checks pass. All fixtures and the entire private cluster
+are removed; append-only audit guards are never disabled.
+
+`phase2b_live_verification.sql` uses DML-only transactional synthetic fixtures and
+actual Data API database roles. It completed on the canonical project after all
+three new migrations; seven prefix-scoped cleanup counts were zero. The MCP
+response contains its final cleanup row rather than the preceding assertion-count
+row, so evidence also retains the matching 314-assertion local runtime result.
+This does not substitute for signed-JWT/browser acceptance or production load tests.
+
 `auth.uid()` semantics and relevant Auth columns/role attributes were verified
 read-only against the canonical project before implementation. Official references:
 
@@ -83,6 +108,9 @@ no remote history repair or duplicate migration was used.
 | `20260930212421` | `phase2a_integrity` |
 | `20260930212426` | `phase2a_authorization_rls` |
 | `20260930212430` | `phase2a_catalog_seeds` |
+| `20261001134826` | `phase2b_operational_mutations` |
+| `20261001134845` | `phase2b_admin_read_projection` |
+| `20261001140101` | `phase2b_scoped_people_projection` |
 
 The CLI is not a runtime dependency and no CLI access token is required to
 create migration files or run these local SQL tests.

@@ -61,11 +61,11 @@ privileged. Unit scopes do not imply organization membership-list authority;
 memberships have no unit resource anchor. A future resource model/workflow must
 settle either extension before those grants can authorize such operations.
 
-The permission catalog reserves `manage` and `roles.assign` capabilities but
-does not implement their mutation workflows. Authenticated Data API clients have
-SELECT only, subject to RLS. There are no client INSERT/UPDATE/DELETE policies or
-grants, even for a person holding a platform-scoped role. Trusted server writers
-must use a separately secured, reviewed path; no such application path is added.
+Authenticated Data API table clients retain SELECT only, subject to unchanged
+RLS. No INSERT/UPDATE/DELETE/TRUNCATE policy or grant is added, including for
+platform administrators. Phase 2B implements protected `boss_admin_mutate` commands
+through a public invoker wrapper and a private, finite definer dispatcher. A
+platform person role does not confer database-owner privileges.
 
 ## Protected reads
 
@@ -91,13 +91,59 @@ helpers first check subject visibility and then current status/windows; membersh
 entitlements additionally require an active underlying relationship and parent
 resource. Seeing relationship history does not activate product access.
 
+## Phase 2B protected operations
+
+Both read and mutation RPCs require a confirmed, non-anonymous, non-banned,
+non-deleted Auth user with a signed `session_id` owned by a live `auth.sessions`
+row, including its `not_after` limit. Core operations additionally require an
+active canonical account/person. Explicit self provisioning is the sole unmapped
+identity operation and grants no role.
+
+Each mutation resolves the actual resource, then checks the relevant existing
+permission at its exact organization/unit/team context. A supplied organization
+or team UUID cannot establish authority. Participants reached through scoped
+management require an actual current organization or roster relationship; exact
+unit management covers only a team attached directly to that unit. Platform
+permissions may explicitly recover an inactive resource; scoped grants still fail
+closed for inactive resources. Existing anchored relationships can be ended or
+inactivated without activating an inactive target identity.
+
+A role assignment requires `roles.assign` plus every permission mapped to the
+target role in the same actual scope. Permitted scope kinds, active role/person,
+windows and target relationships are checked independently. A caller cannot grant
+powers they lack, assign a broader scope, or use module activation as authority.
+The 19 roles, 17 keys and 112 approved mappings remain unchanged.
+
+Household creation/membership administration uses platform `household.manage`;
+organization household keys have no approved global-family authority anchor.
+Guardian administration additionally requires platform `person.profile.manage`.
+Verification is explicit and cannot be performed by the relationship's guardian
+or dependent. A currently verified guardian with `can_manage_profile` may update
+approved dependent name fields only, including no identity status or authority
+flags. Household membership alone supplies no mutation authority.
+
+`boss_admin_read` keeps table RLS unchanged and offers a names-only, bounded
+scoped projection for legitimate organization/roster discovery. Separate global
+lifecycle projections require the existing platform `organization.view`,
+`team.view` or `audit.view` key for their respective collection. They expose safe
+archived resource/history metadata so explicitly privileged operators can review
+and recover records; scoped callers retain active-resource restrictions. Ordinary users have no
+global people search. Scoped candidates are selected from authorized relationships
+before canonical person lookup, and global capability checks are cached per
+request. The global directory retains substring search and a bounded result set;
+large-directory search/pagination and load validation remain future scale work.
+UI tools are supplied from current capabilities; the RPC
+reauthorizes every call and all request replays. No frontend context choice,
+hidden control, membership label or Auth metadata is a security boundary.
+
 ## APPROVED BUT NOT IMPLEMENTED
 
-Canonical account provisioning, authorized mutations, audit capture, role
-delegation and reviewed field projections need their specific implementation
-direction. No real person is
-automatically granted a role. Guardian register/document/payment/waiver flags are
-stored foundations only; their corresponding business actions are not built.
+Sensitive-field consent and tenant-household administration need approved
+resource/permission direction. No person is automatically granted a role.
+Guardian register/document/payment/waiver flags remain stored foundations only;
+the corresponding business actions are absent. Entitlement administration is
+deferred because the approved catalog has no entitlement-management permission
+and the operational acceptance workflows do not require it.
 
 ## FUTURE
 

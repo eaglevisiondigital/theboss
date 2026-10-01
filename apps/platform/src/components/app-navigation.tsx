@@ -2,21 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import type { AdminNavigation } from "@/lib/admin/contracts";
 
-const destinations = [
-  { href: "/app", label: "Home" },
-  { href: "/app/account", label: "Account" },
-];
-
-export function AppNavigation() {
+export function AppNavigation({ navigation = [] }: { navigation?: AdminNavigation[] }) {
   const pathname = usePathname();
+  const organization = useSearchParams().get("org");
+  const context = organization && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(organization) ? `?org=${organization}` : "";
+  const labels: Record<AdminNavigation, string> = { organizations: "Organizations", people: "People", families: "Families", teams: "Teams", access: "Access", audit: "Audit" };
+  const destinations = [
+    { href: "/app", label: "Home" },
+    ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
+    { href: "/app/account", label: "Account" },
+  ];
 
   return (
     <nav className="app-navigation" aria-label="Main navigation">
       {destinations.map(({ href, label }) => (
         <Link
           key={href}
-          href={href}
+          href={`${href}${href === "/app/account" ? "" : context}`}
           className="navigation-link"
           aria-current={pathname === href ? "page" : undefined}
         >

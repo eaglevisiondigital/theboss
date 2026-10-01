@@ -1227,7 +1227,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      boss_admin_mutate: {
+        Args: { p_commands: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_admin_read: {
+        Args: { p_organization_id?: string; p_query?: string; p_view: string }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

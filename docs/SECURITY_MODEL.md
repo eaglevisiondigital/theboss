@@ -2,7 +2,7 @@
 
 ## IMPLEMENTED
 
-The foundation is applied to the canonical Boss project: 22 exposed application
+The Phase 2A foundation is applied to the canonical Boss project: 22 exposed application
 tables, all with RLS enabled and explicit access grants. The complete local A–P
 suite passes 642 assertions; 269 additional role checks pass locally and live,
 with transaction rollback and zero fixtures afterward. Hierarchy concurrency
@@ -13,8 +13,10 @@ Authenticated clients receive SELECT only; every read requires a canonical activ
 Boss identity plus the appropriate relationship or explicit scoped permission.
 Catalog definitions require that identity but no tenant relationship.
 An Auth login alone, membership label, module activation, entitlement, visibility
-field or feature flag never grants broad access. No public identity projection or
-automatic publication policy exists. Private team visibility is the default.
+field or feature flag never grants broad access. No anonymous identity projection
+or automatic publication policy exists. Phase 2B adds a protected names-only
+projection and finite operational RPCs; current live/validation evidence belongs
+in `CURRENT_BUILD_STATE.md`. Private team visibility is the default.
 
 Private person DOB/contact information is restricted to self, currently verified
 explicit guardian profile authority, or platform `person.profile.view`.
@@ -23,8 +25,9 @@ metadata access does not reveal another person's private canonical profile.
 
 The private `boss_private` schema contains invoker integrity functions and small
 caller-bound definer lookups. Definers are needed to resolve canonical mapping,
-relationship and permission records without recursive policies; they are not
-general read/write or impersonation endpoints. All use an empty search path,
+relationship and permission records without recursive policies. Phase 2B adds
+a finite private mutation dispatcher, not an arbitrary table/SQL or impersonation
+endpoint. All use an empty search path,
 fully qualified references, database-owned mapping/role records and restricted
 EXECUTE. No user-editable metadata supplies authority. Private schema USAGE does
 not itself add it to PostgREST exposed-schema configuration. Spoofing, missing
@@ -51,9 +54,10 @@ unchanged; every new application object explicitly sets ACLs. Existing managed
 Auth/Storage settings, functions and policies are not modified.
 
 Configuration JSON is for low-risk settings; audit JSON must be safe structured
-context. Neither is a credential store or public profile store. Automatic audit
-capture, secure business mutation paths and field-level consent projections
-need their own reviewed implementation. Transactional test fixtures are separate
+context. Neither is a credential store or public profile store. Phase 2B audit
+capture records safe changed field names and actor/resource/scope metadata only.
+Field-level consent and later business mutation paths require separate approved
+implementation. Transactional test fixtures are separate
 from production catalog migrations; no real identity is provisioned or assigned
 authority by a seed.
 
@@ -62,12 +66,52 @@ pairs and validates the role's permitted scope kinds. Live advisors report no ne
 schema security warning; separate existing Auth findings are unchanged. Required
 FK/scoped-query indexes are retained despite fresh-schema unused-index information.
 
+## Phase 2B mutation boundary
+
+Authenticated callers may execute the finite public invoker RPC wrappers, with no
+anonymous/PUBLIC execution grant. The private definer dispatcher has an empty
+search path, qualified object names, typed input allowlists, caller-bound identity
+and exact permission/context checks. Private helper execution is restricted.
+Direct table writes remain unavailable and no application service key is needed.
+
+Global lifecycle read projections separately require the existing collection
+read key and expose approved unit/team/audit metadata even when a referenced
+resource is archived. They do not alter table SELECT policies, widen scoped
+access or reveal audit payloads. Audit actor names additionally require platform
+`person.profile.view`; otherwise the projection shows an opaque canonical actor
+identifier. Neither Auth identifiers nor session values appear.
+
+Sensitive administration validates the signed Auth session against the current
+managed `auth.sessions` row and user confirmation/deletion/ban state. Revoking or
+removing that session prevents a subsequent operational request even when an old
+access token has not expired. No user-editable metadata participates in authority.
+
+The server POST adapter checks same-origin requests, validates bounded commands,
+uses the authenticated SSR client, and returns safe errors. The database RPC
+applies the same authorization independently, including direct authenticated API
+calls. Invalid UUIDs/references/windows, forged context, role escalation, duplicate
+active periods and input fields fail closed. Household/guardian authority remains
+explicit; no global household mutation is inferred from a tenant permission.
+
+Batches are transactional, with append-only safe audit events and a private
+RLS-protected receipt for request idempotency. Replays recheck current authority.
+Relationship collision checks use physical resource anchors so stale higher
+isolation snapshots fail with a safe conflict instead of committing duplicates.
+No raw before/after profile payload, password, token or session value is captured.
+
+The controlled bootstrap is a separate, documented one-time trusted procedure,
+not a hard-coded account bypass or automatic seed grant. Its explicit link and
+minimum approved platform role are audited. Acceptance data must be marked as
+test data and contain no real minor data. Security/performance advisor and hosted
+acceptance results are reported in `CURRENT_BUILD_STATE.md`; the existing Auth
+leaked-password-protection warning is not weakened or silently changed.
+
 ## APPROVED BUT NOT IMPLEMENTED
 
-Authenticated management workflows, automatic audit capture, canonical identity
-provisioning and consent are not implemented. Organization household grants cannot infer an unmodeled
-tenant-family relationship; those reads stay protected by current household RLS.
-No out-of-scope business module is included.
+Sensitive-field consent, retention/correction procedures and tenant-family
+authority require approved direction. Organization household grants cannot infer
+an unmodeled tenant-family relationship; household RLS remains unchanged. No
+out-of-scope business module is included.
 
 ## Historical Phase 1B shell controls and limits
 
