@@ -67,10 +67,11 @@ showed the same new 6 PM time. The weekly series has one durable exception.
 Personal/family projection deduplicated the shared occurrence; the third-child
 filter excluded Falcons-only and Wildcats-only events. The controlled account
 has explicit verified relationships to three synthetic participants for these
-tests. It also remains a platform administrator, so these signed UI checks are
-not presented as restricted-guardian HTTP isolation tests. Actual database-role
-guardian, household-only, coach, exact-unit and expired-role isolation passed
-both local and live transactional suites.
+tests. These projections were subsequently repeated with administrator authority
+inactive and only an exact-Falcons head-coach grant active. The restricted
+Wildcats event was absent; the shared event remained readable without edit
+controls. Actual database-role guardian, household-only, coach, exact-unit and
+expired-role isolation also passed local and live transactional suites.
 
 An actual anonymous database-role query over the retained hosted records returned
 only the one explicitly published public event. Member/restricted series,
@@ -89,18 +90,36 @@ No password, real access/refresh token, cookie/session value or privileged key
 was retrieved, captured, printed or committed. Managed service log histories were
 not exhaustively inspected. Public website code and configurations are unchanged.
 
-### REMAINING HOSTED ACCEPTANCE
+### FINAL HOSTED ACCEPTANCE — COMPLETE
 
-A restricted-role signed HTTP mutation-denial test remains pending explicit
-permission to temporarily alter the controlled account's live grants. Automatic
-approval review rejected disabling its existing platform-administrator grant and
-adding an expiring exact-Falcons head-coach grant because the assignment did not
-specifically authorize that live access change. No role assignment changed.
-A valid stale admin form and reviewed restore procedure are prepared. Current
-administrator access is intact; the temporary coach grant does not exist.
-Database-role denial is verified independently, and is not claimed to replace
-this remaining hosted negative test. Phase 3A is not marked fully accepted until
-that test is resolved. No later phase is started.
+Direct human authorization resolved the remaining controlled-grant test.
+From 17:39:59 to 17:44:30 UTC on October 1, 2026, the original administrator
+assignment was inactive and an expiring head-coach assignment was active only
+for CONTROLLED TEST Falcons. No Auth setting, credential or feature policy
+changed. The hosted form offered only Falcons as a scheduling target; signed
+creation and archival of one synthetic Falcons event succeeded.
+
+Four previously prepared administrator forms were submitted after the downgrade.
+The server denied a Wildcats edit, a sibling-program event creation, an
+organization-wide event creation, and retargeting a known Wildcats event to
+Falcons. No forbidden title persisted; the original Wildcats version and targets
+were unchanged. This exercises signed HTTP saves with stale client capabilities,
+including an unauthorized event ID with otherwise permitted proposed targets.
+An unknown team filter and the actual sibling-unit filter returned no events.
+Family deduplication and third-child filtering passed in the restricted session.
+
+The reviewed recovery procedure immediately restored the original administrator
+assignment, preserving its scope, start and unlimited end date. The temporary
+coach assignment is inactive and ended. Independent database verification found
+zero active temporary assignments; refreshed hosted settings, facility management,
+audit navigation and all administrator scheduling targets returned. Append-only
+audit records cover the limitation, controlled grant and restoration, plus both
+authorized event changes. The added synthetic sibling unit is inactive and the
+Falcons acceptance event is archived. No customer data changed.
+
+All 19 focused Calendar regressions passed, including six HTTP/mutation boundary
+tests. No application code, schema or website deployment changed for this
+addendum. Phase 3A acceptance is complete. No later phase is started.
 
 Starting SHA: `51680bc2c34e60bf25129d07d685fc6632f2ea25`.
 Branch: `build/boss-platform-v1`.
