@@ -48,8 +48,8 @@ See `docs/design/boss-bucks-page.md` for asset provenance and verification.
 
 ## Next work
 
-1. Verify hosted Boss Bucks publication and record its release checkpoint.
-2. Prepare the Fundraising interior mockup for owner review.
+1. Publish and verify the approved responsive Fundraising page.
+2. Prepare the next interior-page mockup for owner review.
 3. Extend the approved website identity through remaining interior pages.
 4. Complete production contact, legal, abuse prevention and launch configuration.
 5. Progressive integration with the separately released Boss platform.
@@ -57,3 +57,12 @@ See `docs/design/boss-bucks-page.md` for asset provenance and verification.
 Other interior pages retain the earlier foundation. Public website work preserves
 the platform/backend strategy. Wallet and payment functionality is not added by
 this website release.
+
+
+## October 1 Fundraising checkpoint
+
+Owner approved the Fundraising desktop mockup and directed implementation and
+publication. The responsive route is implemented. Source and content contract:
+`docs/design/fundraising-page.md`. Boss Bucks and the homepage were already
+published and browser-verified from commit 930a3a4, Netlify deployment
+6abd749baa010200085c0531. Fundraising release verification is in progress.

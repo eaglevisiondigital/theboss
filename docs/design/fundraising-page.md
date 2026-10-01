@@ -1,11 +1,11 @@
 # Fundraising interior page
 
-Status: proposed desktop mockup, awaiting owner approval.
+Status: approved October 1, 2026. Responsive implementation complete; release verification in progress.
 Reference: fundraising-desktop-proposed.png.
 
 The owner directed the next page after publication of the approved homepage and
 Boss Bucks page. This design follows the approved mockup-first workflow. It has
-not been implemented or published as the /fundraising route.
+now been implemented as the /fundraising route after explicit owner approval.
 
 ## Visual and content contract
 
@@ -58,4 +58,34 @@ photographic sports/community imagery, legible copy and no fabricated results.
 The approved homepage and Boss Bucks page were published September 30, 2026 from
 commit 930a3a438cb0ae03a8f941cb439df6a2ea76a7c5, Netlify deployment
 6abd749baa010200085c0531. The live Boss Bucks page was visually verified in the
-cloud browser. This proposed design does not change that production deployment.
+cloud browser. The Fundraising release follows this production checkpoint.
+
+
+## Implementation checkpoint
+
+Semantic HTML implements the approved page story and controls. Original approved
+Money Board and Discounts JPEG sources supply product UI. Clean photographic
+crops supply the family, merchandise and team imagery. Built-in Imagegen created
+`public/images/approved/fundraising-hero.png` from the approved hero: remove page
+text and controls, retain the coach and youth team, sunset field, black/orange
+apparel and dark left space for HTML copy. Campaign imagery is illustrative.
+
+The approved homepage team-celebration crop replaces the proposed raster's
+text-overlapped crop, preventing duplicated raster text behind the HTML copy.
+Mobile presents the Money Board copy first, with team/phone visuals below.
+
+Trial-duration pills are descriptive campaign options. Donations remain optional;
+qualifying gifts use more than $25. Team-store CTA leads to the existing Engage
+page, with the planned store connection labeled platform vision. Intake uses
+/fundraising/get-started. No operational checkout, wallet, payment, authentication,
+backend or platform release changes are part of this implementation.
+
+
+## Verification
+
+Next.js production build and TypeScript passed. Browser checks passed at 1440,
+1024, 768, 390 and 320 pixels: no horizontal overflow, one h1, images loaded,
+optional-donation and approved-spending rules present, anchor and mobile menu
+working, all 14 destinations HTTP 200, and intake, Money Board and team-store
+CTA navigation working. Desktop and phone screenshots were compared with the
+approved design. Photograph crops and mobile order were corrected before release.
