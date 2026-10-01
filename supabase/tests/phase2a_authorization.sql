@@ -121,7 +121,7 @@ END;
 $test$;
 
 SELECT pg_temp.expect_count('only approved exposed table set', 'P',
-  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT IN ('event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders') $$, 22);
+  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename IN ('people','user_accounts','households','participants','organizations','organization_units','seasons','teams','organization_memberships','team_memberships','household_memberships','guardian_relationships','roles','permissions','role_permissions','role_assignments','modules','organization_modules','entitlements','feature_flags','feature_flag_overrides','audit_events') $$, 22);
 SELECT pg_temp.expect_count('no anonymously accessible policies', 'A',
   $$ SELECT count(*) FROM pg_catalog.pg_policies WHERE schemaname = 'public'
        AND ('anon' = ANY (roles) OR 'public' = ANY (roles)) $$, 0);
@@ -222,16 +222,16 @@ INSERT INTO pg_temp.phase2a_expected_role_catalog VALUES
   ('volunteer_coordinator',ARRAY['team'],ARRAY['team.view']),
   ('scorekeeper',ARRAY['team'],ARRAY['team.view']),
   ('livestream_operator',ARRAY['team'],ARRAY['team.view']);
-SELECT pg_temp.expect_count('exact initial role catalog count', 'P', $$ SELECT count(*) FROM public.roles $$, 19);
-SELECT pg_temp.expect_count('exact initial permission catalog count', 'P', $$ SELECT count(*) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict') $$, 17);
-SELECT pg_temp.expect_count('exact initial role-permission mapping count', 'P', $$ SELECT count(*) FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict') $$, 112);
+SELECT pg_temp.expect_count('exact initial role catalog count', 'P', $$ SELECT count(*) FROM public.roles WHERE key NOT IN ('registrar','organization_finance') $$, 19);
+SELECT pg_temp.expect_count('exact initial permission catalog count', 'P', $$ SELECT count(*) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict','registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage') $$, 17);
+SELECT pg_temp.expect_count('exact initial role-permission mapping count', 'P', $$ SELECT count(*) FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict','registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage') $$, 112);
 SELECT pg_temp.expect_count('exact initial module catalog count', 'P', $$ SELECT count(*) FROM public.modules WHERE key <> 'calendar' $$, 13);
 SELECT pg_temp.expect_count('no speculative feature flags seeded', 'P', $$ SELECT count(*) FROM public.feature_flags $$, 0);
 SELECT pg_temp.expect_count('seed roles and permissions are active', 'P',
   $$ SELECT (SELECT count(*) FROM public.roles WHERE status <> 'active')
           + (SELECT count(*) FROM public.permissions WHERE status <> 'active') $$, 0);
 SELECT pg_temp.expect_true('no unexpected initial permission keys', 'P',
-  (SELECT array_agg(key ORDER BY key) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict')) =
+  (SELECT array_agg(key ORDER BY key) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict','registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage')) =
   (SELECT array_agg(key ORDER BY key) FROM unnest(ARRAY[
     'person.profile.view','person.profile.manage','organization.view','organization.manage',
     'organization.members.view','organization.members.manage','team.view','team.manage',
@@ -253,7 +253,7 @@ BEGIN
       actual_scopes = expected.expected_scopes);
     SELECT coalesce(array_agg(p.key ORDER BY p.key),ARRAY[]::text[]) INTO actual_permissions
       FROM public.roles r JOIN public.role_permissions rp ON rp.role_id = r.id
-      JOIN public.permissions p ON p.id = rp.permission_id WHERE r.key = expected.role_key AND p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict');
+      JOIN public.permissions p ON p.id = rp.permission_id WHERE r.key = expected.role_key AND p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict','registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage');
     SELECT coalesce(array_agg(key ORDER BY key),ARRAY[]::text[]) INTO sorted_expected_permissions
       FROM unnest(expected.expected_permissions) AS key;
     PERFORM pg_temp.expect_true('approved seed role capabilities only: ' || expected.role_key, 'P',
@@ -294,8 +294,13 @@ DO $test$
 DECLARE table_name text; column_name text;
 BEGIN
   FOR table_name IN SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname = 'public' LOOP
-    PERFORM pg_temp.expect_count('missing identity has no rows: ' || table_name, 'P',
-      format('SELECT count(*) FROM public.%I', table_name), 0);
+    IF has_table_privilege('authenticated','public.'||table_name,'SELECT') THEN
+      PERFORM pg_temp.expect_count('missing identity has no rows: ' || table_name, 'P',
+        format('SELECT count(*) FROM public.%I', table_name), 0);
+    ELSE
+      PERFORM pg_temp.expect_error('missing identity raw-table read denied: ' || table_name, 'P',
+        format('SELECT count(*) FROM public.%I',table_name),ARRAY['42501']);
+    END IF;
     PERFORM pg_temp.expect_error('authenticated INSERT denied: ' || table_name, 'O',
       format('INSERT INTO public.%I DEFAULT VALUES', table_name), ARRAY['42501']);
     SELECT attname INTO column_name FROM pg_catalog.pg_attribute

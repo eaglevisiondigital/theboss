@@ -1,5 +1,48 @@
 # Boss foundation implementation decisions
 
+## Phase 3B implementation choices
+
+| Choice | Reason and limit |
+| --- | --- |
+| One tenant-owned offering and persistent participant identity | Reuses canonical people/participants across seasons; no account or role is created by registration |
+| Immutable owning scope and same-tenant references | Exact organization/unit/team context remains enforceable; no ancestor/descendant scope inheritance |
+| Frozen requirements at registration start | Later form/waiver/document/required-fee edits affect future registrations while historical evidence retains its original definition |
+| Independent workflow states | Submission, approval, document review, payment and team assignment do not silently imply one another |
+| Default manual team assignment | An authorized explicit operation uses existing roster records and configured prerequisites; no automatic placement or permission grant |
+| Bounded conditional form language | Server-side finite field/condition evaluation avoids arbitrary expressions, executable rules and client-only required-field checks |
+| Typed consent and immutable signed version | Preserves actual canonical signer, Auth provenance, database time and consent; does not claim legal sufficiency or verified client IP |
+| Private session-bound document intents and audited read leases | Storage checks actual guardian/scope authority on every operation; no public link or UI-only protection |
+| Separate finance and medical permissions | Registrar and coach roles gain no implicit payment administration; finance gains no document/medical read |
+| Exact-team emergency access | Requires actual current coach/staff and athlete relationships, explicit team permission and feature policy; exposes minimum approved emergency information |
+| Explicit obligations and append-only allocations | Partial cash/check receipts preserve history; balances and status are computed rather than silently edited |
+| Cash/check-only live method constraint | Future card/ACH/Boss Bucks types remain a static contract; a later approved migration must validate the execution path before extending permitted database values |
+| Resource locks plus physical serialization anchors | Capacity, coupons and charge allocation cannot commit against stale higher-isolation snapshots; conflicts fail safely |
+| Audited actor-bound retry receipts | Duplicate actions do not create duplicate records; a retry rechecks current role/guardian/module context |
+
+Required forms and waivers gate submission. Documents and payment remain separate
+pending states. Submitted/review/approved registrations reserve capacity; drafts and
+waitlists do not. Waitlisted submissions can create the frozen required obligations;
+this does not collect funds or assign a team. Fee rules and coupons are finite
+configuration; sibling/early-registration discounts use explicit coupons or reviewed
+manual adjustments rather than an inferred automatic pricing engine.
+Fixed coupons require a single currency among frozen fee rules; percentage
+discounts remain per charge. No currency conversion is inferred.
+
+Installment schedules cover the complete adjusted charge obligation, including
+amounts already received. Editing an active planned obligation requires explicit
+plan cancellation/replacement. Payment reversal/refund execution, automated
+collections, processor settlement, signed-PDF generation, antivirus scanning,
+notification delivery and retention/purging remain future work. Historical evidence
+and current deployment/test status are kept separately in CURRENT_BUILD_STATE.md.
+
+The permanent future Boss Bucks rule is preserved without ledger implementation:
+one family master wallet can display organization-specific sub-balances, while
+fundraising-earned value remains restricted to its originating organization.
+Organization A's earned funds cannot automatically pay Organization B's fees.
+Future allocation must validate source organization, charge eligibility, available
+restricted value and reversal dependencies before combining tenders. Phase 3B
+executes cash/check only. [Finance details](FEES_CHARGES_ARCHITECTURE.md).
+
 ## Phase 3A implementation choices
 
 The approved Events/Calendar assignment adds one reusable canonical event model,
@@ -71,7 +114,8 @@ The approved initial role matrix is seeded as 112 explicit potential-capability
 pairs. Organization owner/administrator/director roles accept organization scope;
 program/sport administrators accept exact unit scope; team roles accept exact
 team scope. Support/sales/compliance receive organization visibility only, and
-finance/merchant staff receive no current grants. See `PERMISSIONS_MODEL.md`.
+finance/merchant staff received no foundation grants at that checkpoint. Phase 3B
+separately adds the explicit finance mappings above. See `PERMISSIONS_MODEL.md`.
 No existing Auth user is assigned a Boss person or role automatically.
 
 The migration owner `postgres` can harden its defaults but does not hold managed

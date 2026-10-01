@@ -117,6 +117,277 @@ export type Database = {
           },
         ]
       }
+      charge_adjustments: {
+        Row: {
+          adjustment_type: string
+          amount_minor: number
+          charge_id: string
+          created_at: string
+          id: string
+          organization_id: string
+          reason: string
+          recorded_by_person_id: string
+          source_coupon_id: string | null
+        }
+        Insert: {
+          adjustment_type: string
+          amount_minor: number
+          charge_id: string
+          created_at?: string
+          id?: string
+          organization_id: string
+          reason: string
+          recorded_by_person_id: string
+          source_coupon_id?: string | null
+        }
+        Update: {
+          adjustment_type?: string
+          amount_minor?: number
+          charge_id?: string
+          created_at?: string
+          id?: string
+          organization_id?: string
+          reason?: string
+          recorded_by_person_id?: string
+          source_coupon_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "charge_adjustments_organization_id_charge_id_fkey"
+            columns: ["organization_id", "charge_id"]
+            isOneToOne: false
+            referencedRelation: "charges"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "charge_adjustments_organization_id_source_coupon_id_fkey"
+            columns: ["organization_id", "source_coupon_id"]
+            isOneToOne: false
+            referencedRelation: "registration_coupons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "charge_adjustments_recorded_by_person_id_fkey"
+            columns: ["recorded_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      charges: {
+        Row: {
+          charge_type: string
+          created_at: string
+          created_by_person_id: string
+          currency: string
+          due_on: string | null
+          event_id: string | null
+          fee_rule_id: string | null
+          household_id: string | null
+          id: string
+          organization_id: string
+          original_amount_minor: number
+          participant_id: string
+          registration_id: string
+          status: string
+          title: string
+        }
+        Insert: {
+          charge_type: string
+          created_at?: string
+          created_by_person_id: string
+          currency: string
+          due_on?: string | null
+          event_id?: string | null
+          fee_rule_id?: string | null
+          household_id?: string | null
+          id?: string
+          organization_id: string
+          original_amount_minor: number
+          participant_id: string
+          registration_id: string
+          status?: string
+          title: string
+        }
+        Update: {
+          charge_type?: string
+          created_at?: string
+          created_by_person_id?: string
+          currency?: string
+          due_on?: string | null
+          event_id?: string | null
+          fee_rule_id?: string | null
+          household_id?: string | null
+          id?: string
+          organization_id?: string
+          original_amount_minor?: number
+          participant_id?: string
+          registration_id?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "charges_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "charges_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "charges_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "charges_organization_id_fee_rule_id_fkey"
+            columns: ["organization_id", "fee_rule_id"]
+            isOneToOne: false
+            referencedRelation: "registration_fee_rules"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "charges_organization_id_registration_id_participant_id_fkey"
+            columns: ["organization_id", "registration_id", "participant_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id", "participant_id"]
+          },
+        ]
+      }
+      document_requirements: {
+        Row: {
+          allowed_mime_types: string[]
+          classification: string
+          created_at: string
+          created_by_person_id: string
+          emergency_access: boolean
+          id: string
+          key: string
+          max_bytes: number
+          organization_id: string
+          required: boolean
+          title: string
+          validity_days: number | null
+          version_number: number
+        }
+        Insert: {
+          allowed_mime_types?: string[]
+          classification?: string
+          created_at?: string
+          created_by_person_id: string
+          emergency_access?: boolean
+          id?: string
+          key: string
+          max_bytes?: number
+          organization_id: string
+          required?: boolean
+          title: string
+          validity_days?: number | null
+          version_number: number
+        }
+        Update: {
+          allowed_mime_types?: string[]
+          classification?: string
+          created_at?: string
+          created_by_person_id?: string
+          emergency_access?: boolean
+          id?: string
+          key?: string
+          max_bytes?: number
+          organization_id?: string
+          required?: boolean
+          title?: string
+          validity_days?: number | null
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_requirements_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_requirements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_upload_intents: {
+        Row: {
+          actor_person_id: string
+          auth_session_id: string
+          consumed_at: string | null
+          created_at: string
+          document_id: string
+          expires_at: string
+          id: string
+          mime_type: string
+          object_name: string
+          organization_id: string
+          sha256: string | null
+          size_bytes: number
+        }
+        Insert: {
+          actor_person_id: string
+          auth_session_id: string
+          consumed_at?: string | null
+          created_at?: string
+          document_id: string
+          expires_at: string
+          id?: string
+          mime_type: string
+          object_name: string
+          organization_id: string
+          sha256?: string | null
+          size_bytes: number
+        }
+        Update: {
+          actor_person_id?: string
+          auth_session_id?: string
+          consumed_at?: string | null
+          created_at?: string
+          document_id?: string
+          expires_at?: string
+          id?: string
+          mime_type?: string
+          object_name?: string
+          organization_id?: string
+          sha256?: string | null
+          size_bytes?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_upload_intents_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_upload_intents_organization_id_document_id_fkey"
+            columns: ["organization_id", "document_id"]
+            isOneToOne: false
+            referencedRelation: "registration_documents"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       entitlements: {
         Row: {
           configuration: Json
@@ -1115,6 +1386,63 @@ export type Database = {
         }
         Relationships: []
       }
+      participant_emergency_records: {
+        Row: {
+          contacts: Json
+          id: string
+          insurance: Json
+          medical: Json
+          organization_id: string
+          participant_id: string
+          physician: Json
+          registration_id: string
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+        }
+        Insert: {
+          contacts?: Json
+          id?: string
+          insurance?: Json
+          medical?: Json
+          organization_id: string
+          participant_id: string
+          physician?: Json
+          registration_id: string
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+        }
+        Update: {
+          contacts?: Json
+          id?: string
+          insurance?: Json
+          medical?: Json
+          organization_id?: string
+          participant_id?: string
+          physician?: Json
+          registration_id?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participant_emergency_records_organization_id_registration_fkey"
+            columns: ["organization_id", "registration_id", "participant_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id", "participant_id"]
+          },
+          {
+            foreignKeyName: "participant_emergency_records_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       participants: {
         Row: {
           created_at: string
@@ -1145,6 +1473,244 @@ export type Database = {
             foreignKeyName: "participants_person_id_fkey"
             columns: ["person_id"]
             isOneToOne: true
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_allocations: {
+        Row: {
+          amount_minor: number
+          charge_id: string
+          created_at: string
+          id: string
+          organization_id: string
+          payment_id: string
+          reversal_of_id: string | null
+          status: string
+        }
+        Insert: {
+          amount_minor: number
+          charge_id: string
+          created_at?: string
+          id?: string
+          organization_id: string
+          payment_id: string
+          reversal_of_id?: string | null
+          status?: string
+        }
+        Update: {
+          amount_minor?: number
+          charge_id?: string
+          created_at?: string
+          id?: string
+          organization_id?: string
+          payment_id?: string
+          reversal_of_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_allocations_organization_id_charge_id_fkey"
+            columns: ["organization_id", "charge_id"]
+            isOneToOne: false
+            referencedRelation: "charges"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_allocations_organization_id_payment_id_fkey"
+            columns: ["organization_id", "payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_allocations_organization_id_reversal_of_id_fkey"
+            columns: ["organization_id", "reversal_of_id"]
+            isOneToOne: false
+            referencedRelation: "payment_allocations"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      payment_installments: {
+        Row: {
+          amount_minor: number
+          charge_id: string
+          created_at: string
+          due_on: string
+          id: string
+          organization_id: string
+          payment_plan_id: string
+          sequence_number: number
+        }
+        Insert: {
+          amount_minor: number
+          charge_id: string
+          created_at?: string
+          due_on: string
+          id?: string
+          organization_id: string
+          payment_plan_id: string
+          sequence_number: number
+        }
+        Update: {
+          amount_minor?: number
+          charge_id?: string
+          created_at?: string
+          due_on?: string
+          id?: string
+          organization_id?: string
+          payment_plan_id?: string
+          sequence_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_installments_organization_id_charge_id_fkey"
+            columns: ["organization_id", "charge_id"]
+            isOneToOne: false
+            referencedRelation: "charges"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_installments_organization_id_payment_plan_id_fkey"
+            columns: ["organization_id", "payment_plan_id"]
+            isOneToOne: false
+            referencedRelation: "payment_plans"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      payment_plans: {
+        Row: {
+          charge_id: string
+          created_at: string
+          created_by_person_id: string
+          id: string
+          organization_id: string
+          registration_id: string
+          status: string
+          title: string
+        }
+        Insert: {
+          charge_id: string
+          created_at?: string
+          created_by_person_id: string
+          id?: string
+          organization_id: string
+          registration_id: string
+          status?: string
+          title: string
+        }
+        Update: {
+          charge_id?: string
+          created_at?: string
+          created_by_person_id?: string
+          id?: string
+          organization_id?: string
+          registration_id?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_plans_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_plans_organization_id_charge_id_fkey"
+            columns: ["organization_id", "charge_id"]
+            isOneToOne: false
+            referencedRelation: "charges"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_plans_organization_id_registration_id_fkey"
+            columns: ["organization_id", "registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          currency: string
+          id: string
+          method: string
+          note: string | null
+          organization_id: string
+          payer_person_id: string
+          received_at: string
+          recorded_by_person_id: string
+          reference: string | null
+          reversal_of_id: string | null
+          source_reference: string | null
+          status: string
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          currency: string
+          id?: string
+          method: string
+          note?: string | null
+          organization_id: string
+          payer_person_id: string
+          received_at: string
+          recorded_by_person_id: string
+          reference?: string | null
+          reversal_of_id?: string | null
+          source_reference?: string | null
+          status?: string
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          method?: string
+          note?: string | null
+          organization_id?: string
+          payer_person_id?: string
+          received_at?: string
+          recorded_by_person_id?: string
+          reference?: string | null
+          reversal_of_id?: string | null
+          source_reference?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_organization_id_reversal_of_id_fkey"
+            columns: ["organization_id", "reversal_of_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payments_payer_person_id_fkey"
+            columns: ["payer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_recorded_by_person_id_fkey"
+            columns: ["recorded_by_person_id"]
+            isOneToOne: false
             referencedRelation: "people"
             referencedColumns: ["id"]
           },
@@ -1224,6 +1790,797 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      registration_coupons: {
+        Row: {
+          adjustment_type: string
+          amount_minor: number | null
+          closes_at: string | null
+          code: string
+          created_at: string
+          created_by_person_id: string
+          id: string
+          max_uses: number | null
+          offering_id: string
+          opens_at: string | null
+          organization_id: string
+          percent_bps: number | null
+          status: string
+          title: string
+          used_count: number
+          version: number
+        }
+        Insert: {
+          adjustment_type: string
+          amount_minor?: number | null
+          closes_at?: string | null
+          code: string
+          created_at?: string
+          created_by_person_id: string
+          id?: string
+          max_uses?: number | null
+          offering_id: string
+          opens_at?: string | null
+          organization_id: string
+          percent_bps?: number | null
+          status?: string
+          title: string
+          used_count?: number
+          version?: number
+        }
+        Update: {
+          adjustment_type?: string
+          amount_minor?: number | null
+          closes_at?: string | null
+          code?: string
+          created_at?: string
+          created_by_person_id?: string
+          id?: string
+          max_uses?: number | null
+          offering_id?: string
+          opens_at?: string | null
+          organization_id?: string
+          percent_bps?: number | null
+          status?: string
+          title?: string
+          used_count?: number
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_coupons_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_coupons_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      registration_documents: {
+        Row: {
+          created_at: string
+          expires_on: string | null
+          id: string
+          object_name: string | null
+          organization_id: string
+          participant_id: string
+          registration_id: string
+          renewal_due_on: string | null
+          requirement_id: string
+          review_reason: string | null
+          reviewed_at: string | null
+          reviewed_by_person_id: string | null
+          snapshot: Json
+          status: string
+          updated_at: string
+          upload_mime_type: string | null
+          upload_sha256: string | null
+          upload_size_bytes: number | null
+          uploaded_at: string | null
+          uploaded_by_person_id: string | null
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          expires_on?: string | null
+          id?: string
+          object_name?: string | null
+          organization_id: string
+          participant_id: string
+          registration_id: string
+          renewal_due_on?: string | null
+          requirement_id: string
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by_person_id?: string | null
+          snapshot: Json
+          status?: string
+          updated_at?: string
+          upload_mime_type?: string | null
+          upload_sha256?: string | null
+          upload_size_bytes?: number | null
+          uploaded_at?: string | null
+          uploaded_by_person_id?: string | null
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          expires_on?: string | null
+          id?: string
+          object_name?: string | null
+          organization_id?: string
+          participant_id?: string
+          registration_id?: string
+          renewal_due_on?: string | null
+          requirement_id?: string
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by_person_id?: string | null
+          snapshot?: Json
+          status?: string
+          updated_at?: string
+          upload_mime_type?: string | null
+          upload_sha256?: string | null
+          upload_size_bytes?: number | null
+          uploaded_at?: string | null
+          uploaded_by_person_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_documents_organization_id_registration_id_par_fkey"
+            columns: ["organization_id", "registration_id", "participant_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id", "participant_id"]
+          },
+          {
+            foreignKeyName: "registration_documents_organization_id_requirement_id_fkey"
+            columns: ["organization_id", "requirement_id"]
+            isOneToOne: false
+            referencedRelation: "document_requirements"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_documents_reviewed_by_person_id_fkey"
+            columns: ["reviewed_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_documents_uploaded_by_person_id_fkey"
+            columns: ["uploaded_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registration_fee_rules: {
+        Row: {
+          amount_minor: number
+          charge_type: string
+          currency: string
+          due_on: string | null
+          id: string
+          offering_id: string
+          organization_id: string
+          required: boolean
+          status: string
+          title: string
+          version: number
+        }
+        Insert: {
+          amount_minor: number
+          charge_type?: string
+          currency: string
+          due_on?: string | null
+          id?: string
+          offering_id: string
+          organization_id: string
+          required?: boolean
+          status?: string
+          title: string
+          version?: number
+        }
+        Update: {
+          amount_minor?: number
+          charge_type?: string
+          currency?: string
+          due_on?: string | null
+          id?: string
+          offering_id?: string
+          organization_id?: string
+          required?: boolean
+          status?: string
+          title?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_fee_rules_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      registration_form_answers: {
+        Row: {
+          answers: Json
+          completed_at: string | null
+          created_at: string
+          form_version_id: string
+          id: string
+          organization_id: string
+          registration_id: string
+          respondent_person_id: string
+          status: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          answers?: Json
+          completed_at?: string | null
+          created_at?: string
+          form_version_id: string
+          id?: string
+          organization_id: string
+          registration_id: string
+          respondent_person_id: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          answers?: Json
+          completed_at?: string | null
+          created_at?: string
+          form_version_id?: string
+          id?: string
+          organization_id?: string
+          registration_id?: string
+          respondent_person_id?: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_form_answers_organization_id_form_version_id_fkey"
+            columns: ["organization_id", "form_version_id"]
+            isOneToOne: false
+            referencedRelation: "registration_form_versions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_form_answers_organization_id_registration_id_fkey"
+            columns: ["organization_id", "registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_form_answers_respondent_person_id_fkey"
+            columns: ["respondent_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registration_form_versions: {
+        Row: {
+          definition: Json
+          form_key: string
+          id: string
+          organization_id: string
+          published_at: string
+          published_by_person_id: string
+          sensitivity: string
+          title: string
+          version_number: number
+        }
+        Insert: {
+          definition: Json
+          form_key: string
+          id?: string
+          organization_id: string
+          published_at?: string
+          published_by_person_id: string
+          sensitivity?: string
+          title: string
+          version_number: number
+        }
+        Update: {
+          definition?: Json
+          form_key?: string
+          id?: string
+          organization_id?: string
+          published_at?: string
+          published_by_person_id?: string
+          sensitivity?: string
+          title?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_form_versions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_form_versions_published_by_person_id_fkey"
+            columns: ["published_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registration_offering_documents: {
+        Row: {
+          document_requirement_id: string
+          offering_id: string
+          organization_id: string
+          required: boolean
+          sort_order: number
+        }
+        Insert: {
+          document_requirement_id: string
+          offering_id: string
+          organization_id: string
+          required?: boolean
+          sort_order?: number
+        }
+        Update: {
+          document_requirement_id?: string
+          offering_id?: string
+          organization_id?: string
+          required?: boolean
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_offering_documen_organization_id_document_req_fkey"
+            columns: ["organization_id", "document_requirement_id"]
+            isOneToOne: false
+            referencedRelation: "document_requirements"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offering_document_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      registration_offering_forms: {
+        Row: {
+          form_version_id: string
+          offering_id: string
+          organization_id: string
+          required: boolean
+          sort_order: number
+        }
+        Insert: {
+          form_version_id: string
+          offering_id: string
+          organization_id: string
+          required?: boolean
+          sort_order?: number
+        }
+        Update: {
+          form_version_id?: string
+          offering_id?: string
+          organization_id?: string
+          required?: boolean
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_offering_forms_organization_id_form_version_i_fkey"
+            columns: ["organization_id", "form_version_id"]
+            isOneToOne: false
+            referencedRelation: "registration_form_versions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offering_forms_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      registration_offering_waivers: {
+        Row: {
+          offering_id: string
+          organization_id: string
+          required: boolean
+          sort_order: number
+          waiver_version_id: string
+        }
+        Insert: {
+          offering_id: string
+          organization_id: string
+          required?: boolean
+          sort_order?: number
+          waiver_version_id: string
+        }
+        Update: {
+          offering_id?: string
+          organization_id?: string
+          required?: boolean
+          sort_order?: number
+          waiver_version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_offering_waivers_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offering_waivers_organization_id_waiver_versi_fkey"
+            columns: ["organization_id", "waiver_version_id"]
+            isOneToOne: false
+            referencedRelation: "registration_waiver_versions"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      registration_offerings: {
+        Row: {
+          age_max: number | null
+          age_min: number | null
+          approval_required: boolean
+          capacity: number | null
+          closes_at: string | null
+          created_at: string
+          created_by_person_id: string
+          description: string | null
+          event_id: string | null
+          grade_max: number | null
+          grade_min: number | null
+          id: string
+          opens_at: string | null
+          organization_id: string
+          participant_type: string
+          registration_type: string
+          returning_behavior: string
+          scope_id: string
+          scope_type: string
+          season_id: string | null
+          status: string
+          team_assignment_policy: Json
+          team_id: string | null
+          title: string
+          unit_id: string | null
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+          visibility: string
+          waitlist_enabled: boolean
+        }
+        Insert: {
+          age_max?: number | null
+          age_min?: number | null
+          approval_required?: boolean
+          capacity?: number | null
+          closes_at?: string | null
+          created_at?: string
+          created_by_person_id: string
+          description?: string | null
+          event_id?: string | null
+          grade_max?: number | null
+          grade_min?: number | null
+          id?: string
+          opens_at?: string | null
+          organization_id: string
+          participant_type?: string
+          registration_type?: string
+          returning_behavior?: string
+          scope_id: string
+          scope_type: string
+          season_id?: string | null
+          status?: string
+          team_assignment_policy?: Json
+          team_id?: string | null
+          title: string
+          unit_id?: string | null
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+          visibility?: string
+          waitlist_enabled?: boolean
+        }
+        Update: {
+          age_max?: number | null
+          age_min?: number | null
+          approval_required?: boolean
+          capacity?: number | null
+          closes_at?: string | null
+          created_at?: string
+          created_by_person_id?: string
+          description?: string | null
+          event_id?: string | null
+          grade_max?: number | null
+          grade_min?: number | null
+          id?: string
+          opens_at?: string | null
+          organization_id?: string
+          participant_type?: string
+          registration_type?: string
+          returning_behavior?: string
+          scope_id?: string
+          scope_type?: string
+          season_id?: string | null
+          status?: string
+          team_assignment_policy?: Json
+          team_id?: string | null
+          title?: string
+          unit_id?: string | null
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+          visibility?: string
+          waitlist_enabled?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_offerings_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_organization_id_season_id_fkey"
+            columns: ["organization_id", "season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registration_offerings_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registration_waiver_versions: {
+        Row: {
+          body: string
+          effective_from: string
+          effective_until: string | null
+          id: string
+          organization_id: string
+          published_at: string
+          published_by_person_id: string
+          signer_type: string
+          title: string
+          version_number: number
+          waiver_key: string
+        }
+        Insert: {
+          body: string
+          effective_from?: string
+          effective_until?: string | null
+          id?: string
+          organization_id: string
+          published_at?: string
+          published_by_person_id: string
+          signer_type?: string
+          title: string
+          version_number: number
+          waiver_key: string
+        }
+        Update: {
+          body?: string
+          effective_from?: string
+          effective_until?: string | null
+          id?: string
+          organization_id?: string
+          published_at?: string
+          published_by_person_id?: string
+          signer_type?: string
+          title?: string
+          version_number?: number
+          waiver_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_waiver_versions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registration_waiver_versions_published_by_person_id_fkey"
+            columns: ["published_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registrations: {
+        Row: {
+          approval_status: string
+          assigned_team_id: string | null
+          context: Json
+          created_at: string
+          document_status: string
+          eligibility_status: string
+          family_snapshot: Json
+          form_status: string
+          household_id: string | null
+          id: string
+          offering_id: string
+          offering_snapshot: Json
+          organization_id: string
+          participant_id: string
+          participant_snapshot: Json
+          review_reason: string | null
+          reviewed_at: string | null
+          reviewed_by_person_id: string | null
+          roster_status: string
+          status: string
+          submitted_at: string | null
+          submitted_by_person_id: string
+          updated_at: string
+          version: number
+          waitlist_position: number | null
+          waiver_status: string
+        }
+        Insert: {
+          approval_status?: string
+          assigned_team_id?: string | null
+          context?: Json
+          created_at?: string
+          document_status?: string
+          eligibility_status?: string
+          family_snapshot?: Json
+          form_status?: string
+          household_id?: string | null
+          id?: string
+          offering_id: string
+          offering_snapshot: Json
+          organization_id: string
+          participant_id: string
+          participant_snapshot: Json
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by_person_id?: string | null
+          roster_status?: string
+          status?: string
+          submitted_at?: string | null
+          submitted_by_person_id: string
+          updated_at?: string
+          version?: number
+          waitlist_position?: number | null
+          waiver_status?: string
+        }
+        Update: {
+          approval_status?: string
+          assigned_team_id?: string | null
+          context?: Json
+          created_at?: string
+          document_status?: string
+          eligibility_status?: string
+          family_snapshot?: Json
+          form_status?: string
+          household_id?: string | null
+          id?: string
+          offering_id?: string
+          offering_snapshot?: Json
+          organization_id?: string
+          participant_id?: string
+          participant_snapshot?: Json
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by_person_id?: string | null
+          roster_status?: string
+          status?: string
+          submitted_at?: string | null
+          submitted_by_person_id?: string
+          updated_at?: string
+          version?: number
+          waitlist_position?: number | null
+          waiver_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_organization_id_assigned_team_id_fkey"
+            columns: ["organization_id", "assigned_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registrations_organization_id_offering_id_fkey"
+            columns: ["organization_id", "offering_id"]
+            isOneToOne: false
+            referencedRelation: "registration_offerings"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "registrations_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_reviewed_by_person_id_fkey"
+            columns: ["reviewed_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_submitted_by_person_id_fkey"
+            columns: ["submitted_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       role_assignments: {
         Row: {
@@ -1780,6 +3137,73 @@ export type Database = {
           },
         ]
       }
+      waiver_signatures: {
+        Row: {
+          consent: boolean
+          id: string
+          organization_id: string
+          participant_id: string
+          registration_id: string
+          request_context: Json
+          signed_at: string
+          signer_name: string
+          signer_person_id: string
+          status: string
+          version_snapshot: Json
+          waiver_version_id: string
+        }
+        Insert: {
+          consent: boolean
+          id?: string
+          organization_id: string
+          participant_id: string
+          registration_id: string
+          request_context?: Json
+          signed_at?: string
+          signer_name: string
+          signer_person_id: string
+          status?: string
+          version_snapshot: Json
+          waiver_version_id: string
+        }
+        Update: {
+          consent?: boolean
+          id?: string
+          organization_id?: string
+          participant_id?: string
+          registration_id?: string
+          request_context?: Json
+          signed_at?: string
+          signer_name?: string
+          signer_person_id?: string
+          status?: string
+          version_snapshot?: Json
+          waiver_version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "waiver_signatures_organization_id_registration_id_particip_fkey"
+            columns: ["organization_id", "registration_id", "participant_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["organization_id", "id", "participant_id"]
+          },
+          {
+            foreignKeyName: "waiver_signatures_organization_id_waiver_version_id_fkey"
+            columns: ["organization_id", "waiver_version_id"]
+            isOneToOne: false
+            referencedRelation: "registration_waiver_versions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "waiver_signatures_signer_person_id_fkey"
+            columns: ["signer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -1800,6 +3224,11 @@ export type Database = {
       boss_calendar_preview: { Args: { p_command: Json }; Returns: Json }
       boss_calendar_public_read: { Args: { p_query: Json }; Returns: Json }
       boss_calendar_read: { Args: { p_query: Json }; Returns: Json }
+      boss_registration_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_registration_read: { Args: { p_query?: Json }; Returns: Json }
     }
     Enums: {
       [_ in never]: never

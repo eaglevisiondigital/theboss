@@ -33,7 +33,7 @@ DECLARE
   household_b uuid := 'f2a60000-0000-4000-8000-000000000002';
   participant_id uuid := 'f2a80000-0000-4000-8000-000000000001';
 BEGIN
-  IF (SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT IN ('event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders')) <> 22 THEN
+  IF (SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename IN ('people','user_accounts','households','participants','organizations','organization_units','seasons','teams','organization_memberships','team_memberships','household_memberships','guardian_relationships','roles','permissions','role_permissions','role_assignments','modules','organization_modules','entitlements','feature_flags','feature_flag_overrides','audit_events')) <> 22 THEN
     RAISE EXCEPTION 'Live foundation table count is not exactly 22';
   END IF;
   passed := passed + 1;

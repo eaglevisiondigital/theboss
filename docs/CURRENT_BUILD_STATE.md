@@ -1,5 +1,45 @@
 # Current build state
 
+## Phase 3B registration foundation — hosted acceptance in progress
+
+Registration offerings, canonical family drafts, versioned structured forms,
+immutable waiver signatures, private document review, audited emergency access,
+separate charges/adjustments/allocations, offline cash/check recording, installment
+plans, coupons and manual guarded roster assignment are implemented. These use
+the existing verified identity, exact scope, actual guardian authority and module
+features. Registration, forms, signatures, documents, payment, eligibility,
+approval and roster statuses remain separate. No wallet or payment provider runs.
+
+Four validated migrations are applied to canonical `the-boss-platform`, ref
+`ilykgwgmxtrrikreacrz`, PostgreSQL 17, region `us-east-1`: `20261001231206`
+registration core, `20261001231216` transactional mutations and `20261001231224`
+read projections/private Storage, plus `20261001232309` for current document
+expiry projections and authorized renewal of naturally expired approved files.
+The previous twelve migrations are unchanged.
+Public database types were generated from this live project. New raw tables are
+closed to client reads/writes; safe projections and audited finite operations
+provide authorized access. Storage is private with exact upload intents and short,
+session-bound audited download leases; no public or signed document URLs.
+
+The full disposable PostgreSQL suite passed 4,846 assertions and 16 coordinated
+races. The canonical rollback-only verifier passed 634 assertions with all seven
+fixture cleanup counts zero. A managed Storage deletion protection exposed a local
+harness mismatch; the corrected verifier models that guard without deleting
+Storage rows or bypassing protection. Expiry and renewal regressions verify
+current summaries, expired-file replacement, preserved review history and denial
+for unexpired files. The final live public types are unchanged by the private
+forward correction. Strict typecheck, zero-warning lint, all 95 application tests
+and the production build pass in an identical isolated source copy with locked
+dependencies and synthetic public configuration. Controlled hosted desktop/mobile
+acceptance remains in progress and is not yet claimed complete.
+
+Security advisors show intentional RLS-without-policy information for 26 closed
+raw/private tables and the existing leaked-password protection warning. Performance
+advisors show 78 unused-index information findings and the existing absolute Auth
+connection allocation information. No unrelated Auth setting is changed. See
+[registration architecture](REGISTRATION_ARCHITECTURE.md), [forms and waivers](FORMS_WAIVERS_ARCHITECTURE.md),
+[document security](DOCUMENT_SECURITY.md) and [fees and charges](FEES_CHARGES_ARCHITECTURE.md).
+
 ## Phase 3A events and calendar core
 
 ### IMPLEMENTED AND VERIFIED DATABASE

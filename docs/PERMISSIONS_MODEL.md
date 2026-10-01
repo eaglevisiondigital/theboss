@@ -1,9 +1,50 @@
 # Boss foundation permissions
 
+## Phase 3B registration permissions
+
+Phase 3B adds `registration.view`, `registration.create`, `registration.manage`,
+`registration.review`, `forms.manage`, `waivers.manage`, `documents.view`,
+`documents.review`, `documents.emergency_view`, `fees.view`, `fees.manage` and
+`payments.record_offline`. The new `registrar` and `organization_finance` roles
+accept organization, exact organization-unit or exact team assignments. The
+migrations create potential capability mappings, never real role assignments.
+
+| Role | Added potential capability |
+| --- | --- |
+| Super/platform administrator, organization owner/administrator | All 12 keys within their existing permitted scope; family signatures still require the actual signer relationship |
+| Registrar, program/sport administrator, athletic director | Registration view/create/manage/review, forms/waivers manage and ordinary documents view/review; no financial keys |
+| Finance, organization finance | Fees view/manage and offline payment recording; no registration review or medical/document access |
+| Head coach, assistant coach, team staff | Scoped registration summary when the organization enables it, plus emergency capability requiring the additional exact-team checks |
+| Other existing roles | No new keys |
+
+Assignments, permission records, tenant resources, module activation, feature
+policy and actual relationships must be current. Organization-unit reach remains
+the exact unit and teams directly attached to it; no descendant inheritance is
+added. Possession of registration, document, event or charge IDs is insufficient.
+
+Family registration uses actual self identity or a verified active guardian with
+`can_register`. Dependent signatures require `can_sign_waivers`; private document
+reads require `can_view_documents`, and dependent fee visibility requires
+`can_manage_payments`. Upload additionally requires `can_register`. Household
+membership does not substitute for these flags. No staff permission allows forging
+the family's form response or signature.
+
+Ordinary registration summary authority does not expose medical answers or raw
+documents. Sensitive form and emergency retrievals use audited commands. Emergency
+access needs a team-scoped `documents.emergency_view` assignment, actual current
+coach/staff membership, the participant's current membership in that exact team,
+active document/emergency features and a bounded projection. An organization-wide
+grant alone does not authorize that emergency path. Finance authority provides no
+medical access. Coaches receive no fee editing or payment recording capability.
+
+[Detailed access contracts](REGISTRATION_ARCHITECTURE.md) and
+[Private document boundary](DOCUMENT_SECURITY.md) describe these checks. Runtime
+and hosted verification are recorded separately in CURRENT_BUILD_STATE.md.
+
 ## Phase 3A calendar permissions
 
 Five keys add 35 explicit mappings: `events.view`, `events.create`, `events.manage`,
-`events.publish` and `events.override_conflict`. Current totals are 22 permissions,
+`events.publish` and `events.override_conflict`. Phase 3A totals are 22 permissions,
 147 mappings and the same 19 roles. Capability mapping never replaces actual
 tenant/target scope, active role/window, module, feature or relationship checks.
 
@@ -74,7 +115,7 @@ role-permission pairs. No person receives a role automatically.
 | --- | --- | --- |
 | Super administrator, platform administrator | Platform | All 17 foundation keys |
 | Support, sales, compliance | Platform | `organization.view` only |
-| Finance, merchant network staff | Platform | None; no current operational need or module permission is inferred |
+| Finance, merchant network staff | Platform | None at the Phase 2A checkpoint; Phase 3B separately adds the listed finance keys |
 | Organization owner, organization administrator | Organization | The 15 approved operational keys, excluding canonical person profile keys |
 | Athletic director | Organization | Organization/member view; team/roster view/manage; participant view/manage; household view; roles view |
 | Program administrator, sport administrator | Organization unit | Organization/team/roster/participant view/manage and roles view, limited to exact unit context |
@@ -176,8 +217,9 @@ hidden control, membership label or Auth metadata is a security boundary.
 
 Sensitive-field consent and tenant-household administration need approved
 resource/permission direction. No person is automatically granted a role.
-Guardian register/document/payment/waiver flags remain stored foundations only;
-the corresponding business actions are absent. Entitlement administration is
+Phase 3B implements the guardian registration/document/payment-view/signature
+actions described above. Broader consent and tenant-household administration
+remain separate approved work. Entitlement administration is
 deferred because the approved catalog has no entitlement-management permission
 and the operational acceptance workflows do not require it.
 

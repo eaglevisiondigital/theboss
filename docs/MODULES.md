@@ -1,12 +1,46 @@
 # Modules and product access
 
+## Phase 3B Registration capability
+
+Phase 3B implements Registration with reusable forms, waivers, private document
+review and fee/offline-payment foundations. They operate under the active
+`registration` organization module. The existing `documents` catalog entry remains
+separate; activating it alone does not expose Registration files. Calendar and
+Sports activation are independent, and an optional same-tenant event association
+does not enable or authorize Calendar actions.
+
+`registration.configure` accepts a finite Boolean configuration and requires
+organization-wide `organization.manage`. Unit/team roles cannot enable broader
+organization features. Within an active Registration module, `registration`,
+`forms` and `waivers` default enabled; `documents`, `fees`, `payment_plans`,
+`coupons`, `waitlists`, `offline_payments`, `emergency_access` and
+`coach_registration_view` default disabled. Malformed Boolean configuration fails
+closed. Activation/settings provide availability, never permission or relationship.
+
+Every read/mutation/Storage access evaluates the applicable feature and current
+authority. Emergency access needs document and emergency features plus actual
+exact-team context. Offline receipt entry needs fee and offline-payment features
+plus its scoped permission. A coach summary setting grants no document or financial
+capability. Disabling a feature preserves its canonical history while closing the
+corresponding runtime path.
+
+These bounded module settings do not implement the future generic entitlement or
+feature-flag precedence engine. Payment-plan selection stores context and explicit
+authorized installment schedules; it does not charge a card or bank automatically.
+Card/ACH/Boss Bucks are planned static contract types; live payment rows and commands
+permit cash/check only. Future methods require an approved migration and validated
+integration before becoming executable.
+[Registration contract](REGISTRATION_ARCHITECTURE.md) and
+[Finance boundary](FEES_CHARGES_ARCHITECTURE.md) describe the implemented limits.
+
 ## Phase 3A independent Calendar module
 
 Calendar extends the catalog to 14 modules. Active Sports does not automatically
 enable Calendar, and Calendar operates without Sports. The existing authorized
 module activation workflow enables it; activation never grants event permission.
-The organization projection marks Calendar implemented while later modules retain
-their future classification.
+At the Phase 3A checkpoint the organization projection marks Calendar implemented
+while later modules retain their future classification. Phase 3B additionally
+implements Registration.
 
 `calendar.configure` accepts only finite Boolean organization-module settings and
 requires organization-wide `organization.manage`. Organization/team calendars,
@@ -76,7 +110,8 @@ activation. It does not grant permission to read any other data.
 
 The organization admin view shows each catalog module's current activation as
 active/inactive and separately identifies implementation status. Phase 3A marks
-Calendar implemented; other module classifications remain future. Activation/deactivation is a validated, audited transactional
+Calendar implemented at that checkpoint; Phase 3B additionally implements Registration.
+Activation/deactivation is a validated, audited transactional
 operation with same-organization references. It creates or updates the current
 activation period; immutable historical keys remain intact. Request replays do
 not duplicate writes or audits.
@@ -140,9 +175,10 @@ pricing, assignment, publishing or flag-resolution rules.
 
 ## FUTURE
 
-Later business-module workflows remain unimplemented: campaigns/donations/referrals,
-Boss Bucks memberships and geographic discounts, Money Board, payments/ledgers,
-merchants/offers/redemption, registration/forms, document/storage workflows,
-messaging/notifications, volunteer scheduling, Game Center/scoring/statistics,
-livestreaming, products/orders/fulfillment and CRM. No seed or configuration row
-activates an implementation of these products.
+Later workflows remain unimplemented: campaigns/donations/referrals, Boss Bucks
+memberships/geographic discounts and value execution, Money Board, processor and
+settlement ledgers, merchants/offers/redemption, messaging/notifications, volunteer
+scheduling, Game Center/scoring/statistics, livestreaming, products/orders/fulfillment
+and CRM. Registration/forms/private document review and offline allocations are
+the bounded Phase 3B implementation above. No catalog/configuration row activates
+the later products.

@@ -5,6 +5,14 @@ umask 077
 
 test_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repository_dir=$(cd -- "$test_dir/../.." && pwd)
+selected_test=''
+if [[ $# != 0 ]]; then
+  if [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase[23][ab]_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase3b_acceptance.sql]' >&2
+    exit 1
+  fi
+  selected_test=$2
+fi
 
 if [[ -n "${PG_BINDIR:-}" ]]; then
   postgres_bin_dir=$PG_BINDIR
@@ -85,9 +93,10 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3a_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql)
+if [[ -n "$selected_test" ]]; then tests=("$test_dir/$selected_test");fi
 if [[ ${#tests[@]} == 0 ]]; then
-  printf '%s\n' 'No foundation/calendar SQL test files found.' >&2
+  printf '%s\n' 'No foundation/calendar/registration SQL test files found.' >&2
   exit 1
 fi
 for test_file in "${tests[@]}"; do
@@ -106,6 +115,11 @@ for test_file in "${tests[@]}"; do
     exit 1
   fi
 done
+
+if [[ -n "$selected_test" ]]; then
+  printf 'Focused SQL test passed: %s. Full run without --test remains required.\n' "$selected_test"
+  exit 0
+fi
 
 concurrency_test=$test_dir/phase2a_hierarchy_concurrency.sh
 if [[ ! -s "$concurrency_test" ]]; then
@@ -139,4 +153,12 @@ fi
 printf 'Testing %s\n' "${calendar_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$calendar_concurrency_test"
-printf '%s\n' 'Phase 2A/2B/3A PostgreSQL 17 authorization tests passed.'
+registration_concurrency_test=$test_dir/phase3b_mutation_concurrency.sh
+if [[ ! -s "$registration_concurrency_test" ]]; then
+  printf '%s\n' 'Phase 3B registration/payment concurrency test is missing.' >&2
+  exit 1
+fi
+printf 'Testing %s\n' "${registration_concurrency_test##*/}"
+PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
+  PGDATABASE=postgres PGUSER=postgres bash "$registration_concurrency_test"
+printf '%s\n' 'Phase 2A/2B/3A/3B PostgreSQL 17 authorization tests passed.'

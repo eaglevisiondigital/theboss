@@ -18,6 +18,10 @@ on:
       - "docs/DECISIONS.md"
       - "docs/MODULES.md"
       - "docs/OPERATIONAL_CORE.md"
+      - "docs/REGISTRATION_ARCHITECTURE.md"
+      - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
+      - "docs/DOCUMENT_SECURITY.md"
+      - "docs/FEES_CHARGES_ARCHITECTURE.md"
   push:
     branches: ["build/boss-platform-v1"]
     paths:
@@ -36,6 +40,10 @@ on:
       - "docs/DECISIONS.md"
       - "docs/MODULES.md"
       - "docs/OPERATIONAL_CORE.md"
+      - "docs/REGISTRATION_ARCHITECTURE.md"
+      - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
+      - "docs/DOCUMENT_SECURITY.md"
+      - "docs/FEES_CHARGES_ARCHITECTURE.md"
 
 permissions:
   contents: read

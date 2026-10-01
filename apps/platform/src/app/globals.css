@@ -406,3 +406,54 @@ button:disabled { cursor: wait; opacity: .65; }
 @media (max-width: 640px) { .calendar-jump { align-items: stretch; }.calendar-jump > a { align-self: flex-end; }.calendar-jump form { flex: 1; min-width: 0; }.calendar-jump .form-field { flex: 1; min-width: 0; }.calendar-jump input[type=date] { max-width: 100%; } }
 
 .calendar-console select:focus-visible, .calendar-console textarea:focus-visible { outline: 3px solid var(--orange-dark); outline-offset: 4px; }
+
+/* Registration keeps independent statuses readable on desktop and phones. */
+.registration-console { min-width: 0; color: #171914; }
+.registration-heading { margin-bottom: 24px; }
+.registration-heading h1 { font-size: clamp(32px,5vw,50px); letter-spacing: -1.5px; margin: 8px 0 15px; }
+.registration-heading p { max-width: 720px; line-height: 1.7; }
+.registration-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.registration-tabs a { min-height: 44px; padding: 12px 18px; border: 1px solid #c9cdc1; border-radius: 5px; font-size: 13px; font-weight: 700; }
+.registration-tabs a[aria-current=page] { background: #181c16; color: #fff; }
+.registration-filter { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)) auto; align-items: end; gap: 16px; margin-bottom: 24px; }
+.registration-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.registration-card, .registration-selection, .registration-detail { background: #fff; border: 1px solid #dedfd6; border-radius: 7px; padding: 24px; min-width: 0; overflow-wrap: anywhere; }
+.registration-card p, .registration-selection > p { line-height: 1.7; font-size: 14px; }
+.registration-card h3, .registration-card h4 { margin-top: 0; line-height: 1.5; }
+.registration-card h3 { font-size: 21px; }.registration-card h4 { font-size: 17px; }
+.registration-card-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+.registration-card-heading h2, .registration-card-heading h3, .registration-card-heading h4 { margin: 0; }
+.registration-badge { background: #f2f1e8; border: 1px solid #d8dbc9; border-radius: 4px; padding: 7px 10px; font-size: 11px; text-transform: capitalize; }
+.registration-section { margin-top: 30px; }.registration-section > h2 { font-size: 25px; }.registration-section > h3 { font-size: 22px; }.registration-section > .registration-card { margin-bottom: 18px; }
+.registration-detail { margin-top: 26px; border-color: #da6828; }.registration-detail > .registration-card { margin-top: 20px; }.registration-detail h2:focus { outline: 2px solid #c44811; outline-offset: 5px; }
+.registration-facts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 17px; margin-block: 23px; }
+.registration-facts dt { color: #626658; font-size: 11px; margin-bottom: 7px; text-transform: capitalize; }.registration-facts dd { margin: 0; line-height: 1.6; font-size: 14px; text-transform: none; }
+.registration-disclosure { border: 1px solid #dedfd6; border-radius: 6px; background: #fff; margin-block: 18px; min-width: 0; }
+.registration-disclosure > summary { cursor: pointer; min-height: 48px; padding: 15px 19px; font-size: 14px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.registration-form { display: grid; gap: 20px; padding: 18px; min-width: 0; }
+.registration-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 18px; }
+.registration-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; min-width: 0; }
+.registration-console .form-field { display: grid; gap: 8px; min-width: 0; font-size: 12px; font-weight: 600; }
+.registration-console input:not([type=checkbox]):not([type=radio]), .registration-console select, .registration-console textarea { min-height: 44px; min-width: 0; max-width: 100%; width: 100%; border: 1px solid #c9cdc1; color: #171914; background: #fff; border-radius: 4px; padding: 10px 12px; font: inherit; font-size: 14px; }
+.registration-console input[type=file] { font-size: 12px; padding: 10px; }.registration-console input::file-selector-button { min-height: 32px; margin-right: 10px; border: 1px solid #c9cdc1; border-radius: 3px; padding: 6px; background: #f5f6f1; }
+.registration-console textarea { resize: vertical; }
+.registration-check { display: flex; gap: 10px; align-items: center; min-height: 44px; font-size: 13px; line-height: 1.6; cursor: pointer; }
+.registration-check input { width: 20px; height: 20px; flex: 0 0 20px; accent-color: #c44811; }
+.registration-form .registration-group, .registration-group { border: 1px solid #dedfd6; padding: 15px; border-radius: 4px; display: grid; gap: 14px; min-width: 0; }.registration-group legend { font-size: 12px; font-weight: 700; padding: 0 6px; }
+.registration-form-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }.registration-form-footer p, .registration-private-action > p, .registration-sensitive > p[role=status] { font-size: 12px; line-height: 1.6; flex: 1; min-width: 0; }
+.registration-console .button { min-height: 44px; font-size: 12px; padding: 12px 17px; max-width: 100%; white-space: normal; }
+.registration-helper { font-size: 12px !important; color: #626658; line-height: 1.7; margin: 0; }
+.registration-long-copy { white-space: pre-wrap; line-height: 1.8; }
+.registration-notice { padding: 20px; border: 1px solid #ead1b0; background: #fff3e3; border-radius: 6px; line-height: 1.7; font-size: 14px; }
+.registration-charge { padding-block: 20px; border-top: 1px solid #dedfd6; }.registration-charge li, .registration-card li { font-size: 13px; line-height: 1.8; }
+.registration-sensitive { background: #f8f5ef; border: 1px solid #e0d9cb; border-radius: 5px; padding: 16px; margin-top: 14px; }
+.registration-stack { display: grid; gap: 8px; }
+.registration-console input:focus-visible, .registration-console select:focus-visible, .registration-console textarea:focus-visible, .registration-console summary:focus-visible { outline: 3px solid var(--orange-dark); outline-offset: 3px; }
+.registration-form-builder { display: grid; gap: 18px; padding: 18px; }.registration-form-builder .registration-form { padding: 0; }
+.registration-field-editor { padding: 18px; border: 1px solid #dedfd6; border-radius: 5px; display: grid; gap: 14px; min-width: 0; }
+@media (max-width: 900px) { .registration-filter { grid-template-columns: repeat(2,minmax(0,1fr)); }.registration-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+ .registration-fields, .registration-filter, .registration-facts { grid-template-columns: 1fr; }.registration-card, .registration-selection, .registration-detail { padding: 18px; }.registration-form, .registration-form-builder { padding: 15px; }.registration-disclosure > summary { padding-inline: 15px; }.registration-card-heading { align-items: stretch; }.registration-card-heading > div { min-width: 0; }.registration-form-footer { align-items: stretch; flex-direction: column; }.registration-form-footer .button { width: 100%; }.registration-form-footer p { margin: 0; }.registration-facts { gap: 12px; }.registration-sensitive { padding: 12px; }.registration-heading h1 { letter-spacing: -1px; }
+}
+.registration-form-grid, .registration-status-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; min-width: 0; }.registration-form .registration-field-group, .registration-field-group { border: 1px solid #dedfd6; padding: 16px; margin: 0; border-radius: 5px; display: grid; gap: 15px; min-width: 0; }.registration-field-group legend { font-size: 12px; font-weight: 700; padding: 0 6px; }.registration-console .muted { color: #626658; font-size: 12px; line-height: 1.7; }.registration-status-grid dt { font-size: 12px; font-weight: 700; }.registration-status-grid dd { margin: 8px 0 0; font-size: 14px; line-height: 1.7; }.registration-panel { min-width: 0; }.registration-form p:focus { outline: 2px solid #c44811; outline-offset: 4px; }
+@media (max-width: 640px) { .registration-form-grid, .registration-status-grid { grid-template-columns: 1fr; }.registration-field-group { padding: 12px; } }

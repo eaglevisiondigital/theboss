@@ -30,7 +30,7 @@ END IF;
 v_passed:=v_passed+1;
 
 -- Exact new public schema and API grants, independently asserted.
-IF NOT coalesce(((SELECT count(*)=30 FROM pg_catalog.pg_tables WHERE schemaname='public')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','exact exposed table count';
+IF NOT coalesce(((SELECT count(*)=30 FROM pg_catalog.pg_tables WHERE schemaname='public' AND tablename IN ('people','user_accounts','households','participants','organizations','organization_units','seasons','teams','organization_memberships','team_memberships','household_memberships','guardian_relationships','roles','permissions','role_permissions','role_assignments','modules','organization_modules','entitlements','feature_flags','feature_flag_overrides','audit_events','event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','exact exposed table count';
 END IF;
 v_passed:=v_passed+1;
 
@@ -1345,7 +1345,7 @@ v_passed:=v_passed+1;
 
 EXECUTE 'RESET ROLE';
 
-IF NOT coalesce(((SELECT count(*)=22 FROM public.permissions) AND (SELECT count(*)=147 FROM public.role_permissions)),false) THEN RAISE EXCEPTION 'Live assertion failed: %','22 permissions 147 role mappings';
+IF NOT coalesce(((SELECT count(*)=22 FROM public.permissions WHERE key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage')) AND (SELECT count(*)=147 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','22 permissions 147 role mappings';
 END IF;
 v_passed:=v_passed+1;
 

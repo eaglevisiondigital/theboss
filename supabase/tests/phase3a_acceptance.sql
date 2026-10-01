@@ -35,7 +35,7 @@ REVOKE ALL ON FUNCTION pg_temp.f(text),pg_temp.check(text,text,boolean),pg_temp.
 GRANT EXECUTE ON FUNCTION pg_temp.f(text),pg_temp.check(text,text,boolean),pg_temp.act(text),pg_temp.command(text,jsonb),pg_temp.event_input(text,jsonb,text,text),pg_temp.ok(text,text,jsonb),pg_temp.deny(text,text,jsonb,text[],text),pg_temp.event_id(text),pg_temp.query(text,text,text) TO authenticated,anon;
 
 -- Exact new public schema and API grants, independently asserted.
-SELECT pg_temp.check('exact exposed table count','X',(SELECT count(*)=30 FROM pg_catalog.pg_tables WHERE schemaname='public'));
+SELECT pg_temp.check('exact exposed table count','X',(SELECT count(*)=30 FROM pg_catalog.pg_tables WHERE schemaname='public' AND tablename IN ('people','user_accounts','households','participants','organizations','organization_units','seasons','teams','organization_memberships','team_memberships','household_memberships','guardian_relationships','roles','permissions','role_permissions','role_assignments','modules','organization_modules','entitlements','feature_flags','feature_flag_overrides','audit_events','event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders')));
 SELECT pg_temp.check('five finite calendar permissions','PERMISSIONS',(SELECT array_agg(key ORDER BY key)=ARRAY['events.create','events.manage','events.override_conflict','events.publish','events.view'] FROM public.permissions WHERE key LIKE 'events.%'));
 SELECT pg_temp.check('twelve centrally governed types','MODEL',(SELECT count(*)=12 FROM public.event_types));
 DO $$DECLARE tab text;action text;role_name text;denied boolean;BEGIN
@@ -237,7 +237,7 @@ SELECT pg_temp.check('expired guardians lose children projection','FAMILY',jsonb
 SELECT pg_temp.check('expired guardians lose team schedule','FAMILY',(SELECT count(*)=0 FROM public.events WHERE id=pg_temp.event_id('three-team event')));
 RESET ROLE;
 
-SELECT pg_temp.check('22 permissions 147 role mappings','PERMISSIONS',(SELECT count(*)=22 FROM public.permissions) AND (SELECT count(*)=147 FROM public.role_permissions));
+SELECT pg_temp.check('historical 22 permissions 147 role mappings','PERMISSIONS',(SELECT count(*)=22 FROM public.permissions WHERE key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage')) AND (SELECT count(*)=147 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage')));
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('admin-a');
 SELECT pg_temp.check('idempotent same input returns same receipt','REPLAY',public.boss_calendar_mutate(pg_temp.command('event.create',pg_temp.event_input('one team',jsonb_build_array(jsonb_build_object('target_type','team','target_id',pg_temp.f('team1'))),'2026-10-12T14:00:00Z','2026-10-12T15:00:00Z')),pg_temp.f('request-one-team event'))=(SELECT result FROM pg_temp.phase3a_results WHERE label='one-team event'));

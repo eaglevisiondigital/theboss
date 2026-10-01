@@ -1,8 +1,52 @@
 # Data model
 
+## Phase 3B registration records
+
+Phase 3B adds 21 tenant-owned public tables, with RLS and no anonymous or
+authenticated direct table privileges. Authenticated reads and writes use finite
+caller-bound RPCs. Migration source defines the model; application, live migration
+and acceptance evidence belongs in [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
+
+| Area | Tables | Responsibility |
+| --- | --- | --- |
+| Offering | `registration_offerings` | Exact organization/unit/team context, optional existing season/event, dates, eligibility, capacity and manual assignment policy |
+| Versioned collection | `registration_form_versions`, `registration_waiver_versions`, `document_requirements` | Immutable published form, consent text and document requirement versions |
+| Offering attachments | `registration_offering_forms`, `registration_offering_waivers`, `registration_offering_documents` | Future registration requirements, independent from frozen historical snapshots |
+| Registration | `registrations`, `registration_form_answers`, `waiver_signatures` | Persistent participant reference, independent workflow states, draft answers and immutable completed evidence |
+| Private documents | `registration_documents`, `document_upload_intents` | Private object reference, session-bound upload intent, review, expiration and renewal metadata |
+| Emergency information | `participant_emergency_records` | Restricted contacts, medical, physician and insurance fields with audited access |
+| Finance | `registration_fee_rules`, `registration_coupons`, `charges`, `charge_adjustments`, `payments`, `payment_allocations`, `payment_plans`, `payment_installments` | Explicit minor-unit obligations, adjustments, offline receipts, allocations and installment schedules |
+
+Same-tenant composite foreign keys bind each registration, attachment, charge,
+allocation and plan to its actual organization. Canonical participants and
+households remain global; their IDs alone provide no registration authority.
+Registration start freezes the offering requirements and participant/family
+context. Later published versions affect future registrations. Completed answers,
+signed waiver evidence, charge origins, adjustments, payments, allocations and
+installments cannot be rewritten through ordinary updates.
+
+Registration, forms, waiver, document, eligibility, approval and roster states
+remain separate. Payment status is derived from obligations and allocations.
+The current `payments.method` table constraint permits cash/check only; planned
+card, ACH and Boss Bucks method types are a static future integration contract.
+Extending live methods requires a separately approved migration and validated
+execution boundary. Explicit credits remain charge adjustment records.
+Draft, submitted or paid registrations create no automatic team relationship or
+role. Explicit assignment writes the existing canonical roster only after scoped
+authorization and configured prerequisites; explicit removal retains history.
+
+Private request receipts bind actor/request IDs to input hashes and results.
+Current authority is rechecked on retry. Private document access leases bind the
+actor, current Auth session, purpose and optional exact team. Sensitive responses
+are audited without copying their contents into receipt or audit JSON. See
+[Registration](REGISTRATION_ARCHITECTURE.md),
+[Forms and waivers](FORMS_WAIVERS_ARCHITECTURE.md),
+[Document security](DOCUMENT_SECURITY.md) and
+[Fees and charges](FEES_CHARGES_ARCHITECTURE.md).
+
 ## Phase 3A event records
 
-The current model has 30 public tables: the 22 identity/organization/authorization
+The Phase 3A checkpoint has 30 public tables: the 22 identity/organization/authorization
 foundation tables and eight Calendar tables. Calendar adds `event_types`, `venues`,
 `venue_resources`, `events`, `event_targets`, `event_game_details`,
 `event_occurrence_exceptions` and `event_reminders`, each with RLS and authenticated
@@ -108,7 +152,9 @@ Household membership and primary-contact labels do not grant guardian authority.
 Guardian relationships prohibit self-guardianship and default authority and
 capability booleans to pending/false. Profile access requires active, current,
 verified guardian authority and `can_manage_profile`. The other guardian capability
-fields are stored foundations; their corresponding workflows are not implemented.
+fields were stored foundations at the Phase 2A/2B checkpoint. Phase 3B separately
+enforces `can_register`, `can_sign_waivers`, `can_view_documents` and
+`can_manage_payments` for the corresponding registration workflows.
 
 ### Scoped references and governance
 
@@ -182,8 +228,9 @@ Operational person writes and scoped discovery expose names only, excluding DOB,
 email and phone. Scoped discovery resolves actual active organization/roster
 relationships. Household membership does not establish guardian authority;
 verification and stored capability changes require the existing explicit platform
-permissions. No registration, document, waiver or payment workflow is enabled by
-those flags.
+permissions. The Phase 2B workflow itself did not implement registration, document,
+waiver or payment actions. Phase 3B combines those independently stored flags with
+the actual registration context; household membership remains insufficient.
 
 Season parent units and team parent-unit/season attachments are selected at
 creation and remain immutable. Existing relationships retain their identity/type/
@@ -208,6 +255,8 @@ is inferred from the operational API.
 
 ## FUTURE
 
-Business tables, processing, pricing and product workflows for fundraising,
-Boss Bucks, payments, commerce, registration, documents, messaging and advanced
-sports are absent. Module catalog rows do not implement those products.
+Fundraising, Boss Bucks value/ledger execution, processor settlement, commerce,
+messaging and advanced sports remain absent. Phase 3B implements registration,
+private documents and cash/check allocation foundations described above, without
+executing card, ACH or Boss Bucks payments. Catalog rows do not implement later
+products.

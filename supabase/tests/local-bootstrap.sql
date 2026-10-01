@@ -1,6 +1,7 @@
 -- Test-only managed Supabase compatibility layer. Never apply remotely.
--- This file contains only the Auth/role surfaces used by foundation migrations.
--- It does not emulate Auth HTTP/JWT verification, session issuance or PostgREST.
+-- This file contains only the Auth/role and Storage catalog surfaces used by
+-- canonical migrations. It does not emulate Auth HTTP/JWT verification,
+-- session issuance, PostgREST, Storage HTTP, file scanning or object bytes.
 -- Roles and uid() semantics were checked against the canonical project; uid() is
 -- equivalent to Supabase Auth's current implementation.
 -- Bootstrap executes as a separate local administrator; migrations execute as
@@ -74,6 +75,57 @@ as $$
 $$;
 revoke all on function auth.jwt() from public;
 grant execute on function auth.jwt() to postgres, anon, authenticated, service_role;
+
+-- Managed Storage metadata compatibility surface. Policy expressions are the
+-- actual migration source and run as real anon/authenticated PostgreSQL roles;
+-- only this disposable table shape is synthetic. Hosted Storage acceptance
+-- separately verifies HTTP upload/download behavior and bytes. No permissive
+-- test policies, bypass-RLS client role or replacement policy functions exist.
+create schema storage authorization postgres;
+grant usage on schema storage to postgres, anon, authenticated, service_role;
+create table storage.buckets (
+  id text primary key,
+  name text not null,
+  public boolean not null default false,
+  file_size_limit bigint,
+  allowed_mime_types text[]
+);
+create table storage.objects (
+  id uuid primary key default gen_random_uuid(),
+  bucket_id text references storage.buckets(id),
+  name text,
+  owner uuid,
+  owner_id text,
+  metadata jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique(bucket_id,name)
+);
+alter table storage.buckets owner to postgres;
+alter table storage.objects owner to postgres;
+alter table storage.objects enable row level security;
+revoke all on storage.buckets,storage.objects from public,anon,authenticated,service_role;
+-- These grants match the managed Storage API metadata operations. RLS starts
+-- with no policies, so uploads/downloads must pass the canonical policy source.
+grant select,insert,update,delete on storage.objects to authenticated;
+grant select on storage.objects to anon;
+
+-- Managed Storage rejects direct SQL deletion before row filtering or RLS,
+-- including statements matching zero rows. The hosted failure established this
+-- protection. Model only its deny behavior; never emulate or enable an API
+-- deletion bypass. Actual files must be removed through the Storage HTTP API.
+create function storage.protect_delete() returns trigger
+language plpgsql security invoker set search_path='' as $$
+begin
+  raise exception 'Direct deletion from Storage tables is not permitted' using errcode='P0001';
+end $$;
+alter function storage.protect_delete() owner to postgres;
+revoke all on function storage.protect_delete() from public,anon,authenticated,service_role;
+create trigger protect_objects_delete before delete on storage.objects
+for each statement execute function storage.protect_delete();
+create trigger protect_buckets_delete before delete on storage.buckets
+for each statement execute function storage.protect_delete();
+
 
 -- Model the previously audited broad future defaults so the first migration
 -- must actually remove them. Applications must grant approved access explicitly.

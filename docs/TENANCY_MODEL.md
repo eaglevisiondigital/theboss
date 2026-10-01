@@ -1,5 +1,41 @@
 # Tenancy model
 
+## Phase 3B registration isolation
+
+Every offering owns one tenant and an immutable organization, exact unit or exact
+team scope. Existing season associations must belong to that tenant and match its
+offering context; an optional same-tenant event also requires current authorized
+Calendar visibility. Registration requirements, responses,
+documents, obligations, payments and installment references use same-tenant
+foreign keys. Event association reuses the canonical Calendar event; it neither
+copies the event nor grants scheduling authority.
+
+Global participant identity is reused across offerings and seasons. A family
+must have actual self authority or the current verified guardian capability for
+the requested action. Optional household selection requires current membership of
+both the actor and participant in that household, in addition to guardian checks.
+An unrelated household, guessed child ID or shared address confers no access.
+
+The registration read RPC independently authorizes list/detail/context selectors.
+Staff summary, registration review, financial and sensitive document projections
+are separate. A finance assignment can expose an obligation in its actual offering
+scope without revealing medical answers; a coach summary exposes no family profile,
+charge amounts or payment receipts. Ordinary medical answer retrieval is suppressed and requires
+the explicit audited sensitive path. Module/feature deactivation closes access
+without deleting history.
+
+Emergency access is narrower than ordinary staff review: an exact team role,
+actual active coach/staff membership and the participant's actual active membership
+in that same team are all required. A sibling team, ancestor unit, organization-wide
+role or guessed document ID supplies no emergency authority. Each private Storage
+read rechecks the current actor/session lease and current relationships/permissions.
+
+Cash/check allocations must reference same-tenant, same-currency obligations and
+an actual payer in the registration's family/participant context. RLS-protected
+private receipts cannot be used to replay an operation after its authority expires.
+See [Registration architecture](REGISTRATION_ARCHITECTURE.md) and
+[Document security](DOCUMENT_SECURITY.md).
+
 ## Phase 3A calendar isolation
 
 Each canonical event has one organization owner. Composite foreign keys enforce
@@ -150,8 +186,9 @@ relationships are ended/inactivated and replaced instead of repointed.
 Household management stays explicitly platform scoped because no approved
 organization-household authority anchor exists. Household membership does not
 imply guardian authority or access to another person's private profile. Guardian
-verification/capabilities are explicit, with only the approved dependent name
-update supported by the current `can_manage_profile` flag.
+verification/capabilities are explicit. Phase 2B supports dependent name updates
+through `can_manage_profile`; Phase 3B separately requires the registration,
+signature, document and payment capability for each relevant action.
 
 Transactional commands validate references and target relationships inside the
 database and append audit events with the actual organization/unit/team/person/
@@ -167,6 +204,7 @@ beyond exact matches remain unresolved; Phase 2B does not infer either.
 
 ## FUTURE
 
-No organization-specific product forks, tenant billing, payment allocation,
-regional discount rules, module workflows or cross-product data sharing are
-implemented. Canonical Boss records remain within its dedicated backend.
+No organization-specific product forks, tenant billing, regional discount rules
+or cross-product data sharing are implemented. Phase 3B cash/check charge allocation
+is a bounded registration foundation; wallet, processor and settlement ledgers
+remain future work. Canonical Boss records remain within its dedicated backend.

@@ -1,5 +1,57 @@
 # Boss platform security
 
+## Phase 3B registration and private files
+
+Registration tables use RLS and explicit revokes for `anon`, `authenticated` and
+`service_role`. Authenticated clients receive finite public invoker read/mutation
+RPCs backed by caller-bound private functions, rather than raw table access.
+The mutation guard requires the current confirmed non-anonymous managed Auth user,
+a live owned session and active canonical account/person. The database independently
+checks tenant, exact scope, role window, actual family relationship, module and
+feature for each operation, including an idempotent retry.
+
+The server accepts a finite command/field vocabulary, bounded bodies and typed
+resource IDs. Same-origin checks precede sensitive actions. Supabase verifies
+the signed identity; getClaims/getUser must agree. Safe application and SQL errors
+omit SQL details, stacks and credentials. Authority is enforced through PostgreSQL
+and Storage RLS even when UI controls or input IDs are forged.
+
+Private upload intents bind actor, live Auth session, document, immutable random
+object path, allowed MIME/size and a short expiration. Storage accepts only that
+current unused intent; upsert, direct update and delete are closed. Completion
+checks an actual private Storage object and metadata before marking submission.
+The hosted path bounds actual streamed bytes to 5 MiB and checks PDF/JPEG/PNG
+signatures. Its content digest binds retry content, rather than certifying malware
+absence or independently verifying Storage bytes. The bucket/requirement ceiling
+is 10 MiB. Files remain private, subject to explicit review and lifecycle metadata.
+
+Every sensitive document/form/emergency access appends a safe audit record.
+Two-minute Storage read leases are actor/session/purpose bound and recheck actual
+role, feature and relationship on every object SELECT; revocation takes effect
+before lease expiration. Emergency paths require exact-team coach/staff and
+participant relationships and expose restricted fields or explicitly eligible
+approved unexpired medical documents. No public file or reusable signed URL is
+returned by the application.
+
+Canonical medical/form answers, waiver text/signature evidence and document paths
+are excluded from ordinary lists, generic mutation projections and audit payloads.
+Private mutation receipts can hold the original family mutation command to bind
+retries, but are RLS-protected with no client privileges. Sensitive retrievals
+bypass receipts so they do not create a second medical response copy there.
+Cash/check operations lock actual obligations, append allocations and reject
+over-allocation. No service credential, payment processor, wallet execution,
+production Auth setting change or broad medical role is introduced.
+The live payment table and command both permit cash/check only. Planned electronic
+or internal-value methods remain nonexecuting contract/documentation types, with
+an approved future migration required to extend the table constraint.
+
+File validation is limited; antivirus/content-disarm scanning, retention/object
+purging, regulatory/legal consent assurance, recovery automation and incident
+response remain separate operational work. See [Document security](DOCUMENT_SECURITY.md),
+[Forms/waivers](FORMS_WAIVERS_ARCHITECTURE.md) and
+[Fees/charges](FEES_CHARGES_ARCHITECTURE.md). Test, advisor, hosted and deployment
+evidence belongs in CURRENT_BUILD_STATE.md.
+
 ## Phase 3A calendar boundary
 
 The eight Calendar tables have RLS and authenticated SELECT-only privileges.
@@ -84,8 +136,10 @@ superusers/database owners remain an operational trust boundary.
 
 The migration owner's future table/sequence/function grants are hardened.
 Managed `supabase_admin` future defaults are outside its ownership and remain
-unchanged; every new application object explicitly sets ACLs. Existing managed
-Auth/Storage settings, functions and policies are not modified.
+unchanged; every new application object explicitly sets ACLs. At the foundation
+checkpoint existing managed Auth/Storage settings, functions and policies were
+not modified. Phase 3B adds only the explicit private-bucket Storage INSERT/SELECT
+policies described above; it does not change Auth settings.
 
 Configuration JSON is for low-risk settings; audit JSON must be safe structured
 context. Neither is a credential store or public profile store. Phase 2B audit
