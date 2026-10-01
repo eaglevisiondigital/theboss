@@ -85,8 +85,8 @@ not presented as a restricted-tenant HTTP negative test.
 Desktop at 1280 pixels and mobile at 390/320 pixels had no horizontal page overflow.
 At 320 pixels all visible form controls fit the page, and keyboard Tab moved into
 the next labeled family field. A team-membership metadata change saved on mobile.
-Browser console inspection found zero entries. No password, access/refresh token,
-cookie/session value, production secret or private request attachment was captured,
+Browser console inspection found zero entries. No Boss Auth password, access/refresh
+token, cookie/session value, Supabase privileged key or private request attachment was captured,
 stored, printed or committed during this assignment. Managed service log histories
 were not exhaustively inspected. No production environment variable changed.
 
