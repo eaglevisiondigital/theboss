@@ -8,7 +8,7 @@
 - Review URL: https://deploy-preview-2--bossplus.netlify.app
 - Netlify website project: `bossplus`, `bc4662a5-57c4-4fdc-8754-aa1be8aa9a8a`.
 - Earlier public frontend is preserved on `build/premium-site-v1`.
-- Homepage, Boss Bucks and Fundraising are published on bossplus. Shared main remains unmerged.
+- Homepage, Boss Bucks, Fundraising and Digital Money Board are published on bossplus. Shared main remains unmerged.
 
 ## September 30, 2026 homepage completion
 
@@ -48,8 +48,8 @@ See `docs/design/boss-bucks-page.md` for asset provenance and verification.
 
 ## Next work
 
-1. Publish and verify the approved responsive Digital Money Board page.
-2. Prepare the Boss Engage interior-page mockup for owner review.
+1. Publish and verify the approved responsive Boss Engage page.
+2. Prepare the Family Hub interior-page mockup for owner review.
 3. Extend the approved website identity through remaining interior pages.
 4. Complete production contact, legal, abuse prevention and launch configuration.
 5. Progressive integration with the separately released Boss platform.
@@ -76,3 +76,15 @@ See `docs/design/money-board-page.md` for content contract, assets and QA.
 Publication confirmation and exact deployed revision will be recorded on PR #2.
 The page markets the product to fundraising organizers. Operational payment and
 wallet systems remain separate; thebossplatform is untouched.
+
+
+## October 1 Money Board publication and Engage checkpoint
+
+Digital Money Board was published and browser-verified at `/money-board`, commit
+c969e57e533fe033d6e00a6b9583fbb6c91d11b5, deploy 6abe901e853b630007bd0085.
+
+Owner approved the final Boss Engage mockup with cross-organization Family Hub copy,
+varied sports/ages, BOSS jerseys and single-B hats. `/engage` is implemented and
+locally verified. Contract and QA: `docs/design/engage-page.md`. The exact publication
+record will be saved on PR #2. Organization management and cross-organization family
+views are distinct; operational backend access remains separate and unchanged.
