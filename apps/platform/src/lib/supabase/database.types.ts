@@ -229,6 +229,405 @@ export type Database = {
           },
         ]
       }
+      event_game_details: {
+        Row: {
+          event_id: string
+          external_opponent_name: string | null
+          game_status: string
+          home_away: string
+          opponent_team_id: string | null
+          organization_id: string
+        }
+        Insert: {
+          event_id: string
+          external_opponent_name?: string | null
+          game_status?: string
+          home_away?: string
+          opponent_team_id?: string | null
+          organization_id: string
+        }
+        Update: {
+          event_id?: string
+          external_opponent_name?: string | null
+          game_status?: string
+          home_away?: string
+          opponent_team_id?: string | null
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_game_details_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_game_details_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_game_details_organization_id_opponent_team_id_fkey"
+            columns: ["organization_id", "opponent_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      event_occurrence_exceptions: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          event_id: string
+          id: string
+          instructions: string | null
+          is_active: boolean
+          occurrence_key: string
+          organization_id: string
+          override_arrival_at: string | null
+          override_end_at: string | null
+          override_start_at: string | null
+          status: string | null
+          title: string | null
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          event_id: string
+          id?: string
+          instructions?: string | null
+          is_active?: boolean
+          occurrence_key: string
+          organization_id: string
+          override_arrival_at?: string | null
+          override_end_at?: string | null
+          override_start_at?: string | null
+          status?: string | null
+          title?: string | null
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          event_id?: string
+          id?: string
+          instructions?: string | null
+          is_active?: boolean
+          occurrence_key?: string
+          organization_id?: string
+          override_arrival_at?: string | null
+          override_end_at?: string | null
+          override_start_at?: string | null
+          status?: string | null
+          title?: string | null
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_occurrence_exceptions_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_occurrence_exceptions_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_occurrence_exceptions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_occurrence_exceptions_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_reminders: {
+        Row: {
+          audience: string[]
+          enabled: boolean
+          event_id: string
+          id: string
+          minutes_before: number
+          organization_id: string
+        }
+        Insert: {
+          audience: string[]
+          enabled?: boolean
+          event_id: string
+          id?: string
+          minutes_before: number
+          organization_id: string
+        }
+        Update: {
+          audience?: string[]
+          enabled?: boolean
+          event_id?: string
+          id?: string
+          minutes_before?: number
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_reminders_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_reminders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_targets: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          organization_id: string
+          target_id: string
+          target_type: string
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          organization_id: string
+          target_id: string
+          target_type: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          organization_id?: string
+          target_id?: string
+          target_type?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_targets_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_targets_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_targets_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_targets_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      event_types: {
+        Row: {
+          created_at: string
+          description: string | null
+          key: string
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          key: string
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          key?: string
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          all_day: boolean
+          archived_at: string | null
+          arrival_at: string | null
+          audience: string[]
+          created_at: string
+          created_by_person_id: string
+          description: string | null
+          end_at: string
+          event_type_key: string
+          id: string
+          instructions: string | null
+          organization_id: string
+          publication_state: string
+          published_at: string | null
+          recurrence: Json | null
+          recurrence_end_at: string | null
+          resource_id: string | null
+          rsvp_mode: string
+          start_at: string
+          status: string
+          timezone: string
+          title: string
+          updated_at: string
+          updated_by_person_id: string
+          venue_id: string | null
+          version: number
+          visibility: string
+        }
+        Insert: {
+          all_day?: boolean
+          archived_at?: string | null
+          arrival_at?: string | null
+          audience?: string[]
+          created_at?: string
+          created_by_person_id: string
+          description?: string | null
+          end_at: string
+          event_type_key: string
+          id?: string
+          instructions?: string | null
+          organization_id: string
+          publication_state?: string
+          published_at?: string | null
+          recurrence?: Json | null
+          recurrence_end_at?: string | null
+          resource_id?: string | null
+          rsvp_mode?: string
+          start_at: string
+          status?: string
+          timezone?: string
+          title: string
+          updated_at?: string
+          updated_by_person_id: string
+          venue_id?: string | null
+          version?: number
+          visibility?: string
+        }
+        Update: {
+          all_day?: boolean
+          archived_at?: string | null
+          arrival_at?: string | null
+          audience?: string[]
+          created_at?: string
+          created_by_person_id?: string
+          description?: string | null
+          end_at?: string
+          event_type_key?: string
+          id?: string
+          instructions?: string | null
+          organization_id?: string
+          publication_state?: string
+          published_at?: string | null
+          recurrence?: Json | null
+          recurrence_end_at?: string | null
+          resource_id?: string | null
+          rsvp_mode?: string
+          start_at?: string
+          status?: string
+          timezone?: string
+          title?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          venue_id?: string | null
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "events_event_type_key_fkey"
+            columns: ["event_type_key"]
+            isOneToOne: false
+            referencedRelation: "event_types"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "events_organization_id_venue_id_fkey"
+            columns: ["organization_id", "venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "events_organization_id_venue_id_resource_id_fkey"
+            columns: ["organization_id", "venue_id", "resource_id"]
+            isOneToOne: false
+            referencedRelation: "venue_resources"
+            referencedColumns: ["organization_id", "venue_id", "id"]
+          },
+          {
+            foreignKeyName: "events_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feature_flag_overrides: {
         Row: {
           configuration: Json
@@ -1222,6 +1621,165 @@ export type Database = {
           },
         ]
       }
+      venue_resources: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          id: string
+          is_public: boolean
+          name: string
+          organization_id: string
+          resource_type: string
+          status: string
+          updated_at: string
+          updated_by_person_id: string
+          venue_id: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          id?: string
+          is_public?: boolean
+          name: string
+          organization_id: string
+          resource_type?: string
+          status?: string
+          updated_at?: string
+          updated_by_person_id: string
+          venue_id: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          id?: string
+          is_public?: boolean
+          name?: string
+          organization_id?: string
+          resource_type?: string
+          status?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          venue_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "venue_resources_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "venue_resources_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "venue_resources_organization_id_venue_id_fkey"
+            columns: ["organization_id", "venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "venue_resources_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      venues: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          city: string | null
+          country_code: string | null
+          created_at: string
+          created_by_person_id: string
+          id: string
+          instructions: string | null
+          is_public: boolean
+          name: string
+          organization_id: string
+          postal_code: string | null
+          region: string | null
+          status: string
+          timezone: string
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country_code?: string | null
+          created_at?: string
+          created_by_person_id: string
+          id?: string
+          instructions?: string | null
+          is_public?: boolean
+          name: string
+          organization_id: string
+          postal_code?: string | null
+          region?: string | null
+          status?: string
+          timezone?: string
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country_code?: string | null
+          created_at?: string
+          created_by_person_id?: string
+          id?: string
+          instructions?: string | null
+          is_public?: boolean
+          name?: string
+          organization_id?: string
+          postal_code?: string | null
+          region?: string | null
+          status?: string
+          timezone?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "venues_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "venues_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "venues_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -1235,6 +1793,13 @@ export type Database = {
         Args: { p_organization_id?: string; p_query?: string; p_view: string }
         Returns: Json
       }
+      boss_calendar_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_calendar_preview: { Args: { p_command: Json }; Returns: Json }
+      boss_calendar_public_read: { Args: { p_query: Json }; Returns: Json }
+      boss_calendar_read: { Args: { p_query: Json }; Returns: Json }
     }
     Enums: {
       [_ in never]: never

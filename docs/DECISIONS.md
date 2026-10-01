@@ -1,11 +1,48 @@
 # Boss foundation implementation decisions
 
-## IMPLEMENTED
+## Phase 3A implementation choices
+
+The approved Events/Calendar assignment adds one reusable canonical event model,
+exact tenant associations and Calendar activation independent from Sports. Finite
+local-time recurrence avoids future event copies and normalizes interval/weekly
+anchor defaults. The subset is bounded to five years and is not a general RFC 5545
+parser. DST gaps and invalid monthly dates are skipped; only valid emitted dates
+count. Ambiguous recurring timestamps use PostgreSQL's post-transition offset, validated
+against ordinary, negative-DST, half-hour, political and date-line transitions.
+
+Durable exceptions retain original local keys. Whole-series timing/timezone/rule
+changes with active exceptions require an explicit audited reset and preserve the
+inactive rows. Ordinary title/lifecycle edits retain effective exceptions. Canonical
+series cancellation dominates older scheduled exceptions. “This and following”
+splitting is deferred.
+
+Explicit public/authenticated publication is separate from private full-row access
+and venue publication. General projections redact private facilities, instructions,
+arrival and relationship labels. Audience labels and public/follower knowledge
+cannot grant private schedule authority. Organization-wide read can retain inactive
+team/unit history; exact inactive scope and inactive mutation targets fail closed.
+
+Conflict review covers the complete finite series, rather than the displayed month.
+Resource/team and actual shared coach/participant attachments are actionable; broad
+organization audiences do not automatically reserve every team. Effective canceled/
+moved slots prevent false original-slot warnings and missed rescheduled conflicts.
+Organization serialization favors correctness over finer lock concurrency in this
+initial core. An explicit authorized override additionally needs organization policy
+and protected audit capture.
+
+RSVP mode and reminders are configuration foundations. Attendance responses,
+delivery, following, ICS export/feed tokens and external calendar subscriptions are
+deferred. No guardian response authority, age/consent policy, entitlement rule or
+later business module is inferred. Calendar uses finite organization-module
+configuration rather than claiming a generic feature-flag precedence engine.
+[Detailed calendar choices and limits](CALENDAR_ARCHITECTURE.md).
+
+## Phase 2A/2B foundation choices
 
 The Phase 2A approved architecture is expressed in 22 application tables and six
 immutable canonical migrations. Phase 2B adds operational RPC migrations under
 `supabase/migrations`, preserving that schema's RLS and approved role matrix. No
-new business module is implemented. Applied/live status and validation results belong in
+business module was implemented in Phase 2B. Phase 3A adds Calendar above. Applied/live status and validation results belong in
 `CURRENT_BUILD_STATE.md`; migration files alone do not establish deployment.
 
 | Technical choice | Reason and limit |
@@ -25,7 +62,7 @@ new business module is implemented. Applied/live status and validation results b
 | Opaque historical Auth actor ID on audits | Preserves provenance after Auth deletion; live identity ownership remains the strong FK in `user_accounts` |
 | Audit UPDATE/DELETE/TRUNCATE guard | Casual rewrites are rejected even by a trusted writer; database owners can still change DDL under an operational process |
 
-Visibility currently has one governed named check on `teams`: public,
+Foundation team visibility has one governed named check on `teams`: public,
 authenticated, member, restricted and private. Private is the default. Lifecycle
 checks use active, inactive, pending, suspended and archived; nullable end times
 represent open windows. These checks can be extended by reviewed migrations.
@@ -86,5 +123,5 @@ core.
 Tenant-family authority, sensitive-field consent and later business-module rules
 remain decisions for the main Boss chat. Phase 2B's explicit provisioning, finite
 mutation API and permission-subset delegation are implemented within the approved
-foundation. Business modules remain separate future assignments. Existing Auth/email/session operational findings
+foundation. Other business modules remain separate future assignments. Existing Auth/email/session operational findings
 and Phase 1B direct cookie/header inspection limits remain separate work.

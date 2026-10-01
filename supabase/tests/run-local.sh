@@ -85,9 +85,9 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3a_*.sql)
 if [[ ${#tests[@]} == 0 ]]; then
-  printf '%s\n' 'No Phase 2A/2B SQL test files found.' >&2
+  printf '%s\n' 'No foundation/calendar SQL test files found.' >&2
   exit 1
 fi
 for test_file in "${tests[@]}"; do
@@ -131,4 +131,12 @@ fi
 printf 'Testing %s\n' "${mutation_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$mutation_concurrency_test"
-printf '%s\n' 'Phase 2A/2B PostgreSQL 17 authorization tests passed.'
+calendar_concurrency_test=$test_dir/phase3a_mutation_concurrency.sh
+if [[ ! -s "$calendar_concurrency_test" ]]; then
+  printf '%s\n' 'Phase 3A calendar concurrency test is missing.' >&2
+  exit 1
+fi
+printf 'Testing %s\n' "${calendar_concurrency_test##*/}"
+PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
+  PGDATABASE=postgres PGUSER=postgres bash "$calendar_concurrency_test"
+printf '%s\n' 'Phase 2A/2B/3A PostgreSQL 17 authorization tests passed.'

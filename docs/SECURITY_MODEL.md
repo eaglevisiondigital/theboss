@@ -1,14 +1,48 @@
 # Boss platform security
 
-## IMPLEMENTED
+## Phase 3A calendar boundary
 
-The Phase 2A foundation is applied to the canonical Boss project: 22 exposed application
-tables, all with RLS enabled and explicit access grants. The complete local A–P
-suite passes 642 assertions; 269 additional role checks pass locally and live,
+The eight Calendar tables have RLS and authenticated SELECT-only privileges.
+Direct client writes, anonymous table reads and anonymous `boss_private` access
+remain closed. A public invoker RPC delegates anonymous publication reads to one
+bounded fixed-field function in the separate non-exposed `boss_calendar_public`
+schema. Signed-in general schedule visibility uses safe projections; it does not
+expose full private event rows, facilities, target labels, instructions or family
+and roster data.
+
+Sensitive calendar read/preview/mutation paths require the current confirmed,
+non-anonymous Auth user and live owned session plus an active canonical identity.
+Mutation requires every actual current/proposed target active and authorized, in
+its exact tenant scope, with module/feature and finite input checks. Request
+receipts reauthorize on replay. No editable Auth metadata authorizes access.
+
+Conflict checks use effective canceled/rescheduled occurrences across the complete
+finite recurrence horizon, including dates beyond the visible 93-day window.
+Transactional organization serialization prevents two concurrent schedulers from
+committing an unreviewed occupied resource. Explicit override requires scoped
+`events.override_conflict` and organization feature policy. Hidden conflicts reveal
+only Busy/time metadata; real conflict references are audited within the protected
+boundary. Failed mutations leave no partial event, receipt or audit writes.
+
+Versions prevent stale series/occurrence updates. Whole-series status dominates
+older exceptions; all-day exceptions retain local-midnight bounds. Timing/rule
+changes with active exceptions require an explicit audited reset that archives
+rows rather than discarding history. General error messages omit raw SQL details.
+No privileged key, feed credential, new production environment variable or Auth
+security change is introduced by Calendar. Attendance response, ICS subscriptions,
+following and message delivery are deferred.
+[Exact boundaries and limits](CALENDAR_ARCHITECTURE.md).
+
+## Foundation security controls
+
+At the Phase 2A checkpoint, the foundation was applied to the canonical Boss
+project: 22 exposed application tables, all with RLS enabled and explicit access grants. That checkpoint
+A-P suite passed 642 assertions; 269 additional role checks passed locally and live,
 with transaction rollback and zero fixtures afterward. Hierarchy concurrency
 checks pass at three isolation levels. See `CURRENT_BUILD_STATE.md`.
 
-Anonymous users have no application table access or private helper execution.
+Anonymous users have no application table access or `boss_private` execution.
+The Calendar publication projection is their sole event read surface.
 Authenticated clients receive SELECT only; every read requires a canonical active
 Boss identity plus the appropriate relationship or explicit scoped permission.
 Catalog definitions require that identity but no tenant relationship.
@@ -62,8 +96,9 @@ from production catalog migrations; no real identity is provisioned or assigned
 authority by a seed.
 
 The approved initial role-permission matrix has 112 explicit potential-capability
-pairs and validates the role's permitted scope kinds. Live advisors report no new
-schema security warning; separate existing Auth findings are unchanged. Required
+pairs and validates the role's permitted scope kinds. At the foundation checkpoint, live advisors reported no new schema security
+warning; separate existing Auth findings were unchanged. Current advisor results
+are recorded in `CURRENT_BUILD_STATE.md`. Required
 FK/scoped-query indexes are retained despite fresh-schema unused-index information.
 
 ## Phase 2B mutation boundary

@@ -1,6 +1,33 @@
 # Modules and product access
 
-## IMPLEMENTED
+## Phase 3A independent Calendar module
+
+Calendar extends the catalog to 14 modules. Active Sports does not automatically
+enable Calendar, and Calendar operates without Sports. The existing authorized
+module activation workflow enables it; activation never grants event permission.
+The organization projection marks Calendar implemented while later modules retain
+their future classification.
+
+`calendar.configure` accepts only finite Boolean organization-module settings and
+requires organization-wide `organization.manage`. Organization/team calendars,
+recurrence and conflict detection default enabled after activation. Public
+schedules, head-coach management, conflict overrides and attendance default disabled.
+Head-coach management and conflict override require both potential role capability
+and the corresponding organization policy. Unit/team grants cannot configure the
+organization module or enable broader authority.
+
+Calendar read/mutation paths independently enforce active module, target context,
+features, roles/relationships and visibility. Configuration is distinct from the
+unfinished generic feature-flag/entitlement evaluator. No large settings engine is
+added. The attendance setting cannot be enabled in Phase 3A: RSVP modes are stored
+but response/guardian-response workflows and attendance permissions are deferred.
+
+Event type labels, minimal game opponent/site details and reminder configuration
+implement no registration, fundraising, volunteer engine, Game Center, notifications
+or other later product. ICS export/subscriptions and following remain deferred.
+[Configuration and runtime contract](CALENDAR_ARCHITECTURE.md).
+
+## Product-access foundation
 
 Phase 2A implements the capability/access/rollout data foundation. Phase 2B
 adds authorized organization module activation administration, without implementing
@@ -21,7 +48,7 @@ Application and CI validation remain separate from these database results.
 | Rollout/availability | `feature_flags`, `feature_flag_overrides` | Definitions and dated platform/organization/person overrides |
 | Authorization | `roles`, `permissions`, `role_permissions`, `role_assignments` | Independent permission decision in resource context |
 
-The authorization catalog seeds 19 roles, 17 permissions and 112 approved
+The Phase 2A authorization catalog seeds 19 roles, 17 permissions and 112 approved
 role-permission mappings. Those potential capabilities require a valid active
 assignment in its permitted scope; no real assignments are seeded. Organization
 owner/administrator and athletic director use organization scope, program/sport
@@ -31,10 +58,10 @@ Phase 2B administration uses protected, audited RPC commands.
 
 ### Modules
 
-Module keys are stable, unique catalog identifiers. The approved catalog covers
+Module keys are stable, unique catalog identifiers. The initial Phase 2A catalog covers
 `fundraising`, `boss_bucks`, `sports`, `engage`, `registration`, `documents`,
 `messaging`, `volunteers`, `money_board`, `commerce`, `livestream`, `fan` and
-`reporting`. Their catalog presence does not mean product functionality exists.
+`reporting`. Phase 3A adds `calendar`. Catalog presence does not mean product functionality exists.
 The catalog migration records the final seed implementation; no organizations,
 families, teams or customers are seed data.
 
@@ -48,8 +75,8 @@ activation. It does not grant permission to read any other data.
 ### Phase 2B activation administration
 
 The organization admin view shows each catalog module's current activation as
-active/inactive and separately identifies its implementation as future/not
-implemented. Activation/deactivation is a validated, audited transactional
+active/inactive and separately identifies implementation status. Phase 3A marks
+Calendar implemented; other module classifications remain future. Activation/deactivation is a validated, audited transactional
 operation with same-organization references. It creates or updates the current
 activation period; immutable historical keys remain intact. Request replays do
 not duplicate writes or audits.
@@ -57,8 +84,8 @@ not duplicate writes or audits.
 Sports activation can be recorded alongside the approved organizational sports
 foundation: units, seasons, teams, participants and rosters. Activation supplies no
 permission by itself and does not enable schedules, registration, games, scoring,
-statistics, livestreaming or any other sports module workflow. There are no fake
-business-module screens or navigation links.
+statistics, livestreaming or any other sports module workflow. Calendar has its own authorized UI; no placeholder later-module workflows are
+activated by Sports.
 
 ### Entitlements
 
@@ -113,9 +140,9 @@ pricing, assignment, publishing or flag-resolution rules.
 
 ## FUTURE
 
-All business-module workflows remain unimplemented: campaigns/donations/referrals,
+Later business-module workflows remain unimplemented: campaigns/donations/referrals,
 Boss Bucks memberships and geographic discounts, Money Board, payments/ledgers,
 merchants/offers/redemption, registration/forms, document/storage workflows,
-messaging/notifications, volunteer scheduling, games/scoring/statistics,
+messaging/notifications, volunteer scheduling, Game Center/scoring/statistics,
 livestreaming, products/orders/fulfillment and CRM. No seed or configuration row
 activates an implementation of these products.

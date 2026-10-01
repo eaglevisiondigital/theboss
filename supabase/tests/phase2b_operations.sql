@@ -101,7 +101,7 @@ GRANT EXECUTE ON FUNCTION pg_temp.fixture_id(text),pg_temp.expect_true(text,text
 
 -- ACL and API invariants are checked independently of mutation outcomes.
 SELECT pg_temp.expect_count('exact foundation table set remains', 'O',
-  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname='public' $$,22);
+  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname='public' AND tablename NOT IN ('event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders') $$,22);
 SELECT pg_temp.expect_count('no public SECURITY DEFINER endpoint', 'O',
   $$ SELECT count(*) FROM pg_catalog.pg_proc p JOIN pg_catalog.pg_namespace n ON n.oid=p.pronamespace
      WHERE n.nspname='public' AND p.prosecdef $$,0);
@@ -789,9 +789,9 @@ BEGIN
 END;
 $test$;
 SELECT pg_temp.expect_true('organization view includes all module classifications','READ',
- (SELECT jsonb_array_length(result->'records'->'modules')=13 AND NOT EXISTS(
+ (SELECT jsonb_array_length(result->'records'->'modules')=14 AND NOT EXISTS(
   SELECT 1 FROM jsonb_array_elements(result->'records'->'modules') m
-  WHERE m->'fields'->>'implementation_status' IS DISTINCT FROM 'Future / not implemented'
+  WHERE m->'fields'->>'implementation_status' IS DISTINCT FROM CASE WHEN m->'fields'->>'module_key'='calendar' THEN 'Implemented: Events and calendar' ELSE 'Future / not implemented' END
    OR m->'fields'->>'activation_status' NOT IN('active','inactive'))
  FROM pg_temp.phase2b_reads WHERE label='platform read view: organizations'));
 SELECT pg_temp.expect_true('selected org projects teams only from its real tenant','READ',

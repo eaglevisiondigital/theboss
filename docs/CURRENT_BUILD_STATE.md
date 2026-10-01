@@ -1,6 +1,69 @@
 # Current build state
 
-## Phase 2B operational core
+## Phase 3A events and calendar core
+
+### IMPLEMENTED AND VERIFIED DATABASE
+
+One canonical event supports organization, exact unit, team, multi-team and
+personal/family projections. Calendar is independent from Sports and uses finite
+module features, five least-privilege permissions and the existing trusted
+mutation architecture. All eight new public tables have immediate RLS and
+authenticated SELECT-only grants. Public invoker RPCs delegate to caller-bound
+private authorization; a separate whitelisted anonymous RPC emits only explicitly
+published public schedules. No direct client write, household-derived guardian
+authority or descendant-unit inheritance is introduced.
+
+Daily, selected-weekday weekly and monthly rules are finite and local-time based.
+Durable occurrence exceptions preserve the canonical event and original local key.
+Resource, team and actual coach/participant conflicts are previewed and checked
+transactionally over the whole finite series. Explicit scoped overrides require
+policy and append-only audit. Venue/resource, minimal game, RSVP settings and
+eight bounded reminder configurations are included. Attendance responses, reminder
+delivery, subscription credentials, ICS export and series splitting are deferred.
+See [calendar architecture and limits](CALENDAR_ARCHITECTURE.md).
+
+| Applied Phase 3A version | Migration |
+| --- | --- |
+| `20261001160819` | Canonical events, targeting, recurrence, RLS and read projections |
+| `20261001160835` | Audited transactional mutations, conflict preview and private receipts |
+| `20261001160851` | Existing module administration identifies implemented Calendar |
+
+The previous nine migrations remain unchanged. Filename reconciliation preserved
+the reviewed SQL bytes and order. Canonical Boss Supabase is verified healthy:
+`the-boss-platform`, ref `ilykgwgmxtrrikreacrz`, region `us-east-1`, PostgreSQL 17.
+The catalog now contains 30 public tables, 19 roles, 22 permissions, 147 mappings,
+14 modules and 12 event types.
+
+The complete fresh PostgreSQL 17 run passed 2,720 assertions and eight coordinated
+concurrency cases. It rolled back transactional fixtures and removed its private
+Unix-only cluster. The canonical DML-only 300-assertion verifier completed without
+errors; all nine synthetic cleanup counts were zero. A separate 34-assertion live
+security check passed. Live public database types were regenerated. Application
+strict typecheck, zero-warning lint, all 47 tests and production build pass using
+locked dependencies and fake public build configuration in an identical isolated
+source copy. No production credential or environment setting changed.
+
+Security advisors retain the existing leaked-password warning and intentional
+RLS-without-policy information for the two private receipt tables, both closed to
+clients. Performance advisors report 36 unused-index information findings and the
+existing absolute Auth connection allocation information; no schema warning or
+unindexed foreign key was found. Empty-schema index information is retained for
+actual workload review. No Auth security protection was weakened.
+
+### HOSTED PUBLICATION
+
+The validated implementation is being published for controlled desktop/mobile
+acceptance. Hosted results and final deployment/CI references are recorded after
+that acceptance; database-role verification alone does not certify signed HTTP
+behavior. Starting SHA: `51680bc2c34e60bf25129d07d685fc6632f2ea25`.
+Branch: `build/boss-platform-v1`.
+[PR #3](https://github.com/eaglevisiondigital/theboss/pull/3) remains
+OPEN/DRAFT/UNMERGED. Public website releases remain separate.
+
+Phase 3A ends after publication and final acceptance. No registration,
+communications, Game Center, financial, commerce or other later module is started.
+
+## Historical Phase 2B operational core
 
 ### IMPLEMENTED
 

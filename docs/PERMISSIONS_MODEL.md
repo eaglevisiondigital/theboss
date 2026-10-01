@@ -1,6 +1,42 @@
 # Boss foundation permissions
 
-## IMPLEMENTED
+## Phase 3A calendar permissions
+
+Five keys add 35 explicit mappings: `events.view`, `events.create`, `events.manage`,
+`events.publish` and `events.override_conflict`. Current totals are 22 permissions,
+147 mappings and the same 19 roles. Capability mapping never replaces actual
+tenant/target scope, active role/window, module, feature or relationship checks.
+
+Super/platform administrator and organization owner/administrator receive all five
+within their existing assignment scope. Athletic director receives view/create/
+manage in the assigned organization. Program/sport administrator receives those
+three in the exact assigned unit. Head coach gains view plus own-team create/manage
+when the organization enables head-coach management. Assistant coach, team
+administrator and team staff gain view only. Other roles gain no calendar keys.
+Every current and proposed target must authorize edits; one owned team cannot
+confer authority over another target in a multi-team event. Descendant inheritance
+remains absent.
+
+Publication requires `events.publish` and the public-schedules feature, for public
+and authenticated general audiences. Anonymous callers receive only explicitly
+published public schedule fields. Unrelated authenticated canonical users can see
+published authenticated schedule fields through the safe RPC, without full event
+rows, private facilities, instructions, family or roster data. Member/restricted/
+private boundaries continue to require actual relationship or scoped authority.
+Audience labels, follower knowledge, filters and UUID possession confer no grant.
+
+Verified active guardian relationships provide relevant dependent schedule reads,
+never scheduling or attendance-response authority. Household membership alone is
+insufficient. No attendance permissions or response endpoint are added while the
+response workflow is deferred.
+
+Calendar writes require active actual targets even for platform roles. Organization-
+wide calendar view can retain inactive team/unit history in an active organization
+and Calendar module; draft/private history requires management authority. An
+inactive exact unit/team scope does not acquire authority through historical reads.
+[Full role, visibility and feature contract](CALENDAR_ARCHITECTURE.md).
+
+## Identity and foundation permissions
 
 Identity is resolved from the verified Auth subject through an active
 `user_accounts` mapping to an active canonical `people` row. A valid Auth login
@@ -31,7 +67,7 @@ their own historical relationship row.
 The catalog contains the approved foundation role names, the example foundation
 permissions and two canonical identity permissions, `person.profile.view` and
 `person.profile.manage`. Those two distinguish private person information from
-participant metadata. The approved initial matrix contains 112 explicit
+participant metadata. The Phase 2A initial matrix contains 112 explicit
 role-permission pairs. No person receives a role automatically.
 
 | Role | Allowed assignment scope | Seeded potential permissions |
@@ -61,8 +97,8 @@ privileged. Unit scopes do not imply organization membership-list authority;
 memberships have no unit resource anchor. A future resource model/workflow must
 settle either extension before those grants can authorize such operations.
 
-Authenticated Data API table clients retain SELECT only, subject to unchanged
-RLS. No INSERT/UPDATE/DELETE/TRUNCATE policy or grant is added, including for
+Authenticated Data API foundation table clients retain SELECT only, subject to
+their existing RLS. Calendar adds its own strict SELECT policies and safe projections. No INSERT/UPDATE/DELETE/TRUNCATE policy or grant is added, including for
 platform administrators. Phase 2B implements protected `boss_admin_mutate` commands
 through a public invoker wrapper and a private, finite definer dispatcher. A
 platform person role does not confer database-owner privileges.

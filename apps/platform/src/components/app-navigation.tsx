@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import type { AdminNavigation } from "@/lib/admin/contracts";
 
-export function AppNavigation({ navigation = [] }: { navigation?: AdminNavigation[] }) {
+export function AppNavigation({ navigation = [], calendarAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean }) {
   const pathname = usePathname();
   const organization = useSearchParams().get("org");
   const context = organization && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(organization) ? `?org=${organization}` : "";
@@ -13,6 +13,7 @@ export function AppNavigation({ navigation = [] }: { navigation?: AdminNavigatio
   const destinations = [
     { href: "/app", label: "Home" },
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
+    ...(calendarAvailable ? [{ href: "/app/calendar", label: "Calendar" }] : []),
     { href: "/app/account", label: "Account" },
   ];
 

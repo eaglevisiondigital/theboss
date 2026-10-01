@@ -1,6 +1,40 @@
 # Data model
 
-## IMPLEMENTED
+## Phase 3A event records
+
+The current model has 30 public tables: the 22 identity/organization/authorization
+foundation tables and eight Calendar tables. Calendar adds `event_types`, `venues`,
+`venue_resources`, `events`, `event_targets`, `event_game_details`,
+`event_occurrence_exceptions` and `event_reminders`, each with RLS and authenticated
+SELECT-only access. Anonymous table access and direct client writes remain closed.
+
+One event is associated with its organization, exact unit or one/many teams through
+tenant-qualified targets. Its type uses one extensible catalog. Optional game
+details hold only opponent/site/schedule metadata. Venue resources belong to one
+same-tenant venue; precise coordinates are not required or stored.
+
+Finite recurrence stores normalized rules rather than future event copies. The
+complete series is bounded to five years; count limits are 1-1,000. Exceptions use
+original local timestamp keys and retain inactive rows after an explicit whole-
+series timing/rule reset. Event versions protect both series and single occurrence
+updates. Whole-series lifecycle status takes precedence over prior exceptions.
+Effective moved/canceled slots participate correctly in date queries and conflicts.
+
+The private `calendar_operation_receipts` table is RLS-enabled, has no client
+privileges and binds an actor/request pair to its input hash/result. It is separate
+from Phase 2B receipts. `boss_calendar_mutate` commits its canonical record,
+associations, settings, receipt and safe audit together. Same-input retry rechecks
+current authority. New calendar features extend the catalog to 14 modules, 22
+permissions and 147 role-permission mappings without creating real identities or
+assigning roles in migrations.
+
+RSVP mode and reminder configuration are foundations only. Attendance responses,
+following, ICS feeds/subscriptions and reminder delivery remain deferred.
+[Calendar architecture](CALENDAR_ARCHITECTURE.md) defines exact recurrence, timezone,
+exception, projection, publication and conflict limits. Current deployment/test
+status remains separate in [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
+
+## Phase 2A/2B foundation
 
 Phase 2A implements 22 foundation tables in `public`, with explicit grants and RLS
 on every table. All six migrations are applied to the canonical Boss Supabase
@@ -10,9 +44,9 @@ application, live migration and acceptance status are tracked separately. This
 document describes the implemented model;
 [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md) records deployment and validation
 status. Phase 2B implements explicit identity provisioning and operational admin
-UI. No Auth trigger silently provisions identities or roles, and no business
-module UI is implemented.
-The final fresh PostgreSQL 17 run passed 911 SQL assertions: 642 across categories
+UI. No Auth trigger silently provisions identities or roles. Phase 2B did not
+implement business module UI; Phase 3A adds the separate Calendar described above.
+At the Phase 2A checkpoint, the final fresh PostgreSQL 17 run passed 911 SQL assertions: 642 across categories
 A–P and 269 no-DDL verification assertions. Three coordinated hierarchy checks
 also passed, with no cycle and all fixtures and the temporary cluster removed.
 Canonical database verification separately passed 269 assertions and confirmed
@@ -84,7 +118,7 @@ Assignment scopes must also match the role's `allowed_scope_types`, which are
 immutable catalog identity alongside the role key. Changing permitted scope kinds
 requires a reviewed migration. See [PERMISSIONS_MODEL.md](PERMISSIONS_MODEL.md).
 
-The catalog seed defines 19 roles, 17 permissions, 13 modules and 112 approved
+The Phase 2A catalog seed defines 19 roles, 17 permissions, 13 modules and 112 approved
 role-permission mappings. Platform roles accept platform assignments; organization
 owner, organization administrator and athletic director accept organization
 assignments; program and sport administrators accept organization-unit assignments;
@@ -122,7 +156,8 @@ identifiers without speculative business indexes.
 Lifecycle checks use `active`, `inactive`, `pending`, `suspended` and `archived`.
 Visibility vocabulary is `public`, `authenticated`, `member`, `restricted` and
 `private`; Phase 2A applies it to teams, which default to private. Visibility is a
-classification, not a publishing grant. No foundation table is anonymously exposed.
+classification, not a publishing grant. No foundation table is anonymously exposed. Phase 3A uses an explicit safe
+calendar RPC projection without opening anonymous table privileges.
 See [TENANCY_MODEL.md](TENANCY_MODEL.md) and [SECURITY_MODEL.md](SECURITY_MODEL.md).
 
 ### Phase 2B operational records and writes

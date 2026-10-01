@@ -1,6 +1,33 @@
 # Tenancy model
 
-## IMPLEMENTED
+## Phase 3A calendar isolation
+
+Each canonical event has one organization owner. Composite foreign keys enforce
+the same organization for targets, venue/resources, internal opponents, game
+extensions, exceptions and reminders. Organization, exact unit and team calendars
+project that same event. Three targets do not create three event copies.
+
+Family views use currently verified active guardians and the dependent's active
+participant/team relationships. Global household/person identifiers are never a
+tenant authority anchor. Household membership, public team knowledge, following
+or an event UUID cannot reveal private family, roster or schedule records. Child
+filters narrow existing authority and deduplicate shared canonical occurrences.
+Filter options and target labels are independently authorized.
+
+Both existing and proposed targets must authorize a mutation in their actual
+organization/unit/team context. Unit scope remains exact. Inactive targets cannot
+be mutated even through platform calendar capability. Organization-wide readers
+can retain appropriate inactive team/unit event history while organization and
+Calendar remain active; inactive exact scopes do not regain scheduling authority.
+
+Public and authenticated general publication are fixed-field schedule projections,
+not anonymous/full-row table grants. General readers never receive private facility
+IDs/instructions, private team labels, family or roster data. Public projection
+requires explicit public publication, active tenant/Calendar and public-schedules
+feature. Disabled/inactive Calendar closes runtime access without deleting history.
+See [Calendar architecture](CALENDAR_ARCHITECTURE.md).
+
+## Foundation tenant boundaries
 
 An organization is the primary tenant. Canonical people, participants and
 households persist independently of a single organization. Membership and scoped
@@ -8,8 +35,8 @@ assignment records connect them to the context in which access is evaluated.
 The implementation uses one schema with tenant keys and RLS rather than per-tenant
 code forks. Current deployment/test evidence belongs in
 [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
-All six migrations are applied to the canonical Boss project. Live inspection
-verified RLS on all 22 tables, 22 authenticated SELECT policies, no mutation
+At the Phase 2A checkpoint, all six foundation migrations were applied to the
+canonical Boss project. Live inspection verified RLS on all 22 foundation tables, 22 authenticated SELECT policies, no mutation
 policies, no anonymous table rights and no client write grants. Live verification
 passed 269 assertions and confirmed fixture rollback. The final disposable run
 passed 911 SQL assertions plus three coordinated hierarchy checks: unsafe edits
@@ -71,7 +98,7 @@ The approved catalog permits organization owner, organization administrator and
 athletic director assignments only at organization scope. Program and sport
 administrators are restricted to organization-unit scope; coaches and other team
 roles are restricted to team scope. Platform roles use platform scope only.
-Allowed scope types are immutable catalog identity. The 112 seeded mappings do
+Allowed scope types are immutable catalog identity. The 112 Phase 2A mappings and 35 added Calendar mappings do
 not assign a role to anyone, and management keys do not enable client mutations.
 
 Platform-scoped assignments may cross tenants only for permissions actually mapped

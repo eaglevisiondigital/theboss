@@ -121,7 +121,7 @@ END;
 $test$;
 
 SELECT pg_temp.expect_count('only approved exposed table set', 'P',
-  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' $$, 22);
+  $$ SELECT count(*) FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT IN ('event_types','venues','venue_resources','events','event_targets','event_game_details','event_occurrence_exceptions','event_reminders') $$, 22);
 SELECT pg_temp.expect_count('no anonymously accessible policies', 'A',
   $$ SELECT count(*) FROM pg_catalog.pg_policies WHERE schemaname = 'public'
        AND ('anon' = ANY (roles) OR 'public' = ANY (roles)) $$, 0);
@@ -223,15 +223,15 @@ INSERT INTO pg_temp.phase2a_expected_role_catalog VALUES
   ('scorekeeper',ARRAY['team'],ARRAY['team.view']),
   ('livestream_operator',ARRAY['team'],ARRAY['team.view']);
 SELECT pg_temp.expect_count('exact initial role catalog count', 'P', $$ SELECT count(*) FROM public.roles $$, 19);
-SELECT pg_temp.expect_count('exact initial permission catalog count', 'P', $$ SELECT count(*) FROM public.permissions $$, 17);
-SELECT pg_temp.expect_count('exact initial role-permission mapping count', 'P', $$ SELECT count(*) FROM public.role_permissions $$, 112);
-SELECT pg_temp.expect_count('exact initial module catalog count', 'P', $$ SELECT count(*) FROM public.modules $$, 13);
+SELECT pg_temp.expect_count('exact initial permission catalog count', 'P', $$ SELECT count(*) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict') $$, 17);
+SELECT pg_temp.expect_count('exact initial role-permission mapping count', 'P', $$ SELECT count(*) FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict') $$, 112);
+SELECT pg_temp.expect_count('exact initial module catalog count', 'P', $$ SELECT count(*) FROM public.modules WHERE key <> 'calendar' $$, 13);
 SELECT pg_temp.expect_count('no speculative feature flags seeded', 'P', $$ SELECT count(*) FROM public.feature_flags $$, 0);
 SELECT pg_temp.expect_count('seed roles and permissions are active', 'P',
   $$ SELECT (SELECT count(*) FROM public.roles WHERE status <> 'active')
           + (SELECT count(*) FROM public.permissions WHERE status <> 'active') $$, 0);
 SELECT pg_temp.expect_true('no unexpected initial permission keys', 'P',
-  (SELECT array_agg(key ORDER BY key) FROM public.permissions) =
+  (SELECT array_agg(key ORDER BY key) FROM public.permissions WHERE key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict')) =
   (SELECT array_agg(key ORDER BY key) FROM unnest(ARRAY[
     'person.profile.view','person.profile.manage','organization.view','organization.manage',
     'organization.members.view','organization.members.manage','team.view','team.manage',
@@ -239,7 +239,7 @@ SELECT pg_temp.expect_true('no unexpected initial permission keys', 'P',
     'household.view','household.manage','roles.view','roles.assign','audit.view'
   ]) AS key));
 SELECT pg_temp.expect_true('no unexpected initial module keys', 'P',
-  (SELECT array_agg(key ORDER BY key) FROM public.modules) =
+  (SELECT array_agg(key ORDER BY key) FROM public.modules WHERE key <> 'calendar') =
   (SELECT array_agg(key ORDER BY key) FROM unnest(ARRAY[
     'fundraising','boss_bucks','sports','engage','registration','documents','messaging',
     'volunteers','money_board','commerce','livestream','fan','reporting'
@@ -253,7 +253,7 @@ BEGIN
       actual_scopes = expected.expected_scopes);
     SELECT coalesce(array_agg(p.key ORDER BY p.key),ARRAY[]::text[]) INTO actual_permissions
       FROM public.roles r JOIN public.role_permissions rp ON rp.role_id = r.id
-      JOIN public.permissions p ON p.id = rp.permission_id WHERE r.key = expected.role_key;
+      JOIN public.permissions p ON p.id = rp.permission_id WHERE r.key = expected.role_key AND p.key NOT IN ('events.view','events.create','events.manage','events.publish','events.override_conflict');
     SELECT coalesce(array_agg(key ORDER BY key),ARRAY[]::text[]) INTO sorted_expected_permissions
       FROM unnest(expected.expected_permissions) AS key;
     PERFORM pg_temp.expect_true('approved seed role capabilities only: ' || expected.role_key, 'P',
