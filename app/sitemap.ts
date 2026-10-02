@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/boss-bucks",
+    "/boss-bucks-account",
     "/fundraising",
     "/money-board",
     "/engage",
