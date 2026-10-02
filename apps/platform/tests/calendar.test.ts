@@ -100,6 +100,12 @@ test("reminder settings validate enable and audience without providing delivery"
   const html = render(createElement(EventEditor,{ data: fixture(),date: "2026-10-15",occurrence: occurrence({ reminders }) }));
   assert.match(html,/name="reminder_offset_7"/); assert.doesNotMatch(html,/name="reminder_offset_8"|Add reminder/);
 });
+test("calendar reminder guidance describes enabled notification preparation", () => {
+  const html = render(createElement(EventEditor,{ data: fixture(),date: "2026-10-15",occurrence: occurrence() }));
+  assert.match(html,/When notifications are enabled/);
+  assert.match(html,/authorized staff can prepare and process reminders in Notifications/);
+  assert.doesNotMatch(html,/Configuration only|no reminders are sent in this phase/);
+});
 test("calendar POST and preview reject cross-origin before RPC or Auth", async () => {
   const m = mock(); let authCalls = 0; m.client.auth.getClaims = async () => { authCalls++; return { data: null,error: null }; };
   const malicious: Record<string,string>[] = [{ origin: "https://attacker.invalid" },{ "sec-fetch-site": "cross-site" },{ host: "attacker.invalid" },{ origin: "" }];
