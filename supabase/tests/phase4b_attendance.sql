@@ -155,6 +155,57 @@ set local role authenticated;select pg_temp.actor('admin');
 select pg_temp.check('selected tenant outside picker remains usable','SCALE',(select (q->>'options_limited')::boolean and jsonb_array_length(q->'organizations')<=101 and q->>'organization_id'=pg_temp.f('picker-org-105')::text and exists(select 1 from jsonb_array_elements(q->'organizations')option where option->>'id'=pg_temp.f('picker-org-105')::text) from(select public.boss_attendance_read(jsonb_build_object('organization_id',pg_temp.f('picker-org-105')))q)projection));
 select pg_temp.actor('household-only');select pg_temp.denied('selected inaccessible tenant not added to picker',format('select public.boss_attendance_read(%L)',jsonb_build_object('organization_id',pg_temp.f('picker-org-105'))));
 reset role;
+-- Legacy Calendar events have no attendance settings. A missing deadline must
+-- not expand the Calendar occurrence merely to subtract a NULL offset. Verify
+-- real fixed/offset semantics first, then install a rollback-only raising
+-- resolver sentinel so this regression fails on the prior implementation.
+-- Derive this event's actual key from its stored timezone, since the earlier
+-- timezone-independence check deliberately changed the session timezone.
+create temp table deadline_regression_context as
+ select to_char(start_at at time zone timezone,'YYYY-MM-DD"T"HH24:MI:SS') as occurrence_key
+ from public.events where id=pg_temp.f('second-event');
+select pg_temp.check('legacy invalid key with no deadline returns null','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),'legacy-invalid-key') is null);
+insert into public.event_attendance_settings(organization_id,event_id,deadline_offset_minutes,updated_by_person_id)
+ values(pg_temp.f('org'),pg_temp.f('second-event'),90,pg_temp.f('admin'));
+select pg_temp.check('offset deadline uses current occurrence start','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=(select start_at-interval '90 minutes' from public.events where id=pg_temp.f('second-event')));
+-- Count real resolver calls without replacing its behavior. The sequence and
+-- instrumentation exist only inside this transaction; the original definition
+-- is restored before the separate deadline short-circuit checks below.
+create temp sequence attendance_deadline_resolution_calls;
+create temp table attendance_saved_resolver(definition text);
+DO $$declare original text;begin
+ original:=pg_get_functiondef('boss_private.attendance_occurrence(uuid,text)'::regprocedure);
+ if strpos(original,'result jsonb;begin')=0 then raise exception 'Resolver instrumentation anchor missing';end if;
+ insert into attendance_saved_resolver values(original);
+ execute replace(original,'result jsonb;begin','result jsonb;begin perform nextval(''pg_temp.attendance_deadline_resolution_calls''::regclass);');
+end $$;
+set local role authenticated;select pg_temp.actor('admin');
+create temp table attendance_deadline_projection as
+ select public.boss_attendance_read(pg_temp.query('staff','second-event')) as payload;
+reset role;
+select pg_temp.check('projection resolves relative deadline once per occurrence','PROJECTION',
+ (select jsonb_array_length(payload->'occurrences')=1 from attendance_deadline_projection)
+ and (select is_called and last_value=1 from attendance_deadline_resolution_calls));
+select pg_temp.check('reused deadline retains projection and response policy','PROJECTION',
+ (select (payload->'occurrences'->0->'settings'->>'effective_deadline_at')::timestamptz
+ = (select start_at-interval '90 minutes' from public.events where id=pg_temp.f('second-event'))
+ and (payload->'occurrences'->0->'subjects'->0->'capabilities'->>'respond')::boolean
+ from attendance_deadline_projection));
+DO $$begin execute (select definition from attendance_saved_resolver);end $$;
+update public.event_attendance_settings set response_deadline_at=now()+interval '5 days',deadline_offset_minutes=null where event_id=pg_temp.f('second-event');
+select pg_temp.check('fixed deadline retains configured instant','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=now()+interval '5 days');
+create or replace function boss_private.attendance_occurrence(p_event uuid,p_key text) returns jsonb
+ language plpgsql stable security definer set search_path='' as $$begin
+ raise exception 'Unexpected occurrence resolution in deadline regression' using errcode='P4B01';
+end $$;
+select pg_temp.check('fixed deadline skips occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=now()+interval '5 days');
+update public.event_attendance_settings set response_deadline_at=null where event_id=pg_temp.f('second-event');
+select pg_temp.check('empty deadline settings skip occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),'legacy-invalid-key') is null);
+select pg_temp.check('missing deadline settings skip occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('sibling-event'),'legacy-invalid-key') is null);
+update public.event_attendance_settings set deadline_offset_minutes=90 where event_id=pg_temp.f('second-event');
+select pg_temp.denied('offset deadline still resolves its occurrence',format('select boss_private.attendance_deadline(%L,%L)',pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context)),'P4B01');
+-- The transaction rollback below restores the original resolver definition as
+-- well as all synthetic settings and fixtures. No later checks use the sentinel.
 select count(*) as passed_assertions from phase4b_attendance_assertions;
 select category,count(*) from phase4b_attendance_assertions group by category order by category;
 rollback;
