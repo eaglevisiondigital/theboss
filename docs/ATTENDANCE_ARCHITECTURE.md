@@ -127,7 +127,7 @@ narrower filter instead of silently omitting records. Tenant/event/person indexe
 support next-response and summary queries. Family Hub and coach views reuse these
 same projections; client hiding is never the security boundary.
 
-The full disposable PostgreSQL run passed all 79 `phase4b_attendance.sql`
+The full disposable PostgreSQL run passed all 88 `phase4b_attendance.sql`
 assertions covering A-O, features, current Auth/scope, note privacy, raw mutation
 closure, history and safe audit markers. Three synchronized two-connection races
 passed for receipt retries, optimistic response conflicts and response-versus-
@@ -138,6 +138,9 @@ live grants, credentials or customer data.
 The attendance migration is applied to the canonical Boss project. Read-only
 verification confirms closed raw/RLS access, RPC/helper ACLs and search paths,
 foreign-key index coverage and the non-null default-false guardian flag with zero
-enabled flags at verification. Hosted family/restricted-role acceptance and final
-temporary-authority restoration remain pending. See [Phase 4B
+enabled flags at verification. Controlled hosted family/restricted-role actions
+were partially verified; the remaining hosted matrix and post-fix retest are
+incomplete after browser unresponsiveness. Final temporary-authority restoration
+is verified with zero residual access and the original administrator restored.
+See [Phase 4B
 validation](PHASE_4B_VALIDATION.md) for the current checkpoint.

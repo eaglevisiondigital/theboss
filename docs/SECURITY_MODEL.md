@@ -10,7 +10,7 @@ Volunteer capacity cannot be exceeded or reduced below existing commitments. Uns
 
 The complete disposable PostgreSQL suite passed, including 351 independent Phase 4B security assertions and ten new synchronized races. Read-only canonical checks verify 12 closed RLS tables including private receipts, four invoker RPCs and 72 private helpers with empty search paths and expected ACLs, all 38 new foreign keys indexed, and zero enabled guardian attendance flags with a non-null false default. Prior migration hashes remain unchanged.
 
-Post-migration security advisors report 57 informational closed-RLS notices and one pre-existing Auth leaked-password-protection warning. Performance advisors report 130 unused-index informational notices and one pre-existing Auth connection informational notice. No new warning or Auth setting change was reported. Hosted security acceptance, temporary-authority restoration and final residual-access verification remain pending.
+Post-migration security advisors report 57 informational closed-RLS notices and one pre-existing Auth leaked-password-protection warning. Performance advisors report 117 unused-index informational notices and one pre-existing Auth connection informational notice. No new warning or Auth setting change was reported. Hosted security acceptance remains incomplete. Temporary-authority restoration and final residual-access verification passed, with zero temporary access and the original administrator restored. A Netlify proxy tool response exposed credential material; it was not used, written to files or committed, and validity/revocation remains unverified. See [Phase 4B validation](PHASE_4B_VALIDATION.md) for the incident and remaining acceptance gaps.
 
 ## Phase 4A communication boundary
 

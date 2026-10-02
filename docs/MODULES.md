@@ -8,7 +8,7 @@ Attendance flags include attendance, RSVP, participant self-response, guardian R
 
 An active module assignment alone does not activate its private features. Authorized administrators can enter a configuration-only context for a disabled feature; ordinary users receive no private collections or actions. Configuration updates merge finite fields into the existing active module assignment and do not create implicit grants. Disabled or expired assignments close current application access.
 
-The applied canonical catalog projection marks Volunteers implemented. Availability still requires an explicit current module assignment and feature configuration; migration application creates no implicit organization access. Hosted acceptance and final controlled-authority cleanup remain pending. The public website and all later module implementations are untouched.
+The applied canonical catalog projection marks Volunteers implemented. Availability still requires an explicit current module assignment and feature configuration; migration application creates no implicit organization access. Hosted acceptance remains incomplete. Final controlled-authority cleanup and exact selected module baselines are verified with zero residual temporary access and the original administrator restored. See [Phase 4B validation](PHASE_4B_VALIDATION.md) for the remaining hosted gaps. The public website and all later module implementations are untouched.
 
 ## Phase 4A shared communications
 

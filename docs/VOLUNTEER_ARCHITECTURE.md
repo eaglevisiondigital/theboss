@@ -127,7 +127,11 @@ attendance/volunteer notification and selected-volunteer communications suite
 passed 100 assertions. All local fixtures are synthetic.
 
 The volunteer migration is applied and read-only canonical schema checks passed.
-Post-migration advisors report no new warning. Hosted adult/restricted-role
-acceptance, selected-volunteer announcement/attachment checks and final temporary-
-authority restoration remain pending. These outcomes are tracked separately in
+Post-migration advisors report no new warning. Hosted restricted-role capacity
+management was verified. Positive adult signup, assignment/reassignment and family
+commitments remain SQL-only because approved adult candidates have unknown DOB;
+no DOB was changed. Hosted selected-volunteer announcement/attachment checks and
+the final post-fix retest remain incomplete. Final temporary-authority restoration
+is verified with zero residual access and the original administrator restored.
+These outcomes are tracked separately in
 [Phase 4B validation](PHASE_4B_VALIDATION.md).

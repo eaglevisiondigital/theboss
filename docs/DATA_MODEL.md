@@ -8,7 +8,7 @@ Responses identify the canonical event, retained occurrence key, participant/sta
 
 Volunteer shifts carry exact organization/unit/team scope, optional canonical event occurrence, finite capacity, deadline, visibility and reminder offset. Assignments retain an active/canceled episode, actor and immutable history. Capacity changes and signup transitions share one transactional shift anchor. A selected-volunteer announcement adds a tenant-qualified optional shift reference to an existing communication audience; messages and attachments continue to use the existing communications records.
 
-Read-only canonical verification confirms these 12 closed RLS tables, all 38 new foreign keys with supporting indexes, and 73 public tables overall. All 27 migrations are applied; the previous 23 remain unchanged. Hosted acceptance and final controlled-authority cleanup remain pending. See [Phase 4B validation](PHASE_4B_VALIDATION.md).
+Read-only canonical verification confirms these 12 closed RLS tables, all 38 new foreign keys with supporting indexes, and 73 public tables overall. All 29 migrations are applied, including six Phase 4B migrations; the previous 23 remain unchanged. Final controlled-authority cleanup is verified with zero residual temporary access and the original administrator restored. Hosted acceptance remains incomplete. See [Phase 4B validation](PHASE_4B_VALIDATION.md).
 
 ## Phase 4A communications and notifications
 

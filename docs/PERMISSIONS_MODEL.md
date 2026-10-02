@@ -2,7 +2,7 @@
 
 ## Phase 4B verified potential capabilities
 
-The eight new keys are `attendance.view`, `attendance.respond`, `attendance.manage`, `attendance.checkin`, `volunteers.view`, `volunteers.signup`, `volunteers.manage` and `volunteers.assign`. The applied canonical catalog retains 21 roles and 14 modules with 52 permissions and 393 role-permission mappings. The independent runtime matrix and read-only canonical capability checks passed. Controlled hosted restricted-role acceptance and final temporary-grant cleanup remain pending.
+The eight new keys are `attendance.view`, `attendance.respond`, `attendance.manage`, `attendance.checkin`, `volunteers.view`, `volunteers.signup`, `volunteers.manage` and `volunteers.assign`. The applied canonical catalog retains 21 roles and 14 modules with 52 permissions and 393 role-permission mappings. The independent runtime matrix and read-only canonical capability checks passed. Controlled hosted restricted-role acceptance is partial; final temporary-grant cleanup is verified with zero residual access and the original administrator restored. See [Phase 4B validation](PHASE_4B_VALIDATION.md) for the remaining hosted gaps.
 
 | Existing role | Attendance potential | Volunteer potential |
 | --- | --- | --- |
