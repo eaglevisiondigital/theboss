@@ -4,14 +4,15 @@ Phase 4A is locally implemented and validated. Direct typed Phase 4A authorizati
 was received on October 2, 2026. All five prepared migrations were applied to the
 canonical Boss project at 06:20 UTC. The complete post-migration local validation
 rerun passes 6,086 SQL assertions, 24 races, typecheck, lint, 163 application tests
-and production build with canonical generated types. Deployment and controlled hosted acceptance
-are pending; this record does not yet claim completion.
+and production build with canonical generated types. The Phase 4A app was published to the existing platform at 06:25:14 UTC.
+Controlled positive hosted acceptance is pending one supplemental precondition;
+this record does not yet claim Phase 4A completion.
 
 Starting and current branch SHA: `e9e110737609b58dd171a8e5c482102d8b86aed0`.
 Branch: `build/boss-platform-v1`. PR [#3](https://github.com/eaglevisiondigital/theboss/pull/3)
 was freshly verified open, draft and unmerged at that SHA. No later module started.
 
-## Prepared migrations
+## Applied migrations
 
 The eighteen previous migration files retain their original SHA-256 values.
 These five new files bootstrap successfully on fresh disposable PostgreSQL 17:
@@ -44,8 +45,9 @@ administrator bootstrap source. SQL and race counts are separate.
 | Phase 4A SQL total | 598 |
 
 Both new rollback verifiers completed with every residual fixture count zero.
-Their execution here used the disposable local database, not the canonical live
-project. The disposable cluster was removed after the full run.
+The initial execution used disposable local PostgreSQL. After migration, the same
+21- and 25-assertion verifiers also passed in the canonical project and rolled back
+completely. The disposable cluster was removed after the full run.
 
 Eight new races verify message request deduplication, unique monotonic sequencing,
 nonregressing read watermarks, fail-closed higher-isolation writes, notification
@@ -104,9 +106,34 @@ only, so hosted positive acceptance is paused at that precondition pending expli
 additional authorization for one temporary controlled assignment. No temporary
 Phase 4A person, role, guardian, household or team authority has been activated.
 
-Remaining: dedicated platform deployment, controlled desktop/mobile acceptance,
-complete authority/configuration/preference cleanup, final validation and PR update.
-No hosted PASS is claimed at this checkpoint.
+Production deployment `6abf4e2daf06dd0008738bc4` is ready on the dedicated Boss
+platform, sourced from implementation commit `3ae01d8`. The existing signed
+controlled administrator loaded the new Messages and Notifications routes.
+Without an organization Messaging assignment, no communication authority or drawer
+is exposed; the Messages projection is unavailable and inbox is empty. The
+preferences foundation renders, while email remains explicitly unconfigured.
+No preference or fixture was created by these read-only smoke checks. At 390 and
+320 pixels, the inbox page has no horizontal document overflow. This is smoke
+evidence, not positive announcement/chat/delivery/attachment/restricted acceptance.
+
+CI initially passed every SQL suite but failed because the minimal PostgreSQL image
+has no `rg`. One race-script check now uses portable `grep -Fq`; all assertions
+are unchanged. All eight Phase 4A races passed again under a system-only PATH with
+`rg` absent. Both GitHub runs for fix commit `bf1e729` passed their database and
+application jobs: [36973793675](https://github.com/eaglevisiondigital/theboss/actions/runs/36973793675)
+and [36973790415](https://github.com/eaglevisiondigital/theboss/actions/runs/36973790415).
+No production runtime or migration defect was found in the completed checks.
+
+Fresh canonical residual checks confirm original administrator intact, no selected
+current temporary roles, no guardian authority or any of the seven capability flags,
+no selected household/Child1 organization authority, no controlled upload intents or
+access leases, and zero email sent/delivered rows. No temporary Phase 4A authority
+has been activated; restoration is not falsely claimed as an executed step.
+
+Remaining: explicit authorization to create one temporary controlled Messaging
+assignment, then positive desktop/mobile and restricted hosted acceptance, exact
+audit evidence and immediate cleanup of any subsequently activated test authority.
+No positive hosted PASS or Phase 4A completion is claimed at this checkpoint.
 
 ## Operational limits and decisions
 

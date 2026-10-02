@@ -34,7 +34,10 @@ Controlled acceptance has one verified precondition requiring additional directi
 this synthetic organization has no Messaging assignment, while the reviewed plan
 allows activation only of an existing assignment. A narrowly scoped temporary-row
 authorization has been requested. No temporary authority has been activated.
-Deployment, hosted desktop/mobile acceptance, restoration and final PR checks remain
+The implementation is deployed on the existing Boss platform. Signed desktop and
+320/390-pixel read-only smoke checks pass with communications closed by default.
+Both CI jobs pass after one portable race-script correction. Positive controlled
+hosted acceptance and restoration of any subsequently activated authority remain
 pending. See [the Phase 4A validation record](PHASE_4A_VALIDATION.md) for live advisor
 findings and precise evidence limits. No later phase has begun.
 
