@@ -1,4 +1,4 @@
-export const notificationCategories = ["events", "registration", "fees", "communications", "security"] as const;
+export const notificationCategories = ["events", "registration", "fees", "communications", "security", "attendance", "volunteers"] as const;
 export type NotificationCategory = typeof notificationCategories[number];
 export type EmailTemplate = Readonly<{ subject: string; preheader: string; html: string; text: string }>;
 export type EmailTemplateInput = Readonly<{ title: string; summary: string; destination: string; organizationName?: string }>;
@@ -15,6 +15,9 @@ export function safeNotificationDestination(value: unknown): value is string {
     new RegExp(`^/app/registrations\\?org=${sourceUuid}&registration=${sourceUuid}$`, "i"),
     new RegExp(`^/app/registrations\\?view=family&org=${sourceUuid}$`, "i"),
     new RegExp(`^/app/messages\\?org=${sourceUuid}&thread=${sourceUuid}$`, "i"),
+    new RegExp(`^/app/attendance\\?org=${sourceUuid}&event=${sourceUuid}&occurrence=${occurrence}$`, "i"),
+    new RegExp(`^/app/volunteers\\?org=${sourceUuid}&shift=${sourceUuid}$`, "i"),
+    new RegExp(`^/app/volunteers\\?org=${sourceUuid}&event=${sourceUuid}$`, "i"),
   ];
   if (!patterns.some(pattern => pattern.test(value))) return false;
   const query = new URL(value, "https://thebossplatform.netlify.app").searchParams;

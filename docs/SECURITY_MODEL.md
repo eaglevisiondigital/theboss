@@ -1,5 +1,17 @@
 # Boss platform security
 
+## Phase 4B validated coordination security
+
+Attendance and volunteer source work preserves deny-by-default RLS, closed raw tables, private helpers with empty search paths, verified canonical actors, finite same-origin POST handlers and transactional request receipts. Replays reauthorize current relationships and feature policy. RSVP notes and private snapshots do not enter audit/notification text.
+
+Guardian attendance is an independent default-false flag administered through the existing bounded guardian dispatcher. No legacy guardian capability or household membership grants RSVP authority. Unknown/minor ages fail closed under the current adult self-action policy. No Auth, credential, provider or production environment setting changed.
+
+Volunteer capacity cannot be exceeded or reduced below existing commitments. Unsafe capacity overrides, waitlists and quotas are absent. Current volunteer management also constrains the generic communications/attachment paths for selected-volunteer announcements. Reminder identities bind an active assignment episode to a stable UTC schedule context, rather than a capacity version changed by someone else's signup.
+
+The complete disposable PostgreSQL suite passed, including 351 independent Phase 4B security assertions and ten new synchronized races. Read-only canonical checks verify 12 closed RLS tables including private receipts, four invoker RPCs and 72 private helpers with empty search paths and expected ACLs, all 38 new foreign keys indexed, and zero enabled guardian attendance flags with a non-null false default. Prior migration hashes remain unchanged.
+
+Post-migration security advisors report 57 informational closed-RLS notices and one pre-existing Auth leaked-password-protection warning. Performance advisors report 130 unused-index informational notices and one pre-existing Auth connection informational notice. No new warning or Auth setting change was reported. Hosted security acceptance, temporary-authority restoration and final residual-access verification remain pending.
+
 ## Phase 4A communication boundary
 
 Public invoker read/mutation wrappers delegate to private finite dispatchers. New

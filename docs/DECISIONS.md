@@ -1,5 +1,15 @@
 # Boss foundation implementation decisions
 
+## Phase 4B implemented choices and remaining acceptance
+
+Attendance is an independent, default-off extension of the existing Calendar configuration; Volunteers uses its existing independent module key. Calendar-only organizations gain neither capability implicitly. Attendance-specific coach flags are stored separately from Calendar coach management.
+
+Keep configurable deadline behavior (`lock` or marked late response), material-change behavior (`keep` or sticky reconfirmation), private notes, finite check-in and retained history. Use adult-only self actions until an explicit minor self-action policy is approved; changing the configured minimum cannot bypass that lower bound. No analytical attendance product, kiosk, waitlist, mandatory volunteer quota or billing workflow is introduced.
+
+Reuse Phase 4A canonical notifications and private announcements. Announcement recipients are current selected-shift assignees, and senders also need existing communication permissions. Attendance request sources, event-linked volunteer sources and assignment-episode reminders retain source-dated recipient qualification. Reminder preparation and queue expansion remain bounded operator-invoked work; this phase adds no autonomous scheduler or delivery provider. Repeated preparation advances past existing sources and keeps a stable UTC identity.
+
+The complete disposable database and application validation passed. Four migrations are applied and verified on the canonical Boss project; TypeScript types are regenerated from that schema. The implementation remains uncommitted at this checkpoint, with hosted deployment, controlled acceptance and final cleanup pending. Live controlled acceptance must verify the actual controlled account's adult eligibility; do not invent a birth date or weaken policy if the prerequisite is absent. Any necessary controlled-fixture decision must return to the main Boss chat. No later implementation phase is authorized by this work.
+
 ## Phase 4A implementation choices
 
 | Choice | Reason and limit |

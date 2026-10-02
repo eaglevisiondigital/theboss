@@ -1,5 +1,15 @@
 # Tenancy model
 
+## Phase 4B attendance and volunteer boundaries
+
+All ten new public tables and private receipts are closed to direct anonymous, authenticated and service-role table access. Tenant-qualified foreign keys bind settings, histories, shifts, assignments and optional communication audiences. Public invoker RPCs enter private caller-bound finite dispatchers; clients cannot supply authority or arbitrary recipient identities.
+
+Attendance reads and mutations recheck current event/roster context. Staff summaries filter subjects to authorized exact targets; full event management cannot borrow authority over an unrelated target. Private notes require explicit row capability. Ended guardianships and memberships close current projection access while preserving canonical history.
+
+Volunteer reads, signup and staff assignment require current exact context. Knowing a shift, event or thread identifier creates no access. An old assignment cannot keep private shift visibility after its relationship ends. A former volunteer may cancel an owned commitment through a minimal ownership-only result without recovering private projection access.
+
+Notification recipients are qualified against current access and source-dated relationships/assignment episodes. A selected-volunteer audience adds a current assignment predicate to normal communications, including generic management and attachment paths. No organization-wide authority follows from the shift anchor. The full runtime suite passed, including 100 Phase 4B integration assertions. Canonical checks verify closed raw access and tenant-qualified foreign-key index coverage. Controlled hosted isolation acceptance and final temporary-authority cleanup remain pending.
+
 ## Phase 4A communication boundaries
 
 Communication content, target audience and delivery are tenant-qualified. Multi-team

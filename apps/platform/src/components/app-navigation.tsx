@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import type { AdminNavigation } from "@/lib/admin/contracts";
 
-export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false, communicationsAvailable = false, notificationsAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean; communicationsAvailable?: boolean; notificationsAvailable?: boolean }) {
+export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false, communicationsAvailable = false, notificationsAvailable = false, attendanceAvailable = false, volunteersAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean; communicationsAvailable?: boolean; notificationsAvailable?: boolean; attendanceAvailable?: boolean; volunteersAvailable?: boolean }) {
   const pathname = usePathname();
   const organization = useSearchParams().get("org");
   const context = organization && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(organization) ? `?org=${organization}` : "";
@@ -13,8 +13,11 @@ export function AppNavigation({ navigation = [], calendarAvailable = false, regi
   const destinations = [
     { href: "/app", label: "Home" },
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
+    ...((attendanceAvailable || volunteersAvailable) && !navigation.includes("families") ? [{ href: "/app/families", label: "Family Hub" }] : []),
     ...(calendarAvailable ? [{ href: "/app/calendar", label: "Calendar" }] : []),
     ...(registrationAvailable ? [{ href: "/app/registrations", label: "Registrations" }] : []),
+    ...(attendanceAvailable ? [{ href: "/app/attendance", label: "Attendance" }] : []),
+    ...(volunteersAvailable ? [{ href: "/app/volunteers", label: "Volunteers" }] : []),
     ...(communicationsAvailable ? [{ href: "/app/messages", label: "Messages" }, { href: "/app/announcements", label: "Announcements" }] : []),
     ...(notificationsAvailable ? [{ href: "/app/notifications", label: "Notifications" }] : []),
     { href: "/app/account", label: "Account" },

@@ -791,7 +791,7 @@ $test$;
 SELECT pg_temp.expect_true('organization view includes all module classifications','READ',
  (SELECT jsonb_array_length(result->'records'->'modules')=14 AND NOT EXISTS(
   SELECT 1 FROM jsonb_array_elements(result->'records'->'modules') m
-  WHERE m->'fields'->>'implementation_status' IS DISTINCT FROM CASE m->'fields'->>'module_key' WHEN 'calendar' THEN 'Implemented: Events and calendar' WHEN 'registration' THEN 'Implemented: Registration, forms and private documents' WHEN 'messaging' THEN 'Implemented: Communications and notifications' ELSE 'Future / not implemented' END
+  WHERE m->'fields'->>'implementation_status' IS DISTINCT FROM CASE m->'fields'->>'module_key' WHEN 'calendar' THEN 'Implemented: Events and calendar' WHEN 'registration' THEN 'Implemented: Registration, forms and private documents' WHEN 'messaging' THEN 'Implemented: Communications and notifications' WHEN 'volunteers' THEN 'Implemented: Volunteer coordination' ELSE 'Future / not implemented' END
    OR m->'fields'->>'activation_status' NOT IN('active','inactive'))
  FROM pg_temp.phase2b_reads WHERE label='platform read view: organizations'));
 SELECT pg_temp.expect_true('selected org projects teams only from its real tenant','READ',

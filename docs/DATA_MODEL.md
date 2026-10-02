@@ -1,5 +1,15 @@
 # Data model
 
+## Phase 4B canonical coordination records
+
+The applied migrations add six closed attendance tables: `event_attendance_settings`, `attendance_responses`, `attendance_response_history`, `attendance_checkins`, `attendance_checkin_history` and `attendance_requests`; plus four closed volunteer tables: `volunteer_role_definitions`, `volunteer_shifts`, `volunteer_assignments` and `volunteer_assignment_history`. Two private operation-receipt tables bind retries to the canonical actor, request and input.
+
+Responses identify the canonical event, retained occurrence key, participant/staff context, subject and responder. Guardian authority uses the dedicated default-false `can_respond_attendance` capability. Reasons, notes and arrival/departure differences remain private. Material context changes preserve snapshots and may require explicit reconfirmation. Single-event anchors survive rescheduling; changes between single and recurring modes retire old anchors while retaining history.
+
+Volunteer shifts carry exact organization/unit/team scope, optional canonical event occurrence, finite capacity, deadline, visibility and reminder offset. Assignments retain an active/canceled episode, actor and immutable history. Capacity changes and signup transitions share one transactional shift anchor. A selected-volunteer announcement adds a tenant-qualified optional shift reference to an existing communication audience; messages and attachments continue to use the existing communications records.
+
+Read-only canonical verification confirms these 12 closed RLS tables, all 38 new foreign keys with supporting indexes, and 73 public tables overall. All 27 migrations are applied; the previous 23 remain unchanged. Hosted acceptance and final controlled-authority cleanup remain pending. See [Phase 4B validation](PHASE_4B_VALIDATION.md).
+
 ## Phase 4A communications and notifications
 
 One tenant-owned thread holds canonical messages and sequences. `communication_threads`,

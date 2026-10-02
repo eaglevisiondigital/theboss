@@ -1,7 +1,7 @@
 import type { Json } from "../supabase/database.types";
 export const notificationOperations = ["notification.read", "notification.read_all", "preference.set", "delivery.process", "reminder.generate"] as const;
 export type NotificationOperation = typeof notificationOperations[number];
-export const notificationCategories = ["events", "registration", "fees", "communications", "security"] as const;
+export const notificationCategories = ["events", "registration", "fees", "communications", "security", "attendance", "volunteers"] as const;
 export type NotificationCategory = typeof notificationCategories[number];
 export type NotificationCommand = { operation: NotificationOperation; input: Record<string, Json | undefined> };
 export type NotificationQuery = { view: "inbox" | "summary" | "preferences" | "history"; organization_id?: string; category?: NotificationCategory; before?: string; limit?: number };

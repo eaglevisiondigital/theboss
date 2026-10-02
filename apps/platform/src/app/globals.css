@@ -540,3 +540,42 @@ button:disabled { cursor: wait; opacity: .65; }
 @media (max-width: 1000px) { .communication-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }.admin-shell .app-header-inner { flex-wrap: wrap; column-gap: 18px; row-gap: 14px; padding-block: 16px; } }
 @media (max-width: 760px) { .communication-workspace, .communication-fields, .notification-preferences, .notification-facts { grid-template-columns: minmax(0, 1fr); }.communication-has-detail .communication-conversation-list { display: none; }.communication-has-detail .communication-mobile-back { display: inline-flex; margin-bottom: 16px; }.communication-workspace:not(:has(.communication-thread-detail)) .communication-detail-pane { display: none; }.communication-thread-detail { padding: 18px; }.communication-heading h1 { letter-spacing: -1px; }.admin-shell .app-header-inner .workspace-label { display: none; }.notification-drawer-trigger .button { gap: 8px; padding-inline: 10px; }.notification-drawer { padding: 18px; } }
 @media (max-width: 480px) { .communication-filters { grid-template-columns: minmax(0, 1fr); }.communication-form-footer { flex-direction: column; align-items: stretch; }.communication-form-footer .button { width: 100%; }.communication-message { padding: 14px; }.communication-detail-heading { gap: 14px; }.notification-card { padding: 16px; }.communication-form { padding: 15px; }.notification-drawer .communication-form { padding-inline: 0; }.communication-message header time, .notification-card header time { margin-left: 0; }.admin-shell .app-header-inner { column-gap: 10px; }.admin-shell .app-header-inner .brand { font-size: 20px; }.admin-shell .app-header-inner .button-small { font-size: 11px; padding: 10px; }.communication-attachment > .button { width: 100%; }.communication-form-footer p { margin: 0; } }
+
+/* Attendance and volunteer coordination retain the existing Boss shell. */
+.coordination-console, .coordination-hub { min-width: 0; }
+.coordination-list, .coordination-subjects { display: grid; gap: 18px; margin-block: 20px; min-width: 0; }
+.coordination-card { padding: 24px; border: 1px solid var(--line); border-radius: 6px; background: #fff; min-width: 0; overflow-wrap: anywhere; }
+.coordination-card > header { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+.coordination-card h2 { font-size: 22px; line-height: 1.4; margin-block: 8px; }
+.coordination-card header p, .coordination-hint, .coordination-deadline { color: var(--muted); font-size: 13px; line-height: 1.8; }
+.coordination-card header time { font-size: inherit; }
+.coordination-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 14px; padding: 18px; margin: 20px 0; background: var(--background); border-radius: 4px; }
+.coordination-summary dt { font-size: 11px; line-height: 1.6; color: var(--muted); }
+.coordination-summary dd { font-size: 25px; font-weight: 700; margin: 6px 0 0; }
+.coordination-editor, .coordination-filter-panel { border: 1px solid var(--line); border-radius: 5px; margin-block: 18px; min-width: 0; }
+.coordination-editor > summary, .coordination-filter-panel > summary { padding: 17px; cursor: pointer; font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+.coordination-form { padding: 18px; min-width: 0; }
+.coordination-fields, .coordination-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.coordination-filters { padding: 18px; }
+.coordination-form textarea { resize: vertical; min-height: 85px; max-width: 100%; width: 100%; }
+.coordination-form :is(input, select, textarea), .coordination-filters :is(input, select), .coordination-child-switch select { min-width: 0; max-width: 100%; width: 100%; }
+.coordination-form .calendar-check input, .coordination-choice-group input { width: auto; }
+.coordination-form-footer, .coordination-filter-actions, .coordination-calendar-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+.coordination-form-footer p { margin: 0; font-size: 13px; line-height: 1.8; }
+.coordination-subject { padding: 18px; border: 1px solid var(--line); border-radius: 4px; min-width: 0; }
+.coordination-subject h3 { font-size: 17px; line-height: 1.5; }
+.coordination-choice-group { border: 1px solid var(--line); padding: 16px; margin-block: 18px; display: flex; gap: 15px; flex-wrap: wrap; }
+.coordination-choice-group legend { font-size: 13px; font-weight: 700; padding-inline: 5px; }
+.coordination-private-note { font-size: 13px; line-height: 1.8; margin-block: 14px; }
+.coordination-private-note summary { cursor: pointer; font-weight: 600; }
+.coordination-instructions { white-space: pre-wrap; font-size: 14px; line-height: 1.8; }
+.coordination-commitment { padding: 12px; background: #f1f3e9; font-size: 13px; }
+.coordination-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-block: 20px; }
+.coordination-tabs a { display: inline-flex; padding: 12px 15px; border: 1px solid var(--line); border-radius: 4px; font-size: 13px; }
+.coordination-tabs a[aria-current=page] { background: var(--ink); color: white; }
+.coordination-hub-section { padding-block: 18px; border-top: 1px solid var(--line); }
+.coordination-hub-section > h3 { font-size: 18px; }
+.coordination-child-switch { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px; }
+.coordination-child-switch .form-field { min-width: 0; flex: 1; max-width: 360px; }
+.coordination-console :is(input, select, textarea, summary):focus-visible, .coordination-hub :is(select, summary):focus-visible { outline: 3px solid var(--orange-dark); outline-offset: 3px; }
+@media (max-width: 640px) { .coordination-fields, .coordination-filters { grid-template-columns: minmax(0, 1fr); }.coordination-card { padding: 17px; }.coordination-card h2 { font-size: 20px; }.coordination-subject { padding: 14px; }.coordination-form { padding: 14px; }.coordination-form-footer, .coordination-filter-actions { align-items: stretch; flex-direction: column; }.coordination-form-footer .button, .coordination-filter-actions .button { width: 100%; }.coordination-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px; }.coordination-tabs a { padding: 11px; font-size: 12px; }.coordination-child-switch { align-items: stretch; flex-direction: column; }.coordination-child-switch .form-field { max-width: none; }.coordination-calendar-actions .button { width: 100%; } }

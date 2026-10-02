@@ -1,5 +1,23 @@
 # Boss foundation permissions
 
+## Phase 4B verified potential capabilities
+
+The eight new keys are `attendance.view`, `attendance.respond`, `attendance.manage`, `attendance.checkin`, `volunteers.view`, `volunteers.signup`, `volunteers.manage` and `volunteers.assign`. The applied canonical catalog retains 21 roles and 14 modules with 52 permissions and 393 role-permission mappings. The independent runtime matrix and read-only canonical capability checks passed. Controlled hosted restricted-role acceptance and final temporary-grant cleanup remain pending.
+
+| Existing role | Attendance potential | Volunteer potential |
+| --- | --- | --- |
+| Super/platform administrator; organization owner/admin; athletic director; program/sport administrator | view, respond, manage, check-in | view, signup, manage, assign |
+| Team administrator | view, respond, manage, check-in | view, signup, manage, assign |
+| Head coach | view, respond, manage, check-in | view, signup, manage; no assign |
+| Assistant coach | view, respond, manage, check-in | view, signup |
+| Team staff | view, respond | view, signup |
+| Volunteer coordinator | view, respond | view, signup, manage, assign |
+| All other existing roles | none | none |
+
+Potential capability never replaces current scope, relationship, resource or feature checks. Unit grants cover their exact unit and directly related team resources; no descendant-unit inheritance is introduced. Team grants require the current exact team relationship. The volunteer-coordinator role retains its existing team-only scope. Head/assistant management also requires its independent feature policy.
+
+Guardian responses require the dedicated current verified capability and the exact dependent roster/event relationship. Household membership and legacy guardian flags cannot substitute. Adult self-response and volunteer signup require known age meeting the configured minimum, at least 18 in this implementation. No new parent or participant role is created. Selected-volunteer announcements require both scoped volunteer management and the existing announcements permission; no extra communications mappings are seeded.
+
 ## Phase 4A communication permissions
 
 Ten finite keys add potential capability only: `communications.view`,

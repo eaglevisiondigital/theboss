@@ -11,9 +11,9 @@ DECLARE role_key text;expected text[];actual text[];tab record;fn record;client_
  keys text[]:=ARRAY['announcements.send','communications.manage','communications.send','communications.view','delivery_history.view','moderation.manage','notifications.manage','notifications.view','team_chat.send','team_chat.view'];
 BEGIN
  PERFORM pg_temp.check('exact evolved catalogs',
-  (SELECT count(*)=21 FROM public.roles) AND (SELECT count(*)=44 FROM public.permissions)
-  AND (SELECT count(*)=306 FROM public.role_permissions)
-  AND (SELECT count(*)=63 FROM pg_catalog.pg_tables WHERE schemaname='public'));
+  (SELECT count(*)=21 FROM public.roles) AND (SELECT count(*)=44 FROM public.permissions WHERE key NOT IN ('attendance.view','attendance.respond','attendance.manage','attendance.checkin','volunteers.view','volunteers.signup','volunteers.manage','volunteers.assign'))
+  AND (SELECT count(*)=306 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('attendance.view','attendance.respond','attendance.manage','attendance.checkin','volunteers.view','volunteers.signup','volunteers.manage','volunteers.assign'))
+  AND (SELECT count(*)=63 FROM pg_catalog.pg_tables WHERE schemaname='public' AND tablename NOT IN ('event_attendance_settings','attendance_responses','attendance_response_history','attendance_checkins','attendance_checkin_history','attendance_requests','volunteer_role_definitions','volunteer_shifts','volunteer_assignments','volunteer_assignment_history')));
  PERFORM pg_temp.check('exact finite Phase4A permission catalog',(SELECT array_agg(key ORDER BY key)=keys FROM public.permissions WHERE key=ANY(keys)));
  FOR role_key IN SELECT key FROM public.roles ORDER BY key LOOP
   expected:=CASE

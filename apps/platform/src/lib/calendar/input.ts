@@ -63,7 +63,7 @@ export function parseCalendarCommand(value: unknown): CalendarCommand | null {
     else if (key === "reminders") { if (!validReminders(field)) return null; }
     else if (key === "recurrence") { if (!validRecurrence(field,typeof input.start_at === "string" ? input.start_at : undefined,typeof input.timezone === "string" ? input.timezone : "UTC")) return null; }
     else if (key === "game") { if (!validGame(field)) return null; }
-    else if (key === "features") { if (!isObject(field) || !Object.keys(field).length || !keys(field,featureKeys) || !Object.values(field).every(item => typeof item === "boolean") || field.attendance === true) return null; }
+    else if (key === "features") { if (!isObject(field) || !Object.keys(field).length || !keys(field,featureKeys) || !Object.values(field).every(item => typeof item === "boolean")) return null; }
     else if (field !== null && !text(field,["title", "name", "event_type_key", "resource_type"].includes(key) ? 200 : 4000)) return null;
   }
   if (input.status !== undefined && !(value.operation.startsWith("event.") ? statuses : ["active", "inactive"]).includes(String(input.status))) return null;

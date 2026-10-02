@@ -10,12 +10,13 @@ export function safeNotificationDestination(value: unknown): string | null {
   if (typeof value !== "string" || value.length > 512 || !value.startsWith("/app/") || (value.includes("\\") || value.includes("#") || [...value].some(character => character.charCodeAt(0) <= 32))) return null;
   try { const url = new URL(value, "https://boss.invalid"); if (url.origin !== "https://boss.invalid" || url.searchParams.getAll("org").length !== 1 || !uuid(url.searchParams.get("org"))) return null;
     if (url.pathname === "/app/registrations" && url.searchParams.get("view") === "family" && url.searchParams.getAll("view").length === 1 && [...url.searchParams.keys()].every(key => ["org", "view"].includes(key))) return `${url.pathname}?${url.searchParams.toString()}`;
-    const key = ({ "/app/calendar": "event", "/app/registrations": "registration", "/app/messages": "thread", "/app/announcements": "thread" } as Record<string, string>)[url.pathname];
-    const allowed = url.pathname === "/app/calendar" ? ["org", key, "date", "tz", "occurrence"] : ["org", key];
+    const key = ({ "/app/calendar": "event", "/app/registrations": "registration", "/app/messages": "thread", "/app/announcements": "thread", "/app/attendance": "event", "/app/volunteers": url.searchParams.has("event") ? "event" : "shift" } as Record<string, string>)[url.pathname];
+    const allowed = url.pathname === "/app/calendar" ? ["org", key, "date", "tz", "occurrence"] : url.pathname === "/app/attendance" ? ["org", key, "occurrence"] : ["org", key];
     if (!key || [...url.searchParams.keys()].some(param => !allowed.includes(param)) || url.searchParams.getAll(key).length !== 1 || !uuid(url.searchParams.get(key))) return null;
     if (url.searchParams.has("date") && (url.searchParams.getAll("date").length !== 1 || !validDate(url.searchParams.get("date")!))) return null;
     if (url.searchParams.has("tz")) { const timezone = url.searchParams.get("tz")!; if (url.searchParams.getAll("tz").length !== 1 || !url.searchParams.has("date") || timezone.length > 100 || !/^[A-Za-z0-9_+\-/]+$/.test(timezone) || !validTimezone(timezone)) return null; }
-    if (url.searchParams.has("occurrence") && (url.searchParams.getAll("occurrence").length !== 1 || !url.searchParams.has("date") || !url.searchParams.has("tz") || !validOccurrenceKey(url.searchParams.get("occurrence")!))) return null;
+    if (url.searchParams.has("occurrence") && (url.searchParams.getAll("occurrence").length !== 1 || (url.pathname !== "/app/attendance" && (!url.searchParams.has("date") || !url.searchParams.has("tz"))) || !validOccurrenceKey(url.searchParams.get("occurrence")!))) return null;
+    if (url.pathname === "/app/attendance" && !url.searchParams.has("occurrence")) return null;
     return `${url.pathname}?${url.searchParams.toString()}`; } catch { return null; }
 }
 export function parseNotificationCommand(value: unknown): NotificationCommand | null {

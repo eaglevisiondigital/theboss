@@ -1,5 +1,15 @@
 # Modules and product access
 
+## Phase 4B independent controls
+
+Calendar attendance and the existing Volunteers module are separate opt-ins. Four supported combinations are Calendar alone, Calendar with attendance, Calendar with Volunteers, and Calendar with both. The independent runtime combination matrix passed in the full disposable PostgreSQL suite.
+
+Attendance flags include attendance, RSVP, participant self-response, guardian RSVP, attendance reminders, check-in, head/assistant coach management and an adult minimum self-response age. Attendance-specific keys are prefixed in stored Calendar configuration to prevent legacy flag collisions. Volunteers flags include volunteers, self signup, reminders, head/assistant management and an adult minimum signup age.
+
+An active module assignment alone does not activate its private features. Authorized administrators can enter a configuration-only context for a disabled feature; ordinary users receive no private collections or actions. Configuration updates merge finite fields into the existing active module assignment and do not create implicit grants. Disabled or expired assignments close current application access.
+
+The applied canonical catalog projection marks Volunteers implemented. Availability still requires an explicit current module assignment and feature configuration; migration application creates no implicit organization access. Hosted acceptance and final controlled-authority cleanup remain pending. The public website and all later module implementations are untouched.
+
 ## Phase 4A shared communications
 
 The existing stable `messaging` catalog key serves Communications. One shared

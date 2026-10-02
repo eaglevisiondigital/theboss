@@ -1,4 +1,5 @@
 import type { AdminCommand, AdminMutationResult } from "./contracts";
+import { guardianCapabilityKeys } from "./contracts";
 
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const statusValues = ["active", "inactive", "pending", "suspended", "archived"];
@@ -8,7 +9,7 @@ const unit = ["parent_unit_id", "unit_type", "name", "slug", "status", "sort_ord
 const season = ["name", "starts_on", "ends_on", "status"];
 const team = ["name", "short_name", "slug", "status", "visibility"];
 const household = ["name", "status"];
-const flags = ["can_register", "can_sign_waivers", "can_view_documents", "can_manage_payments", "can_manage_profile"];
+const flags: readonly string[] = guardianCapabilityKeys;
 const guardian = ["authority_status", "ends_at", ...flags];
 const operations: Record<string, readonly string[]> = {
   "identity.provision_self": ["display_name"],

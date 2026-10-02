@@ -14,6 +14,367 @@ export type Database = {
   }
   public: {
     Tables: {
+      attendance_checkin_history: {
+        Row: {
+          actor_person_id: string
+          checkin_id: string
+          created_at: string
+          id: string
+          organization_id: string
+          request_id: string
+          state: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          checkin_id: string
+          created_at?: string
+          id?: string
+          organization_id: string
+          request_id: string
+          state: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          checkin_id?: string
+          created_at?: string
+          id?: string
+          organization_id?: string
+          request_id?: string
+          state?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_checkin_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_checkin_history_organization_id_checkin_id_fkey"
+            columns: ["organization_id", "checkin_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_checkins"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      attendance_checkins: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          event_id: string
+          id: string
+          occurrence_key: string
+          occurrence_mode: string
+          organization_id: string
+          participant_id: string | null
+          person_id: string
+          state: string
+          subject_kind: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          event_id: string
+          id?: string
+          occurrence_key: string
+          occurrence_mode: string
+          organization_id: string
+          participant_id?: string | null
+          person_id: string
+          state: string
+          subject_kind: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          occurrence_key?: string
+          occurrence_mode?: string
+          organization_id?: string
+          participant_id?: string | null
+          person_id?: string
+          state?: string
+          subject_kind?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_checkins_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_checkins_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "attendance_checkins_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+          {
+            foreignKeyName: "attendance_checkins_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attendance_requests: {
+        Row: {
+          context_fingerprint: string
+          created_at: string
+          event_id: string
+          id: string
+          kind: string
+          occurrence_key: string
+          organization_id: string
+          revision: string
+        }
+        Insert: {
+          context_fingerprint: string
+          created_at?: string
+          event_id: string
+          id?: string
+          kind: string
+          occurrence_key: string
+          organization_id: string
+          revision: string
+        }
+        Update: {
+          context_fingerprint?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          kind?: string
+          occurrence_key?: string
+          organization_id?: string
+          revision?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_requests_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      attendance_response_history: {
+        Row: {
+          actor_person_id: string | null
+          change_kind: string
+          created_at: string
+          event_id: string
+          id: string
+          occurrence_key: string
+          organization_id: string
+          person_id: string
+          request_id: string | null
+          response_id: string
+          snapshot: Json
+          subject_kind: string
+          version: number
+        }
+        Insert: {
+          actor_person_id?: string | null
+          change_kind: string
+          created_at?: string
+          event_id: string
+          id?: string
+          occurrence_key: string
+          organization_id: string
+          person_id: string
+          request_id?: string | null
+          response_id: string
+          snapshot: Json
+          subject_kind: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string | null
+          change_kind?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          occurrence_key?: string
+          organization_id?: string
+          person_id?: string
+          request_id?: string | null
+          response_id?: string
+          snapshot?: Json
+          subject_kind?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_response_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_response_history_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "attendance_response_history_organization_id_response_id_fkey"
+            columns: ["organization_id", "response_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_responses"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "attendance_response_history_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attendance_responses: {
+        Row: {
+          arrival_difference_minutes: number | null
+          context_fingerprint: string
+          created_at: string
+          departure_difference_minutes: number | null
+          event_id: string
+          guardian_relationship_id: string | null
+          household_id: string | null
+          id: string
+          is_late: boolean
+          needs_reconfirmation: boolean
+          note: string | null
+          occurrence_key: string
+          occurrence_mode: string
+          organization_id: string
+          participant_id: string | null
+          person_id: string
+          reason: string | null
+          responder_person_id: string
+          status: string
+          subject_kind: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          arrival_difference_minutes?: number | null
+          context_fingerprint: string
+          created_at?: string
+          departure_difference_minutes?: number | null
+          event_id: string
+          guardian_relationship_id?: string | null
+          household_id?: string | null
+          id?: string
+          is_late?: boolean
+          needs_reconfirmation?: boolean
+          note?: string | null
+          occurrence_key: string
+          occurrence_mode: string
+          organization_id: string
+          participant_id?: string | null
+          person_id: string
+          reason?: string | null
+          responder_person_id: string
+          status: string
+          subject_kind: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          arrival_difference_minutes?: number | null
+          context_fingerprint?: string
+          created_at?: string
+          departure_difference_minutes?: number | null
+          event_id?: string
+          guardian_relationship_id?: string | null
+          household_id?: string | null
+          id?: string
+          is_late?: boolean
+          needs_reconfirmation?: boolean
+          note?: string | null
+          occurrence_key?: string
+          occurrence_mode?: string
+          organization_id?: string
+          participant_id?: string | null
+          person_id?: string
+          reason?: string | null
+          responder_person_id?: string
+          status?: string
+          subject_kind?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_responses_guardian_relationship_id_fkey"
+            columns: ["guardian_relationship_id"]
+            isOneToOne: false
+            referencedRelation: "guardian_relationships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_responses_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_responses_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "attendance_responses_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+          {
+            foreignKeyName: "attendance_responses_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_responses_responder_person_id_fkey"
+            columns: ["responder_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           action: string
@@ -346,6 +707,7 @@ export type Database = {
           team_id: string | null
           thread_id: string
           unit_id: string | null
+          volunteer_shift_id: string | null
         }
         Insert: {
           created_at?: string
@@ -357,6 +719,7 @@ export type Database = {
           team_id?: string | null
           thread_id: string
           unit_id?: string | null
+          volunteer_shift_id?: string | null
         }
         Update: {
           created_at?: string
@@ -368,6 +731,7 @@ export type Database = {
           team_id?: string | null
           thread_id?: string
           unit_id?: string | null
+          volunteer_shift_id?: string | null
         }
         Relationships: [
           {
@@ -397,6 +761,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "roles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_audiences_volunteer_shift_fkey"
+            columns: ["organization_id", "volunteer_shift_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_shifts"
+            referencedColumns: ["organization_id", "id"]
           },
         ]
       }
@@ -981,6 +1352,60 @@ export type Database = {
           },
         ]
       }
+      event_attendance_settings: {
+        Row: {
+          audience: string[]
+          change_policy: string
+          deadline_offset_minutes: number | null
+          deadline_policy: string
+          event_id: string
+          organization_id: string
+          response_deadline_at: string | null
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+        }
+        Insert: {
+          audience?: string[]
+          change_policy?: string
+          deadline_offset_minutes?: number | null
+          deadline_policy?: string
+          event_id: string
+          organization_id: string
+          response_deadline_at?: string | null
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+        }
+        Update: {
+          audience?: string[]
+          change_policy?: string
+          deadline_offset_minutes?: number | null
+          deadline_policy?: string
+          event_id?: string
+          organization_id?: string
+          response_deadline_at?: string | null
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_attendance_settings_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "event_attendance_settings_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       event_game_details: {
         Row: {
           event_id: string
@@ -1496,6 +1921,7 @@ export type Database = {
           can_manage_profile: boolean
           can_receive_communications: boolean
           can_register: boolean
+          can_respond_attendance: boolean
           can_send_communications: boolean
           can_sign_waivers: boolean
           can_view_documents: boolean
@@ -1515,6 +1941,7 @@ export type Database = {
           can_manage_profile?: boolean
           can_receive_communications?: boolean
           can_register?: boolean
+          can_respond_attendance?: boolean
           can_send_communications?: boolean
           can_sign_waivers?: boolean
           can_view_documents?: boolean
@@ -1534,6 +1961,7 @@ export type Database = {
           can_manage_profile?: boolean
           can_receive_communications?: boolean
           can_register?: boolean
+          can_respond_attendance?: boolean
           can_send_communications?: boolean
           can_sign_waivers?: boolean
           can_view_documents?: boolean
@@ -3842,6 +4270,329 @@ export type Database = {
           },
         ]
       }
+      volunteer_assignment_history: {
+        Row: {
+          action: string
+          actor_person_id: string
+          assignment_id: string
+          assignment_version: number
+          created_at: string
+          id: string
+          organization_id: string
+          prior_status: string | null
+          request_id: string
+          status: string
+        }
+        Insert: {
+          action: string
+          actor_person_id: string
+          assignment_id: string
+          assignment_version: number
+          created_at?: string
+          id?: string
+          organization_id: string
+          prior_status?: string | null
+          request_id: string
+          status: string
+        }
+        Update: {
+          action?: string
+          actor_person_id?: string
+          assignment_id?: string
+          assignment_version?: number
+          created_at?: string
+          id?: string
+          organization_id?: string
+          prior_status?: string | null
+          request_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_assignment_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_assignment_history_organization_id_assignment_id_fkey"
+            columns: ["organization_id", "assignment_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_assignments"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      volunteer_assignments: {
+        Row: {
+          assigned_by_person_id: string
+          canceled_at: string | null
+          canceled_by_person_id: string | null
+          created_at: string
+          id: string
+          organization_id: string
+          person_id: string
+          shift_id: string
+          source: string
+          status: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          assigned_by_person_id: string
+          canceled_at?: string | null
+          canceled_by_person_id?: string | null
+          created_at?: string
+          id?: string
+          organization_id: string
+          person_id: string
+          shift_id: string
+          source: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          assigned_by_person_id?: string
+          canceled_at?: string | null
+          canceled_by_person_id?: string | null
+          created_at?: string
+          id?: string
+          organization_id?: string
+          person_id?: string
+          shift_id?: string
+          source?: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_assignments_assigned_by_person_id_fkey"
+            columns: ["assigned_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_assignments_canceled_by_person_id_fkey"
+            columns: ["canceled_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_assignments_organization_id_shift_id_fkey"
+            columns: ["organization_id", "shift_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_shifts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "volunteer_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_role_definitions: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          description: string | null
+          id: string
+          name: string
+          organization_id: string
+          status: string
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          description?: string | null
+          id?: string
+          name: string
+          organization_id: string
+          status?: string
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          description?: string | null
+          id?: string
+          name?: string
+          organization_id?: string
+          status?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_role_definitions_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_role_definitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_role_definitions_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_shifts: {
+        Row: {
+          capacity: number
+          created_at: string
+          created_by_person_id: string
+          end_at: string
+          event_context_stamp: string | null
+          event_id: string | null
+          id: string
+          instructions: string | null
+          location: string | null
+          occurrence_key: string | null
+          organization_id: string
+          organization_unit_id: string | null
+          reminder_minutes_before: number
+          role_id: string
+          scope_id: string
+          scope_type: string
+          signup_deadline: string | null
+          start_at: string
+          status: string
+          team_id: string | null
+          title: string
+          updated_at: string
+          updated_by_person_id: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          capacity: number
+          created_at?: string
+          created_by_person_id: string
+          end_at: string
+          event_context_stamp?: string | null
+          event_id?: string | null
+          id?: string
+          instructions?: string | null
+          location?: string | null
+          occurrence_key?: string | null
+          organization_id: string
+          organization_unit_id?: string | null
+          reminder_minutes_before?: number
+          role_id: string
+          scope_id: string
+          scope_type: string
+          signup_deadline?: string | null
+          start_at: string
+          status?: string
+          team_id?: string | null
+          title: string
+          updated_at?: string
+          updated_by_person_id: string
+          version?: number
+          visibility?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          created_by_person_id?: string
+          end_at?: string
+          event_context_stamp?: string | null
+          event_id?: string | null
+          id?: string
+          instructions?: string | null
+          location?: string | null
+          occurrence_key?: string | null
+          organization_id?: string
+          organization_unit_id?: string | null
+          reminder_minutes_before?: number
+          role_id?: string
+          scope_id?: string
+          scope_type?: string
+          signup_deadline?: string | null
+          start_at?: string
+          status?: string
+          team_id?: string | null
+          title?: string
+          updated_at?: string
+          updated_by_person_id?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_shifts_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_organization_id_organization_unit_id_fkey"
+            columns: ["organization_id", "organization_unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_organization_id_role_id_fkey"
+            columns: ["organization_id", "role_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_role_definitions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "volunteer_shifts_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       waiver_signatures: {
         Row: {
           consent: boolean
@@ -3922,6 +4673,11 @@ export type Database = {
         Args: { p_organization_id?: string; p_query?: string; p_view: string }
         Returns: Json
       }
+      boss_attendance_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_attendance_read: { Args: { p_query: Json }; Returns: Json }
       boss_calendar_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json
@@ -3944,6 +4700,11 @@ export type Database = {
         Returns: Json
       }
       boss_registration_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_volunteers_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_volunteers_read: { Args: { p_query?: Json }; Returns: Json }
     }
     Enums: {
       [_ in never]: never

@@ -1,5 +1,13 @@
 # Current build state
 
+## Phase 4B attendance and volunteer coordination: validated schema applied, hosted acceptance pending
+
+Four validated migrations were applied to canonical `the-boss-platform`, ref `ilykgwgmxtrrikreacrz`: `20261002151348` controls, `20261002151412` attendance core, `20261002151417` volunteer core and `20261002151425` integrations. Read-only checks verify all 27 canonical migrations, unchanged prior 23 migration hashes, 21 roles, 52 permissions, 393 mappings, 14 modules and 73 public tables. The authenticated application is prepared on `build/boss-platform-v1`; commit, push, Phase 4B deployment and the PR update remain pending. The branch/PR head at this checkpoint remains `1a6b00805c50be5a4fac40d477fc7fa64ac4b390`.
+
+The full disposable PostgreSQL 17 suite passed 7,161 assertions, including 28 bootstrap and 681 new Phase 4B assertions, plus 34 synchronized races (ten new). The final application validation with regenerated canonical database types passed strict typecheck, zero-warning lint, all 206 tests and production build. Canonical schema checks confirm 12 new closed RLS tables, four invoker RPCs, 72 private helpers, 38 indexed foreign keys, nine generic notification templates and the shared pipeline. Guardian attendance flags remain default false with zero enabled flags at verification.
+
+Post-migration advisors report 57 closed-RLS informational notices, one existing Auth leaked-password-protection warning, 130 unused-index informational notices and one existing Auth connection informational notice; no new warning or Auth setting change. Direct typed Phase 4B authorization resolved the earlier automatic approval-review block. Hosted acceptance, deployment and final temporary-authority cleanup/restoration remain pending. See [Phase 4B validation](PHASE_4B_VALIDATION.md), [attendance architecture](ATTENDANCE_ARCHITECTURE.md) and [volunteer architecture](VOLUNTEER_ARCHITECTURE.md). No later phase has begun.
+
 ## Phase 4A communications and notifications: controlled hosted acceptance complete
 
 Phase 4A adds private tenant-owned channels/messages, organization and multi-team
@@ -68,7 +76,7 @@ fix. Hosted reinspection confirms the corrected copy and restored administrator
 access; the ended Messaging assignment exposes no communication context. PR #3
 remains open, draft and unmerged. See [the Phase 4A validation
 record](PHASE_4A_VALIDATION.md) for exact observations, cleanup and evidence limits.
-No Phase 4B or other later phase has begun.
+At the Phase 4A handoff, no Phase 4B or other later phase had begun.
 
 See [communications](COMMUNICATIONS_ARCHITECTURE.md),
 [minor safety](MINOR_COMMUNICATION_SAFETY.md),

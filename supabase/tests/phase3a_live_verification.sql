@@ -1345,7 +1345,7 @@ v_passed:=v_passed+1;
 
 EXECUTE 'RESET ROLE';
 
-IF NOT coalesce(((SELECT count(*)=22 FROM public.permissions WHERE key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage','announcements.send','communications.manage','communications.send','communications.view','delivery_history.view','moderation.manage','notifications.manage','notifications.view','team_chat.send','team_chat.view')) AND (SELECT count(*)=147 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage','announcements.send','communications.manage','communications.send','communications.view','delivery_history.view','moderation.manage','notifications.manage','notifications.view','team_chat.send','team_chat.view'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','22 permissions 147 role mappings';
+IF NOT coalesce(((SELECT count(*)=22 FROM public.permissions WHERE key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage','announcements.send','communications.manage','communications.send','communications.view','delivery_history.view','moderation.manage','notifications.manage','notifications.view','team_chat.send','team_chat.view','attendance.view','attendance.respond','attendance.manage','attendance.checkin','volunteers.view','volunteers.signup','volunteers.manage','volunteers.assign')) AND (SELECT count(*)=147 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('registration.view','registration.create','registration.manage','registration.review','forms.manage','documents.view','documents.review','documents.emergency_view','fees.view','fees.manage','payments.record_offline','waivers.manage','announcements.send','communications.manage','communications.send','communications.view','delivery_history.view','moderation.manage','notifications.manage','notifications.view','team_chat.send','team_chat.view','attendance.view','attendance.respond','attendance.manage','attendance.checkin','volunteers.view','volunteers.signup','volunteers.manage','volunteers.assign'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','22 permissions 147 role mappings';
 END IF;
 v_passed:=v_passed+1;
 
@@ -1425,16 +1425,16 @@ PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase
 
 v_failed:=false;
 v_safe:=false;
-BEGIN PERFORM public.boss_calendar_mutate(jsonb_build_object('operation','calendar.configure','input',jsonb_build_object('organization_id',(md5('boss-phase3a-live:'||('org-a'))::uuid),'features',jsonb_build_object('attendance',true))),md5('boss-phase3a-live:request-'||('attendance activation not implemented'))::uuid);
+BEGIN PERFORM public.boss_calendar_mutate(jsonb_build_object('operation','calendar.configure','input',jsonb_build_object('organization_id',(md5('boss-phase3a-live:'||('org-a'))::uuid),'features',jsonb_build_object('unapproved_attendance_feature',true))),md5('boss-phase3a-live:request-'||('unknown calendar feature activation denied'))::uuid);
 EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['PT422']) THEN v_failed:=true;
 v_safe:=length(SQLERRM)<100 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';
-ELSE RAISE EXCEPTION 'Unexpected live denial state %: %',SQLSTATE,'attendance activation not implemented';
+ELSE RAISE EXCEPTION 'Unexpected live denial state %: %',SQLSTATE,'unknown calendar feature activation denied';
 END IF;
 END;
-IF NOT v_failed THEN RAISE EXCEPTION 'Missing live denial: %','attendance activation not implemented';
+IF NOT v_failed THEN RAISE EXCEPTION 'Missing live denial: %','unknown calendar feature activation denied';
 END IF;
 v_passed:=v_passed+1;
-IF NOT v_safe THEN RAISE EXCEPTION 'Unsafe live denial: %','attendance activation not implemented';
+IF NOT v_safe THEN RAISE EXCEPTION 'Unsafe live denial: %','unknown calendar feature activation denied';
 END IF;
 v_passed:=v_passed+1;
 

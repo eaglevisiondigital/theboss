@@ -7,8 +7,8 @@ test_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repository_dir=$(cd -- "$test_dir/../.." && pwd)
 selected_test=''
 if [[ $# != 0 ]]; then
-  if [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4a)_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase4a_communications.sql]' >&2
+  if [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase4b_attendance.sql]' >&2
     exit 1
   fi
   selected_test=$2
@@ -65,10 +65,12 @@ trap 'exit 143' TERM
 
 # Host connections are rejected and PostgreSQL binds no TCP interfaces.
 # The private Unix socket is accessible only to this operating-system user.
+# Match the canonical Boss project's verified JIT setting, so compiler cost
+# does not obscure authorization and concurrency behavior in short requests.
 "$postgres_bin_dir/initdb" --pgdata "$data_dir" --username boss_test_admin \
   --auth-local trust --auth-host reject --encoding UTF8 --no-locale >/dev/null
 "$postgres_bin_dir/pg_ctl" --pgdata "$data_dir" --log "$test_run_dir/postgres.log" \
-  --options "-c listen_addresses='' -c unix_socket_directories='$socket_dir' -c unix_socket_permissions=0700 -c log_statement=none" \
+  --options "-c listen_addresses='' -c unix_socket_directories='$socket_dir' -c unix_socket_permissions=0700 -c log_statement=none -c jit=off" \
   --wait start >/dev/null
 psql_bootstrap_command=("$postgres_bin_dir/psql" --no-psqlrc --no-password \
   --host "$socket_dir" --port 5432 --username boss_test_admin --dbname postgres \
@@ -93,7 +95,7 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4a_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql)
 if [[ -n "$selected_test" ]]; then tests=("$test_dir/$selected_test");fi
 if [[ ${#tests[@]} == 0 ]]; then
   printf '%s\n' 'No foundation/calendar/registration/communications SQL test files found.' >&2
@@ -161,14 +163,14 @@ fi
 printf 'Testing %s\n' "${registration_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$registration_concurrency_test"
-for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh; do
+for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh phase4b_attendance_concurrency.sh phase4b_volunteers_concurrency.sh; do
   concurrency_test=$test_dir/$phase4a_test
   if [[ ! -s "$concurrency_test" ]]; then
-    printf 'Phase 4A concurrency test is missing: %s\n' "$phase4a_test" >&2
+    printf 'Phase 4 concurrency test is missing: %s\n' "$phase4a_test" >&2
     exit 1
   fi
   printf 'Testing %s\n' "$phase4a_test"
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
     PGDATABASE=postgres PGUSER=postgres bash "$concurrency_test"
 done
-printf '%s\n' 'Phase 2A/2B/3A/3B/4A PostgreSQL 17 authorization tests passed.'
+printf '%s\n' 'Phase 2A/2B/3A/3B/4A/4B PostgreSQL 17 authorization tests passed.'

@@ -50,6 +50,13 @@ test("atomic references are backward only and UUID fields are strictly shaped", 
   assert.equal(parseAdminInput({ ...body, commands: [{ operation: "person.update", input: { id: "not-a-uuid" } }] }),null);
   assert.equal(parseAdminInput({ ...body, commands: [{ operation: "person.create", input: { display_name: { $ref: "child" } } }] }),null);
 });
+test("guardian attendance capability is an explicit boolean independent of prior flags", () => {
+  const input = { id, can_register: true, can_manage_payments: true };
+  const prior = parseAdminInput({ request_id: id, commands: [{ operation: "guardian.update", input }] }); assert.ok(prior); assert.equal(Object.hasOwn(prior.commands[0].input, "can_respond_attendance"), false);
+  for (const enabled of [true, false]) assert.ok(parseAdminInput({ request_id: id, commands: [{ operation: "guardian.update", input: { ...input, can_respond_attendance: enabled } }] }));
+  for (const value of ["true", 1, null, { enabled: true }]) assert.equal(parseAdminInput({ request_id: id, commands: [{ operation: "guardian.update", input: { ...input, can_respond_attendance: value } }] }), null);
+  assert.equal(parseAdminInput({ request_id: id, commands: [{ operation: "household_membership.update", input: { id, can_respond_attendance: true } }] }), null);
+});
 test("current Auth user and verified identity must agree", async () => {
   const m = mock();
   m.client.auth.getUser = async () => ({ data: { user: { id: other } }, error: null });

@@ -6,6 +6,7 @@ import { AppRouterContext, type AppRouterInstance } from "next/dist/shared/lib/a
 import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import { EventEditor } from "../src/components/calendar/event-editor";
 import { CalendarConsole } from "../src/components/calendar/console";
+import { CalendarManagement } from "../src/components/calendar/management";
 import { defaultFeatures, emptyCalendar, type CalendarData, type EventInput, type Occurrence } from "../src/lib/calendar/contracts";
 import { parseCalendarCommand, projectCalendarData, projectCalendarMutation, projectCalendarPreview, readCalendarInput } from "../src/lib/calendar/input";
 import { performCalendarMutation, type CalendarMutationClient } from "../src/lib/calendar/mutation";
@@ -32,6 +33,15 @@ function fixture(): CalendarData {
 }
 const router: AppRouterInstance = { back() {},forward() {},refresh() {},push() {},replace() {},prefetch() {},bfcacheId: "controlled-test" };
 function render(node: ReturnType<typeof createElement>, params = "") { return renderToStaticMarkup(createElement(AppRouterContext.Provider,{ value: router },createElement(SearchParamsContext.Provider,{ value: new URLSearchParams(params) },node))); }
+
+test("calendar volunteer link follows the authorized feature organization of the selected event", () => {
+  const selection = parseSelection({ date: "2026-10-15", tz: "America/Chicago" }), data = fixture();
+  const allowed = render(createElement(CalendarConsole, { data, selection, initialEventId: other, volunteerOrganizationId: id }));
+  assert.match(allowed, /Volunteer needs/); assert.match(allowed, new RegExp(`/app/volunteers\\?view=upcoming&amp;org=${id}&amp;event=${other}`));
+  for (const volunteerOrganizationId of [third, null, undefined]) {
+    assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection, initialEventId: other, volunteerOrganizationId })), /Volunteer needs/);
+  }
+});
 
 test("calendar wall time uses selected IANA zone and later DST fold", () => {
   assert.equal(localToInstant("2026-11-01T01:30","America/Chicago"),"2026-11-01T07:30:00.000Z");
@@ -73,7 +83,25 @@ test("multi-day and all-day display uses exclusive ends across DST", () => {
 });
 test("finite command input rejects forged capability, unknown fields and unsupported modules", () => {
   assert.ok(parseCalendarCommand(command));
-  for (const value of [{ ...command,actor: third },{ ...command,input: { ...input,is_admin: true } },{ operation: "registration.create",input },{ ...command,input: { ...input,targets: [{ target_type: "descendant",target_id: other }] } },{ ...command,input: { ...input,targets: [input.targets[0],input.targets[0]] } },{ ...command,input: { ...input,audience: ["players"] } },{ ...command,input: { ...input,end_at: input.start_at } },{ ...command,input: { ...input,start_at: "2026-02-30T16:00:00Z" } },{ ...command,input: { ...input,description: "a".repeat(4001) } },{ operation: "calendar.configure",input: { organization_id: id,features: { attendance: true } } }]) assert.equal(parseCalendarCommand(value),null);
+  for (const value of [{ ...command,actor: third },{ ...command,input: { ...input,is_admin: true } },{ operation: "registration.create",input },{ ...command,input: { ...input,targets: [{ target_type: "descendant",target_id: other }] } },{ ...command,input: { ...input,targets: [input.targets[0],input.targets[0]] } },{ ...command,input: { ...input,audience: ["players"] } },{ ...command,input: { ...input,end_at: input.start_at } },{ ...command,input: { ...input,start_at: "2026-02-30T16:00:00Z" } },{ ...command,input: { ...input,description: "a".repeat(4001) } }]) assert.equal(parseCalendarCommand(value),null);
+});
+test("Calendar attendance configuration accepts booleans and rejects unknown or malformed flags", () => {
+  for (const attendance of [true, false]) {
+    const value = { operation: "calendar.configure", input: { organization_id: id, features: { attendance, head_coach_management: false } } };
+    assert.deepEqual(parseCalendarCommand(value), value);
+  }
+  for (const features of [{ attendance: "true" }, { attendance: 1 }, { attendance: null }, { attendance: {} }, { attendance: true, attendance_head_coach_management: true }, { attendance: true, sms: true }, {}]) {
+    assert.equal(parseCalendarCommand({ operation: "calendar.configure", input: { organization_id: id, features } }), null);
+  }
+});
+test("Calendar settings expose current attendance state only to authorized configuration users", () => {
+  for (const attendance of [true, false]) {
+    const data = fixture(); data.features = { ...data.features, attendance }; data.capabilities = { ...data.capabilities, configure: true };
+    const html = render(createElement(CalendarManagement, { data, organizationId: id }));
+    const checkbox = html.match(/<input[^>]*name="attendance"[^>]*>/)?.[0]; assert.ok(checkbox);
+    assert.equal(checkbox.includes("checked"), attendance); assert.match(html, /Attendance and RSVP/); assert.match(html, /response policies are configured in Attendance/); assert.doesNotMatch(html, /Attendance is reserved|later phase/);
+  }
+  assert.doesNotMatch(render(createElement(CalendarManagement, { data: fixture(), organizationId: id })), /name="attendance"|Save calendar settings/);
 });
 test("recurrence requires finite end, unique ISO weekdays and bounded horizon", () => {
   const good = { ...command,input: { ...input,recurrence: { frequency: "weekly",interval: 1,weekdays: [1,3],count: 20 } } }; assert.ok(parseCalendarCommand(good));

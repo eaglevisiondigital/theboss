@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { requireSession } from "@/lib/auth/session";
 import { loadAdminView } from "@/lib/admin/data";
 import { AdminConsole } from "@/components/admin/console";
+import { loadAttendance } from "@/lib/attendance/data";
+import { loadVolunteers } from "@/lib/volunteers/data";
+import { parseAttendanceQuery } from "@/lib/attendance/input";
+import { parseVolunteerQuery } from "@/lib/volunteers/input";
+import { CoordinationHub } from "@/components/coordination/hub";
 
 export const metadata: Metadata = { title: "Families" };
 
@@ -9,6 +14,8 @@ export default async function FamiliesPage({ searchParams }: { searchParams: Pro
   await requireSession("/app/families");
   const query = await searchParams;
   const search = typeof query.q === "string" ? query.q : undefined;
-  const data = await loadAdminView("families", typeof query.org === "string" ? query.org : undefined, search);
-  return <AdminConsole view="families" data={data} query={search} />;
+  const attendanceQuery = parseAttendanceQuery({ org: query.org, child: query.child, view: "family" }), volunteerQuery = parseVolunteerQuery({ org: query.org, view: "family" });
+  if (!attendanceQuery || !volunteerQuery) return <p role="status" className="form-notice">Review the organization and child filters.</p>;
+  const [data, attendance, volunteers] = await Promise.all([loadAdminView("families", typeof query.org === "string" ? query.org : undefined, search), loadAttendance(attendanceQuery), loadVolunteers(volunteerQuery)]);
+  return <><CoordinationHub family attendance={attendance} volunteers={volunteers} attendanceQuery={attendanceQuery} volunteerQuery={volunteerQuery} /><AdminConsole view="families" data={data} query={search} /></>;
 }

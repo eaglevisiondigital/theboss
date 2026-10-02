@@ -33,6 +33,7 @@ export const guardianFlags: AdminField[] = [
   { name: "can_sign_waivers", label: "Waiver capability", type: "checkbox" },
   { name: "can_view_documents", label: "Document capability", type: "checkbox" },
   { name: "can_manage_payments", label: "Payment capability", type: "checkbox" },
+  { name: "can_respond_attendance", label: "Attendance response capability", type: "checkbox", value: false, hint: "Permits RSVP only for this dependent when current event, team and attendance policy also authorize it." },
 ];
 export function windowFields(includeStart = true): AdminField[] {
   return [...(includeStart ? [{ name: "starts_at", label: "Starts at", type: "datetime-local" as const }] : []), { name: "ends_at", label: "Ends at", type: "datetime-local" }];
