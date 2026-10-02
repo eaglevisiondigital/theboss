@@ -1,11 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import ApprovedHeader from "@/components/ApprovedHeader";
 import ApprovedFooter from "@/components/ApprovedFooter";
 import home from "@/app/approvedHome.module.css";
 import s from "./vision.module.css";
 
-// Prepared for /about. Wire into the route only after the exact approved artwork
-// is recovered, crop coordinates are checked, and desktop/mobile QA is complete.
+// Approved Vision composition; photographic regions reuse the owner-approved artwork.
 function Photo({crop,alt}:{crop:string;alt:string}) {
   return <svg viewBox={crop} preserveAspectRatio="xMidYMid slice" role="img" aria-label={alt}><image href="/design/vision-approved.png" width="821" height="1916"/></svg>;
 }
@@ -13,7 +13,7 @@ function Icon({kind}:{kind:"people"|"growth"|"heart"}) {
   return <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{kind==="growth"?<><path d="M5 27V18h5v9M14 27V11h5v16M23 27V4h5v23"/></>:kind==="heart"?<path d="M16 27 4 15C-3 5 10 0 16 9 22 0 35 5 28 15Z"/>:<><circle cx="16" cy="8" r="4"/><path d="M9 28v-8c0-7 14-7 14 0v8ZM3 26v-7M29 26v-7"/><circle cx="4" cy="11" r="3"/><circle cx="28" cy="11" r="3"/></>}</svg>;
 }
 export default function ApprovedVision(){return <div className={home.home}><a className={home.skipLink} href="#main-content">Skip to content</a><ApprovedHeader/><main id="main-content" className={s.page}>
-<section className={s.hero}><div className={s.heroCopy}><p className={s.eyebrow}>THE BOSS VISION</p><h1>Equip this generation.<br/>Empower <span>their potential.</span></h1><p>Help young people discover their abilities, pursue their dreams, and see possibilities beyond their circumstances.</p><a href="#our-purpose" className={s.button}>Be part of the vision</a></div><div className={s.heroPhoto}><Photo crop="354 45 467 304" alt="Young basketball and softball players with a supportive family outside a community recreation center"/></div></section>
+<section className={s.hero}><div className={s.heroCopy}><p className={s.eyebrow}>THE BOSS VISION</p><h1>Equip this generation.<br/>Empower <span>their potential.</span></h1><p>Help young people discover their abilities, pursue their dreams, and see possibilities beyond their circumstances.</p><a href="#our-purpose" className={s.button}>Be part of the vision</a></div><div className={s.heroPhoto}><Image src="/images/approved/vision-hero.png" alt="Young basketball and softball players with a supportive family outside a community recreation center" fill priority sizes="100vw"/></div></section>
 <section id="our-purpose" className={s.mission}><h2>Their potential drives our purpose.</h2><p>We created Boss to help equip this generation with practical fundraising tools, meaningful engagement, and a community of support. Together, we can help young people maximize their abilities and build a future filled with opportunity.</p><div className={s.three}>{([
 ["growth","Unlock opportunity.","Help remove financial barriers and expand what's possible."],
 ["heart","Build confidence.","Give young people the support they need to pursue their goals."],
