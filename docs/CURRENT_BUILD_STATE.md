@@ -10,23 +10,27 @@ the existing verified identity, exact scope, actual guardian authority and modul
 features. Registration, forms, signatures, documents, payment, eligibility,
 approval and roster statuses remain separate. No wallet or payment provider runs.
 
-Five validated migrations are applied to canonical `the-boss-platform`, ref
+Six validated migrations are applied to canonical `the-boss-platform`, ref
 `ilykgwgmxtrrikreacrz`, PostgreSQL 17, region `us-east-1`: `20261001231206`
 registration core, `20261001231216` transactional mutations and `20261001231224`
 read projections/private Storage, plus `20261001232309` for current document
 expiry projections and authorized renewal of naturally expired approved files.
 The previous twelve migrations are unchanged.
 `20261002031816` corrects managed Storage upload preflight metadata and restricts
-Storage operations to authenticated upload/byte download. Signed upload/download,
-list, copy and metadata-info operations remain denied even with current intent or lease.
+Storage operations to authenticated upload/byte download. `20261002034037`
+corrects the documented managed download preflight: exact authenticated byte and
+metadata operations both require the unchanged same-object, same-actor/session
+audited lease and current authority. Signing, listing, public info, HEAD and copy
+remain denied.
 Public database types were generated from this live project. New raw tables are
 closed to client reads/writes; safe projections and audited finite operations
 provide authorized access. Storage is private with exact upload intents and short,
 session-bound audited download leases; no public or signed document URLs.
 
-The full disposable PostgreSQL suite passed 4,990 assertions and 16 coordinated
-races. The canonical rollback-only verifier passed 704 assertions with all seven
-fixture cleanup counts zero. A managed Storage deletion protection exposed a local
+The full disposable PostgreSQL suite passed 5,044 assertions and 16 coordinated
+races. The canonical rollback-only verifier passed 731 assertions with all seven
+verifier fixture cleanup counts zero; later hosted synthetic authority cleanup is
+a separate operation, recorded below. A managed Storage deletion protection exposed a local
 harness mismatch; the corrected verifier models that guard without deleting
 Storage rows or bypassing protection. Expiry and renewal regressions verify
 current summaries, expired-file replacement, preserved review history and denial
@@ -37,11 +41,24 @@ dependencies and synthetic public configuration. Controlled hosted desktop/mobil
 acceptance remains in progress and is not yet claimed complete. Hosted positives
 include three reused child identities/programs, draft reload, conditional forms,
 immutable typed signature preserved after waiver v2 publication, coupon submission,
-actual private PDF upload/review, two offline partial receipts and installment plan.
+actual private PDF upload/review/download, two offline partial receipts and
+installment plan. Desktop and mobile downloaded PDFs match the 1,771-byte upload and its SHA-256
+exactly. Hosted staff review, eligibility and approval preserve the separate
+partially-paid and unassigned states.
 Wrong-team mutation, draft review/assignment and missing check-reference requests
 are denied. Staff detail links/deep links now restore context through authorized
-reads. A fresh hosted download check and bounded expired household membership
-continuation approval are pending; the original administrator is restored active.
+reads. The contacts-only emergency save, Falcons final submission/500-dollar fee example
+and full positive roster demonstration remain pending: the synthetic household
+and child organization memberships expired. Automatic approval review rejected
+the bounded continuation because general Phase 3B authorization did not name that
+exact access-duration extension. The extension was not applied or bypassed. The
+original administrator is restored active and fresh hosted staff controls were
+verified after cleanup. All temporary role, guardian capability, household,
+organization and team-membership authority counts are zero. Four controlled
+create/restore/end audit records are present. Immutable synthetic signatures,
+document and cash/check evidence remain clearly marked and retained. Resuming the
+remaining family tests requires explicit bounded reinstatement of the same
+controlled relationships; the earlier duration-extension request is now stale.
 
 Security advisors show intentional RLS-without-policy information for 26 closed
 raw/private tables and the existing leaked-password protection warning. Performance

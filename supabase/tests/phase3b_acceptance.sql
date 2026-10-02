@@ -254,7 +254,7 @@ RESET ROLE;
 UPDATE public.document_upload_intents SET object_name=(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent') WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
 SET LOCAL ROLE authenticated;
 DO $$DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.upload.extra'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.get_authenticated_info','storage.object.get_authenticated_info','object.upload.extra'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   PERFORM pg_temp.sql_deny('upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
  END LOOP;
@@ -323,7 +323,7 @@ RESET ROLE;
 UPDATE auth.sessions SET not_after=NULL WHERE id=pg_temp.f('session-guardian');
 SET LOCAL ROLE authenticated;
 DO $$DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get_authenticated_info','storage.object.get_authenticated_info','object.head','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   PERFORM pg_temp.check('unaudited pending object denied for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
  END LOOP;
@@ -334,11 +334,56 @@ SELECT pg_temp.ok('physical upload complete','H',pg_temp.command('document.compl
 SELECT set_config('storage.operation','storage.object.upload',true);
 SELECT pg_temp.check('consumed upload intent grants no completed-object read','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
 SELECT set_config('storage.operation','',true);
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('completed object without audited lease denies '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
 SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.ok('guardian document access','H',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')));
 SELECT pg_temp.check('authorized guardian lease permits only one physical','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+SELECT set_config('storage.operation','object.get_authenticated_info',true);
+SELECT pg_temp.check('audited lease permits normalized authenticated metadata preflight','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+SELECT set_config('storage.operation','storage.object.get_authenticated_info',true);
+SELECT pg_temp.check('audited lease permits prefixed authenticated metadata preflight','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+-- A real isolated unleased metadata row ensures cross-path denials are not
+-- vacuous empty-table checks. The fixture and all writes roll back together.
+RESET ROLE;
+INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+SELECT 'boss-registration-documents',result->>'object_name'||'/unleased-path',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}'::jsonb FROM pg_temp.phase3b_results WHERE label='physical upload intent';
+SELECT pg_temp.check('isolated unleased cross-path metadata fixture exists','H',EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name'||'/unleased-path' FROM pg_temp.phase3b_results WHERE label='physical upload intent')));
+SET LOCAL ROLE authenticated;
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('audited lease remains exact-object path for '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name'||'/unleased-path' FROM pg_temp.phase3b_results WHERE label='physical upload intent')));
+ END LOOP;
+END $$;
+RESET ROLE;
+UPDATE auth.sessions SET not_after=now()-interval '1 second' WHERE id=pg_temp.f('session-guardian');
+SET LOCAL ROLE authenticated;
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('audited lease cannot outlive expired Auth session for '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+RESET ROLE;
+UPDATE auth.sessions SET not_after=NULL WHERE id=pg_temp.f('session-guardian');
+DELETE FROM auth.sessions WHERE id=pg_temp.f('session-guardian');
+SET LOCAL ROLE authenticated;
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('audited lease cannot outlive deleted Auth session for '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+RESET ROLE;
+INSERT INTO auth.sessions(id,user_id) VALUES(pg_temp.f('session-guardian'),pg_temp.f('auth-guardian'));
+SET LOCAL ROLE authenticated;
 DO $$DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.download.extra'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.head','object.get_authenticated_info.extra','object.download.extra'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   PERFORM pg_temp.check('valid lease never grants bearer signing or alternative operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
  END LOOP;
@@ -355,7 +400,13 @@ DO $$DECLARE affected integer;BEGIN
  PERFORM pg_temp.check('authenticated DELETE has no object replacement or erasure policy','Z',NOT EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','DELETE') AND (roles @> ARRAY['authenticated']::name[] OR roles @> ARRAY['public']::name[])));
 END $$;
 SELECT pg_temp.act('outsider');
-SELECT pg_temp.check('known object ID grants stranger no read','Z',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('known object ID grants stranger no read '||download_operation,'Z',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.deny('unrelated guardian known physical document denied','X',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')));
 SELECT pg_temp.act('coach');
 SELECT pg_temp.deny('ordinary coach private physical denied','I',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')));
@@ -375,19 +426,37 @@ UPDATE public.role_assignments SET ends_at=now()-interval '1 second' WHERE id=pg
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('emergency');
 SELECT pg_temp.deny('expired exact-team role denies emergency RPC','K',pg_temp.command('emergency.access',jsonb_build_object('registration_id',pg_temp.result_id('child one draft'),'purpose','emergency','team_id',pg_temp.f('team-a'))));
-SELECT pg_temp.check('unexpired medical lease revoked by current role expiry','K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('unexpired medical lease revoked by current role expiry '||download_operation,'K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 RESET ROLE;
 UPDATE public.role_assignments SET ends_at=NULL WHERE id=pg_temp.f('role-emergency');
 UPDATE public.team_memberships SET status='inactive' WHERE person_id=pg_temp.f('emergency');
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('emergency');
-SELECT pg_temp.check('unexpired medical lease revoked by staff membership inactivity','K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('unexpired medical lease revoked by staff membership inactivity '||download_operation,'K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 RESET ROLE;
 UPDATE public.team_memberships SET status='active' WHERE person_id=pg_temp.f('emergency');
 UPDATE boss_private.document_access_leases SET expires_at=now()-interval '1 second',created_at=now()-interval '2 minutes' WHERE actor_person_id=pg_temp.f('emergency');
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('emergency');
-SELECT pg_temp.check('expired medical lease no longer reads object','K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('expired medical lease no longer reads object '||download_operation,'K',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.act('finance');
 SELECT pg_temp.deny('finance cannot read medical physical','SEPARATION',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')));
 SELECT pg_temp.deny('finance cannot retrieve emergency medical data','SEPARATION',pg_temp.command('emergency.access',jsonb_build_object('registration_id',pg_temp.result_id('child one draft'),'purpose','ordinary')));
@@ -506,7 +575,13 @@ RESET ROLE;
 UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=pg_temp.f('guardian-child1');
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('guardian');
-SELECT pg_temp.check('revoked guardian document flag invalidates unexpired lease','Y',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('revoked guardian document flag invalidates unexpired lease '||download_operation,'Y',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.deny('revoked document flag prevents prior access replay','IDEMPOTENCY',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')),ARRAY['PT403'],'guardian document access');
 RESET ROLE;
 UPDATE public.guardian_relationships SET can_view_documents=true,can_sign_waivers=false,can_manage_payments=false WHERE id=pg_temp.f('guardian-child1');
@@ -520,7 +595,13 @@ INSERT INTO auth.sessions(id,user_id) VALUES(pg_temp.f('session-guardian-alterna
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('guardian');
 SELECT set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',pg_temp.f('session-guardian-alternate')))::text,true);
-SELECT pg_temp.check('different valid session cannot reuse private download lease','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('different valid session cannot reuse private download lease '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.act('guardian');
 SELECT pg_temp.check('family drilldown retains child name','READ',EXISTS(SELECT 1 FROM jsonb_array_elements(public.boss_registration_read('{}')->'registrations') x WHERE x->>'participant_label'='Synthetic Phase3B child1'));
 SELECT pg_temp.check('event linked offering projection names actual event','W',EXISTS(SELECT 1 FROM jsonb_array_elements(public.boss_registration_read('{}')->'offerings') x WHERE x->>'id'=pg_temp.result_id('camp offering')::text AND x->>'event_id'=pg_temp.f('event-a')::text AND x->>'event_title'='Synthetic Phase3B linked camp'));
@@ -541,7 +622,13 @@ SELECT pg_temp.deny('anonymous sign-in role cannot mutate private records','AUTH
 SET LOCAL ROLE anon;
 SELECT set_config('request.jwt.claims','{}',true);
 SELECT pg_temp.sql_deny('anonymous actual registration RPC denied','Z','SELECT public.boss_registration_read(''{}''::jsonb)');
-SELECT pg_temp.check('anonymous storage listing empty','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('anonymous storage listing empty '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 RESET ROLE;
 SELECT pg_temp.check('emergency sensitive access audited without medical plaintext','AUDIT',EXISTS(SELECT 1 FROM public.audit_events WHERE request_id=pg_temp.f('request-exact Falcons emergency access') AND action='emergency.access') AND NOT EXISTS(SELECT 1 FROM public.audit_events WHERE organization_id=pg_temp.f('org-a') AND (coalesce(before_data::text,'')||coalesce(after_data::text,'')) ~ '(Synthetic restricted|Synthetic Physician|Synthetic Insurance|555-0100|Synthetic Guardian|VERSION ONE)'));
 SELECT pg_temp.check('authorized physical access audits each new lease','AUDIT',(SELECT count(*)=2 FROM public.audit_events WHERE request_id IN(pg_temp.f('request-guardian document access'),pg_temp.f('request-exact Falcons physical emergency lease')) AND action='document.access'));
@@ -782,6 +869,13 @@ SELECT pg_temp.act('outsider');
 SELECT pg_temp.deny('natural expiry creates no unrelated guardian renewal authority','X',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','application/pdf','size_bytes',100)));
 SELECT pg_temp.act('guardian');
 SELECT pg_temp.ok('naturally expired physical renewal intent','H',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','application/pdf','size_bytes',100)));
+DO $$DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  PERFORM pg_temp.check('renewed document path invalidates old object lease for '||download_operation,'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent')));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.check('renewal issues new private path and revokes old object lease','H',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='naturally expired physical renewal intent')<>(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent') AND NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent')));
 RESET ROLE;
 SELECT pg_temp.check('renewal resets current approval while retaining old reviewed evidence','H',(SELECT status='upload_pending' AND reviewed_by_person_id IS NULL AND reviewed_at IS NULL AND review_reason IS NULL FROM public.registration_documents WHERE id=pg_temp.result_id('physical document')) AND EXISTS(SELECT 1 FROM boss_private.registration_document_history WHERE document_id=pg_temp.result_id('physical document') AND snapshot->>'status'='approved' AND snapshot->>'reviewed_by_person_id'=pg_temp.f('registrar')::text));

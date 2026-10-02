@@ -72,18 +72,26 @@ Raw metadata tables and object paths have no ordinary client table grants. An
 authorized guardian with `can_view_documents` or scoped `documents.view` requests
 `document.access` with purpose ordinary. Every request reauthorizes and audits,
 then creates a two-minute private actor/Auth-session lease. Storage SELECT permits
-that lease only during `object.get_authenticated`, the authenticated download GET.
-It checks the lease and current authority again for every byte request. Role inactivation,
+that lease only during `object.get_authenticated` and `object.get_authenticated_info`,
+the exact authenticated byte and metadata operations documented by Supabase for
+file access. Hosted byte requests were observed at Storage as authenticated info
+requests; a managed CDN authorization preflight is the inferred explanation.
+Both operations check the same lease and current authority. Role inactivation,
 expiration, guardian capability removal, module/feature closure or relationship
 expiry therefore closes an existing lease immediately.
 
 Operation checks compare exact trusted Storage route names, normalizing only the
 optional `storage.` prefix; empty, unset or partial operations are denied. Signed
-upload URLs, signed download URLs, listing, info/HEAD, copying, moving and image
+upload URLs, signed download URLs, listing, public info, HEAD, copying, moving and image
 rendering are denied even while an intent or lease is valid. Storage's signed
 routes mint bearer capabilities and later operate as an internal superuser, which
 would bypass the current-authority lease requirement. The platform supports no
-such flow. See [Storage operation helpers](https://supabase.com/docs/guides/storage/schema/helper-functions),
+such flow. Authenticated metadata is limited to the exact already authorized
+object and does not grant listing or another object's metadata. The application
+still requires PDF/JPEG/PNG MIME and valid bytes before returning an attachment;
+metadata JSON cannot pass as a document. See
+[documented file-access operation pair](https://supabase.com/docs/guides/storage/security/access-control),
+[Storage operation helpers](https://supabase.com/docs/guides/storage/schema/helper-functions),
 [signed download delivery](https://github.com/supabase/storage/blob/master/src/http/routes/object/getSignedObject.ts)
 and [signed upload delivery](https://github.com/supabase/storage/blob/master/src/http/routes/object/uploadSignedObject.ts).
 

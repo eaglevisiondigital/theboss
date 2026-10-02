@@ -33,15 +33,18 @@ is 10 MiB. Files remain private, subject to explicit review and lifecycle metada
 Every sensitive document/form/emergency access appends a safe audit record.
 Two-minute Storage read leases are actor/session/purpose bound and recheck actual
 role, feature and relationship on every authenticated download GET; the leased
-SELECT policy accepts only exact `object.get_authenticated`. Revocation takes
+SELECT policy accepts only exact `object.get_authenticated` and
+`object.get_authenticated_info`, the documented managed file-access pair. Both
+use the same already authorized object, actor/session and audited lease. Revocation takes
 effect before lease expiration. Emergency paths require exact-team coach/staff and
 participant relationships and expose restricted fields or explicitly eligible
 approved unexpired medical documents. Signed upload/download URL minting, listing,
-info/HEAD, copying, moving and rendering routes are denied even with a valid
+public info, HEAD, copying, moving and rendering routes are denied even with a valid
 intent or lease. Empty or partial operation names are also denied. No public file
 or reusable signed URL is returned by the application. These operation restrictions
 prevent signed bearer delivery from bypassing later lease or authority revocation;
-see [Supabase operation helpers](https://supabase.com/docs/guides/storage/schema/helper-functions)
+see [Supabase file-access policies](https://supabase.com/docs/guides/storage/security/access-control),
+[Supabase operation helpers](https://supabase.com/docs/guides/storage/schema/helper-functions)
 and the [Storage uploader](https://github.com/supabase/storage/blob/master/src/storage/uploader.ts).
 
 Canonical medical/form answers, waiver text/signature evidence and document paths

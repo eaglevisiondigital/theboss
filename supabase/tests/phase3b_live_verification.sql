@@ -319,7 +319,7 @@ EXECUTE 'RESET ROLE';
 UPDATE public.document_upload_intents SET object_name=(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent') WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
 EXECUTE 'SET LOCAL ROLE authenticated';
 DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.upload.extra'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.get_authenticated_info','storage.object.get_authenticated_info','object.upload.extra'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
@@ -404,7 +404,7 @@ EXECUTE 'RESET ROLE';
 UPDATE auth.sessions SET not_after=NULL WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
 EXECUTE 'SET LOCAL ROLE authenticated';
 DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get_authenticated_info','storage.object.get_authenticated_info','object.head','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unaudited pending object denied for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
  END LOOP;
@@ -417,13 +417,58 @@ v_results:=v_results||jsonb_build_object('physical upload complete',v_result);
 PERFORM set_config('storage.operation','storage.object.upload',true);
 IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','consumed upload intent grants no completed-object read';END IF;v_passed:=v_passed+1;
 PERFORM set_config('storage.operation','',true);
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','completed object without audited lease denies '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
 PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('guardian document access'))::uuid,jsonb_build_object('operation','document.access','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'purpose','ordinary')));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','guardian document access';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('guardian document access',v_result);
 IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authorized guardian lease permits only one physical';END IF;v_passed:=v_passed+1;
+PERFORM set_config('storage.operation','object.get_authenticated_info',true);
+IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','audited lease permits normalized authenticated metadata preflight';END IF;v_passed:=v_passed+1;
+PERFORM set_config('storage.operation','storage.object.get_authenticated_info',true);
+IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','audited lease permits prefixed authenticated metadata preflight';END IF;v_passed:=v_passed+1;
+-- A real isolated unleased metadata row ensures cross-path denials are not
+-- vacuous empty-table checks. The fixture and all writes roll back together.
+EXECUTE 'RESET ROLE';
+INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+SELECT 'boss-registration-documents',result->>'object_name'||'/unleased-path',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","size":100}'::jsonb FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent';
+IF NOT coalesce((EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name'||'/unleased-path' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','isolated unleased cross-path metadata fixture exists';END IF;v_passed:=v_passed+1;
+EXECUTE 'SET LOCAL ROLE authenticated';
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name'||'/unleased-path' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','audited lease remains exact-object path for '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+EXECUTE 'RESET ROLE';
+UPDATE auth.sessions SET not_after=now()-interval '1 second' WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','audited lease cannot outlive expired Auth session for '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+EXECUTE 'RESET ROLE';
+UPDATE auth.sessions SET not_after=NULL WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
+DELETE FROM auth.sessions WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','audited lease cannot outlive deleted Auth session for '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+EXECUTE 'RESET ROLE';
+INSERT INTO auth.sessions(id,user_id) VALUES((md5('boss-phase3b-live:'||('session-guardian'))::uuid),(md5('boss-phase3b-live:'||('auth-guardian'))::uuid));
+EXECUTE 'SET LOCAL ROLE authenticated';
 DECLARE attempted_operation text;BEGIN
- FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.download.extra'] LOOP
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.head','object.get_authenticated_info.extra','object.download.extra'] LOOP
   PERFORM set_config('storage.operation',attempted_operation,true);
   IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','valid lease never grants bearer signing or alternative operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
  END LOOP;
@@ -441,7 +486,13 @@ DECLARE affected integer;BEGIN
 END;
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('outsider'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('outsider'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','known object ID grants stranger no read';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','known object ID grants stranger no read '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_failed:=false;v_safe:=false;BEGIN PERFORM public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('unrelated guardian known physical document denied'))::uuid,jsonb_build_object('operation','document.access','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'purpose','ordinary'))); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['PT403']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','unrelated guardian known physical document denied',SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unrelated guardian known physical document denied';END IF;v_passed:=v_passed+1;
 IF NOT coalesce((v_safe),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unrelated guardian known physical document denied'||' safe error';END IF;v_passed:=v_passed+1;
@@ -486,21 +537,39 @@ PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase
 v_failed:=false;v_safe:=false;BEGIN PERFORM public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('expired exact-team role denies emergency RPC'))::uuid,jsonb_build_object('operation','emergency.access','input',jsonb_build_object('registration_id',((v_results->('child one draft'))->>'resource_id')::uuid,'purpose','emergency','team_id',(md5('boss-phase3b-live:'||('team-a'))::uuid)))); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['PT403']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','expired exact-team role denies emergency RPC',SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','expired exact-team role denies emergency RPC';END IF;v_passed:=v_passed+1;
 IF NOT coalesce((v_safe),false) THEN RAISE EXCEPTION 'Live assertion failed: %','expired exact-team role denies emergency RPC'||' safe error';END IF;v_passed:=v_passed+1;
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unexpired medical lease revoked by current role expiry';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unexpired medical lease revoked by current role expiry '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 EXECUTE 'RESET ROLE';
 UPDATE public.role_assignments SET ends_at=NULL WHERE id=(md5('boss-phase3b-live:'||('role-emergency'))::uuid);
 UPDATE public.team_memberships SET status='inactive' WHERE person_id=(md5('boss-phase3b-live:'||('emergency'))::uuid);
 EXECUTE 'SET LOCAL ROLE authenticated';
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('emergency'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('emergency'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unexpired medical lease revoked by staff membership inactivity';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unexpired medical lease revoked by staff membership inactivity '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 EXECUTE 'RESET ROLE';
 UPDATE public.team_memberships SET status='active' WHERE person_id=(md5('boss-phase3b-live:'||('emergency'))::uuid);
 UPDATE boss_private.document_access_leases SET expires_at=now()-interval '1 second',created_at=now()-interval '2 minutes' WHERE actor_person_id=(md5('boss-phase3b-live:'||('emergency'))::uuid);
 EXECUTE 'SET LOCAL ROLE authenticated';
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('emergency'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('emergency'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','expired medical lease no longer reads object';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','expired medical lease no longer reads object '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('finance'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('finance'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
 v_failed:=false;v_safe:=false;BEGIN PERFORM public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('finance cannot read medical physical'))::uuid,jsonb_build_object('operation','document.access','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'purpose','ordinary'))); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['PT403']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','finance cannot read medical physical',SQLSTATE;END IF;END;
@@ -731,7 +800,13 @@ UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=(md5(
 EXECUTE 'SET LOCAL ROLE authenticated';
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked guardian document flag invalidates unexpired lease';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked guardian document flag invalidates unexpired lease '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_failed:=false;v_safe:=false;BEGIN PERFORM public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('guardian document access'))::uuid,jsonb_build_object('operation','document.access','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'purpose','ordinary'))); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['PT403']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','revoked document flag prevents prior access replay',SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked document flag prevents prior access replay';END IF;v_passed:=v_passed+1;
 IF NOT coalesce((v_safe),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked document flag prevents prior access replay'||' safe error';END IF;v_passed:=v_passed+1;
@@ -751,7 +826,13 @@ EXECUTE 'SET LOCAL ROLE authenticated';
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
 PERFORM set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',(md5('boss-phase3b-live:'||('session-guardian-alternate'))::uuid)))::text,true);
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','different valid session cannot reuse private download lease';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','different valid session cannot reuse private download lease '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
 IF NOT coalesce((EXISTS(SELECT 1 FROM jsonb_array_elements(public.boss_registration_read('{}')->'registrations') x WHERE x->>'participant_label'='Synthetic Phase3B Live child1')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','family drilldown retains child name';END IF;v_passed:=v_passed+1;
@@ -794,7 +875,13 @@ EXECUTE 'SET LOCAL ROLE anon';
 PERFORM set_config('request.jwt.claims','{}',true);
 v_failed:=false;v_safe:=false;BEGIN EXECUTE 'SELECT public.boss_registration_read(''{}''::jsonb)'; EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','anonymous actual registration RPC denied',SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','anonymous actual registration RPC denied';END IF;v_passed:=v_passed+1;
-IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','anonymous storage listing empty';END IF;v_passed:=v_passed+1;
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','anonymous storage listing empty '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 EXECUTE 'RESET ROLE';
 IF NOT coalesce((EXISTS(SELECT 1 FROM public.audit_events WHERE request_id=(md5('boss-phase3b-live:'||('request-exact Falcons emergency access'))::uuid) AND action='emergency.access') AND NOT EXISTS(SELECT 1 FROM public.audit_events WHERE organization_id=(md5('boss-phase3b-live:'||('org-a'))::uuid) AND (coalesce(before_data::text,'')||coalesce(after_data::text,'')) ~ '(Synthetic restricted|Synthetic Physician|Synthetic Insurance|555-0100|Synthetic Guardian|VERSION ONE)')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','emergency sensitive access audited without medical plaintext';END IF;v_passed:=v_passed+1;
 IF NOT coalesce(((SELECT count(*)=2 FROM public.audit_events WHERE request_id IN((md5('boss-phase3b-live:'||('request-guardian document access'))::uuid),(md5('boss-phase3b-live:'||('request-exact Falcons physical emergency lease'))::uuid)) AND action='document.access')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authorized physical access audits each new lease';END IF;v_passed:=v_passed+1;
@@ -1189,6 +1276,13 @@ PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('naturally expired physical renewal intent'))::uuid,jsonb_build_object('operation','document.intent','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'mime_type','application/pdf','size_bytes',100)));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','naturally expired physical renewal intent';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('naturally expired physical renewal intent',v_result);
+DECLARE download_operation text;BEGIN
+ FOREACH download_operation IN ARRAY ARRAY['object.get_authenticated','storage.object.get_authenticated_info'] LOOP
+  PERFORM set_config('storage.operation',download_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','renewed document path invalidates old object lease for '||download_operation;END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 IF NOT coalesce(((SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='naturally expired physical renewal intent')<>(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent') AND NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','renewal issues new private path and revokes old object lease';END IF;v_passed:=v_passed+1;
 EXECUTE 'RESET ROLE';
 IF NOT coalesce(((SELECT status='upload_pending' AND reviewed_by_person_id IS NULL AND reviewed_at IS NULL AND review_reason IS NULL FROM public.registration_documents WHERE id=((v_results->('physical document'))->>'resource_id')::uuid) AND EXISTS(SELECT 1 FROM boss_private.registration_document_history WHERE document_id=((v_results->('physical document'))->>'resource_id')::uuid AND snapshot->>'status'='approved' AND snapshot->>'reviewed_by_person_id'=(md5('boss-phase3b-live:'||('registrar'))::uuid)::text)),false) THEN RAISE EXCEPTION 'Live assertion failed: %','renewal resets current approval while retaining old reviewed evidence';END IF;v_passed:=v_passed+1;
@@ -1220,12 +1314,12 @@ IF NOT coalesce(((SELECT count(*)=2 FROM storage.objects WHERE bucket_id='boss-r
 IF NOT (SELECT count(*)=3 AND bool_and(cmd IN('INSERT','SELECT')) AND bool_and(roles=ARRAY['authenticated']::name[]) FROM pg_catalog.pg_policies WHERE schemaname='storage' AND policyname IN('boss_registration_document_upload','boss_registration_document_download','boss_registration_document_upload_returning')) THEN RAISE EXCEPTION 'Storage canonical policies changed';END IF;v_passed:=v_passed+1;
 IF EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','UPDATE','DELETE') AND (coalesce(qual,'')||coalesce(with_check,'')) LIKE '%boss-registration-documents%') THEN RAISE EXCEPTION 'Private registration object replacement policy opened';END IF;v_passed:=v_passed+1;
 IF has_function_privilege('anon','public.boss_registration_read(jsonb)','EXECUTE') OR has_function_privilege('service_role','public.boss_registration_read(jsonb)','EXECUTE') OR has_function_privilege('service_role','public.boss_registration_mutate(uuid,jsonb)','EXECUTE') THEN RAISE EXCEPTION 'Private caller RPC grants opened';END IF;v_passed:=v_passed+1;
-IF v_passed<>704 THEN RAISE EXCEPTION 'Phase3B expected assertion count changed';END IF;
+IF v_passed<>731 THEN RAISE EXCEPTION 'Phase3B expected assertion count changed';END IF;
 PERFORM set_config('boss.phase3b_live_assertions',v_passed::text,true);
 END $live$;
 SELECT current_setting('boss.phase3b_live_assertions')::integer AS passed_assertions;
 ROLLBACK;
-SELECT 704 AS passed_assertions,
+SELECT 731 AS passed_assertions,
  (SELECT count(*) FROM public.people WHERE display_name LIKE 'Synthetic Phase3B Live %') AS synthetic_people_remaining,
  (SELECT count(*) FROM public.organizations WHERE slug LIKE 'synthetic-phase3b-live-%') AS synthetic_organizations_remaining,
  (SELECT count(*) FROM auth.users WHERE email LIKE '%@phase3b-live.example.invalid') AS synthetic_auth_users_remaining,
