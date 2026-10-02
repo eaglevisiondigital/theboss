@@ -7,8 +7,8 @@ test_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repository_dir=$(cd -- "$test_dir/../.." && pwd)
 selected_test=''
 if [[ $# != 0 ]]; then
-  if [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase[23][ab]_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase3b_acceptance.sql]' >&2
+  if [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4a)_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase4a_communications.sql]' >&2
     exit 1
   fi
   selected_test=$2
@@ -93,10 +93,10 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4a_*.sql)
 if [[ -n "$selected_test" ]]; then tests=("$test_dir/$selected_test");fi
 if [[ ${#tests[@]} == 0 ]]; then
-  printf '%s\n' 'No foundation/calendar/registration SQL test files found.' >&2
+  printf '%s\n' 'No foundation/calendar/registration/communications SQL test files found.' >&2
   exit 1
 fi
 for test_file in "${tests[@]}"; do
@@ -107,7 +107,7 @@ for test_file in "${tests[@]}"; do
   test_output=$test_run_dir/${test_file##*/}.stdout
   "${psql_command[@]}" --quiet --file "$test_file" >"$test_output"
   if ! awk '
-    /^[[:space:]]*passed_assertions[[:space:]]*$/ { summary = 1 }
+    /^[[:space:]]*passed_assertions([[:space:]]*\||[[:space:]]*$)/ { summary = 1 }
     summary { print }
     END { if (!summary) exit 1 }
   ' "$test_output"; then
@@ -161,4 +161,14 @@ fi
 printf 'Testing %s\n' "${registration_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$registration_concurrency_test"
-printf '%s\n' 'Phase 2A/2B/3A/3B PostgreSQL 17 authorization tests passed.'
+for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh; do
+  concurrency_test=$test_dir/$phase4a_test
+  if [[ ! -s "$concurrency_test" ]]; then
+    printf 'Phase 4A concurrency test is missing: %s\n' "$phase4a_test" >&2
+    exit 1
+  fi
+  printf 'Testing %s\n' "$phase4a_test"
+  PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
+    PGDATABASE=postgres PGUSER=postgres bash "$concurrency_test"
+done
+printf '%s\n' 'Phase 2A/2B/3A/3B/4A PostgreSQL 17 authorization tests passed.'

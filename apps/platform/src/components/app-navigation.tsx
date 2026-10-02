@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import type { AdminNavigation } from "@/lib/admin/contracts";
 
-export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean }) {
+export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false, communicationsAvailable = false, notificationsAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean; communicationsAvailable?: boolean; notificationsAvailable?: boolean }) {
   const pathname = usePathname();
   const organization = useSearchParams().get("org");
   const context = organization && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(organization) ? `?org=${organization}` : "";
@@ -15,6 +15,8 @@ export function AppNavigation({ navigation = [], calendarAvailable = false, regi
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
     ...(calendarAvailable ? [{ href: "/app/calendar", label: "Calendar" }] : []),
     ...(registrationAvailable ? [{ href: "/app/registrations", label: "Registrations" }] : []),
+    ...(communicationsAvailable ? [{ href: "/app/messages", label: "Messages" }, { href: "/app/announcements", label: "Announcements" }] : []),
+    ...(notificationsAvailable ? [{ href: "/app/notifications", label: "Notifications" }] : []),
     { href: "/app/account", label: "Account" },
   ];
 

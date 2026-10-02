@@ -17,6 +17,7 @@ export function localDateTime(instant: string | number, timezone: string): strin
   return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}:${get("second")}`;
 }
 export function validDate(value: string) { return /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(`${value}T12:00:00Z`)) && new Date(`${value}T12:00:00Z`).toISOString().slice(0, 10) === value; }
+export function validOccurrenceKey(value: string) { return /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(value) && validDate(value.slice(0, 10)); }
 /** Resolve wall time in its selected zone. A fold uses the later instant; a gap has no instant. */
 export function localToInstant(value: string, timezone: string): string | null {
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?$/.test(value) || !validTimezone(timezone) || !validDate(value.slice(0, 10))) return null;
@@ -63,6 +64,7 @@ export function parseSelection(params: Record<string, string | string[] | undefi
   if (view && view !== display) invalid = true;
   const zone = text("tz"); const timezone = zone && validTimezone(zone) ? zone : "UTC"; if (zone && zone !== timezone) invalid = true;
   const dateValue = text("date"); const date = validDate(dateValue) ? dateValue : localDateTime(now.getTime(), timezone).slice(0,10); if (dateValue && dateValue !== date) invalid = true;
+  const occurrence = text("occurrence"); if (occurrence && (!validOccurrenceKey(occurrence) || !dateValue || !zone || !uuidPattern.test(text("event")))) invalid = true;
   const days = displayDays(date, display); const requestedFrom = text("from"), requestedTo = text("to");
   const rangeStart = requestedFrom || days[0]; const rangeEnd = requestedTo || (validDate(rangeStart) ? addDays(rangeStart,days.length-1) : days.at(-1)!);
   if (requestedFrom || requestedTo) display = "agenda";

@@ -1,5 +1,27 @@
 # Boss platform security
 
+## Phase 4A communication boundary
+
+Public invoker read/mutation wrappers delegate to private finite dispatchers. New
+raw tables use RLS and no direct client table grants. Helpers accepting arbitrary
+recipient identities remain private and nonexecutable to API roles. Same-origin
+signed-session POSTs validate finite inputs and current scope, features, channel,
+audience, guardian and age policy before canonical writes, receipts and safe audits
+commit together. Retries reauthorize; knowing a UUID or destination link is not access.
+
+Private PDF/PNG/JPEG attachments are limited to 5 MiB. Exact upload intents and short
+audited same-object/same-actor/session download leases retain current channel checks
+for managed Storage preflight and byte operations. Public links, signing, listing,
+overwrite and cross-channel attachment binding remain denied. Message bodies,
+document contents, credentials and provider internals are excluded from broad audits.
+
+Participant messaging is disabled by default; missing age fails closed. Minor direct
+messages remain denied. Explicit guardian visibility and group policy are required
+for permitted minor group communication. Household membership or legacy registration
+flags cannot substitute. Email remains unconfigured until an approved provider and
+sender are supplied; SMS/push channels are future only. [Minor safety](MINOR_COMMUNICATION_SAFETY.md)
+and [delivery boundary](EMAIL_DELIVERY_ARCHITECTURE.md).
+
 ## Phase 3B registration and private files
 
 Registration tables use RLS and explicit revokes for `anon`, `authenticated` and

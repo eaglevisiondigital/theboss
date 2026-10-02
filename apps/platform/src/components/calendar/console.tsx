@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { CalendarData, CalendarDisplay, CalendarSelection, Occurrence } from "@/lib/calendar/contracts";
-import { addDays, displayDays, formatDate, formatTime, groupOccurrences, localDateTime, moveDate } from "@/lib/calendar/temporal";
+import { addDays, displayDays, formatDate, formatTime, groupOccurrences, localDateTime, moveDate, occurrenceOnDate } from "@/lib/calendar/temporal";
 import { EventEditor } from "./event-editor";
 import { CalendarManagement } from "./management";
 
@@ -11,8 +11,11 @@ function Filter({ label, name, selected, rows }: { label: string; name: string; 
   return <label className="form-field"><span>{label}</span><select name={name} defaultValue={selected ?? ""}><option value="">All {label.toLowerCase()}</option>{rows.map(row => <option key={row.id} value={row.id}>{row.name}</option>)}</select></label>;
 }
 const eventKey = (event: Occurrence) => `${event.event_id}:${event.occurrence_key}`;
-export function CalendarConsole({ data, selection }: { data: CalendarData; selection: CalendarSelection }) {
-  const searchParams = useSearchParams(); const [selectedKey,setSelectedKey] = useState<string | null>(null);
+export function CalendarConsole({ data, selection, initialEventId, initialOccurrenceKey }: { data: CalendarData; selection: CalendarSelection; initialEventId?: string; initialOccurrenceKey?: string }) {
+  const searchParams = useSearchParams(); const [selectedKey,setSelectedKey] = useState<string | null>(() => {
+    const linked = !selection.invalid && data.occurrences.find(occurrence => occurrence.event_id === initialEventId && (initialOccurrenceKey === undefined || occurrence.occurrence_key === initialOccurrenceKey) && occurrenceOnDate(occurrence, selection.date, selection.timezone));
+    return linked ? eventKey(linked) : null;
+  });
   const selected = data.occurrences.find(occurrence => eventKey(occurrence) === selectedKey);
   const selectedVenue = selected ? data.venues.find(venue => venue.id === selected.venue_id) : undefined;
   const venueAddress = selectedVenue ? [selectedVenue.address_line1,selectedVenue.address_line2,selectedVenue.city,selectedVenue.region,selectedVenue.postal_code,selectedVenue.country_code].filter(Boolean).join(", ") : "";

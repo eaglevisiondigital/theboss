@@ -4,13 +4,16 @@ import { requireSession } from "@/lib/auth/session";
 import { loadAdminView } from "@/lib/admin/data";
 import { Suspense } from "react";
 import { registrationNavigationAvailable } from "@/lib/registration/data";
+import { loadNotifications } from "@/lib/notifications/data";
+import { communicationsNavigationAvailable } from "@/lib/communications/data";
+import { NotificationDrawer } from "@/components/communications/notification-drawer";
 import { calendarNavigationAvailable } from "@/lib/calendar/data";
 
 export default async function AppLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   await requireSession();
-  const [data, calendarAvailable, registrationAvailable] = await Promise.all([loadAdminView("home"), calendarNavigationAvailable(), registrationNavigationAvailable()]);
+  const [data, calendarAvailable, registrationAvailable, communicationsAvailable, notifications] = await Promise.all([loadAdminView("home"), calendarNavigationAvailable(), registrationNavigationAvailable(), communicationsNavigationAvailable(), loadNotifications({ view: "summary", limit: 5 })]);
 
   return (
     <div className="authenticated-page admin-shell">
@@ -18,11 +21,12 @@ export default async function AppLayout({
         <div className="app-header-inner container">
           <Brand href="/app" />
           <span className="workspace-label">Your Boss workspace</span>
+          <NotificationDrawer data={notifications} />
           <form action="/auth/logout" method="post" className="logout-form">
             <button type="submit" className="button button-small button-outline">Sign out</button>
           </form>
         </div>
-        <div className="container"><Suspense fallback={<nav className="app-navigation" aria-label="Main navigation" />}><AppNavigation navigation={data.navigation} calendarAvailable={calendarAvailable} registrationAvailable={registrationAvailable} /></Suspense></div>
+        <div className="container"><Suspense fallback={<nav className="app-navigation" aria-label="Main navigation" />}><AppNavigation navigation={data.navigation} calendarAvailable={calendarAvailable} registrationAvailable={registrationAvailable} communicationsAvailable={communicationsAvailable} notificationsAvailable={!notifications.unavailable && notifications.availability.in_app} /></Suspense></div>
       </header>
       <main id="main-content" className="app-main container">{children}</main>
       <footer className="app-footer container"><span>The Boss platform</span><span>Operational core</span></footer>

@@ -1,5 +1,30 @@
 # Boss foundation implementation decisions
 
+## Phase 4A implementation choices
+
+| Choice | Reason and limit |
+| --- | --- |
+| Existing messaging catalog key | Shared Communications extends the approved modular foundation without inventing separate per-module systems |
+| Content independent from targets and channels | One multi-team announcement keeps private chats separate and canonical notification content independent of email/in-app delivery |
+| Explicit new guardian capabilities | Legacy registration/document/payment flags do not become private communication grants; both new capabilities default false |
+| Conservative minor policy | Participant messaging defaults disabled with known-age checks; minor direct messages are denied and guardian-visible groups require explicit policy |
+| Current authorization on reads and queued work | Removed members lose private history and pending delivery access; possession of IDs and stale projections cannot grant authority |
+| Closed raw tables and private arbitrary-person helpers | Safe caller-bound RPC projections avoid client recipient injection and impersonation helpers |
+| Monotonic per-thread read state | Counts persist across reload and racing mark-read commands cannot move the watermark backward |
+| Bounded sender edit and preserved revisions | Significant removal/moderation retains evidence while broad audits omit private message text |
+| Private attachment intents and short audited leases | Reuses the validated managed Storage operation boundary without public or signed private URLs |
+| Canonical source/revision/person/channel uniqueness | Duplicate relationships, worker claims and retries do not create repeated notifications or delivery requests |
+| Bounded resumable audience jobs | Expansion can continue without truncating large audiences or performing unbounded request-time fanout |
+| Provider-neutral inactive live email | No approved provider/sender was found; templates, injected adapter and retry semantics are implemented without new secrets, SMTP or production environment changes |
+| Mandatory-policy foundation only | Server-owned mandatory policy cannot be disabled by preferences; no unsupported legal/business mandatory category is invented |
+
+Provider/sender approval and operational scheduler identity remain future activation
+questions, not permission to configure secrets or claim live email delivery. A
+public announcement label can support a separately approved future fan feed; it
+opens no anonymous private-content endpoint in Phase 4A. Production minor policy,
+retention/purging and provider webhook validation remain explicit future decisions.
+No next module is started.
+
 ## Phase 3B implementation choices
 
 | Choice | Reason and limit |

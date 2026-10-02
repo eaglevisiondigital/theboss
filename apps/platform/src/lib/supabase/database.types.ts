@@ -265,6 +265,487 @@ export type Database = {
           },
         ]
       }
+      communication_attachments: {
+        Row: {
+          actor_person_id: string
+          completed_at: string | null
+          content_sha256: string
+          created_at: string
+          file_name: string
+          id: string
+          message_id: string | null
+          mime_type: string
+          object_name: string
+          organization_id: string
+          size_bytes: number
+          status: string
+          thread_id: string
+        }
+        Insert: {
+          actor_person_id: string
+          completed_at?: string | null
+          content_sha256: string
+          created_at?: string
+          file_name: string
+          id?: string
+          message_id?: string | null
+          mime_type: string
+          object_name: string
+          organization_id: string
+          size_bytes: number
+          status?: string
+          thread_id: string
+        }
+        Update: {
+          actor_person_id?: string
+          completed_at?: string | null
+          content_sha256?: string
+          created_at?: string
+          file_name?: string
+          id?: string
+          message_id?: string | null
+          mime_type?: string
+          object_name?: string
+          organization_id?: string
+          size_bytes?: number
+          status?: string
+          thread_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_attachments_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_attachments_organization_id_thread_id_fkey"
+            columns: ["organization_id", "thread_id"]
+            isOneToOne: false
+            referencedRelation: "communication_threads"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_attachments_thread_id_message_id_fkey"
+            columns: ["thread_id", "message_id"]
+            isOneToOne: false
+            referencedRelation: "communication_messages"
+            referencedColumns: ["thread_id", "id"]
+          },
+        ]
+      }
+      communication_audiences: {
+        Row: {
+          created_at: string
+          id: string
+          organization_id: string
+          role_id: string | null
+          scope_id: string
+          scope_type: string
+          team_id: string | null
+          thread_id: string
+          unit_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          organization_id: string
+          role_id?: string | null
+          scope_id: string
+          scope_type: string
+          team_id?: string | null
+          thread_id: string
+          unit_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          organization_id?: string
+          role_id?: string | null
+          scope_id?: string
+          scope_type?: string
+          team_id?: string | null
+          thread_id?: string
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_audiences_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_audiences_organization_id_thread_id_fkey"
+            columns: ["organization_id", "thread_id"]
+            isOneToOne: false
+            referencedRelation: "communication_threads"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_audiences_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_audiences_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communication_message_revisions: {
+        Row: {
+          actor_person_id: string
+          body: string
+          created_at: string
+          id: string
+          message_id: string
+          organization_id: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          body: string
+          created_at?: string
+          id?: string
+          message_id: string
+          organization_id: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          message_id?: string
+          organization_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_message_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_message_revisions_organization_id_message_id_fkey"
+            columns: ["organization_id", "message_id"]
+            isOneToOne: false
+            referencedRelation: "communication_messages"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      communication_messages: {
+        Row: {
+          author_person_id: string
+          body: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          organization_id: string
+          pinned_at: string | null
+          removed_at: string | null
+          sequence_number: number
+          status: string
+          thread_id: string
+          version: number
+        }
+        Insert: {
+          author_person_id: string
+          body: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          organization_id: string
+          pinned_at?: string | null
+          removed_at?: string | null
+          sequence_number: number
+          status?: string
+          thread_id: string
+          version?: number
+        }
+        Update: {
+          author_person_id?: string
+          body?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          organization_id?: string
+          pinned_at?: string | null
+          removed_at?: string | null
+          sequence_number?: number
+          status?: string
+          thread_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_messages_author_person_id_fkey"
+            columns: ["author_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_messages_organization_id_thread_id_fkey"
+            columns: ["organization_id", "thread_id"]
+            isOneToOne: false
+            referencedRelation: "communication_threads"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      communication_read_state: {
+        Row: {
+          organization_id: string
+          person_id: string
+          read_at: string
+          thread_id: string
+          through_sequence: number
+        }
+        Insert: {
+          organization_id: string
+          person_id: string
+          read_at?: string
+          thread_id: string
+          through_sequence?: number
+        }
+        Update: {
+          organization_id?: string
+          person_id?: string
+          read_at?: string
+          thread_id?: string
+          through_sequence?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_read_state_organization_id_thread_id_fkey"
+            columns: ["organization_id", "thread_id"]
+            isOneToOne: false
+            referencedRelation: "communication_threads"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_read_state_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communication_reports: {
+        Row: {
+          created_at: string
+          detail: string | null
+          id: string
+          message_id: string
+          moderation_reason: string | null
+          moderator_person_id: string | null
+          organization_id: string
+          reason: string
+          reporter_person_id: string
+          reviewed_at: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          message_id: string
+          moderation_reason?: string | null
+          moderator_person_id?: string | null
+          organization_id: string
+          reason: string
+          reporter_person_id: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          message_id?: string
+          moderation_reason?: string | null
+          moderator_person_id?: string | null
+          organization_id?: string
+          reason?: string
+          reporter_person_id?: string
+          reviewed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_reports_moderator_person_id_fkey"
+            columns: ["moderator_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_reports_organization_id_message_id_fkey"
+            columns: ["organization_id", "message_id"]
+            isOneToOne: false
+            referencedRelation: "communication_messages"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_reports_reporter_person_id_fkey"
+            columns: ["reporter_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communication_thread_members: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          organization_id: string
+          person_id: string
+          starts_at: string
+          status: string
+          thread_id: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          organization_id: string
+          person_id: string
+          starts_at?: string
+          status?: string
+          thread_id: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          organization_id?: string
+          person_id?: string
+          starts_at?: string
+          status?: string
+          thread_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_thread_members_organization_id_thread_id_fkey"
+            columns: ["organization_id", "thread_id"]
+            isOneToOne: false
+            referencedRelation: "communication_threads"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_thread_members_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communication_threads: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          household_id: string | null
+          id: string
+          kind: string
+          next_sequence: number
+          organization_id: string
+          scope_id: string
+          scope_type: string
+          status: string
+          team_id: string | null
+          title: string
+          unit_id: string | null
+          updated_at: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          household_id?: string | null
+          id?: string
+          kind: string
+          next_sequence?: number
+          organization_id: string
+          scope_id: string
+          scope_type: string
+          status?: string
+          team_id?: string | null
+          title: string
+          unit_id?: string | null
+          updated_at?: string
+          version?: number
+          visibility?: string
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          household_id?: string | null
+          id?: string
+          kind?: string
+          next_sequence?: number
+          organization_id?: string
+          scope_id?: string
+          scope_type?: string
+          status?: string
+          team_id?: string | null
+          title?: string
+          unit_id?: string | null
+          updated_at?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_threads_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_threads_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_threads_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_threads_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "communication_threads_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       document_requirements: {
         Row: {
           allowed_mime_types: string[]
@@ -1013,7 +1494,9 @@ export type Database = {
           authority_status: string
           can_manage_payments: boolean
           can_manage_profile: boolean
+          can_receive_communications: boolean
           can_register: boolean
+          can_send_communications: boolean
           can_sign_waivers: boolean
           can_view_documents: boolean
           created_at: string
@@ -1030,7 +1513,9 @@ export type Database = {
           authority_status?: string
           can_manage_payments?: boolean
           can_manage_profile?: boolean
+          can_receive_communications?: boolean
           can_register?: boolean
+          can_send_communications?: boolean
           can_sign_waivers?: boolean
           can_view_documents?: boolean
           created_at?: string
@@ -1047,7 +1532,9 @@ export type Database = {
           authority_status?: string
           can_manage_payments?: boolean
           can_manage_profile?: boolean
+          can_receive_communications?: boolean
           can_register?: boolean
+          can_send_communications?: boolean
           can_sign_waivers?: boolean
           can_view_documents?: boolean
           created_at?: string
@@ -1184,6 +1671,224 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      notification_deliveries: {
+        Row: {
+          attempts: number
+          channel: string
+          claim_generation: number
+          created_at: string
+          delivered_at: string | null
+          failure_category: string | null
+          id: string
+          next_attempt_at: string
+          notification_id: string
+          organization_id: string
+          processing_until: string | null
+          provider_message_reference: string | null
+          sent_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          channel: string
+          claim_generation?: number
+          created_at?: string
+          delivered_at?: string | null
+          failure_category?: string | null
+          id?: string
+          next_attempt_at?: string
+          notification_id: string
+          organization_id: string
+          processing_until?: string | null
+          provider_message_reference?: string | null
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          channel?: string
+          claim_generation?: number
+          created_at?: string
+          delivered_at?: string | null
+          failure_category?: string | null
+          id?: string
+          next_attempt_at?: string
+          notification_id?: string
+          organization_id?: string
+          processing_until?: string | null
+          provider_message_reference?: string | null
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_deliveries_organization_id_notification_id_fkey"
+            columns: ["organization_id", "notification_id"]
+            isOneToOne: false
+            referencedRelation: "notifications"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      notification_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          occurred_at: string
+          organization_id: string
+          safe_data: Json
+          scheduled_at: string
+          source_id: string
+          source_module: string
+          source_revision: string
+          source_type: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          occurred_at?: string
+          organization_id: string
+          safe_data?: Json
+          scheduled_at?: string
+          source_id: string
+          source_module: string
+          source_revision: string
+          source_type: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          occurred_at?: string
+          organization_id?: string
+          safe_data?: Json
+          scheduled_at?: string
+          source_id?: string
+          source_module?: string
+          source_revision?: string
+          source_type?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_preferences: {
+        Row: {
+          category: string
+          channel: string
+          created_at: string
+          enabled: boolean
+          id: string
+          organization_id: string | null
+          person_id: string
+          team_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          channel: string
+          created_at?: string
+          enabled: boolean
+          id?: string
+          organization_id?: string | null
+          person_id: string
+          team_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          channel?: string
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          organization_id?: string | null
+          person_id?: string
+          team_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_preferences_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_preferences_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "notification_preferences_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          contexts: Json
+          created_at: string
+          id: string
+          notification_event_id: string
+          organization_id: string
+          read_at: string | null
+          recipient_person_id: string
+        }
+        Insert: {
+          contexts?: Json
+          created_at?: string
+          id?: string
+          notification_event_id: string
+          organization_id: string
+          read_at?: string | null
+          recipient_person_id: string
+        }
+        Update: {
+          contexts?: Json
+          created_at?: string
+          id?: string
+          notification_event_id?: string
+          organization_id?: string
+          read_at?: string | null
+          recipient_person_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_organization_id_notification_event_id_fkey"
+            columns: ["organization_id", "notification_event_id"]
+            isOneToOne: false
+            referencedRelation: "notification_events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "notifications_recipient_person_id_fkey"
+            columns: ["recipient_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       organization_memberships: {
         Row: {
@@ -3224,6 +3929,16 @@ export type Database = {
       boss_calendar_preview: { Args: { p_command: Json }; Returns: Json }
       boss_calendar_public_read: { Args: { p_query: Json }; Returns: Json }
       boss_calendar_read: { Args: { p_query: Json }; Returns: Json }
+      boss_communications_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_communications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_notifications_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_notifications_read: { Args: { p_query?: Json }; Returns: Json }
       boss_registration_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

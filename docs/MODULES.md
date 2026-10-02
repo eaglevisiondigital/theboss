@@ -1,5 +1,25 @@
 # Modules and product access
 
+## Phase 4A shared communications
+
+The existing stable `messaging` catalog key serves Communications. One shared
+notification engine integrates Calendar and Registration source events, including
+safe document decisions and offline fee receipts; these modules do not create
+separate notification systems. Independent finite controls gate announcements,
+team chat, staff send, direct/group messaging, guardian visibility, participant
+messaging, minor groups, attachments, moderation, in-app and email channels.
+
+Within an active module, communications, announcements, guardian visibility and
+in-app notifications default on. Conversational/participant/attachment/moderation
+and email features default off. Participant minimum age defaults to 18, with
+participant messaging independently disabled; lower-age production policy is not
+silently activated. Disabled features hide controls and deny server operations.
+Guardian visibility controls permitted minor groups; ordinary guardian team-chat
+access separately requires the current explicit receive/send capability.
+Email templates and an injected provider-neutral adapter do not configure live
+email. SMS/push, fundraising, Boss Bucks, Money Board and later modules stay outside
+Phase 4A. [Communications](COMMUNICATIONS_ARCHITECTURE.md), [notifications](NOTIFICATION_ARCHITECTURE.md).
+
 ## Phase 3B Registration capability
 
 Phase 3B implements Registration with reusable forms, waivers, private document

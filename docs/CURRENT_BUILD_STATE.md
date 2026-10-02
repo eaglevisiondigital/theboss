@@ -1,5 +1,48 @@
 # Current build state
 
+## Phase 4A communications and notifications: live migration complete, acceptance pending
+
+The local Phase 4A package adds private tenant-owned channels/messages,
+organization and multi-team announcements, bounded direct/group/family contexts,
+explicit guardian communication flags, private attachments, pins, canonical read
+watermarks, scoped search and audited reporting/moderation. Exact current scope,
+actual relationships and finite feature policy authorize every operation. Removed
+relationships lose private history and attachment access. Participant messaging
+defaults off; unknown ages and minor direct messaging fail closed.
+
+One shared notification pipeline captures material Calendar changes, Registration
+decisions, safe document status and offline fee receipts. Per-person deduplication,
+bounded resumable audience processing, current source authorization, preferences,
+read state and safe delivery history remain separate from communication content.
+In-app delivery is implemented. Email templates and a provider-neutral adapter
+are implemented, with synthetic failure/retry coverage; no provider, live sender,
+external worker, new production secret or SMTP change is configured. Optional email
+work is truthfully suppressed as `not_configured`. SMS and push remain future
+channels. Reminder preparation and queue continuation are protected operator
+commands rather than an installed scheduler.
+
+The five validated Phase 4A migrations were applied to the canonical Boss project
+at 06:20 UTC on October 2, 2026, after direct typed authorization. All 23 migrations
+are present in order and previous SQL files are unchanged. Canonical rollback-only
+verifiers pass 21 communications and 25 notification assertions with zero residual
+fixtures. Database types are regenerated from the live schema. Local full validation
+passes 6,086 SQL assertions, 24 coordinated races and 163 application tests, plus
+typecheck, lint and production build; the post-migration rerun also passes against
+the reconciled migration filenames and canonical generated database types.
+
+Controlled acceptance has one verified precondition requiring additional direction:
+this synthetic organization has no Messaging assignment, while the reviewed plan
+allows activation only of an existing assignment. A narrowly scoped temporary-row
+authorization has been requested. No temporary authority has been activated.
+Deployment, hosted desktop/mobile acceptance, restoration and final PR checks remain
+pending. See [the Phase 4A validation record](PHASE_4A_VALIDATION.md) for live advisor
+findings and precise evidence limits. No later phase has begun.
+
+See [communications](COMMUNICATIONS_ARCHITECTURE.md),
+[minor safety](MINOR_COMMUNICATION_SAFETY.md),
+[notifications](NOTIFICATION_ARCHITECTURE.md) and
+[email delivery](EMAIL_DELIVERY_ARCHITECTURE.md).
+
 ## Phase 3B registration foundation — authenticated acceptance complete
 
 Registration offerings, canonical family drafts, versioned structured forms,

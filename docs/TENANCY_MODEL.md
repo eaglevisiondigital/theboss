@@ -1,5 +1,21 @@
 # Tenancy model
 
+## Phase 4A communication boundaries
+
+Communication content, target audience and delivery are tenant-qualified. Multi-team
+announcements keep one content record with separate authorized targets; they do not
+merge private team channels or expose cross-team recipient lists. Direct/group
+members must be bounded and related to the chosen tenant/resource context. Names-only
+candidate discovery is scoped; no unrestricted global person search is added.
+
+Every read, attachment byte request and queued notification rechecks current source
+and relationship authority. Ending a relationship cannot preserve private channel
+access through a remembered UUID, membership projection, stale inbox item or prior
+access lease. Exact units include directly attached teams only, with no descendant
+inheritance. Global households remain canonical identities rather than tenant grants;
+family channels require explicit tenant context, current household membership and
+current guardian authority.
+
 ## Phase 3B registration isolation
 
 Every offering owns one tenant and an immutable organization, exact unit or exact

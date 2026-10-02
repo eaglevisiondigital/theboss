@@ -1,5 +1,33 @@
 # Boss foundation permissions
 
+## Phase 4A communication permissions
+
+Ten finite keys add potential capability only: `communications.view`,
+`communications.send`, `communications.manage`, `announcements.send`, `team_chat.view`,
+`team_chat.send`, `notifications.view`, `notifications.manage`, `delivery_history.view`
+and `moderation.manage`. Migrations assign no real roles. Current identity, exact
+scope, actual channel/audience relationships and enabled features remain mandatory.
+Organization/unit/team resource IDs and role names provide no independent authority.
+
+Super/platform administrators and organization owner/administrator gain these keys
+within their existing allowed scopes. Athletic director gains communication view and
+announcement send. Program/sport administrators gain exact-unit communication,
+announcement and team-chat capability plus safe scoped delivery history. Head coach
+receives own-team communication management, announcements and chat. Assistant coach
+and team staff gain own-team view/chat with staff sending disabled by default.
+Finance receives no private chat permission merely because it manages fees.
+
+Guardian `can_receive_communications` and `can_send_communications` are explicit,
+false-default capabilities separate from registration, signature, document and payment
+flags. Household membership alone confers no guardian communication access. Parent
+and participant access derives from current actual relationships and configured
+policy, without adding inferred roles. Broad communication management alone does
+not open private direct/group messages to a nonmember administrator.
+Ordinary organization membership supplies recipient context, not sender authority.
+Direct/group sending still needs the exact mapped capability or explicit current
+guardian/self-participant policy.
+[Minor safety](MINOR_COMMUNICATION_SAFETY.md) and [communication contracts](COMMUNICATIONS_ARCHITECTURE.md).
+
 ## Phase 3B registration permissions
 
 Phase 3B adds `registration.view`, `registration.create`, `registration.manage`,

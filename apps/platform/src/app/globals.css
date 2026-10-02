@@ -457,3 +457,86 @@ button:disabled { cursor: wait; opacity: .65; }
 }
 .registration-form-grid, .registration-status-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; min-width: 0; }.registration-form .registration-field-group, .registration-field-group { border: 1px solid #dedfd6; padding: 16px; margin: 0; border-radius: 5px; display: grid; gap: 15px; min-width: 0; }.registration-field-group legend { font-size: 12px; font-weight: 700; padding: 0 6px; }.registration-console .muted { color: #626658; font-size: 12px; line-height: 1.7; }.registration-status-grid dt { font-size: 12px; font-weight: 700; }.registration-status-grid dd { margin: 8px 0 0; font-size: 14px; line-height: 1.7; }.registration-panel { min-width: 0; }.registration-form p:focus { outline: 2px solid #c44811; outline-offset: 4px; }
 @media (max-width: 640px) { .registration-form-grid, .registration-status-grid { grid-template-columns: 1fr; }.registration-field-group { padding: 12px; } }
+
+/* Shared communications and notification surfaces. */
+.communications-console { color: var(--ink); min-width: 0; }
+.communication-heading { margin-bottom: 26px; }
+.communication-heading h1 { font-size: clamp(32px, 5vw, 48px); margin: 10px 0 14px; letter-spacing: -1.4px; }
+.communication-heading > p:last-child { max-width: 740px; line-height: 1.7; color: var(--muted); }
+.communication-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.communication-tabs a { display: flex; align-items: center; min-height: 44px; border: 1px solid var(--line); border-radius: 5px; padding: 12px 16px; background: white; font-size: 13px; font-weight: 700; }
+.communication-tabs a[aria-current=page] { color: white; background: var(--dark); border-color: var(--dark); }
+.communication-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 16px; align-items: end; margin-bottom: 24px; }
+.communications-console .form-field { min-width: 0; font-size: 12px; font-weight: 700; }
+.communications-console input:not([type=checkbox]), .communications-console select, .communications-console textarea { width: 100%; min-width: 0; max-width: 100%; padding: 12px; border: 1px solid #c7cbbf; border-radius: 4px; background: white; color: var(--ink); font-size: 16px; line-height: 1.5; min-height: 44px; }
+.communications-console textarea { resize: vertical; }
+.communications-console .button { min-height: 44px; padding: 12px 16px; font-size: 12px; max-width: 100%; white-space: normal; }
+.communication-workspace { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.8fr); gap: 22px; align-items: start; }
+.communication-conversation-list { display: grid; gap: 10px; min-width: 0; }
+.communication-thread-link { display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; background: white; border: 1px solid var(--line); border-radius: 6px; padding: 18px; min-width: 0; overflow-wrap: anywhere; }
+.communication-thread-link[aria-current=page] { border-color: var(--orange-dark); box-shadow: inset 4px 0 var(--orange); }
+.communication-thread-kind { font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--muted); }
+.communication-thread-link time, .communication-message time, .notification-card time { font-size: 11px; line-height: 1.6; color: var(--muted); }
+.communication-badge { justify-self: start; border-radius: 4px; background: #fff0de; color: #73330c; padding: 5px 8px; font-size: 11px; line-height: 1.5; font-weight: 700; }
+.communication-detail-pane, .communication-thread-detail, .communication-message-list { min-width: 0; }
+.communication-thread-detail { background: white; border: 1px solid var(--line); border-radius: 7px; padding: 24px; overflow-wrap: anywhere; }
+.communication-detail-heading, .notification-drawer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 22px; flex-wrap: wrap; }
+.communication-detail-heading h2 { font-size: 24px; line-height: 1.4; margin-top: 7px; }
+.communication-message-list, .notification-list, .notification-history { display: grid; gap: 16px; }
+.communication-message { border: 1px solid var(--line); border-radius: 6px; padding: 18px; background: #fafaf6; min-width: 0; }
+.communication-message header, .notification-card header { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; font-size: 13px; }
+.communication-message header time, .notification-card header time { margin-left: auto; }
+.communication-body { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; line-height: 1.8; font-size: 14px; }
+.communication-pinned { border-color: #e4a56f; background: #fff8ed; }
+.communication-message-actions, .notification-card-actions { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.communication-disclosure { min-width: 0; border: 1px solid var(--line); border-radius: 6px; background: white; margin-top: 18px; overflow-wrap: anywhere; }
+.communication-disclosure summary { cursor: pointer; padding: 16px 18px; min-height: 48px; font-size: 13px; line-height: 1.6; font-weight: 700; }
+.communication-disclosure > p { padding-inline: 18px; }
+.communication-form { padding: 18px; display: grid; min-width: 0; }
+.communication-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 18px; }
+.communication-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; min-width: 0; }
+.communication-form-footer { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.communication-form-footer p, .communication-upload > p, .communication-attachment > p { font-size: 12px; line-height: 1.6; min-width: 0; overflow-wrap: anywhere; }
+.communication-message-actions .communication-form, .notification-card-actions .communication-form { padding: 0; }
+.communication-helper { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.communication-composer { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+.communication-composer > h3 { font-size: 18px; }
+.communication-composer .communication-form { padding-inline: 0; }
+.communication-upload { display: grid; gap: 12px; min-width: 0; padding: 16px; border: 1px dashed #bfc5b5; border-radius: 5px; }
+.communication-upload button { justify-self: start; }
+.communication-attachment { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; }
+.communication-attachment > p { width: 100%; }
+.communication-choice-group { border: 1px solid var(--line) !important; padding: 16px !important; border-radius: 4px; }
+.communication-choice-group legend { font-size: 12px; font-weight: 700; padding: 0 5px; }
+.communication-check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 13px; line-height: 1.6; cursor: pointer; }
+.communication-check input { width: 20px; height: 20px; flex: 0 0 20px; accent-color: var(--orange-dark); }
+.communication-attached-files { display: grid; gap: 8px; margin: 0; padding-left: 20px; min-width: 0; font-size: 12px; }
+.communication-attached-files li { overflow-wrap: anywhere; }
+.communication-attached-files button { min-height: 44px; margin-left: 10px; border: 1px solid var(--line); border-radius: 4px; background: white; padding: 8px; }
+.communication-empty { padding: 22px; border: 1px solid var(--line); border-radius: 6px; background: #fff; font-size: 14px; line-height: 1.7; }
+.communication-notice { padding: 20px; border: 1px solid #ead1b0; background: #fff3e3; border-radius: 6px; line-height: 1.7; margin-bottom: 20px; }
+.communication-section { margin-top: 26px; }
+.communication-section > h2 { font-size: 25px; margin-bottom: 14px; }
+.communication-mobile-back { display: none; }
+.notification-list { margin-block: 20px; }
+.notification-card { background: white; border: 1px solid var(--line); border-radius: 6px; padding: 22px; min-width: 0; overflow-wrap: anywhere; }
+.notification-card h3 { font-size: 18px; line-height: 1.5; margin: 0 0 12px; }
+.notification-unread { border-left: 4px solid var(--orange); }
+.notification-preferences { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.communication-preference { background: white; border: 1px solid var(--line); border-radius: 6px; padding: 18px; min-width: 0; }
+.communication-preference .communication-form { padding-inline: 0; }
+.notification-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.notification-facts dt { font-size: 11px; color: var(--muted); }
+.notification-facts dd { font-size: 13px; line-height: 1.7; margin: 6px 0 0; }
+.notification-drawer-trigger { margin-left: auto; }
+.notification-drawer-trigger + .logout-form { margin-left: 0; }
+.notification-count { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--orange); color: var(--ink); min-width: 24px; height: 24px; padding: 3px; font-size: 11px !important; font-weight: 700 !important; }
+.notification-drawer { position: fixed; margin: 0 0 0 auto; inset: 0; width: min(500px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; padding: 25px; border: 0; border-left: 1px solid var(--line); overflow-y: auto; background: var(--background); color: var(--ink); }
+.notification-drawer::backdrop { background: #0008; }
+.notification-drawer-heading h2 { font-size: 25px; }
+.admin-shell .app-header .notification-drawer .button-outline { background: white; color: var(--ink); border-color: #b8bab0; }
+.admin-shell .app-header .notification-drawer .button-outline:hover { background: #efeee8; border-color: var(--ink); }
+.communications-console :is(input, textarea, select, summary):focus-visible, .communication-form p:focus, .notification-drawer h2:focus { outline: 3px solid var(--orange-dark); outline-offset: 3px; }
+@media (max-width: 1000px) { .communication-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }.admin-shell .app-header-inner { flex-wrap: wrap; column-gap: 18px; row-gap: 14px; padding-block: 16px; } }
+@media (max-width: 760px) { .communication-workspace, .communication-fields, .notification-preferences, .notification-facts { grid-template-columns: minmax(0, 1fr); }.communication-has-detail .communication-conversation-list { display: none; }.communication-has-detail .communication-mobile-back { display: inline-flex; margin-bottom: 16px; }.communication-workspace:not(:has(.communication-thread-detail)) .communication-detail-pane { display: none; }.communication-thread-detail { padding: 18px; }.communication-heading h1 { letter-spacing: -1px; }.admin-shell .app-header-inner .workspace-label { display: none; }.notification-drawer-trigger .button { gap: 8px; padding-inline: 10px; }.notification-drawer { padding: 18px; } }
+@media (max-width: 480px) { .communication-filters { grid-template-columns: minmax(0, 1fr); }.communication-form-footer { flex-direction: column; align-items: stretch; }.communication-form-footer .button { width: 100%; }.communication-message { padding: 14px; }.communication-detail-heading { gap: 14px; }.notification-card { padding: 16px; }.communication-form { padding: 15px; }.notification-drawer .communication-form { padding-inline: 0; }.communication-message header time, .notification-card header time { margin-left: 0; }.admin-shell .app-header-inner { column-gap: 10px; }.admin-shell .app-header-inner .brand { font-size: 20px; }.admin-shell .app-header-inner .button-small { font-size: 11px; padding: 10px; }.communication-attachment > .button { width: 100%; }.communication-form-footer p { margin: 0; } }

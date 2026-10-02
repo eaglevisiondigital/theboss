@@ -160,3 +160,35 @@ test("single all-day exception controls preserve all-day semantics without chang
   assert.doesNotMatch(html,/type="checkbox"[^>]*name="all_day"|name="all_day"[^>]*type="checkbox"/);
   assert.match(html,/name="end"[^>]*value="2026-10-16"/);
 });
+
+test("notification event link opens only the authorized occurrence on its selected day", () => {
+  const data = fixture(), selection = parseSelection({ date: "2026-10-15", org: id, tz: "America/Chicago" });
+  const html = render(createElement(CalendarConsole, { data, selection, initialEventId: other }));
+  assert.match(html, /aria-label="Event details"/);
+  assert.match(html, /aria-pressed="true"/);
+  for (const hidden of [third, "forged"]) {
+    assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection, initialEventId: hidden })), /aria-label="Event details"/);
+  }
+  assert.doesNotMatch(render(createElement(CalendarConsole, { data: { ...data, occurrences: [] }, selection, initialEventId: other })), /aria-label="Event details"/);
+  assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection: parseSelection({ date: "2026-10-16", tz: "America/Chicago" }), initialEventId: other })), /aria-label="Event details"/);
+});
+
+test("notification timezone opens a near-midnight event on its actual local date", () => {
+  const params = { org: id, event: other, date: "2026-10-15", tz: "America/Chicago", occurrence: "2026-10-15T23:30:00" };
+  const selection = parseSelection(params), data = { ...fixture(), occurrences: [occurrence({ title: "Late practice", start_at: "2026-10-16T04:30:00Z", end_at: "2026-10-16T05:00:00Z", occurrence_key: params.occurrence })] };
+  const html = render(createElement(CalendarConsole, { data, selection, initialEventId: other, initialOccurrenceKey: params.occurrence }));
+  assert.equal(selection.invalid, false); assert.match(html, /aria-label="Event details"/); assert.match(html, /<h2[^>]*>Late practice<\/h2>/);
+  assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection: parseSelection({ date: params.date }), initialEventId: other, initialOccurrenceKey: params.occurrence })), /aria-label="Event details"/);
+});
+
+test("moved recurrence notification selects the exact authorized occurrence among same-date entries", () => {
+  const params = { org: id, event: other, date: "2026-10-15", tz: "America/Chicago", occurrence: "2026-10-14T16:00:00" }, selection = parseSelection(params);
+  const data = { ...fixture(), occurrences: [occurrence({ title: "Other occurrence" }), occurrence({ title: "Moved occurrence", is_exception: true, occurrence_key: params.occurrence })] };
+  const html = render(createElement(CalendarConsole, { data, selection, initialEventId: other, initialOccurrenceKey: params.occurrence }));
+  assert.match(html, /<h2[^>]*>Moved occurrence<\/h2>/); assert.doesNotMatch(html, /<h2[^>]*>Other occurrence<\/h2>/);
+  assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection, initialEventId: other, initialOccurrenceKey: "2026-10-13T16:00:00" })), /aria-label="Event details"/);
+  for (const changed of [{ occurrence: "2026-02-30T16:00:00" }, { occurrence: "2026-10-14T25:00:00" }, { occurrence: [params.occurrence, params.occurrence] }, { tz: "" }, { date: "" }, { event: third, occurrence: "forged" }]) {
+    const invalid = parseSelection({ ...params, ...changed }); assert.equal(invalid.invalid, true);
+    assert.doesNotMatch(render(createElement(CalendarConsole, { data, selection: invalid, initialEventId: other, initialOccurrenceKey: params.occurrence })), /aria-label="Event details"/);
+  }
+});

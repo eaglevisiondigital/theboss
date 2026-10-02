@@ -1,5 +1,27 @@
 # Data model
 
+## Phase 4A communications and notifications
+
+One tenant-owned thread holds canonical messages and sequences. `communication_threads`,
+`communication_thread_members` and `communication_audiences` separate channel context,
+bounded explicit membership and authorized announcement targets. `communication_messages`
+retains one content record; revisions preserve edits and removed messages retain
+their canonical history while disappearing from ordinary projections. `communication_read_state`
+records monotonic per-person read watermarks. Attachments and reports use
+`communication_attachments` and `communication_reports` with tenant-qualified references.
+All new raw tables use RLS and are closed to anonymous/authenticated direct access.
+Private receipts, upload intents and short access leases support guarded operations.
+
+`notification_events` identifies a canonical existing-module source and stable revision.
+`notifications` deduplicates that event by canonical person; context explains the
+projection without merging team chat membership. `notification_preferences` separates
+channel/category/context choices. `notification_deliveries` separates channel state,
+attempts and provider acceptance from confirmed delivery. Private expansion jobs
+support bounded resumable audience processing; no broad client-defined payload,
+recipient or notification type is accepted. See [communications](COMMUNICATIONS_ARCHITECTURE.md)
+and [notifications](NOTIFICATION_ARCHITECTURE.md). Application/live validation remains
+separate in CURRENT_BUILD_STATE.md.
+
 ## Phase 3B registration records
 
 Phase 3B adds 21 tenant-owned public tables, with RLS and no anonymous or

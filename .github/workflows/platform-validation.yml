@@ -22,6 +22,11 @@ on:
       - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
       - "docs/DOCUMENT_SECURITY.md"
       - "docs/FEES_CHARGES_ARCHITECTURE.md"
+      - "docs/COMMUNICATIONS_ARCHITECTURE.md"
+      - "docs/NOTIFICATION_ARCHITECTURE.md"
+      - "docs/MINOR_COMMUNICATION_SAFETY.md"
+      - "docs/EMAIL_DELIVERY_ARCHITECTURE.md"
+      - "docs/PHASE_4A_VALIDATION.md"
   push:
     branches: ["build/boss-platform-v1"]
     paths:
@@ -44,6 +49,11 @@ on:
       - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
       - "docs/DOCUMENT_SECURITY.md"
       - "docs/FEES_CHARGES_ARCHITECTURE.md"
+      - "docs/COMMUNICATIONS_ARCHITECTURE.md"
+      - "docs/NOTIFICATION_ARCHITECTURE.md"
+      - "docs/MINOR_COMMUNICATION_SAFETY.md"
+      - "docs/EMAIL_DELIVERY_ARCHITECTURE.md"
+      - "docs/PHASE_4A_VALIDATION.md"
 
 permissions:
   contents: read
