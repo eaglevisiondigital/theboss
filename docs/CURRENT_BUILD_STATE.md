@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 3B registration foundation — hosted acceptance in progress
+## Phase 3B registration foundation — authenticated acceptance complete
 
 Registration offerings, canonical family drafts, versioned structured forms,
 immutable waiver signatures, private document review, audited emergency access,
@@ -37,28 +37,47 @@ current summaries, expired-file replacement, preserved review history and denial
 for unexpired files. The final live public types are unchanged by the private
 forward correction. Strict typecheck, zero-warning lint, all 104 application tests
 and the production build pass in an identical isolated source copy with locked
-dependencies and synthetic public configuration. Controlled hosted desktop/mobile
-acceptance remains in progress and is not yet claimed complete. Hosted positives
-include three reused child identities/programs, draft reload, conditional forms,
-immutable typed signature preserved after waiver v2 publication, coupon submission,
-actual private PDF upload/review/download, two offline partial receipts and
-installment plan. Desktop and mobile downloaded PDFs match the 1,771-byte upload and its SHA-256
-exactly. Hosted staff review, eligibility and approval preserve the separate
-partially-paid and unassigned states.
+dependencies and synthetic public configuration. Authorized controlled hosted
+desktop/mobile acceptance is complete. Earlier positives include three reused
+child identities/programs, draft reload, conditional forms, immutable typed
+signature preserved after waiver v2 publication, coupon submission, private PDF
+upload/review/download, offline partial receipts and an installment plan. Desktop
+and mobile downloads match the 1,771-byte upload and its SHA-256 exactly.
 Wrong-team mutation, draft review/assignment and missing check-reference requests
-are denied. Staff detail links/deep links now restore context through authorized
-reads. The contacts-only emergency save, Falcons final submission/500-dollar fee example
-and full positive roster demonstration remain pending: the synthetic household
-and child organization memberships expired. Automatic approval review rejected
-the bounded continuation because general Phase 3B authorization did not name that
-exact access-duration extension. The extension was not applied or bypassed. The
-original administrator is restored active and fresh hosted staff controls were
-verified after cleanup. All temporary role, guardian capability, household,
-organization and team-membership authority counts are zero. Four controlled
-create/restore/end audit records are present. Immutable synthetic signatures,
-document and cash/check evidence remain clearly marked and retained. Resuming the
-remaining family tests requires explicit bounded reinstatement of the same
-controlled relationships; the earlier duration-extension request is now stale.
+were denied. Staff detail links/deep links restore context through authorized reads.
+
+Direct human approval authorized the reviewed one-hour reinstatement of only
+Child1's existing guardian flags, the actor/Child1 household memberships and
+Child1's organization membership. The exact four-row reinstatement ran at
+2026-10-02 04:08:24.103466 UTC with expiry 05:08:24.103466 UTC; no Child2/3 or
+other-scope authority was restored. My Registrations showed only Child1, and the
+family chooser offered only Child1 and the controlled household. Contacts-only
+emergency save and audited ordinary retrieval succeeded with medical/insurance
+sections blank. Completed forms and the original nonbinding waiver v1 signature
+remained unchanged; current private document download succeeded with an audit.
+Child1 submission at 04:09:29.914410 UTC created the separate $500 obligation.
+The unchanged original administrator recorded synthetic cash $100 and check $150,
+leaving $250 due, then cash $250 completed payment. Eligible/approved decisions
+permitted the guarded Falcons assignment, followed by normal assignment removal.
+These staff actions do not follow from guardian payment capability.
+
+A forged unrelated-organization/Child1 registration request was unavailable.
+Guardian flags were removed first at 04:11:51.028444 UTC while the two household
+and one organization memberships remained current: a stale signed family save
+was denied and the refreshed family list was empty. The reviewed full cleanup
+completed at 04:12:15.235812 UTC, under four minutes after reinstatement. All
+temporary role, guardian-flag, household, organization and team-membership
+authority counts are zero; the original administrator remains active and the
+fresh staff workspace is valid. Authorized direct staff reads remain permitted
+and are not presented as blanket unrelated-record denials. Independent guardian
+flags and other-resource isolation remain covered by the full local/live suites.
+Eight cumulative controlled lifecycle audits include reinstatement and removal;
+the final window has 16 safe canonical audit events across 14 action types.
+Immutable synthetic signatures, document and cash/check evidence remain clearly
+marked and retained. The earlier rejected extension was not applied; this exact
+reinstatement proceeded under subsequent explicit human authorization. No family
+acceptance blocker remains. This addendum changed no application code or schema,
+and no next phase was started.
 
 Security advisors show intentional RLS-without-policy information for 26 closed
 raw/private tables and the existing leaked-password protection warning. Performance
