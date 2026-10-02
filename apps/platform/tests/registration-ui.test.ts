@@ -9,6 +9,7 @@ import { OfferingEditor } from "../src/components/registration/offering-editor";
 import { FeesSection } from "../src/components/registration/fees";
 import { RegistrationForm } from "../src/components/registration/form-engine";
 import { emptyRegistrationData, type RegistrationData, type RegistrationRow } from "../src/lib/registration/contracts";
+import { readRegistrationData } from "../src/lib/registration/read";
 
 const org = "00000000-0000-4000-8000-000000000001";
 const team = "00000000-0000-4000-8000-000000000002";
@@ -46,6 +47,44 @@ test("registration controls follow projected operations in family and staff view
   assert.match(staff, /Record registration decision/);
   assert.match(staff, /Record eligibility decision/);
   assert.doesNotMatch(staff, /Save draft details|Save form draft/);
+});
+
+test("all-organization registration links select each row's organization and preserve staff filters", () => {
+  const secondOrganization = "00000000-0000-4000-8000-000000000007";
+  const data = fixture({ organizationId: null, features: {}, registrations: [
+    registration({ participant_label: "First child", offering_title: "First program" }),
+    registration({ id: sibling, organization_id: secondOrganization, participant_label: "Second child", offering_title: "Second program" }),
+  ] });
+  const html = render(createElement(RegistrationConsole, { data, query: { view: "admin", status: "submitted", query: "program", offering_id: team } }));
+  const links = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>View registration<\/a>/g)]
+    .map(match => new URL(match[1].replaceAll("&amp;", "&"), "https://boss.example"));
+  assert.equal(links.length, 2);
+  for (const [index, organization] of [org, secondOrganization].entries()) {
+    assert.equal(links[index].pathname, "/app/registrations");
+    assert.equal(links[index].searchParams.get("org"), organization);
+    assert.equal(links[index].searchParams.get("registration"), index === 0 ? registrationId : sibling);
+    assert.equal(links[index].searchParams.get("view"), "admin");
+    assert.equal(links[index].searchParams.get("status"), "submitted");
+    assert.equal(links[index].searchParams.get("q"), "program");
+    assert.equal(links[index].searchParams.has("offering"), false);
+  }
+});
+
+test("authorized direct detail renders organization-enabled payments, plans and team choices", async () => {
+  const detail = registration({ operations: ["payment.record_offline", "payment_plan.create", "registration.assign_team"], charges: [
+    { id: sibling, title: "Controlled program charge", status: "active", balance: { currency: "USD", original_amount_minor: 50000, applied_amount_minor: 0, balance_due_minor: 50000, payment_status: "unpaid" } },
+  ] });
+  const query = { view: "admin", registration_id: registrationId } as const;
+  const data = await readRegistrationData(query, async current => ({ error: null, data: fixture({ detail, ...(current.organization_id ? {
+    features: { registration: true, fees: true, offline_payments: true, payment_plans: true }, teams: [{ id: team, label: "Authorized Falcons" }],
+  } : { organizationId: null, features: {}, teams: [] }) }) }));
+  const html = render(createElement(RegistrationConsole, { data, query }));
+  assert.match(html, /Record offline payment/);
+  assert.match(html, /Create payment plan/);
+  const choices = html.match(/<select name="team_id"[^>]*>(.*?)<\/select>/)?.[1];
+  assert.ok(choices);
+  assert.match(choices, /Authorized Falcons/);
+  assert.doesNotMatch(choices, /Sibling team/);
 });
 
 test("draft review and completed forms render without editable answer controls", () => {

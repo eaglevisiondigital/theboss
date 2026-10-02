@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createServerClient } from "@supabase/ssr";
 import { parseRegistrationCommand, parseRegistrationQuery, projectRegistrationData, projectRegistrationResult, readBoundedJson } from "../src/lib/registration/input";
 import { performRegistrationMutation } from "../src/lib/registration/mutation";
 import { MAX_DOCUMENT_BYTES, PRIVATE_DOCUMENT_BUCKET, performDocumentDownload, performDocumentUpload, readDocumentBytes, validDocumentBytes, type DocumentClient } from "../src/lib/registration/documents";
@@ -38,7 +39,7 @@ function mock() {
     rpc: async (name, args) => { calls.push({ name, args }); return { data: { request_id: args.p_request_id, resource_type: "registration", resource_id: registration, version: 2, sql_detail: "PRIVATE_SQL" }, error: null }; },
     storage: { from: bucket => ({
       upload: async (objectPath, _bytes, options) => { storageCalls.push({ action: "upload", bucket, path: objectPath }); assert.equal(options.upsert, false); assert.equal(options.cacheControl, "0"); return { error: null }; },
-      download: async objectPath => { storageCalls.push({ action: "download", bucket, path: objectPath }); return { data: new Blob([pdfText]), error: null }; },
+      download: async objectPath => { storageCalls.push({ action: "download", bucket, path: objectPath }); return { data: new Blob([pdfText], { type: "application/pdf" }), error: null }; },
     }) },
   };
   return { client, calls, storageCalls, authCalls: () => authCalls };
@@ -215,6 +216,43 @@ test("download audits the requested ordinary or exact-team emergency access befo
   assert.equal(result.status, 200); assert.deepEqual(m.calls[0].args.p_command, { operation: "document.access", input: { document_id: document, purpose: "emergency", team_id: form } });
   assert.deepEqual(m.storageCalls, [{ action: "download", bucket: PRIVATE_DOCUMENT_BUCKET, path }]);
   assert.ok("file" in result); if ("file" in result) { assert.equal(result.filename, "private-document.pdf"); assert.equal(await result.file.text(), pdfText); }
+});
+test("pinned SSR Storage SDK downloads actual bytes with a single object GET and no info request", async () => {
+  const m = mock(); documentRpc(m);
+  const requests: { method: string; pathname: string; cache: RequestCache; hasAuthorization: boolean }[] = [];
+  const sdk = createServerClient("https://boss-sdk-download.invalid", "synthetic-publishable-key", {
+    cookies: { getAll: () => [], setAll: () => {} },
+    global: { fetch: async (input, init) => {
+      const request = new Request(input, { ...init, cache: "no-store" });
+      requests.push({ method: request.method, pathname: new URL(request.url).pathname, cache: request.cache, hasAuthorization: request.headers.has("authorization") });
+      assert.equal(m.calls.length, 1, "document.access must be audited before fetching object bytes");
+      return new Response(pdfText, { status: 200, headers: { "content-type": "application/pdf" } });
+    } },
+  });
+  m.client.storage = sdk.storage;
+  const result = await performDocumentDownload(jsonRequest({ document_id: document, request_id: requestId, purpose: "ordinary" }), m.client, origin);
+  assert.equal(result.status, 200);
+  assert.deepEqual(requests, [{ method: "GET", pathname: `/storage/v1/object/${PRIVATE_DOCUMENT_BUCKET}/${path}`, cache: "no-store", hasAuthorization: true }]);
+  assert.ok("file" in result);
+  if ("file" in result) assert.equal(await result.file.text(), pdfText);
+});
+test("download refuses metadata JSON, wrong MIME, empty and malformed bytes", async () => {
+  const bodies = [
+    new Blob([JSON.stringify({ size: pdfText.length, mimetype: "application/pdf", private_path: "PRIVATE_PATH" })], { type: "application/json" }),
+    new Blob([JSON.stringify({ size: pdfText.length, mimetype: "application/pdf" })], { type: "application/pdf" }),
+    new Blob([pdfText], { type: "application/json" }),
+    new Blob([], { type: "application/pdf" }),
+    new Blob(["%PDF-1.4\nMissing final marker"], { type: "application/pdf" }),
+    new Blob([new Uint8Array(MAX_DOCUMENT_BYTES + 1)], { type: "application/pdf" }),
+  ];
+  for (const data of bodies) {
+    const m = mock(); documentRpc(m);
+    m.client.storage.from = () => ({ upload: async () => ({ error: null }), download: async () => ({ data, error: null }) });
+    const result = await performDocumentDownload(jsonRequest({ document_id: document, request_id: requestId, purpose: "ordinary" }), m.client, origin);
+    assert.equal(result.status, 403);
+    assert.equal("file" in result, false);
+    assert.doesNotMatch(JSON.stringify(result), /PRIVATE_PATH|mimetype|private-document\.pdf/);
+  }
 });
 test("denied document access never invokes Storage and does not expose private paths", async () => {
   const m = mock(); m.client.rpc = async () => ({ data: null, error: { code: "PT403", message: "PRIVATE_PATH" } });

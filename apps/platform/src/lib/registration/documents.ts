@@ -61,6 +61,8 @@ export async function performDocumentDownload(request: Request, client: Document
     if (!isRecord(data) || data.request_id !== input.request_id || data.resource_id !== input.document_id || !safePath(data.object_name) || !documentMimeTypes.includes(data.mime_type as DocumentMimeType)) return registrationFailure();
     const downloaded = await client.storage.from(PRIVATE_DOCUMENT_BUCKET).download(data.object_name);
     if (downloaded.error || !downloaded.data || downloaded.data.size > MAX_DOCUMENT_BYTES) return registrationFailure("PT403");
+    const downloadedMime = downloaded.data.type.split(";")[0].trim().toLowerCase();
+    if (downloadedMime !== data.mime_type || !validDocumentBytes(new Uint8Array(await downloaded.data.arrayBuffer()), data.mime_type)) return registrationFailure("PT403");
     const extension = data.mime_type === "application/pdf" ? "pdf" : data.mime_type === "image/png" ? "png" : "jpg";
     return { status: 200, file: downloaded.data, mime: data.mime_type as DocumentMimeType, filename: "private-document." + extension };
   } catch { return registrationFailure(); }

@@ -18,8 +18,13 @@ and Storage RLS even when UI controls or input IDs are forged.
 
 Private upload intents bind actor, live Auth session, document, immutable random
 object path, allowed MIME/size and a short expiration. Storage accepts only that
-current unused intent; upsert, direct update and delete are closed. Completion
-checks an actual private Storage object and metadata before marking submission.
+current unused intent during the exact server-established `object.upload` route;
+upsert, direct update and delete are closed. Its rolled-back upload preflight uses
+MIME plus `contentLength`, while backend object metadata uses MIME plus `size`.
+Every supplied size must exactly match the intent, and malformed or conflicting
+values are denied. Completion independently checks the actual private object's
+persisted backend MIME/size before marking submission. An intent-bound SELECT
+branch permits upload INSERT RETURNING only during that same upload operation.
 The hosted path bounds actual streamed bytes to 5 MiB and checks PDF/JPEG/PNG
 signatures. Its content digest binds retry content, rather than certifying malware
 absence or independently verifying Storage bytes. The bucket/requirement ceiling
@@ -27,11 +32,17 @@ is 10 MiB. Files remain private, subject to explicit review and lifecycle metada
 
 Every sensitive document/form/emergency access appends a safe audit record.
 Two-minute Storage read leases are actor/session/purpose bound and recheck actual
-role, feature and relationship on every object SELECT; revocation takes effect
-before lease expiration. Emergency paths require exact-team coach/staff and
+role, feature and relationship on every authenticated download GET; the leased
+SELECT policy accepts only exact `object.get_authenticated`. Revocation takes
+effect before lease expiration. Emergency paths require exact-team coach/staff and
 participant relationships and expose restricted fields or explicitly eligible
-approved unexpired medical documents. No public file or reusable signed URL is
-returned by the application.
+approved unexpired medical documents. Signed upload/download URL minting, listing,
+info/HEAD, copying, moving and rendering routes are denied even with a valid
+intent or lease. Empty or partial operation names are also denied. No public file
+or reusable signed URL is returned by the application. These operation restrictions
+prevent signed bearer delivery from bypassing later lease or authority revocation;
+see [Supabase operation helpers](https://supabase.com/docs/guides/storage/schema/helper-functions)
+and the [Storage uploader](https://github.com/supabase/storage/blob/master/src/storage/uploader.ts).
 
 Canonical medical/form answers, waiver text/signature evidence and document paths
 are excluded from ordinary lists, generic mutation projections and audit payloads.

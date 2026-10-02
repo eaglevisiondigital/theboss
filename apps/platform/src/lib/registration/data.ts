@@ -1,13 +1,12 @@
 import "server-only";
 import { createClient } from "../supabase/server";
 import { emptyRegistrationData, type RegistrationData, type RegistrationQuery } from "./contracts";
-import { projectRegistrationData } from "./input";
+import { readRegistrationData } from "./read";
 
 export async function loadRegistrations(query: RegistrationQuery): Promise<RegistrationData> {
   try {
     const client = await createClient();
-    const { data, error } = await client.rpc("boss_registration_read", { p_query: query });
-    return error ? { ...emptyRegistrationData, unavailable: true } : projectRegistrationData(data) ?? { ...emptyRegistrationData, unavailable: true };
+    return await readRegistrationData(query, async p_query => await client.rpc("boss_registration_read", { p_query }));
   } catch { return { ...emptyRegistrationData, unavailable: true }; }
 }
 export async function registrationNavigationAvailable() {

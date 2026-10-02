@@ -110,6 +110,25 @@ revoke all on storage.buckets,storage.objects from public,anon,authenticated,ser
 grant select,insert,update,delete on storage.objects to authenticated;
 grant select on storage.objects to anon;
 
+-- Canonical managed Storage operation helpers, copied from the live project.
+-- Storage HTTP establishes this setting; SQL tests set only synthetic operation
+-- names to execute the actual policy branches. Prefix normalization is exact.
+create function storage.operation() returns text language plpgsql stable as $$
+begin return current_setting('storage.operation',true);end $$;
+create function storage.allow_only_operation(expected_operation text) returns boolean
+language sql stable as $$
+ with current_operation as(select storage.operation() as raw_operation),
+ normalized as(select
+  case when raw_operation like 'storage.%' then substr(raw_operation,9) else raw_operation end as current_operation,
+  case when expected_operation like 'storage.%' then substr(expected_operation,9) else expected_operation end as requested_operation
+  from current_operation)
+ select case when requested_operation is null or requested_operation='' then false
+ else coalesce(current_operation=requested_operation,false) end from normalized
+$$;
+alter function storage.operation() owner to postgres;
+alter function storage.allow_only_operation(text) owner to postgres;
+grant execute on function storage.operation(),storage.allow_only_operation(text) to authenticated,anon,service_role;
+
 -- Managed Storage rejects direct SQL deletion before row filtering or RLS,
 -- including statements matching zero rows. The hosted failure established this
 -- protection. Model only its deny behavior; never emulate or enable an API

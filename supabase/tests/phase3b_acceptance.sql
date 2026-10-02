@@ -200,6 +200,87 @@ SELECT pg_temp.act('guardian');
 SELECT pg_temp.deny('unsafe physical MIME rejected','H',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','text/html','size_bytes',100)),ARRAY['PT422']);
 SELECT pg_temp.deny('requirement file size maximum enforced','H',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','application/pdf','size_bytes',100001)),ARRAY['PT422']);
 SELECT pg_temp.ok('physical upload intent','H',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','application/pdf','size_bytes',100)));
+-- Match the managed uploader's preflight metadata and INSERT RETURNING.
+-- PL/pgSQL's exception block is a savepoint-backed subtransaction: deliberately
+-- roll it back while retaining local returned values for assertions afterward.
+SELECT set_config('storage.operation','storage.object.upload',true);
+SELECT pg_temp.check('canonical Storage upload prefix normalization','H',storage.operation()='storage.object.upload' AND storage.allow_only_operation('object.upload') AND storage.allow_only_operation('storage.object.upload') AND NOT storage.allow_only_operation(NULL) AND NOT storage.allow_only_operation(''));
+DO $$DECLARE returned jsonb;rolled_back boolean:=false;BEGIN
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","contentLength":100}'::jsonb
+  FROM pg_temp.phase3b_results WHERE label='physical upload intent'
+  RETURNING metadata INTO returned;
+  IF returned IS DISTINCT FROM '{"mimetype":"application/pdf","contentLength":100}'::jsonb THEN RAISE EXCEPTION 'Unexpected preflight metadata';END IF;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN rolled_back:=true;
+ END;
+ PERFORM pg_temp.check('managed contentLength preflight INSERT RETURNING passes','H',rolled_back AND returned='{"mimetype":"application/pdf","contentLength":100}'::jsonb);
+ PERFORM pg_temp.check('managed preflight savepoint leaves no object','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+END $$;
+DO $$DECLARE invalid_metadata jsonb;BEGIN
+ FOR invalid_metadata IN SELECT value FROM jsonb_array_elements('[null,[],"bad",{}, {"mimetype":"application/pdf"},{"contentLength":100},{"mimetype":"application/pdf","contentLength":101},{"mimetype":"application/pdf","contentLength":-100},{"mimetype":"application/pdf","contentLength":100.5},{"mimetype":"application/pdf","contentLength":true},{"mimetype":"application/pdf","contentLength":"10000000000"},{"mimetype":"application/pdf","size":100,"contentLength":101},{"mimetype":"application/pdf","size":101,"contentLength":100},{"mimetype":"application/pdf","size":"bad","contentLength":100},{"mimetype":"text/html","contentLength":100}]'::jsonb) LOOP
+  PERFORM pg_temp.sql_deny('malformed preflight metadata denied '||invalid_metadata::text,'Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),invalid_metadata::text));
+ END LOOP;
+ PERFORM pg_temp.sql_deny('SQL NULL preflight metadata denied','Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,NULL) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent')));
+END $$;
+DO $$DECLARE returned jsonb;completion_denied boolean:=false;BEGIN
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name','{"mimetype":"application/pdf","size":100,"contentLength":100}'::jsonb FROM pg_temp.phase3b_results WHERE label='physical upload intent'
+  RETURNING metadata INTO returned;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN NULL;
+ END;
+ PERFORM pg_temp.check('consistent dual preflight and final size fields accepted','H',returned='{"mimetype":"application/pdf","size":100,"contentLength":100}'::jsonb);
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name','{"mimetype":"application/pdf","contentLength":100}'::jsonb FROM pg_temp.phase3b_results WHERE label='physical upload intent';
+  BEGIN
+   PERFORM public.boss_registration_mutate(pg_temp.f('request-preflight-only-complete'),pg_temp.command('document.complete',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'intent_id',(SELECT result->>'intent_id' FROM pg_temp.phase3b_results WHERE label='physical upload intent'))));
+  EXCEPTION WHEN SQLSTATE 'PT422' THEN completion_denied:=true;
+  END;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN NULL;
+ END;
+ PERFORM pg_temp.check('document completion requires persisted actual size rather than contentLength','H',completion_denied);
+ PERFORM pg_temp.check('dual-size and incomplete-object simulations roll back atomically','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+END $$;
+RESET ROLE;
+UPDATE public.document_upload_intents SET object_name=object_name||'-mismatch' WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.sql_deny('current intent must match actual pending document path','H',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name'||'-mismatch' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+RESET ROLE;
+UPDATE public.document_upload_intents SET object_name=(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent') WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+SET LOCAL ROLE authenticated;
+DO $$DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.upload.extra'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  PERFORM pg_temp.sql_deny('upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','storage.object.upload',true);
+SELECT pg_temp.sql_deny('upload operation cannot replace trusted intent size','Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","size":101}'));
+RESET ROLE;
+UPDATE public.document_upload_intents SET created_at=now()-interval '31 minutes',expires_at=now()-interval '1 minute' WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.sql_deny('expired intent denies preflight INSERT RETURNING','H',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+RESET ROLE;
+UPDATE public.document_upload_intents SET created_at=now(),expires_at=now()+interval '15 minutes' WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=pg_temp.f('guardian-child1');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.sql_deny('revoked guardian document flag denies preflight','Y',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+RESET ROLE;
+UPDATE public.guardian_relationships SET can_view_documents=true,can_register=false WHERE id=pg_temp.f('guardian-child1');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.sql_deny('revoked guardian registration flag denies preflight','Y',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+RESET ROLE;
+UPDATE public.guardian_relationships SET can_register=true WHERE id=pg_temp.f('guardian-child1');
+INSERT INTO auth.sessions(id,user_id) VALUES(pg_temp.f('session-guardian-preflight-alternate'),pg_temp.f('auth-guardian'));
+SET LOCAL ROLE authenticated;
+SELECT set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',pg_temp.f('session-guardian-preflight-alternate')))::text,true);
+SELECT pg_temp.sql_deny('different live session cannot reuse upload intent','H',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'));
+SELECT pg_temp.act('guardian');
 SELECT pg_temp.sql_deny('metadata MIME must match trusted intent','Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb)','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"text/html","size":100}'));
 SELECT pg_temp.sql_deny('metadata size must match trusted intent','Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb)','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),'{"mimetype":"application/pdf","size":101}'));
 SELECT pg_temp.sql_deny('knowing a guessed object key grants no upload','Z',format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb)','boss-registration-documents','guessed/org/physical.pdf','{"mimetype":"application/pdf","size":100}'));
@@ -207,19 +288,71 @@ SELECT pg_temp.act('limited-guardian');
 SELECT pg_temp.deny('can_view_documents false prevents upload intent','Y',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'mime_type','application/pdf','size_bytes',100)));
 SELECT pg_temp.sql_deny('different actor cannot use known authorized intent','Z',format('INSERT INTO storage.objects(bucket_id,name,owner_id,metadata) VALUES(%L,%L,%L,%L::jsonb)','boss-registration-documents',(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent'),pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}'));
 SELECT pg_temp.act('guardian');
-INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
-SELECT 'boss-registration-documents',result->>'object_name',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}' FROM pg_temp.phase3b_results WHERE label='physical upload intent';
+SELECT set_config('storage.operation','storage.object.upload',true);
+DO $$DECLARE returned jsonb;BEGIN
+ INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+ SELECT 'boss-registration-documents',result->>'object_name',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}'::jsonb FROM pg_temp.phase3b_results WHERE label='physical upload intent'
+ RETURNING metadata INTO returned;
+ PERFORM pg_temp.check('persisted backend size INSERT RETURNING passes','H',returned='{"mimetype":"application/pdf","size":100}'::jsonb);
+END $$;
+SELECT pg_temp.check('exact upload operation sees its own pending metadata','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+RESET ROLE;
+UPDATE public.document_upload_intents SET created_at=now()-interval '31 minutes',expires_at=now()-interval '1 minute' WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.check('upload RETURNING read gate rejects expired intent','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+RESET ROLE;
+UPDATE public.document_upload_intents SET created_at=now(),expires_at=now()+interval '15 minutes' WHERE id=(SELECT (result->>'intent_id')::uuid FROM pg_temp.phase3b_results WHERE label='physical upload intent');
+UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=pg_temp.f('guardian-child1');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.check('upload RETURNING read gate rejects revoked document authority','Y',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+RESET ROLE;
+UPDATE public.guardian_relationships SET can_view_documents=true,can_register=false WHERE id=pg_temp.f('guardian-child1');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.check('upload RETURNING read gate rejects revoked registration authority','Y',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+RESET ROLE;
+UPDATE public.guardian_relationships SET can_register=true WHERE id=pg_temp.f('guardian-child1');
+SET LOCAL ROLE authenticated;
+SELECT set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',pg_temp.f('session-guardian-preflight-alternate')))::text,true);
+SELECT pg_temp.check('upload RETURNING read gate rejects a different live session','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+SELECT pg_temp.act('guardian');
+RESET ROLE;
+UPDATE auth.sessions SET not_after=now()-interval '1 second' WHERE id=pg_temp.f('session-guardian');
+SET LOCAL ROLE authenticated;
+SELECT pg_temp.check('upload RETURNING read gate rejects expired Auth session','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+RESET ROLE;
+UPDATE auth.sessions SET not_after=NULL WHERE id=pg_temp.f('session-guardian');
+SET LOCAL ROLE authenticated;
+DO $$DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  PERFORM pg_temp.check('unaudited pending object denied for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','',true);
 SELECT pg_temp.check('uploaded bytes metadata hidden before audited lease','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
 SELECT pg_temp.ok('physical upload complete','H',pg_temp.command('document.complete',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'intent_id',(SELECT result->>'intent_id' FROM pg_temp.phase3b_results WHERE label='physical upload intent'))));
+SELECT set_config('storage.operation','storage.object.upload',true);
+SELECT pg_temp.check('consumed upload intent grants no completed-object read','H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+SELECT set_config('storage.operation','',true);
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.ok('guardian document access','H',pg_temp.command('document.access',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'purpose','ordinary')));
 SELECT pg_temp.check('authorized guardian lease permits only one physical','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+DO $$DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.download.extra'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  PERFORM pg_temp.check('valid lease never grants bearer signing or alternative operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),'H',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+ END LOOP;
+END $$;
+SELECT set_config('storage.operation','object.get_authenticated',true);
+SELECT pg_temp.check('authenticated download operation accepts unprefixed canonical form','H',(SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 -- UPDATE has an API metadata grant but no policy; target only this isolated
 -- upload-intent fixture. Managed Storage forbids direct SQL DELETE, so immutable
 -- DELETE policy closure is asserted structurally without issuing a deletion.
 DO $$DECLARE affected integer;BEGIN
  UPDATE storage.objects SET metadata=metadata WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM pg_temp.phase3b_results WHERE label='physical upload intent');GET DIAGNOSTICS affected=ROW_COUNT;
  PERFORM pg_temp.check('authenticated UPDATE cannot replace document object','Z',affected=0);
- PERFORM pg_temp.check('authenticated DELETE has no object replacement or erasure policy','Z',NOT EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','DELETE') AND (roles @> ARRAY['authenticated']::name[] OR roles @> ARRAY['public']::name[]))); 
+ PERFORM pg_temp.check('authenticated DELETE has no object replacement or erasure policy','Z',NOT EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','DELETE') AND (roles @> ARRAY['authenticated']::name[] OR roles @> ARRAY['public']::name[])));
 END $$;
 SELECT pg_temp.act('outsider');
 SELECT pg_temp.check('known object ID grants stranger no read','Z',NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents'));
@@ -499,8 +632,10 @@ INSERT INTO pg_temp.phase3b_results SELECT 'mixed authority identity document',j
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('guardian');
 SELECT pg_temp.ok('mixed authority identity upload intent','H',pg_temp.command('document.intent',jsonb_build_object('document_id',pg_temp.result_id('mixed authority identity document'),'mime_type','application/pdf','size_bytes',100)));
+SELECT set_config('storage.operation','storage.object.upload',true);
 INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
 SELECT 'boss-registration-documents',result->>'object_name',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}' FROM pg_temp.phase3b_results WHERE label='mixed authority identity upload intent';
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.ok('mixed authority identity upload complete','H',pg_temp.command('document.complete',jsonb_build_object('document_id',pg_temp.result_id('mixed authority identity document'),'intent_id',(SELECT result->>'intent_id' FROM pg_temp.phase3b_results WHERE label='mixed authority identity upload intent'))));
 RESET ROLE;
 UPDATE public.guardian_relationships SET can_register=false,can_view_documents=true WHERE id=pg_temp.f('limited-guardian');
@@ -652,8 +787,10 @@ RESET ROLE;
 SELECT pg_temp.check('renewal resets current approval while retaining old reviewed evidence','H',(SELECT status='upload_pending' AND reviewed_by_person_id IS NULL AND reviewed_at IS NULL AND review_reason IS NULL FROM public.registration_documents WHERE id=pg_temp.result_id('physical document')) AND EXISTS(SELECT 1 FROM boss_private.registration_document_history WHERE document_id=pg_temp.result_id('physical document') AND snapshot->>'status'='approved' AND snapshot->>'reviewed_by_person_id'=pg_temp.f('registrar')::text));
 SET LOCAL ROLE authenticated;
 SELECT pg_temp.act('guardian');
+SELECT set_config('storage.operation','storage.object.upload',true);
 INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
 SELECT 'boss-registration-documents',result->>'object_name',pg_temp.f('auth-guardian')::text,'{"mimetype":"application/pdf","size":100}' FROM pg_temp.phase3b_results WHERE label='naturally expired physical renewal intent';
+SELECT set_config('storage.operation','storage.object.get_authenticated',true);
 SELECT pg_temp.ok('naturally expired physical renewal complete','H',pg_temp.command('document.complete',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'intent_id',(SELECT result->>'intent_id' FROM pg_temp.phase3b_results WHERE label='naturally expired physical renewal intent'))));
 SELECT pg_temp.deny('guardian renewal does not create reviewer authority','Y',pg_temp.command('document.review',jsonb_build_object('document_id',pg_temp.result_id('physical document'),'expected_version',(SELECT (result->>'version')::bigint FROM pg_temp.phase3b_results WHERE label='naturally expired physical renewal complete'),'status','approved','reason','Synthetic denied self approval')));
 SELECT pg_temp.act('admin-a');

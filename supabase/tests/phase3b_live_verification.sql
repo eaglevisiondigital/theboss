@@ -262,6 +262,97 @@ IF NOT coalesce((v_safe),false) THEN RAISE EXCEPTION 'Live assertion failed: %',
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('physical upload intent'))::uuid,jsonb_build_object('operation','document.intent','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'mime_type','application/pdf','size_bytes',100)));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','physical upload intent';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('physical upload intent',v_result);
+-- Match the managed uploader's preflight metadata and INSERT RETURNING.
+-- PL/pgSQL's exception block is a savepoint-backed subtransaction: deliberately
+-- roll it back while retaining local returned values for assertions afterward.
+PERFORM set_config('storage.operation','storage.object.upload',true);
+IF NOT coalesce((storage.operation()='storage.object.upload' AND storage.allow_only_operation('object.upload') AND storage.allow_only_operation('storage.object.upload') AND NOT storage.allow_only_operation(NULL) AND NOT storage.allow_only_operation('')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','canonical Storage upload prefix normalization';END IF;v_passed:=v_passed+1;
+DECLARE returned jsonb;rolled_back boolean:=false;BEGIN
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","contentLength":100}'::jsonb
+  FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'
+  RETURNING metadata INTO returned;
+  IF returned IS DISTINCT FROM '{"mimetype":"application/pdf","contentLength":100}'::jsonb THEN RAISE EXCEPTION 'Unexpected preflight metadata';END IF;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN rolled_back:=true;
+ END;
+ IF NOT coalesce((rolled_back AND returned='{"mimetype":"application/pdf","contentLength":100}'::jsonb),false) THEN RAISE EXCEPTION 'Live assertion failed: %','managed contentLength preflight INSERT RETURNING passes';END IF;v_passed:=v_passed+1;
+ IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','managed preflight savepoint leaves no object';END IF;v_passed:=v_passed+1;
+END;
+DECLARE invalid_metadata jsonb;BEGIN
+ FOR invalid_metadata IN SELECT value FROM jsonb_array_elements('[null,[],"bad",{}, {"mimetype":"application/pdf"},{"contentLength":100},{"mimetype":"application/pdf","contentLength":101},{"mimetype":"application/pdf","contentLength":-100},{"mimetype":"application/pdf","contentLength":100.5},{"mimetype":"application/pdf","contentLength":true},{"mimetype":"application/pdf","contentLength":"10000000000"},{"mimetype":"application/pdf","size":100,"contentLength":101},{"mimetype":"application/pdf","size":101,"contentLength":100},{"mimetype":"application/pdf","size":"bad","contentLength":100},{"mimetype":"text/html","contentLength":100}]'::jsonb) LOOP
+  v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),invalid_metadata::text); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','malformed preflight metadata denied '||invalid_metadata::text,SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','malformed preflight metadata denied '||invalid_metadata::text;END IF;v_passed:=v_passed+1;
+ END LOOP;
+ v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,NULL) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent')); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','SQL NULL preflight metadata denied',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','SQL NULL preflight metadata denied';END IF;v_passed:=v_passed+1;
+END;
+DECLARE returned jsonb;completion_denied boolean:=false;BEGIN
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name','{"mimetype":"application/pdf","size":100,"contentLength":100}'::jsonb FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'
+  RETURNING metadata INTO returned;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN NULL;
+ END;
+ IF NOT coalesce((returned='{"mimetype":"application/pdf","size":100,"contentLength":100}'::jsonb),false) THEN RAISE EXCEPTION 'Live assertion failed: %','consistent dual preflight and final size fields accepted';END IF;v_passed:=v_passed+1;
+ BEGIN
+  INSERT INTO storage.objects(bucket_id,name,metadata)
+  SELECT 'boss-registration-documents',result->>'object_name','{"mimetype":"application/pdf","contentLength":100}'::jsonb FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent';
+  BEGIN
+   PERFORM public.boss_registration_mutate((md5('boss-phase3b-live:'||('request-preflight-only-complete'))::uuid),jsonb_build_object('operation','document.complete','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'intent_id',(SELECT result->>'intent_id' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))));
+  EXCEPTION WHEN SQLSTATE 'PT422' THEN completion_denied:=true;
+  END;
+  RAISE EXCEPTION 'Synthetic managed preflight rollback' USING ERRCODE='P3B01';
+ EXCEPTION WHEN SQLSTATE 'P3B01' THEN NULL;
+ END;
+ IF NOT coalesce((completion_denied),false) THEN RAISE EXCEPTION 'Live assertion failed: %','document completion requires persisted actual size rather than contentLength';END IF;v_passed:=v_passed+1;
+ IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','dual-size and incomplete-object simulations roll back atomically';END IF;v_passed:=v_passed+1;
+END;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET object_name=object_name||'-mismatch' WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+EXECUTE 'SET LOCAL ROLE authenticated';
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name'||'-mismatch' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','current intent must match actual pending document path',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','current intent must match actual pending document path';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET object_name=(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent') WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+EXECUTE 'SET LOCAL ROLE authenticated';
+DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign_upload_url','storage.object.sign_upload_url','object.upload_signed','object.copy','object.update','object.get_authenticated','object.upload.extra'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL'),SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload intent denies metadata INSERT for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','storage.object.upload',true);
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","size":101}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','upload operation cannot replace trusted intent size',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload operation cannot replace trusted intent size';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET created_at=now()-interval '31 minutes',expires_at=now()-interval '1 minute' WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+EXECUTE 'SET LOCAL ROLE authenticated';
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','expired intent denies preflight INSERT RETURNING',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','expired intent denies preflight INSERT RETURNING';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET created_at=now(),expires_at=now()+interval '15 minutes' WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','revoked guardian document flag denies preflight',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked guardian document flag denies preflight';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.guardian_relationships SET can_view_documents=true,can_register=false WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','revoked guardian registration flag denies preflight',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','revoked guardian registration flag denies preflight';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.guardian_relationships SET can_register=true WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+INSERT INTO auth.sessions(id,user_id) VALUES((md5('boss-phase3b-live:'||('session-guardian-preflight-alternate'))::uuid),(md5('boss-phase3b-live:'||('auth-guardian'))::uuid));
+EXECUTE 'SET LOCAL ROLE authenticated';
+PERFORM set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',(md5('boss-phase3b-live:'||('session-guardian-preflight-alternate'))::uuid)))::text,true);
+v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb) RETURNING metadata','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","contentLength":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','different live session cannot reuse upload intent',SQLSTATE;END IF;END;
+IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','different live session cannot reuse upload intent';END IF;v_passed:=v_passed+1;
+PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
+PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
 v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb)','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"text/html","size":100}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','metadata MIME must match trusted intent',SQLSTATE;END IF;END;
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','metadata MIME must match trusted intent';END IF;v_passed:=v_passed+1;
 v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(bucket_id,name,metadata) VALUES(%L,%L,%L::jsonb)','boss-registration-documents',(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),'{"mimetype":"application/pdf","size":101}'); EXCEPTION WHEN OTHERS THEN IF SQLSTATE=ANY(ARRAY['42501']) THEN v_failed:=true;v_safe:=length(SQLERRM)<160 AND SQLERRM !~* '(constraint|relation|column|password|token|stack|SELECT|INSERT|UPDATE|DELETE)';ELSE RAISE EXCEPTION 'Live denial failed: %; unexpected state %','metadata size must match trusted intent',SQLSTATE;END IF;END;
@@ -277,23 +368,76 @@ v_failed:=false;v_safe:=false;BEGIN EXECUTE format('INSERT INTO storage.objects(
 IF NOT coalesce((v_failed),false) THEN RAISE EXCEPTION 'Live assertion failed: %','different actor cannot use known authorized intent';END IF;v_passed:=v_passed+1;
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
-INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
-SELECT 'boss-registration-documents',result->>'object_name',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","size":100}' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent';
+PERFORM set_config('storage.operation','storage.object.upload',true);
+DECLARE returned jsonb;BEGIN
+ INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
+ SELECT 'boss-registration-documents',result->>'object_name',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","size":100}'::jsonb FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'
+ RETURNING metadata INTO returned;
+ IF NOT coalesce((returned='{"mimetype":"application/pdf","size":100}'::jsonb),false) THEN RAISE EXCEPTION 'Live assertion failed: %','persisted backend size INSERT RETURNING passes';END IF;v_passed:=v_passed+1;
+END;
+IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','exact upload operation sees its own pending metadata';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET created_at=now()-interval '31 minutes',expires_at=now()-interval '1 minute' WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+EXECUTE 'SET LOCAL ROLE authenticated';
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload RETURNING read gate rejects expired intent';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.document_upload_intents SET created_at=now(),expires_at=now()+interval '15 minutes' WHERE id=(SELECT (result->>'intent_id')::uuid FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');
+UPDATE public.guardian_relationships SET can_view_documents=false WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload RETURNING read gate rejects revoked document authority';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.guardian_relationships SET can_view_documents=true,can_register=false WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload RETURNING read gate rejects revoked registration authority';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE public.guardian_relationships SET can_register=true WHERE id=(md5('boss-phase3b-live:'||('guardian-child1'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+PERFORM set_config('request.jwt.claims',(auth.jwt()||jsonb_build_object('session_id',(md5('boss-phase3b-live:'||('session-guardian-preflight-alternate'))::uuid)))::text,true);
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload RETURNING read gate rejects a different live session';END IF;v_passed:=v_passed+1;
+PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
+PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
+EXECUTE 'RESET ROLE';
+UPDATE auth.sessions SET not_after=now()-interval '1 second' WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','upload RETURNING read gate rejects expired Auth session';END IF;v_passed:=v_passed+1;
+EXECUTE 'RESET ROLE';
+UPDATE auth.sessions SET not_after=NULL WHERE id=(md5('boss-phase3b-live:'||('session-guardian'))::uuid);
+EXECUTE 'SET LOCAL ROLE authenticated';
+DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.get_authenticated','storage.object.get_authenticated','object.get','storage.object.get','object.list','object.sign','object.sign_many','object.info','object.copy','object.update','object.upload.extra','storage.storage.object.upload'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','unaudited pending object denied for operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','',true);
 IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','uploaded bytes metadata hidden before audited lease';END IF;v_passed:=v_passed+1;
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('physical upload complete'))::uuid,jsonb_build_object('operation','document.complete','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'intent_id',(SELECT result->>'intent_id' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'))));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','physical upload complete';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('physical upload complete',v_result);
+PERFORM set_config('storage.operation','storage.object.upload',true);
+IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','consumed upload intent grants no completed-object read';END IF;v_passed:=v_passed+1;
+PERFORM set_config('storage.operation','',true);
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('guardian document access'))::uuid,jsonb_build_object('operation','document.access','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'purpose','ordinary')));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','guardian document access';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('guardian document access',v_result);
 IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authorized guardian lease permits only one physical';END IF;v_passed:=v_passed+1;
+DECLARE attempted_operation text;BEGIN
+ FOREACH attempted_operation IN ARRAY ARRAY['','object.sign','storage.object.sign','object.sign_many','object.list','object.info','object.copy','object.upload_signed','object.get_public','object.get_signed','object.get','object.download.extra'] LOOP
+  PERFORM set_config('storage.operation',attempted_operation,true);
+  IF NOT coalesce((NOT EXISTS(SELECT 1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','valid lease never grants bearer signing or alternative operation '||coalesce(nullif(attempted_operation,''),'unset raw SQL');END IF;v_passed:=v_passed+1;
+ END LOOP;
+END;
+PERFORM set_config('storage.operation','object.get_authenticated',true);
+IF NOT coalesce(((SELECT count(*)=1 FROM storage.objects WHERE bucket_id='boss-registration-documents')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authenticated download operation accepts unprefixed canonical form';END IF;v_passed:=v_passed+1;
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 -- UPDATE has an API metadata grant but no policy; target only this isolated
 -- upload-intent fixture. Managed Storage forbids direct SQL DELETE, so immutable
 -- DELETE policy closure is asserted structurally without issuing a deletion.
 DECLARE affected integer;BEGIN
  UPDATE storage.objects SET metadata=metadata WHERE bucket_id='boss-registration-documents' AND name=(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent');GET DIAGNOSTICS affected=ROW_COUNT;
  IF NOT coalesce((affected=0),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authenticated UPDATE cannot replace document object';END IF;v_passed:=v_passed+1;
- IF NOT coalesce((NOT EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','DELETE') AND (roles @> ARRAY['authenticated']::name[] OR roles @> ARRAY['public']::name[]))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authenticated DELETE has no object replacement or erasure policy';END IF;v_passed:=v_passed+1; 
+ IF NOT coalesce((NOT EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','DELETE') AND (roles @> ARRAY['authenticated']::name[] OR roles @> ARRAY['public']::name[]))),false) THEN RAISE EXCEPTION 'Live assertion failed: %','authenticated DELETE has no object replacement or erasure policy';END IF;v_passed:=v_passed+1;
 END;
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('outsider'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('outsider'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
@@ -809,8 +953,10 @@ PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('mixed authority identity upload intent'))::uuid,jsonb_build_object('operation','document.intent','input',jsonb_build_object('document_id',((v_results->('mixed authority identity document'))->>'resource_id')::uuid,'mime_type','application/pdf','size_bytes',100)));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','mixed authority identity upload intent';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('mixed authority identity upload intent',v_result);
+PERFORM set_config('storage.operation','storage.object.upload',true);
 INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
 SELECT 'boss-registration-documents',result->>'object_name',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","size":100}' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='mixed authority identity upload intent';
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('mixed authority identity upload complete'))::uuid,jsonb_build_object('operation','document.complete','input',jsonb_build_object('document_id',((v_results->('mixed authority identity document'))->>'resource_id')::uuid,'intent_id',(SELECT result->>'intent_id' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='mixed authority identity upload intent'))));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','mixed authority identity upload complete';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('mixed authority identity upload complete',v_result);
@@ -1049,8 +1195,10 @@ IF NOT coalesce(((SELECT status='upload_pending' AND reviewed_by_person_id IS NU
 EXECUTE 'SET LOCAL ROLE authenticated';
 PERFORM set_config('request.jwt.claim.sub','',true);PERFORM set_config('request.jwt.claim','',true);
 PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',md5('boss-phase3b-live:auth-'||('guardian'))::uuid,'role','authenticated','is_anonymous',false,'session_id',md5('boss-phase3b-live:session-'||('guardian'))::uuid,'user_metadata',jsonb_build_object('is_admin',true,'role','super_administrator'))::text,true);
+PERFORM set_config('storage.operation','storage.object.upload',true);
 INSERT INTO storage.objects(bucket_id,name,owner_id,metadata)
 SELECT 'boss-registration-documents',result->>'object_name',(md5('boss-phase3b-live:'||('auth-guardian'))::uuid)::text,'{"mimetype":"application/pdf","size":100}' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='naturally expired physical renewal intent';
+PERFORM set_config('storage.operation','storage.object.get_authenticated',true);
 v_result:=public.boss_registration_mutate(md5('boss-phase3b-live:request-'||('naturally expired physical renewal complete'))::uuid,jsonb_build_object('operation','document.complete','input',jsonb_build_object('document_id',((v_results->('physical document'))->>'resource_id')::uuid,'intent_id',(SELECT result->>'intent_id' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='naturally expired physical renewal intent'))));
 IF NOT coalesce((jsonb_typeof(v_result)='object'),false) THEN RAISE EXCEPTION 'Live assertion failed: %','naturally expired physical renewal complete';END IF;v_passed:=v_passed+1;
 v_results:=v_results||jsonb_build_object('naturally expired physical renewal complete',v_result);
@@ -1069,15 +1217,15 @@ EXECUTE 'RESET ROLE';
 IF NOT coalesce(((SELECT count(*)=2 FROM storage.objects WHERE bucket_id='boss-registration-documents' AND name IN((SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='physical upload intent'),(SELECT result->>'object_name' FROM (SELECT key AS label,value AS result FROM jsonb_each(v_results)) stored WHERE label='naturally expired physical renewal intent'))) AND EXISTS(SELECT 1 FROM boss_private.registration_document_history WHERE document_id=((v_results->('physical document'))->>'resource_id')::uuid AND version=4 AND snapshot->>'status'='approved') AND EXISTS(SELECT 1 FROM public.audit_events WHERE request_id=(md5('boss-phase3b-live:'||('request-naturally expired physical renewal intent'))::uuid) AND action='document.intent')),false) THEN RAISE EXCEPTION 'Live assertion failed: %','renewal retains both isolated metadata versions and all history';END IF;v_passed:=v_passed+1;
 
 
-IF NOT (SELECT count(*)=2 AND bool_and(cmd IN('INSERT','SELECT')) AND bool_and(roles=ARRAY['authenticated']::name[]) FROM pg_catalog.pg_policies WHERE schemaname='storage' AND policyname IN('boss_registration_document_upload','boss_registration_document_download')) THEN RAISE EXCEPTION 'Storage canonical policies changed';END IF;v_passed:=v_passed+1;
+IF NOT (SELECT count(*)=3 AND bool_and(cmd IN('INSERT','SELECT')) AND bool_and(roles=ARRAY['authenticated']::name[]) FROM pg_catalog.pg_policies WHERE schemaname='storage' AND policyname IN('boss_registration_document_upload','boss_registration_document_download','boss_registration_document_upload_returning')) THEN RAISE EXCEPTION 'Storage canonical policies changed';END IF;v_passed:=v_passed+1;
 IF EXISTS(SELECT 1 FROM pg_catalog.pg_policies WHERE schemaname='storage' AND tablename='objects' AND cmd IN('ALL','UPDATE','DELETE') AND (coalesce(qual,'')||coalesce(with_check,'')) LIKE '%boss-registration-documents%') THEN RAISE EXCEPTION 'Private registration object replacement policy opened';END IF;v_passed:=v_passed+1;
 IF has_function_privilege('anon','public.boss_registration_read(jsonb)','EXECUTE') OR has_function_privilege('service_role','public.boss_registration_read(jsonb)','EXECUTE') OR has_function_privilege('service_role','public.boss_registration_mutate(uuid,jsonb)','EXECUTE') THEN RAISE EXCEPTION 'Private caller RPC grants opened';END IF;v_passed:=v_passed+1;
-IF v_passed<>634 THEN RAISE EXCEPTION 'Phase3B expected assertion count changed';END IF;
+IF v_passed<>704 THEN RAISE EXCEPTION 'Phase3B expected assertion count changed';END IF;
 PERFORM set_config('boss.phase3b_live_assertions',v_passed::text,true);
 END $live$;
 SELECT current_setting('boss.phase3b_live_assertions')::integer AS passed_assertions;
 ROLLBACK;
-SELECT 634 AS passed_assertions,
+SELECT 704 AS passed_assertions,
  (SELECT count(*) FROM public.people WHERE display_name LIKE 'Synthetic Phase3B Live %') AS synthetic_people_remaining,
  (SELECT count(*) FROM public.organizations WHERE slug LIKE 'synthetic-phase3b-live-%') AS synthetic_organizations_remaining,
  (SELECT count(*) FROM auth.users WHERE email LIKE '%@phase3b-live.example.invalid') AS synthetic_auth_users_remaining,
