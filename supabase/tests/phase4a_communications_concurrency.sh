@@ -42,7 +42,7 @@ race(){
  if wait "$contender_pid";then status=0;else status=$?;fi;contender_pid=''
  if [[ "$expected" == success && "$status" != 0 ]];then cat "$race_dir/phase4a-comm-$n-contender.err" >&2;return 1;fi
  if [[ "$expected" == conflict && "$status" == 0 ]];then printf '%s\n' 'Higher-isolation concurrent mutation unexpectedly committed.' >&2;return 1;fi
- if [[ "$expected" == conflict ]] && ! rg -q 'PT409' "$race_dir/phase4a-comm-$n-contender.err";then cat "$race_dir/phase4a-comm-$n-contender.err" >&2;return 1;fi
+ if [[ "$expected" == conflict ]] && ! grep -Fq 'PT409' "$race_dir/phase4a-comm-$n-contender.err";then cat "$race_dir/phase4a-comm-$n-contender.err" >&2;return 1;fi
 }
 race retry 1 'read committed' success
 if [[ $("${psql_cmd[@]}" --command "select count(*) from public.communication_messages where thread_id='c4aa5000-0000-4000-8000-000000000001'") != 1 ]];then printf '%s\n' 'Concurrent request replay duplicated message.' >&2;exit 1;fi
