@@ -8,7 +8,7 @@
 - Review URL: https://deploy-preview-2--bossplus.netlify.app
 - Netlify website project: `bossplus`, `bc4662a5-57c4-4fdc-8754-aa1be8aa9a8a`.
 - Earlier public frontend is preserved on `build/premium-site-v1`.
-- Homepage, Boss Bucks, Fundraising, Digital Money Board and Boss Engage are published on bossplus. Shared main remains unmerged.
+- Homepage, Boss Bucks, Fundraising, Digital Money Board, Boss Engage and Family Hub are published on bossplus. Shared main remains unmerged.
 
 ## September 30, 2026 homepage completion
 
@@ -48,7 +48,7 @@ See `docs/design/boss-bucks-page.md` for asset provenance and verification.
 
 ## Next work
 
-1. Publish and verify the approved responsive Family Hub page.
+1. Publish and verify the approved responsive Who It’s For / Organizations page.
 2. Prepare the next interior-page mockup for owner review.
 3. Extend the approved website identity through remaining interior pages.
 4. Complete production contact, legal, abuse prevention and launch configuration.
@@ -100,3 +100,15 @@ Responsive `/family-hub` is implemented with cross-organization calendars,
 per-child fundraising progress and restricted family wallet messaging. Contract,
 asset provenance and QA: `docs/design/family-hub-page.md`. Exact publication and
 browser confirmation are recorded on PR #2 after release. Backend unchanged.
+
+
+## October 1 Family Hub publication and Organizations checkpoint
+
+Family Hub was published and browser-verified at `/family-hub`, commit
+256ae252c5256c4552d3ea876a165d5d6b5096d2, deploy 6abec0208e643c0008f69683.
+
+Owner approved Who It’s For desktop mockup and authorized implementation/publication.
+Responsive `/organizations` implements five audience groups with distinct approved
+photos and an organization-leader focus. Contract: `docs/design/organizations-page.md`.
+Exact QA and publication are recorded on PR #2. Main remains unmerged and operational
+platform/backend unchanged.
