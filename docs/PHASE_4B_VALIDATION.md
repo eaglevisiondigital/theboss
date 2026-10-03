@@ -1,5 +1,14 @@
 # Phase 4B validation status
 
+Latest bounded performance follow-up: all 30 canonical migration versions/names
+match; regenerated types are unchanged. Fresh validation passes 7,230 SQL/bootstrap
+assertions and all 34 races in one successful run, plus all 218 application tests,
+typecheck, zero-warning lint and production build. The original 29 migrations
+are unchanged. Decision A applies to bounded disposable/canonical/restored hosted
+proof; remaining restricted acceptance is not resumed or relabeled. See
+[performance evidence and limits](PHASE_4B_PERFORMANCE.md). Historical totals and
+failed attempts below are preserved.
+
 Status: implementation deployed, four controlled runs closed, final hosted acceptance **INCOMPLETE**. Latest acceptance started at branch `22f29f2bdafb4f4f51ae213d0ee89cd3ca29ae95` on published application source `4247289af8d1aad46379c4597bfd87c19ddddccd`. New Family Hub/recurrence/stale-POST/requested-notification checks passed; the Notifications page then became temporarily unavailable and acceptance stopped under the explicit failure rule. At that acceptance handoff the cause was undetermined. Subsequent bounded read-only diagnosis confirms PostgreSQL `57014` cancellations for both Notifications reads and Attendance at the eight-second limit; see [the focused diagnosis](PHASE_4B_NOTIFICATIONS_DIAGNOSIS.md). Recovery and zero-residual proof completed by 13:37:42 UTC, before the fixed 14:15:40.602045 expiry. See the latest-run section below and ordered addendum for current results; earlier sections retain historical evidence and timing exceptions. Final application validation passed again; no code/schema change or further acceptance window was made.
 
 ## Applied migrations and canonical verification

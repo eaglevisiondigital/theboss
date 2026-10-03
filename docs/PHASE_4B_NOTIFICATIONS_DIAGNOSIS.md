@@ -1,5 +1,12 @@
 # Phase 4B Notifications blocker diagnosis
 
+October 3 follow-up: the authorized [bounded performance investigation](PHASE_4B_PERFORMANCE.md)
+subsequently reproduced the Notifications timeout, validated narrow SQL evaluation
+reuse, applied its append-only migration and verified bounded restored reads.
+Historical investigation limits below describe the preceding checkpoint. Full
+restricted hosted acceptance remains incomplete; no new authority window was
+opened by the performance assignment.
+
 This focused investigation starts from `ce4232fbb4df56dc31f80bb63c8ad66c3603aded`
 on `build/boss-platform-v1`. It uses source review, bounded value-free incident
 logs and the restored administrator's read-only hosted session. No new acceptance

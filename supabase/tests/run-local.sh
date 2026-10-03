@@ -67,10 +67,12 @@ trap 'exit 143' TERM
 # The private Unix socket is accessible only to this operating-system user.
 # Match the canonical Boss project's verified JIT setting, so compiler cost
 # does not obscure authorization and concurrency behavior in short requests.
+# Local function tracking enables structural regressions without superuser
+# privileges for the managed-like migration/test role.
 "$postgres_bin_dir/initdb" --pgdata "$data_dir" --username boss_test_admin \
   --auth-local trust --auth-host reject --encoding UTF8 --no-locale >/dev/null
 "$postgres_bin_dir/pg_ctl" --pgdata "$data_dir" --log "$test_run_dir/postgres.log" \
-  --options "-c listen_addresses='' -c unix_socket_directories='$socket_dir' -c unix_socket_permissions=0700 -c log_statement=none -c jit=off" \
+  --options "-c listen_addresses='' -c unix_socket_directories='$socket_dir' -c unix_socket_permissions=0700 -c log_statement=none -c jit=off -c track_functions=all" \
   --wait start >/dev/null
 psql_bootstrap_command=("$postgres_bin_dir/psql" --no-psqlrc --no-password \
   --host "$socket_dir" --port 5432 --username boss_test_admin --dbname postgres \
