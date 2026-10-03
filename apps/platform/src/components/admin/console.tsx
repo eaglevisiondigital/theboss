@@ -72,7 +72,7 @@ function ConsoleContent({ view, data, query }: { view: AdminView; data: AdminVie
   const copy = viewCopy[view];
   return <>
     <div className="page-heading admin-page-heading"><p className="eyebrow muted">{view === "home" ? "Your workspace" : view}</p><h1>{copy.title}</h1><p>{copy.description}</p></div>
-    {data.unavailable ? <div className="form-notice" role="status">Your workspace is temporarily unavailable. Refresh the page to try again.</div> : !data.provisioned ? <Provisioning /> : <>
+    {data.accessDenied ? <div className="form-notice" role="status">{view === "families" ? "Family records are restricted in this context." : "You do not have access to this workspace in the selected context."}</div> : data.unavailable ? <div className="form-notice" role="status">Your workspace is temporarily unavailable. Refresh the page to try again.</div> : !data.provisioned ? <Provisioning /> : <>
       {view !== "account" && <OrganizationContext organizations={data.organizations} selected={data.organizationId} />}
       {view === "home" && <Home data={data} />}
       {view === "organizations" && <Organizations data={data} query={query} />}

@@ -12,6 +12,8 @@ import type { AttendanceData } from "../src/lib/attendance/contracts";
 import type { VolunteerData } from "../src/lib/volunteers/contracts";
 import { guardianFlags, editFields } from "../src/components/admin/fields";
 import { MutationForm } from "../src/components/admin/mutation-form";
+import { AdminConsole } from "../src/components/admin/console";
+import { readAdminView } from "../src/lib/admin/read";
 const org = "00000000-0000-4000-8000-000000000001", event = "00000000-0000-4000-8000-000000000002", person = "00000000-0000-4000-8000-000000000003", participant = "00000000-0000-4000-8000-000000000004", shift = "00000000-0000-4000-8000-000000000005", role = "00000000-0000-4000-8000-000000000006", team = "00000000-0000-4000-8000-000000000007", assignment = "00000000-0000-4000-8000-000000000008";
 const router: AppRouterInstance = { back() {}, forward() {}, refresh() {}, push() {}, replace() {}, prefetch() {}, bfcacheId: "coordination-ui-test" };
 test.beforeEach(() => mock.timers.enable({ apis: ["Date"], now: new Date("2026-10-02T12:00:00Z") }));
@@ -92,6 +94,18 @@ test("Family Hub preserves the actual selected domain organizations from a conte
   const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map(match => match[1]);
   assert.ok(hrefs.some(href => href.startsWith("/app/attendance?") && href.includes(`org=${org}`)));
   assert.ok(hrefs.some(href => href.startsWith("/app/volunteers?") && href.includes(`org=${volunteerOrg}`)));
+});
+test("authorized Family Hub actions survive a denied older family-record view", async () => {
+  const denied = await readAdminView("families", async () => ({ data: null, error: { code: "PT403" } }), org);
+  const html = render(createElement("div", null,
+    createElement(CoordinationHub, { family: true, attendance: attendance(), volunteers: volunteers({ commitments: [] }), attendanceQuery, volunteerQuery }),
+    createElement(AdminConsole, { view: "families", data: denied }),
+  ));
+  assert.match(html, /Family Hub/);
+  assert.match(html, /Respond for Controlled Child1/);
+  assert.match(html, /Save response/);
+  assert.match(html, /Family records are restricted in this context/);
+  assert.doesNotMatch(html, /temporarily unavailable|Connect your Boss identity|Create household/);
 });
 test("coach dashboard compact next event shows counts and exact occurrence link without absence notes", () => {
   const data = attendance({ occurrences: [{ ...occurrenceRow, capabilities: { view_summary: true, manage: true } }] }); const html = render(createElement(AttendanceCard, { occurrence: data.occurrences[0], compact: true })); assert.match(html, /Attendance summary/); assert.match(html, /view=staff/); assert.match(html, /occurrence=2026-10-03T18%3A00%3A00/); assert.doesNotMatch(html, /Private reason|Save response|Save check-in/);

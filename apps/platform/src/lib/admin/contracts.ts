@@ -21,6 +21,7 @@ export type AdminViewData = {
   navigation: AdminNavigation[];
   records: Record<string, AdminRecord[]>;
   unavailable?: boolean;
+  accessDenied?: boolean;
 };
 export type AdminCommand = { operation: string; input: Record<string, Json>; ref?: string };
 export type AdminMutationResult = { resource_type: string; resource_id: string; ref?: string };
