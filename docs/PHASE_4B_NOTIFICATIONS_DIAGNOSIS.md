@@ -82,8 +82,26 @@ the original classification; all six pass with the correction. Final isolated
 validation passes typecheck, zero-warning lint, all 218 application tests without
 skips and the production build. All 160 source/config files match the validated
 snapshot. The public login page returns HTTP 200. Production publication and
-post-deployment read-only evidence are recorded in the completion handoff and
-PR #3.
+post-deployment read-only evidence follow below.
+
+## Publication and restored-administrator verification
+
+The correction is committed and pushed as
+`8ac5527e0961fb66a07be2533924d5906023147d`. Dedicated Boss platform production
+deployment `6ac131268ba1670008889049` is ready and published at
+**2026-10-03 16:45:54.164 UTC**, on the existing `build/boss-platform-v1`
+Git-based release path. No Netlify proxy credential or deployment-environment
+value was retrieved or reused.
+
+Read-only production checks with the restored original administrator verify:
+the ended organization filter renders the corrected restricted-context text with
+no records/actions; the unfiltered Notifications inbox loads with no unavailable
+notice; a full reload preserves that result; navigation to Home loads the
+controlled organization picker and administrator management tools; returning to
+Notifications succeeds. The summary drawer remains absent under the restored
+feature-disabled baseline, as expected; no positive drawer scenario is claimed
+from these checks. Safe proof is retained outside Git. These checks exercise no
+notification preference/read mutation and no attendance/volunteer mutation.
 
 ## Remaining acceptance and stop boundary
 
