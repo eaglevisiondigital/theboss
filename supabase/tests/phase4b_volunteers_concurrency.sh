@@ -22,7 +22,27 @@ insert into public.organization_modules(organization_id,module_id,status,configu
 insert into public.volunteer_role_definitions(id,organization_id,name,created_by_person_id,updated_by_person_id) values('c4bb5000-0000-4000-8000-000000000001','c4bb4000-0000-4000-8000-000000000001','Synthetic race duty','c4bb3000-0000-4000-8000-000000000001','c4bb3000-0000-4000-8000-000000000001');
 insert into public.volunteer_shifts(id,organization_id,role_id,title,scope_type,scope_id,start_at,end_at,capacity,status,created_by_person_id,updated_by_person_id) select ('c4bb6000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid,'c4bb4000-0000-4000-8000-000000000001','c4bb5000-0000-4000-8000-000000000001','Synthetic concurrent duty','organization','c4bb4000-0000-4000-8000-000000000001',now()+interval '1 day',now()+interval '1 day 1 hour',case when n=5 then 2 else 1 end,'open','c4bb3000-0000-4000-8000-000000000001','c4bb3000-0000-4000-8000-000000000001' from generate_series(1,7)n;commit;" >"$race_dir/phase4b-vol-setup.out"
 claims(){ printf '{"sub":"c4bb1000-0000-4000-8000-%012d","role":"authenticated","is_anonymous":false,"session_id":"c4bb2000-0000-4000-8000-%012d"}' "$1" "$1"; }
-await_state(){ local app=$1 expected=$2 query deadline=$((SECONDS+15));if [[ "$expected" == ready ]];then query="select count(*) from pg_stat_activity where application_name='$app' and state='idle in transaction' and query like '%boss_volunteers_mutate%'";else query="select count(*) from pg_stat_activity where application_name='$app' and wait_event_type='Lock'";fi;while (( SECONDS<deadline ));do if [[ $("${psql_cmd[@]}" --command "$query") == 1 ]];then return 0;fi;sleep 0.05;done;printf 'Volunteer race did not synchronize %s.\n' "$app" >&2;return 1;}
+participant_failure(){
+ local app=$1 reason=$2 error_file=$3
+ printf 'Volunteer race participant %s %s.\n' "$app" "$reason" >&2
+ # Retain the failure category without printing SQL, synthetic claims or context.
+ awk '/(ERROR|FATAL):/ {for(i=1;i<NF;i++) if($i=="ERROR:" || $i=="FATAL:") {code=$(i+1);sub(/:$/,"",code);if(code~/^[0-9A-Z]{5}$/) print "Participant SQLSTATE: " code;exit}}' "$error_file" >&2
+}
+await_state(){
+ local app=$1 expected=$2 participant_pid=$3 error_file=$4 query deadline=$((SECONDS+60))
+ if [[ "$expected" == ready ]];then query="select count(*) from pg_stat_activity where application_name='$app' and state='idle in transaction' and query like '%boss_volunteers_mutate%'";
+ else query="select count(*) from pg_stat_activity where application_name='$app' and wait_event_type='Lock'";fi
+ while (( SECONDS<deadline ));do
+  if [[ -s "$error_file" ]] && grep -Eq '(^|[[:space:]])(ERROR|FATAL):' "$error_file";then participant_failure "$app" 'failed before synchronization' "$error_file";return 1;fi
+  if ! kill -0 "$participant_pid" >/dev/null 2>&1;then participant_failure "$app" 'exited before synchronization' "$error_file";return 1;fi
+  if [[ $("${psql_cmd[@]}" --command "$query") == 1 ]];then return 0;fi
+  sleep 0.05
+ done
+ participant_failure "$app" "did not reach $expected within 60 seconds" "$error_file"
+ # This metadata is safe even when a failing query includes request claims.
+ "${psql_cmd[@]}" --command "set statement_timeout='5s';select state,coalesce(wait_event_type,'none') from pg_stat_activity where application_name='$app';" >&2 || true
+ return 1
+}
 race(){
  local kind=$1 n=$2 isolation=$3 expected=$4 writer_name="boss_phase4b_vol_${1}_${2}_writer" contender_name="boss_phase4b_vol_${1}_${2}_contender" fifo="$race_dir/phase4b-vol-${1}-${2}.stdin" req1 req2 cmd1 cmd2 who2=2 assignment_id version status sid
  printf -v req1 'c4bb7000-0000-4000-8000-%012d' "$((n*10))";printf -v req2 'c4bb7000-0000-4000-8000-%012d' "$((n*10+1))";printf -v sid 'c4bb6000-0000-4000-8000-%012d' "$n"
@@ -35,8 +55,8 @@ race(){
  if [[ "$kind" == cancel ]];then cmd1="{\"operation\":\"assignment.cancel\",\"input\":{\"assignment_id\":\"$assignment_id\",\"expected_version\":1}}";
  else version=$("${psql_cmd[@]}" --command "select version from public.volunteer_shifts where id='$sid'");cmd1=$("${psql_cmd[@]}" --command "select jsonb_build_object('operation','shift.upsert','input',jsonb_build_object('organization_id',organization_id,'shift_id',id,'expected_version',$version,'role_id',role_id,'title',title,'scope_type',scope_type,'scope_id',scope_id,'start_at',start_at,'end_at',end_at,'capacity',1,'status',status,'visibility',visibility)) from public.volunteer_shifts where id='$sid'");fi;fi
  mkfifo -m 600 "$fifo";"${psql_cmd[@]}" <"$fifo" >"$race_dir/phase4b-vol-$n-writer.out" 2>"$race_dir/phase4b-vol-$n-writer.err" & writer_pid=$!;exec 9>"$fifo";input_open=true
- printf '%s\n' "set application_name='$writer_name';begin;set local role authenticated;select set_config('request.jwt.claims','$(claims 1)',true);select public.boss_volunteers_mutate('$req1','$cmd1');" >&9;await_state "$writer_name" ready
- "${psql_cmd[@]}" --command "set application_name='$contender_name';begin isolation level $isolation;set local role authenticated;select set_config('request.jwt.claims','$(claims "$who2")',true);select public.boss_volunteers_mutate('$req2','$cmd2');commit;" >"$race_dir/phase4b-vol-$n-contender.out" 2>"$race_dir/phase4b-vol-$n-contender.err" & contender_pid=$!;await_state "$contender_name" waiting
+ printf '%s\n' "set application_name='$writer_name';set statement_timeout='75s';begin;set local role authenticated;select set_config('request.jwt.claims','$(claims 1)',true);select public.boss_volunteers_mutate('$req1','$cmd1');" >&9;await_state "$writer_name" ready "$writer_pid" "$race_dir/phase4b-vol-$n-writer.err"
+ "${psql_cmd[@]}" --command "set application_name='$contender_name';set statement_timeout='75s';begin isolation level $isolation;set local role authenticated;select set_config('request.jwt.claims','$(claims "$who2")',true);select public.boss_volunteers_mutate('$req2','$cmd2');commit;" >"$race_dir/phase4b-vol-$n-contender.out" 2>"$race_dir/phase4b-vol-$n-contender.err" & contender_pid=$!;await_state "$contender_name" waiting "$contender_pid" "$race_dir/phase4b-vol-$n-contender.err"
  printf '%s\n' 'commit;' >&9;exec 9>&-;input_open=false;wait "$writer_pid";writer_pid=''
  if wait "$contender_pid";then status=0;else status=$?;fi;contender_pid=''
  if [[ "$expected" == success && "$status" != 0 ]];then cat "$race_dir/phase4b-vol-$n-contender.err" >&2;return 1;fi
