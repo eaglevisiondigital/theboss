@@ -24,7 +24,7 @@ const costs = [
 export default function ApprovedHomepageSections() {
   return <>
     <section className={f.savings} aria-labelledby="savings-title"><div className={f.savingsCanvas}>
-      <ReferencePhoto crop="542 578 251 307" alt="A young woman showing a Boss Bucks discount on her phone" className={f.savingsPortrait}/>
+      <ReferencePhoto crop="542 578 251 255" preserveAspectRatio="xMidYMin slice" alt="A young woman showing a Boss Bucks discount on her phone" className={f.savingsPortrait}/>
       <figure className={f.discountPhone}>
         <svg viewBox="205 14 686 1366" role="img" aria-label="Approved Boss Bucks Discounts app preview"><defs><clipPath id="home-discounts-phone"><rect x="205" y="14" width="686" height="1366" rx="120"/></clipPath></defs><image href="/images/approved/discounts-original.png" width="1122" height="1402" clipPath="url(#home-discounts-phone)"/></svg>
         <figcaption>Illustrative product preview</figcaption>
