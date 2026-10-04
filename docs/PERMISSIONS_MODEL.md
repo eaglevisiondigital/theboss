@@ -1,5 +1,17 @@
 # Boss foundation permissions
 
+## Phase 5C exact-game Soccer operation
+
+Soccer adds no role, permission or broader mapping. Existing current game
+administrator/scorekeeper functions authorize bounded segment, clock, event,
+lineup and keeper entry only with exact current resource/relationship/feature
+checks. Private attribution requires actual roster-side authority. Unknown
+opponent/team facts never grant private roster access. Elevated correction,
+finalization and reopen gates remain independent. Household membership confers
+no family authority; current own/dependent relationships determine identity
+projection. Implementation validation is in progress.
+
+
 ## Phase 5B exact-game Basketball operation
 
 No role or permission mapping is broadened. Existing current `games.operate`

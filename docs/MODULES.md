@@ -1,5 +1,17 @@
 # Modules and product access
 
+## Phase 5C finite Soccer controls
+
+Sports adds independent default-off `soccer_live_scoring`, `soccer_stats`,
+`soccer_play_by_play` and `soccer_lineups`, for thirteen implemented Game Center
+booleans overall. Existing Game Center, operations, current Sports and Calendar
+context still gate access. Configuration activates no organization implicitly and
+cannot enable another engine, public Game Center or later module. Live Soccer
+requires live scoring and stats; enforced participation requires lineups;
+play-by-play display has its own gate. Already configured Soccer ownership stays
+closed to legacy manual scoring after disable. Validation is in progress.
+
+
 ## Phase 5B finite Basketball controls
 
 Sports adds four finite default-off controls: `basketball_live_scoring`,

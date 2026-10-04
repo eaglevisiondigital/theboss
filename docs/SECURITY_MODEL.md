@@ -1,5 +1,21 @@
 # Boss platform security
 
+## Phase 5C Soccer boundary
+
+Five new raw tables are RLS-enabled and closed to API roles. Fixed-path private
+helpers reuse current caller liveness, exact game/operator and side authority,
+caller-bound receipt replay and post-lock checks. Wrong sport, tenant, side,
+athlete/keeper, stale version, final status and disabled features fail closed.
+Permanent engine ownership blocks legacy manual score/reversal and roster bypass
+even after feature disable. Events/stat seals preserve immutable evidence.
+Historical keeper corrections cannot use a later designation for an earlier
+shot. Family/private masks and signed transport remain unchanged. Controlled
+acceptance will use one fixed synthetic window with independently tested admin
+recovery and exact zero-residual cleanup. No credential extraction, Auth-policy
+change, production test endpoint or provider workaround is introduced. Runtime
+and hosted validation remain distinct and are currently in progress.
+
+
 ## Phase 5B Basketball boundary
 
 Basketball raw state, event, lineup, history and final-stat tables are immediately

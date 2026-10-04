@@ -1,5 +1,18 @@
 # Game Center foundation
 
+## Phase 5C Soccer extension
+
+The second sport engine layers onto the same game, exact Calendar occurrence,
+roster, operator functions, receipt/sequence, lifecycle and final epoch. Soccer
+has an ascending server clock and appropriate shot/card/keeper/participation
+semantics; it does not rename Basketball's countdown model. Four independent
+controls remain default off. Canonical sport keys and permanent engine ownership
+prevent overlap or legacy scoring bypass. Safe family projections, low-volume
+notifications and authenticated refresh reuse existing interfaces. See
+[Soccer architecture](SOCCER_ENGINE_ARCHITECTURE.md). Validation is in progress;
+prior foundation and Basketball evidence below is historical and preserved.
+
+
 Phase 5A implementation contract. The starting branch head is
 `378b93e8db2880527dd80b640ca3989ce5c5c409`. This phase establishes shared operating
 records for competitive Calendar occurrences. Sport scoring engines, statistics

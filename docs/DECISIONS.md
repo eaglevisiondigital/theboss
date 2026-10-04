@@ -1,5 +1,29 @@
 # Boss foundation implementation decisions
 
+## Phase 5C Soccer implementation choices
+
+Main Boss Chat directly authorized Soccer on October 4, 2026 from
+`a5942ac5d5c79127e08b137d429aff71ac75d499`. Single canonical shot outcomes derive
+attempts/SOG/goal/save; own goals remain separate. Configurable halves/youth
+quarters, added time, two optional extra segments, lineups and substitution
+policies do not infer professional or knockout rules. Extra time does not require
+an invented tied-score policy; final completed matches may draw. Complete
+monotonic participation supports minutes/keeper GA; insufficient basis remains
+null. Shootout operation is deferred with a distinct full extension contract.
+No role mapping broadens and no later sport/aggregate/module begins.
+
+Controlled hosted preparation identifies only synthetic existing records. For
+one enforced 2v2 game with goal/assist, bench substitution and reliable keeper
+intervals, two narrowly bounded athlete memberships may be needed: reinstate an
+existing inactive controlled Falcons membership and end one new controlled
+Wildcats membership on an existing synthetic participant. No person, DOB, Auth,
+guardian flag or household authority is invented. Capture exact baselines,
+exercise recovery locally and verify restoration within the single fixed window.
+No canonical migration, deployment or window result is claimed by this design
+record. See [Soccer architecture](SOCCER_ENGINE_ARCHITECTURE.md) and
+[the hosted plan](PHASE_5C_HOSTED_PLAN.md).
+
+
 ## Phase 5B Basketball implementation choices
 
 Main Boss Chat authorized the first sport engine on October 4, 2026 against

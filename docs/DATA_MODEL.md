@@ -1,5 +1,18 @@
 # Data model
 
+## Phase 5C Soccer extension
+
+Soccer uses five tenant-qualified tables for bounded state, typed events, current
+lineups, epoch metadata and normalized UUID-keyed final stats. It reuses canonical
+game/Calendar/roster/operator/operation identities. Typed event participation
+snapshots provide interval history; no duplicate schedule or sport identity is
+created. Single shot outcomes derive score, attempts, SOG and saves; own goals
+retain conceding-side attribution. Complete participation supports minutes and
+keeper GA; incomplete evidence yields null. Immutable Soccer epochs bind existing
+core finalizations. Implementation validation is in progress. See
+[Soccer architecture](SOCCER_ENGINE_ARCHITECTURE.md).
+
+
 ## Phase 5B Basketball extension
 
 Basketball binds to the existing `games` identity, exact Calendar occurrence,

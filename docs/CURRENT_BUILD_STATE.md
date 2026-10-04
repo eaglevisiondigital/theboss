@@ -1,5 +1,39 @@
 # Current build state
 
+## Phase 5C Soccer Live Scoring + Game Statistics: IN PROGRESS
+
+Main Boss Chat directly authorized Phase 5C on October 4, 2026 from verified
+`a5942ac5d5c79127e08b137d429aff71ac75d499`, on `build/boss-platform-v1` and
+existing draft PR #3. Soccer will extend the same canonical Game Center game,
+Calendar occurrence, roster, operators, ordered operation/receipt/version model
+and final epochs. Basketball and earlier completed records below remain intact.
+
+Implementation and independent local validation are complete: **9,337 distinct
+SQL/bootstrap assertions**, **96 two-connection races** (23 Soccer), **24**
+separate recovery checks, **304/304 application tests**, typecheck, zero-warning
+lint and production build passed. After the initial approval-review rejection,
+the user directly authorized all remaining Phase 5C live/release steps on October
+4, 2026. Three validated migrations were applied to canonical Boss Supabase;
+all **40** migration versions/names and all three raw body hashes match local
+history. The live read-only verifier passed **120** assertions. Canonical types
+were regenerated (**195,784 bytes**); final type-dependent app checks passed (304/304 tests, typecheck, zero-warning
+lint and production build).
+
+Post-migration security advisors report75 intentional closed-table RLS INFO and
+the one pre-existing leaked-password-protection WARN. Performance advisors report
+154 unused-index INFO and one existing Auth connection INFO, no WARN/ERROR.
+Canonical Boss remains the only database target. No Auth/security settings,
+public website or later engine/module changed.
+
+Deployment and the one controlled hosted window remain pending at this checkpoint.
+The original administrator was independently verified valid with zero temporary
+authority before migration. Completion requires verified deployment, actual
+hosted acceptance, fixed-window cleanup and final push. The initial rejection
+and subsequent direct authorization are preserved in the validation record.
+See [executed validation](PHASE_5C_VALIDATION.md),
+[performance measurements](PHASE_5C_PERFORMANCE.md) and the
+[fixed hosted plan](PHASE_5C_HOSTED_PLAN.md). Phase 5C is not declared complete.
+
 ## Phase 5B Basketball Live Scoring + Game Statistics: COMPLETE
 
 Main Boss Chat authorized Phase 5B on October 4, 2026 from

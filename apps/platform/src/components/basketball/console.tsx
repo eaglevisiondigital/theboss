@@ -61,6 +61,7 @@ function BasketballScorer({ game, state }: { game: Game; state: BasketballGame }
   </section>;
 }
 function BasketballContent({ game, family = false }: { game: Game; family?: boolean }) {
+  if (game.sport_key !== "basketball") return null;
   const state = game.basketball;
   if (!state) return game.engine_locked ? <p className="game-notice">Basketball controls are unavailable. Manual score summaries remain closed for this configured game.</p> : null;
   if (!state.configured) return !family && state.capabilities.configure ? <BasketballSetup game={game} /> : null;

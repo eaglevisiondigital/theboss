@@ -737,3 +737,71 @@ button:disabled { cursor: wait; opacity: .65; }
   .basketball-state-heading h3 { font-size: 20px; }
   .basketball-clock-controls .button { width: 100%; }
 }
+
+.soccer-panel { margin-top: 24px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; min-width: 0; overflow-wrap: anywhere; }
+.soccer-state-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.soccer-state-heading h3 { margin: 4px 0; }
+.soccer-state-heading p { margin: 0; }
+.soccer-clock { display: grid; text-align: center; flex-shrink: 0; }
+.soccer-clock strong { font-size: clamp(32px, 5vw, 52px); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.soccer-clock span { font-size: 13px; }
+.soccer-clock-note { margin: 12px 0 20px; font-size: 13px; }
+.soccer-scorer { min-width: 0; }
+.soccer-scorer h4 { margin-bottom: 12px; }
+.soccer-selection { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.soccer-panel select, .soccer-panel input:not([type=checkbox]), .soccer-panel textarea { min-width: 0; max-width: 100%; width: 100%; }
+.soccer-panel select { min-height: 48px; }
+.soccer-control-label { margin: 16px 0 8px; font-weight: 700; font-size: 14px; }
+.soccer-shot-buttons, .soccer-stat-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.soccer-play-button { padding: 14px 10px; min-height: 56px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.soccer-goal { background: var(--orange); color: var(--ink); }
+.soccer-play-button:disabled { opacity: 0.5; cursor: default; }
+.soccer-play-button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+.soccer-assist { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; }
+.soccer-save-state { min-height: 24px; font-size: 14px; }
+.soccer-recent-plays { margin: 18px 0; }
+.soccer-recent-plays h5 { font-size: 14px; margin: 0 0 10px; }
+.soccer-clock-controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.soccer-clock-controls .button { min-height: 48px; white-space: normal; }
+.soccer-secondary-panel { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 22px; min-width: 0; }
+.soccer-secondary-panel summary { cursor: pointer; font-weight: 700; padding-bottom: 12px; }
+.soccer-secondary-panel .game-action-form { margin: 16px 0; }
+.soccer-lineup-side { margin: 16px 0; min-width: 0; }
+.soccer-athlete-checks { display: grid; gap: 10px; }
+.soccer-box-section { margin-top: 24px; }
+.soccer-box-score { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.soccer-team-box { min-width: 0; }
+.soccer-stat-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 12px; min-width: 0; }
+.soccer-stat-card h5 { margin: 0 0 12px; font-size: 15px; }
+.soccer-team-totals { background: color-mix(in srgb, currentColor 4%, transparent); }
+.soccer-stats-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px 8px; margin: 0; }
+.soccer-stats-grid dt { font-size: 11px; }
+.soccer-stats-grid dd { margin: 3px 0 0; font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.soccer-play-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.soccer-play-list li { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.soccer-play-list li > span { font-size: 13px; }
+.soccer-play-context { font-variant-numeric: tabular-nums; }
+.soccer-superseded { opacity: 0.7; }
+.soccer-final-epoch { margin: 16px 0; }
+@media (max-width: 1000px) {
+  .soccer-box-score { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .soccer-panel { padding: 16px; margin-top: 18px; }
+  .soccer-selection, .soccer-assist { grid-template-columns: minmax(0, 1fr); }
+  .soccer-shot-buttons, .soccer-stat-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .soccer-play-button { padding: 12px 6px; min-height: 56px; font-size: 14px; }
+  .soccer-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 6px; }
+  .soccer-clock strong { font-size: 32px; }
+  .soccer-state-heading { gap: 8px; }
+  .soccer-state-heading h3 { font-size: 20px; }
+  .soccer-clock-controls .button { width: 100%; }
+}
+
+.soccer-clock { min-width: 0; flex-shrink: 1; }
+.soccer-clock strong { white-space: nowrap; font-size: clamp(28px, 4vw, 46px); }
+.soccer-keeper-summary { display: grid; gap: 6px; margin-top: 12px; font-size: 13px; }
+.soccer-policy-note { padding: 12px; margin: 12px 0; border-radius: 8px; background: var(--background); font-size: 13px; }
+.soccer-stat-buttons { margin-top: 10px; }
+.soccer-lineup-status { display: grid; gap: 8px; padding-left: 18px; }
+@media (max-width: 640px) { .soccer-state-heading { flex-direction: column; align-items: flex-start; } .soccer-clock { text-align: left; } .soccer-clock strong { font-size: 32px; } }

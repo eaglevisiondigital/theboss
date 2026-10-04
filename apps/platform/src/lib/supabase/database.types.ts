@@ -2628,6 +2628,402 @@ export type Database = {
           },
         ]
       }
+      game_soccer_events: {
+        Row: {
+          actor_person_id: string
+          clock_ms: number
+          correction_of: string | null
+          created_at: string
+          display_clock_ms: number
+          event_type: string
+          game_id: string
+          goalkeeper_roster_id: string | null
+          id: string
+          lineup_roster_ids: string[] | null
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          playing_ms: number
+          prior_goalkeeper_roster_id: string | null
+          prior_lineup_roster_ids: string[] | null
+          reason: string | null
+          request_id: string
+          roster_id: string | null
+          scoring_event_id: string | null
+          secondary_roster_id: string | null
+          segment_number: number
+          sequence: number
+          side: string | null
+          was_on_field: boolean
+        }
+        Insert: {
+          actor_person_id: string
+          clock_ms: number
+          correction_of?: string | null
+          created_at?: string
+          display_clock_ms: number
+          event_type: string
+          game_id: string
+          goalkeeper_roster_id?: string | null
+          id?: string
+          lineup_roster_ids?: string[] | null
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          playing_ms: number
+          prior_goalkeeper_roster_id?: string | null
+          prior_lineup_roster_ids?: string[] | null
+          reason?: string | null
+          request_id: string
+          roster_id?: string | null
+          scoring_event_id?: string | null
+          secondary_roster_id?: string | null
+          segment_number: number
+          sequence: number
+          side?: string | null
+          was_on_field?: boolean
+        }
+        Update: {
+          actor_person_id?: string
+          clock_ms?: number
+          correction_of?: string | null
+          created_at?: string
+          display_clock_ms?: number
+          event_type?: string
+          game_id?: string
+          goalkeeper_roster_id?: string | null
+          id?: string
+          lineup_roster_ids?: string[] | null
+          operation_id?: string
+          organization_id?: string
+          origin_sequence?: number
+          playing_ms?: number
+          prior_goalkeeper_roster_id?: string | null
+          prior_lineup_roster_ids?: string[] | null
+          reason?: string | null
+          request_id?: string
+          roster_id?: string | null
+          scoring_event_id?: string | null
+          secondary_roster_id?: string | null
+          segment_number?: number
+          sequence?: number
+          side?: string | null
+          was_on_field?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_soccer_events_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_correction_of_fkey"
+            columns: ["organization_id", "game_id", "correction_of"]
+            isOneToOne: false
+            referencedRelation: "game_soccer_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_goalkeeper_rost_fkey"
+            columns: ["organization_id", "game_id", "goalkeeper_roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_operation_id_fkey"
+            columns: ["organization_id", "game_id", "operation_id"]
+            isOneToOne: false
+            referencedRelation: "game_operations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_prior_goalkeepe_fkey"
+            columns: [
+              "organization_id",
+              "game_id",
+              "prior_goalkeeper_roster_id",
+            ]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_scoring_event_i_fkey"
+            columns: ["organization_id", "game_id", "scoring_event_id"]
+            isOneToOne: false
+            referencedRelation: "game_soccer_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_events_organization_id_game_id_secondary_roste_fkey"
+            columns: ["organization_id", "game_id", "secondary_roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_soccer_final_stats: {
+        Row: {
+          assists: number
+          clean_sheet: boolean | null
+          finalization_id: string
+          fouls: number
+          game_id: string
+          goals: number
+          goals_allowed: number | null
+          id: string
+          minutes: number | null
+          organization_id: string
+          own_goals: number
+          red_cards: number
+          roster_id: string | null
+          saves: number
+          shots: number
+          shots_on_goal: number
+          side: string
+          yellow_cards: number
+        }
+        Insert: {
+          assists: number
+          clean_sheet?: boolean | null
+          finalization_id: string
+          fouls: number
+          game_id: string
+          goals: number
+          goals_allowed?: number | null
+          id?: string
+          minutes?: number | null
+          organization_id: string
+          own_goals: number
+          red_cards: number
+          roster_id?: string | null
+          saves: number
+          shots: number
+          shots_on_goal: number
+          side: string
+          yellow_cards: number
+        }
+        Update: {
+          assists?: number
+          clean_sheet?: boolean | null
+          finalization_id?: string
+          fouls?: number
+          game_id?: string
+          goals?: number
+          goals_allowed?: number | null
+          id?: string
+          minutes?: number | null
+          organization_id?: string
+          own_goals?: number
+          red_cards?: number
+          roster_id?: string | null
+          saves?: number
+          shots?: number
+          shots_on_goal?: number
+          side?: string
+          yellow_cards?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_soccer_final_stats_organization_id_game_id_finalizati_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_soccer_finalizations"
+            referencedColumns: ["organization_id", "game_id", "finalization_id"]
+          },
+          {
+            foreignKeyName: "game_soccer_final_stats_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_soccer_finalizations: {
+        Row: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          segment_number: number
+          state: Json
+        }
+        Insert: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          segment_number: number
+          state: Json
+        }
+        Update: {
+          engine_version?: string
+          epoch?: number
+          event_sequence?: number
+          finalization_id?: string
+          game_id?: string
+          organization_id?: string
+          roster_revision?: number
+          segment_number?: number
+          state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_soccer_finalizations_organization_id_game_id_finaliza_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_finalizations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_soccer_lineups: {
+        Row: {
+          dismissed: boolean
+          game_id: string
+          goalkeeper: boolean
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Insert: {
+          dismissed?: boolean
+          game_id: string
+          goalkeeper?: boolean
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Update: {
+          dismissed?: boolean
+          game_id?: string
+          goalkeeper?: boolean
+          organization_id?: string
+          roster_id?: string
+          side?: string
+          slot?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_soccer_lineups_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_soccer_lineups_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_soccer_states: {
+        Row: {
+          added_time_seconds: number
+          allow_reentry: boolean
+          clock_anchor: string | null
+          clock_elapsed_ms: number
+          clock_running: boolean
+          enforce_lineup: boolean
+          engine_version: string
+          extra_time_seconds: number
+          extra_time_segments: number
+          game_id: string
+          lineup_size: number
+          max_substitutions: number | null
+          organization_id: string
+          participation_complete: boolean
+          regulation_segments: number
+          roster_revision: number
+          segment_base_ms: number
+          segment_number: number
+          segment_seconds: number
+          segment_status: string
+        }
+        Insert: {
+          added_time_seconds?: number
+          allow_reentry: boolean
+          clock_anchor?: string | null
+          clock_elapsed_ms?: number
+          clock_running?: boolean
+          enforce_lineup: boolean
+          engine_version?: string
+          extra_time_seconds: number
+          extra_time_segments: number
+          game_id: string
+          lineup_size: number
+          max_substitutions?: number | null
+          organization_id: string
+          participation_complete?: boolean
+          regulation_segments: number
+          roster_revision: number
+          segment_base_ms?: number
+          segment_number?: number
+          segment_seconds: number
+          segment_status?: string
+        }
+        Update: {
+          added_time_seconds?: number
+          allow_reentry?: boolean
+          clock_anchor?: string | null
+          clock_elapsed_ms?: number
+          clock_running?: boolean
+          enforce_lineup?: boolean
+          engine_version?: string
+          extra_time_seconds?: number
+          extra_time_segments?: number
+          game_id?: string
+          lineup_size?: number
+          max_substitutions?: number | null
+          organization_id?: string
+          participation_complete?: boolean
+          regulation_segments?: number
+          roster_revision?: number
+          segment_base_ms?: number
+          segment_number?: number
+          segment_seconds?: number
+          segment_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_soccer_states_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       game_sports: {
         Row: {
           key: string

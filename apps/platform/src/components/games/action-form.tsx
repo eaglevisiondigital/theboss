@@ -3,17 +3,17 @@ import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import type { GameCommand } from "@/lib/games/contracts";
 import { gameResultMatchesCommand, parseGameCommand, projectGameResult } from "@/lib/games/input";
-import { useOptionalBasketballIntent } from "../basketball/intent-provider";
+import { useOptionalGameIntent } from "./intent-provider";
 export function GameForm({ build, children, label, confirmation }: { build: (data: FormData) => GameCommand | null; children?: ReactNode; label: string; confirmation?: string }) {
-  const router = useRouter(), retry = useRef<{ signature: string; id: string } | null>(null), basketball = useOptionalBasketballIntent();
+  const router = useRouter(), retry = useRef<{ signature: string; id: string } | null>(null), intent = useOptionalGameIntent();
   const [pending, setPending] = useState(false), [message, setMessage] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); if (pending || basketball?.blocked) return;
+    event.preventDefault(); if (pending || intent?.blocked) return;
     const command = build(new FormData(event.currentTarget));
     if (!command || !parseGameCommand(command)) { setMessage("Review the game fields, then try again."); return; }
-    if (command.operation.startsWith("basketball.") && basketball) {
+    if ((command.operation.startsWith("basketball.") || command.operation.startsWith("soccer.")) && intent) {
       setPending(true); setMessage("");
-      try { const outcome = await basketball.send(command); setMessage(outcome.message); }
+      try { const outcome = await intent.send(command); setMessage(outcome.message); }
       finally { setPending(false); }
       return;
     }
