@@ -158,3 +158,34 @@ Forged signed hosted requests unavailable through approved browser tools retain
 the accepted SQL/runtime evidence label. No test-only production endpoint or
 session extraction is allowed. Controlled testing uses synthetic records with
 baseline, fixed expiry, recovery and immediate zero-residual cleanup.
+
+## Main Boss Chat closure record — October 4, 2026 UTC
+
+Main Boss Chat approved **Phase 5A Game Center Foundation: COMPLETE** after
+reviewing the second/final controlled hosted acceptance and accepting six
+residual evidence limitations. Reviewed branch head:
+`520a32be5827e45e0f53b93b7dd42ada6aad8eeb`; successor CI PASS. This records closure
+of the implemented foundation and changes no architecture or product rule.
+
+Repeated administrator LIVE-detail navigation/reload passed in the final window;
+the first-window failure did not recur. Its historical root cause remains
+undetermined. No known Phase 5A product/runtime defect or architecture
+contradiction remains. Original administrator access and exact baseline were
+restored with zero residual temporary authority and pending controlled work.
+
+The accepted limitations cover roster-change versus historical-snapshot hosted
+comparison; positive started/operator-assigned/canceled notification receipt;
+separate scorekeeper sibling-program/organization negatives; Phase 5A household-
+only hosted context; Start/final confirmation interaction at 390px/320px; and
+forged signed requests unavailable through approved tooling. Their exact
+classifications are preserved in
+[the appended closure record](PHASE_5A_BLOCKER_INVESTIGATION.md#main-boss-chat-phase-5a-closure)
+and [the acceptance record](PHASE_5A_ACCEPTANCE_ADDENDUM.md). They are accepted
+test-evidence limitations, not known production defects; unperformed hosted
+cases retain their original classifications.
+
+All historical implementation contracts, INCOMPLETE reports and first-window/
+investigation evidence remain preserved. This closure is documentation only:
+no application, schema, migration, Auth, security-policy, deployment or
+architecture change. No third acceptance window or Phase 5B is authorized or
+opened by this task. PR #3 remains OPEN/DRAFT/UNMERGED. STOP after Phase 5A closure.

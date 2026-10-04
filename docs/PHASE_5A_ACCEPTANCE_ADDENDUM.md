@@ -249,3 +249,47 @@ documents, invented no DOB and weakened no policy.
 PR #3 remains **OPEN, DRAFT and UNMERGED**. Stop at Phase 5A with this remaining
 matrix: **acceptance completion is not claimed**, no third window is opened and
 no later phase or sport engine was started.
+
+## Main Boss Chat closure decision — October 4, 2026 UTC
+
+**Current authoritative status: Phase 5A Game Center Foundation: COMPLETE.**
+
+Main Boss Chat reviewed the complete final controlled acceptance record and
+explicitly approved closure from verified branch head
+`520a32be5827e45e0f53b93b7dd42ada6aad8eeb` on
+`build/boss-platform-v1`. It accepts the six precise test-evidence limitations
+below. They are not known production defects and are not relabeled HOSTED
+VERIFIED. No known Phase 5A product/runtime defect or architecture contradiction
+remains. The earlier administrator LIVE-detail failure did not recur in the
+second/final hosted window; the original interruption and investigation history
+remain intact without an invented retrospective cause.
+
+The original historical reports and INCOMPLETE statuses above are preserved
+byte-for-byte. This later product-owner decision closes Phase 5A with documented
+residual evidence limitations; it does not change what each test actually
+executed.
+
+| Accepted evidence limitation | Exact closure classification |
+| --- | --- |
+| Current season/team jersey or position change versus preserved historical game snapshot was not executed in the final hosted window. Hosted roster revisions, final seals and preservation through score/Calendar changes were verified. | `SQL/RUNTIME VERIFIED; HOSTED CURRENT-ROSTER-CHANGE/HISTORICAL-SNAPSHOT COMPARISON NOT EXECUTED.` |
+| Delayed/final positive receipts were hosted verified. Started, operator-assigned and canceled sources were created/completed, but positive recipients were unavailable after the relationships ended; no notification defect was demonstrated. | `SOURCE/PROCESSING HOSTED VERIFIED; POSITIVE RECIPIENT RECEIPT FOR STARTED / OPERATOR-ASSIGNED / CANCELED REMAINS UNVERIFIED.` |
+| Exact-game scorekeeper scoring and unrelated Wildcats denial were hosted verified. Separate scorekeeper sibling-program and organization-wide unrelated-game checks were not executed. Head-coach sibling/program and organization-wide denials were independently hosted verified. | `SQL/RUNTIME VERIFIED; HOSTED SCOREKEEPER SIBLING-PROGRAM / ORGANIZATION-WIDE NEGATIVES NOT EXECUTED.` |
+| A Phase 5A-specific positive household-membership-only hosted context was not activated. Phase 4B hosted household-only denial evidence retains its original phase scope. | `SQL/RUNTIME VERIFIED; PHASE 5A HOUSEHOLD-ONLY HOSTED CONTEXT NOT EXECUTED.` |
+| Relevant details, score/status, roster, operators, history and forms rendered and fit at 390px/320px. Actual Start/finalization confirmation interaction was not repeated at those widths; desktop behavior was hosted verified. | `RESPONSIVE HOSTED RENDER VERIFIED; START/FINALIZATION CONFIRMATION INTERACTION NOT REPEATED AT 390/320.` |
+| Forged authenticated requests unavailable through approved native tooling remain unperformed. No test-only production endpoint or Auth/session extraction was used. | `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.` |
+
+The final accepted record retains verified exact cleanup, zero residual
+temporary authority and valid original administrator access. This closure is
+documentation only: no third window, application/migration/schema/Auth/deployment
+or security-policy change was made. No credential/session material was exposed,
+no real youth/customer data was used, and no later phase or sport engine was
+started. PR #3 remains **OPEN, DRAFT and UNMERGED**.
+
+Authoritative build status: [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
+Product-owner decision:
+[Phase 5A closure by Main Boss Chat](DECISIONS.md#phase-5a-closure-by-main-boss-chat).
+Final acceptance evidence:
+[second-window report](PHASE_5A_SECOND_WINDOW_REPORT.md).
+
+**STOP after Phase 5A closure. No Phase 5B work is authorized or started by this
+closure.**

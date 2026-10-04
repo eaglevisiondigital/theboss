@@ -286,3 +286,37 @@ remain decisions for the main Boss chat. Phase 2B's explicit provisioning, finit
 mutation API and permission-subset delegation are implemented within the approved
 foundation. Other business modules remain separate future assignments. Existing Auth/email/session operational findings
 and Phase 1B direct cookie/header inspection limits remain separate work.
+
+## Phase 5A closure by Main Boss Chat
+
+On October 4, 2026 UTC, Main Boss Chat reviewed the complete second/final hosted
+acceptance record at `520a32be5827e45e0f53b93b7dd42ada6aad8eeb` and directly
+approved **Phase 5A Game Center Foundation: COMPLETE**. Closure accepts residual
+test-evidence limitations without upgrading missing hosted cases to PASS. No
+known Phase 5A product/runtime defect or architecture contradiction remains;
+the earlier unexplained LIVE-detail failure did not recur in the repeated final
+hosted gate. Its historical root cause remains undetermined.
+
+The accepted classifications are:
+
+1. `SQL/RUNTIME VERIFIED; HOSTED CURRENT-ROSTER-CHANGE/HISTORICAL-SNAPSHOT COMPARISON NOT EXECUTED.` Hosted revisions, final seals and preservation through score/Calendar changes remain verified.
+2. `SOURCE/PROCESSING HOSTED VERIFIED; POSITIVE RECIPIENT RECEIPT FOR STARTED / OPERATOR-ASSIGNED / CANCELED REMAINS UNVERIFIED.` Delayed/final positive receipts were verified; the other sources completed with no eligible recipients after relationships ended. No notification defect was demonstrated.
+3. `SQL/RUNTIME VERIFIED; HOSTED SCOREKEEPER SIBLING-PROGRAM / ORGANIZATION-WIDE NEGATIVES NOT EXECUTED.` Exact-game scoring/unrelated Wildcats denial and independent coach scope negatives remain hosted verified.
+4. `SQL/RUNTIME VERIFIED; PHASE 5A HOUSEHOLD-ONLY HOSTED CONTEXT NOT EXECUTED.` Preserve Phase 4B household-only hosted denial as Phase 4B evidence.
+5. `RESPONSIVE HOSTED RENDER VERIFIED; START/FINALIZATION CONFIRMATION INTERACTION NOT REPEATED AT 390/320.` Desktop confirmations remain hosted verified; responsive rendering does not certify an unperformed interaction.
+6. `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.` No test-only production endpoint or Auth/session extraction is authorized.
+
+These accepted limitations are not known production defects. Exact cleanup and
+zero residual temporary authority, original administrator validity, 250/250
+green tests, 33 canonical migrations and matched generated types remain verified.
+Read-only closure baseline checks reconfirmed the original administrator and
+zero residuals at 07:22:56.387107 UTC. Closure is documentation-only; preserve
+every historical INCOMPLETE report, interruption/investigation and prior incident
+disclosure. No application, migration, schema, Auth, deployment or security-policy
+change or third acceptance window is authorized. Keep PR #3 OPEN/DRAFT/UNMERGED,
+do not merge, and STOP after closure. Phase 5B and later modules are not started
+or authorized by this decision.
+
+Current status: [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md). Historical
+acceptance: [PHASE_5A_ACCEPTANCE_ADDENDUM.md](PHASE_5A_ACCEPTANCE_ADDENDUM.md) and
+[PHASE_5A_SECOND_WINDOW_REPORT.md](PHASE_5A_SECOND_WINDOW_REPORT.md).

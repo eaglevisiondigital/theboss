@@ -143,3 +143,57 @@ incidents with no demonstrated causal connection. No second window was opened.
     data, no DOB and no weakened policy. Prior disclosures remain preserved.
 29. **No later phase.** No Phase 5B, sport engine or later module started.
     STOP after this investigation; Phase 5A is not declared complete.
+
+## Main Boss Chat Phase 5A closure
+
+October 4, 2026 UTC. Main Boss Chat reviewed the second/final controlled hosted
+acceptance and explicitly approved **Phase 5A Game Center Foundation: COMPLETE**
+from verified branch head `520a32be5827e45e0f53b93b7dd42ada6aad8eeb`, with successor
+CI PASS. This is the owner's closure decision after accepting the six residual
+test-evidence limitations below. The dated INCOMPLETE investigation and its
+first-window observations above remain unchanged.
+
+The previously unexplained administrator LIVE-detail failure did not recur in
+the second/final window: repeated Start/detail navigation, full reload and Home/
+detail navigation passed. The original cause remains **UNDETERMINED**. No known
+Phase 5A product/runtime defect or architecture contradiction remains; the
+accepted limitations are not known production defects. The recovered baseline
+has zero residual temporary authority, original administrator access valid and
+zero pending controlled notification work. Current acceptance and cleanup
+records are in [the addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md); authoritative
+closure is recorded in [build state](CURRENT_BUILD_STATE.md) and
+[decisions](DECISIONS.md).
+
+Accepted evidence classifications, preserved without promoting unperformed
+hosted cases to PASS:
+
+1. **Roster-history comparison.** Current season/team jersey or position edit
+   versus historical game snapshot was not executed in the final hosted window.
+   `SQL/RUNTIME VERIFIED; HOSTED CURRENT-ROSTER-CHANGE/HISTORICAL-SNAPSHOT COMPARISON NOT EXECUTED.`
+   Hosted roster revision, final seals and preservation through score/Calendar
+   changes were verified.
+2. **Notification hooks.** Delayed/final positive in-app receipts passed; started,
+   operator-assigned and canceled sources completed after recipient relationships
+   had ended, with no positive recipient acceptance.
+   `SOURCE/PROCESSING HOSTED VERIFIED; POSITIVE RECIPIENT RECEIPT FOR STARTED / OPERATOR-ASSIGNED / CANCELED REMAINS UNVERIFIED.`
+3. **Scorekeeper negative scope.** Exact-game scoring and unrelated Wildcats
+   denial passed; separate scorer sibling-program/organization-wide checks were
+   not executed. Head-coach negatives remain independent hosted evidence.
+   `SQL/RUNTIME VERIFIED; HOSTED SCOREKEEPER SIBLING-PROGRAM / ORGANIZATION-WIDE NEGATIVES NOT EXECUTED.`
+4. **Household-only context.** The Phase 5A-specific positive household-membership
+   context remained inactive. Retained Phase 4B household-only denial evidence
+   remains dated Phase 4B evidence.
+   `SQL/RUNTIME VERIFIED; PHASE 5A HOUSEHOLD-ONLY HOSTED CONTEXT NOT EXECUTED.`
+5. **Mobile confirmation interaction.** Responsive rendering fit at 390px/320px;
+   actual Start/finalization confirmation interaction was not repeated at those
+   widths. Desktop confirmation behavior passed.
+   `RESPONSIVE HOSTED RENDER VERIFIED; START/FINALIZATION CONFIRMATION INTERACTION NOT REPEATED AT 390/320.`
+6. **Forged signed requests.** Existing SQL/runtime boundaries remain verified;
+   approved tooling could not construct the remaining signed forged matrix.
+   `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.`
+
+Closure changes documentation only. No application, migration, schema, Auth,
+architecture, deployment or security-policy change is made or authorized. No
+third acceptance window, test-only endpoint, credential/session extraction or
+Phase 5B is opened. Historical incidents and their evidence remain preserved.
+STOP after Phase 5A closure; PR #3 remains OPEN/DRAFT/UNMERGED.

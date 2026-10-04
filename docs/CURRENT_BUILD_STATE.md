@@ -1,5 +1,54 @@
 # Current build state
 
+## Phase 5A Game Center Foundation: COMPLETE
+
+Main Boss Chat reviewed the complete second/final hosted acceptance record and
+approved Phase 5A closure on October 4, 2026 UTC against
+`520a32be5827e45e0f53b93b7dd42ada6aad8eeb`. This owner decision supersedes the
+historical INCOMPLETE handoffs below without changing any recorded test result.
+The six residual items are accepted test-evidence limitations, **not known
+production defects**. No known Phase 5A product/runtime defect or architecture
+contradiction remains. The earlier unexplained administrator LIVE-detail failure
+did not recur in the repeated final-window navigation/reload gate; its historical
+root cause remains undetermined.
+
+| Accepted limitation | Evidence classification retained |
+| --- | --- |
+| Current roster edit versus historical snapshot | `SQL/RUNTIME VERIFIED; HOSTED CURRENT-ROSTER-CHANGE/HISTORICAL-SNAPSHOT COMPARISON NOT EXECUTED.` |
+| Started/operator-assigned/canceled notification receipt | `SOURCE/PROCESSING HOSTED VERIFIED; POSITIVE RECIPIENT RECEIPT FOR STARTED / OPERATOR-ASSIGNED / CANCELED REMAINS UNVERIFIED.` |
+| Separate scorekeeper scope negatives | `SQL/RUNTIME VERIFIED; HOSTED SCOREKEEPER SIBLING-PROGRAM / ORGANIZATION-WIDE NEGATIVES NOT EXECUTED.` |
+| Household-only Phase 5A context | `SQL/RUNTIME VERIFIED; PHASE 5A HOUSEHOLD-ONLY HOSTED CONTEXT NOT EXECUTED.` |
+| Mobile confirmations | `RESPONSIVE HOSTED RENDER VERIFIED; START/FINALIZATION CONFIRMATION INTERACTION NOT REPEATED AT 390/320.` |
+| Forged signed requests | `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.` |
+
+Hosted game revisions/seals and history through score/Calendar changes, delayed/
+final notification receipts, exact scorer operation/unrelated Wildcats denial,
+independent coach scope denials and desktop Start/finalization remain verified.
+Phase 4B household-only evidence retains its original phase scope. None of the
+unperformed cases is relabeled HOSTED VERIFIED.
+
+Read-only closure verification at **07:22:56.387107 UTC** reconfirmed exact
+authority/module baseline equality, original administrator validity, zero
+temporary person/operator/module/guardian/staff authority, zero unexpected active
+controlled fixtures and zero pending controlled notification work. Prior hosted
+administrator Home proof remains valid. All 33 canonical migration versions/names
+and regenerated 169,630-byte database types still match. The reviewed application
+source is unchanged; **250/250 tests**, 32/32 focused regressions, typecheck,
+zero-warning lint and production build remain green. Reviewed-head application
+and database [CI PASS](https://github.com/eaglevisiondigital/theboss/actions/runs/37185163761).
+The closure successor SHA/CI is recorded in the final handoff and PR.
+
+This closure changes documentation only. No application, migration, schema,
+Auth, deployment or security-policy change, new controlled window, credential/
+session retrieval, real youth/customer data or later-phase work occurred. PR #3
+remains OPEN/DRAFT/UNMERGED. **STOP after Phase 5A closure; no Phase 5B.**
+
+See [the owner closure decision](DECISIONS.md#phase-5a-closure-by-main-boss-chat),
+[the preserved completion report](PHASE_5A_COMPLETION_REPORT.md) and
+[the final-window evidence](PHASE_5A_SECOND_WINDOW_REPORT.md). All subsequent
+INCOMPLETE reports, first-window interruption, blocker investigation and prior
+timeout/Netlify proxy disclosures remain historical records, not current status.
+
 ## Second and final planned Phase 5A hosted window: INCOMPLETE; cleanup verified
 
 This October 4, 2026 UTC record supersedes earlier Phase 5A remaining-case and
