@@ -1,5 +1,60 @@
 # Phase 5A validation status
 
+## Second and final planned hosted window — October 4, 2026 UTC
+
+Current status: **INCOMPLETE; ADMINISTRATOR LIVE-DETAIL GATE PASSED; CLEANUP
+VERIFIED**. This dated update supersedes earlier Phase 5A remaining-case/window
+statements while preserving their full history below. Starting head:
+`31910ea42e999d9b989d0181366ecca9adb67310`.
+
+Repeated administrator Start → detail/reload → Home → detail/reload passed without
+an outer page error or local unavailable fallback. Hosted internal/external/
+recurring identity, lifecycle, score/reversal, two finalization epochs,
+reschedule/cancel isolation, exact scorer/operator revocation, coach scope,
+Child1 family/Attendance masking/revocation and feature-disable stale mutation
+checks passed. Delayed plus two final-result in-app receipts were verified; one
+read state persisted and replay left six sources/three recipient notifications.
+Started/operator-assigned/canceled sources completed with zero recipients after
+relationship removal; their positive in-app receipt is **not hosted verified**.
+
+Focused regressions **32/32**, all application tests **250/250**, typecheck and
+zero-warning lint pass. All **33** canonical migration versions/names and
+generated types match. Prepared staged private recovery/removal controls passed
+**23** focused assertions in a fresh disposable PostgreSQL 17 cluster, which was
+removed. The unchanged implementation's earlier full SQL/concurrency/build
+validation remains valid; those expensive suites/build were not unnecessarily
+repeated. No application/SQL/Auth/security-policy change was made.
+
+Fixed UTC window: start **06:35:29.885143**, stop-new deadline
+**07:10:29.885143**, cleanup target **07:20:29.885143**, hard expiry
+**07:35:29.885143**. Actual scenarios stopped at **07:08:24**. Recovery checkpoints:
+
+| Checkpoint | October 4 UTC | Safe audit reference |
+| --- | --- | --- |
+| Original administrator independently restored | 07:08:36.919332 | `b59de8a5-7a15-44ad-9a80-c907e98f3be9` |
+| Selected authority/relationship/roster baseline restored | 07:08:41.642454 | `1511a603-eb85-4e49-9221-96e417664689` |
+| Recorded resources archived, history retained | 07:08:47.381742 | `b755ae76-5193-47ba-b08c-ef1e2562effb` |
+| Exact module baseline restored | 07:08:52.142672 | `a29b6689-a69a-4072-9cf0-fc9fc45442a1` |
+| Read-only zero-residual checkpoint passed | by 07:09:19 | Read-only result; no mutation |
+
+Original administrator Home then passed. Exact baseline equality, zero temporary
+person/operator/module authority and zero pending controlled notification work
+were verified before every fixed deadline. Three current-window Calendar events
+are archived; four games preserve roster, operation and finalization history. No real youth/customer data, credential or
+session material, invented DOB, proxy reuse, policy weakening or later phase.
+
+Remaining hosted evidence: ordinary roster jersey/position edit versus retained
+snapshot/history; explicit scorer sibling-unit/organization negatives; positive
+started/operator-assigned/canceled receipt; and complete 390px/320px Start/final
+confirmation interaction. Household-only positive-context proof remains SQL/
+runtime with its reviewed inactive hosted baseline; forged signed-request cases
+retain the accepted tooling limitation. Do not substitute geometry, another
+role's denials, source completion or SQL results for unperformed hosted actions.
+These acceptance gaps keep **Phase 5A INCOMPLETE**, without establishing a product
+defect. No additional window or Phase 5B is opened. The current acceptance
+record/report contains the exact timestamps and matrix; earlier dated evidence
+follows unchanged.
+
 Subsequent October 4 blocker investigation adds one post-Start regression:
 **250/250** tests, typecheck, zero-warning lint and production build PASS. Actual
 disposable Games RPC payload SSR/hydration also passes, with mocked Next router

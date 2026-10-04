@@ -1,5 +1,70 @@
 # Current build state
 
+## Second and final planned Phase 5A hosted window: INCOMPLETE; cleanup verified
+
+This October 4, 2026 UTC record supersedes earlier Phase 5A remaining-case and
+window-authorization statements; all dated history below is preserved. Main Boss
+Chat directly authorized this second and final planned window from
+`31910ea42e999d9b989d0181366ecca9adb67310`. The administrator LIVE-detail gate
+passed repeatedly after Start, full reload and Home/detail navigation, with score
+controls, roster, operators and history visible and no outer page error or local
+unavailable fallback. The previous unexplained page-load failure did not recur;
+its historical root cause remains undetermined.
+
+Hosted evidence now verifies internal shared identity/team filters and duplicate
+link denial; external presentation and distinct recurring E1/E2 identities;
+pause/delay/resume, score updates/reversal and preserved history; finalization,
+stale final-state denial, reasoned reopen/refinalization and two retained seals;
+one-time reschedule and exact recurring move/cancellation with sibling isolation;
+exact-game scorer operation and operator-revocation stale POST denial; exact
+Falcons coach scope and unrelated team/unit/organization denial; Child1/whole-family
+filtering, reload/navigation and authorized Attendance integration with capability
+masking and guardian-revocation denial; and feature-disable retained mutation
+denial without a persisted game change. Desktop/mobile geometry passed for the
+pictured detail/list/filter states. Delayed and two final-result notifications
+reached the in-app inbox, one was marked read, and bounded replay preserved six
+sources and three recipient notifications.
+
+**Phase 5A remains INCOMPLETE because executable hosted cases remain unperformed:**
+
+- Ordinary season/team jersey or position edit compared with the retained game
+  roster snapshot/sealed history.
+- Explicit scorekeeper sibling-unit and organization-wide unrelated-game denials;
+  successful coach-scope negatives do not prove scorer negatives.
+- Positive in-app receipt of game-started, operator-assigned and canceled hooks:
+  these sources completed with zero recipients after restricted relationships
+  had been removed, so source completion is not recipient acceptance.
+- Full Start/finalization confirmation interaction at both 390px and 320px;
+  geometry screenshots do not prove those interactions.
+
+The household-only positive membership context remained closed as reviewed;
+existing SQL/runtime evidence and hosted closed-context/unrelated-child denials
+are retained without claiming a hosted positive-context proof. Unconstructible
+forged signed requests retain the approved tooling limitation. These evidence
+gaps are not demonstrated product defects. No additional acceptance window is authorized or opened.
+
+The fixed window opened at **06:35:29.885143 UTC**, with stop-new deadline
+07:10:29.885143, cleanup target 07:20:29.885143 and hard expiry 07:35:29.885143.
+New scenarios actually stopped at 07:08:24. Independent administrator recovery
+committed at 07:08:36.919332; authority restoration at 07:08:41.642454; resource
+cleanup at 07:08:47.381742; and module restoration at 07:08:52.142672. Read-only
+zero-residual verification passed by **07:09:19 UTC**, followed by administrator
+Home verification. Cleanup completed before every fixed deadline. Safe baseline
+audit: `0ecfe6aa-8f4b-4442-8f0a-3d5a99656f75`; restoration audits are recorded in
+[the acceptance record](PHASE_5A_ACCEPTANCE_ADDENDUM.md).
+Original administrator access is valid; exact role, relationship, roster and
+module baselines match. Temporary person/operator/module authority and pending
+run notification work are zero. All three current-window events are archived;
+all four games retain their immutable history. Focused Game Center regressions
+**32/32**, application tests **250/250**, typecheck and zero-warning lint pass.
+All **33** canonical migration versions/names and generated database types match.
+No application, SQL, Auth or security-policy change was required; full expensive
+SQL/concurrency suites were not repeated. PR #3 remains OPEN/DRAFT/UNMERGED.
+No credential/session values were requested, entered, read, exposed, stored or
+committed; no real customer/youth data was used. No DOB was invented, security
+policy weakened, proxy credential reused or later phase started. STOP after Phase 5A with the recovered baseline. See
+[the acceptance record](PHASE_5A_ACCEPTANCE_ADDENDUM.md).
+
 ## Phase 5A Game Center foundation: INCOMPLETE, hosted acceptance interrupted
 
 Subsequent read-only page-load investigation is complete with **root cause
