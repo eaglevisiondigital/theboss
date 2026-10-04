@@ -1,5 +1,20 @@
 # Phase 4B acceptance addendum
 
+## Current closure status: COMPLETE
+
+Main Boss Chat closed Phase 4B after reviewing the complete acceptance record and
+accepting the hosted forged-request tooling limitation. Adult volunteer positives
+remain SQL/RUNTIME VERIFIED with hosted positives unverified under approved
+eligibility policy. Forged signed mutations remain SQL/RUNTIME VERIFIED with
+hosted execution unavailable through approved tooling; none is HOSTED VERIFIED.
+Neither limitation represents a known production defect.
+
+See [the authoritative closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat)
+and [current build state](CURRENT_BUILD_STATE.md). No new test window, implementation,
+schema, Auth or security-policy change accompanies closure; no later phase starts.
+All prior report text below is preserved verbatim as acceptance history, including
+its original INCOMPLETE status, incidents, timing exceptions and proxy disclosure.
+
 Historical October 3 report. The [October 4 final 39-point
 report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md) supersedes remaining-case lists below
 without erasing historical failures or timing exceptions.

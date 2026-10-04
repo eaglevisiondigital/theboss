@@ -1,5 +1,22 @@
 # Phase 4B bounded database performance investigation
 
+## Subsequent Phase 4B closure
+
+Main Boss Chat closed Phase 4B as COMPLETE after reviewing the full acceptance
+record and accepting the residual forged-hosted-request tooling limitation.
+The adult volunteer eligibility limitation remains approved. Neither limitation
+is a known production defect or a new hosted pass.
+
+The Decision A performance investigation and its original evidence below are
+unchanged. The later restricted guardian acceptance recorded successful reads
+without PostgreSQL `57014`; see [the final acceptance record](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md).
+The eight-second limit was not increased. This documentation closure repeats no
+investigation, opens no acceptance window and changes no implementation/security
+policy. Historical timeout/remediation evidence and proxy exposure remain retained.
+
+See [the owner closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat).
+All original investigation text below remains verbatim historical evidence.
+
 Starting branch: `build/boss-platform-v1` at
 `c6fcd4b41bde66ea95bdedfd9df9345c47bfac97`. This investigation follows the
 confirmed October 3 PostgreSQL `57014` incident; the separately published

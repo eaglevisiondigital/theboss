@@ -1,5 +1,45 @@
 # Current build state
 
+## Phase 4B Attendance + RSVP + Volunteer Coordination: COMPLETE
+
+Main Boss Chat closed Phase 4B after reviewing the complete acceptance record and
+accepting the remaining hosted test-evidence limitation. This direct closure
+decision is recorded on October 4, 2026 UTC against reviewed branch head
+`bd24ef9235eb741dbefcfc160b6b2fe6fa9a0a31`. It supersedes the earlier
+INCOMPLETE handoff status without changing any test result or implementation.
+
+Accepted limitations remain:
+
+- Adult volunteer positive and eligibility-dependent scenarios:
+  `SQL/RUNTIME VERIFIED; HOSTED POSITIVE UNVERIFIED DUE TO APPROVED POLICY/ELIGIBILITY LIMITATION.`
+- Forged event/occurrence/participant/team/unit and unrelated organization/team/
+  child signed mutations:
+  `SQL/RUNTIME VERIFIED; HOSTED EXECUTION UNAVAILABLE THROUGH APPROVED TEST TOOLING.`
+
+The forged hosted POST cases remain unperformed and are not HOSTED VERIFIED.
+Neither accepted limitation represents a known production defect. No DOB was
+invented, eligibility/security policy weakened or test-only production endpoint
+created. No additional acceptance window or later phase was opened.
+
+Retained evidence includes 7,230 SQL/bootstrap assertions, 34 concurrency races,
+218/218 application tests, deny-by-default/RLS and tenant/guardian isolation,
+native resource denials, household-only denial and hosted stale signed mutation
+denial after guardian revocation. Reviewed-head application/database CI passed.
+The closure commit's final SHA and CI result are recorded in the handoff/PR.
+
+A read-only canonical verification at 03:44:28.146608 UTC reconfirmed zero residual
+temporary authority, no unarchived controlled fixtures or pending controlled work,
+and the original administrator grant valid. Prior hosted administrator access
+remains recorded. This closure changes documentation only: no application, schema,
+migration, Auth, deployment or security-policy changes. PR #3 stays OPEN, DRAFT,
+UNMERGED. STOP after Phase 4B; Phase 5 and other modules are not authorized.
+
+See [the closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat) and
+[the final acceptance record](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md).
+All following sections preserve the prior dated evidence, including original
+INCOMPLETE statuses, timeout/remediation history and Netlify proxy disclosure.
+They do not override this authoritative closure decision.
+
 ## Final Phase 4B hosted acceptance: cleaned up, signed matrix incomplete
 
 The final authorized October 4 window started 02:47:41.446636 UTC with fixed expiry

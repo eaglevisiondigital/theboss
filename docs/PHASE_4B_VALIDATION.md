@@ -1,5 +1,24 @@
 # Phase 4B validation status
 
+## Current closure status: COMPLETE
+
+Main Boss Chat reviewed the complete acceptance record and accepted the remaining
+forged-hosted-request tooling limitation. The approved adult volunteer eligibility
+limitation also remains. SQL/runtime results do not become hosted POST or positive
+adult-signup results by this decision. Neither accepted limitation is a known
+production defect.
+
+Retained final evidence: 7,230 SQL/bootstrap assertions, 34 races, 218/218 application
+tests, successful typecheck/lint/build and application/database CI. Read-only
+closure verification reconfirmed zero temporary authority and the original
+administrator grant valid. No additional acceptance window or implementation
+change was made; no later phase started.
+
+See [the closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat) and
+[current build state](CURRENT_BUILD_STATE.md). All earlier validation text below,
+including original statuses, failures, timeout evidence and proxy disclosure,
+is preserved verbatim as history.
+
 For the October 4 final window, cleanup and current blocker, use the [final
 39-point report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md). Earlier dated remaining-case
 lists below preserve historical evidence and do not override the latest report.

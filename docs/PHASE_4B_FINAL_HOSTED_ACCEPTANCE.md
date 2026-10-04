@@ -1,5 +1,30 @@
 # Final Phase 4B hosted acceptance
 
+## Owner-approved Phase 4B closure: COMPLETE
+
+Main Boss Chat reviewed this complete acceptance record and directly closed
+Phase 4B Attendance + RSVP + Volunteer Coordination. Decision recorded October 4,
+2026 UTC at reviewed head `bd24ef9235eb741dbefcfc160b6b2fe6fa9a0a31`.
+
+The accepted limitations retain these current classifications:
+
+- Adult volunteer positive and dependent scenarios:
+  `SQL/RUNTIME VERIFIED; HOSTED POSITIVE UNVERIFIED DUE TO APPROVED POLICY/ELIGIBILITY LIMITATION.`
+- Forged event/occurrence/participant/team/unit and unrelated organization/team/
+  child signed mutations:
+  `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.`
+
+Forged hosted POSTs remain unperformed, not HOSTED VERIFIED. Neither accepted
+limitation represents a known production defect. Cleanup, administrator access,
+validation and CI evidence remain unchanged. A read-only closure check reconfirmed
+zero temporary authority and the valid original administrator grant.
+
+See [the authoritative closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat).
+The following 39-point report remains verbatim as the pre-closure handoff,
+including its original INCOMPLETE status and exact evidence limits. The owner's
+decision changes closure status, not historical test results. No new acceptance
+window, application/schema/Auth/security change or later phase accompanies it.
+
 **INCOMPLETE:** the remaining hosted forged signed-mutation matrix has no approved
 execution path in the available browser tools. Ordinary forms capture their
 resource identifiers in React bindings. Browser/network access worked throughout;

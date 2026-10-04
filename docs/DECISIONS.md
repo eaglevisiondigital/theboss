@@ -1,5 +1,46 @@
 # Boss foundation implementation decisions
 
+## Phase 4B closure by Main Boss Chat
+
+**Phase 4B Attendance + RSVP + Volunteer Coordination: COMPLETE.** Main Boss Chat
+made this direct closure decision after reviewing the complete acceptance record
+at branch `build/boss-platform-v1`, head
+`bd24ef9235eb741dbefcfc160b6b2fe6fa9a0a31`. Decision recorded October 4, 2026 UTC.
+
+Main Boss Chat accepted the unavailable hosted forged signed-mutation execution
+as a test-evidence limitation, not a demonstrated Boss defect. Forged event,
+occurrence, participant, team and unit IDs plus unrelated organization/team/child
+signed targets retain this execution classification:
+`SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE THROUGH APPROVED TEST TOOLING.`
+They must not be reported as HOSTED VERIFIED. No approved raw-table hosted path
+was available; its unperformed status is also preserved.
+
+Adult volunteer positive and dependent scenarios retain:
+`SQL/RUNTIME VERIFIED; HOSTED POSITIVE UNVERIFIED DUE TO APPROVED POLICY/ELIGIBILITY LIMITATION.`
+Unknown approved candidate ages do not authorize a fabricated DOB, relaxed
+minimum age or broader staff role. Neither accepted limitation is a known
+production defect, and neither blocks this owner-approved closure.
+
+The decision relies on the existing 7,230 SQL/bootstrap assertions, 34 races,
+218/218 application tests, deny-by-default/RLS, cross-tenant/guardian and
+exact-team isolation, native hosted resource denials, household-only denial and
+HOSTED VERIFIED stale signed mutation denial following guardian revocation.
+Final cleanup and read-only closure verification show zero temporary authority
+and valid original administrator access. No hosted POST result is inferred.
+
+Preserve the original eight-second timeout incident, Decision A remediation,
+failed attempts/timing exceptions and historical Netlify proxy exposure
+(expired by design; individual revocation unconfirmed). Closure does not erase
+these records or relabel their observations.
+
+Only documentation/PR metadata updates are authorized for this closure. No new
+acceptance window, test-only production endpoint, credential/session extraction,
+application/schema/migration/Auth/security-policy change or later phase is
+authorized. Keep PR #3 OPEN, DRAFT and UNMERGED; STOP after Phase 4B.
+
+The earlier decision and validation sections below are retained verbatim as
+historical records. Current build state is in [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
+
 ## Phase 4B implemented choices and remaining acceptance
 
 Attendance is an independent, default-off extension of the existing Calendar configuration; Volunteers uses its existing independent module key. Calendar-only organizations gain neither capability implicitly. Attendance-specific coach flags are stored separately from Calendar coach management.
