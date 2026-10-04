@@ -1,5 +1,9 @@
 # Phase 4B acceptance addendum
 
+Historical October 3 report. The [October 4 final 39-point
+report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md) supersedes remaining-case lists below
+without erasing historical failures or timing exceptions.
+
 Status: **INCOMPLETE**. Implementation and controlled-authority cleanup are verified; required hosted acceptance remains unfinished because hosted access failed. This is an acceptance/recovery blocker, not a demonstrated contradiction in the approved architecture. The report distinguishes earlier evidence from both October 3 runs and makes no claim that an unperformed hosted scenario passed.
 
 Latest controlled acceptance began from `22f29f2bdafb4f4f51ae213d0ee89cd3ca29ae95`, using published application source `4247289af8d1aad46379c4597bfd87c19ddddccd`. The fourth window had fixed start **2026-10-03 13:15:40.602045 UTC** and expiry **14:15:40.602045 UTC**. Testing stopped when the guardian Notifications page reported temporary unavailability around 13:37 UTC. Subsequent read-only diagnosis confirms PostgreSQL `57014` statement timeouts for both Notifications reads and Attendance at the eight-second limit; the exact query-performance defect remains unproved. See [the focused diagnosis](PHASE_4B_NOTIFICATIONS_DIAGNOSIS.md). No further acceptance window was opened. Final recovery and zero-residual proof completed by **13:37:42 UTC / 08:37:42 CDT**, before both the internal cleanup target and hard expiry.

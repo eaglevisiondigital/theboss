@@ -1,5 +1,35 @@
 # Current build state
 
+## Final Phase 4B hosted acceptance: cleaned up, signed matrix incomplete
+
+The final authorized October 4 window started 02:47:41.446636 UTC with fixed expiry
+03:47:41.446636. Actual restricted guardian reads no longer reproduced `57014`:
+Attendance 2.133–3.127s, Calendar 1.561–5.258s, combined Notifications summary/inbox
+3.564–5.250s returned HTTP 200. Canceled recurrence/prompt/reminder exclusion,
+requested/deadline/missing/context-change receipt/replay, persisted read state,
+guardian navigation/reload/Child1 filtering, household-only denial, stale signed
+POST denial (HTTP 403, unchanged response), exact-Falcons read scope and relevant
+320px controls passed. Prior Decision A investigation was not repeated.
+
+Remaining blocker: hosted signed forged resource/scope mutations have no approved
+native request facility. Browser networking worked; GET/SQL denials are not POST
+proof. Adult volunteer positives/dependent flows retain the approved eligibility
+limitation; no DOB or broader staff authority fabricated. **Phase 4B INCOMPLETE.**
+
+Admin recovered 03:13:26; synthetic event signed archival 03:14:27; exact authority/
+configuration restore 03:14:45; pending-work cleanup 03:15:05; complete zero-residual
+proof 03:15:23. All baseline checks pass, all temporary current authority and
+pending/unexpected fixtures zero, original administrator Home valid. Post-cleanup
+typecheck, zero-warning lint, all 218 application tests including 39 focused
+regressions pass. All 30 migration names and 151,779-byte regenerated types match.
+No implementation/schema/Auth/deployment change, credential exposure in this
+final window or later phase. Final documentation only; PR #3 open/draft/unmerged.
+STOP, no new window.
+See [the current ordered 39-point report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md).
+
+The dated sections below preserve history; their older remaining-case lists are
+superseded by the latest report.
+
 ## Phase 4B bounded performance investigation completed
 
 Starting head `c6fcd4b41bde66ea95bdedfd9df9345c47bfac97`. The synthetic baseline

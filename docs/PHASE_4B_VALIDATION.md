@@ -1,5 +1,9 @@
 # Phase 4B validation status
 
+For the October 4 final window, cleanup and current blocker, use the [final
+39-point report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md). Earlier dated remaining-case
+lists below preserve historical evidence and do not override the latest report.
+
 Latest bounded performance follow-up: all 30 canonical migration versions/names
 match; regenerated types are unchanged. Fresh validation passes 7,230 SQL/bootstrap
 assertions and all 34 races in one successful run, plus all 218 application tests,
