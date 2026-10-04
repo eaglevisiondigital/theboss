@@ -1,5 +1,10 @@
 # Boss foundation implementation decisions
 
+Current owner status: **Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.**
+The [Main Boss Chat closure decision](#phase-5c-closure-by-main-boss-chat--october-4-2026)
+at the end of this file supersedes the historical pending disposition immediately
+below. All earlier status, acceptance and incident records remain unchanged.
+
 ## Phase 5C current disposition — hosted core verified; owner closure review pending
 
 October 4, 2026 UTC: direct authorization was executed for the three unchanged
@@ -441,3 +446,67 @@ and incident disclosures remain unchanged.
 Keep PR #3 OPEN/DRAFT/UNMERGED and STOP. Soccer is only a suggested next direction
 for Main Boss Chat to decide and separately authorize; no next engine or module
 has been started.
+
+## Phase 5C closure by Main Boss Chat — October 4, 2026
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+directly approved this documentation-only closure after reviewing the complete
+Soccer implementation, acceptance record and read-only canonical incident
+reconstruction at `build/boss-platform-v1`, head
+`053c7dc71bd60f5b5c13cbc6aa1ce58e4c70b4bc`. This owner decision supersedes the
+historical pending/incomplete Phase 5C disposition above without deleting or
+rewriting its evidence or any prior acceptance/incident history.
+
+The serious cleanup deadline breach remains permanently recorded as an
+operational/process incident, accepted with this classification:
+
+`EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+
+Hard expiry was **2026-10-04 18:24:28.466723 UTC**. Canonical first
+selected-authority restoration occurred at **21:04:29.585080 UTC**; full
+module-baseline restoration completed at **21:05:24.046832 UTC**. Maximum explicit
+restoration delay was **2 hours 40 minutes 55.580109 seconds**. The expiry was not
+extended. Automatic expiry bounded effectiveness but did not satisfy the explicit
+restoration deadline. First recovery preceded the historical 21:04:47 sampled
+clock; no cause is inferred for the elapsed gap.
+
+Canonical reconstruction establishes early scorer/operator/role and staff
+removal; administrator operator expiry before hard expiry; athlete and Sports/
+Calendar expiry exactly at hard expiry; ineffective residual Game Center/Soccer
+configuration; no guardian/household activation; public Game Center disabled;
+and unpublished controlled event/game residue until archival. After hard expiry,
+no new Soccer/scoring facts, finalizations or signed application mutation receipts
+were identified. The one Game Center operation was a recovery-only Calendar sync.
+There were zero related notification sources/jobs/notifications/deliveries. This
+is not proof that every possible GET/read or session during the interval can be
+reconstructed; absence of read activity remains unprovable from available audits.
+
+The guardian evidence gap is accepted, does not block closure and retains:
+
+`SOCCER FAMILY/GUARDIAN PRIVACY: SQL/RUNTIME VERIFIED; PHASE 5C POSITIVE HOSTED GUARDIAN STAGE NOT EXECUTED.`
+
+The deadline guard refused the optional guardian stage before activation.
+Inherited Phase 5A/5B hosted family evidence, the shared current-authority family
+projection and Soccer-specific SQL/runtime privacy coverage may support the
+decision but never become Phase 5C positive hosted guardian proof. Other retained
+limitations include forged signed requests unavailable through approved tooling,
+SQL/runtime-only positive individual goalkeeper clean sheet and saved-penalty
+outcomes, SQL/runtime-only alternative substitution policies, entry controls not
+exhaustively exercised at every viewport, and public Soccer publication not
+enabled. Unperformed cases retain their original classifications. Neither the
+cleanup incident nor the accepted evidence limitation is a known Phase 5C
+production defect; no known product defect or architecture contradiction remains.
+
+Read-only verification at **2026-10-04 21:43:59.710742 UTC** confirmed exact
+baseline equality, original administrator validity, zero current residual
+temporary authority, archived/unpublished controlled resources and zero pending
+controlled work. Existing application/database/concurrency validation, canonical
+migrations, matched generated types and latest CI PASS remain intact. No new
+acceptance window, application/schema/migration/Auth/deployment/security-policy
+change or later phase is authorized or initiated by closure. No credential/session
+material was exposed or real youth/customer data used. Keep PR #3
+**OPEN / DRAFT / UNMERGED**, do not merge, and **STOP after Phase 5C closure**.
+
+Current owner status: [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
+Detailed record: [PHASE_5C_COMPLETION_REPORT.md](PHASE_5C_COMPLETION_REPORT.md) and
+[PHASE_5C_HOSTED_ACCEPTANCE.md](PHASE_5C_HOSTED_ACCEPTANCE.md).

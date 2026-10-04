@@ -1,5 +1,68 @@
 # Current build state
 
+## Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE
+
+Main Boss Chat directly approved closure on October 4, 2026 after reviewing the
+complete implementation, hosted acceptance and canonical cleanup-incident
+reconstruction at `build/boss-platform-v1`, reviewed head
+`053c7dc71bd60f5b5c13cbc6aa1ce58e4c70b4bc`. This owner decision supersedes every
+historical pending/IN PROGRESS checkpoint below. Those earlier records, including
+their original timing statements, remain unchanged as historical evidence; the
+first-restoration timestamp established by the reconstruction is recorded here.
+
+The cleanup timing breach is accepted and permanently retained as a serious
+operational/process incident:
+
+`EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+
+The authorized hard expiry was **2026-10-04 18:24:28.466723 UTC**. First
+selected-authority restoration was **21:04:29.585080 UTC**; full module-baseline
+restoration was **21:05:24.046832 UTC**. The maximum explicit-restoration delay
+was **2 hours 40 minutes 55.580109 seconds**. The fixed expiry was not extended,
+and automatic expiry does not make this on-time cleanup. The canonical first
+restoration preceded the previously sampled 21:04:47 clock; the unexplained
+elapsed gap has no established cause.
+
+Canonical history establishes that the administrator game-operator window expired
+before hard expiry, while the scorer operator/role and staff restoration had
+already ended the restricted context. Synthetic athlete memberships and Sports/
+Calendar module availability expired at hard expiry. Game Center/Soccer flags
+remained changed but granted no independent authority after Sports expiry.
+Guardian/household authority was never activated, public Game Center stayed off,
+and the controlled event/game remained unpublished until archival. Post-expiry
+records contain zero new Soccer/scoring facts, finalizations or signed application
+mutation receipts, one recovery-only Game Center Calendar sync, and zero related
+notification sources/jobs/notifications/deliveries. Absence of all GET/read or
+session activity cannot be proven from the available audit evidence.
+
+The accepted family evidence limitation retains its exact classification:
+
+`SOCCER FAMILY/GUARDIAN PRIVACY: SQL/RUNTIME VERIFIED; PHASE 5C POSITIVE HOSTED GUARDIAN STAGE NOT EXECUTED.`
+
+The optional guardian stage was refused before activation by the deadline guard.
+Inherited Phase 5A/5B family evidence and shared current-authority projection
+architecture support the review but are not Soccer-specific hosted proof. Other
+retained limitations include unavailable forged signed hosted requests, positive
+individual goalkeeper clean sheet and saved-penalty outcomes verified only in
+SQL/runtime, alternative substitution policies verified only in SQL/runtime,
+entry controls not exhaustively exercised at every responsive viewport, and
+public Soccer publication not enabled. No unperformed case becomes HOSTED VERIFIED.
+Neither the accepted incident nor the accepted evidence gap represents a known
+Phase 5C production defect; no known product defect or architecture contradiction
+remains.
+
+Read-only verification at **2026-10-04 21:43:59.710742 UTC** confirmed exact baseline
+equality, zero current residual temporary authority, valid original administrator
+access, controlled resources archived/unpublished and zero pending controlled
+work. The **304/304 application tests**, database/concurrency checks, canonical
+40-migration history, matched generated types and latest CI PASS remain intact.
+This closure changes documentation only: no application, migration, schema, Auth,
+deployment or security-policy change; no new acceptance window or later phase.
+PR #3 must remain **OPEN / DRAFT / UNMERGED**. **STOP after Phase 5C closure.**
+See the [completion report](PHASE_5C_COMPLETION_REPORT.md),
+[hosted acceptance and incident record](PHASE_5C_HOSTED_ACCEPTANCE.md) and
+[Soccer architecture](SOCCER_ENGINE_ARCHITECTURE.md).
+
 ## Phase 5C current checkpoint — HOSTED CORE VERIFIED; CLOSURE PENDING MAIN BOSS REVIEW
 
 October 4, 2026 UTC: the Soccer implementation is migrated and deployed, and the

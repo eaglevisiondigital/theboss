@@ -1,5 +1,24 @@
 # Phase 5C validation
 
+## Current owner closure decision — 2026-10-04
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+accepted the preserved cleanup deadline breach and Soccer guardian hosted
+evidence limitation after reviewing the canonical reconstruction. The incident
+remains `EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+Full module restoration at 21:05:24.046832 UTC was **2:40:55.580109** after hard
+expiry. This is explicit-restoration delay, not demonstrated usable authority.
+Guardian privacy remains SQL/runtime verified; the positive Soccer hosted stage
+did not execute. Neither accepted limitation is a known production defect.
+
+The canonical reconstruction, other evidence limits and current decision are
+recorded in [hosted acceptance](PHASE_5C_HOSTED_ACCEPTANCE.md) and
+[DECISIONS](DECISIONS.md). The validation and historical pending statuses below
+are preserved verbatim. No test result is relabeled and no full local suite,
+acceptance window or implementation change was performed for this closure.
+
+## Historical validation checkpoints
+
 ## Actual migration/deployment and single-window result — October 4, 2026 UTC
 
 **HOSTED CORE VERIFIED; PHASE 5C CLOSURE PENDING MAIN BOSS REVIEW.** The family/

@@ -1,5 +1,26 @@
 # Phase 5C performance
 
+## Current owner closure decision — 2026-10-04
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+accepted the operational cleanup timing incident and guardian hosted evidence
+limitation. No production latency/SLA claim or new performance run accompanies
+this documentation-only closure. The measurements and earlier pending status
+below remain historical and unchanged.
+
+Canonical audits establish first selected-authority restoration at
+21:04:29.585080 UTC, before the repeated 21:05:09 recovery cited below; full module
+restoration was 21:05:24.046832 UTC. Maximum explicit-restoration delay after
+18:24:28.466723 hard expiry was **2:40:55.580109**. The serious deadline breach is
+retained as `EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+Changed configuration/resource residue does not establish usable authority.
+Available audits cannot prove absence of all reads or sessions during the gap.
+See [canonical reconstruction and evidence limits](PHASE_5C_HOSTED_ACCEPTANCE.md)
+and [owner closure decision](DECISIONS.md). No new window, deployment,
+timeout/security-policy change or later phase was started.
+
+## Historical performance and incident checkpoints
+
 ## Actual hosted responsiveness and operational incident — October 4, 2026 UTC
 
 The Soccer implementation is deployed as READY `6ac28b6f641ca7000a2287bb`

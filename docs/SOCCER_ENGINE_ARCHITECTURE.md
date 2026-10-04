@@ -1,5 +1,60 @@
 # Soccer engine
 
+## Current acceptance and closure status — 2026-10-04
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+accepted the canonical Soccer implementation and reviewed the hosted acceptance
+and cleanup-incident reconstruction. This is a documentation-only closure; the
+architecture and deployed implementation are unchanged. The original design
+checkpoint below is preserved verbatim, including its historical validation
+status.
+
+The retained incident classification is
+`EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+Hard expiry was `2026-10-04 18:24:28.466723 UTC`; first selected-authority
+restoration has canonical audit timestamp `2026-10-04 21:04:29.585080 UTC`, and
+full module-baseline restoration has timestamp `2026-10-04 21:05:24.046832 UTC`.
+Maximum explicit-restoration delay was **2:40:55.580109**. The deadline breach is
+accepted and permanently retained as an operational/process incident. Audit
+timestamps are not asserted to be exact commit instants.
+
+The bounded operator, Sports/Calendar and athlete windows were expired (A) at
+hard expiry; scorer authority and the temporary staff relationship had already
+ended or been restored. Changed Game Center/Soccer flags were configuration
+residue granting no independent authority (C); the unpublished controlled
+event/game was resource residue (D). No usable temporary post-expiry authority
+(B) was identified. Guardian/household authority was never activated and public
+Game Center remained disabled. There were no new Soccer/scoring facts,
+finalizations or signed mutation receipts during the reviewed interval; the one
+Game Center Calendar sync was recovery-only and preserved the 2–0 score. Related
+notification sources/jobs/notifications/deliveries were zero. Available audits
+cannot prove absence of all GET/read or session activity.
+
+The accepted family evidence label remains
+`SOCCER FAMILY/GUARDIAN PRIVACY: SQL/RUNTIME VERIFIED; PHASE 5C POSITIVE HOSTED GUARDIAN STAGE NOT EXECUTED.`
+Inherited [Phase 5A Game Center](PHASE_5A_ACCEPTANCE_ADDENDUM.md) and
+[Phase 5B Basketball family/Child1-only](PHASE_5B_HOSTED_ACCEPTANCE.md) hosted
+evidence and shared current-authority projections support the design; they do
+not become Soccer hosted proof. Soccer-specific SQL/runtime privacy/isolation
+coverage remains distinct. Main Boss accepted this evidence limitation; neither
+it nor the cleanup process incident is a known Phase 5C production defect.
+
+Forged signed requests remain unavailable through approved hosted tooling;
+positive individual keeper clean sheets, saved penalties and alternative
+substitution policies remain SQL/runtime only. Exhaustive entry controls were
+not exercised at every responsive viewport, and public Soccer publication was
+not enabled. No new acceptance window or later sport/module is authorized.
+
+Current recovery evidence records zero residual temporary authority, valid
+original administrator access, exact baseline equality and archived/unpublished
+controlled resources. Prior canonical migration/type and 304/304 application
+test results remain the validation basis; final documentation SHA/CI are recorded
+in the final handoff. See the [completion report](PHASE_5C_COMPLETION_REPORT.md),
+[acceptance and incident record](PHASE_5C_HOSTED_ACCEPTANCE.md) and
+[Main Boss decision](DECISIONS.md).
+
+## Historical architecture checkpoint — preserved verbatim
+
 Phase 5C extends the canonical Calendar occurrence, game, snapshot roster,
 operator assignments, request receipts, sequence and finalization epochs. The
 engine runs only for the explicit canonical `games.sport_key = 'soccer'`.

@@ -1,5 +1,129 @@
 # Phase 5C hosted acceptance
 
+## Current closure and canonical incident reconstruction — 2026-10-04
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+reviewed the complete implementation, acceptance and read-only canonical incident
+record at `053c7dc71bd60f5b5c13cbc6aa1ce58e4c70b4bc` and explicitly approved
+closure. Core Soccer functionality is accepted. The cleanup timing breach is
+retained as an operational/process incident, and the guardian hosted gap is
+accepted as a test-evidence limitation. Neither is a known Phase 5C production
+defect or architecture contradiction. This current decision supersedes the status
+of the historical record below without changing any recorded test result.
+
+The permanent incident classification is:
+
+`EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+
+### Exact canonical timeline and expiry behavior
+
+All times in this table are October 4, 2026 UTC. Audit `created_at` is a
+transaction-start timestamp; `observed_at` is a wall-clock checkpoint. Exact
+transaction commit instants are not retained. Declared relationship start times
+are not substituted for actual creation/preparation times.
+
+| Canonical evidence | Audit/row timestamp | Expiry or restoration finding |
+| --- | --- | --- |
+| Fixed run baseline | 17:24:28.464043 | Fixed window starts 17:24:28.466723; no extension |
+| Sports/Calendar preparation | 17:24:48.638187 | Calendar observed 17:24:48.646500; Sports 17:24:48.649465; both end exactly 18:24:28.466723 |
+| Two synthetic athlete memberships prepared | 17:24:51.639937 | Observed 17:24:51.649156; both end exactly 18:24:28.466723 |
+| Native Sports flags configured | 17:25:16.322204 | Game Center/operations and four Soccer flags true; public and Basketball flags false; no module-window change |
+| Controlled event created | 17:28:53.029640 | Member visibility, unpublished |
+| Controlled Soccer game created | 17:30:04.739862 | Same canonical event; member visibility, unpublished |
+| Administrator game operator created | 17:30:34.233072 | Mistaken 23:20 expiry narrowed at 17:31:10.820846 to 18:20:00, before the LIVE gate |
+| Falcons scorer role/staff prepared | 17:33:18.822058 | Observed 17:33:18.864310; finite end 18:24:28.466723 |
+| Exact scorer operator created | 17:33:44.349853 | Original operator end 18:00:00 |
+| Administrator temporarily limited | 17:34:05.741944 | Scorekeeper context only; no guardian context activation |
+| Scorer operator explicitly revoked | 17:35:34.614944 | Stored end 17:35:34.623202; observed 17:35:34.624191 |
+| Original administrator restored | 17:35:51.573768 | Original platform role, scope and start preserved |
+| Scorer role ended/staff baseline restored | 17:38:23.081173 | Role end 17:38:23.083579; observed 17:38:23.094074 |
+| Corrected second final sealed | 17:43:49.737853 | Authoritative 2–0; earlier 2–4 epoch preserved |
+| Stop-new deadline | 17:59:28.466723 | Fixed deadline retained |
+| Cleanup target | 18:09:28.466723 | Explicit restoration missed this target |
+| Administrator operator natural expiry | 18:20:00.000000 | Unusable despite physical active-status residue |
+| Hard expiry | 18:24:28.466723 | Sports/Calendar availability and both athlete membership windows expired |
+| First late administrator recovery | 21:04:25.357537 | Reaffirmed already-restored original role |
+| First selected-authority recovery | 21:04:29.585080 | Audit a87c539c-924f-4bca-987b-185c9543ea2c; observed 21:04:29.598107 |
+| Repeat administrator recovery | 21:05:04.404756 | Idempotent reaffirmation |
+| Repeat selected-authority recovery | 21:05:09.183417 | Observed 21:05:09.194805 |
+| Controlled resource archival | 21:05:15.804037 | Observed 21:05:15.892559; recovery-only Calendar sync retains score/seals |
+| Athlete fixture baseline restoration | 21:05:19.658853 | Observed 21:05:19.666202 |
+| Full module-baseline restoration | 21:05:24.046832 | Observed 21:05:24.056948; exact original configuration/windows restored |
+
+First selected-authority recovery was **2:40:01.118357** after hard expiry.
+Maximum explicit-restoration delay through full module restoration was
+**2:40:55.580109**, measured using audit transaction timestamps. This is a serious
+missed cleanup deadline, not on-time cleanup and not a demonstrated duration of
+usable authority. The first canonical recovery records precede the sampled
+21:04:47 clock in the historical narrative below. That sample and the earlier
+summary are preserved as history; they do not override the canonical sequence.
+The cause of the elapsed gap remains unknown. The guardian refusal made no
+committed changes; its exact refusal timestamp is not retained.
+
+At hard expiry, the administrator operator, Sports/Calendar availability and
+athlete memberships were **A: expired bounded windows**. Scorer operator/role
+authority and staff restoration had already ended before expiry. Sports flags
+were **C: configuration residue without independent authority**; the unarchived,
+unpublished event/game were **D: resource residue without independent authority**.
+Only one Sports and one Calendar row existed, so expiry exposed no older live
+fallback row. No **B: usable temporary authority after expiry** was identified.
+Guardian/household authority was never activated, organization membership was not
+broadened, public Game Center stayed disabled and the event/game were never
+published. Original administrator authority remained the pre-test baseline.
+
+The exact-resource interval includes all actors: 45 total Soccer facts with
+**zero** appended after hard expiry, two finalizations with **zero** new in the
+interval, and 53 Game Center plus one Calendar application receipts with **zero**
+new in the interval. Of 54 game operations, the only interval operation is
+`game.calendar.sync` at 21:05:15.804037, archival recovery preserving final status,
+the 2–0 score and both epochs. All related notification sources, expansion jobs,
+notifications and deliveries are **zero**, including linked attendance/volunteer
+source paths. Do not describe this interval as having zero Game Center mutations.
+
+Current read-only evidence establishes baseline equality, valid original
+administrator, zero residual temporary authority and archived/unpublished
+controlled resources. Historical Auth/session continuity and unrecorded denied,
+read or replay requests remain **E: unknown from available evidence**. Absence of
+GET/read activity cannot be proven; no continuous-monitoring claim is made.
+
+Documentation-closure verification at **21:54:46.460186 UTC** reconfirmed exact
+captured authority/module baseline equality, original administrator validity,
+active controlled identity, zero extra active roles/operators/memberships, no
+added module rows, archived/unpublished resources and zero related notification
+sources/jobs/notifications/deliveries. Fresh canonical history still matches all
+**40** local migration versions/names. Fresh canonical types exactly match the
+previously matched **195,784-byte** file, SHA256
+`754edacaa8cb20bdf8566bd585cff0815b73995549924fa74eaf948189bfe9af`.
+No types or migration file was changed or reapplied for closure.
+
+### Accepted hosted evidence limitations
+
+`SOCCER FAMILY/GUARDIAN PRIVACY: SQL/RUNTIME VERIFIED; PHASE 5C POSITIVE HOSTED GUARDIAN STAGE NOT EXECUTED.`
+
+The optional guardian stage was refused before activation. Inherited
+[Phase 5A family/guardian](PHASE_5A_ACCEPTANCE_ADDENDUM.md) and
+[Phase 5B Basketball Child1-only](PHASE_5B_HOSTED_ACCEPTANCE.md) hosted evidence,
+shared current-authority projections and Soccer-specific runtime privacy tests
+support the design; none is relabeled as Soccer positive hosted guardian proof.
+
+Other classifications remain unchanged: forged signed requests unavailable
+through approved hosted tooling; positive individual keeper clean sheets, saved
+penalties and alternative substitution policies SQL/runtime only; exhaustive
+entry controls not executed at every viewport; public Soccer publication not
+enabled. All other unperformed cases below retain their original evidence scope.
+Main Boss accepted the evidence limits without promoting them to HOSTED VERIFIED.
+
+This closure changes documentation only. No acceptance window, code, schema,
+migration, Auth, deployment or security-policy change, or next sport/module was
+started. PR #3 remains OPEN/DRAFT/UNMERGED. See the
+[owner decision](DECISIONS.md), [current build state](CURRENT_BUILD_STATE.md)
+and [completion report](PHASE_5C_COMPLETION_REPORT.md).
+
+## Historical acceptance record — preserved verbatim
+
+The following original pending/incomplete handoff and prepared oracle predate
+Main Boss's closure decision. Their text and evidence remain unchanged.
+
 **HOSTED CORE EXECUTED; FINAL CLOSURE PENDING MAIN BOSS REVIEW.**
 The prepared oracle below remains the original plan. Actual results and limitations
 are recorded here separately; SQL reconciliation does not substitute for native evidence.

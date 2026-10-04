@@ -1,5 +1,78 @@
 # Phase 5C Soccer completion report — 78 points
 
+## Current closure decision — 2026-10-04
+
+**Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.** Main Boss Chat
+reviewed the implementation, acceptance record and canonical cleanup-incident
+reconstruction and explicitly approved closure. The cleanup timing incident and
+Soccer guardian hosted-evidence limitation are accepted and retained; neither is
+a known Phase 5C production defect or architecture contradiction.
+
+**Incident classification:** `EXPLICIT RESTORATION DEADLINE MISSED; NO USABLE TEMPORARY PHASE 5C AUTHORITY IDENTIFIED AFTER HARD EXPIRY.`
+The cleanup target was `2026-10-04 18:09:28.466723 UTC`; hard expiry was
+`2026-10-04 18:24:28.466723 UTC`. First selected-authority restoration has canonical
+audit timestamp `2026-10-04 21:04:29.585080 UTC`; full module-baseline restoration
+has timestamp `2026-10-04 21:05:24.046832 UTC`. The maximum explicit-restoration
+delay after hard expiry was **2:40:55.580109**. Audit timestamps are recorded
+transaction evidence, not a claim of exact commit instants. This serious missed
+deadline is accepted as an operational/process incident; it was not on-time
+cleanup, and the fixed expiry was not extended.
+
+Historical state and authorization predicates establish A (expired bounded
+availability) for the administrator operator and the Sports/Calendar and athlete
+membership windows. The scorer operator and temporary scorekeeper role had
+already ended explicitly; the staff relationship had already been restored.
+Game Center/Soccer flags remained changed as C (configuration residue without
+independent authority), and the unpublished controlled event/game remained as D
+(resource residue without independent authority). No B (usable temporary
+authority after hard expiry) was identified. Guardian/household authority was
+never activated; public Game Center remained disabled. This finding does not
+claim that all possible reads or sessions were reconstructable: absence of
+GET/read activity cannot be proven from the available audit evidence.
+
+The post-expiry canonical interval contains zero new Soccer/scoring facts, zero
+new finalizations and zero new signed application mutation receipts. It contains
+**one recovery-only Game Center Calendar sync**, retaining the 2–0 score, and
+zero related notification sources, jobs, notifications or deliveries. Current
+read-only recovery evidence establishes zero residual temporary person/module
+authority, valid original administrator access, baseline equality, archived and
+unpublished controlled resources and zero pending controlled notification work.
+See [the acceptance and incident record](PHASE_5C_HOSTED_ACCEPTANCE.md).
+
+**Accepted guardian limitation:** `SOCCER FAMILY/GUARDIAN PRIVACY: SQL/RUNTIME VERIFIED; PHASE 5C POSITIVE HOSTED GUARDIAN STAGE NOT EXECUTED.`
+The deadline guard refused that optional stage before activation. Supporting
+inherited [Phase 5A Game Center family/guardian](PHASE_5A_ACCEPTANCE_ADDENDUM.md)
+and [Phase 5B Basketball Child1-only](PHASE_5B_HOSTED_ACCEPTANCE.md) hosted
+evidence, plus shared current-authority family projections and
+Soccer-specific SQL/runtime privacy/isolation coverage, remain supporting
+evidence; they are not relabeled as Soccer hosted proof. Main Boss accepted this
+test-evidence limitation for Phase 5C closure.
+
+Other retained limitations remain accurately labeled: forged signed requests
+were unavailable through approved hosted tooling; positive individual goalkeeper
+clean sheets, saved penalties and alternative substitution policies remain
+SQL/runtime only; exhaustive responsive entry controls were not exercised at
+every viewport; public Soccer publication was not enabled. Unperformed cases
+are not HOSTED VERIFIED.
+
+The previously verified 40 canonical migrations, matched generated database
+types, 9,337 database/bootstrap assertions, 96 concurrency races, 304/304
+application tests, typecheck, lint and production build remain the validation
+basis. The final documentation-only closure SHA, current verification and final
+CI result are reported in the final handoff and branch history. Existing PR #3
+must remain OPEN, DRAFT and UNMERGED. This closure authorizes no application,
+migration, schema, Auth, deployment or security-policy change. No new acceptance
+window was opened, no credential/session material was exposed, no real
+youth/customer data was used and no later phase was started for this closure.
+Main Boss's decision is recorded in [DECISIONS](DECISIONS.md).
+
+## Historical 78-point checkpoint — preserved verbatim
+
+The report below predates the closure decision. Its pending statuses, earlier
+recovery summary and next-direction text are preserved as history; the current
+closure addendum above supersedes their status. Historical next-direction text
+does not authorize Football, Phase 5D or another acceptance window.
+
 2026-10-04. **Implemented, migrated, deployed and core hosted acceptance verified;
 final Phase5C closure pending Main Boss review.** The optional guardian stage did
 not run, and explicit baseline cleanup missed the fixed deadline. Present recovery
