@@ -13,6 +13,12 @@ Original administrator and exact cleanup baseline remain valid with zero residua
 authority. See [the 29-point investigation](PHASE_5A_BLOCKER_INVESTIGATION.md).
 Main Boss Chat must separately authorize a recommended bounded second window.
 
+The existing Git deployment workflow automatically published investigation
+commit `9502335e06ce528f8bd7ce7d9a4c3a5c7cad6cf3` as deploy
+`6ac1eea8c882a50008eff7bc` at 06:14:25.331 UTC. Its application inputs are
+identical to the initial implementation; only tests/docs changed. Read-only
+archived-detail reload, disabled-feature list and administrator Home passed.
+
 Main Boss Chat directly authorized disposable PostgreSQL validation, migration,
 deployment and controlled acceptance in typed instructions after the initial
 approval-review rejection. That earlier rejection is resolved; its history is

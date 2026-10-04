@@ -91,16 +91,21 @@ incidents with no demonstrated causal connection. No second window was opened.
     original administrator and zero temporary person/module/operator/pending
     authority. Initial checkpoint invocation lacked its nonsecret run-context
     setting and failed closed; supplying that audit run ID passed, without writes.
-21. **Deployment if changed.** No runtime fix/manual deployment. Published
-    implementation `c12824152b39fdd336d3153965e669422c6f25d7`, Netlify deploy
-    `6ac1e4145b191500082e1aed`. Automatic investigation-commit build/ignore
-    outcome is recorded in final handoff; application inputs are unchanged.
-    No environment/proxy/settings helper used.
+21. **Deployment if changed.** No runtime fix/manual deployment. Existing Git
+    publishing automatically rebuilt investigation commit
+    `9502335e06ce528f8bd7ce7d9a4c3a5c7cad6cf3` and published Netlify deploy
+    `6ac1eea8c882a50008eff7bc` at 06:14:25.331 UTC. Platform application source,
+    dependencies, configuration and migrations compare identical to the first
+    implementation commit `c12824152b39fdd336d3153965e669422c6f25d7`. Test-file
+    scope triggered the existing build policy. No environment/proxy/settings
+    helper used. Follow-up documentation commit's outcome is in final handoff.
 22. **Read-only hosted verification.** List renders the disabled-feature
     message; archived detail renders the expected local restriction notice.
     Detail reload, Home navigation and fresh detail request work. Original
     administrator tools present; Games hub absent with feature disabled. No
-    outer boundary reproduced. This does not replace positive LIVE acceptance.
+    outer boundary reproduced. Repeated on the automatically published deploy:
+    archived-detail full reload, disabled-feature list and original administrator
+    Home passed. This does not replace positive LIVE acceptance.
 23. **Final SHA.** Commit containing this regression/report is recorded in final
     handoff and PR #3; prior implementation and first-window evidence preserved.
 24. **PR.** [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3) remains
