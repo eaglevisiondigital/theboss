@@ -11,7 +11,7 @@ export function GameForm({ build, children, label, confirmation }: { build: (dat
     event.preventDefault(); if (pending || intent?.blocked) return;
     const command = build(new FormData(event.currentTarget));
     if (!command || !parseGameCommand(command)) { setMessage("Review the game fields, then try again."); return; }
-    if ((command.operation.startsWith("basketball.") || command.operation.startsWith("soccer.")) && intent) {
+    if ((command.operation.startsWith("basketball.") || command.operation.startsWith("soccer.") || command.operation.startsWith("football.")) && intent) {
       setPending(true); setMessage("");
       try { const outcome = await intent.send(command); setMessage(outcome.message); }
       finally { setPending(false); }

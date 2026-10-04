@@ -1,5 +1,22 @@
 # Boss platform security
 
+## Phase 5D Football and history isolation
+
+Football raw state/facts/lineups/seals/stats have closed RLS and no direct client
+writes. Typed finite commands reuse current-session validation, event-before-game
+serialization, current authority checks, caller-bound receipts and optimistic
+versions. Each supplied player reference must match the current immutable
+snapshot, actual side and independently authorized roster context. Wrong-sport
+commands fail closed. Engine ownership survives feature disable.
+
+The history read resolves authorized subjects first and projects only whitelisted
+sealed player stats and minimal provenance. It does not depend on old-team or
+source-module availability and never grants a future team implicit read/correction
+rights. Guardian revocation/expiry and subject status are checked at request time.
+No credential extraction or new test endpoint is part of hosted acceptance.
+Controlled acceptance requires recovery rehearsed before activation, fixed
+stop-new/cleanup/hard deadlines and explicit restoration before hard expiry.
+
 ## Phase 5C Soccer boundary
 
 Five new raw tables are RLS-enabled and closed to API roles. Fixed-path private

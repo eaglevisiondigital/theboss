@@ -1,5 +1,15 @@
 # Modules and product access
 
+## Phase 5D Football controls
+
+`football_live_scoring`, `football_stats`, `football_play_by_play` and
+`football_lineups` are finite default-off Sports configuration, independent of
+Basketball/Soccer. Current Sports/Calendar and exact-game authority gates remain.
+A configured Football game cannot fall back to manual score/roster mutation when
+flags are disabled. Portable athlete history is a separate safe sealed-record
+read; disabling a former team's live module does not erase a child's verified
+historical record. No provider infrastructure or later sport is activated.
+
 ## Phase 5C finite Soccer controls
 
 Sports adds independent default-off `soccer_live_scoring`, `soccer_stats`,

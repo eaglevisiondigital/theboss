@@ -7,7 +7,7 @@ export class GameIntent {
   private inFlight = false;
   private retry: { command: GameCommand; id: string } | null = null;
   private confirmedVersion = 0;
-  constructor(private readonly makeId: () => string = () => crypto.randomUUID(), private readonly prefixes: readonly string[] = ["basketball.", "soccer."]) {}
+  constructor(private readonly makeId: () => string = () => crypto.randomUUID(), private readonly prefixes: readonly string[] = ["basketball.", "soccer.", "football."]) {}
   waitingFor(version: number) { return this.inFlight || version < this.confirmedVersion; }
   hasUnconfirmed() { return this.retry !== null && !this.inFlight; }
   async execute(command: GameCommand, transport: Transport = fetch): Promise<GameIntentOutcome> {

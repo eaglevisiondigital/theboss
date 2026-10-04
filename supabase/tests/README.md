@@ -1,5 +1,65 @@
 # Boss core database tests
 
+## Phase 5D Football and athlete-history suites
+
+`phase5d/fixture.sql` extends the reviewed Phase 5A Game Center fixture exactly
+once, adding six synthetic athletes to each existing side for seven athletes
+per team. Its `ff_create`, `ff_game`, `ff_roster`, `ff_play`, `ff_op`, and
+`ff_finish` helpers support Football and athlete-history acceptance without
+copying canonical identity, roster, schedule, or operator systems.
+
+`phase5d_football.sql` records one deterministic four-quarter game and checks
+literal values for every finite stat key across both teams and all fourteen
+athletes. The independent score is 25–16 after receiver attribution correction;
+an authorized reopen and made-to-missed XP replacement produces 24–16 and an
+additional immutable epoch. The oracle documents Football-v1 sack, kneel,
+spike, conversion, assisted-tackle, recovery, return-yard, and first-down
+conventions. It never derives expected answers from production projection code.
+
+`phase5d_formats.sql`, `phase5d_security.sql`, `phase5d_corrections.sql`, and
+`phase5d_cross_sport.sql` cover bounded formats and overtime foundations,
+remaining server clocks, normalized field/down state, lineups, closed raw
+tables, exact operators, independently masked entry/family views, current
+features, immutable correction chains, safe dependent replay, and both-direction
+Football/Basketball/Soccer denial. Historical table inventories exclude only the
+exact five new Football tables; historical feature inventories subtract only
+the exact four Football flags and retain their prior counts and assertions.
+
+`phase5d_athlete_history.sql` covers the bounded sealed-history provenance and
+guardian access foundation independently of current old/new team membership.
+It does not implement season or career aggregation or grant new-team sharing.
+`phase5d_live_verification.sql` is a read-only structural verifier without
+synthetic fixtures, Auth reads, or writes. Canonical use requires the separate
+authorized infrastructure workflow.
+
+`phase5d_performance.sql` measures every append, reporting the slowest individual
+call as well as volume totals. It separately times field state, full accepted
+play replay, the authorized PBP read, box, drives, Game Center detail, remaining
+period controls, and finalization with 10, 100, and 1,000 zero-yard scrimmage
+plays. Each measured call must complete below eight seconds; database timeouts
+are not increased. Literal full totals must survive the 500-play and 100-drive
+display limits. These disposable measurements do not establish hosted load
+capacity or a production SLA.
+
+`phase5d_football_concurrency.sh` uses the proven FIFO writer/observed-lock-wait
+wrapper with a distinct Phase 5D namespace, preserving historical committed
+fixtures. Its 25 prepared races include all nine requested collision families,
+operator/role/membership revocation, natural operator/role/session deadlines, and
+same-request replay for rush, pass, TD, interception, fumble, tackle, kick,
+return, correction, substitution, and state change. Every participant retains
+the fixed eight-second timeout and requires the private no-TCP runner socket.
+
+```sh
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test5d
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test phase5d_football.sql
+```
+
+The focused options apply every canonical migration. `--test5d` includes the
+Football race helper; a single `--test` omits races. Both retain the requirement
+to complete the full historical run. Prepared sources and planned race counts
+are not passing runtime evidence; actual validation belongs in the Phase 5D
+completion record.
+
 ## Phase 5B Basketball suites
 
 `phase5b_basketball.sql` checks a hand-computed synthetic two-sided scoring/stat

@@ -1,5 +1,20 @@
 # Boss foundation permissions
 
+## Phase 5D Football and athlete history
+
+Football reuses exact-game operating assignments and existing scoped game
+permissions. Selecting Football or enabling its four finite feature flags creates
+no operator authority. Current session, original tenant/team scope, roster side,
+operator/role windows and features remain server enforced. Historical corrections
+use the originating game's current authorized correction workflow.
+
+Portable sealed history is subject-only: authenticated self or a current verified
+guardian may read the athlete's own safe record. Household membership, coach,
+new-team membership or platform role alone provides no history authority. This
+read grants no original-team roster, communications, Attendance, other-family,
+operator or correction access. Future family-authorized sharing is a separate
+contract and is not implemented here.
+
 ## Phase 5C exact-game Soccer operation
 
 Soccer adds no role, permission or broader mapping. Existing current game

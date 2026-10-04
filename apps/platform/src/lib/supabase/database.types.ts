@@ -2368,6 +2368,304 @@ export type Database = {
           },
         ]
       }
+      game_football_events: {
+        Row: {
+          actor_person_id: string
+          after_field: Json
+          before_field: Json
+          clock_ms: number
+          correction_of: string | null
+          created_at: string
+          event_type: string
+          game_id: string
+          id: string
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          payload: Json
+          period_number: number
+          reason: string | null
+          request_id: string
+          roster_id: string | null
+          sequence: number
+          side: string | null
+        }
+        Insert: {
+          actor_person_id: string
+          after_field?: Json
+          before_field?: Json
+          clock_ms: number
+          correction_of?: string | null
+          created_at?: string
+          event_type: string
+          game_id: string
+          id?: string
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          payload?: Json
+          period_number: number
+          reason?: string | null
+          request_id: string
+          roster_id?: string | null
+          sequence: number
+          side?: string | null
+        }
+        Update: {
+          actor_person_id?: string
+          after_field?: Json
+          before_field?: Json
+          clock_ms?: number
+          correction_of?: string | null
+          created_at?: string
+          event_type?: string
+          game_id?: string
+          id?: string
+          operation_id?: string
+          organization_id?: string
+          origin_sequence?: number
+          payload?: Json
+          period_number?: number
+          reason?: string | null
+          request_id?: string
+          roster_id?: string | null
+          sequence?: number
+          side?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_football_events_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_football_events_organization_id_game_id_correction_of_fkey"
+            columns: ["organization_id", "game_id", "correction_of"]
+            isOneToOne: false
+            referencedRelation: "game_football_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_football_events_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_football_events_organization_id_game_id_operation_id_fkey"
+            columns: ["organization_id", "game_id", "operation_id"]
+            isOneToOne: false
+            referencedRelation: "game_operations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_football_events_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_football_final_stats: {
+        Row: {
+          finalization_id: string
+          game_id: string
+          id: string
+          organization_id: string
+          roster_id: string | null
+          side: string
+          stats: Json
+        }
+        Insert: {
+          finalization_id: string
+          game_id: string
+          id?: string
+          organization_id: string
+          roster_id?: string | null
+          side: string
+          stats: Json
+        }
+        Update: {
+          finalization_id?: string
+          game_id?: string
+          id?: string
+          organization_id?: string
+          roster_id?: string | null
+          side?: string
+          stats?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_football_final_stats_organization_id_game_id_finaliza_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_football_finalizations"
+            referencedColumns: ["organization_id", "game_id", "finalization_id"]
+          },
+          {
+            foreignKeyName: "game_football_final_stats_organization_id_game_id_roster_i_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_football_finalizations: {
+        Row: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          state: Json
+        }
+        Insert: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          state: Json
+        }
+        Update: {
+          engine_version?: string
+          epoch?: number
+          event_sequence?: number
+          finalization_id?: string
+          game_id?: string
+          organization_id?: string
+          roster_revision?: number
+          state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_football_finalizations_organization_id_game_id_finali_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_finalizations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_football_lineups: {
+        Row: {
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Insert: {
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Update: {
+          game_id?: string
+          organization_id?: string
+          roster_id?: string
+          side?: string
+          slot?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_football_lineups_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_football_lineups_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_football_states: {
+        Row: {
+          clock_anchor: string | null
+          clock_remaining_ms: number
+          clock_running: boolean
+          enforce_lineup: boolean
+          engine_version: string
+          field_state: Json
+          game_id: string
+          kneel_counts_as_rush: boolean
+          lineup_size: number
+          max_overtime_periods: number
+          organization_id: string
+          overtime_format: string
+          overtime_seconds: number
+          period_number: number
+          period_status: string
+          play_clock_seconds: number | null
+          quarter_seconds: number
+          roster_revision: number
+        }
+        Insert: {
+          clock_anchor?: string | null
+          clock_remaining_ms?: number
+          clock_running?: boolean
+          enforce_lineup: boolean
+          engine_version?: string
+          field_state?: Json
+          game_id: string
+          kneel_counts_as_rush: boolean
+          lineup_size: number
+          max_overtime_periods: number
+          organization_id: string
+          overtime_format: string
+          overtime_seconds: number
+          period_number?: number
+          period_status?: string
+          play_clock_seconds?: number | null
+          quarter_seconds: number
+          roster_revision: number
+        }
+        Update: {
+          clock_anchor?: string | null
+          clock_remaining_ms?: number
+          clock_running?: boolean
+          enforce_lineup?: boolean
+          engine_version?: string
+          field_state?: Json
+          game_id?: string
+          kneel_counts_as_rush?: boolean
+          lineup_size?: number
+          max_overtime_periods?: number
+          organization_id?: string
+          overtime_format?: string
+          overtime_seconds?: number
+          period_number?: number
+          period_status?: string
+          play_clock_seconds?: number | null
+          quarter_seconds?: number
+          roster_revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_football_states_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       game_operations: {
         Row: {
           actor_person_id: string
@@ -6005,6 +6303,7 @@ export type Database = {
         Args: { p_organization_id?: string; p_query?: string; p_view: string }
         Returns: Json
       }
+      boss_athlete_history_read: { Args: { p_query?: Json }; Returns: Json }
       boss_attendance_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

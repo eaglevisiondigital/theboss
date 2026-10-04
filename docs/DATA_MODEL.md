@@ -1,5 +1,23 @@
 # Data model
 
+## Phase 5D Football and portable sealed athlete history
+
+Football adds bounded state, typed whole-play facts, current lineup state,
+immutable sport finalization headers and UUID-keyed JSON stat rows. All retain
+canonical game/organization/roster/operation identities. Whole kick/return and
+fumble/recovery outcomes capture their underlying action once; immutable
+supersession preserves original facts and origin order. Source Basketball and
+Soccer stats are not rewritten or copied.
+
+A closed cross-sport projection joins player seals through immutable roster
+snapshots to persistent person/participant identity and originating game/team/
+organization/season/epoch. Current verified self/guardian authority permits only
+that athlete's history. Current original-team membership is unnecessary; new-team
+membership grants no access. Older seals remain distinguishable from the latest
+sealed and currently authoritative epoch. No season/career aggregation is added.
+See [Football](FOOTBALL_ENGINE_ARCHITECTURE.md) and
+[athlete history](ATHLETE_HISTORY_ARCHITECTURE.md). Validation is in progress.
+
 ## Phase 5C Soccer extension
 
 Soccer uses five tenant-qualified tables for bounded state, typed events, current

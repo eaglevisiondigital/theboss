@@ -1,5 +1,32 @@
 # Current build state
 
+## Phase 5D Football + athlete-history portability: IN PROGRESS
+
+Main Boss directly authorized Phase 5D on October 4, 2026 from
+`185683d8d13b7a36f9aa7e52b0b691b8c676ca34`, on `build/boss-platform-v1` and
+OPEN/DRAFT/UNMERGED PR #3. Phase 5C remains closed; its incident and evidence
+limitations below are unchanged. Football extends the existing Calendar/game,
+roster, operators, receipt/sequence and finalization architecture. Athlete history
+is a separate subject-authorized read over immutable Basketball/Soccer/Football
+player seals, independent of current original-team membership.
+
+The initial canonical identity audit found no missing provenance links in six
+Basketball and ten Soccer player seals across two games, and no missing recorded
+seasons. Existing nullable season fields remain honest; game season and athlete's
+originating-team season are distinct provenance fields. No duplicate identities,
+stats, schedules or correction authority is introduced. The final frozen
+PostgreSQL 17 run passed 12,381 SQL/bootstrap assertions (2,825 Phase 5D) and
+123 genuine races, including 25 Football and two history races; its cluster was
+removed. Four validated migrations were applied to canonical Boss at
+23:22:22–23:22:46 UTC on October 4. All 44 migration versions/names and each
+new stored SQL body match local source; 157 read-only schema checks passed.
+Canonical database types are regenerated. Final typecheck, zero-warning lint,
+336/336 application tests and production build passed. Deployment,
+recovery freeze and controlled hosted acceptance remain pending. No temporary
+Phase 5D acceptance authority has been activated. No later phase is
+in scope. See [Football architecture](FOOTBALL_ENGINE_ARCHITECTURE.md) and
+[athlete history](ATHLETE_HISTORY_ARCHITECTURE.md).
+
 ## Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE
 
 Main Boss Chat directly approved closure on October 4, 2026 after reviewing the

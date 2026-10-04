@@ -805,3 +805,62 @@ button:disabled { cursor: wait; opacity: .65; }
 .soccer-stat-buttons { margin-top: 10px; }
 .soccer-lineup-status { display: grid; gap: 8px; padding-left: 18px; }
 @media (max-width: 640px) { .soccer-state-heading { flex-direction: column; align-items: flex-start; } .soccer-clock { text-align: left; } .soccer-clock strong { font-size: 32px; } }
+
+.football-panel, .athlete-history-record { min-width: 0; overflow-wrap: anywhere; border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-top: 24px; }
+.football-state-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.football-state-heading h3, .football-state-heading p { margin: 4px 0; }
+.football-clock { display: grid; text-align: center; min-width: 0; }
+.football-clock strong { font-size: clamp(32px, 5vw, 52px); line-height: 1.2; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.football-clock span { font-size: 13px; }
+.football-field { display: grid; gap: 8px; margin: 16px 0; padding: 16px; border-radius: 12px; background: var(--background); }
+.football-field meter { width: 100%; min-width: 0; height: 20px; }
+.football-panel select, .football-panel input:not([type=checkbox]), .football-panel textarea, .athlete-history-filters select { min-width: 0; max-width: 100%; width: 100%; }
+.football-panel select, .athlete-history-filters select { min-height: 48px; }
+.football-play-buttons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 12px 0 18px; }
+.football-play-button { padding: 14px 10px; min-height: 56px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.football-selected { background: var(--orange); color: var(--ink); }
+.football-play-button:disabled { opacity: 0.5; cursor: default; }
+.football-play-button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+.football-secondary-panel { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 22px; min-width: 0; }
+.football-secondary-panel summary, .athlete-history-provenance summary { cursor: pointer; font-weight: 700; padding-bottom: 12px; }
+.football-outcome, .football-assists { min-width: 0; margin: 16px 0; }
+.football-assists { display: grid; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.football-clock-controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.football-clock-controls .button { min-height: 48px; white-space: normal; }
+.football-recent-plays { margin: 18px 0; }
+.football-box { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.football-team-box, .football-stat-section, .football-scorer, .athlete-history-hub { min-width: 0; }
+.football-stat-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 12px; min-width: 0; }
+.football-stat-card h5, .football-stat-card h6 { margin: 0 0 12px; font-size: 15px; }
+.football-team-total { background: color-mix(in srgb, currentColor 4%, transparent); }
+.football-stats-grid, .athlete-history-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px 8px; margin: 0; }
+.football-stats-grid dt, .athlete-history-stats dt { font-size: 11px; overflow-wrap: anywhere; }
+.football-stats-grid dd, .athlete-history-stats dd { margin: 3px 0 0; font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.football-play-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.football-play-list li { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.football-play-list li > span { font-size: 13px; }
+.football-play-context { font-variant-numeric: tabular-nums; }
+.football-superseded { opacity: 0.7; }
+.football-final-epoch { margin: 16px 0; }
+.athlete-history-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) auto; align-items: end; gap: 14px; margin: 20px 0; }
+.athlete-history-filters .form-field { margin: 0; }
+.athlete-history-records { display: grid; gap: 16px; margin-bottom: 20px; }
+.athlete-history-record { margin-top: 0; }
+.athlete-history-record h3 { margin: 0 0 8px; }
+.athlete-history-epoch { display: block; font-size: 13px; font-weight: 700; }
+.athlete-history-provenance { margin-top: 18px; }
+.athlete-history-provenance dl { display: grid; gap: 10px; margin: 0; }
+.athlete-history-provenance dt { font-size: 12px; }
+.athlete-history-provenance dd { margin: 3px 0 0; font-size: 13px; overflow-wrap: anywhere; }
+.athlete-history-stat-section h4 { margin: 18px 0 12px; }
+@media (max-width: 1000px) { .football-box { grid-template-columns: minmax(0, 1fr); } .football-play-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .football-panel, .athlete-history-record { padding: 16px; }
+  .football-state-heading { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .football-clock { text-align: left; }
+  .football-clock strong { font-size: 32px; }
+  .football-play-button { padding: 12px 6px; font-size: 14px; }
+  .football-clock-controls .button { width: 100%; }
+  .football-stats-grid, .athlete-history-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 6px; }
+  .athlete-history-filters { grid-template-columns: minmax(0, 1fr); }
+}

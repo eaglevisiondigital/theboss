@@ -1,5 +1,18 @@
 # Game Center foundation
 
+## Phase 5D Football extension and history portability
+
+Football is the third engine on the same Calendar/game, roster, operator,
+operation/receipt, lifecycle and final-epoch foundation. It adds typed football
+plays, normalized field/down/possession state, bounded drives, countdown quarters
+and explicit overtime boundaries. All score/stat facts remain engine derived.
+Cross-sport history reads sealed individual records through persistent person and
+participant identity. Transfer preserves origin provenance and correction
+ownership; it does not expose prior-team private resources to the new team.
+See [Football](FOOTBALL_ENGINE_ARCHITECTURE.md) and
+[history](ATHLETE_HISTORY_ARCHITECTURE.md). Implementation is in progress;
+previous phase history remains below.
+
 ## Phase 5C Soccer extension
 
 The second sport engine layers onto the same game, exact Calendar occurrence,

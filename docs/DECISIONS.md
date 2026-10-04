@@ -510,3 +510,17 @@ material was exposed or real youth/customer data used. Keep PR #3
 Current owner status: [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md).
 Detailed record: [PHASE_5C_COMPLETION_REPORT.md](PHASE_5C_COMPLETION_REPORT.md) and
 [PHASE_5C_HOSTED_ACCEPTANCE.md](PHASE_5C_HOSTED_ACCEPTANCE.md).
+
+
+## October 4, 2026: Phase 5D authorization and permanent athlete portability
+
+Main Boss authorized Football plus the bounded cross-sport sealed-history
+foundation from `185683d8d13b7a36f9aa7e52b0b691b8c676ca34`. Verified historical
+records remain attached to persistent athletes across teams, organizations and
+seasons. The originating game/team/organization retains provenance and correction
+ownership; a new team gains no automatic private-history access. Current valid
+self/guardian authority authorizes subject-only history without restoring old
+team membership. Future explicit family sharing is view-only and separately
+approved; full career aggregation, recruiting/public links and exports remain
+out of scope. Phase 5C closure and incident history are unchanged. Implementation
+and all new validation remain pending at this decision checkpoint.
