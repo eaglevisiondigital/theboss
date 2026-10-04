@@ -1,10 +1,11 @@
 # Phase 5A validation status
 
-Status: **MIGRATED AND LOCALLY VALIDATED; DEPLOYMENT/HOSTED ACCEPTANCE PENDING**.
+Status: **MIGRATED, LOCALLY VALIDATED AND DEPLOYED; HOSTED ACCEPTANCE INTERRUPTED/INCOMPLETE; CLEANUP VERIFIED**.
 Starting SHA: `378b93e8db2880527dd80b640ca3989ce5c5c409`.
-Branch: `build/boss-platform-v1`. No new commit or push yet.
+Branch: `build/boss-platform-v1`. Implementation committed/pushed:
+`c12824152b39fdd336d3153965e669422c6f25d7`.
 
-## Prepared implementation
+## Validated implementation
 
 CLI-generated append migrations:
 
@@ -29,8 +30,9 @@ the new FK denial. Historical migration bodies remain unchanged.
 Actual private connector recovery controls passed **17 separate assertions** on
 fresh PostgreSQL 17, including independent administrator restoration surviving
 cleanup rollback, exact one-game Falcons authority, original relationship/module
-baseline restoration, immutable history retention and zero residuals. No live
-temporary window has opened yet. Safe canonical anchor preflight passed.
+baseline restoration, immutable history retention and zero residuals. Safe
+canonical anchor preflight passed. The live window and verified recovery are
+recorded separately in [the acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md).
 
 ## Checks performed
 
@@ -53,7 +55,8 @@ delayed game. Live identity and Calendar permission are rechecked after database
 lock waits. New Game Center authority windows use current clock time, and
 organization discovery derives indexed current-actor candidates before its
 authorization recheck. No historical domain helper was rewritten. These are
-reviewed draft fixes, not PostgreSQL syntax, runtime or hosted proof.
+pre-deployment fixes subsequently validated by the full runtime suite; local
+validation is not hosted acceptance.
 
 Canonical application succeeded on October 4, 2026 UTC:
 20261004052521 core, 20261004052534 operations, 20261004052544 integrations.
@@ -72,7 +75,8 @@ after typed-client integration.
 
 Security advisors: 64 expected closed-RLS informational findings and one existing
 [Auth leaked-password protection warning](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
-Performance advisors: 138 unused-index informational findings and one existing
+Performance advisors: 138 unused-index informational findings immediately after
+migration, 131 after controlled usage/cleanup, and one existing
 [Auth connection configuration informational finding](https://supabase.com/docs/guides/deployment/going-into-prod).
 No missing-FK-index warning, new warning/error, timeout increase or Auth change.
 Unused indexes are retained for tenant-qualified integrity and bounded access;
@@ -87,15 +91,53 @@ typed authorization for Phase 5A disposable validation, migration, deployment an
 controlled acceptance. Subsequent escalated disposable runs were approved and
 executed. No workaround or production mutation was used to resolve that block.
 
-## Remaining completion work
+## Deployment and interrupted hosted acceptance
 
-Deploy only the existing platform, execute the single fixed controlled hosted
-window with reviewed recovery, restore all temporary authority/resources and
-verify zero residuals/original admin, record actual evidence and relevant focused
-checks, finish documentation/commit/push/PR #3 OPEN/DRAFT/UNMERGED, then stop.
-Hosted positives/denials and responsive scenarios are not yet verified.
+Netlify published the existing platform from `c128241` in deploy
+`6ac1e4145b191500082e1aed`. Correct repository/branch/source mapping was observed
+through the ordinary authenticated Netlify dashboard. No proxy credential or
+configuration/environment change was used. Both application and database jobs
+passed in [implementation CI](https://github.com/eaglevisiondigital/theboss/actions/runs/37180010866).
 
-No credentials were requested, read or exposed in this draft work. No real
+The single controlled window started at 05:30:58.811038 UTC on October 4. Finite
+configuration, retained stale configuration denial, three Calendar creations,
+one internal Game, revision-one roster and exact bounded administrator operator
+were hosted verified. Start committed once and signed Home later showed LIVE;
+the refreshed game-detail page showed the outer error boundary. A separate first
+recovery connector request failed at transport. No root cause or HTTP status is
+inferred; source review identified no confirmed implementation defect.
+
+New scenarios stopped. Idempotent independent administrator recovery succeeded,
+then selected-authority/resource/module recovery completed. Final read-only
+verification passed by 05:43:05 UTC, before the 06:15:58.811038 cleanup target:
+exact existing baseline restored, zero temporary person/module/operator authority,
+zero unexpected recorded fixtures and zero pending controlled notification work.
+Original administrator Home and closed Game Center baseline are hosted verified.
+Three events are archived/unpublished; one game is canceled/archived/unpublished
+with its snapshot and ledger preserved. No restricted-role/guardian grant was
+activated. No second window was opened.
+
+Post-cleanup canonical verifier again passed 183 checks. All 33 migration
+versions/names match; generated types match canonical bytes. Security and
+performance advisors retain no new error/warning or missing-FK-support finding.
+Application/schema source did not change after its successful validation and CI;
+only accurate evidence/status documentation changed after the interrupted test.
+
+## Remaining hosted work and stop
+
+**Phase 5A remains INCOMPLETE.** [The acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md)
+contains the exact unverified hosted matrix: remaining identity/replay, external
+recurring games, lifecycle/score/correction/final/reopen, schedule exceptions,
+roster-history, restricted scorer/coach/guardian/Attendance/notification/isolation,
+mobile/desktop geometry and final navigation. These are SQL/RUNTIME VERIFIED;
+HOSTED UNVERIFIED DUE TO HOSTED ACCESS FAILURE. Forged signed requests unavailable
+through approved tooling retain their separate explicit tooling label; no GET or
+SQL result is substituted for POST proof. Public fan launch remains outside the
+required foundation release.
+
+No credentials were requested, entered, read or exposed during Phase 5A. No real
 customer/youth data, DOB invention, security-policy weakening, Netlify proxy
 credential reuse or later module implementation occurred. Prior Phase 4B
 accepted limitations and historical incidents remain documented unchanged.
+Stop with the recovered baseline and report; do not open another window or begin
+Phase 5B in this run.

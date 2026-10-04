@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 5A Game Center foundation: IN PROGRESS, authorized runtime validation
+## Phase 5A Game Center foundation: INCOMPLETE, hosted acceptance interrupted
 
 Main Boss Chat directly authorized disposable PostgreSQL validation, migration,
 deployment and controlled acceptance in typed instructions after the initial
@@ -14,14 +14,31 @@ PostgreSQL 17 suite passed 8,721 SQL/bootstrap assertions and 56 races, includin
 522 Phase 5A assertions and 22 races. Live read-only verification passed 183
 checks. Exact private recovery controls separately passed 17 assertions.
 Generated types, typecheck, zero-warning lint and 249 application tests pass;
-final typed-client production build passes. Deployment is next.
+final typed-client production build passes. Implementation commit
+`c12824152b39fdd336d3153965e669422c6f25d7` is pushed and deployed on the existing
+Boss platform (published Netlify deploy `6ac1e4145b191500082e1aed`). Its CI passed.
 
-Canonical Supabase is ACTIVE_HEALTHY; original administrator Home is hosted
-verified, and no temporary acceptance authority has opened. Advisors report only
-expected informational notices and the pre-existing Auth leaked-password warning.
-Deployment and controlled hosted acceptance remain pending. PR #3 stays
-OPEN/DRAFT/UNMERGED. No sport engine or later module has begun. The prior Phase 4B
-closure and historical incidents remain intact below. See [validation](PHASE_5A_VALIDATION.md).
+The single fixed controlled window opened at 05:30:58.811038 UTC on October 4.
+Native finite configuration, stale configuration denial, three Calendar event
+creations, one internal game, its roster snapshot and bounded administrator
+operator were verified. Start committed once, but its game-detail refresh showed
+the page-load error boundary. The first recovery connector call also had a
+transport failure. No new scenario or second window was opened.
+
+Recovery finished and zero residuals were verified by 05:43:05 UTC, before the
+06:15:58.811038 cleanup target. Original administrator Home works; exact role,
+guardian, household, roster and module baselines are restored. All three events
+are archived/unpublished; the one game is canceled/archived/unpublished, with its
+snapshot and ordered history preserved. Temporary person/module/operator
+authority and pending controlled notification work are zero. No restricted-role
+or guardian grant was activated. Post-cleanup verifier, migration history and
+advisors pass with the existing Auth warning retained. Generated types match.
+
+**Phase 5A is not COMPLETE.** Remaining hosted cases and the unresolved page-load
+failure are recorded in [the acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md)
+and [the 68-point report](PHASE_5A_COMPLETION_REPORT.md). PR #3 stays
+OPEN/DRAFT/UNMERGED. No sport engine or later module has begun. Prior Phase 4B
+closure, accepted limitations and historical incidents remain intact below.
 
 ## Phase 4B Attendance + RSVP + Volunteer Coordination: COMPLETE
 

@@ -13,7 +13,10 @@ preserve prior history. Safe projections omit private profile/reason/contact,
 operator and internal ledger data from families, and mask captured Attendance
 fields when current source authority no longer permits them. Anonymous APIs stay
 closed. Focused PostgreSQL security/concurrency and application checks pass; the full
-historical run and canonical checks pass; hosted acceptance remains pending.
+historical run and canonical checks pass; hosted acceptance is interrupted.
+The exact controlled baseline is restored with zero temporary authority and
+pending run work; original administrator Home is verified. No restricted grant
+was activated before the stop. See [the acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md).
 New Game Center entry/post-wait checks use current-clock caller liveness, including
 the natural session hard deadline; historical Auth helpers are unchanged.
 Finite feature configuration uses existing org.manage and current active Sports,

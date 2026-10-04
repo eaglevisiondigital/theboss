@@ -17,14 +17,23 @@ are ordered and audited without inventing sport scoring semantics. Reversals are
 restricted to the most recent eligible score update; final/reopen boundaries
 cannot be crossed by stale reversal. Initial source review fixed early Calendar
 metadata leakage before authorization, side-specific operator selection and
-Attendance authority masking. These are draft changes, not live findings.
+Attendance authority masking. These pre-deployment fixes passed local validation;
+they are not hosted findings.
 
 Typed human authorization explicitly permits Phase 5A disposable PostgreSQL,
 migration, deployment and controlled acceptance, resolving the initial approval
-review rejection. Focused runtime execution now exists; full historical/final
-checks and canonical/hosted acceptance remain pending. No temporary authority
-has opened. [Validation](PHASE_5A_VALIDATION.md) records actual progress without
-claiming completion. Prior Phase 4B acceptance history below is preserved.
+review rejection. The full runtime suite, canonical migration/verification and
+implementation deployment are complete. The single fixed controlled hosted
+window was interrupted after the first internal-game Start: the page-load error
+boundary appeared and a recovery connector transport request failed. Testing
+stopped and recovery completed by 05:43:05 UTC on October 4, before the approved
+target. Exact baseline equality, zero residual authority/work and original
+administrator Home were verified. No second window or broader authority was
+introduced. Root cause is unresolved; the failure is not classified as an
+architecture contradiction or inferred to be a proven security defect.
+[The acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md) records actual verified
+steps and every remaining hosted case. Phase 5A remains INCOMPLETE; no Main Boss
+Chat closure decision is inferred. Prior Phase 4B history below is preserved.
 
 The five implemented Sports feature booleans use the existing scoped org.manage
 capability through a closed transactional Game Center command. A monotonic

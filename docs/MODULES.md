@@ -4,17 +4,18 @@
 
 Game Center extends the existing Sports module with default-off `game_center`,
 `game_operations`, `public_game_center`, `team_game_management` and
-`head_coach_game_management`. The draft creates no organization activation.
+`head_coach_game_management`. Migration creates no organization activation.
 Core game views, explicit operating assignments, manual audited summaries and
-finalization are the only prepared capabilities. Live sport scoring, statistics,
+finalization are the implemented capabilities. Live sport scoring, statistics,
 leaderboards, clock engines and livestream remain nonoperational regardless of
 unrecognized configuration names. Calendar and Attendance remain their canonical
 authorities. Existing Notifications receive low-volume source hooks only; no
 score push, SMS or provider activation is added. Finite configuration is available to currently authorized org.manage callers
 while Game Center itself is disabled, provided Sports is already current/active.
 It merges the five implemented booleans using module-version concurrency and
-preserves unrelated fields. Canonical migration application passes; hosted acceptance
-remains pending.
+preserves unrelated fields. Canonical migration application passes; hosted acceptance is interrupted and
+incomplete. Temporary configuration was restored to its captured baseline;
+see [the acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md).
 
 ## Phase 4B independent controls
 

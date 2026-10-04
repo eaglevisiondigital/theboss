@@ -2,9 +2,9 @@
 
 ## Phase 5A canonical potential capabilities
 
-Seven prepared keys are `games.view`, `games.create`, `games.manage`,
+Seven applied keys are `games.view`, `games.create`, `games.manage`,
 `games.operate`, `games.finalize`, `games.correct` and `games.publish`.
-The draft adds 53 explicit mappings, preserving the 21 roles and 14 modules.
+The migrations add 53 explicit mappings, preserving the 21 roles and 14 modules.
 Platform and organization administrators receive all seven; athletic directors
 omit publish; program/sport administrators omit correct/publish. Team admin and
 head coach management require separate default-off Sports policy. Assistant

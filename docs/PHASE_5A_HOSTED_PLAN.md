@@ -1,9 +1,12 @@
 # Phase 5A controlled hosted acceptance plan
 
-Status: **PREPARED; NOT EXECUTED.** This plan grants no authority by itself. The
-implementation owner must review the exact private baseline/recovery controls,
-verify current canonical anchors, and record the one fixed acceptance window
-before activating any temporary authority.
+Status: **EXECUTED PARTIALLY; INTERRUPTED; CLEANUP VERIFIED.** Actual October 4
+results, safe audit references, exact remaining cases and baseline verification
+are in [the acceptance addendum](PHASE_5A_ACCEPTANCE_ADDENDUM.md). The plan below
+is preserved as the reviewed scenario/recovery boundary; no unperformed case is
+accepted and no second window is opened. This plan grants no authority by itself.
+The implementation owner reviewed exact private recovery controls, freshly
+verified anchors and recorded the fixed window before temporary activation.
 
 The actual connector-compatible recovery controls passed an independent fresh
 PostgreSQL 17 run with all 33 migrations and 17 explicit recovery assertions on
@@ -11,7 +14,7 @@ October 4, 2026. Separate committed admin recovery, a failed-cleanup rollback,
 exact Falcons/Child1 restoration, preserved roster/game history, monotonic module
 versions and zero residual authority/work were exercised with synthetic copies.
 The private cluster was removed. This is recovery/runtime evidence; hosted
-acceptance has not been performed by this preparation.
+acceptance was not performed by that preparatory recovery run.
 
 ## Execution boundary
 

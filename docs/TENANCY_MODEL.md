@@ -1,6 +1,6 @@
 # Tenancy model
 
-## Phase 5A prepared game isolation
+## Phase 5A canonical game isolation
 
 Game Center uses the Calendar tenant and one exact competitive occurrence.
 Both internal sides must belong to that tenant and target the same event.
@@ -9,8 +9,8 @@ remain Calendar recipients rather than competing sides. Exact-unit scope has
 no descendant inheritance. A legitimate Falcons operator may operate a shared
 Falcons/Wildcats score but gains no Wildcats roster, team management or unrelated
 game authority. Roster projections require exact-side or own/dependent authority;
-family controls are always closed. These boundaries are prepared, not yet runtime
-verified. The underlying closed raw tables expose only bounded authorized RPCs.
+family controls are always closed. These boundaries are SQL/RUNTIME VERIFIED; restricted-role hosted testing was
+not reached before the acceptance interruption. The underlying closed raw tables expose only bounded authorized RPCs.
 
 ## Phase 4B attendance and volunteer boundaries
 
