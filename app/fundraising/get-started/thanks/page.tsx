@@ -1,0 +1,5 @@
+import ApprovedHeader from '@/components/ApprovedHeader';
+import ApprovedFooter from '@/components/ApprovedFooter';
+import home from '@/app/approvedHome.module.css';
+export const metadata={title:'Fundraising Inquiry Received'};
+export default function Page(){return <div className={home.home}><ApprovedHeader/><main style={{padding:'80px 24px',textAlign:'center',minHeight:'65vh',background:'#f5f7f9',color:'#111'}}><p style={{color:'#b63800',fontWeight:800}}>YOUR NEXT STEP STARTS HERE</p><h1 style={{fontSize:'clamp(2.3rem,5vw,4rem)',letterSpacing:'-.04em'}}>Thank you for reaching out.</h1><p style={{maxWidth:650,margin:'20px auto',lineHeight:1.7}}>Your fundraising inquiry has been submitted. The Boss team will review your organization, goals and selected options, then follow up to discuss the next step.</p><a href="/fundraising" style={{display:'inline-block',padding:'16px 24px',background:'#c53b00',color:'white',borderRadius:5}}>Explore Boss Fundraising →</a></main><ApprovedFooter/></div>}
