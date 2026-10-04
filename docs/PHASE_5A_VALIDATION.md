@@ -1,5 +1,14 @@
 # Phase 5A validation status
 
+Subsequent October 4 blocker investigation adds one post-Start regression:
+**250/250** tests, typecheck, zero-warning lint and production build PASS. Actual
+disposable Games RPC payload SSR/hydration also passes, with mocked Next router
+and no backend requests; this does not verify the historical hosted RSC request.
+No SQL/application implementation change or manual deployment. Cause remains
+undetermined; no new window/later phase. See
+[the investigation](PHASE_5A_BLOCKER_INVESTIGATION.md). Original evidence below
+is retained.
+
 Status: **MIGRATED, LOCALLY VALIDATED AND DEPLOYED; HOSTED ACCEPTANCE INTERRUPTED/INCOMPLETE; CLEANUP VERIFIED**.
 Starting SHA: `378b93e8db2880527dd80b640ca3989ce5c5c409`.
 Branch: `build/boss-platform-v1`. Implementation committed/pushed:

@@ -2,6 +2,17 @@
 
 ## Phase 5A Game Center foundation: INCOMPLETE, hosted acceptance interrupted
 
+Subsequent read-only page-load investigation is complete with **root cause
+UNDETERMINED**, without an application fix or another controlled window. Bounded
+logs show successful Games RPC activity immediately after Start, without
+detail-request/payload or triggering exception correlation. Actual disposable
+post-Start production projection/SSR and local browser hydration/status renders
+pass; real hosted LIVE/RSC acceptance remains unverified. One synthetic regression
+added; typecheck, zero-warning lint, **250** tests and production build PASS.
+Original administrator and exact cleanup baseline remain valid with zero residual
+authority. See [the 29-point investigation](PHASE_5A_BLOCKER_INVESTIGATION.md).
+Main Boss Chat must separately authorize a recommended bounded second window.
+
 Main Boss Chat directly authorized disposable PostgreSQL validation, migration,
 deployment and controlled acceptance in typed instructions after the initial
 approval-review rejection. That earlier rejection is resolved; its history is

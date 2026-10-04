@@ -1,5 +1,11 @@
 # Phase 5A controlled hosted acceptance — interrupted, cleanup verified
 
+Subsequent evidence: [read-only page-load blocker investigation](PHASE_5A_BLOCKER_INVESTIGATION.md).
+Successful bounded RPC metadata, disposable post-Start projection/render/hydration
+and one regression supplement this history without resolving the original cause
+or upgrading outstanding hosted cases. No second window opened. The original
+record below is retained; Phase 5A remains INCOMPLETE.
+
 Phase 5A remains **INCOMPLETE**. Implementation, local validation, canonical
 migrations and deployment are verified. The single controlled hosted window
 stopped on a page-load failure and a separate connector transport failure.

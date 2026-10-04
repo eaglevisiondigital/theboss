@@ -18,6 +18,29 @@ const render = (node: ReturnType<typeof createElement>) => renderToStaticMarkup(
 test("assigned operator game detail shows score controls and explicit finalization confirmation", () => {
   const html = render(createElement(GameConsole, { data: data(), query })); assert.match(html, /Record score summary/); assert.match(html, /Finalize game/); assert.match(html, /<input(?=[^>]*name="confirmed")(?=[^>]*required)[^>]*>/); assert.match(html, /ordinary operations will close/); assert.match(html, /Calendar event/); assert.match(html, /Attendance and RSVP/); assert.doesNotMatch(html, /Career|Basketball shots|Live scoring engine/);
 });
+test("post-Start internal game projects and renders its roster, operator and four-operation history without a final seal", () => {
+  const otherTeam = "00000000-0000-4000-8000-000000000004";
+  const syntheticId = (n: number) => `00000000-0000-4000-8000-${n.toString().padStart(12, "0")}`;
+  const postStart = {
+    ...row, version: 4, home_away: "neutral", competition_type: "tournament", roster_revision: 1, finalization_count: 0,
+    start_at: "2026-10-04T06:00:00+00:00", end_at: "2026-10-04T07:00:00+00:00", occurrence_key: "2026-10-04T01:00:00",
+    primary: { team_id: team, label: "Falcons", score: 0, final_score: null }, opponent: { team_id: otherTeam, label: "Wildcats", score: 0, final_score: null },
+    capabilities: { manage: true, roster_snapshot: false, operate: true, start: false, resume: false, finalize: true, correct: true, publish: false, view_roster: true },
+    roster: [1, 2, 3].map(n => ({ id: syntheticId(10 + n), person_id: syntheticId(20 + n), participant_id: syntheticId(30 + n), team_id: n === 3 ? otherTeam : team, display_name: `Synthetic Athlete ${n}`, jersey_number: null, position_label: null, active: true, captain: false, starter: false, availability: "unknown", checkin_state: null, revision: 1 })),
+    operators: [{ id: syntheticId(40), person_id: syntheticId(41), role_assignment_id: syntheticId(42), team_id: team, display_name: "Synthetic administrator", function_key: "game_administrator", status: "active", ends_at: "2026-10-04T06:25:00+00:00" }],
+    history: ["game.create", "game.roster.snapshot", "game.operator.assign", "game.start"].map((operation, n) => ({ id: syntheticId(50 + n), sequence: n + 1, version: n + 1, operation, created_at: `2026-10-04T05:3${n}:00.123456+00:00`, correction_of: null, summary: ["Game linked", "Roster snapshot captured", "Operator assigned", "Game started"][n] })),
+    finalizations: [],
+  };
+  const projected = data({ games: [postStart] });
+  assert.equal(projected.games[0].status, "live"); assert.equal(projected.games[0].version, 4);
+  assert.equal(projected.games[0].roster.length, 3); assert.equal(projected.games[0].operators.length, 1);
+  assert.deepEqual(projected.games[0].history.map(operation => operation.sequence), [1, 2, 3, 4]);
+  assert.equal(projected.games[0].primary.final_score, null); assert.equal(projected.games[0].opponent.final_score, null);
+  assert.deepEqual(projected.games[0].finalizations, []);
+  const html = render(createElement(GameConsole, { data: projected, query }));
+  for (const expected of ["Neutral site", "Wildcats", "Synthetic Athlete 3", "Game started", "End assignment for Synthetic administrator", "Update game status", "Record score summary", "Finalize game", "Calendar event", "Attendance and RSVP"]) assert.ok(html.includes(expected), expected);
+  assert.doesNotMatch(html, /Start Game|Refresh roster snapshot|Snapshot game roster|Reverse score summary|Sealed final results|Reopen for correction/);
+});
 test("game start requires a labeled review confirmation and snapshot context", () => {
   const html = render(createElement(GameConsole, { data: data({ games: [{ ...row, status: "scheduled", capabilities: { ...row.capabilities, roster_snapshot: true } }] }), query })); assert.match(html, /Start Game/); assert.match(html, /reviewed the matchup and roster snapshot/); assert.match(html, /Refresh roster snapshot/); assert.doesNotMatch(html, /Record score summary|Finalize game/);
 });
