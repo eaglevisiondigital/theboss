@@ -1,5 +1,5 @@
 .header{height:82px;display:flex;align-items:center;gap:28px;padding:0 4vw;background:rgba(8,8,10,.84);backdrop-filter:blur(24px) saturate(1.15);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:50;color:#fff;box-shadow:0 12px 35px rgba(0,0,0,.12)}
-.brand{display:grid;gap:2px;line-height:1;white-space:nowrap}
+.brand{display:flex;align-items:center;gap:10px;line-height:1;white-space:nowrap}
 .brandWords{display:flex;gap:6px;align-items:baseline;font-size:25px;font-weight:950;letter-spacing:-.055em}
 .brandWords strong{color:#ff5a00}
 .brand small{font-size:7px;letter-spacing:.26em;color:#7f7f85;font-weight:800}
@@ -29,3 +29,6 @@
 @media(max-width:1120px){.nav{gap:13px}.nav a{font-size:10px}.brand small{display:none}}
 @media(max-width:1000px){.nav{display:none}.header{gap:18px}.actions{margin-left:auto}.mobileMenu{display:block}.actions .login{display:none}.footerTop{grid-template-columns:1fr}.footerGrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.header{height:70px;padding:0 18px}.brandWords{font-size:22px}.login{display:none}.footer{padding:45px 22px 25px}.footerGrid{grid-template-columns:1fr 1fr}.footerBottom{display:block}.footerBottom div{margin-top:12px}}
+
+.brandMark{display:block;width:48px;height:auto}
+@media(max-width:560px){.brandMark{width:37px}}

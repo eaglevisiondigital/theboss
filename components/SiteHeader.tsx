@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BossPlusIcon from "./BossPlusIcon";
 import styles from "./siteChrome.module.css";
 
 const menu = [
@@ -14,9 +15,8 @@ const menu = [
 
 export default function SiteHeader(){
   return <header className={styles.header}>
-    <Link className={styles.brand} href="/" aria-label="BOSS PLUS home">
-      <span className={styles.brandWords}><span>BOSS</span><strong>PLUS</strong></span>
-      <small>THE BOSS ECOSYSTEM</small>
+    <Link className={styles.brand} href="/" aria-label="The Boss home">
+      <BossPlusIcon className={styles.brandMark}/><span className={styles.brandWords}>THE BOSS</span>
     </Link>
 
     <nav className={styles.nav} aria-label="Primary navigation">
