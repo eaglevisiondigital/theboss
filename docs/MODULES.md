@@ -1,5 +1,16 @@
 # Modules and product access
 
+## Phase 5B finite Basketball controls
+
+Sports adds four finite default-off controls: `basketball_live_scoring`,
+`basketball_stats`, `basketball_play_by_play` and `basketball_lineups`. Game
+Center/operations and current Calendar/module activation remain independently
+required. A game is not silently adopted: explicit pregame initialization requires
+a zero-score snapshot and no prior manual score history. Live entry requires
+live-scoring and stats controls; enforced lineups require lineup controls.
+Play-by-play display is independent. No feature activates another sport, public
+Game Center, season/career totals, records, leaderboards or provider infrastructure.
+
 ## Phase 5A canonical Sports capability
 
 Game Center extends the existing Sports module with default-off `game_center`,

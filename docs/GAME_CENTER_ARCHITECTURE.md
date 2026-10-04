@@ -189,3 +189,12 @@ investigation evidence remain preserved. This closure is documentation only:
 no application, schema, migration, Auth, security-policy, deployment or
 architecture change. No third acceptance window or Phase 5B is authorized or
 opened by this task. PR #3 remains OPEN/DRAFT/UNMERGED. STOP after Phase 5A closure.
+
+## Phase 5B Basketball extension
+
+Phase 5B extends this historical foundation with the approved Basketball engine.
+The original Phase 5A contract above remains preserved. The current extension is
+documented in [Basketball engine architecture](BASKETBALL_ENGINE_ARCHITECTURE.md):
+one core game identity, operation ledger and finalization epoch, with typed
+Basketball state, plays and immutable statistical seals. No other sport engine or
+season/career statistics are included.

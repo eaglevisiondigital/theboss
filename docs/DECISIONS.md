@@ -1,5 +1,24 @@
 # Boss foundation implementation decisions
 
+## Phase 5B Basketball implementation choices
+
+Main Boss Chat authorized the first sport engine on October 4, 2026 against
+`1f3e44dd40e6d0aab18545965de5140ae65e5f75`. Typed accepted events derive per-game
+statistics and canonical scores; immutable normalized totals seal into existing
+finalization epochs. No duplicate game, schedule, roster, operator or aggregate
+identity is created. Two halves or four quarters, bounded durations/overtime and
+one-to-five-player lineup policy are explicit configuration. No association-wide
+bonus, foul-out, timeout or possession rules are inferred.
+
+Minutes and plus/minus display remain deferred until complete authoritative
+clock/lineup histories can support a reviewed calculation. This phase records
+the necessary transitions and snapshot identity without claiming those derived
+statistics. Existing exact-game scorekeeper/admin functions suffice; no new broad
+statistician role is added. Manual summary emergency/reconciliation writes are
+closed for initialized Basketball games; no unapproved override is introduced.
+Historical Phase 5A manual-summary games remain untouched. Later aggregates may
+consume the currently authoritative final epoch; no aggregate/records UI starts.
+
 ## Phase 5A foundation choices under authorized validation
 
 The existing Calendar audit identified transient replacement of game detail and

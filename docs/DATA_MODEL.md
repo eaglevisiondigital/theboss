@@ -1,5 +1,18 @@
 # Data model
 
+## Phase 5B Basketball extension
+
+Basketball binds to the existing `games` identity, exact Calendar occurrence,
+snapshot roster and canonical operation sequence. `game_basketball_states`
+records bounded period/clock/lineup policy; typed `game_basketball_events` reference
+the same ordered operations. Immutable supersession/reversal links preserve
+original plays. `game_basketball_lineups` is current state; immutable lineup
+history records substitution boundaries. Event-derived per-game totals are
+reconciled to the canonical score. Basketball finalization and normalized stat
+rows bind to the existing core finalization epoch, not another final-game system.
+Season/career aggregates and records remain future contracts. See
+[the Basketball architecture](BASKETBALL_ENGINE_ARCHITECTURE.md).
+
 ## Phase 5A canonical Game Center records
 
 The applied migrations complement `events` and `event_game_details` with

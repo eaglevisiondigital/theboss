@@ -3,13 +3,20 @@ import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import type { GameCommand } from "@/lib/games/contracts";
 import { gameResultMatchesCommand, parseGameCommand, projectGameResult } from "@/lib/games/input";
+import { useOptionalBasketballIntent } from "../basketball/intent-provider";
 export function GameForm({ build, children, label, confirmation }: { build: (data: FormData) => GameCommand | null; children?: ReactNode; label: string; confirmation?: string }) {
-  const router = useRouter(), retry = useRef<{ signature: string; id: string } | null>(null);
+  const router = useRouter(), retry = useRef<{ signature: string; id: string } | null>(null), basketball = useOptionalBasketballIntent();
   const [pending, setPending] = useState(false), [message, setMessage] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); if (pending) return;
+    event.preventDefault(); if (pending || basketball?.blocked) return;
     const command = build(new FormData(event.currentTarget));
     if (!command || !parseGameCommand(command)) { setMessage("Review the game fields, then try again."); return; }
+    if (command.operation.startsWith("basketball.") && basketball) {
+      setPending(true); setMessage("");
+      try { const outcome = await basketball.send(command); setMessage(outcome.message); }
+      finally { setPending(false); }
+      return;
+    }
     const signature = JSON.stringify(command); if (retry.current?.signature !== signature) retry.current = { signature, id: crypto.randomUUID() };
     const requestId = retry.current.id; setPending(true); setMessage("");
     try {

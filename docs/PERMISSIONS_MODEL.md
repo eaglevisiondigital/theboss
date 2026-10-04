@@ -1,5 +1,18 @@
 # Boss foundation permissions
 
+## Phase 5B exact-game Basketball operation
+
+No role or permission mapping is broadened. Existing current `games.operate`
+potential capability plus an exact current game assignment authorizes period,
+clock, play and substitution entry. A coach role alone grants no scoring.
+Attributed entry uses only the exact assigned team or independently authorized
+roster side, through minimal snapshot name/jersey references. Opponent team
+events may remain explicitly unattributed. Existing elevated `games.correct`
+permission gates event correction/reversal and core reopening; existing
+`games.finalize` gates sealing. Scorekeeper potential does not confer these
+elevated capabilities. A separate statistician function is unnecessary for this
+bounded engine and is not introduced.
+
 ## Phase 5A canonical potential capabilities
 
 Seven applied keys are `games.view`, `games.create`, `games.manage`,

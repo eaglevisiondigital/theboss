@@ -1,5 +1,45 @@
 # Boss core database tests
 
+## Phase 5B Basketball suites
+
+`phase5b_basketball.sql` checks a hand-computed synthetic two-sided scoring/stat
+scenario, typed assists and their dependencies, team-only rebounds/turnovers,
+clock corrections, substitutions, immutable correction evidence and two distinct
+final-stat epochs. `phase5b_formats.sql` covers bounded halves/quarters/overtime,
+pause/clock integration and per-period fouls. `phase5b_security.sql` checks current
+exact-game operators, wrong sport/roster/side, role and relationship revocation,
+disabled features, family masking, deny-by-default raw tables and idempotent
+replay. All reuse the unchanged Phase 5A fixture with additional synthetic roster
+depth in `phase5b/fixture.sql`; no DOB, real user or credential is used.
+
+`phase5b_live_verification.sql` is compatible with separately authorized canonical
+READ ONLY verification. It creates no fixture/schema objects, reads no Auth or
+person data, and reports structural checks performed rather than a preset pass
+count. Its transaction-local assertion count is discarded at rollback.
+
+`phase5b_performance.sql` records bounded append and projection timings at 10,
+100 and 1,000 accepted synthetic plays. Full totals must remain correct beyond
+the 500-play display cap; Basketball plays must not create notification spam.
+These local timings do not establish a hosted SLA or production capacity.
+
+`phase5b_basketball_concurrency.sh` uses actual independent PostgreSQL connections,
+observes a contender blocked on a lock before releasing the writer, and checks
+the resulting ledger/stat/clock/lineup state. Its races cover baskets, duplicate
+requests/free throws/fouls/substitutions/corrections, scoring versus substitution,
+foul, period transition and finalization, competing substitutions/clock edits,
+and operator/role/membership/feature revocation during a lock wait. Participants
+retain the eight-second timeout and require the runner's private Unix socket.
+
+```sh
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test5b
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test phase5b_basketball.sql
+```
+
+The focused option applies every migration and runs only the Basketball SQL
+suites and real race helper. It does not replace the full historical run.
+Execution counts, timings and hosted/canonical results belong in the completed
+validation record; prepared test sources alone do not certify a PASS.
+
 Run from the repository root with PostgreSQL 17 binaries installed:
 
 ```sh

@@ -1914,6 +1914,397 @@ export type Database = {
         }
         Relationships: []
       }
+      game_basketball_events: {
+        Row: {
+          actor_person_id: string
+          clock_ms: number
+          correction_of: string | null
+          created_at: string
+          event_type: string
+          game_id: string
+          id: string
+          operation_id: string
+          organization_id: string
+          period_number: number
+          points: number
+          reason: string | null
+          request_id: string
+          roster_id: string | null
+          scoring_event_id: string | null
+          secondary_roster_id: string | null
+          sequence: number
+          side: string | null
+        }
+        Insert: {
+          actor_person_id: string
+          clock_ms: number
+          correction_of?: string | null
+          created_at?: string
+          event_type: string
+          game_id: string
+          id?: string
+          operation_id: string
+          organization_id: string
+          period_number: number
+          points: number
+          reason?: string | null
+          request_id: string
+          roster_id?: string | null
+          scoring_event_id?: string | null
+          secondary_roster_id?: string | null
+          sequence: number
+          side?: string | null
+        }
+        Update: {
+          actor_person_id?: string
+          clock_ms?: number
+          correction_of?: string | null
+          created_at?: string
+          event_type?: string
+          game_id?: string
+          id?: string
+          operation_id?: string
+          organization_id?: string
+          period_number?: number
+          points?: number
+          reason?: string | null
+          request_id?: string
+          roster_id?: string | null
+          scoring_event_id?: string | null
+          secondary_roster_id?: string | null
+          sequence?: number
+          side?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_events_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_correction__fkey"
+            columns: ["organization_id", "game_id", "correction_of"]
+            isOneToOne: false
+            referencedRelation: "game_basketball_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_operation_i_fkey"
+            columns: ["organization_id", "game_id", "operation_id"]
+            isOneToOne: false
+            referencedRelation: "game_operations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_scoring_eve_fkey"
+            columns: ["organization_id", "game_id", "scoring_event_id"]
+            isOneToOne: false
+            referencedRelation: "game_basketball_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_events_organization_id_game_id_secondary_r_fkey"
+            columns: ["organization_id", "game_id", "secondary_roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_basketball_final_stats: {
+        Row: {
+          assists: number
+          blocks: number
+          defensive_rebounds: number
+          fga: number
+          fgm: number
+          finalization_id: string
+          fta: number
+          ftm: number
+          game_id: string
+          id: string
+          offensive_rebounds: number
+          organization_id: string
+          personal_fouls: number
+          points: number
+          rebounds: number
+          roster_id: string | null
+          side: string
+          steals: number
+          tpa: number
+          tpm: number
+          turnovers: number
+        }
+        Insert: {
+          assists: number
+          blocks: number
+          defensive_rebounds: number
+          fga: number
+          fgm: number
+          finalization_id: string
+          fta: number
+          ftm: number
+          game_id: string
+          id?: string
+          offensive_rebounds: number
+          organization_id: string
+          personal_fouls: number
+          points: number
+          rebounds: number
+          roster_id?: string | null
+          side: string
+          steals: number
+          tpa: number
+          tpm: number
+          turnovers: number
+        }
+        Update: {
+          assists?: number
+          blocks?: number
+          defensive_rebounds?: number
+          fga?: number
+          fgm?: number
+          finalization_id?: string
+          fta?: number
+          ftm?: number
+          game_id?: string
+          id?: string
+          offensive_rebounds?: number
+          organization_id?: string
+          personal_fouls?: number
+          points?: number
+          rebounds?: number
+          roster_id?: string | null
+          side?: string
+          steals?: number
+          tpa?: number
+          tpm?: number
+          turnovers?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_final_stats_organization_id_game_id_finali_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_basketball_finalizations"
+            referencedColumns: ["organization_id", "game_id", "finalization_id"]
+          },
+          {
+            foreignKeyName: "game_basketball_final_stats_organization_id_game_id_roster_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_basketball_finalizations: {
+        Row: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          period_number: number
+          roster_revision: number
+          state: Json
+        }
+        Insert: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          period_number: number
+          roster_revision: number
+          state: Json
+        }
+        Update: {
+          engine_version?: string
+          epoch?: number
+          event_sequence?: number
+          finalization_id?: string
+          game_id?: string
+          organization_id?: string
+          period_number?: number
+          roster_revision?: number
+          state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_finalizations_organization_id_game_id_fina_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_finalizations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_basketball_lineup_history: {
+        Row: {
+          event_id: string
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Insert: {
+          event_id: string
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Update: {
+          event_id?: string
+          game_id?: string
+          organization_id?: string
+          roster_id?: string
+          side?: string
+          slot?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_lineup_histor_organization_id_game_id_even_fkey"
+            columns: ["organization_id", "game_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "game_basketball_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_lineup_histor_organization_id_game_id_rost_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_lineup_history_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "game_basketball_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_basketball_lineups: {
+        Row: {
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Insert: {
+          game_id: string
+          organization_id: string
+          roster_id: string
+          side: string
+          slot: number
+        }
+        Update: {
+          game_id?: string
+          organization_id?: string
+          roster_id?: string
+          side?: string
+          slot?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_lineups_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_basketball_lineups_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_basketball_states: {
+        Row: {
+          clock_anchor: string | null
+          clock_remaining_ms: number
+          clock_running: boolean
+          enforce_lineup: boolean
+          engine_version: string
+          game_id: string
+          lineup_size: number
+          organization_id: string
+          overtime_seconds: number
+          period_number: number
+          period_seconds: number
+          period_status: string
+          regulation_periods: number
+          roster_revision: number
+        }
+        Insert: {
+          clock_anchor?: string | null
+          clock_remaining_ms?: number
+          clock_running?: boolean
+          enforce_lineup: boolean
+          engine_version?: string
+          game_id: string
+          lineup_size: number
+          organization_id: string
+          overtime_seconds: number
+          period_number?: number
+          period_seconds: number
+          period_status?: string
+          regulation_periods: number
+          roster_revision: number
+        }
+        Update: {
+          clock_anchor?: string | null
+          clock_remaining_ms?: number
+          clock_running?: boolean
+          enforce_lineup?: boolean
+          engine_version?: string
+          game_id?: string
+          lineup_size?: number
+          organization_id?: string
+          overtime_seconds?: number
+          period_number?: number
+          period_seconds?: number
+          period_status?: string
+          regulation_periods?: number
+          roster_revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_basketball_states_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       game_finalizations: {
         Row: {
           actor_person_id: string

@@ -1,5 +1,18 @@
 # Current build state
 
+## Phase 5B Basketball Live Scoring + Game Statistics: IN PROGRESS
+
+Main Boss Chat authorized Phase 5B on October 4, 2026 from
+`1f3e44dd40e6d0aab18545965de5140ae65e5f75`. Basketball extends the existing
+canonical Game Center; earlier phase closure records and accepted evidence
+limitations remain historical evidence. Four canonical migrations and the complete
+disposable SQL/runtime suites passed, including 73 true two-connection races and
+22 separate recovery assertions. The final regenerated-type platform validation
+passed typecheck, lint, all 277 application tests and production build after the
+reviewed unknown-outcome retry/state-preservation correction. Deployment
+and controlled hosted acceptance remain pending. PR #3 remains draft and open.
+No later sport engine or cross-game aggregation module is authorized.
+
 ## Phase 5A Game Center Foundation: COMPLETE
 
 Main Boss Chat reviewed the complete second/final hosted acceptance record and

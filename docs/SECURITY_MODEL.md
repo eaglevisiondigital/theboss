@@ -1,5 +1,19 @@
 # Boss platform security
 
+## Phase 5B Basketball boundary
+
+Basketball raw state, event, lineup, history and final-stat tables are immediately
+RLS-enabled and closed to direct Data API writes/reads. Authorized canonical
+Games RPCs retain current identity/session checks, same-origin transport,
+caller-bound idempotency, event-before-game serialization and post-lock current
+role/operator/module checks. Sport key, snapshot athlete, exact side, period,
+version, final status and bounded feature state are independently validated.
+Engine activation closes both manual score set and manual score reversal, even
+if Basketball features are later disabled. Original plays/seals are immutable.
+Family/public projections expose no private operator, Attendance, guardian,
+request, correction-reason or audit data. Hosted evidence never requires cookie,
+token or credential extraction or a test-only production endpoint.
+
 ## Phase 5A canonical security boundary
 
 All six new public tables and private receipts have RLS enabled with raw client

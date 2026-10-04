@@ -678,3 +678,62 @@ button:disabled { cursor: wait; opacity: .65; }
 .game-calendar-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 18px; background: var(--background); border: 1px solid var(--line); border-radius: 6px; min-width: 0; }
 .game-calendar-summary strong { font-size: 14px; overflow-wrap: anywhere; }
 .game-calendar-summary > span { color: var(--muted); font-size: 12px; text-transform: capitalize; }
+.basketball-panel { margin-top: 24px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; min-width: 0; overflow-wrap: anywhere; }
+.basketball-state-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.basketball-state-heading h3 { margin: 4px 0; }
+.basketball-state-heading p { margin: 0; }
+.basketball-clock { display: grid; text-align: center; flex-shrink: 0; }
+.basketball-clock strong { font-size: clamp(32px, 5vw, 52px); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.basketball-clock span { font-size: 13px; }
+.basketball-clock-note { margin: 12px 0 20px; font-size: 13px; }
+.basketball-scorer { min-width: 0; }
+.basketball-scorer h4 { margin-bottom: 12px; }
+.basketball-selection { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.basketball-panel select, .basketball-panel input:not([type=checkbox]), .basketball-panel textarea { min-width: 0; max-width: 100%; width: 100%; }
+.basketball-panel select { min-height: 48px; }
+.basketball-control-label { margin: 16px 0 8px; font-weight: 700; font-size: 14px; }
+.basketball-shot-buttons, .basketball-stat-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.basketball-play-button { padding: 14px 10px; min-height: 56px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.basketball-made { background: var(--orange); color: var(--ink); }
+.basketball-play-button:disabled { opacity: 0.5; cursor: default; }
+.basketball-play-button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+.basketball-assist { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; }
+.basketball-save-state { min-height: 24px; font-size: 14px; }
+.basketball-recent-plays { margin: 18px 0; }
+.basketball-recent-plays h5 { font-size: 14px; margin: 0 0 10px; }
+.basketball-clock-controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.basketball-clock-controls .button { min-height: 48px; white-space: normal; }
+.basketball-secondary-panel { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 22px; min-width: 0; }
+.basketball-secondary-panel summary { cursor: pointer; font-weight: 700; padding-bottom: 12px; }
+.basketball-secondary-panel .game-action-form { margin: 16px 0; }
+.basketball-lineup-side { margin: 16px 0; min-width: 0; }
+.basketball-athlete-checks { display: grid; gap: 10px; }
+.basketball-box-section { margin-top: 24px; }
+.basketball-box-score { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.basketball-team-box { min-width: 0; }
+.basketball-stat-card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 12px; min-width: 0; }
+.basketball-stat-card h5 { margin: 0 0 12px; font-size: 15px; }
+.basketball-team-totals { background: color-mix(in srgb, currentColor 4%, transparent); }
+.basketball-stats-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px 8px; margin: 0; }
+.basketball-stats-grid dt { font-size: 11px; }
+.basketball-stats-grid dd { margin: 3px 0 0; font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.basketball-play-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.basketball-play-list li { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.basketball-play-list li > span { font-size: 13px; }
+.basketball-play-context { font-variant-numeric: tabular-nums; }
+.basketball-superseded { opacity: 0.7; }
+.basketball-final-epoch { margin: 16px 0; }
+@media (max-width: 1000px) {
+  .basketball-box-score { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .basketball-panel { padding: 16px; margin-top: 18px; }
+  .basketball-selection, .basketball-assist { grid-template-columns: minmax(0, 1fr); }
+  .basketball-shot-buttons, .basketball-stat-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .basketball-play-button { padding: 12px 6px; min-height: 56px; font-size: 14px; }
+  .basketball-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 6px; }
+  .basketball-clock strong { font-size: 32px; }
+  .basketball-state-heading { gap: 8px; }
+  .basketball-state-heading h3 { font-size: 20px; }
+  .basketball-clock-controls .button { width: 100%; }
+}
