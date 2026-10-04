@@ -2,6 +2,7 @@ import BossPlusIcon from "./BossPlusIcon";
 import Link from "next/link";
 import ReferencePhoto from "./ReferencePhoto";
 import s from "@/app/approvedSections.module.css";
+import f from "@/app/homeFeatures.module.css";
 
 function CostIcon({ kind }: { kind: string }) {
   return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -22,53 +23,52 @@ const costs = [
 
 export default function ApprovedHomepageSections() {
   return <>
-    <section className={s.savings} aria-labelledby="savings-title">
-      <ReferencePhoto crop="250 578 292 60" className={s.savingsBackdrop} preserveAspectRatio="xMidYMid slice"/>
-      <ReferencePhoto crop="542 578 251 307" alt="A young woman showing a Boss Bucks discount on her phone" className={s.savingsPortrait}/>
-      <figure className={s.discountPhone}>
-        <ReferencePhoto crop="43 580 205 370" alt="Illustrative Boss Bucks Discounts screen with a featured offer, nearby deals, and navigation for Home, Deals, Near Me, Favorites and Account"/>
+    <section className={f.savings} aria-labelledby="savings-title"><div className={f.savingsCanvas}>
+      <ReferencePhoto crop="542 578 251 307" alt="A young woman showing a Boss Bucks discount on her phone" className={f.savingsPortrait}/>
+      <figure className={f.discountPhone}>
+        <svg viewBox="205 14 686 1366" role="img" aria-label="Approved Boss Bucks Discounts app preview"><defs><clipPath id="home-discounts-phone"><rect x="205" y="14" width="686" height="1366" rx="120"/></clipPath></defs><image href="/images/approved/discounts-original.png" width="1122" height="1402" clipPath="url(#home-discounts-phone)"/></svg>
         <figcaption>Illustrative product preview</figcaption>
       </figure>
-      <div className={s.savingsCopy}>
+      <div className={f.savingsCopy}>
         <h2 id="savings-title">Save<br/>Like a <span>Boss.</span></h2>
         <p>Discover participating local deals, support your community and make everyday spending go further.</p>
-        <Link className={s.button} href="/boss-bucks">Explore Boss Bucks</Link>
-      </div>
+        <Link className={f.button} href="/boss-bucks">Explore Boss Bucks</Link>
+      </div></div>
     </section>
 
-    <section className={s.money} aria-labelledby="money-title">
-      <ReferencePhoto source="/images/approved/home-football-plain-helmets.webp" crop="284 891 285 347" alt="Young athletes celebrating with their team" className={s.moneyPhoto} preserveAspectRatio="xMidYMid slice"/>
-      <div className={s.moneyCopy}>
+    <section className={f.money} aria-labelledby="money-title"><div className={f.moneyCanvas}>
+      <ReferencePhoto source="/images/approved/home-football-plain-helmets.webp" crop="284 891 285 347" alt="Young athletes celebrating with their team" className={f.moneyPhoto} preserveAspectRatio="xMidYMid slice"/>
+      <div className={f.moneyCopy}>
         <h2 id="money-title">The Digital<br/><span>Money Board</span></h2>
         <h3>Fundraise Like a Boss.</h3>
         <p>Choose an amount or take a spin. Watch the board fill as supporters help your team reach its goal.</p>
-        <ul className={s.checks}><li>Donate or Spin</li><li>Visible progress</li><li>Team and participant credit</li></ul>
-        <Link className={s.button} href="/money-board">Explore the Money Board</Link>
+        <ul className={f.checks}><li>Donate or Spin</li><li>Visible progress</li><li>Team and participant credit</li></ul>
+        <Link className={f.button} href="/money-board">Explore the Money Board</Link>
       </div>
-      <figure className={s.moneyPhone}>
-        <ReferencePhoto crop="568 837 225 391" alt="Illustrative Digital Money Board with fundraising progress, Donate and Spin modes, and white amount tiles showing available and claimed states"/>
+      <figure className={f.moneyPhone}>
+        <img src="/images/approved/money-board-original.png" width="751" height="1492" alt="Approved Digital Money Board app preview"/>
         <figcaption>Illustrative product preview</figcaption>
-      </figure>
+      </figure></div>
     </section>
 
-    <section className={s.family} aria-labelledby="family-title">
-      <div className={s.familyMain}>
-        <ReferencePhoto source="/images/approved/home-photos-single-b.webp" crop="365 1251 185 197" alt="A family supporting their young athlete" className={s.familyPhoto} preserveAspectRatio="xMidYMid slice"/>
-        <div className={s.familyCopy}>
+    <section className={f.family} aria-labelledby="family-title">
+      <div className={f.familyMain}>
+        <img src="/images/approved/boss-bucks-hero.png" width="2172" height="724" alt="Parents celebrating with their young athlete" className={f.familyPhoto}/>
+        <div className={f.familyCopy}>
           <h2 id="family-title">Help cover<br/><span>approved costs.</span></h2>
           <p>Raise or earn Boss Bucks through approved campaigns. Apply your balance toward sports fees, registration, team gear, children’s and youth camps, tournaments and eligible travel expenses.</p>
-          <Link className={s.button} href="/boss-bucks">See how Boss Bucks work</Link>
+          <Link className={f.button} href="/boss-bucks">See how Boss Bucks work</Link>
         </div>
-        <div className={s.walletPreview} aria-label="Family Boss Bucks approved spending categories">
-          <div className={s.walletHeading}><span className={s.walletIcon}><CostIcon kind="wallet"/></span><div><h3>Family Boss Bucks</h3><p><span aria-hidden="true">✓</span> Approved costs</p></div></div>
-          <div className={s.costs}>{costs.map(cost => <div key={cost.kind}><CostIcon kind={cost.kind}/><span>{cost.label}</span></div>)}</div>
+        <div className={f.walletPreview} aria-label="Family Boss Bucks approved spending categories">
+          <div className={f.walletHeading}><span className={f.walletIcon}><CostIcon kind="wallet"/></span><div><h3>Family Boss Bucks</h3><p><span aria-hidden="true">✓</span> Approved costs</p></div></div>
+          <div className={f.costs}>{costs.map(cost => <div key={cost.kind}><CostIcon kind={cost.kind}/><span>{cost.label}</span></div>)}</div>
         </div>
       </div>
-      <div className={s.giftCards}>
-        <span className={s.giftIcons}><CostIcon kind="gas"/><CostIcon kind="meal"/></span>
+      <div className={f.giftCards}>
+        <span className={f.giftIcons}><CostIcon kind="gas"/><CostIcon kind="meal"/></span>
         <strong>Coming soon</strong><p>Use Boss Bucks to purchase gas and restaurant gift cards.</p>
       </div>
-      <p className={s.integrity}>Family and participant Boss Bucks stay within approved spending options, with no cash withdrawals or personal bank transfers. Only eligible team and organization proceeds can transfer to their approved bank accounts.</p>
+      <p className={f.integrity}>Family and participant Boss Bucks stay within approved spending options, with no cash withdrawals or personal bank transfers. Only eligible team and organization proceeds can transfer to their approved bank accounts.</p>
     </section>
 
     <section className={s.engage} aria-labelledby="engage-title">
