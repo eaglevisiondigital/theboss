@@ -1,0 +1,211 @@
+-- Synthetic acceptance A-O, identity/scope/deadline/history and closed raw rows.
+-- All fixtures and operation receipts are rolled back.
+begin;
+create temp table phase4b_attendance_assertions(label text primary key,category text not null) on commit drop;
+grant select,insert on phase4b_attendance_assertions to authenticated,anon;
+create function pg_temp.f(label text) returns uuid language sql immutable as $$select md5('boss-phase4b-attendance:'||label)::uuid$$;
+create function pg_temp.check(label text,category text,ok boolean) returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'FAIL [%] %',category,label;end if;insert into phase4b_attendance_assertions values(label,category);end$$;
+create function pg_temp.actor(label text) returns void language plpgsql as $$begin perform set_config('request.jwt.claims',jsonb_build_object('sub',pg_temp.f('auth-'||label),'role','authenticated','is_anonymous',false,'session_id',pg_temp.f('session-'||label))::text,true);end$$;
+create function pg_temp.denied(label text,statement text,expected text default 'PT403') returns void language plpgsql as $$declare denied boolean:=false;begin begin execute statement;exception when others then if sqlstate=expected then denied:=true;else raise exception 'FAIL % unexpected %: %',label,sqlstate,sqlerrm;end if;end;perform pg_temp.check(label,'DENIAL',denied);end$$;
+create function pg_temp.key(event_name text,n int default 0) returns text language sql as $$select to_char((date_trunc('day',now())+interval '10 days 18 hours'+n*interval '1 day') at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS')$$;
+create function pg_temp.cmd(op text,input jsonb) returns jsonb language sql as $$select jsonb_build_object('operation',op,'input',input)$$;
+create function pg_temp.respond(event_name text,person_name text,participant_name text,status text default 'attending',ver int default 0,n int default 0) returns jsonb language sql as $$select pg_temp.cmd('response.set',jsonb_build_object('event_id',pg_temp.f(event_name),'occurrence_key',pg_temp.key(event_name,n),'person_id',pg_temp.f(person_name),'participant_id',case when participant_name is null then null else pg_temp.f(participant_name) end,'subject_kind',case when participant_name is null then 'staff' else 'participant' end,'status',status,'expected_version',ver))$$;
+create function pg_temp.configure(event_name text,ver int default 0,deadline_policy text default 'lock',change_policy text default 'needs_reconfirmation',deadline timestamptz default null) returns jsonb language sql as $$select pg_temp.cmd('event.configure',jsonb_build_object('event_id',pg_temp.f(event_name),'expected_version',ver,'rsvp_mode','required','deadline_policy',deadline_policy,'change_policy',change_policy,'audience',jsonb_build_array('participants','staff'),'response_deadline_at',case when deadline is null then null else to_char(deadline at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS"Z"') end,'deadline_offset_minutes',null))$$;
+create function pg_temp.query(view_name text default 'family',event_name text default null) returns jsonb language sql as $$select jsonb_build_object('organization_id',pg_temp.f('org'),'view',view_name,'from',to_char(now() at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS"Z"'),'to',to_char((now()+interval '30 days') at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS"Z"'))||case when event_name is null then '{}'::jsonb else jsonb_build_object('event_id',pg_temp.f(event_name)) end$$;
+revoke all on function pg_temp.f(text),pg_temp.check(text,text,boolean),pg_temp.actor(text),pg_temp.denied(text,text,text),pg_temp.key(text,int),pg_temp.cmd(text,jsonb),pg_temp.respond(text,text,text,text,int,int),pg_temp.configure(text,int,text,text,timestamptz),pg_temp.query(text,text) from public;
+grant execute on function pg_temp.f(text),pg_temp.check(text,text,boolean),pg_temp.actor(text),pg_temp.denied(text,text,text),pg_temp.key(text,int),pg_temp.cmd(text,jsonb),pg_temp.respond(text,text,text,text,int,int),pg_temp.configure(text,int,text,text,timestamptz),pg_temp.query(text,text) to authenticated,anon;
+insert into public.people(id,display_name,date_of_birth) select pg_temp.f(label),'Synthetic attendance '||label,case when label='unknown-age' then null when label in ('child1','child2','child3','minor') then '2014-01-01'::date else '1990-01-01'::date end from unnest(array['admin','other-admin','coach','assistant','program','parent','household-only','child1','child2','child3','adult','minor','unknown-age','staff'])label;
+insert into auth.users(id,email,email_confirmed_at) select pg_temp.f('auth-'||label),label||'@phase4b.example.invalid',now()-interval '2 days' from unnest(array['admin','other-admin','coach','assistant','program','parent','household-only','adult','minor','unknown-age','staff'])label;
+insert into auth.sessions(id,user_id) select pg_temp.f('session-'||label),pg_temp.f('auth-'||label) from unnest(array['admin','other-admin','coach','assistant','program','parent','household-only','adult','minor','unknown-age','staff'])label;
+insert into public.user_accounts(person_id,auth_user_id,account_status) select pg_temp.f(label),pg_temp.f('auth-'||label),'active' from unnest(array['admin','other-admin','coach','assistant','program','parent','household-only','adult','minor','unknown-age','staff'])label;
+insert into public.organizations(id,name,slug) values(pg_temp.f('org'),'Synthetic attendance tenant','synthetic-phase4b-attendance'),(pg_temp.f('other-org'),'Synthetic attendance other tenant','synthetic-phase4b-attendance-other');
+insert into public.organization_units(id,organization_id,unit_type,name,slug) values(pg_temp.f('unit'),pg_temp.f('org'),'program','Synthetic unit','att-unit'),(pg_temp.f('sibling-unit'),pg_temp.f('org'),'program','Synthetic sibling unit','att-sibling');
+insert into public.teams(id,organization_id,parent_unit_id,name,slug,status) values(pg_temp.f('team'),pg_temp.f('org'),pg_temp.f('unit'),'Synthetic Falcons','att-team','active'),(pg_temp.f('second-team'),pg_temp.f('org'),pg_temp.f('unit'),'Synthetic Wildcats','att-second','active'),(pg_temp.f('sibling-team'),pg_temp.f('org'),pg_temp.f('sibling-unit'),'Synthetic Tigers','att-sibling','active'),(pg_temp.f('other-team'),pg_temp.f('other-org'),null,'Synthetic other tenant team','att-other','active');
+insert into public.participants(id,person_id) select pg_temp.f('participant-'||label),pg_temp.f(label) from unnest(array['child1','child2','child3','adult','minor','unknown-age'])label;
+insert into public.team_memberships(organization_id,team_id,person_id,participant_id,membership_type,starts_at,created_at) select pg_temp.f('org'),pg_temp.f(case when label='child2' then 'second-team' when label='child3' then 'sibling-team' else 'team' end),pg_temp.f(label),pg_temp.f('participant-'||label),'athlete',now()-interval '2 days',now()-interval '2 days' from unnest(array['child1','child2','child3','adult','minor','unknown-age'])label;
+insert into public.team_memberships(organization_id,team_id,person_id,membership_type,starts_at,created_at) select pg_temp.f('org'),pg_temp.f('team'),pg_temp.f(label),case when label='coach' then 'head_coach' when label='assistant' then 'assistant_coach' else 'staff' end,now()-interval '2 days',now()-interval '2 days' from unnest(array['coach','assistant','staff'])label;
+insert into public.guardian_relationships(id,guardian_person_id,dependent_person_id,authority_status,verified_at,starts_at,created_at,can_respond_attendance) select pg_temp.f('guardian-'||label),pg_temp.f('parent'),pg_temp.f(label),'active',now()-interval '2 days',now()-interval '2 days',now()-interval '2 days',true from unnest(array['child1','child2'])label;
+insert into public.households(id,name) values(pg_temp.f('household'),'Synthetic attendance household');
+insert into public.household_memberships(household_id,person_id,relationship_type,starts_at) select pg_temp.f('household'),pg_temp.f(label),'member',now()-interval '1 day' from unnest(array['household-only','parent','child1'])label;
+insert into public.role_assignments(person_id,role_id,scope_type,scope_id,organization_id,starts_at,created_at) select pg_temp.f(label),role.id,case when label in ('coach','assistant') then 'team' when label='program' then 'organization_unit' else 'organization' end,pg_temp.f(case when label in ('coach','assistant') then 'team' when label='program' then 'unit' when label='other-admin' then 'other-org' else 'org' end),pg_temp.f(case when label='other-admin' then 'other-org' else 'org' end),now()-interval '2 days',now()-interval '2 days' from unnest(array['admin','other-admin','coach','assistant','program'])label join public.roles role on role.key=case when label='coach' then 'head_coach' when label='assistant' then 'assistant_coach' when label='program' then 'program_administrator' else 'organization_administrator' end;
+insert into public.organization_modules(organization_id,module_id,status,configuration,starts_at) select pg_temp.f(label),m.id,'active','{}',now()-interval '2 days' from unnest(array['org','other-org'])label cross join public.modules m where m.key='calendar';
+insert into public.events(id,organization_id,title,event_type_key,start_at,end_at,timezone,status,visibility,rsvp_mode,recurrence,created_by_person_id,updated_by_person_id) select pg_temp.f(label),pg_temp.f(case when label='other-event' then 'other-org' else 'org' end),'Synthetic attendance '||label,'practice',date_trunc('day',now())+interval '10 days 18 hours',date_trunc('day',now())+interval '10 days 19 hours','UTC','scheduled','member','required',case when label='recurring' then '{"frequency":"daily","interval":1,"count":3}'::jsonb else null end,pg_temp.f(case when label='other-event' then 'other-admin' else 'admin' end),pg_temp.f(case when label='other-event' then 'other-admin' else 'admin' end) from unnest(array['event','second-event','sibling-event','other-event','recurring','keep-event','multi-event'])label;
+insert into public.event_targets(event_id,organization_id,target_type,target_id) select pg_temp.f(label),pg_temp.f(case when label='other-event' then 'other-org' else 'org' end),'team',pg_temp.f(case when label='second-event' then 'second-team' when label='sibling-event' then 'sibling-team' when label='other-event' then 'other-team' else 'team' end) from unnest(array['event','second-event','sibling-event','other-event','recurring','keep-event','multi-event'])label;
+insert into public.event_targets(event_id,organization_id,target_type,target_id) values(pg_temp.f('multi-event'),pg_temp.f('org'),'team',pg_temp.f('sibling-team'));
+set local role authenticated;
+select pg_temp.actor('parent');
+select pg_temp.denied('disabled attendance denies RSVP',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1'),pg_temp.f('disabled')));
+select pg_temp.actor('admin');
+select public.boss_attendance_mutate(pg_temp.cmd('attendance.configure',jsonb_build_object('organization_id',pg_temp.f('org'),'configuration','{"attendance":true,"rsvp":true,"guardian_rsvp":true,"participant_self_response":true,"checkin":true,"head_coach_management":true,"assistant_coach_management":false,"minimum_self_response_age":18}'::jsonb)) ,pg_temp.f('enable'));
+select pg_temp.check('features explicit enabled','FEATURE',(public.boss_attendance_read(pg_temp.query('staff'))->'features'->>'attendance')::boolean);
+select public.boss_attendance_mutate(pg_temp.configure('event'),pg_temp.f('configure-event'));
+select public.boss_attendance_mutate(pg_temp.configure('keep-event',0,'lock','keep'),pg_temp.f('configure-keep'));
+select pg_temp.actor('parent');
+select public.boss_attendance_mutate(pg_temp.respond('event','child1','participant-child1'),pg_temp.f('A'));
+select public.boss_attendance_mutate(pg_temp.respond('second-event','child2','participant-child2','not_attending'),pg_temp.f('B'));
+select pg_temp.check('A authorized child RSVP row','A',(select exists(select 1 from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('family','event'))->'occurrences')o cross join lateral jsonb_array_elements(o->'subjects')s where s->'response'->>'status'='attending')));
+select pg_temp.check('B second child not attending','B',(select exists(select 1 from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('family','second-event'))->'occurrences')o cross join lateral jsonb_array_elements(o->'subjects')s where s->'response'->>'status'='not_attending')));
+select pg_temp.denied('C unrelated participant denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('sibling-event','child3','participant-child3'),pg_temp.f('C')));
+select pg_temp.actor('household-only');
+select pg_temp.denied('D household-only denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1'),pg_temp.f('D')));
+select pg_temp.check('household never creates organization choice','D',jsonb_array_length(public.boss_attendance_read('{}')->'organizations')=0);
+reset role;
+update public.guardian_relationships set ends_at=now()-interval '1 hour' where id=pg_temp.f('guardian-child1');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.denied('E expired guardian denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1','maybe',1),pg_temp.f('E')));
+select pg_temp.denied('expired same-request replay reauthorized',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1'),pg_temp.f('A')));
+reset role;update public.guardian_relationships set ends_at=null where id=pg_temp.f('guardian-child1');
+update public.guardian_relationships set can_respond_attendance=false,can_register=true,can_sign_waivers=true,can_view_documents=true,can_manage_payments=true,can_manage_profile=true,can_receive_communications=true,can_send_communications=true where id=pg_temp.f('guardian-child1');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.denied('legacy guardian flags do not substitute for attendance',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1','maybe',1),pg_temp.f('wrong-capabilities')));
+reset role;update public.guardian_relationships set can_respond_attendance=true,can_register=false,can_sign_waivers=false,can_view_documents=false,can_manage_payments=false,can_manage_profile=false,can_receive_communications=false,can_send_communications=false where id=pg_temp.f('guardian-child1');
+select pg_temp.check('F child without Auth represented','F',not exists(select 1 from public.user_accounts where person_id=pg_temp.f('child1')) and exists(select 1 from public.attendance_responses where person_id=pg_temp.f('child1')));
+set local role authenticated;select pg_temp.actor('adult');
+select public.boss_attendance_mutate(pg_temp.respond('event','adult','participant-adult','maybe'),pg_temp.f('G'));
+select pg_temp.check('G adult self response','G',(select exists(select 1 from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('family','event'))->'occurrences')o cross join lateral jsonb_array_elements(o->'subjects')s where s->>'person_id'=pg_temp.f('adult')::text and s->'response'->>'status'='maybe')));
+select pg_temp.actor('minor');select pg_temp.denied('minor self failclosed',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','minor','participant-minor'),pg_temp.f('minor')));
+select pg_temp.actor('unknown-age');select pg_temp.denied('unknown age self failclosed',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','unknown-age','participant-unknown-age'),pg_temp.f('unknown')));
+select pg_temp.actor('staff');select public.boss_attendance_mutate(pg_temp.respond('event','staff',null,'not_attending'),pg_temp.f('staff-response'));
+select pg_temp.check('staff own type distinct','STAFF',(select exists(select 1 from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('family','event'))->'occurrences')o cross join lateral jsonb_array_elements(o->'subjects')s where s->>'subject_kind'='staff' and s->'response'->>'status'='not_attending')));
+select pg_temp.actor('coach');select pg_temp.check('H own-team coach summary','H',jsonb_array_length(public.boss_attendance_read(pg_temp.query('staff','event'))->'occurrences')=1);
+select pg_temp.denied('I unrelated team management denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('sibling-event','child3','participant-child3'),pg_temp.f('I')));
+select pg_temp.check('coach team filters exact only','SCOPE',(select jsonb_array_length(q->'teams')=1 and q->'teams'->0->>'id'=pg_temp.f('team')::text from(select public.boss_attendance_read(pg_temp.query('staff'))q)projection));
+select pg_temp.check('coach unit filters exact only','SCOPE',(select jsonb_array_length(q->'units')=1 and q->'units'->0->>'id'=pg_temp.f('unit')::text from(select public.boss_attendance_read(pg_temp.query('staff'))q)projection));
+select pg_temp.check('mixed team summary hides sibling subject','SCOPE',not(public.boss_attendance_read(pg_temp.query('staff','multi-event'))::text like '%'||pg_temp.f('child3')::text||'%'));
+select pg_temp.denied('mixed event mutation requires all target scopes',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('multi-event','child1','participant-child1'),pg_temp.f('mixed-denial')));
+select pg_temp.actor('program');select pg_temp.denied('J sibling program denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('sibling-event','child3','participant-child3'),pg_temp.f('J')));
+select pg_temp.actor('admin');select public.boss_attendance_mutate(pg_temp.configure('event',1,'lock','needs_reconfirmation',now()-interval '1 hour'),pg_temp.f('past-deadline'));
+select pg_temp.actor('parent');select pg_temp.denied('K lock after deadline',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('event','child1','participant-child1','maybe',1),pg_temp.f('K')),'PT409');
+select pg_temp.denied('guardian cannot override deadline',format('select public.boss_attendance_mutate(%L,%L)',jsonb_set(pg_temp.respond('event','child1','participant-child1','maybe',1),'{input,override_deadline}','true'),pg_temp.f('guardian-override')));
+select pg_temp.actor('admin');select public.boss_attendance_mutate(jsonb_set(pg_temp.respond('event','child1','participant-child1','maybe',1),'{input,override_deadline}','true'),pg_temp.f('staff-override'));
+reset role;select pg_temp.check('override audit safe marker','AUDIT',exists(select 1 from public.audit_events where request_id=pg_temp.f('staff-override') and after_data->>'deadline_override'='true'));
+set local role authenticated;select pg_temp.actor('admin');select public.boss_attendance_mutate(pg_temp.configure('event',2,'allow_late','needs_reconfirmation',now()-interval '1 hour'),pg_temp.f('allow-late'));
+select pg_temp.actor('parent');select public.boss_attendance_mutate(pg_temp.respond('event','child1','participant-child1','attending',2),pg_temp.f('late-response'));
+reset role;select pg_temp.check('K allowlate marked','K',(select is_late from public.attendance_responses where person_id=pg_temp.f('child1') and event_id=pg_temp.f('event')));
+update public.events set start_at=start_at+interval '2 hours',end_at=end_at+interval '2 hours',version=version+1 where id=pg_temp.f('event');
+select pg_temp.check('L sticky reconfirmation material change','L',(select needs_reconfirmation from public.attendance_responses where person_id=pg_temp.f('child1') and event_id=pg_temp.f('event')));
+select pg_temp.check('material history remains','HISTORY',(select count(*)=4 from public.attendance_response_history where person_id=pg_temp.f('child1') and event_id=pg_temp.f('event')));
+-- A one-time event remains the same canonical occurrence after rescheduling.
+-- Preserve its original attendance key, effective times and explicit marker.
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.check('L rescheduled single response visible reconfirmation','L',(select exists(select 1 from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('family','event'))->'occurrences')o cross join lateral jsonb_array_elements(o->'subjects')subject where o->>'occurrence_key'=pg_temp.key('event') and subject->'response'->>'needs_reconfirmation'='true')));
+reset role;
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.denied('rescheduled current-key alias cannot duplicate single RSVP',format('select public.boss_attendance_mutate(%L,%L)',jsonb_set(pg_temp.respond('event','child1','participant-child1','maybe',0),'{input,occurrence_key}',to_jsonb(to_char((date_trunc('day',now())+interval '10 days 20 hours') at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS'))),pg_temp.f('single-dupe-alias')));
+select pg_temp.denied('rescheduled single arbitrary alias denied',format('select public.boss_attendance_mutate(%L,%L)',jsonb_set(pg_temp.respond('event','child1','participant-child1','maybe',3),'{input,occurrence_key}',to_jsonb(pg_temp.key('event',3))),pg_temp.f('single-forged-key')));
+reset role;
+select pg_temp.check('prior key history retained','HISTORY',exists(select 1 from public.attendance_response_history where event_id=pg_temp.f('event') and occurrence_key=pg_temp.key('event')));
+set local role authenticated;select pg_temp.actor('parent');select public.boss_attendance_mutate(pg_temp.respond('keep-event','child1','participant-child1'),pg_temp.f('keep'));
+reset role;update public.events set venue_id=null,title='Synthetic title only' where id=pg_temp.f('keep-event');select pg_temp.check('title change does not invalidate','HISTORY',(select not needs_reconfirmation from public.attendance_responses where event_id=pg_temp.f('keep-event')));
+update public.events set start_at=start_at+interval '1 hour',end_at=end_at+interval '1 hour',version=version+1 where id=pg_temp.f('keep-event');select pg_temp.check('keep policy retains history status','L',(select not needs_reconfirmation and status='attending' from public.attendance_responses where event_id=pg_temp.f('keep-event')));
+set local role authenticated;select pg_temp.actor('parent');select public.boss_attendance_mutate(pg_temp.respond('recurring','child1','participant-child1'),pg_temp.f('N0'));select public.boss_attendance_mutate(pg_temp.respond('recurring','child1','participant-child1','not_attending',0,1),pg_temp.f('N1'));
+reset role;select pg_temp.check('N recurring occurrences separate','N',(select count(*)=2 from public.attendance_responses where event_id=pg_temp.f('recurring')));
+set local role authenticated;select pg_temp.actor('parent');select public.boss_attendance_mutate(pg_temp.respond('recurring','child1','participant-child1'),pg_temp.f('N0'));
+reset role;select pg_temp.check('O retry one response/history','O',(select count(*)=1 from public.attendance_response_history where request_id=pg_temp.f('N0')) and (select count(*)=1 from boss_private.attendance_operation_receipts where request_id=pg_temp.f('N0')));
+set local role authenticated;select pg_temp.actor('parent');select pg_temp.denied('changed body same request conflict',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','child1','participant-child1','maybe'),pg_temp.f('N0')),'PT409');
+select pg_temp.denied('forged occurrence denied',format('select public.boss_attendance_mutate(%L,%L)',jsonb_set(pg_temp.respond('recurring','child1','participant-child1'),'{input,occurrence_key}',to_jsonb(pg_temp.key('recurring',20))),pg_temp.f('forged-occurrence')));
+select pg_temp.denied('forged participant-person denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','child1','participant-child2'),pg_temp.f('forged-participant')));
+select pg_temp.denied('other tenant event denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('other-event','child1','participant-child1'),pg_temp.f('other-tenant')));
+reset role;insert into public.event_occurrence_exceptions(organization_id,event_id,occurrence_key,status,created_by_person_id,updated_by_person_id) values(pg_temp.f('org'),pg_temp.f('recurring'),pg_temp.key('recurring',1),'canceled',pg_temp.f('admin'),pg_temp.f('admin'));
+set local role authenticated;select pg_temp.actor('parent');select pg_temp.check('M canceled occurrence not asked','M',not(public.boss_attendance_read(pg_temp.query('family','recurring'))::text like '%'||pg_temp.key('recurring',1)||'%'));
+select pg_temp.denied('canceled occurrence response denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','child1','participant-child1','maybe',1,1),pg_temp.f('canceled-rsvp')));
+reset role;select pg_temp.check('canceled historical RSVP retained','M',exists(select 1 from public.attendance_responses where event_id=pg_temp.f('recurring') and occurrence_key=pg_temp.key('recurring',1)));
+set local role authenticated;select pg_temp.actor('coach');select public.boss_attendance_mutate(pg_temp.cmd('checkin.set',jsonb_build_object('event_id',pg_temp.f('recurring'),'occurrence_key',pg_temp.key('recurring'),'person_id',pg_temp.f('child1'),'participant_id',pg_temp.f('participant-child1'),'subject_kind','participant','state','checked_in','expected_version',0)),pg_temp.f('checkin'));
+reset role;select pg_temp.check('light checkin separate','CHECKIN',exists(select 1 from public.attendance_checkins where person_id=pg_temp.f('child1') and state='checked_in') and exists(select 1 from public.attendance_checkin_history where request_id=pg_temp.f('checkin')));
+set local role authenticated;select pg_temp.actor('assistant');select pg_temp.denied('assistant manage policy disabled',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','child1','participant-child1','maybe',1),pg_temp.f('assistant')));
+select pg_temp.check('assistant still scoped view','ROLE',jsonb_array_length(public.boss_attendance_read(pg_temp.query('staff','recurring'))->'occurrences')=2);
+select pg_temp.actor('parent');
+DO $$declare name text;begin foreach name in array array['event_attendance_settings','attendance_responses','attendance_response_history','attendance_checkins','attendance_checkin_history','attendance_requests'] loop perform pg_temp.denied('raw read closed '||name,'select * from public.'||name,'42501');perform pg_temp.denied('raw update closed '||name,'update public.'||name||' set organization_id=organization_id','42501');end loop;end$$;
+reset role;select pg_temp.denied('history immutable','update public.attendance_response_history set snapshot=snapshot','23514');select pg_temp.denied('history truncate immutable','truncate public.attendance_response_history','23514');
+set local role authenticated;select pg_temp.actor('parent');
+select public.boss_attendance_mutate(jsonb_set(jsonb_set(pg_temp.respond('second-event','child2','participant-child2','not_attending',1),'{input,reason}',to_jsonb('Synthetic private absence'::text)),'{input,note}',to_jsonb('Synthetic confidential note'::text)),pg_temp.f('private-note'));
+select pg_temp.check('exact guardian receives private absence note','PRIVACY',public.boss_attendance_read(pg_temp.query('family','second-event'))::text like '%Synthetic confidential note%');
+select pg_temp.actor('program');select pg_temp.check('manager receives private absence note','PRIVACY',public.boss_attendance_read(pg_temp.query('staff','second-event'))::text like '%Synthetic confidential note%');
+select pg_temp.actor('parent');select public.boss_attendance_mutate(jsonb_set(pg_temp.respond('recurring','child1','participant-child1','attending',1),'{input,note}',to_jsonb('Synthetic current private recurring note'::text)),pg_temp.f('private-recurring-note'));
+select pg_temp.actor('assistant');select pg_temp.check('view-only assistant never receives private notes','PRIVACY',not(public.boss_attendance_read(pg_temp.query('staff','recurring'))::text like '%Synthetic current private recurring note%'));
+select pg_temp.check('view-only scoped summary remains visible','PRIVACY',(select bool_and((o->'capabilities'->>'view_summary')::boolean) from jsonb_array_elements(public.boss_attendance_read(pg_temp.query('staff','recurring'))->'occurrences')o));
+reset role;
+update public.organization_modules set configuration=configuration||'{"attendance_participant_self_response":false}'::jsonb where organization_id=pg_temp.f('org') and module_id=(select id from public.modules where key='calendar');
+set local role authenticated;select pg_temp.actor('adult');select pg_temp.denied('G self policy disabled denied',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','adult','participant-adult'),pg_temp.f('self-disabled')));
+reset role;update public.organization_modules set configuration=configuration||'{"attendance_participant_self_response":true,"attendance_minimum_self_response_age":null}'::jsonb where organization_id=pg_temp.f('org') and module_id=(select id from public.modules where key='calendar');
+set local role authenticated;select pg_temp.actor('adult');select pg_temp.denied('malformed minimum age denies self',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','adult','participant-adult'),pg_temp.f('malformed-age')));
+reset role;update public.organization_modules set configuration=configuration||'{"attendance_minimum_self_response_age":18}'::jsonb where organization_id=pg_temp.f('org') and module_id=(select id from public.modules where key='calendar');
+update public.team_memberships set ends_at=now()-interval '1 hour' where person_id=pg_temp.f('child1');
+set local role authenticated;select pg_temp.actor('parent');select pg_temp.denied('expired dependent roster denies RSVP',format('select public.boss_attendance_mutate(%L,%L)',pg_temp.respond('recurring','child1','participant-child1','maybe',1),pg_temp.f('expired-roster')));
+reset role;
+select pg_temp.check('history survives roster expiry','HISTORY',exists(select 1 from public.attendance_response_history where person_id=pg_temp.f('child1')));
+select pg_temp.check('private schema receipt RLS','RLS',(select relrowsecurity from pg_class where oid='boss_private.attendance_operation_receipts'::regclass));
+select pg_temp.check('all new public tables RLS','RLS',(select bool_and(relrowsecurity) from pg_class where oid=any(array['public.event_attendance_settings'::regclass,'public.attendance_responses'::regclass,'public.attendance_response_history'::regclass,'public.attendance_checkins'::regclass,'public.attendance_checkin_history'::regclass,'public.attendance_requests'::regclass])));
+select pg_temp.check('public RPC invoker','RLS',(select bool_and(not prosecdef and proconfig @> array['search_path=""']) from pg_proc where oid=any(array['public.boss_attendance_read(jsonb)'::regprocedure,'public.boss_attendance_mutate(jsonb,uuid)'::regprocedure])));
+select pg_temp.check('safe audit excludes note content','AUDIT',not exists(select 1 from public.audit_events where organization_id=pg_temp.f('org') and (after_data?'note' or after_data?'reason')));
+select pg_temp.check('dedicated guardian default false','GUARDIAN',(select column_default='false' from information_schema.columns where table_schema='public' and table_name='guardian_relationships' and column_name='can_respond_attendance'));
+create temp table saved_attendance_context(fingerprint text,original_key text);insert into saved_attendance_context values(boss_private.attendance_context(pg_temp.f('recurring'),pg_temp.key('recurring')),pg_temp.key('recurring'));
+set local timezone='Pacific/Auckland';select pg_temp.check('timezone-independent context fingerprint','CONTEXT',(select fingerprint=boss_private.attendance_context(pg_temp.f('recurring'),original_key) from saved_attendance_context));set local timezone='UTC';
+select pg_temp.check('no role/auth created by implementation','MODEL',(select count(*)=21 from public.roles));
+-- Changing single/recurring mode cannot alias retired keys into a new context.
+update public.events set recurrence='{"frequency":"daily","interval":1,"count":3}'::jsonb,version=version+1 where id=pg_temp.f('keep-event');
+select pg_temp.check('single-to-recurring retires original pin','CONTEXT',(select occurrence_mode='retired' from public.attendance_responses where event_id=pg_temp.f('keep-event')) and boss_private.attendance_occurrence(pg_temp.f('keep-event'),pg_temp.key('keep-event')) is null);
+update public.events set recurrence=null,version=version+1 where id=pg_temp.f('keep-event');
+select pg_temp.check('recurring-to-single cannot revive old pin','CONTEXT',boss_private.attendance_occurrence(pg_temp.f('keep-event'),pg_temp.key('keep-event')) is null and boss_private.attendance_effective_key(pg_temp.f('keep-event'),'synthetic-current-key')='synthetic-current-key');
+-- Selected authorized tenants remain usable beyond the finite picker page.
+insert into public.role_assignments(person_id,role_id,scope_type,starts_at) select pg_temp.f('admin'),id,'platform',now()-interval '1 day' from public.roles where key='platform_administrator';
+insert into public.organizations(id,name,slug) select pg_temp.f('picker-org-'||n),'Synthetic picker '||lpad(n::text,3,'0'),'synthetic-attendance-picker-'||n from generate_series(1,105)n;
+insert into public.organization_modules(organization_id,module_id,status,configuration,starts_at) select pg_temp.f('picker-org-'||n),m.id,'active','{}',now()-interval '1 day' from generate_series(1,105)n cross join public.modules m where m.key='calendar';
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.check('selected tenant outside picker remains usable','SCALE',(select (q->>'options_limited')::boolean and jsonb_array_length(q->'organizations')<=101 and q->>'organization_id'=pg_temp.f('picker-org-105')::text and exists(select 1 from jsonb_array_elements(q->'organizations')option where option->>'id'=pg_temp.f('picker-org-105')::text) from(select public.boss_attendance_read(jsonb_build_object('organization_id',pg_temp.f('picker-org-105')))q)projection));
+select pg_temp.actor('household-only');select pg_temp.denied('selected inaccessible tenant not added to picker',format('select public.boss_attendance_read(%L)',jsonb_build_object('organization_id',pg_temp.f('picker-org-105'))));
+reset role;
+-- Legacy Calendar events have no attendance settings. A missing deadline must
+-- not expand the Calendar occurrence merely to subtract a NULL offset. Verify
+-- real fixed/offset semantics first, then install a rollback-only raising
+-- resolver sentinel so this regression fails on the prior implementation.
+-- Derive this event's actual key from its stored timezone, since the earlier
+-- timezone-independence check deliberately changed the session timezone.
+create temp table deadline_regression_context as
+ select to_char(start_at at time zone timezone,'YYYY-MM-DD"T"HH24:MI:SS') as occurrence_key
+ from public.events where id=pg_temp.f('second-event');
+select pg_temp.check('legacy invalid key with no deadline returns null','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),'legacy-invalid-key') is null);
+insert into public.event_attendance_settings(organization_id,event_id,deadline_offset_minutes,updated_by_person_id)
+ values(pg_temp.f('org'),pg_temp.f('second-event'),90,pg_temp.f('admin'));
+select pg_temp.check('offset deadline uses current occurrence start','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=(select start_at-interval '90 minutes' from public.events where id=pg_temp.f('second-event')));
+-- Count real resolver calls without replacing its behavior. The sequence and
+-- instrumentation exist only inside this transaction; the original definition
+-- is restored before the separate deadline short-circuit checks below.
+create temp sequence attendance_deadline_resolution_calls;
+create temp table attendance_saved_resolver(definition text);
+DO $$declare original text;begin
+ original:=pg_get_functiondef('boss_private.attendance_occurrence(uuid,text)'::regprocedure);
+ if strpos(original,'result jsonb;begin')=0 then raise exception 'Resolver instrumentation anchor missing';end if;
+ insert into attendance_saved_resolver values(original);
+ execute replace(original,'result jsonb;begin','result jsonb;begin perform nextval(''pg_temp.attendance_deadline_resolution_calls''::regclass);');
+end $$;
+set local role authenticated;select pg_temp.actor('admin');
+create temp table attendance_deadline_projection as
+ select public.boss_attendance_read(pg_temp.query('staff','second-event')) as payload;
+reset role;
+select pg_temp.check('projection resolves relative deadline once per occurrence','PROJECTION',
+ (select jsonb_array_length(payload->'occurrences')=1 from attendance_deadline_projection)
+ and (select is_called and last_value=1 from attendance_deadline_resolution_calls));
+select pg_temp.check('reused deadline retains projection and response policy','PROJECTION',
+ (select (payload->'occurrences'->0->'settings'->>'effective_deadline_at')::timestamptz
+ = (select start_at-interval '90 minutes' from public.events where id=pg_temp.f('second-event'))
+ and (payload->'occurrences'->0->'subjects'->0->'capabilities'->>'respond')::boolean
+ from attendance_deadline_projection));
+DO $$begin execute (select definition from attendance_saved_resolver);end $$;
+update public.event_attendance_settings set response_deadline_at=now()+interval '5 days',deadline_offset_minutes=null where event_id=pg_temp.f('second-event');
+select pg_temp.check('fixed deadline retains configured instant','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=now()+interval '5 days');
+create or replace function boss_private.attendance_occurrence(p_event uuid,p_key text) returns jsonb
+ language plpgsql stable security definer set search_path='' as $$begin
+ raise exception 'Unexpected occurrence resolution in deadline regression' using errcode='P4B01';
+end $$;
+select pg_temp.check('fixed deadline skips occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context))=now()+interval '5 days');
+update public.event_attendance_settings set response_deadline_at=null where event_id=pg_temp.f('second-event');
+select pg_temp.check('empty deadline settings skip occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('second-event'),'legacy-invalid-key') is null);
+select pg_temp.check('missing deadline settings skip occurrence resolution','DEADLINE',boss_private.attendance_deadline(pg_temp.f('sibling-event'),'legacy-invalid-key') is null);
+update public.event_attendance_settings set deadline_offset_minutes=90 where event_id=pg_temp.f('second-event');
+select pg_temp.denied('offset deadline still resolves its occurrence',format('select boss_private.attendance_deadline(%L,%L)',pg_temp.f('second-event'),(select occurrence_key from deadline_regression_context)),'P4B01');
+-- The transaction rollback below restores the original resolver definition as
+-- well as all synthetic settings and fixtures. No later checks use the sentinel.
+select count(*) as passed_assertions from phase4b_attendance_assertions;
+select category,count(*) from phase4b_attendance_assertions group by category order by category;
+rollback;
