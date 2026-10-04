@@ -12,7 +12,7 @@ export default function Page(){
         <div className={s.eyebrow}>SPORTS TEAMS</div>
         <h1>More than champions.</h1>
         <p>Boss helps sports teams raise money, stay organized, engage families and build stronger communities through one connected ecosystem.</p>
-        <div className={s.actions}><a href="/get-started">Get Started →</a><a href="/engage">Explore Boss Engage</a></div>
+        <div className={s.actions}><a href="/fundraising/get-started">Get Started →</a><a href="/engage">Explore Boss Engage</a></div>
       </div>
       <div className={s.photoStage}>
         <img src="https://images.unsplash.com/photo-1771308378506-7f394413342c?auto=format&fit=crop&w=1600&q=84" alt="Youth basketball team huddled with coach"/>
@@ -42,7 +42,7 @@ export default function Page(){
     <section className={s.panel}><h2>Built around the full team experience.</h2><p>Fundraising is only one part of the journey. Boss is designed to support athletes, parents, coaches, athletic directors and supporters before, during and after the season.</p><div className={s.cards}><article className={s.card}><b>FUNDRAISING</b><h3>Raise more with more options.</h3><p>Digital savings, Money Board, direct donations and merchandise can work together in one campaign.</p></article><article className={s.card}><b>TEAM OPERATIONS</b><h3>Keep the season organized.</h3><p>Schedules, rosters, registrations, fees, documents and communication fit naturally inside Boss Engage.</p></article><article className={s.card}><b>FAMILY EXPERIENCE</b><h3>Make participation easier.</h3><p>Family Hub brings multiple children, teams, schedules, fundraising and future Boss Bucks value into one place.</p></article></div></section>
 
     <section className={s.dark}><h2>Same teams. Bigger possibilities.</h2><p>Boss can serve football, basketball, volleyball, soccer, baseball, softball, cheer, homeschool athletics and other youth sports without forcing every organization into the same mold.</p><div className={s.steps}><div className={s.step}><span>01</span><h3>Raise</h3><p>Launch modern fundraising with team and participant attribution.</p></div><div className={s.step}><span>02</span><h3>Organize</h3><p>Manage schedules, registrations, documents and communication.</p></div><div className={s.step}><span>03</span><h3>Reward</h3><p>Use leaderboards, milestones and badges to recognize participation.</p></div><div className={s.step}><span>04</span><h3>Grow</h3><p>Keep families and supporters connected beyond one fundraiser.</p></div></div></section>
-    <section className={s.cta}><h2>Organize your sports team like a Boss.</h2><a href="/get-started">Start Here →</a></section>
+    <section className={s.cta}><h2>Organize your sports team like a Boss.</h2><a href="/fundraising/get-started">Start Here →</a></section>
     <SiteFooter/>
   </main>
 }

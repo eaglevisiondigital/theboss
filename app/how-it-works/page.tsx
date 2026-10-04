@@ -12,7 +12,7 @@ export default function Page(){
         <div className={s.eyebrow}>HOW IT WORKS</div>
         <h1>Start where you are. Grow from there.</h1>
         <p>Boss connects fundraising, savings, engagement and family participation so every audience can enter through the path that makes sense for them.</p>
-        <div className={s.actions}><a href="/get-started">Find Your Path →</a><a href="/">Explore the Ecosystem</a></div>
+        <div className={s.actions}><a href="/fundraising/get-started">Find Your Path →</a><a href="/">Explore the Ecosystem</a></div>
       </div>
       <div className={s.photoStage}>
         <img src="https://images.unsplash.com/photo-1755599629285-91cc09a185c7?auto=format&fit=crop&w=1600&q=84" alt="People working together on a community project"/>
@@ -27,7 +27,7 @@ export default function Page(){
       <div className={s.steps}><div className={s.step}><span>01</span><h3>Organization Joins</h3><p>A team or organization starts with fundraising or engagement.</p></div><div className={s.step}><span>02</span><h3>Supporters Enter</h3><p>People register through participant links, QR codes or public campaign pages.</p></div><div className={s.step}><span>03</span><h3>Value Continues</h3><p>Digital savings, Family Hub and future ecosystem features extend the relationship.</p></div><div className={s.step}><span>04</span><h3>Community Compounds</h3><p>More organizations, families and merchants make the network more useful for everyone.</p></div></div>
     </section>
 
-    <section className={s.cta}><h2>One ecosystem. Multiple ways to make an impact.</h2><a href="/get-started">Get Started →</a></section>
+    <section className={s.cta}><h2>One ecosystem. Multiple ways to make an impact.</h2><a href="/fundraising/get-started">Get Started →</a></section>
     <SiteFooter/>
   </main>
 }

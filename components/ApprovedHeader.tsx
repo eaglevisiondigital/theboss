@@ -19,7 +19,7 @@ export default function ApprovedHeader() {
   return <header className={s.header}>
     <Link href="/" className={s.brand} aria-label="The Boss home"><ReferencePhoto crop="37 5 39 38" className={s.brandMark}/><span>THE BOSS</span></Link>
     <nav className={s.desktopNav} aria-label="Primary navigation">{links.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</nav>
-    <Link href="/get-started" className={s.headerCta}>Get Started <span aria-hidden="true">›</span></Link>
+    <Link href="/fundraising/get-started" className={s.headerCta}>Get Started <span aria-hidden="true">›</span></Link>
     <div className={s.mobileMenu} ref={menuRef}>
       <button ref={buttonRef} type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation" : "Open navigation"} className={s.menuButton}><span/><span/><span/></button>
       <nav id="mobile-navigation" className={s.mobilePanel} aria-label="Mobile navigation" hidden={!open}>{links.map(([label, href]) => <Link href={href} key={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav>

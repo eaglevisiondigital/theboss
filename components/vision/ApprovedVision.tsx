@@ -31,5 +31,5 @@ export default function ApprovedVision(){return <div className={home.home}><a cl
 ["heart","Save Like a Boss.","Connect useful discounts with earned value for approved family expenses.","/boss-bucks"],
 ["people","Engage Like a Boss.","Bring teams, organizations, and family life closer together.","/engage"]
 ] as const).map(([kind,title,copy,href])=><article key={title}><Icon kind={kind}/><h3><Link href={href}>{title}</Link></h3><p>{copy}</p></article>)}</div><p className={s.note}>Platform vision shown. Feature availability varies by module and rollout.</p><Link href="/family-hub" className={s.hub}><strong>Multiple kids. Multiple teams. Multiple organizations. One Family Hub.</strong><span>Connected calendars, individual fundraising progress, and a shared family view.</span></Link></section>
-<section className={s.cta}><div><h2>Help make their next opportunity possible.</h2><p>Bring Boss to your team, ministry, school, or community organization.</p></div><Link href="/get-started" className={s.button}>Get Started</Link></section>
+<section className={s.cta}><div><h2>Help make their next opportunity possible.</h2><p>Bring Boss to your team, ministry, school, or community organization.</p></div><Link href="/fundraising/get-started" className={s.button}>Get Started</Link></section>
 </main><ApprovedFooter/></div>}

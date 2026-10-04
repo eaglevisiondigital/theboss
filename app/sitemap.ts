@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/merchants",
     "/how-it-works",
     "/about",
-    "/get-started",
+    "/request-information",
     "/fundraising/get-started",
     "/merchant-partner",
     "/sales-rep",

@@ -31,7 +31,7 @@ export default function SiteHeader(){
 
     <div className={styles.actions}>
       <Link className={styles.login} href="/contact">Contact</Link>
-      <Link className={styles.cta} href="/get-started">Get Started <span>→</span></Link>
+      <Link className={styles.cta} href="/fundraising/get-started">Get Started <span>→</span></Link>
     </div>
 
     <details className={styles.mobileMenu}>
@@ -41,7 +41,7 @@ export default function SiteHeader(){
         <Link href="/how-it-works">How It Works</Link>
         <Link href="/about">About Boss</Link>
         <Link href="/contact">Contact</Link>
-        <Link className={styles.mobileCta} href="/get-started">Get Started</Link>
+        <Link className={styles.mobileCta} href="/fundraising/get-started">Get Started</Link>
       </div>
     </details>
   </header>

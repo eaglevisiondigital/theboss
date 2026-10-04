@@ -98,7 +98,7 @@ export default function ApprovedHomepageSections() {
     <section className={s.finalCta} aria-labelledby="start-title">
       <h2 id="start-title">Fundraise <span>Like a Boss.</span></h2>
       <p>Tell us about your team or organization. Find the right Boss starting point.</p>
-      <Link className={s.button} href="/get-started">Get Started</Link>
+      <Link className={s.button} href="/fundraising/get-started">Get Started</Link>
     </section>
 
     <footer className={s.footer} role="contentinfo">
