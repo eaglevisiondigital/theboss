@@ -1,6 +1,6 @@
 # Phase 5B performance evidence
 
-**FINAL LOCAL RUNTIME AND CANONICAL ADVISORS VERIFIED; HOSTED EVIDENCE PENDING.**
+**FINAL LOCAL RUNTIME, HOSTED INTERACTION AND POST-CLEANUP ADVISORS VERIFIED.**
 Measurements below come from the final successful integrated PostgreSQL 17.11
 run on October 4, 2026 UTC. The private cluster was removed. They are single-run
 local observations, not production latency percentiles, network measurements or
@@ -69,15 +69,52 @@ finding is resolved. The earlier successful measurements remain available in
 the local run record: box projection 0.697/0.934/3.500 ms and full detail
 41.909/39.100/50.623 ms at 10/100/1,000 plays. The table above uses the final run.
 
-Post-migration performance advisors report **143 unused-index informational
+The pre-acceptance performance-advisor checkpoint reported **143 unused-index informational
 findings** and **one existing Auth connection configuration informational
 finding**, with **no warning/error**, no missing-FK-index finding and no remaining
 missing-primary-key finding. The security advisor reports 70 expected closed-RLS
 informational findings and one preexisting Auth warning. Fresh unused-index
 information does not justify removing integrity or scoped-access indexes.
 
-Deployment, hosted response/navigation stability and controlled acceptance
-remain **PENDING** at this checkpoint. The local timings establish no hosted
-latency or production-scale SLA. See
-[the validation ledger](PHASE_5B_VALIDATION.md) and
-[the controlled hosted plan](PHASE_5B_HOSTED_PLAN.md).
+## Hosted interaction and final advisor checkpoint
+
+The corrected implementation deployed from
+`23e86382a0565f4d25770cefda034428f040f2bf` and reported READY at **14:25:17 UTC**
+on October 4. Native controlled hosted scoring, box/stat reconciliation,
+correction, finalization, reopen/refinalization and family reload completed. Real
+**1280/768/390/320px** viewports completed meaningful actions with no horizontal
+overflow. A native 320px double free-throw interaction produced one contribution;
+retained signed forms after operator revocation and finalization were rejected
+without changing their recorded version/score/typed-fact checkpoints. These are
+functional hosted observations, not response-time percentiles or load results.
+
+The controlled small roster used lineup_size=1 and three athlete rows plus two
+team-total rows. Full five-player lineup, large-volume and wrong-sport/forged-
+request cases remain SQL/runtime evidence. Minutes, plus/minus, season/career
+aggregation and new sport engines remain outside this phase's displayed outputs.
+
+Exact cleanup completed at **14:51:37 UTC**, before stop-new **15:01:33**, cleanup
+target **15:11:33** and hard expiry **15:26:33**. Original administrator access is
+valid; all temporary operator/role/staff/guardian/module authority is inactive or
+restored to baseline; zero unarchived unexpected controlled fixtures and pending
+controlled sources remain. Safe immutable history retains one archived engine,
+38 typed facts, two final epochs and ten sealed stat rows. No application/schema
+change occurred during hosted acceptance.
+
+Final read-only checks at approximately **14:53 UTC** passed **114** assertions.
+All **37** migration versions/names match and regenerated types compare exactly
+at **182,318 bytes**. Final performance advisors report **140 unused-index INFO**
+and **one preexisting Auth absolute-connection INFO**, **no WARN/ERROR**, no
+missing-FK-index finding and no missing-primary-key finding. The pre-acceptance
+143 unused-index findings above are retained as dated history; controlled usage
+accounts for three indexes no longer reported unused. Required indexes remain
+intact. Final security advisors retain **70 intentional closed-RLS INFO**, one
+preexisting Auth leaked-password WARN and no ERROR.
+
+The local timings establish no hosted latency or production-scale SLA. The
+historical Phase 4B timeout/remediation record and Netlify proxy disclosure remain
+unchanged. Native hosted evidence does not promote the unexecuted forged signed
+request matrix or wrong-sport cases to HOSTED VERIFIED. See
+[the validation ledger](PHASE_5B_VALIDATION.md),
+[the controlled hosted plan](PHASE_5B_HOSTED_PLAN.md), and
+[the completion report](PHASE_5B_COMPLETION_REPORT.md).

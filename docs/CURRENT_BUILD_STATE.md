@@ -1,17 +1,51 @@
 # Current build state
 
-## Phase 5B Basketball Live Scoring + Game Statistics: IN PROGRESS
+## Phase 5B Basketball Live Scoring + Game Statistics: COMPLETE
 
 Main Boss Chat authorized Phase 5B on October 4, 2026 from
 `1f3e44dd40e6d0aab18545965de5140ae65e5f75`. Basketball extends the existing
-canonical Game Center; earlier phase closure records and accepted evidence
-limitations remain historical evidence. Four canonical migrations and the complete
-disposable SQL/runtime suites passed, including 73 true two-connection races and
-22 separate recovery assertions. The final regenerated-type platform validation
-passed typecheck, lint, all 277 application tests and production build after the
-reviewed unknown-outcome retry/state-preservation correction. Deployment
-and controlled hosted acceptance remain pending. PR #3 remains draft and open.
-No later sport engine or cross-game aggregation module is authorized.
+canonical Game Center. Four validated migrations were applied to canonical Boss
+Supabase; all **37** migration names/versions and **182,318-byte** generated types
+match. Complete disposable validation passed **8,616 distinct SQL/bootstrap
+assertions**, **73** genuine two-connection races (17 Basketball), plus **22**
+separate exact recovery assertions. Typecheck, zero-warning lint, **277/277**
+application tests and production build pass. Implementation application/database
+[CI PASS](https://github.com/eaglevisiondigital/theboss/actions/runs/37209167141).
+
+Implementation `23e86382a0565f4d25770cefda034428f040f2bf` was published on the
+existing Boss platform as READY deploy `6ac261b0c882a50008b25a31` at
+14:25:17.412 UTC. The single controlled hosted window verified required typed
+plays/clock/periods/substitution, the independent 6–3 player/team oracle,
+correction/reversal, final/late-event denial, reasoned reopen/refinalization with
+two retained stat epochs, exact scorer/revocation denial, Child1-only family
+privacy/removal denial, responsive 1280/768/390/320 views and stable navigation.
+
+Cleanup completed **14:51:37.590726 UTC**, before every fixed deadline. Original
+administrator access is valid, exact person/relationship/module baselines match,
+both game operators ended, temporary scorer inactive, guardian/staff baseline
+restored, one event/game archived/unpublished with immutable history retained.
+Read-only checks confirm **zero residual temporary authority**, unexpected active
+controlled fixtures or pending fixture work. Final canonical verifier: **114
+PASS**, six closed tables, one archived engine, 38 typed facts and two epochs.
+
+Final security advisors: 70 intentional closed-table RLS INFO and one pre-existing
+leaked-password-protection WARN. Final performance advisors: 140 unused-index
+INFO and one Auth connection INFO, no WARN/ERROR. No Auth/security-policy change.
+
+Retained limitations: unavailable forged signed hosted requests and wrong-sport
+mutation construction remain SQL/runtime evidence, never HOSTED VERIFIED.
+Minutes/plus-minus display is deferred; the three-athlete lineup-size-one fixture
+does not certify five-on-five minutes. No Phase 5B positive hosted notification
+recipient/provider-delivery claim is made. All earlier phase acceptance history,
+accepted limitations and timeout/Netlify proxy disclosures remain preserved.
+
+No credential/session material was exposed, no real youth/customer data used,
+no DOB invented, no policy weakened and no historical proxy credential reused.
+Final documentation successor SHA/CI is recorded in the final handoff and PR.
+PR #3 remains **OPEN/DRAFT/UNMERGED**. No later sport engine/module started.
+**STOP after Phase 5B.** See the [68-point completion report](PHASE_5B_COMPLETION_REPORT.md),
+[actual hosted record](PHASE_5B_HOSTED_ACCEPTANCE.md),
+[validation](PHASE_5B_VALIDATION.md) and [architecture](BASKETBALL_ENGINE_ARCHITECTURE.md).
 
 ## Phase 5A Game Center Foundation: COMPLETE
 

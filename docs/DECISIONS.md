@@ -339,3 +339,35 @@ or authorized by this decision.
 Current status: [CURRENT_BUILD_STATE.md](CURRENT_BUILD_STATE.md). Historical
 acceptance: [PHASE_5A_ACCEPTANCE_ADDENDUM.md](PHASE_5A_ACCEPTANCE_ADDENDUM.md) and
 [PHASE_5A_SECOND_WINDOW_REPORT.md](PHASE_5A_SECOND_WINDOW_REPORT.md).
+
+## Phase 5B completion within Main Boss Chat authorization
+
+On October 4, 2026, the directly authorized Basketball engine was implemented,
+validated, migrated to canonical Boss Supabase and deployed on the existing Boss
+platform. It extends the same game/Calendar occurrence, roster, operators,
+version/operation/receipt architecture and final epochs. Event-derived current
+statistics plus immutable normalized sealed stat epochs avoid separately editable
+scores/percentages. The fourth narrow migration adds stable sealed-stat UUID row
+identity and resolves the advisor INFO without changing approved architecture.
+Existing game administrator/scorekeeper functions suffice; no broad statistician
+role or automatic coach scoring authority was introduced. Precise minutes and
+plus/minus remain deferred until sufficient authoritative participation inputs.
+
+The single fixed hosted window passed the required typed plays, independent
+6–3 oracle, actual signed revoked/final-state mutation denials, corrections and
+7–3/6–3 preserved final epochs, scoped family privacy and responsive interactions.
+Cleanup at 14:51:37.590726 UTC restored original administrator and exact role,
+relationship/module baseline with zero temporary authority or unexpected active
+fixtures. No window extension occurred. Forged signed requests unavailable through
+approved native tooling retain the supplied SQL/runtime-only evidence limitation;
+no session extraction or test-only production endpoint was used. Notification
+recipient/provider-delivery evidence is not invented. Prior acceptance history
+and incident disclosures remain unchanged.
+
+**Phase 5B Basketball Live Scoring + Game Statistics: COMPLETE.** Full evidence:
+[68-point report](PHASE_5B_COMPLETION_REPORT.md),
+[hosted acceptance](PHASE_5B_HOSTED_ACCEPTANCE.md),
+[validation](PHASE_5B_VALIDATION.md) and [performance](PHASE_5B_PERFORMANCE.md).
+Keep PR #3 OPEN/DRAFT/UNMERGED and STOP. Soccer is only a suggested next direction
+for Main Boss Chat to decide and separately authorize; no next engine or module
+has been started.

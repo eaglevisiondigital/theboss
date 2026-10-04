@@ -1,8 +1,8 @@
 # Phase 5B validation
 
-**MIGRATED AND SQL/RUNTIME VERIFIED; DEPLOYMENT AND HOSTED ACCEPTANCE PENDING.**
-This October 4, 2026 UTC entry records completed disposable validation. Local
-results do not establish hosted acceptance or Phase 5B completion. Starting SHA:
+**MIGRATED, DEPLOYED AND HOSTED ACCEPTED; CLEANUP AND FINAL READ-ONLY CHECKS VERIFIED.**
+This October 4, 2026 UTC record distinguishes completed disposable validation
+from the native hosted acceptance and final cleanup below. Starting SHA:
 `1f3e44dd40e6d0aab18545965de5140ae65e5f75`; branch
 `build/boss-platform-v1`; PR #3 remains open, draft and unmerged.
 
@@ -171,7 +171,7 @@ cluster was removed. Those recovery assertions are reported separately
 and are excluded from the 8,616 full-suite total. They do not establish live
 cleanup or authorize a new acceptance window.
 
-## Application and deployment gates
+## Application validation and implementation CI
 
 The preceding application snapshot passed **273/273 tests**, typecheck,
 zero-warning lint and production build using the clean private pinned runtime.
@@ -185,10 +185,12 @@ retry resolves. Four additional regressions passed; final focused **59/59**, ful
 application **277/277**, typecheck, zero-warning lint and production build **PASS**.
 No database source changed; completed SQL/concurrency evidence remains valid.
 
-Hosted scoring/stat reconciliation, correction/finalization/reopen,
-role/family isolation, desktop/tablet/390px/320px interaction, navigation,
-notifications and controlled cleanup remain subject to the approved hosted plan.
-The controlled hosted window remains closed at this checkpoint.
+The corrected implementation deployed from
+`23e86382a0565f4d25770cefda034428f040f2bf`; the existing Boss platform reported
+**READY at 14:25:17 UTC**. Implementation CI passed both application and database
+jobs in the [PR run](https://github.com/eaglevisiondigital/theboss/actions/runs/37209167141)
+and [push run](https://github.com/eaglevisiondigital/theboss/actions/runs/37209164661).
+Documentation closure is separate from that deployed implementation.
 
 Post-migration security advisors report **70 informational closed-RLS findings**
 and **one preexisting Auth warning**. Performance advisors report **143 unused-
@@ -197,6 +199,66 @@ informational finding**, with no warning/error and no remaining missing-primary-
 key or missing-FK-index finding. Required indexes remain intact. No Auth/security
 setting or timeout was weakened to obtain these results.
 
-Final application validation is **PASS**; deployment and hosted acceptance remain
-**PENDING** at this checkpoint. Record actual live outputs as available. No local
-result is promoted to HOSTED VERIFIED. No later sport engine or module was started.
+## Native hosted acceptance and closure
+
+Controlled run `d23d41cb-75f8-4503-b326-a47d1c3d8606` used only the reviewed
+synthetic Calendar event `c2cdf8ab-2f96-4a27-b6cd-11d00ca20b79` and canonical
+Basketball game `52070eaf-ce97-480c-ba83-c600a39f9d15`. The native hosted actions
+below are **HOSTED VERIFIED**; their resulting ledger/stat facts were checked
+through authorized read-only verification.
+
+| Hosted scenario | Actual result |
+| --- | --- |
+| Independent play/stat oracle | Nineteen entered plays produced **6:3**; all **five projected rows**—three athletes and two team totals—matched the independent oracle. |
+| Real 320px repeated tap | Native double free-throw interaction added **one** contribution. |
+| Retained form after exact operator revocation | Signed native mutation denied; version **33**, score **7:3**, and **28** typed facts stayed unchanged. |
+| First correction and finalization | Extra free throw reversed; A2 shot corrected to three; first sealed epoch **7:3**. |
+| Retained live form after finalization | Signed native mutation denied; version **43**, score **7:3**, and **37** typed facts stayed unchanged. |
+| Native reopen/correct/refinalize | Three-point shot corrected to two; second epoch **6:3**, version **46**. |
+| Prior sealed epoch preservation | Original normalized stat-row identities/digest **`e59130694e9579c9abd44ca2cd605775`** preserved; two epochs retain **10** sealed rows. |
+| Desktop/tablet/mobile interaction | Real **1280/768/390/320px** viewports each completed meaningful native actions with no horizontal overflow. |
+| Restricted Child1 family projection | Active relationship for **Child1 only**, all eight guardian capability flags remained false; safe score **6:3**, Child1 points **3**, and team totals visible; unrelated athlete IDs and private controls absent. |
+| Family reload and isolation | Reload passed; unrelated Child2 resource GET denied; retained Child1 GET denied after guardian revocation. |
+
+The controlled small roster used **lineup_size=1**. Full five-player lineup and
+broader roster/format/concurrency cases remain **SQL/RUNTIME VERIFIED**. Minutes
+and plus/minus displays are deferred foundations. Forged signed event/athlete/
+team/unit/tenant identifiers and wrong-sport mutation tests remain **SQL/RUNTIME
+VERIFIED**; they are not labeled HOSTED VERIFIED. Native retained-form POST
+rejection above is separate actual hosted evidence, and GET rejection is not
+substituted for an unexecuted forged POST matrix.
+
+Original administrator access was restored at **14:50:26 UTC**; both temporary
+operator assignments ended. The fresh controlled role assignment is inactive;
+selected staff/guardian relationships and all guardian flags equal baseline.
+The event/game were archived through the native authorized route, then the
+approved exact cleanup checkpoint restored the selected module baseline at
+**14:51:37 UTC**. This preceded the stop-new-scenarios deadline **15:01:33**, the
+cleanup target **15:11:33**, and hard expiry **15:26:33 UTC**.
+
+Final read-only cleanup proof confirms **zero temporary role/operator/guardian/
+staff/module authority**, zero unexpected unarchived controlled resources, zero
+pending controlled notification/source work, exact baseline equality and valid
+original administrator access. The immutable controlled game/stat/audit history
+is preserved. No application or schema change occurred during hosted acceptance;
+closure changes are documentation only.
+
+Final post-cleanup checks at approximately **14:53 UTC** passed **114** schema
+assertions with **one archived Basketball engine, 38 typed facts and two epochs**.
+All **37 canonical migration versions/names** still match. Regenerated canonical
+TypeScript database types compare **exactly byte-for-byte**, **182,318 bytes**;
+the transfer-only extra newline was removed before comparison, leaving source
+unchanged. Final security advisors retain **70 intentional closed-RLS INFO** and
+**one preexisting Auth leaked-password WARN**, no ERROR. Final performance
+advisors now report **140 unused-index INFO** plus **one existing Auth absolute-
+connection INFO**, with no WARN/ERROR, missing-FK-index or missing-primary-key
+finding. The earlier **143** unused-index checkpoint above is retained;
+controlled usage explains the three fewer unused-index findings.
+
+Final validation remains **277/277 application tests**, typecheck, zero-warning
+lint and production build PASS; **8,616** distinct SQL/bootstrap assertions,
+**73** races and **22** separate recovery assertions retain their actual passing
+results. No expensive runtime suite was repeated after hosted acceptance because
+application/schema source did not change. No later sport engine or module was
+started. Final documentation commit/PR state is recorded in the completion
+report; this record makes no merged-release claim.
