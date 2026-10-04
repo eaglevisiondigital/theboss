@@ -36,7 +36,7 @@ export default function ApprovedHomepageSections() {
     </section>
 
     <section className={s.money} aria-labelledby="money-title">
-      <ReferencePhoto crop="284 891 285 347" alt="Young athletes celebrating with their team" className={s.moneyPhoto} preserveAspectRatio="xMidYMid slice"/>
+      <ReferencePhoto source="/images/approved/home-football-plain-helmets.webp" crop="284 891 285 347" alt="Young athletes celebrating with their team" className={s.moneyPhoto} preserveAspectRatio="xMidYMid slice"/>
       <div className={s.moneyCopy}>
         <h2 id="money-title">The Digital<br/><span>Money Board</span></h2>
         <h3>Fundraise Like a Boss.</h3>
@@ -52,7 +52,7 @@ export default function ApprovedHomepageSections() {
 
     <section className={s.family} aria-labelledby="family-title">
       <div className={s.familyMain}>
-        <ReferencePhoto crop="365 1251 185 197" alt="A family supporting their young athlete" className={s.familyPhoto} preserveAspectRatio="xMidYMid slice"/>
+        <ReferencePhoto source="/images/approved/home-photos-single-b.webp" crop="365 1251 185 197" alt="A family supporting their young athlete" className={s.familyPhoto} preserveAspectRatio="xMidYMid slice"/>
         <div className={s.familyCopy}>
           <h2 id="family-title">Help cover<br/><span>approved costs.</span></h2>
           <p>Raise or earn Boss Bucks through approved campaigns. Apply your balance toward sports fees, registration, team gear, children’s and youth camps, tournaments and eligible travel expenses.</p>
@@ -71,7 +71,7 @@ export default function ApprovedHomepageSections() {
     </section>
 
     <section className={s.engage} aria-labelledby="engage-title">
-      <ReferencePhoto crop="618 1532 175 145" alt="A parent and child staying connected with their team" className={s.engagePhoto}/>
+      <ReferencePhoto source="/images/approved/home-photos-single-b.webp" crop="618 1532 175 145" alt="A parent and child staying connected with their team" className={s.engagePhoto}/>
       <div className={s.engageCopy}>
         <h2 id="engage-title">Engage Like a <span>Boss.</span></h2>
         <h3>Keep teams organized and families connected.</h3>

@@ -23,7 +23,7 @@ export default function Home() {
     <ApprovedHeader/>
     <main id="main">
       <section className={s.hero} aria-labelledby="hero-title">
-        <div className={s.heroPhoto}><Image src="/images/approved/hero-team.png" alt="Young athletes in black and orange uniforms gathering together" fill priority sizes="100vw" quality={90}/></div>
+        <div className={s.heroPhoto}><Image src="/images/approved/hero-team-single-b.webp" alt="Young athletes in black and orange uniforms gathering together" fill priority sizes="100vw" quality={90}/></div>
         <div className={s.heroShade}/>
         <div className={s.heroCopy}>
           <h1 id="hero-title">Fundraise<br/>Like a <span>Boss.</span></h1>
@@ -36,7 +36,7 @@ export default function Home() {
         <div className={s.ecosystemHeading}><h2 id="ecosystem-title">The Boss <span>Ecosystem</span></h2><p>Start with what you need. Grow with The Boss.</p></div>
         <div className={s.pillars}>{pillars.map(pillar => <Link className={s.pillar} href={pillar.href} key={pillar.title}>
           <div className={s.pillarIntro}><span className={s.pillarIcon}><PillarIcon kind={pillar.icon}/></span><div><h3>{pillar.title}<br/>Like a Boss.</h3><p>{pillar.description}</p></div></div>
-          <ReferencePhoto crop={pillar.crop} alt={pillar.alt} className={s.pillarPhoto}/>
+          <ReferencePhoto source={pillar.icon === "save" ? undefined : pillar.icon === "fundraise" ? "/images/approved/home-football-plain-helmets.webp" : "/images/approved/home-photos-single-b.webp"} crop={pillar.crop} alt={pillar.alt} className={s.pillarPhoto}/>
         </Link>)}</div>
       </section>
       <ApprovedHomepageSections/>
