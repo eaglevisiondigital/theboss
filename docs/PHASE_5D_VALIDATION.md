@@ -65,8 +65,19 @@ and [index notice](https://supabase.com/docs/guides/database/database-linter?lin
 Final application typecheck, zero-warning lint, **336/336 tests** and production
 build passed against the exact canonical types, with the temporary history RPC
 type cast removed. Only the existing explicitly synthetic local build-format
-fixture was used. Deployment and controlled hosted acceptance remain pending.
-SQL/runtime results are not represented as hosted acceptance.
+fixture was used. The existing Boss platform production deployment
+`6ac2e1de4f36280008d164e4` is READY, published **2026-10-04 23:32:16.954 UTC**
+from implementation SHA `8e15df6059f9cb07d0d8ada3a364fba5d063082c`.
+Both [push CI](https://github.com/eaglevisiondigital/theboss/actions/runs/37244085383)
+and [PR CI](https://github.com/eaglevisiondigital/theboss/actions/runs/37244089096)
+completed successfully for that exact SHA. PR #3 is OPEN/DRAFT/UNMERGED.
+Native authenticated Family Hub smoke shows the new history section, self-only
+subject choice under the unchanged baseline, and Basketball/Soccer/Football
+filters. Submitting the Football filter and a full native reload retain the
+selected filter and authorized self-only result. Positive guardian history and
+the deterministic Football game remain
+pending controlled acceptance. SQL/runtime results are not represented as hosted
+acceptance. No public website deployment or environment configuration was changed.
 
 ## Test boundary
 
@@ -88,3 +99,33 @@ prebuilt/rehearsed recovery and a cleanup controller armed before activation.
 The fixed stop-new, cleanup-target and hard-expiry timestamps will be recorded
 with actual explicit restoration and zero-residual results. Prior controlled
 fixtures and Phase 5C cleanup/exposure history remain preserved.
+
+The optional hosted new-team privacy context needs a human choice about exactly
+two temporary Wildcats memberships: the controlled account as staff and the
+selected CONTROLLED TEST Child1 as athlete. No role, guardian capability,
+household or organization authority would be added. The prepared live capture
+keeps creation disabled while the answer is pending. It records and later ends
+the two rows if specifically approved; those inactive audit fixtures are a
+declared delta, rather than an assertion that total membership row counts never
+changed. No capture, temporary authority activation or acceptance window has
+started while awaiting the choice.
+
+The private recovery bundle is frozen. Two independent fresh PostgreSQL 17
+rehearsals executed the literal connector scripts: 30/30 assertions for the
+unapproved branch (zero new memberships) and 30/30 for the locally simulated
+approved branch (exactly two bounded memberships, then exactly two inactive
+audit fixtures). Both waited for real 90-second guardian expiry and proved that
+retry preserves the first deadline, expiry/revocation cannot renew authority,
+administrator restoration commits independently, and repeated cleanup restores
+the exact selected baselines while ending operators and stopping Football
+clocks. Both clusters were removed. These 60 private-recovery assertions are
+reported separately from the 12,381 application/database assertions. They are
+disposable readiness evidence, not proof of an activated or cleaned live window.
+The unchanged live capture still disables optional membership creation pending
+the human's choice; no private recovery script or credential is committed.
+
+Canonical read-only checkpoint at **2026-10-04 23:43:20.007133 UTC** found zero
+audit rows for the prepared Phase 5D run, zero Football states/facts/seals, zero
+effective game operators, and the original platform-administrator assignment
+still effective. No hosted fixture or temporary test authority had been
+activated. This checkpoint is not represented as final post-window cleanup.

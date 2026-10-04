@@ -1,5 +1,11 @@
 # Boss foundation implementation decisions
 
+Current implementation status: **Phase 5D Football and athlete-history portability:
+IN PROGRESS**, authorized separately below. Its validated implementation is
+migrated and deployed; controlled hosted acceptance is still pending. The
+following Phase 5C owner-closure statement and its historical checkpoints remain
+preserved.
+
 Current owner status: **Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.**
 The [Main Boss Chat closure decision](#phase-5c-closure-by-main-boss-chat--october-4-2026)
 at the end of this file supersedes the historical pending disposition immediately
@@ -524,3 +530,29 @@ team membership. Future explicit family sharing is view-only and separately
 approved; full career aggregation, recruiting/public links and exports remain
 out of scope. Phase 5C closure and incident history are unchanged. Implementation
 and all new validation remain pending at this decision checkpoint.
+
+### October 4, 2026: Phase 5D deployed readiness checkpoint
+
+The validated four migrations are applied and their exact stored bodies match
+the tested source; all 44 canonical migration entries match. Disposable
+PostgreSQL 17 passed 12,381 SQL/bootstrap assertions and 123 genuine races;
+typecheck, zero-warning lint, 336/336 application tests and build passed against
+canonical generated types. Implementation SHA
+`8e15df6059f9cb07d0d8ada3a364fba5d063082c` is deployed to the existing Boss
+platform at **23:32:16.954 UTC**, with both implementation-head CI runs passed
+and PR #3 OPEN/DRAFT/UNMERGED. No public website or Auth settings were changed.
+
+The independent fixed-window cleanup preparation addresses the retained Phase
+5C incident without rewriting that incident. Two frozen literal-script disposable
+rehearsals passed 30 assertions each, including actual 90-second guardian expiry,
+immutable first-stage deadline, refused renewal, independent administrator
+restoration and repeated exact-baseline cleanup. This is readiness evidence;
+no live Phase 5D window has started and no temporary authority is active.
+
+The optional hosted new-team context awaits a specific human choice about two
+temporary Wildcats memberships for the existing controlled account and selected
+Child1. No new role, guardian capability, household or organization authority is
+proposed. The unapproved branch creates zero rows; the specifically approved
+branch would end exactly two new rows and retain them as inactive audit fixtures.
+Hosted positives and live cleanup are not inferred from disposable validation.
+No next sport/module is started by this checkpoint.

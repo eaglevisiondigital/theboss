@@ -21,9 +21,26 @@ removed. Four validated migrations were applied to canonical Boss at
 23:22:22–23:22:46 UTC on October 4. All 44 migration versions/names and each
 new stored SQL body match local source; 157 read-only schema checks passed.
 Canonical database types are regenerated. Final typecheck, zero-warning lint,
-336/336 application tests and production build passed. Deployment,
-recovery freeze and controlled hosted acceptance remain pending. No temporary
-Phase 5D acceptance authority has been activated. No later phase is
+336/336 application tests and production build passed. Implementation commit
+`8e15df6059f9cb07d0d8ada3a364fba5d063082c` is deployed on the existing Boss
+platform: production deployment `6ac2e1de4f36280008d164e4` was READY and published
+at **2026-10-04 23:32:16.954 UTC**. Both push and PR validation jobs passed for
+that source SHA; PR #3 is verified OPEN/DRAFT/UNMERGED. Native authenticated
+Family Hub smoke shows the new history section and three sport filters; this
+is not positive guardian or Football scenario acceptance.
+
+Private recovery is frozen and both literal-script rehearsal branches passed
+30/30 assertions on separate disposable PostgreSQL 17 clusters, including real
+90-second guardian expiry, refusal to renew, independent administrator restoration
+and repeated idempotent cleanup. Both clusters were removed. These 60 additional
+recovery assertions are separate from the 12,381 application/database suite
+assertions and are not live cleanup evidence.
+
+Controlled hosted acceptance remains pending. The single
+window has not been captured or started. The optional new-team privacy stage
+awaits the human's choice about two exact temporary Wildcats memberships; no
+additional role or guardian capability is proposed. No temporary Phase 5D
+acceptance authority has been activated. No later phase is
 in scope. See [Football architecture](FOOTBALL_ENGINE_ARCHITECTURE.md) and
 [athlete history](ATHLETE_HISTORY_ARCHITECTURE.md).
 
