@@ -1914,6 +1914,548 @@ export type Database = {
         }
         Relationships: []
       }
+      game_finalizations: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          epoch: number
+          game_id: string
+          id: string
+          operation_sequence: number
+          opponent_score: number
+          organization_id: string
+          primary_score: number
+          roster_hash: string
+          roster_revision: number
+          tied: boolean
+          winner_side: string | null
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          epoch: number
+          game_id: string
+          id?: string
+          operation_sequence: number
+          opponent_score: number
+          organization_id: string
+          primary_score: number
+          roster_hash: string
+          roster_revision: number
+          tied: boolean
+          winner_side?: string | null
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          epoch?: number
+          game_id?: string
+          id?: string
+          operation_sequence?: number
+          opponent_score?: number
+          organization_id?: string
+          primary_score?: number
+          roster_hash?: string
+          roster_revision?: number
+          tied?: boolean
+          winner_side?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_finalizations_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_finalizations_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      game_operations: {
+        Row: {
+          actor_person_id: string
+          audit_event_id: string
+          correction_of: string | null
+          created_at: string
+          game_id: string
+          id: string
+          logical_game_time: Json | null
+          next_state: Json
+          operation: string
+          organization_id: string
+          prior_state: Json
+          request_id: string | null
+          sequence: number
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          audit_event_id: string
+          correction_of?: string | null
+          created_at?: string
+          game_id: string
+          id?: string
+          logical_game_time?: Json | null
+          next_state: Json
+          operation: string
+          organization_id: string
+          prior_state: Json
+          request_id?: string | null
+          sequence: number
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          audit_event_id?: string
+          correction_of?: string | null
+          created_at?: string
+          game_id?: string
+          id?: string
+          logical_game_time?: Json | null
+          next_state?: Json
+          operation?: string
+          organization_id?: string
+          prior_state?: Json
+          request_id?: string | null
+          sequence?: number
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_operations_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_operations_audit_event_id_fkey"
+            columns: ["audit_event_id"]
+            isOneToOne: false
+            referencedRelation: "audit_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_operations_organization_id_game_id_correction_of_fkey"
+            columns: ["organization_id", "game_id", "correction_of"]
+            isOneToOne: false
+            referencedRelation: "game_operations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_operations_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      game_operator_assignments: {
+        Row: {
+          assigned_by_person_id: string
+          created_at: string
+          ends_at: string
+          function_key: string
+          game_id: string
+          id: string
+          organization_id: string
+          person_id: string
+          role_assignment_id: string
+          starts_at: string
+          status: string
+          team_id: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_by_person_id: string
+          created_at?: string
+          ends_at: string
+          function_key: string
+          game_id: string
+          id?: string
+          organization_id: string
+          person_id: string
+          role_assignment_id: string
+          starts_at?: string
+          status?: string
+          team_id: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_by_person_id?: string
+          created_at?: string
+          ends_at?: string
+          function_key?: string
+          game_id?: string
+          id?: string
+          organization_id?: string
+          person_id?: string
+          role_assignment_id?: string
+          starts_at?: string
+          status?: string
+          team_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_operator_assignments_assigned_by_person_id_fkey"
+            columns: ["assigned_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_operator_assignments_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_operator_assignments_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_operator_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_operator_assignments_role_assignment_id_fkey"
+            columns: ["role_assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_roster_snapshots: {
+        Row: {
+          active: boolean
+          availability: string
+          captain: boolean
+          captured_by_person_id: string
+          checkin_state: string | null
+          created_at: string
+          display_name: string
+          game_id: string
+          id: string
+          jersey_number: string | null
+          organization_id: string
+          participant_id: string
+          person_id: string
+          position_label: string | null
+          revision: number
+          starter: boolean
+          team_id: string
+        }
+        Insert: {
+          active?: boolean
+          availability: string
+          captain?: boolean
+          captured_by_person_id: string
+          checkin_state?: string | null
+          created_at?: string
+          display_name: string
+          game_id: string
+          id?: string
+          jersey_number?: string | null
+          organization_id: string
+          participant_id: string
+          person_id: string
+          position_label?: string | null
+          revision: number
+          starter?: boolean
+          team_id: string
+        }
+        Update: {
+          active?: boolean
+          availability?: string
+          captain?: boolean
+          captured_by_person_id?: string
+          checkin_state?: string | null
+          created_at?: string
+          display_name?: string
+          game_id?: string
+          id?: string
+          jersey_number?: string | null
+          organization_id?: string
+          participant_id?: string
+          person_id?: string
+          position_label?: string | null
+          revision?: number
+          starter?: boolean
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_roster_snapshots_captured_by_person_id_fkey"
+            columns: ["captured_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_roster_snapshots_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_roster_snapshots_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_roster_snapshots_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+          {
+            foreignKeyName: "game_roster_snapshots_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_sports: {
+        Row: {
+          key: string
+          name: string
+          status: string
+        }
+        Insert: {
+          key: string
+          name: string
+          status?: string
+        }
+        Update: {
+          key?: string
+          name?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      games: {
+        Row: {
+          competition_type: string
+          created_at: string
+          created_by_person_id: string
+          event_id: string
+          external_opponent_name: string | null
+          final_opponent_score: number | null
+          final_primary_score: number | null
+          finalization_count: number
+          finalized_at: string | null
+          finalized_by_person_id: string | null
+          home_away: string
+          id: string
+          last_sequence: number
+          occurrence_key: string
+          occurrence_mode: string
+          opponent_score: number
+          opponent_team_id: string | null
+          organization_id: string
+          parent_unit_id: string | null
+          primary_score: number
+          primary_team_id: string
+          publication_state: string
+          reopened_at: string | null
+          roster_revision: number
+          schedule_status: string
+          scheduled_end_at: string
+          scheduled_start_at: string
+          season_id: string | null
+          sport_key: string
+          started_at: string | null
+          status: string
+          tied: boolean | null
+          updated_at: string
+          updated_by_person_id: string
+          venue_id: string | null
+          version: number
+          visibility: string
+          winner_side: string | null
+        }
+        Insert: {
+          competition_type?: string
+          created_at?: string
+          created_by_person_id: string
+          event_id: string
+          external_opponent_name?: string | null
+          final_opponent_score?: number | null
+          final_primary_score?: number | null
+          finalization_count?: number
+          finalized_at?: string | null
+          finalized_by_person_id?: string | null
+          home_away: string
+          id?: string
+          last_sequence?: number
+          occurrence_key: string
+          occurrence_mode: string
+          opponent_score?: number
+          opponent_team_id?: string | null
+          organization_id: string
+          parent_unit_id?: string | null
+          primary_score?: number
+          primary_team_id: string
+          publication_state?: string
+          reopened_at?: string | null
+          roster_revision?: number
+          schedule_status: string
+          scheduled_end_at: string
+          scheduled_start_at: string
+          season_id?: string | null
+          sport_key: string
+          started_at?: string | null
+          status?: string
+          tied?: boolean | null
+          updated_at?: string
+          updated_by_person_id: string
+          venue_id?: string | null
+          version?: number
+          visibility: string
+          winner_side?: string | null
+        }
+        Update: {
+          competition_type?: string
+          created_at?: string
+          created_by_person_id?: string
+          event_id?: string
+          external_opponent_name?: string | null
+          final_opponent_score?: number | null
+          final_primary_score?: number | null
+          finalization_count?: number
+          finalized_at?: string | null
+          finalized_by_person_id?: string | null
+          home_away?: string
+          id?: string
+          last_sequence?: number
+          occurrence_key?: string
+          occurrence_mode?: string
+          opponent_score?: number
+          opponent_team_id?: string | null
+          organization_id?: string
+          parent_unit_id?: string | null
+          primary_score?: number
+          primary_team_id?: string
+          publication_state?: string
+          reopened_at?: string | null
+          roster_revision?: number
+          schedule_status?: string
+          scheduled_end_at?: string
+          scheduled_start_at?: string
+          season_id?: string | null
+          sport_key?: string
+          started_at?: string | null
+          status?: string
+          tied?: boolean | null
+          updated_at?: string
+          updated_by_person_id?: string
+          venue_id?: string | null
+          version?: number
+          visibility?: string
+          winner_side?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "games_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "games_finalized_by_person_id_fkey"
+            columns: ["finalized_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_event_id_fkey"
+            columns: ["organization_id", "event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_opponent_team_id_fkey"
+            columns: ["organization_id", "opponent_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_parent_unit_id_fkey"
+            columns: ["organization_id", "parent_unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_primary_team_id_fkey"
+            columns: ["organization_id", "primary_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_season_id_fkey"
+            columns: ["organization_id", "season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_venue_id_fkey"
+            columns: ["organization_id", "venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "games_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "games_updated_by_person_id_fkey"
+            columns: ["updated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       guardian_relationships: {
         Row: {
           authority_status: string
@@ -2381,6 +2923,7 @@ export type Database = {
           starts_at: string
           status: string
           updated_at: string
+          version: number
         }
         Insert: {
           configuration?: Json
@@ -2393,6 +2936,7 @@ export type Database = {
           starts_at?: string
           status?: string
           updated_at?: string
+          version?: number
         }
         Update: {
           configuration?: Json
@@ -2405,6 +2949,7 @@ export type Database = {
           starts_at?: string
           status?: string
           updated_at?: string
+          version?: number
         }
         Relationships: [
           {
@@ -4690,6 +5235,11 @@ export type Database = {
         Returns: Json
       }
       boss_communications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_games_mutate: {
+        Args: { p_command: Json; p_request_id: string }
+        Returns: Json
+      }
+      boss_games_read: { Args: { p_query?: Json }; Returns: Json }
       boss_notifications_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

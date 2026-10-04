@@ -1,5 +1,22 @@
 # Boss foundation permissions
 
+## Phase 5A canonical potential capabilities
+
+Seven prepared keys are `games.view`, `games.create`, `games.manage`,
+`games.operate`, `games.finalize`, `games.correct` and `games.publish`.
+The draft adds 53 explicit mappings, preserving the 21 roles and 14 modules.
+Platform and organization administrators receive all seven; athletic directors
+omit publish; program/sport administrators omit correct/publish. Team admin and
+head coach management require separate default-off Sports policy. Assistant
+coaches, team staff and livestream operators receive view only. Scorekeepers
+receive view/operate potential and need an explicit exact-game assignment plus
+current exact-team membership and referenced role for every operation/replay.
+Organization/unit grants additionally require current organization membership.
+Own/dependent safe reads require actual current relationships; household alone
+is insufficient. Focused runtime checks pass; these mappings are applied canonically.
+The finite Game Center configuration command uses existing org.manage plus current
+organization context; it adds no new role mapping or module activation.
+
 ## Phase 4B verified potential capabilities
 
 The eight new keys are `attendance.view`, `attendance.respond`, `attendance.manage`, `attendance.checkin`, `volunteers.view`, `volunteers.signup`, `volunteers.manage` and `volunteers.assign`. The applied canonical catalog retains 21 roles and 14 modules with 52 permissions and 393 role-permission mappings. The independent runtime matrix and read-only canonical capability checks passed. Controlled hosted restricted-role acceptance is partial; final temporary-grant cleanup is verified with zero residual access and the original administrator restored. See [Phase 4B validation](PHASE_4B_VALIDATION.md) for the remaining hosted gaps.

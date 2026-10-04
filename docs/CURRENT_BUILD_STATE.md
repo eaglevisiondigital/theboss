@@ -1,5 +1,28 @@
 # Current build state
 
+## Phase 5A Game Center foundation: IN PROGRESS, authorized runtime validation
+
+Main Boss Chat directly authorized disposable PostgreSQL validation, migration,
+deployment and controlled acceptance in typed instructions after the initial
+approval-review rejection. That earlier rejection is resolved; its history is
+retained in [validation](PHASE_5A_VALIDATION.md). Work continues on
+`build/boss-platform-v1` from `378b93e8db2880527dd80b640ca3989ce5c5c409`.
+
+Three append migrations are applied to canonical Boss Supabase and their bodies
+match the validated source. All 33 migration versions/names match. The fresh
+PostgreSQL 17 suite passed 8,721 SQL/bootstrap assertions and 56 races, including
+522 Phase 5A assertions and 22 races. Live read-only verification passed 183
+checks. Exact private recovery controls separately passed 17 assertions.
+Generated types, typecheck, zero-warning lint and 249 application tests pass;
+final typed-client production build passes. Deployment is next.
+
+Canonical Supabase is ACTIVE_HEALTHY; original administrator Home is hosted
+verified, and no temporary acceptance authority has opened. Advisors report only
+expected informational notices and the pre-existing Auth leaked-password warning.
+Deployment and controlled hosted acceptance remain pending. PR #3 stays
+OPEN/DRAFT/UNMERGED. No sport engine or later module has begun. The prior Phase 4B
+closure and historical incidents remain intact below. See [validation](PHASE_5A_VALIDATION.md).
+
 ## Phase 4B Attendance + RSVP + Volunteer Coordination: COMPLETE
 
 Main Boss Chat closed Phase 4B after reviewing the complete acceptance record and

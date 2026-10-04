@@ -1,5 +1,37 @@
 # Boss foundation implementation decisions
 
+## Phase 5A foundation choices under authorized validation
+
+The existing Calendar audit identified transient replacement of game detail and
+target rows, requiring durable operating records to reference events directly.
+One-time uniqueness and exact recurring keys preserve identity through reschedules.
+A completed Calendar command reconciles schedule/context and blocks canceled
+operation without rewriting sealed final facts. Matchup changes after linkage
+fail closed, avoiding silent history changes. A six-entry explicit sport catalog
+is the minimum stable approach because current team/unit labels are not taxonomy.
+No labels are inferred and no team or unit is backfilled.
+
+Only game administrator and scorekeeper functions operate in this foundation;
+normal scorekeepers cannot finalize/reopen/publish. Generic manual summary updates
+are ordered and audited without inventing sport scoring semantics. Reversals are
+restricted to the most recent eligible score update; final/reopen boundaries
+cannot be crossed by stale reversal. Initial source review fixed early Calendar
+metadata leakage before authorization, side-specific operator selection and
+Attendance authority masking. These are draft changes, not live findings.
+
+Typed human authorization explicitly permits Phase 5A disposable PostgreSQL,
+migration, deployment and controlled acceptance, resolving the initial approval
+review rejection. Focused runtime execution now exists; full historical/final
+checks and canonical/hosted acceptance remain pending. No temporary authority
+has opened. [Validation](PHASE_5A_VALIDATION.md) records actual progress without
+claiming completion. Prior Phase 4B acceptance history below is preserved.
+
+The five implemented Sports feature booleans use the existing scoped org.manage
+capability through a closed transactional Game Center command. A monotonic
+organization_modules.version guards concurrent configuration and preserves all
+unrelated configuration/status/window/source fields. It adds no role capability
+or module activation. Future feature names are rejected by this command.
+
 ## Phase 4B closure by Main Boss Chat
 
 **Phase 4B Attendance + RSVP + Volunteer Coordination: COMPLETE.** Main Boss Chat

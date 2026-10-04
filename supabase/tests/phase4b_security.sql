@@ -11,9 +11,9 @@ DECLARE role_key text;expected text[];actual text[];tab record;fn record;client_
  keys text[]:=ARRAY['attendance.checkin','attendance.manage','attendance.respond','attendance.view','volunteers.assign','volunteers.manage','volunteers.signup','volunteers.view'];
 BEGIN
  PERFORM pg_temp.check('exact evolved catalogs',
-  (SELECT count(*)=21 FROM public.roles) AND (SELECT count(*)=52 FROM public.permissions)
-  AND (SELECT count(*)=393 FROM public.role_permissions)
-  AND (SELECT count(*)=73 FROM pg_catalog.pg_tables WHERE schemaname='public')
+  (SELECT count(*)=21 FROM public.roles) AND (SELECT count(*)=52 FROM public.permissions WHERE key NOT LIKE 'games.%')
+  AND (SELECT count(*)=393 FROM public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT LIKE 'games.%')
+  AND (SELECT count(*)=73 FROM pg_catalog.pg_tables WHERE schemaname='public' AND tablename NOT IN ('game_sports','games','game_roster_snapshots','game_operator_assignments','game_operations','game_finalizations'))
   AND (SELECT count(*)=14 FROM public.modules));
  PERFORM pg_temp.check('exact Phase4B finite permission set',(SELECT array_agg(key ORDER BY key)=keys FROM public.permissions WHERE key=ANY(keys)));
  FOR role_key IN SELECT key FROM public.roles ORDER BY key LOOP

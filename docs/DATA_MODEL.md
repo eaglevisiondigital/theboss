@@ -1,5 +1,22 @@
 # Data model
 
+## Phase 5A canonical Game Center records
+
+The applied migrations complement `events` and `event_game_details` with
+`game_sports`, `games`, immutable `game_roster_snapshots`, explicit
+`game_operator_assignments`, ordered immutable `game_operations` and sealed
+`game_finalizations`. Private caller-bound receipts preserve idempotent requests.
+Tenant-qualified event/team/unit/season/venue references prevent cross-tenant
+linkage. Single events have one durable game; recurring games bind one exact
+original occurrence. Competitors are frozen after linkage, while scheduling
+follows Calendar. Snapshot revisions and finalization epochs retain history.
+No sport engine, private profile copy or statistics aggregate is added.
+organization_modules.version adds monotonic optimistic-concurrency metadata; only
+actual configuration/status/window changes advance it, and direct revision rewrites
+are rejected. Focused runtime checks pass; final full checks and canonical
+application passed. See
+[Game Center architecture](GAME_CENTER_ARCHITECTURE.md).
+
 ## Phase 4B canonical coordination records
 
 The applied migrations add six closed attendance tables: `event_attendance_settings`, `attendance_responses`, `attendance_response_history`, `attendance_checkins`, `attendance_checkin_history` and `attendance_requests`; plus four closed volunteer tables: `volunteer_role_definitions`, `volunteer_shifts`, `volunteer_assignments` and `volunteer_assignment_history`. Two private operation-receipt tables bind retries to the canonical actor, request and input.

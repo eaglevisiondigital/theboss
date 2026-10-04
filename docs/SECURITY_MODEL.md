@@ -1,5 +1,24 @@
 # Boss platform security
 
+## Phase 5A canonical security boundary
+
+All six new public tables and private receipts have RLS enabled with raw client
+privileges revoked. The two public authenticated entry points are invokers;
+private dispatchers use fixed empty search paths, current confirmed live identity,
+resource-qualified permissions, feature state and current relationships. Writes
+lock event then game, recheck authority/liveness after waits, check optimistic
+version and append audit/ledger history. Replays reauthorize. Final scores and
+roster revisions remain immutable; corrections require elevated authority and
+preserve prior history. Safe projections omit private profile/reason/contact,
+operator and internal ledger data from families, and mask captured Attendance
+fields when current source authority no longer permits them. Anonymous APIs stay
+closed. Focused PostgreSQL security/concurrency and application checks pass; the full
+historical run and canonical checks pass; hosted acceptance remains pending.
+New Game Center entry/post-wait checks use current-clock caller liveness, including
+the natural session hard deadline; historical Auth helpers are unchanged.
+Finite feature configuration uses existing org.manage and current active Sports,
+with optimistic module revisions and current authority before receipt replay. No live Auth or security configuration changed.
+
 ## Phase 4B validated coordination security
 
 Attendance and volunteer source work preserves deny-by-default RLS, closed raw tables, private helpers with empty search paths, verified canonical actors, finite same-origin POST handlers and transactional request receipts. Replays reauthorize current relationships and feature policy. RSVP notes and private snapshots do not enter audit/notification text.

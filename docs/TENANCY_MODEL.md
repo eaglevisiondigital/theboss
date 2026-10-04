@@ -1,5 +1,17 @@
 # Tenancy model
 
+## Phase 5A prepared game isolation
+
+Game Center uses the Calendar tenant and one exact competitive occurrence.
+Both internal sides must belong to that tenant and target the same event.
+An external opponent is a name, not another invented tenant. Supporting teams
+remain Calendar recipients rather than competing sides. Exact-unit scope has
+no descendant inheritance. A legitimate Falcons operator may operate a shared
+Falcons/Wildcats score but gains no Wildcats roster, team management or unrelated
+game authority. Roster projections require exact-side or own/dependent authority;
+family controls are always closed. These boundaries are prepared, not yet runtime
+verified. The underlying closed raw tables expose only bounded authorized RPCs.
+
 ## Phase 4B attendance and volunteer boundaries
 
 All ten new public tables and private receipts are closed to direct anonymous, authenticated and service-role table access. Tenant-qualified foreign keys bind settings, histories, shifts, assignments and optional communication audiences. Public invoker RPCs enter private caller-bound finite dispatchers; clients cannot supply authority or arbitrary recipient identities.

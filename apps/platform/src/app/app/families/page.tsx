@@ -7,6 +7,9 @@ import { loadVolunteers } from "@/lib/volunteers/data";
 import { parseAttendanceQuery } from "@/lib/attendance/input";
 import { parseVolunteerQuery } from "@/lib/volunteers/input";
 import { CoordinationHub } from "@/components/coordination/hub";
+import { loadGames } from "@/lib/games/data";
+import { parseGameQuery } from "@/lib/games/input";
+import { GameHub } from "@/components/games/hub";
 
 export const metadata: Metadata = { title: "Families" };
 
@@ -15,7 +18,8 @@ export default async function FamiliesPage({ searchParams }: { searchParams: Pro
   const query = await searchParams;
   const search = typeof query.q === "string" ? query.q : undefined;
   const attendanceQuery = parseAttendanceQuery({ org: query.org, child: query.child, view: "family" }), volunteerQuery = parseVolunteerQuery({ org: query.org, view: "family" });
-  if (!attendanceQuery || !volunteerQuery) return <p role="status" className="form-notice">Review the organization and child filters.</p>;
-  const [data, attendance, volunteers] = await Promise.all([loadAdminView("families", typeof query.org === "string" ? query.org : undefined, search), loadAttendance(attendanceQuery), loadVolunteers(volunteerQuery)]);
-  return <><CoordinationHub family attendance={attendance} volunteers={volunteers} attendanceQuery={attendanceQuery} volunteerQuery={volunteerQuery} /><AdminConsole view="families" data={data} query={search} /></>;
+  const gameQuery = parseGameQuery({ org: query.org, child: query.child, view: "family" });
+  if (!attendanceQuery || !volunteerQuery || !gameQuery) return <p role="status" className="form-notice">Review the organization and child filters.</p>;
+  const [data, attendance, volunteers, games] = await Promise.all([loadAdminView("families", typeof query.org === "string" ? query.org : undefined, search), loadAttendance(attendanceQuery), loadVolunteers(volunteerQuery), loadGames(gameQuery)]);
+  return <><CoordinationHub family attendance={attendance} volunteers={volunteers} attendanceQuery={attendanceQuery} volunteerQuery={volunteerQuery} /><GameHub family data={games} query={gameQuery} /><AdminConsole view="families" data={data} query={search} /></>;
 }

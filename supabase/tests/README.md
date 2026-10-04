@@ -61,6 +61,65 @@ cookies, Storage or managed extensions. Canonical project migration verification
 advisors and separately documented hosted checks complement these tests.
 Never apply the local bootstrap to a managed project.
 
+## Phase 5A Game Center test suites
+
+`phase5a_games.sql`, `phase5a_security.sql`, `phase5a_calendar.sql` and
+`phase5a_notifications.sql` use only synthetic rollback-only fixtures from
+`phase5a/fixture.sql`. They cover canonical singleton/recurring identity, finite
+lifecycle transitions, roster history, exact operator authority, role/membership/
+session revocation, correction history, finalization seals, Calendar changes,
+safe family projections and the existing bounded notification pipeline.
+
+`phase5a_games_concurrency.sh` coordinates actual blocked PostgreSQL sessions for
+linkage/start replay, distinct-request starts, operator assignment collisions,
+score sequences, finalization versus operation, reopen/refinalization, Calendar
+cancellation, operator revocation/replay, concurrent transitions, Auth session/
+verification changes during resource-lock waits, current role/membership/module
+revocation and simultaneous correction reversal. The new race
+participants retain an eight-second statement timeout. They use the disposable
+runner socket and never accept a remote connection.
+
+For focused iteration, run:
+
+```sh
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test5a
+PG_BINDIR=/opt/homebrew/opt/postgresql@17/bin bash supabase/tests/run-local.sh --test phase5a_games.sql
+```
+
+The focused option applies every migration and runs the Phase 5A SQL suites plus
+its concurrency helper. A selected SQL file omits races. Both options explicitly
+retain the requirement for the full historical run. Historical inventory checks
+exclude only the newly added Game Center tables and `games.*` keys; their prior
+counts and behavioral assertions remain intact. Execution evidence and actual
+assertion/race totals belong in the Phase 5A validation record after a completed
+runtime run. Merely preparing these files does not certify a passing result.
+
+Phase 5A includes finite configuration/version/merge/revocation coverage; exact
+singleton and recurring Calendar identity; immutable snapshots, score corrections
+and final seals; current scoped roles/relationships/operators; masked family and
+Attendance projections; closed raw access; and low-volume notification hooks.
+Its races confirm real lock waits before committing a winner. Natural deadline
+cases let a fixed synthetic session expire while blocked on event, target-role
+or operator-row locks without rewriting that session during the wait. Other
+races cover configuration versus scoring, duplicate linkage/start, stale versions,
+final/reopen and authority revocation. Each participant retains an eight-second
+timeout. Safe diagnostics show primary SQLSTATE/message or source-file errors.
+
+The historical trusted-owner audit truncation assertion uses `TRUNCATE ...
+CASCADE` inside its expected-error subtransaction. This reaches the unchanged
+immutability trigger despite new ledger foreign keys, still requiring `23514`;
+raw client privilege-denial assertions remain unchanged.
+
+The completed fresh-cluster run on October 4, 2026 passed all 33 migrations,
+8,721 SQL/bootstrap assertions and 56 coordinated races: 522 Phase 5A assertions
+(including its 183-assertion read-only verifier), 22 Phase 5A races and 34
+historical races. Exit was zero and the private cluster was removed. This is
+local/runtime evidence; canonical and hosted outcomes are recorded separately in
+the Phase 5A validation and acceptance documents. An independent private control
+suite also passed 17 recovery assertions using actual connector-compatible SQL
+and synthetic copies of the reviewed anchors; its fixtures/controls remain
+outside this public repository.
+
 ## Phase 2B operational coverage
 
 The final fresh-cluster run passed 1,776 SQL assertions: the unchanged 642 Phase 2A
