@@ -1,5 +1,59 @@
 # Current build state
 
+## Phase 5C current checkpoint — HOSTED CORE VERIFIED; CLOSURE PENDING MAIN BOSS REVIEW
+
+October 4, 2026 UTC: the Soccer implementation is migrated and deployed, and the
+single controlled window verified the core hosted scoring workflow. **Phase 5C
+is not fully closed.** Main Boss Chat must review the missed cleanup deadline and
+unverified family/guardian acceptance. The earlier checkpoint and all historical
+phase records below are retained without relabeling their evidence.
+
+The three canonical migrations are `20261004172028`, `20261004172031` and
+`20261004172034`; all **40** migration names/versions and the three unchanged tested
+body hashes match. Generated canonical types are **195,784 bytes**, SHA256
+`754edacaa8cb20bdf8566bd585cff0815b73995549924fa74eaf948189bfe9af`.
+Final checks with those types passed: typecheck, zero-warning lint, **304/304
+application tests** and production build. Deployment
+`6ac28b6f641ca7000a2287bb` is **READY**, published at **17:23:26 UTC** from
+`ce48206b3025210e8a677826e7f52d477b0fe7ee`; application and database CI both passed.
+Final read-only migration/type checks remain unchanged. Final advisor output
+reported closed-table RLS INFO and the pre-existing leaked-password WARN;
+performance reported unused-index/Auth-connection INFO and no WARN/ERROR.
+No application/schema/Auth/security-policy fix was made during hosted testing.
+
+**HOSTED VERIFIED:** repeated LIVE detail/reload/Home navigation; exact Falcons
+scorekeeper goal/card/assist actions with Wildcats identities and administrator
+controls masked; unrelated-organization GET restriction; retained signed Goal
+denial after operator revocation with score/version/fact counts unchanged;
+added-time early-end denial; no-reentry denial; second-yellow/on-field dismissal,
+bench red card, substitution and keeper changes; and native final/reopen/
+correction/refinalization with two preserved Soccer epochs. The first final was
+**2–4**; the second was **2–0**. Independent read-only oracles passed **84 fields**
+for the first seal and **168 fields** across both seals, preserving the first
+seal's UUID/digest. Actual responsive widths matched **1280/768/390/320**, with
+reopen/correction/refinalization controls exercised at 320px. The first-final
+interaction is not represented as a 320px test.
+
+The window began **17:24:28.466723 UTC**, with stop-new deadline
+**17:59:28.466723**, cleanup target **18:09:28.466723**, and hard expiry
+**18:24:28.466723**. Core scenarios had finished by **17:43:59 UTC**. The next
+confirmed clock observation was **21:04:47 UTC**; the cause of that gap is not
+established. The guardian activation guard refused the expired window before any
+guardian change. **Guardian/family hosted acceptance remains UNVERIFIED; the
+planned temporary guardian authority was never activated.**
+
+Explicit full cleanup missed the target and hard deadline. Bounded authority had
+auto-expired at the hard deadline; this does **not** count as on-time restoration.
+Immediate recovery restored exact authority at **21:05:09.183417**, archived the
+controlled event/game while preserving both epochs at **21:05:15.804037**,
+restored the two synthetic athlete memberships at **21:05:19.658853**, and restored
+modules at **21:05:24.046832 UTC**. Independent residual verification then passed:
+**zero temporary authority, zero pending controlled work, exact baselines, and
+original administrator access valid**. Native administrator Home also passed
+again after recovery. No new acceptance window or later phase is authorized by
+this checkpoint. See [validation and incident evidence](PHASE_5C_VALIDATION.md)
+and [hosted performance evidence](PHASE_5C_PERFORMANCE.md).
+
 ## Phase 5C Soccer Live Scoring + Game Statistics: IN PROGRESS
 
 Main Boss Chat directly authorized Phase 5C on October 4, 2026 from verified

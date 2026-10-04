@@ -1,5 +1,76 @@
 # Phase 5C validation
 
+## Actual migration/deployment and single-window result — October 4, 2026 UTC
+
+**HOSTED CORE VERIFIED; PHASE 5C CLOSURE PENDING MAIN BOSS REVIEW.** The family/
+guardian hosted case remains unverified and the explicit restoration deadline
+was missed. This current record supersedes the earlier pending checkpoint below
+without deleting it or promoting unexecuted scenarios to PASS.
+
+Canonical migrations `20261004172028_phase5c_soccer_core.sql`,
+`20261004172031_phase5c_soccer_operations.sql` and
+`20261004172034_phase5c_soccer_integration.sql` were applied with their exact
+frozen tested bodies. All **40** migration names/versions match; canonical types
+are **195,784 bytes**, SHA256
+`754edacaa8cb20bdf8566bd585cff0815b73995549924fa74eaf948189bfe9af`.
+Final typecheck, zero-warning lint, **304/304 application tests** and production
+build passed with these regenerated types. Application and database CI passed.
+READY deployment `6ac28b6f641ca7000a2287bb`, published **17:23:26 UTC**, serves
+`ce48206b3025210e8a677826e7f52d477b0fe7ee`.
+Final read-only advisors reported the security groups closed-table RLS INFO and
+the unchanged pre-existing leaked-password-protection WARN. Performance reported
+unused-index INFO and existing Auth-connection INFO, no WARN/ERROR. This final
+response did not provide new per-group counts; the historical post-migration
+75/154 counts below retain their original checkpoint scope. Final migration
+history and regenerated types remain unchanged. No application/schema/Auth/
+security-policy fix occurred during hosted acceptance; a narrow controlled
+administrator-operator expiry metadata correction was audited within the window.
+
+| Executed hosted case | Actual evidence |
+| --- | --- |
+| LIVE detail gate and navigation | HOSTED VERIFIED: two full reloads and Home/detail navigation passed. |
+| Controlled resource creation | HOSTED VERIFIED: one controlled event and one Soccer game; a mistaken native time entry was corrected immediately at 17:31 UTC and audited. |
+| Exact Falcons scorekeeper | HOSTED VERIFIED: F1 yellow/goal and F2 assist; Wildcats athlete identities and administrator controls masked; unrelated-organization GET restricted. |
+| Revoked operator retained Goal | HOSTED VERIFIED: permission denial; score 1–0, version 15, ten Soccer facts and one goal remained unchanged. |
+| Timing, participation and discipline | HOSTED VERIFIED: early segment end with declared added time denied, no-reentry denied, on-field second yellow and bench red handled, keeper/substitution changes and complete 130-second participation basis exercised. |
+| First final | HOSTED VERIFIED: native 2–4 final; independent oracle passed 25 groups / 7 rows / 84 fields; first-seal digest `2c77be8038dc6b1e00a96914fe326a4a`. |
+| Retained mutation after final | HOSTED VERIFIED: retained native reversal denied with game/authority-change response. |
+| Reopen/correction/second final | HOSTED VERIFIED: reasoned native reopen, four corrections and 2–0 refinalization; independent oracle passed 36 groups / 14 rows / 168 fields; first-seal UUID/digest unchanged. |
+| Responsive rendering | HOSTED VERIFIED: document width equals viewport at 1280/768/390/320 on the created test tab. Reopen/correction/refinalization controls were exercised at 320px. The original user tab remained at 689px and was never overridden; the first-final interaction is not claimed as a 320px test. |
+| Guardian/family receipt and privacy | UNVERIFIED: the expired-window guard denied activation before changing guardian authority. No positive guardian hosted claim is made. |
+
+### Fixed-window deadline incident and recovery
+
+Baseline T0 was **2026-10-04T17:24:28.466723Z**; stop-new deadline
+**17:59:28.466723Z**, cleanup target **18:09:28.466723Z**, hard expiry
+**18:24:28.466723Z**. Core acceptance was done before the **17:43:59 UTC** clock
+observation. The next confirmed clock was **21:04:47 UTC**. The cause of that gap
+is undetermined; this record does not attribute it to browser, network or
+application behavior without evidence. The guardian guard rejected the expired
+window before any change. No temporary guardian authority was activated and no
+new window was opened.
+
+**`cleanup_deadline_missed = TRUE`.** Automatic expiry bounded the temporary
+permissions at the hard deadline, but did not substitute for explicit baseline
+restoration. Recovery was invoked immediately after the late clock observation:
+
+| Audit evidence | Actual UTC time / result |
+| --- | --- |
+| Baseline `85c8b4e5-62e7-415c-9adf-1d98d87c0f45` | T0 capture; exact controlled baseline. |
+| LIVE gate `44d835fa-a688-4caa-a977-56d89477b040` | Repeated hosted gate passed. |
+| Administrator restoration `b9da2655-0ec4-4316-a6ad-ca7ad22ab8d5` | 17:35:51.573768; original administrator restored and native Home passed. |
+| Restricted role/staff removal `d19ed823-cc19-42b0-816a-39427ad108a2` | 17:38:23.081173; temporary scorekeeper authority removed, controlled administrator operator retained for core scenarios. |
+| Full authority restoration `38dec1a1-414e-4ed9-9b1a-0441c5c942ef` | 21:05:09.183417; exact selected authority baseline restored. |
+| Resource cleanup `7ac256c5-f7b0-4141-acb2-1db4c1a2b14f` | 21:05:15.804037; controlled event/game archived, both sealed epochs/history retained. |
+| Fixture restoration `075d9995-6ec9-4fb1-ad85-4b5fcb933945` | 21:05:19.658853; two synthetic athlete memberships returned to the reviewed baseline. |
+| Module restoration `fb3eadad-f22c-4e8c-aced-fa384d5d9f97` | 21:05:24.046832; exact module baseline restored. |
+| Independent residual read | After 21:05:24; PASS: zero temporary authority, zero pending controlled work, exact baselines and original administrator valid. Native Home passed again after recovery; no exact second is claimed. |
+
+The incident and unverified family case require Main Boss review before closure.
+No further window is inferred. Earlier SQL/runtime evidence remains valid in its
+original classification; it does not certify unperformed hosted cases. Historical
+Netlify proxy exposure and earlier timeout/remediation disclosures remain intact.
+
 **DISPOSABLE AND CANONICAL MIGRATION VERIFICATION PASS; DEPLOYMENT/HOSTED ACCEPTANCE PENDING.**
 Starting SHA: `a5942ac5d5c79127e08b137d429aff71ac75d499`;
 branch `build/boss-platform-v1`; existing draft PR #3.

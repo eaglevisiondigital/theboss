@@ -1,5 +1,51 @@
 # Boss foundation implementation decisions
 
+## Phase 5C current disposition — hosted core verified; owner closure review pending
+
+October 4, 2026 UTC: direct authorization was executed for the three unchanged
+validated Soccer migrations (canonical versions **20261004172028/31/34**), all
+40 migration-history entries, generated canonical types and platform deployment.
+Final typecheck, zero-warning lint, **304/304 application tests**, production
+build and both CI jobs passed. READY deployment `6ac28b6f641ca7000a2287bb`
+(**17:23:26 UTC**) serves `ce48206b3025210e8a677826e7f52d477b0fe7ee`.
+Final read-only migration/type checks remain unchanged. Advisor groups retain
+the pre-existing Auth warning and otherwise INFO notices; no new final per-group
+count is asserted. No application/schema/Auth/security-policy fix was made in
+the hosted window; a narrow controlled operator-expiry metadata correction was
+audited under the existing authorization.
+
+The single controlled native hosted window verified the core LIVE gate, exact
+Falcons scorer/masked-opponent behavior, unrelated-organization restriction,
+revoked-operator retained-Goal denial, added-time/no-reentry denials, discipline/
+substitution/keeper behavior, and native final/reopen/correction/refinalization.
+The first **2–4** seal and second **2–0** seal passed independent read-only field
+oracles while preserving the first seal. Rendering at 1280/768/390/320 and actual
+320px reopen/correction/refinalization were verified. No first-final 320px claim
+is made.
+
+**No Phase 5C closure decision is inferred.** T0 was **17:24:28.466723 UTC**;
+stop-new **17:59:28.466723**, cleanup target **18:09:28.466723**, hard expiry
+**18:24:28.466723**. Core work was done before **17:43:59 UTC**, then the next
+confirmed clock was **21:04:47 UTC**, with cause undetermined. The guardian
+activation guard refused the expired window before any change. The temporary
+guardian authority was never activated; hosted family acceptance stays
+**UNVERIFIED**.
+
+Explicit full cleanup missed the approved target and hard deadline. Automatic
+expiry bounded temporary permissions, but does not excuse or count as on-time
+baseline restoration. Immediate recovery restored selected authority/resources/
+fixtures/modules at **21:05:09.183417 / 21:05:15.804037 / 21:05:19.658853 /
+21:05:24.046832 UTC**. Independent residual checks then proved exact baseline
+equality, zero temporary authority, zero pending work and original administrator
+access valid. Audit evidence is recorded in [Phase 5C validation](PHASE_5C_VALIDATION.md).
+
+Main Boss Chat must review the cleanup deadline incident and incomplete hosted
+family evidence before deciding closure or any further acceptance direction.
+No second window, broader authority, security-policy change, Phase 5D or later
+sport/module is initiated. The earlier design/local checkpoint and every prior
+acceptance history, timeout/remediation record and Netlify proxy-exposure
+disclosure below remain preserved.
+
 ## Phase 5C Soccer implementation choices
 
 Main Boss Chat directly authorized Soccer on October 4, 2026 from
