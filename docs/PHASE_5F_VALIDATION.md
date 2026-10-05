@@ -94,3 +94,17 @@ and unpublished. Recovery retired after verification. The hosted addendum record
 exact canonical audit/check timestamps. No extra window or later phase started.
 Required Softball scoring and guardian/team-transfer/privacy hosted gates remain
 unverified, and Phase 5F remains INCOMPLETE.
+
+## Remaining hosted closure and minimum validation
+
+The separately scoped resumption completed all remaining hosted gates and
+explicitly restored baseline at 18:21:03 UTC, before fixed 19:30/19:45 deadlines.
+Phase 5F is COMPLETE; the earlier INCOMPLETE checkpoint is historical.
+Typecheck, zero-warning lint and 372/372 application tests passed again.
+Read-only canonical checks verify migration history still 57, one Softball epoch,
+three unchanged Baseball epochs and identical persistent/provenance rows after
+transfer. No code/schema change; full SQL/concurrency/performance/build suites
+were not rerun. Prior starting-SHA full CI remains PASS; documentation-only
+closure uses `[skip ci]` to avoid the prohibited unchanged massive suites. This
+is not a new final-head CI PASS claim. Exact evidence is in the
+[remaining acceptance record](PHASE_5F_REMAINING_ACCEPTANCE.md).

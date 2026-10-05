@@ -1,5 +1,16 @@
 # Phase 5F Baseball + Softball Diamond Engine — completion record
 
+## Final status: COMPLETE — remaining hosted gates passed
+
+The separately authorized remaining window passed and explicitly cleaned up
+October 5, 2026 at 18:21:03 UTC. The [focused 50-point final closure](PHASE_5F_REMAINING_ACCEPTANCE.md)
+records actual Softball 1–0/seal, guardian history after transfer with administrator
+paused, Wildcats-only privacy/correction denial, unchanged provenance, zero
+residual authority and minimal closing validation. Accepted hosted mobile and
+forged-POST tooling limits remain explicit. No new product/schema defect or
+later phase. The original 78-point first-window INCOMPLETE checkpoint below is
+retained unchanged as historical evidence, superseded by executed final gates.
+
 Status: INCOMPLETE; implementation/release and safely authorized hosted work are
 validated, and the single controlled window is closed with verified cleanup.
 Required Softball scoring and guardian/team-transfer hosted gates remain unverified.

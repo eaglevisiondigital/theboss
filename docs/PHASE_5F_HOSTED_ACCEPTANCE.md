@@ -158,3 +158,22 @@ No passwords, Auth tokens, sessions, privileged keys or prior Netlify proxy valu
 were requested, inspected, extracted, logged, committed or reused. All synthetic
 records are existing CONTROLLED TEST identities. No real customer/youth data,
 fabricated DOB, weakened security policy or later phase was used or started.
+
+## Separately authorized remaining window — COMPLETE
+
+Main Boss Chat supplied exact account/game/team/guardian/transfer/admin-pause
+authorization with an 18:30 start cutoff and absolute 19:15/19:30/19:45 deadlines.
+Activation transaction began 18:09:06.179565 UTC; no deadline was extended.
+Softball native seven-PA oracle finalized 1–0 with one immutable epoch. Guardian
+history after transfer, Child2 denial, pure Wildcats-only private-history denial
+and no correction/reopen controls passed. No code/schema fix was required.
+
+Administrator-first explicit restoration 18:21:03.191059–18:21:03.264656 UTC;
+six selected baseline sections equal, zero temporary authority/profiles/pending
+work, original administrator and Falcons membership valid, controlled Softball
+resources archived/unpublished, immutable history retained. Native administrator
+Home and removal of temporary family authority verified. Recovery retired after
+these checks. No Baseball scenario repeated, credentials exposed, real data used
+or later phase started. See [exact 50-point record](PHASE_5F_REMAINING_ACCEPTANCE.md).
+The first-window history above remains unchanged. Accepted mobile and forged-POST
+limits retain their classifications; no unexecuted forged POST is called a pass.

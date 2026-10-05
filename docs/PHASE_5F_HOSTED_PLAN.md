@@ -166,3 +166,19 @@ The remaining specific authorization requests were not received; no Softball
 operator, guardian stage, transfer, Wildcats membership or admin pause activated.
 This historical plan does not authorize opening another window. See the hosted
 addendum and INCOMPLETE 78-point report for executed evidence and exact gaps.
+
+## Subsequent exact authorization and completed remaining gates
+
+Main Boss Chat separately authorized the exact existing Softball game/operator,
+Child1 guardian, two Wildcats memberships, original Falcons end and original
+administrator pause. New window had an 18:30 start cutoff and fixed 19:15 stop,
+19:30 cleanup target, 19:45 expiry. It began 18:09 UTC and explicitly restored
+18:21 UTC. The original no-further-window statement above applied to the earlier
+checkpoint; it did not override this later explicit authorization.
+
+To prove guardian positive history *after* original-team membership ended, the
+Child1 transfer/end occurred while guardian alone was active and administrator
+paused. Staff activation followed explicit guardian end, preserving a pure
+Wildcats-only privacy stage. All remaining gates passed with no new defect.
+See [final scoped report](PHASE_5F_REMAINING_ACCEPTANCE.md). No further window or
+phase is authorized by this completed record.

@@ -1,5 +1,42 @@
 # Current build state
 
+## Phase 5F Baseball + Softball Diamond Engine: COMPLETE
+
+October 5, 2026: the separately authorized remaining hosted window passed all
+closure gates from `b42e0c73849aae315fc7dffdd022b444e09f65cd`. Existing Softball
+canonical game native seven-PA/one-inning oracle reconciled **1–0**, batting,
+pitching, honest Not tracked coverage and exactly one immutable epoch. With
+original administrator paused, guardian-only native history retained all 12
+Child1 records across six sports after the original Falcons membership ended and
+Wildcats athlete membership began. Same person/participant and original
+organization/team/game/roster/epoch provenance remain identical. Child2 denied.
+Guardian ended before Wildcats staff activation; pure Wildcats-only native
+history denied prior private records, and prior-game views had no correction,
+reopen or roster-administration controls. Safe opponent team totals are distinct
+from private individual history. No known Diamond runtime defect remains.
+
+Window activation transaction began **18:09:06.179565 UTC** (before 18:30 cutoff),
+with fixed stop-new **19:15**, cleanup target **19:30**, hard expiry **19:45**.
+Explicit administrator-first restoration **18:21:03.191059–18:21:03.264656 UTC**
+met all deadlines. All six selected baselines equal; zero temporary operators,
+Wildcats memberships, guardian authority, active profiles or pending work;
+original administrator/native Home and Falcons membership valid; controlled
+Softball resources archived/unpublished. Inactive audit/history rows retained.
+Recovery retired only after strict verification. No deadline extended.
+
+No code/schema/migration/deployment/Auth/security policy change in this window.
+Closing typecheck, zero-warning lint and 372 application tests passed. Prior full
+CI at the starting SHA remains PASS; documentation-only closure intentionally
+skips repeating unchanged massive CI SQL/race suites as directed. Existing 57
+migrations, canonical types, 13,430 assertions, 153 races and performance/build
+results retained. Accepted hosted mobile/forged-POST tooling classifications
+remain explicit. No real youth/customer data, invented DOB, credential/session
+exposure, historical proxy reuse or later phase. PR #3 stays OPEN/DRAFT/UNMERGED.
+
+See [focused 50-point closure](PHASE_5F_REMAINING_ACCEPTANCE.md). The immediately
+following INCOMPLETE first-window checkpoint and all earlier incident/acceptance
+history remain preserved and are superseded by this executed closure evidence.
+
 ## Phase 5F Baseball + Softball Diamond Engine: INCOMPLETE
 
 One shared `diamond-v1` engine is implemented, validated and deployed to Boss.
