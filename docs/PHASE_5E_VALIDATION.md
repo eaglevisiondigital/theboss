@@ -1,7 +1,9 @@
 # Phase 5E validation record
 
-Status: local and canonical schema validation passed; deployment and hosted
-acceptance pending. Starting SHA `83380a239fa3e6434a4b9d09f54852b1c0bc8597`.
+Status: local/canonical schema validation and deployment passed; core hosted
+acceptance verified; single window explicitly cleaned on time. Phase 5E remains
+INCOMPLETE at the restricted-role hosted authorization gate.
+Starting SHA `83380a239fa3e6434a4b9d09f54852b1c0bc8597`.
 Approved architecture preserved in commit `51ef9db`.
 
 ## Focused PostgreSQL 17 results
@@ -43,7 +45,9 @@ modified. The Phase 5D candidate filename was aligned to the canonical timestamp
 Application tests: 351/351 passed at the local implementation checkpoint.
 Typecheck and zero-warning lint passed. Production build passed using explicitly
 synthetic public build-format values; no live backend request was required.
-A fresh final run remains required after the latest accessibility/layout changes.
+The final implementation rerun again passed typecheck, zero-warning lint,
+351/351 application tests and production build. No code/schema defect was found
+during the hosted scenarios and no additional live repair migration was needed.
 
 The actual rendered console on an isolated synthetic local preview was measured
 at 1280, 768, 390 and 320 pixels: page scroll width equaled viewport width at all
@@ -59,8 +63,18 @@ All six Phase 5E migrations are applied; canonical history contains 52 entries.
 The live structural/ACL verification passed 71 checks. Canonical types regenerated.
 Advisors retain closed-RLS INFO (91), existing leaked-password-protection WARN (1),
 unused-index INFO (172) and absolute Auth connection allocation INFO (1). No Auth
-settings changed. No temporary hosted authority has been activated.
-Required remaining gates: Boss platform deployment, one fixed controlled native hosted acceptance
-window, explicit restoration before hard expiry, baseline equality and residual
-checks, final documentation/commit/push and OPEN/DRAFT/UNMERGED PR #3 verification.
+settings changed. Repeat canonical types were byte-identical and migration history
+remained at 52. Exact implementation GitHub push/PR database and application jobs
+passed. Boss production Git deployment published `5b732e6`; one fixed window
+verified creation, deterministic match, profile changes, immutable refinalization
+and guardian history. See the hosted acceptance record for exact evidence limits.
+Explicit recovery and strict canonical verification completed at 15:00:52 UTC,
+before stop-new, cleanup target and hard expiry. Baseline equality and zero
+residual authority/work passed; native administrator Home and post-revocation
+history denial verified. The rejected administrator pause did not execute and
+no second window was opened. Missing evidence: pure Wildcats-only private-game/
+correction hosted denial and actual smaller hosted widths (override stayed1280).
+The full database runtime suite supports authorization but is not promoted to
+hosted proof. Final documentation/commit/push and PR verification record this
+honest incomplete status; no code/schema fix was required after acceptance.
 No later sport/module is authorized or started.

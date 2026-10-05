@@ -1,5 +1,44 @@
 # Current build state
 
+## Phase 5E Volleyball + shared tracking: INCOMPLETE — hosted gate blocked
+
+October 5, 2026: the approved implementation is migrated, deployed and runtime
+validated. Six Phase 5E migrations bring canonical history to 52. Validation
+passed 13,066 SQL/bootstrap assertions, 138 coordinated races, typecheck,
+zero-warning lint, 351/351 application tests and production build. Exact
+implementation `5b732e64f89729a99a287b1d572082d8c29d5f3b` CI passed.
+
+One fixed hosted window verified two-team Calendar/game creation, match sets
+6–4/0–3/2–0 (2–1), independent stat reconciliation, custom/Score Only profiles,
+midgame partial coverage, both native final epochs and guardian cross-sport history
+after old-team membership ended. Child2 and revoked Child1 history were denied.
+Original facts/seals and earlier sport history remain intact.
+
+The pure Wildcats-only private-game/correction check did not run: automatic
+approval review rejected the original administrator pause and its explicit
+approval did not arrive before this window closed. The administrator remained
+active. Actual hosted 768/390/320 checks also remain unavailable because the
+viewport tool retained actual width 1280; local responsive checks passed. These
+are unverified evidence gates, not demonstrated production defects. No PASS is
+inferred from runtime tests and no second window was opened.
+
+Frozen recovery ran at 15:00:41 UTC; strict canonical verification at
+15:00:52.171294 UTC passed baseline equality, unchanged roles, valid original
+administrator, inactive operator/profiles/new Wildcats memberships, unpublished
+controlled resources and zero pending sources/jobs/deliveries. Guardian/original
+athlete and Sports/Calendar baseline restored; household/organization memberships
+unchanged. Cleanup was 10m34.561s before target and 25m34.561s before hard expiry.
+Monotonic revisions and immutable audited history were preserved. Native restored
+administrator Home access was verified. No credential/session material exposed,
+real youth/customer data used, DOB invented, security weakening or later module.
+
+See [the 70-point report](PHASE_5E_COMPLETION_REPORT.md),
+[hosted record](PHASE_5E_HOSTED_ACCEPTANCE.md),
+[validation](PHASE_5E_VALIDATION.md) and [performance](PHASE_5E_PERFORMANCE.md).
+PR #3 remains OPEN/DRAFT/UNMERGED. Main Boss Chat determines closure or separately
+authorizes any remaining work; Phase 5E is not declared complete here. Earlier
+checkpoint and incident history below remain preserved.
+
 ## Phase 5D Football + athlete-history portability: COMPLETE
 
 ### October 5 final hosted acceptance and closure

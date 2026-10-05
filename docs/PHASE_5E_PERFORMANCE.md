@@ -19,3 +19,10 @@ and exact game locks. Canonical game projections cap plays at 500 and epoch
 review at 100. Foreign-key context indexes and game/origin-sequence indexes support
 protected joins. Shared catalogs are finite. History keeps existing bounded keyset
 pagination. No aggregation, standings, leaderboard or public athlete query was added.
+
+Hosted native creation, 15-rally match, both seals and complete history projections
+completed against the deployed implementation. One tool response was delayed;
+there is no instrumented hosted latency distribution or production scale claim.
+Native 1280px reload/navigation remained stable. Requested smaller hosted viewport
+overrides left actual width at 1280; local responsive measurements above are not
+promoted to hosted evidence. No endpoint or security workaround was introduced.

@@ -1,7 +1,7 @@
 # Volleyball engine — Phase 5E
 
-Status: implementation in progress; no live migration or hosted acceptance is
-claimed by this document.
+Status: implementation migrated, deployed and runtime validated; core hosted
+acceptance verified. Final release/cleanup status belongs in the Phase 5E report.
 
 ## Shared tracking and console amendment
 
@@ -9,8 +9,8 @@ Volleyball must use [Boss Stat Tracking Profiles and Live Stat
 Console](STAT_TRACKING_PROFILES_ARCHITECTURE.md) from inception. The complete
 stat engine remains underneath profile-selected input. Required rally/set/service
 facts cannot be disabled. Optional observations and attribution follow game-side
-snapshots with tracked/not-tracked/partial coverage. The shared model is proposed;
-console integration and validation are pending. Previous engines and seals remain
+snapshots with tracked/not-tracked/partial coverage. The approved shared model and
+Volleyball console are implemented. Previous engines and seals remain
 intact.
 
 Volleyball extends the canonical Calendar occurrence, Game Center game, roster

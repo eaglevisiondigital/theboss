@@ -644,3 +644,41 @@ material from an unrelated open tab. The values were not used, repeated, stored
 or committed. No Boss password, Auth/session value or privileged database key
 was requested or used. Preserve this disclosure and require owner-side expiry or
 revocation review; do not claim the release had zero credential-material exposure.
+
+## Phase 5E approved statistical integrity and release (October 5, 2026)
+
+Main Boss Chat approved the shared Stat Tracking Profiles + Live Stat Console
+architecture and Phase 5E Volleyball implementation, canonical migrations,
+deployment and one bounded controlled hosted acceptance window. Required game
+state cannot be disabled; **NOT TRACKED IS NOT ZERO** is permanent. Exact scope
+resolution does not inherit authorization into descendant units. Earlier sport
+facts/reducers/seals remain unchanged and pre-profile history is labeled honestly.
+Practice remains an isolated synthetic contract; its full UX is deferred.
+
+Six validated migrations applied to canonical `ilykgwgmxtrrikreacrz`:
+`20261005142049`, `20261005142103`, `20261005142111`, `20261005142121`,
+`20261005142133`, `20261005142141`. Application timestamps were aligned in local
+filenames without changing bodies or replaying prior migrations. No new role
+mapping, Auth setting, public website release or later module is introduced.
+
+Post-apply advisor findings are the closed-table
+[RLS informational notice](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy),
+the existing [leaked-password warning](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection),
+[unused indexes](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index)
+and [Auth connection allocation](https://supabase.com/docs/guides/deployment/going-into-prod).
+No security policy was weakened to clear these notices. Hosted acceptance remains
+pending at that release checkpoint. Prior timeout and credential incidents and
+acceptance limitations remain preserved in their historical records.
+
+The single October 5 Phase 5E native window subsequently verified canonical
+creation, deterministic Volleyball, profile/coverage behavior, original and
+corrected sealed epochs, and guardian athlete-history portability. Explicit
+cleanup verified at 15:00:52 UTC before both deadlines; zero temporary authority,
+baseline equality, valid original administrator and zero pending work were proven.
+Automatic approval review rejected an original-administrator pause; the specific
+approval was requested but did not arrive before cleanup. Therefore the pure
+Wildcats-only private-game/correction hosted gate remains unverified, and Phase
+5E is INCOMPLETE. Smaller actual hosted widths also remain a tooling limitation;
+local responsive evidence is not relabeled. No known defect, new product decision,
+second window, policy workaround or later sport/module is introduced. Main Boss
+Chat retains closure authority.

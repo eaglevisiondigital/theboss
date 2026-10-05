@@ -139,3 +139,14 @@ seal; untracked values remain null. Guardian authority is evaluated independentl
 of current team membership. A new team relationship supplies no private prior-team
 history or original-team correction authority. Older sport epochs stay intact
 and receive only an honest legacy/unknown-coverage annotation.
+
+October 5 controlled native evidence: after the original Falcons membership ended
+and the same persistent Child1 moved to Wildcats, the existing verified guardian
+relationship displayed both Volleyball sealed epochs plus preserved Basketball,
+Soccer and Football records. Original provenance and legacy coverage warnings
+remained visible. Child2 was denied. Restoring the guardian to its original
+inactive state made Child1 history restricted despite the new Wildcats membership
+and the still-active administrator assignment; history does not use an admin
+override to substitute for the subject/guardian relationship. This is separate
+from a pure Wildcats-only private-game correction test. No household/organization
+membership or registration/document/payment/communication capability was broadened.

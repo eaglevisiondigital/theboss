@@ -1,9 +1,9 @@
 # Boss Stat Tracking Profiles and Live Stat Console
 
 Status: data and interaction model approved by Main Boss Chat on October 5, 2026.
-Implementation integration and validation are pending. This is a permanent
-cross-sport requirement, not a Phase 5E release
-claim. Volleyball must use this foundation before release. Basketball, Soccer
+The approved shared foundation is implemented, runtime validated and deployed
+with Volleyball. Final hosted release evidence is recorded separately. This is a
+permanent cross-sport requirement. Basketball, Soccer
 and Football retain their canonical engines and historical evidence.
 
 ## Ownership
@@ -15,9 +15,9 @@ A profile controls optional input expectations and presentation. It cannot chang
 sport rules, formulas, permissions, visibility, roster eligibility or features.
 Settings inheritance never carries authorization or descendant-unit authority.
 
-## Proposed shared records
+## Implemented shared records
 
-These names describe proposed new records, not deployed tables. All raw tables
+These records are deployed in the canonical Boss project. All raw tables
 receive immediate RLS and deny direct client writes. Server commands require
 current authorization, optimistic versions, caller-bound receipts and audit.
 
@@ -112,7 +112,7 @@ Full or claim every zero is measured.
 
 ## Permission and mutation model
 
-Propose reusing current scoped `games.manage` capability and existing
+The implementation reuses current scoped `games.manage` capability and existing
 coach-management feature policy for configuration. Validate actual target scope,
 current role and relationship. Platform/organization/program defaults require
 corresponding current management scope. Team/season overrides require that exact
@@ -200,9 +200,10 @@ foundation introduces no second official ledger or production identity system.
 6. Release only through the authorized Phase 5E workflow and one controlled window
    with baseline, prepared recovery, fixed deadline and explicit on-time cleanup.
 
-Volleyball does not yet have a completed console integration. This approved model
-creates no live schema, temporary authority or deployment. Keep PR #3 open,
-draft and unmerged. No Baseball/Softball or later module is started.
+The earlier design-only checkpoint preceded implementation. Volleyball now has
+the profile-aware console; actual migration/deployment/hosted evidence belongs
+in the Phase 5E reports. Keep PR #3 open, draft and unmerged. No
+Baseball/Softball or later module is started.
 
 ## Approved implementation checkpoint
 

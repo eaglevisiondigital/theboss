@@ -1,5 +1,16 @@
 # Game Center foundation
 
+## Phase 5E deployed implementation
+
+Volleyball and the approved shared stat catalog/profile/snapshot/coverage foundation
+are deployed on Boss. Volleyball uses the first profile-aware Live Stat Console;
+earlier sport engines retain their accepted facts and sealed history through finite
+adapter contracts and honest legacy coverage annotations. See
+[Phase 5E acceptance](PHASE_5E_HOSTED_ACCEPTANCE.md) and
+[the 70-point report](PHASE_5E_COMPLETION_REPORT.md) for actual release gates,
+hosted/runtime distinctions, temporary-authority restoration and remaining limits.
+This does not authorize another sport, aggregation or public athlete statistics.
+
 ## Permanent tracking-profile and live-console amendment
 
 Main Boss Chat requires a shared optional-input layer across sport engines:
