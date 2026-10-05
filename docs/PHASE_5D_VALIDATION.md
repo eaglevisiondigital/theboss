@@ -1,6 +1,11 @@
 # Phase 5D validation
 
 Phase 5D Football and bounded athlete-history portability are in progress.
+The single October 5 hosted window stopped after unconfirmed native Football
+game creation; explicit restoration and strict final checks passed before the
+cleanup target. Phase 5D remains incomplete. The earlier readiness records below
+remain historical; [hosted acceptance](PHASE_5D_HOSTED_ACCEPTANCE.md) records the
+actual final window, cleanup times and unexecuted cases.
 Starting branch: `build/boss-platform-v1`; starting SHA:
 `185683d8d13b7a36f9aa7e52b0b691b8c676ca34`.
 Canonical target: `the-boss-platform` / `ilykgwgmxtrrikreacrz`.
@@ -129,3 +134,32 @@ audit rows for the prepared Phase 5D run, zero Football states/facts/seals, zero
 effective game operators, and the original platform-administrator assignment
 still effective. No hosted fixture or temporary test authority had been
 activated. This checkpoint is not represented as final post-window cleanup.
+
+## October 5 single hosted window and cleanup
+
+The exact two Wildcats memberships were directly approved before capture, but
+the creation stage was never reached. Native `game.create` remained unconfirmed
+after one idempotent retry, with zero canonical Football games. New scenarios
+stopped and the frozen recovery restored the administrator independently, ended
+any discovered run authority, restored relationship/module baselines and archived
+the one expected event. No operator, guardian or new-team membership was
+activated. No architecture, app, schema, Auth or security policy changed.
+
+Start **00:24:52.457079 UTC**, stop-new **00:39:52.457079**, target
+**00:44:52.457079**, hard **00:54:52.457079**. Full restoration observation was
+**00:31:54.988898**, complete recovery received **00:32:00.037**, and repeated
+canonical strict residual verification passed at **00:35:39.763783 UTC**.
+Exact touched baselines, original administrator, zero temporary authority and
+pending work passed. The expected archived/unpublished event remains historical
+evidence; zero new membership rows means zero membership fixture delta.
+
+Post-cleanup all 44 migration entries and canonical types are unchanged;
+the 157 read-only schema checks passed with zero Football states/facts/seals.
+Advisors retain 80 intentional closed-RLS INFO and one pre-existing Auth WARN,
+156 unused-index INFO and one Auth connection INFO; no new WARN/ERROR. The prior
+12,381 SQL assertions, 123 races and 336 application tests remain the validation
+basis, separately from the 60 private recovery readiness assertions. No full
+local implementation suite was repeated for the documentation-only window record.
+Hosted Football scoring/oracle/correction/final/refinal and transfer/guardian/
+new-team privacy scenarios are unexecuted, not inferred PASS. See the complete
+[hosted matrix and safe audit IDs](PHASE_5D_HOSTED_ACCEPTANCE.md).

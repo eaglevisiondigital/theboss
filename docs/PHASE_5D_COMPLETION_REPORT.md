@@ -1,16 +1,19 @@
 # Phase 5D completion report
 
-**Status: implementation, complete local validation, canonical migration,
-production deployment and implementation-head CI verified; controlled hosted
-acceptance, cleanup and final closure verification are PENDING.** This report
-does not declare Phase 5D complete. SQL/runtime
-evidence is identified separately from hosted evidence. The release owner will
-replace pending fields only after observing their actual results.
+**Status: Phase 5D INCOMPLETE — native hosted Football creation blocked the
+single approved acceptance window. Implementation, local/canonical validation,
+deployment and readiness-head CI remain verified. Explicit cleanup and repeated
+strict residual checks passed before the cleanup target. No further window or
+phase was started.** SQL/runtime results are not relabeled as hosted acceptance.
+See [the complete hosted timeline and matrix](PHASE_5D_HOSTED_ACCEPTANCE.md).
 
 1. **Starting SHA:** `185683d8d13b7a36f9aa7e52b0b691b8c676ca34`,
    `build/boss-platform-v1`.
-2. **Final SHA:** PENDING closure documentation. Implementation is committed
-   and pushed at `8e15df6059f9cb07d0d8ada3a364fba5d063082c`.
+2. **Final SHA:** Phase 5D closure is not achieved. Implementation is committed
+   at `8e15df6059f9cb07d0d8ada3a364fba5d063082c`; pre-window readiness head was
+   `6c86e1daa0398072944546cba654c9bb8c8276f7`. The pushed documentation-result
+   SHA is recorded in the handoff and PR #3; no application/schema change was
+   made during this window.
 3. **Migrations:** Four CLI-created local migrations: `20261004232222_phase5d_football_core.sql`,
    `20261004232234_phase5d_football_operations.sql`,
    `20261004232241_phase5d_football_integration.sql` and
@@ -124,26 +127,28 @@ replace pending fields only after observing their actual results.
     are not rewritten; original labels/nullable seasons are not invented.
 40. **Family historical access:** SQL/RUNTIME VERIFIED for current verified
     guardian/self authority after old membership/module context ends. Household,
-    staff/coaching/admin status is not substitute authority. Hosted result PENDING.
-41. **Team-change preservation:** SQL/RUNTIME VERIFIED across all three sports;
-    original team/organization membership ends and source context is archived
-    without erasing/reassigning immutable athlete stats. Hosted result PENDING.
-42. **New-team privacy:** SQL/RUNTIME VERIFIED: transfer/current coaching scope
-    does not grant old private history or correction authority. Future sharing
-    needs explicit bounded family consent. Hosted result PENDING.
+    staff/coaching/admin status is not substitute authority. HOSTED NOT EXECUTED:
+    the guardian stage was never activated after the game-create blocker.
+41. **Team-change preservation:** SQL/RUNTIME VERIFIED across all three sports.
+    HOSTED NOT EXECUTED: original Child1 membership was never ended and neither
+    new Wildcats membership was created; no hosted transfer is claimed.
+42. **New-team privacy:** SQL/RUNTIME VERIFIED: new/current coaching scope does
+    not grant old private history or origin-correction authority. HOSTED NOT
+    EXECUTED: the directly approved two-membership stage was not reached.
+    Existing administrator powers remain distinct from team-contributed authority.
 43. **Feature controls:** Four default-off Football keys, independent of
     Basketball/Soccer. All seventeen finite Game Center controls are asserted
     default-off. Disable cannot permit manual score/roster/start/resume bypass.
 44. **Operator model:** Existing game administrator/scorekeeper/statistician and
     exact-game assignments. Current role, scope, resources and feature policy
     remain required; no broad coach scoring permission is added.
-45. **RLS/security:** Closed raw RLS/ACL, no direct client writes, current
-    session/identity/role/operator/occurrence/feature/version and actual roster
-    side checks after lock wait and before write. Guardian history rechecks
-    relationship/session after serialization. Hosted denials PENDING.
+45. **RLS/security:** SQL/RUNTIME VERIFIED: closed raw RLS/ACL, no direct client
+    writes, current identity/role/operator/occurrence/feature/version and actual
+    roster-side checks after lock wait. Guardian history rechecks current
+    relationship/session. Football hosted denial cases were NOT EXECUTED.
 46. **Wrong-sport enforcement:** SQL/RUNTIME VERIFIED in both directions among
-    Football, Soccer and Basketball, including feature-off engine ownership.
-    Hosted wrong-sport execution PENDING; no SQL result is relabeled hosted.
+    Football/Soccer/Basketball, including feature-off engine ownership. HOSTED
+    NOT EXECUTED; no SQL result is relabeled hosted.
 47. **Idempotency:** Canonical caller-bound receipts and request identity prevent
     duplicate plays/control/corrections, while replay revalidates current
     authority. Focused SQL and real collision races passed.
@@ -170,44 +175,49 @@ replace pending fields only after observing their actual results.
     possession/down state, operator/role/member/feature removal and late writes.
     Two additional history races deny blocked readers after guardian revocation
     or natural expiry.
-53. **Hosted deterministic Football scenario:** PENDING one controlled synthetic
-    game and the reviewed finite script. No live result is inferred from SQL.
+53. **Hosted deterministic Football scenario:** NOT EXECUTED. The synthetic
+    Calendar event saved, but native Football `game.create` and its one
+    idempotent retry both remained unconfirmed; canonical state had zero
+    Football games. New scenarios stopped and immediate recovery ran.
 54. **Independent stat reconciliation:** SQL/RUNTIME VERIFIED: literal
     independently hand-summed sixteen-row, 62-key seals; first 25–16, then 24–16.
     Primary passing 6/9 for 105 yards and rushing 7 for 33; opponent passing
     4/8 for 35 and rushing 8 for 30. Team tackles 13/10 and return yards 80/149.
-    Hosted reconciliation PENDING.
-55. **Hosted athlete team-change/history scenario:** PENDING; must end old
-    membership and preserve the same person/participant and sealed provenance.
-56. **Hosted family historical access:** PENDING; current verified guardian only,
-    without reinstating old team membership to manufacture access.
-57. **Hosted new-team privacy:** PENDING; no automatic old-history authority from
-    the new team relationship. Private original-team resources remain separate.
-58. **Hosted correction:** PENDING native signed corrections and retained-form
-    denial scenarios under the approved deadline-bound authority.
-59. **Hosted finalization:** PENDING native finalization and independent seal
-    identity/stat reconciliation.
-60. **Hosted reopen/refinalization:** PENDING native reopen, correction and new
-    seal, with immutable original-epoch proof.
-61. **Desktop acceptance:** PENDING actual 1280px viewport and native actions.
-62. **Tablet acceptance:** PENDING actual tablet viewport and native actions.
-63. **390px acceptance:** PENDING actual viewport/native controls and overflow.
-64. **320px acceptance:** PENDING actual viewport/native controls, double-tap
-    receipt behavior and readable safe stats/context.
+    Hosted reconciliation NOT EXECUTED because no Football game existed.
+55. **Hosted athlete team-change/history scenario:** NOT EXECUTED. Old membership
+    was not ended, no new membership or Football seal was created, and no
+    persistent athlete/participant identity was changed.
+56. **Hosted family historical access:** NOT EXECUTED. The existing Child1
+    guardian stage was never activated. Disposable 90-second expiry proof does
+    not become hosted natural-expiry evidence.
+57. **Hosted new-team privacy:** NOT EXECUTED. Two exact Wildcats memberships
+    were directly approved but never created. Zero new rows is not a positive
+    transfer/privacy test; the origin-correction denial remains SQL/runtime only.
+58. **Hosted correction:** NOT EXECUTED because no Football game existed.
+59. **Hosted finalization:** NOT EXECUTED; no Football seal was created.
+60. **Hosted reopen/refinalization:** NOT EXECUTED; no Football epoch existed.
+61. **Desktop acceptance:** Authenticated platform/history/native setup smoke
+    observed at 1280px; actual Football console scoring and confirmation
+    acceptance NOT EXECUTED.
+62. **Tablet acceptance:** Football console NOT EXECUTED after the setup blocker.
+63. **390px acceptance:** Football console NOT EXECUTED after the setup blocker.
+64. **320px acceptance:** Football console/double-tap/stat readability acceptance
+    NOT EXECUTED after the setup blocker.
 65. **Performance:** SQL/RUNTIME VERIFIED at 10/100/1,000 accepted facts without
     raising timeouts. Final full-run 1,000-play measurements: maximum append RPC
     **37.080ms**, replay **770.966ms**, field **0.509ms**, box **823.356ms**,
     drives **792.128ms**, PBP **2,437.830ms**, detail **2,497.609ms**,
     period-completion controls **3,084.898ms** and finalization **3,460.352ms**.
     Each measured request remained below eight seconds. Complete totals/seals
-    survived the bounded 500-play display. Hosted observations remain PENDING;
+    survived the bounded 500-play display. Hosted observations were NOT EXECUTED;
     local measurements are not a production SLA or hosted load test.
-66. **Security advisors:** Post-migration: 80 intentional closed-RLS/no-policy
-    INFO notices; one pre-existing leaked-password-protection WARN. No error or
-    Auth change. Post-cleanup review PENDING. [Auth notice](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
-67. **Performance advisors:** Post-migration: 156 unused-index INFO notices and
-    one existing Auth connection-allocation INFO; no error/missing-FK-index
-    warning. Post-cleanup review PENDING. [Index notice](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index).
+66. **Security advisors:** Post-migration and post-cleanup findings unchanged:
+    80 intentional closed-RLS INFO and one pre-existing leaked-password-protection
+    WARN. No error or Auth/security-policy change.
+    [Auth notice](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
+67. **Performance advisors:** Post-cleanup unchanged: 156 unused-index INFO and
+    one existing Auth connection-allocation INFO; no error/missing-FK warning.
+    [Index notice](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index).
 68. **Generated types:** PASS; 205,474 bytes exactly match canonical generation.
     SHA256 `171985c339c0e27240f7c2286cee931f3160ae5913cc08ea677db19bb3a09e63`.
     Temporary history RPC type cast removed.
@@ -221,40 +231,48 @@ replace pending fields only after observing their actual results.
     [Boss platform](https://thebossplatform.netlify.app). Authenticated Family Hub
     history-section/sport-filter smoke passed. Controlled positive scenarios
     remain pending; public website deployment remains separate and unchanged.
-74. **Cleanup timing:** PENDING captured baseline, armed independent cleanup,
-    fixed stop-new/target/hard timestamps, natural expiry verification and actual
-    explicit restoration before deadline. The private recovery bundle is frozen;
-    both disposable literal-script approval branches passed 30/30 assertions,
-    including actual 90-second guardian expiry, no renewal, independent admin
-    restore and repeated idempotent cleanup. These separate 60 checks are not
-    live cleanup evidence. No Phase 5D window has started.
-75. **Zero residual authority:** PENDING final exact-baseline/admin/operator/
-    role/staff/team/guardian/module/resource/pending-work verification. Prepared
-    recovery is not evidence of completed cleanup. Read-only checkpoint
-    **2026-10-04 23:43:20.007133 UTC** found zero prepared-run audit rows,
-    Football states/facts/seals and effective game operators; the original
-    administrator assignment remained effective. No temporary authority or
-    hosted fixture has been activated.
-76. **Final CI:** Implementation-head push and PR jobs PASS at `8e15df6`:
-    [push](https://github.com/eaglevisiondigital/theboss/actions/runs/37244085383),
-    [PR](https://github.com/eaglevisiondigital/theboss/actions/runs/37244089096).
-    Final closure-head verification remains PENDING.
+74. **Cleanup timing:** Fixed October 5 UTC start **00:24:52.457079**,
+    stop-new **00:39:52.457079**, target **00:44:52.457079**, hard
+    **00:54:52.457079**. Independent recovery was armed before activation.
+    Full explicit module restoration observation **00:31:54.988898**; complete
+    recovery received **00:32:00.037**. Repeated strict canonical verification
+    passed **00:35:39.763783**. No deadline extension/overrun. Backup controller
+    retired after verified immediate recovery. Guardian/operator natural expiry
+    was NOT HOSTED TESTED because neither stage activated. The separate 60
+    disposable recovery assertions remain readiness evidence only.
+75. **Zero residual authority:** VERIFIED by strict frozen residual checks twice:
+    original administrator valid, zero temporary authority/pending work, exact
+    touched relationship/module/configuration/version baselines, zero new
+    Wildcats rows or membership row-count delta. One expected synthetic event
+    remains archived/unpublished audit history; zero Football games/states/facts/
+    seals. Native administrator Home passed after restoration. Historical
+    resources and audit history were preserved.
+76. **Final CI:** Implementation and readiness heads passed both push/PR jobs.
+    Readiness head `6c86e1d`:
+    [push](https://github.com/eaglevisiondigital/theboss/actions/runs/37244822734),
+    [PR](https://github.com/eaglevisiondigital/theboss/actions/runs/37244826473).
+    Publication-head result is recorded in PR #3 and the handoff.
 77. **PR state:** [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3)
-    VERIFIED OPEN/DRAFT/UNMERGED at implementation head `8e15df6`, with Phase 5D
-    status added above its preserved prior history. Final closure update remains
-    PENDING; no merge is authorized.
-78. **Evidence limitations:** Controlled hosted/cleanup/closure evidence remains
-    pending. The optional new-team hosted context awaits a human choice about
-    the exact two temporary Wildcats memberships; no acceptance window or
-    temporary authority has started. Safe play-clock automation, full
-    officiating, fractional sacks,
-    advanced punting, passer rating, season/career totals and controlled sharing
-    remain bounded deferred scope, not fabricated completions. Prior accepted
-    Phase 4B/5C hosted limitations and failed-attempt history remain intact.
-79. **Security exceptions:** No new exception is asserted from local work.
-    Prior Netlify proxy exposure and Phase 5C late-restoration incident remain
-    preserved in their original records. Phase 5D must separately record actual
-    credential/data and cleanup findings; historical disclosures are not erased.
+    OPEN / DRAFT / UNMERGED. The incomplete hosted result and cleanup evidence
+    are added above the byte-preserved earlier acceptance history. No merge or
+    readiness promotion is authorized.
+78. **Evidence limitations:** Native Football creation remained unconfirmed after
+    one idempotent retry, with no canonical game. Exact transport/runtime cause
+    remains unresolved; no defect is claimed fixed or ruled out. All required
+    Football/oracle/correction/final/refinal/transfer/guardian/new-team hosted
+    positives and console breakpoints remain unexecuted. No second window was
+    opened. Play-clock automation, full officiating, fractional sacks, advanced
+    punting, passer rating, aggregates and controlled sharing remain deferred.
+    Prior accepted Phase 4B/5C limitations/history remain intact.
+79. **Security exceptions:** No password/Auth token/session/privileged key or
+    credential material requested, entered, read, exposed, printed, stored or
+    committed in this hosted work. Existing browser authentication used without
+    extracting values. No historical Netlify proxy credential reused/reproduced;
+    no real youth/customer data, invented DOB or weakened policy. The private
+    module activation omitted feature switches; five required existing switches
+    were enabled natively inside the bounded controlled scope and exactly
+    restored. This is a preparation finding, not a new product policy. Prior
+    proxy exposure and Phase 5C late-restoration history remain preserved.
 80. **No later phase/module:** No additional sport, full season/career engine,
     public athlete profile/sharing/export, finance/commerce, livestream or
     SMS/push provider implementation is part of Phase 5D.
@@ -264,4 +282,5 @@ replace pending fields only after observing their actual results.
 
 Supporting detail: [Football architecture](FOOTBALL_ENGINE_ARCHITECTURE.md),
 [athlete history](ATHLETE_HISTORY_ARCHITECTURE.md),
-[validation](PHASE_5D_VALIDATION.md) and [performance](PHASE_5D_PERFORMANCE.md).
+[validation](PHASE_5D_VALIDATION.md), [performance](PHASE_5D_PERFORMANCE.md) and
+[actual hosted window/cleanup](PHASE_5D_HOSTED_ACCEPTANCE.md).

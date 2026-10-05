@@ -43,3 +43,12 @@ The versioned sack/net-yardage and try-stat separation are supported by the
 Boss does not claim universal NFL/NCAA/NFHS conventions: recorded-only defensive
 attribution, explicit full sacks, configurable kneels and overtime policy remain
 documented bounded engine choices.
+
+The single October 5 hosted window could not confirm native Football game
+creation, even after its one idempotent retry. No game was created and there are
+no hosted Football append/read/seal timings to report. The available evidence
+does not establish whether transport, application or database runtime caused the
+unconfirmed outcome. It is not classified as a measured performance defect or
+covered by the disposable timings above. Recovery completed before the cleanup
+target; no timeout, provider, infrastructure or security change was made as a
+workaround. See [hosted acceptance](PHASE_5D_HOSTED_ACCEPTANCE.md).

@@ -2,6 +2,34 @@
 
 ## Phase 5D Football + athlete-history portability: IN PROGRESS
 
+**October 5, 2026: HOSTED ACCEPTANCE BLOCKED; SINGLE WINDOW CLOSED AND CLEAN.**
+The two exact Wildcats memberships were directly approved, but neither was
+created: native Football game creation remained unconfirmed after one idempotent
+retry. New scenarios stopped. No game, operator or guardian stage was activated;
+the deterministic Football and team-change/history positives are NOT HOSTED
+VERIFIED. The exact underlying request failure remains unresolved; no product
+defect is claimed fixed or ruled out. Phase 5D is not complete and no second
+window or later phase was started.
+
+The fixed window began **00:24:52.457079 UTC**, stop-new **00:39:52.457079**,
+cleanup target **00:44:52.457079**, hard expiry **00:54:52.457079**. Admin-first
+recovery explicitly restored full module baseline by **00:31:54.988898**;
+complete recovery was received at **00:32:00.037**. Repeated strict canonical
+read-only verification passed at **00:35:39.763783 UTC**, before the cleanup
+target. No expiry was extended and there was no restoration overrun.
+
+Final state: original administrator valid, zero temporary authority and pending
+controlled work, exact touched baseline equality, zero new Wildcats membership
+rows, and one expected synthetic Calendar event retained archived/unpublished.
+The historical resources were preserved. The five temporary feature switches
+and bounded Sports/Calendar availability were exactly restored. All 44 migrations
+and canonical types remain unchanged; 157 schema checks passed. Advisor findings
+are unchanged. No application/schema/Auth/security-policy change was made in
+this window. See [hosted results and audit timeline](PHASE_5D_HOSTED_ACCEPTANCE.md)
+and the [81-point report](PHASE_5D_COMPLETION_REPORT.md).
+
+### October 4 deployment/readiness checkpoint — preserved
+
 Main Boss directly authorized Phase 5D on October 4, 2026 from
 `185683d8d13b7a36f9aa7e52b0b691b8c676ca34`, on `build/boss-platform-v1` and
 OPEN/DRAFT/UNMERGED PR #3. Phase 5C remains closed; its incident and evidence

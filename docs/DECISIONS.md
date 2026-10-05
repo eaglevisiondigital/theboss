@@ -556,3 +556,28 @@ proposed. The unapproved branch creates zero rows; the specifically approved
 branch would end exactly two new rows and retain them as inactive audit fixtures.
 Hosted positives and live cleanup are not inferred from disposable validation.
 No next sport/module is started by this checkpoint.
+
+### October 5, 2026: single Phase 5D window ended without hosted closure
+
+Main Boss directly approved the exact two proposed Wildcats memberships. The
+single fixed window began at **00:24:52.457079 UTC**. Native Football creation
+remained unconfirmed after its one existing-request retry; there was no canonical
+Football game. New scenarios stopped immediately, without activating the
+operator, guardian, transfer or new-team stages. No exact failure cause or
+architecture contradiction was established.
+
+The prepared module activation bounded availability but retained empty Sports
+configuration. Its five required existing Game Center/Football switches were
+enabled through the native settings form in the controlled scope, then exactly
+restored by recovery. No new product permission or app/schema policy was invented.
+The admin-first recovery restored full module baseline at **00:31:54.988898**,
+before target **00:44:52.457079** and hard **00:54:52.457079**. Strict residual
+checks passed again at **00:35:39.763783 UTC**: zero temporary authority, original
+administrator valid, exact baselines and zero pending controlled work. Neither
+new membership was created; one expected archived/unpublished Calendar event is
+retained as audit history. Historical Phase 5C incidents are unchanged.
+
+**Phase 5D remains INCOMPLETE.** Required hosted Football and guardian/transfer/
+new-team cases are not relabeled from SQL. Resolve the unconfirmed hosted game
+creation before requesting further owner direction; this record does not
+authorize another window or sport/module. See [the hosted record](PHASE_5D_HOSTED_ACCEPTANCE.md).
