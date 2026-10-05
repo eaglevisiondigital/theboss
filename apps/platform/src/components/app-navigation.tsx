@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import type { AdminNavigation } from "@/lib/admin/contracts";
 
-export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false, communicationsAvailable = false, notificationsAvailable = false, attendanceAvailable = false, volunteersAvailable = false, gamesAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean; communicationsAvailable?: boolean; notificationsAvailable?: boolean; attendanceAvailable?: boolean; volunteersAvailable?: boolean; gamesAvailable?: boolean }) {
+export function AppNavigation({ navigation = [], calendarAvailable = false, registrationAvailable = false, communicationsAvailable = false, notificationsAvailable = false, attendanceAvailable = false, volunteersAvailable = false, gamesAvailable = false, rankingsAvailable = false }: { navigation?: AdminNavigation[]; calendarAvailable?: boolean; registrationAvailable?: boolean; communicationsAvailable?: boolean; notificationsAvailable?: boolean; attendanceAvailable?: boolean; volunteersAvailable?: boolean; gamesAvailable?: boolean; rankingsAvailable?: boolean }) {
   const pathname = usePathname();
   const organization = useSearchParams().get("org");
   const context = organization && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(organization) ? `?org=${organization}` : "";
@@ -15,6 +15,7 @@ export function AppNavigation({ navigation = [], calendarAvailable = false, regi
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
     ...((attendanceAvailable || volunteersAvailable || gamesAvailable) && !navigation.includes("families") ? [{ href: "/app/families", label: "Family Hub" }] : []),
     ...(calendarAvailable ? [{ href: "/app/calendar", label: "Calendar" }] : []),
+    ...(rankingsAvailable ? [{ href: "/app/competitions", label: "Standings & records" }] : []),
     ...(gamesAvailable ? [{ href: "/app/games", label: "Game Center" }] : []),
     ...(registrationAvailable ? [{ href: "/app/registrations", label: "Registrations" }] : []),
     ...(attendanceAvailable ? [{ href: "/app/attendance", label: "Attendance" }] : []),

@@ -914,3 +914,12 @@ button:disabled { cursor: wait; opacity: .65; }
 .stat-intelligence-hub details { padding: 16px 0; }
 @media (max-width: 640px) { .stat-intelligence-hub .athlete-history-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 380px) { .stat-intelligence-hub .athlete-history-stats { grid-template-columns: minmax(0, 1fr); } }
+
+/* Private competition tables keep the page usable without widening the viewport. */
+.rankings-hub, .rankings-product-navigation { min-width: 0; }
+.rankings-product-navigation { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.rankings-table-wrap { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.rankings-table { width: 100%; border-collapse: collapse; min-width: 36rem; }
+.rankings-table th, .rankings-table td { padding: .65rem; border-bottom: 1px solid var(--border-color, #d9d9d9); text-align: left; vertical-align: top; }
+.rankings-table details { min-width: 12rem; max-width: 22rem; white-space: normal; overflow-wrap: anywhere; }
+@media(max-width: 390px) { .rankings-product-navigation a { max-width: 100%; overflow-wrap: anywhere; } .rankings-hub .calendar-fieldset { min-width: 0; } }

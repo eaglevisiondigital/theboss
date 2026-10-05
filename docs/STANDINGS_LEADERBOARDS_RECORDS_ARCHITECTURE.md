@@ -786,3 +786,26 @@ Public Supabase changelog fetched October 5; inspected the
 No dependency, extension or runtime upgrade is proposed here; later implementation
 must recheck relevant current documentation. Technical references do not establish
 sport federation rules or approve product policy. Architecture checkpoint history; approved implementation now proceeds under the binding contract.
+
+
+## Implemented local contract checkpoint
+
+The binding eleven decisions above supersede the historical planning proposal.
+Four forward migrations, private native UIs and finite RPCs implement stable
+competition editions, explicit safe cross-org team entries, versioned assignments/
+policies/rulings, whole-cohort ties and bounded comparative products. All twelve
+potential keys have an independently tested least-privilege role matrix. Exact
+CompetitionManager uses its dedicated bridge; legacy role scopes are preserved.
+
+Seventeen public tables plus private receipts close raw client access immediately.
+Group/edition record histories and current holders bind to their exact scope with
+composite FKs. Athlete products remain originating-scope private; guardian/self
+statistics do not grant peer rank, and cross-org athlete/public sharing is disabled.
+Native forms use six finite Boss templates and explicit rate minima. Canonical
+Phase 6A reducers, eligibility, source chronology and generation dependencies are
+reused; record invalidation recomputes all survivors without deleting history.
+
+Current production remains the Phase 6A/61-migration baseline pending completion
+of the fresh full database gate. See PHASE_6B_VALIDATION.md for actual results,
+including the corrected local performance issue; no unobserved hosted result is
+claimed. Historical proposed/deferred descriptions above remain planning history.

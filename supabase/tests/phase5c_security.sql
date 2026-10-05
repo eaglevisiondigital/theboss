@@ -2,7 +2,7 @@
 begin;
 \ir phase5c/fixture.sql
 do $$declare t record;client text;f record;begin
- perform pg_temp.check('soccer creates no new broad role permission or module','CATALOG',(select count(*)=21 from public.roles) and (select count(*)=59 from public.permissions) and (select count(*)=446 from public.role_permissions) and (select count(*)=14 from public.modules));
+ perform pg_temp.check('soccer creates no new broad role permission or module','CATALOG',(select count(*)=21 from public.roles WHERE key <> 'competition_manager') and (select count(*)=59 from public.permissions WHERE key NOT IN ('competition.view','competition.manage','competition.policy_manage','standings.view','standings.manage','standings.rebuild','leaderboard.view','leaderboard.manage','leaderboard.rebuild','records.view','records.manage','records.rebuild')) and (select count(*)=446 from public.role_permissions rp JOIN public.permissions p ON p.id=rp.permission_id WHERE p.key NOT IN ('competition.view','competition.manage','competition.policy_manage','standings.view','standings.manage','standings.rebuild','leaderboard.view','leaderboard.manage','leaderboard.rebuild','records.view','records.manage','records.rebuild')) and (select count(*)=14 from public.modules));
  for t in select c.oid,c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r' and c.relname like 'game_soccer_%' loop
   perform pg_temp.check(t.relname||' RLS enabled','RLS',t.relrowsecurity);
   perform pg_temp.check(t.relname||' raw policies remain closed','RLS',not exists(select 1 from pg_policy where polrelid=t.oid));

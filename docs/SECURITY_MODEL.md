@@ -441,3 +441,22 @@ pass official command parsing. No Auth/security policy was weakened.
 ## Phase 6A prepared statistical intelligence
 
 Prepared Phase 6A tables enable RLS in their creation migration and revoke direct PUBLIC/anon/authenticated/service-role CRUD. Public statistical RPCs use finite scoped input and narrow private entry points. Self/current verified guardian may read private sport-career history; origin staff may read only explicit organization/team/season slices with existing games.view, team.roster.view for individuals, Calendar/Game Center eligibility and source-game visibility. Current-team relationship never authorizes prior-origin career history. Recheck identity, guardian and scoped role/membership after row waits. Pending projections disclose no stale totals. All changes remain local and unapplied pending release gates.
+
+
+## Phase 6B implemented private comparative boundary (release pending)
+
+Seventeen new public tables and private request receipts have RLS immediately and
+no PUBLIC/anonymous/authenticated/service-role raw CRUD. Two finite authenticated
+invoker RPCs reach only narrow private dispatchers; all other private helpers have
+closed EXECUTE and empty search paths. Current Auth/person, catalog permission,
+exact scope, memberships/windows, modules/features, source-game visibility and
+athlete audience authorize each request and receipt replay. Physical authority
+anchors protect revocation after lock waits, including stale repeatable-read work.
+
+Safe team results can be shared through explicitly approved edition entries.
+Foreign entries require originating-owner approval. Competition management provides
+no foreign roster, private athlete, communication, history or correction authority.
+Athlete cross-organization comparison and anonymous publication remain disabled.
+Guardian/self history access supplies no peer leaderboard or comparative rank.
+Current-team staff cannot inherit prior-origin career access. Signed writes enforce
+same origin and finite bounded JSON; stale projections disclose no private rows.

@@ -294,3 +294,21 @@ Immediately explicitly restore baseline/admin/module/relationships, end all temp
 Phase 6A implementation/migrations/types/UI/jobs and release are authorized under the five approved decisions. Deferred: standings, leaderboards, records (Phase 6B); athlete/recruiting/public/shared profiles (Phase 6C); additional sports or sport-source participation amendments; tournaments, association-specific official statistics policy, notifications about rankings, fundraising, Boss Bucks, Money Board, processors, commerce, livestreaming, SMS/Twilio and push infrastructure.
 
 Main Boss Chat has approved the five decisions above and authorized Phase 6A implementation, validation and release. Stop after the complete Phase 6A report. Standings, leaderboards, records, profiles and all later work remain deferred. The original architecture-only audit did not perform implementation or live changes.
+
+
+## Phase 6B consumer implementation (release pending)
+
+Private comparative products consume authoritative selected Phase 6A contributions,
+using the existing stat_reduce/stat_rates component reducers. The ranking adapter
+projects only compared/qualification components into those reducers; no parallel
+sport formula engine. Rate qualification uses compatible joint component coverage
+and explicit finite minima, never average game percentages. Positive confirmed
+participation is required; Not tracked remains unavailable rather than zero.
+
+Competition standings assignment is independent of official statistical eligibility.
+Generations/manifests invalidate exact dependent scopes on finalization/refinalization,
+classification, policy, entry/group/assignment and ruling changes. Bounded rebuilds
+publish only a complete matching generation and disclose pending/refreshing otherwise.
+ERA conventions remain separated; incompatible Baseball/Softball cohorts are not
+normalized. Nonnegative counting chronology can use binary prefix search with the
+same Phase 6A reducers; rates/nonmonotone values retain ordered source evaluation.

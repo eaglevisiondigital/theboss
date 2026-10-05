@@ -348,3 +348,21 @@ inheritance never creates permission inheritance.
 ## Phase 6A prepared statistical intelligence
 
 Phase 6A introduces no new role permission or broader grant. Athlete career is subject/self/guardian only. Individual origin-team season slices additionally require explicit organization/team/season scope, existing games.view plus team.roster.view and original resource visibility. Team-season totals require exact existing games.view and every relevant official source game's existing visibility policy. Administrator status alone does not authorize a child's cross-team career. Operational rebuild requires existing organization.manage and the same disclosure policy as the requested projection. Classification uses current games.manage over the canonical game's required sides and requires reopen/refinalize after sealing.
+
+
+## Phase 6B finite comparative potential capabilities
+
+Twelve new keys: competition.view/manage/policy_manage; standings.view/manage/rebuild;
+leaderboard.view/manage/rebuild; records.view/manage/rebuild. Platform administrator,
+organization administrator and exact CompetitionManager map all twelve. Athletic
+Director, program administrator and sport administrator map the nine view/manage/
+rebuild capabilities excluding competition.manage and competition.policy_manage.
+Head coach/team administrator map only the four view keys. All other roles gain
+none; scoring is not ranking management. No real role assignment is seeded.
+
+The competition_manager catalog role permits competition/competition_edition scopes
+only through the dedicated bounded assignment bridge. Existing role_assignments
+retain platform/organization/exact unit/exact team scopes. Every mapping remains
+potential only: current exact relationship/resource/source/audience authorization
+and features are mandatory. No descendant inheritance or fake foreign membership.
+Guardian/self authority does not independently include comparative rankings.

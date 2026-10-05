@@ -1,5 +1,28 @@
 # Current build state
 
+## Phase 6B Standings + Leaderboards + Records: IMPLEMENTED; CANONICAL MIGRATED — RELEASE/ACCEPTANCE PENDING
+
+Starting SHA `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`; Main Boss Chat's eleven
+binding decisions committed as `a858ebcaee1a7ce120334cd535fba38eb3adf7a1`.
+Stable Competition/Edition, explicit canonical entries/groups/assignments, safe
+cross-org TEAM boundary, versioned finite policies/rulings, private leaderboards and
+immutable record chronology/rebuilds are implemented using Phase6A sources/reducers.
+No anonymous youth statistics or cross-org athlete comparative sharing.
+
+Fresh full PostgreSQL17 passes **15,052 SQL/bootstrap assertions and177 races**,
+including740 Phase6B assertions and13 new races. All frozen input hashes unchanged;
+disposable cluster removed. Four exact validated bodies applied canonically; history
+**65**. Live497-check security/catalog/ACL verification and all new FK indexes pass.
+Canonical types regenerated. Pre-generation399 app tests/typecheck/lint/build pass;
+post-generation release validation, commit/push/deployment/CI and one fixed hosted
+window remain pending. No temporary Phase6B authority/window has been activated.
+
+See [implementation contract](STANDINGS_LEADERBOARDS_RECORDS_ARCHITECTURE.md),
+[validation](PHASE_6B_VALIDATION.md) and [prepared hosted plan](PHASE_6B_HOSTED_ACCEPTANCE.md).
+No Phase6C or later phase. PR3 must remain OPEN/DRAFT/UNMERGED.
+
+### Historical Phase6B contract checkpoint — preserved
+
 ## Phase 6B Standings + Leaderboards + Records: APPROVED — IMPLEMENTATION IN PROGRESS
 
 Planning-only audit at `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a` completed.
@@ -17,6 +40,7 @@ access/change, application code, deployment, hosted window or temporary authorit
 PR #3 read as OPEN/DRAFT/UNMERGED at the unchanged inspected HEAD; no PR edits in this task.
 Main Boss Chat approved eleven binding decisions and the gated Phase 6B implementation/release sequence; the architecture document records the contract. Implementation begins only after its contract commit.
 No Phase 6C or later phase. Phase 6A completion and all historical evidence below remain intact.
+
 
 ## Phase 6A Season + Career Statistical Intelligence: COMPLETE
 

@@ -376,3 +376,24 @@ rewriting prior tracking/fact seals. **NOT TRACKED IS NOT ZERO** is permanent.
 ## Phase 6A prepared statistical intelligence
 
 Five prepared Phase 6A tables separate immutable versioned competition classification/contributions from rebuildable current-epoch selectors, originating-team summaries and refresh work. Contributions bind canonical organization/game/final epoch, game season, roster revision, person/participant, tracking snapshot, source-stat identity, coverage, participation and definition versions. NULL game seasons remain unassigned career segments; no current membership attribution. Only explicitly official current final epochs contribute. No canonical Phase 6A migration has been applied at this checkpoint.
+
+
+## Phase 6B implemented local schema (canonical application pending)
+
+Four forward migrations add seventeen closed public tables for stable Competition,
+Edition, flat edition groups, canonical team entries and explicit group windows;
+exact Competition/Edition manager assignments; immutable policy, game-assignment
+and ruling revisions; private comparison definitions; rebuildable scopes/standings/
+candidates/work; immutable record events and scope-bound current co-holders.
+All tenant/source identities use canonical foreign keys and indexed referencing
+vectors. Record holder/event/candidate composite foreign keys prevent one group
+from adopting another group's recognition. Legacy role assignment scopes remain
+unchanged; the explicit competition bridge does not create organization memberships.
+
+Current final official Phase 6A selections and sealed contributions remain statistical
+truth. Explicit counting game assignment is separate from statistical eligibility.
+Unplayed forfeit outcomes do not manufacture athlete statistics or differential;
+played rulings preserve canonical scores. Records retain definition/policy versions,
+original organization/team/season/person/participant, game/finalization/epoch/source
+generation, qualification/coverage and separate achievement/recognition timestamps.
+Immutable prior recognition survives corrections and subsequent restoration.

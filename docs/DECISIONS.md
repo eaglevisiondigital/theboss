@@ -767,3 +767,17 @@ all deadlines; administrator-first recovery and exact baseline checks passed.
 Safe-fixture/runtime evidence limits are explicitly retained in the 73-point report;
 no personal data or extra authority was fabricated to inflate hosted coverage.
 Phase 6A COMPLETE; PR #3 remains OPEN/DRAFT/UNMERGED. No Phase 6B started.
+
+
+## Phase 6B Main Boss Chat implementation contract
+
+Main Boss Chat approved eleven binding competition/policy/forfeit/qualification/
+privacy/permission/record decisions. Contract commit:
+`a858ebcaee1a7ce120334cd535fba38eb3adf7a1`, starting SHA
+`e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`.
+See STANDINGS_LEADERBOARDS_RECORDS_ARCHITECTURE.md for the exact contract.
+Four canonical forward migrations are authorized only after fresh complete local
+validation; deployment/CI precede one fixed synthetic hosted window and independent
+administrator-first recovery. No Phase 6C/publication/later module is authorized.
+No current Phase 6B production change or temporary acceptance authority is claimed
+at this local documentation checkpoint. Historical incidents and evidence stay intact.

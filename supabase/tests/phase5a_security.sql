@@ -5,7 +5,7 @@ do $$declare tab record;fn record;client text;r text;actual text[];expected text
  keys text[]:=array['games.correct','games.create','games.finalize','games.manage','games.operate','games.publish','games.view'];
 begin
  perform pg_temp.check('only seven finite game permissions','CATALOG',(select array_agg(key order by key)=keys from public.permissions where key like 'games.%'));
- perform pg_temp.check('Sports reused without new module or broad role','CATALOG',(select count(*)=14 from public.modules) and (select count(*)=21 from public.roles));
+ perform pg_temp.check('Sports reused without new module or broad role','CATALOG',(select count(*)=14 from public.modules) and (select count(*)=21 from public.roles WHERE key <> 'competition_manager'));
  for r in select key from public.roles order by key loop
   expected:=case
    when r in('super_administrator','platform_administrator','organization_owner','organization_administrator') then keys

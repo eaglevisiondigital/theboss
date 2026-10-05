@@ -155,3 +155,18 @@ membership or registration/document/payment/communication capability was broaden
 ## Phase 6A prepared statistical intelligence
 
 Phase 6A adds authorized season/career summaries alongside the existing immutable athlete history, without replacing it. Statistical season uses GAME season provenance, while existing history retains its original season fields. Persistent person/participant identity, origin team/organization, roster revision and epoch survive transfers. Roster is not GP: finite accepted participation/fact predicates confirm appearances; partial/unknown coverage remains visible. Guardians retain permitted historical summaries after team membership ends. A new team obtains no prior private history or correction authority.
+
+
+## Phase 6B private comparative records (release pending)
+
+Subject-only self/guardian history is unchanged and does not grant peer ranking.
+Private athlete season/career/game records require independently authorized originating
+comparative scope. Competition/team transfer does not rewrite persistent identity or
+source provenance and creates no prior-team staff/correction authority. Cross-org
+athlete comparison and anonymous youth records remain disabled.
+
+Immutable recognition events preserve co-holder, superseded, corrected/invalidated,
+restored and policy-superseded transitions. Current holders are scope-bound, rebuildable
+projections over all eligible survivors. Better performance records achievement time
+separately from recognition wall clock. No manual legacy record is certified as Boss
+verified; imported history/publication remain deferred.

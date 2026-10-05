@@ -1117,6 +1117,640 @@ export type Database = {
           },
         ]
       }
+      competition_access_assignments: {
+        Row: {
+          competition_id: string
+          created_at: string
+          edition_id: string | null
+          ends_at: string | null
+          granted_by_person_id: string
+          id: string
+          person_id: string
+          role_id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          competition_id: string
+          created_at?: string
+          edition_id?: string | null
+          ends_at?: string | null
+          granted_by_person_id: string
+          id?: string
+          person_id: string
+          role_id: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          competition_id?: string
+          created_at?: string
+          edition_id?: string | null
+          ends_at?: string | null
+          granted_by_person_id?: string
+          id?: string
+          person_id?: string
+          role_id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_access_assignments_competition_id_edition_id_fkey"
+            columns: ["competition_id", "edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["competition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_access_assignments_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_access_assignments_granted_by_person_id_fkey"
+            columns: ["granted_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_access_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_access_assignments_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competition_editions: {
+        Row: {
+          athlete_cross_organization: boolean
+          competition_id: string
+          created_at: string
+          cross_organization: boolean
+          ends_at: string | null
+          generation: number
+          id: string
+          name: string
+          organization_id: string
+          publication_state: string
+          season_id: string | null
+          sport_key: string
+          standings_policy_id: string | null
+          starts_at: string | null
+          status: string
+          team_result_audience: string
+          version: number
+        }
+        Insert: {
+          athlete_cross_organization?: boolean
+          competition_id: string
+          created_at?: string
+          cross_organization?: boolean
+          ends_at?: string | null
+          generation?: number
+          id?: string
+          name: string
+          organization_id: string
+          publication_state?: string
+          season_id?: string | null
+          sport_key: string
+          standings_policy_id?: string | null
+          starts_at?: string | null
+          status?: string
+          team_result_audience?: string
+          version?: number
+        }
+        Update: {
+          athlete_cross_organization?: boolean
+          competition_id?: string
+          created_at?: string
+          cross_organization?: boolean
+          ends_at?: string | null
+          generation?: number
+          id?: string
+          name?: string
+          organization_id?: string
+          publication_state?: string
+          season_id?: string | null
+          sport_key?: string
+          standings_policy_id?: string | null
+          starts_at?: string | null
+          status?: string
+          team_result_audience?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_editions_organization_id_competition_id_fkey"
+            columns: ["organization_id", "competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_editions_organization_id_season_id_fkey"
+            columns: ["organization_id", "season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_editions_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "edition_policy_fk"
+            columns: ["id", "standings_policy_id"]
+            isOneToOne: false
+            referencedRelation: "standings_policy_revisions"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      competition_entries: {
+        Row: {
+          approved_by_person_id: string | null
+          created_at: string
+          edition_id: string
+          ended_at: string | null
+          entered_at: string
+          id: string
+          season_id: string | null
+          status: string
+          team_id: string
+          team_organization_id: string
+          version: number
+        }
+        Insert: {
+          approved_by_person_id?: string | null
+          created_at?: string
+          edition_id: string
+          ended_at?: string | null
+          entered_at?: string
+          id?: string
+          season_id?: string | null
+          status?: string
+          team_id: string
+          team_organization_id: string
+          version?: number
+        }
+        Update: {
+          approved_by_person_id?: string | null
+          created_at?: string
+          edition_id?: string
+          ended_at?: string | null
+          entered_at?: string
+          id?: string
+          season_id?: string | null
+          status?: string
+          team_id?: string
+          team_organization_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_entries_approved_by_person_id_fkey"
+            columns: ["approved_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_entries_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_entries_team_organization_id_season_id_fkey"
+            columns: ["team_organization_id", "season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_entries_team_organization_id_team_id_fkey"
+            columns: ["team_organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      competition_entry_groups: {
+        Row: {
+          edition_id: string
+          ends_at: string | null
+          entry_id: string
+          group_id: string
+          id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          edition_id: string
+          ends_at?: string | null
+          entry_id: string
+          group_id: string
+          id?: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          edition_id?: string
+          ends_at?: string | null
+          entry_id?: string
+          group_id?: string
+          id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_entry_groups_edition_id_entry_id_fkey"
+            columns: ["edition_id", "entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_entry_groups_edition_id_group_id_fkey"
+            columns: ["edition_id", "group_id"]
+            isOneToOne: false
+            referencedRelation: "competition_groups"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      competition_game_assignment_groups: {
+        Row: {
+          assignment_id: string
+          edition_id: string
+          group_id: string
+        }
+        Insert: {
+          assignment_id: string
+          edition_id: string
+          group_id: string
+        }
+        Update: {
+          assignment_id?: string
+          edition_id?: string
+          group_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_game_assignment_group_edition_id_assignment_id_fkey"
+            columns: ["edition_id", "assignment_id"]
+            isOneToOne: false
+            referencedRelation: "competition_game_assignments"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignment_groups_edition_id_group_id_fkey"
+            columns: ["edition_id", "group_id"]
+            isOneToOne: false
+            referencedRelation: "competition_groups"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      competition_game_assignments: {
+        Row: {
+          actor_person_id: string
+          counts_for_standings: boolean
+          created_at: string
+          edition_id: string
+          game_id: string
+          game_type: string
+          group_id: string | null
+          id: string
+          opponent_entry_id: string
+          primary_entry_id: string
+          reason: string
+          source_consent_by_person_id: string
+          source_organization_id: string
+          status: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          counts_for_standings: boolean
+          created_at?: string
+          edition_id: string
+          game_id: string
+          game_type: string
+          group_id?: string | null
+          id?: string
+          opponent_entry_id: string
+          primary_entry_id: string
+          reason: string
+          source_consent_by_person_id: string
+          source_organization_id: string
+          status?: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          counts_for_standings?: boolean
+          created_at?: string
+          edition_id?: string
+          game_id?: string
+          game_type?: string
+          group_id?: string | null
+          id?: string
+          opponent_entry_id?: string
+          primary_entry_id?: string
+          reason?: string
+          source_consent_by_person_id?: string
+          source_organization_id?: string
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_game_assignments_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_edition_id_group_id_fkey"
+            columns: ["edition_id", "group_id"]
+            isOneToOne: false
+            referencedRelation: "competition_groups"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_edition_id_opponent_entry_id_fkey"
+            columns: ["edition_id", "opponent_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_edition_id_primary_entry_id_fkey"
+            columns: ["edition_id", "primary_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_source_consent_by_person_id_fkey"
+            columns: ["source_consent_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_game_assignments_source_organization_id_game_i_fkey"
+            columns: ["source_organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      competition_groups: {
+        Row: {
+          created_at: string
+          edition_id: string
+          id: string
+          kind: string
+          name: string
+          organization_id: string
+          organization_unit_id: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          edition_id: string
+          id?: string
+          kind: string
+          name: string
+          organization_id: string
+          organization_unit_id?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          edition_id?: string
+          id?: string
+          kind?: string
+          name?: string
+          organization_id?: string
+          organization_unit_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_groups_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_groups_organization_id_edition_id_fkey"
+            columns: ["organization_id", "edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_groups_organization_id_organization_unit_id_fkey"
+            columns: ["organization_id", "organization_unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      competition_rulings: {
+        Row: {
+          actor_person_id: string
+          amount: number | null
+          assignment_id: string | null
+          created_at: string
+          edition_id: string
+          effective_at: string
+          group_id: string | null
+          id: string
+          kind: string
+          opponent_entry_id: string | null
+          outcome: string | null
+          primary_entry_id: string
+          reason: string
+          reversal_of_id: string | null
+          standings_opponent_score: number | null
+          standings_primary_score: number | null
+        }
+        Insert: {
+          actor_person_id: string
+          amount?: number | null
+          assignment_id?: string | null
+          created_at?: string
+          edition_id: string
+          effective_at?: string
+          group_id?: string | null
+          id?: string
+          kind: string
+          opponent_entry_id?: string | null
+          outcome?: string | null
+          primary_entry_id: string
+          reason: string
+          reversal_of_id?: string | null
+          standings_opponent_score?: number | null
+          standings_primary_score?: number | null
+        }
+        Update: {
+          actor_person_id?: string
+          amount?: number | null
+          assignment_id?: string | null
+          created_at?: string
+          edition_id?: string
+          effective_at?: string
+          group_id?: string | null
+          id?: string
+          kind?: string
+          opponent_entry_id?: string | null
+          outcome?: string | null
+          primary_entry_id?: string
+          reason?: string
+          reversal_of_id?: string | null
+          standings_opponent_score?: number | null
+          standings_primary_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_rulings_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_assignment_id_fkey"
+            columns: ["edition_id", "assignment_id"]
+            isOneToOne: false
+            referencedRelation: "competition_game_assignments"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_group_id_fkey"
+            columns: ["edition_id", "group_id"]
+            isOneToOne: false
+            referencedRelation: "competition_groups"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_opponent_entry_id_fkey"
+            columns: ["edition_id", "opponent_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_primary_entry_id_fkey"
+            columns: ["edition_id", "primary_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "competition_rulings_edition_id_reversal_of_id_fkey"
+            columns: ["edition_id", "reversal_of_id"]
+            isOneToOne: false
+            referencedRelation: "competition_rulings"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      competitions: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          id: string
+          name: string
+          organization_id: string
+          parent_unit_id: string | null
+          status: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          id?: string
+          name: string
+          organization_id: string
+          parent_unit_id?: string | null
+          status?: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          id?: string
+          name?: string
+          organization_id?: string
+          parent_unit_id?: string | null
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competitions_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitions_organization_id_parent_unit_id_fkey"
+            columns: ["organization_id", "parent_unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       document_requirements: {
         Row: {
           allowed_mime_types: string[]
@@ -5352,6 +5986,416 @@ export type Database = {
         }
         Relationships: []
       }
+      ranking_candidates: {
+        Row: {
+          achieved_at: string | null
+          built_generation: number
+          coverage: Json
+          id: string
+          person_id: string | null
+          qualification: Json
+          qualification_state: string
+          rank: number | null
+          scope_id: string
+          source_manifest: Json
+          subject_key: string
+          summary: Json
+          team_id: string | null
+          value: number | null
+        }
+        Insert: {
+          achieved_at?: string | null
+          built_generation?: number
+          coverage: Json
+          id?: string
+          person_id?: string | null
+          qualification: Json
+          qualification_state: string
+          rank?: number | null
+          scope_id: string
+          source_manifest: Json
+          subject_key: string
+          summary: Json
+          team_id?: string | null
+          value?: number | null
+        }
+        Update: {
+          achieved_at?: string | null
+          built_generation?: number
+          coverage?: Json
+          id?: string
+          person_id?: string | null
+          qualification?: Json
+          qualification_state?: string
+          rank?: number | null
+          scope_id?: string
+          source_manifest?: Json
+          subject_key?: string
+          summary?: Json
+          team_id?: string | null
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ranking_candidates_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_candidates_scope_id_fkey"
+            columns: ["scope_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_candidates_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ranking_definitions: {
+        Row: {
+          actor_person_id: string
+          allow_partial: boolean
+          competition_only: boolean
+          created_at: string
+          direction: string
+          edition_id: string
+          id: string
+          metric_key: string
+          metric_kind: string
+          name: string
+          product: string
+          qualification: Json
+          season_id: string | null
+          source_kind: string
+          source_organization_id: string
+          stat_definition_version: string
+          status: string
+          team_id: string | null
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          allow_partial?: boolean
+          competition_only?: boolean
+          created_at?: string
+          direction: string
+          edition_id: string
+          id?: string
+          metric_key: string
+          metric_kind: string
+          name: string
+          product: string
+          qualification?: Json
+          season_id?: string | null
+          source_kind: string
+          source_organization_id: string
+          stat_definition_version?: string
+          status?: string
+          team_id?: string | null
+          version?: number
+        }
+        Update: {
+          actor_person_id?: string
+          allow_partial?: boolean
+          competition_only?: boolean
+          created_at?: string
+          direction?: string
+          edition_id?: string
+          id?: string
+          metric_key?: string
+          metric_kind?: string
+          name?: string
+          product?: string
+          qualification?: Json
+          season_id?: string | null
+          source_kind?: string
+          source_organization_id?: string
+          stat_definition_version?: string
+          status?: string
+          team_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ranking_definitions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_definitions_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_definitions_source_organization_id_fkey"
+            columns: ["source_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_definitions_source_organization_id_season_id_fkey"
+            columns: ["source_organization_id", "season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "ranking_definitions_source_organization_id_team_id_fkey"
+            columns: ["source_organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      ranking_refresh_work: {
+        Row: {
+          attempts: number
+          claimed_until: string | null
+          created_at: string
+          scope_id: string
+          target_generation: number
+        }
+        Insert: {
+          attempts?: number
+          claimed_until?: string | null
+          created_at?: string
+          scope_id: string
+          target_generation: number
+        }
+        Update: {
+          attempts?: number
+          claimed_until?: string | null
+          created_at?: string
+          scope_id?: string
+          target_generation?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ranking_refresh_work_scope_id_fkey"
+            columns: ["scope_id"]
+            isOneToOne: true
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ranking_scopes: {
+        Row: {
+          build_cursor: string | null
+          definition_id: string | null
+          edition_id: string
+          group_id: string | null
+          id: string
+          product: string
+          published_generation: number
+          reason: string | null
+          refreshed_at: string | null
+          source_hash: string | null
+          source_manifest: Json
+          state: string
+          target_generation: number
+          valid_until: string | null
+        }
+        Insert: {
+          build_cursor?: string | null
+          definition_id?: string | null
+          edition_id: string
+          group_id?: string | null
+          id?: string
+          product: string
+          published_generation?: number
+          reason?: string | null
+          refreshed_at?: string | null
+          source_hash?: string | null
+          source_manifest?: Json
+          state?: string
+          target_generation?: number
+          valid_until?: string | null
+        }
+        Update: {
+          build_cursor?: string | null
+          definition_id?: string | null
+          edition_id?: string
+          group_id?: string | null
+          id?: string
+          product?: string
+          published_generation?: number
+          reason?: string | null
+          refreshed_at?: string | null
+          source_hash?: string | null
+          source_manifest?: Json
+          state?: string
+          target_generation?: number
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ranking_scopes_definition_id_fkey"
+            columns: ["definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_scopes_edition_id_definition_id_fkey"
+            columns: ["edition_id", "definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_definitions"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "ranking_scopes_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ranking_scopes_edition_id_group_id_fkey"
+            columns: ["edition_id", "group_id"]
+            isOneToOne: false
+            referencedRelation: "competition_groups"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      record_current_holders: {
+        Row: {
+          candidate_id: string
+          definition_id: string
+          event_id: string
+          scope_id: string
+          subject_key: string
+        }
+        Insert: {
+          candidate_id: string
+          definition_id: string
+          event_id: string
+          scope_id: string
+          subject_key: string
+        }
+        Update: {
+          candidate_id?: string
+          definition_id?: string
+          event_id?: string
+          scope_id?: string
+          subject_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "record_current_holders_definition_id_fkey"
+            columns: ["definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "record_current_holders_scope_id_candidate_id_fkey"
+            columns: ["scope_id", "candidate_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_candidates"
+            referencedColumns: ["scope_id", "id"]
+          },
+          {
+            foreignKeyName: "record_current_holders_scope_id_definition_id_fkey"
+            columns: ["scope_id", "definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id", "definition_id"]
+          },
+          {
+            foreignKeyName: "record_current_holders_scope_id_subject_key_event_id_fkey"
+            columns: ["scope_id", "subject_key", "event_id"]
+            isOneToOne: false
+            referencedRelation: "record_events"
+            referencedColumns: ["scope_id", "subject_key", "id"]
+          },
+        ]
+      }
+      record_events: {
+        Row: {
+          achieved_at: string
+          definition_id: string
+          event_key: string
+          event_type: string
+          generation: number
+          id: string
+          previous_event_id: string | null
+          qualification: Json
+          recognized_at: string
+          scope_id: string
+          source_manifest: Json
+          subject_key: string
+          value: number
+        }
+        Insert: {
+          achieved_at: string
+          definition_id: string
+          event_key: string
+          event_type: string
+          generation: number
+          id?: string
+          previous_event_id?: string | null
+          qualification: Json
+          recognized_at?: string
+          scope_id: string
+          source_manifest: Json
+          subject_key: string
+          value: number
+        }
+        Update: {
+          achieved_at?: string
+          definition_id?: string
+          event_key?: string
+          event_type?: string
+          generation?: number
+          id?: string
+          previous_event_id?: string | null
+          qualification?: Json
+          recognized_at?: string
+          scope_id?: string
+          source_manifest?: Json
+          subject_key?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "record_events_definition_id_fkey"
+            columns: ["definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "record_events_scope_id_definition_id_fkey"
+            columns: ["scope_id", "definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id", "definition_id"]
+          },
+          {
+            foreignKeyName: "record_events_scope_id_previous_event_id_fkey"
+            columns: ["scope_id", "previous_event_id"]
+            isOneToOne: false
+            referencedRelation: "record_events"
+            referencedColumns: ["scope_id", "id"]
+          },
+        ]
+      }
       registration_coupons: {
         Row: {
           adjustment_type: string
@@ -6357,6 +7401,114 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organization_units"
             referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      standings_policy_revisions: {
+        Row: {
+          actor_person_id: string
+          configuration: Json
+          created_at: string
+          edition_id: string
+          id: string
+          reason: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          configuration: Json
+          created_at?: string
+          edition_id: string
+          id?: string
+          reason: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          configuration?: Json
+          created_at?: string
+          edition_id?: string
+          id?: string
+          reason?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "standings_policy_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "standings_policy_revisions_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      standings_rows: {
+        Row: {
+          entry_id: string
+          explanation: Json
+          games_played: number
+          losses: number
+          metrics: Json
+          points: number | null
+          rank: number
+          scope_id: string
+          scoring_against: number | null
+          scoring_for: number | null
+          ties: number
+          win_percentage: number | null
+          wins: number
+        }
+        Insert: {
+          entry_id: string
+          explanation: Json
+          games_played: number
+          losses: number
+          metrics: Json
+          points?: number | null
+          rank: number
+          scope_id: string
+          scoring_against?: number | null
+          scoring_for?: number | null
+          ties: number
+          win_percentage?: number | null
+          wins: number
+        }
+        Update: {
+          entry_id?: string
+          explanation?: Json
+          games_played?: number
+          losses?: number
+          metrics?: Json
+          points?: number | null
+          rank?: number
+          scope_id?: string
+          scoring_against?: number | null
+          scoring_for?: number | null
+          ties?: number
+          win_percentage?: number | null
+          wins?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "standings_rows_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "standings_rows_scope_id_fkey"
+            columns: ["scope_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -7478,6 +8630,8 @@ export type Database = {
         Returns: Json
       }
       boss_notifications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_ranking_mutate: { Args: { p_command: Json }; Returns: Json }
+      boss_ranking_read: { Args: { p_query?: Json }; Returns: Json }
       boss_registration_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json
