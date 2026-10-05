@@ -9,17 +9,24 @@ trap 'rm -rf -- "$work"' EXIT
 psql_cmd=("$PG_BINDIR/psql" -X -q --no-password --host "$PGHOST" --username postgres --dbname postgres -v ON_ERROR_STOP=1 -v VERBOSITY=terse)
 for spec in 'phase5b_basketball.sql basketball bb_game basketball' 'phase5c_soccer.sql soccer sc_game oracle' 'phase5d_football.sql football ff_game oracle' 'phase5e_commands.sql volleyball ff_game oracle' 'phase5f_commands.sql baseball ff_game oracle';do
  read -r file sport helper label <<<"$spec"
- python3 - "$test_dir" "$file" "$helper" "$label" "$work/input.sql" <<'PY'
-import sys,re
-from pathlib import Path
-root,file,helper,label,target=sys.argv[1:]
-s=(Path(root)/file).read_text()
-s=re.sub(r'^\\ir (.+)$',lambda m:"\\ir '"+str(Path(root)/m[1])+"'",s,flags=re.M)
-s=re.sub(r"select pg_temp.game_op\('game.finalize','([^']+)'\);",lambda m:"select public.boss_stat_competition_classify(pg_temp."+helper+"('"+m[1]+"'),'official','Disposable synthetic source oracle',gen_random_uuid());"+m[0],s)
-s=re.sub(r'^select count\(\*\).*passed_assertions.*$', '',s,flags=re.M)
-s=re.sub(r'^rollback;$','',s,flags=re.M)
-Path(target).write_text(s)
-PY
+ # POSIX awk is present in the pinned PostgreSQL CI image; Python is not.
+ # Keep every original statement, inserting eligibility before each finalize.
+ awk -v root="$test_dir" -v helper="$helper" -v q="'" '
+ /^\\ir / { print "\\ir " q root "/" substr($0,5) q; next }
+ /^select count\(\*\).*passed_assertions/ || /^rollback;$/ { print ""; next }
+ {
+   rest=$0; out=""
+   pattern="select pg_temp\\.game_op\\(" q "game\\.finalize" q "," q "[^" q "]+" q "\\);"
+   while (match(rest,pattern)) {
+     call=substr(rest,RSTART,RLENGTH)
+     label=call
+     sub("^select pg_temp\\.game_op\\(" q "game\\.finalize" q "," q,"",label)
+     sub(q "\\);$","",label)
+     out=out substr(rest,1,RSTART-1) "select public.boss_stat_competition_classify(pg_temp." helper "(" q label q ")," q "official" q "," q "Disposable synthetic source oracle" q ",gen_random_uuid());" call
+     rest=substr(rest,RSTART+RLENGTH)
+   }
+   print out rest
+ }' "$test_dir/$file" >"$work/input.sql"
  if [[ "$sport" == baseball ]];then
  cat >>"$work/input.sql" <<'SQL'
 set local role authenticated;select pg_temp.actor('admin');

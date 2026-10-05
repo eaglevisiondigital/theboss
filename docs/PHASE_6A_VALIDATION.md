@@ -135,3 +135,18 @@ Advisors: new INFO only—five deliberately closed RLS tables without policies
 and 15 newly unused indexes. Historical leaked-password-protection WARN and
 Auth connection-sizing INFO remain unchanged. No historical remediation or
 security-policy change was made.
+
+## Released CI portability correction
+
+The first Phase 6A release CI run (`37374417837`, source
+`0b0ca42c5e761d0496a27ab14521de1a8b368940`) passed application validation but
+failed the database harness: the pinned PostgreSQL image does not contain
+`python3`. All preceding SQL suites passed; the CI reduction benchmark was
+507.225ms. No hosted acceptance window or temporary authority was activated.
+
+The sealed-source harness now uses POSIX awk already supplied by the image.
+Independent local comparison confirmed byte-for-byte identical generated SQL
+for all five inherited sport suites. Focused disposable PostgreSQL 17 validation
+passed 96 Phase 6A assertions and 11 concurrency races; benchmark 362.819ms.
+The ephemeral cluster was removed. This correction changes test portability
+only, with no application, schema, migration or security-policy change.
