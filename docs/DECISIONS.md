@@ -598,3 +598,22 @@ The earlier report's version-equality wording is corrected: recovery explicitly
 preserved monotonic Calendar/Sports revisions (10 -> 12 / 15 -> 18) while
 restoring operational baselines. Preserve prior records and audit history.
 See [the investigation](PHASE_5D_CREATION_INVESTIGATION.md).
+
+### October 5, 2026: narrow creation-candidate fix released
+
+Main Boss subsequently gave direct authorization for the exact prepared fix.
+Canonical migration `20261005110330_phase5d_game_candidate_validation` changes
+only the Game Center candidate read function so an internal opponent is offered
+only when both teams are explicit Calendar event targets. The write boundary,
+authorization, RLS, ACLs, feature policy and sport engines are unchanged. The
+application now explains the both-target requirement and reports HTTP 422 as a
+validation failure.
+
+The live function body matches validated MD5
+`7b85e9c9ce6c4707042ee5a2cf73627d`; its execution contract and generated public
+types are unchanged. Post-apply disposable validation passed 12 focused assertions,
+635 Game Center assertions and 22 races. Typecheck, zero-warning lint, 339/339
+application tests and production build passed. The fix is released through the
+existing Boss platform branch and PR #3 remains open, draft and unmerged. This
+release created no game, acceptance window, temporary authority or controlled
+membership and does not authorize Phase 5D hosted acceptance or a later phase.

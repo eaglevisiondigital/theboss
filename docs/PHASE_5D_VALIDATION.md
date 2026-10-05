@@ -177,11 +177,17 @@ zero-warning lint passed, all 339 application tests passed, and production build
 passed with the existing synthetic public build environment after an initial
 correct refusal of missing configuration. Both local clusters were removed.
 
-The function-only candidate migration is prepared and validated, but automatic
-approval review rejected production application pending typed live authorization.
-Canonical 44-entry history and original function digest remain unchanged.
-Hosted read-only baseline/admin/archive/game/receipt checks passed. No temporary
-authority or additional window exists. Operational baseline equality is verified;
+Automatic approval review first rejected production application pending direct
+authorization; that rejected attempt changed nothing. Main Boss then directly
+authorized the exact release. Canonical migration
+`20261005110330_phase5d_game_candidate_validation` applied successfully, bringing
+history to 45 entries. The live function MD5 is the validated replacement
+`7b85e9c9ce6c4707042ee5a2cf73627d`; owner/security/volatility/search path/ACL are
+preserved and generated public types are byte-identical. Post-apply reruns passed
+the 12 focused assertions, 635 Game Center assertions, 22 races, typecheck,
+zero-warning lint, 339 application tests and build. Hosted read-only
+baseline/admin/archive/game/receipt checks passed. No temporary authority or
+additional window exists. Operational baseline equality is verified;
 revision counters are intentionally monotonic (Calendar 10 -> 12, Sports 15 -> 18),
 correcting the earlier wording that also claimed version equality.
 See [full investigation evidence](PHASE_5D_CREATION_INVESTIGATION.md).

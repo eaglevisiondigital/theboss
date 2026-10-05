@@ -1,9 +1,9 @@
 # Phase 5D Football game-creation investigation
 
-**October 5, 2026: root cause proven; narrow fix validated locally. Production
-migration/deployment await direct typed approval after automatic approval review
-rejected the live migration. Phase 5D remains INCOMPLETE. No acceptance window,
-live game or temporary authority was created during this investigation.**
+**October 5, 2026: root cause proven; narrow fix validated, migrated, released
+and verified after direct authorization. Phase 5D remains INCOMPLETE. No
+acceptance window, live game or temporary authority was created during this
+investigation and release.**
 
 Starting branch/head: `build/boss-platform-v1`,
 `cbce2889a5f1895ed71c2a944a09e854d7cbc4c1`. PR #3 is OPEN / DRAFT / UNMERGED.
@@ -135,16 +135,25 @@ run successfully with canonical project URL, approved platform origin and the
 existing synthetic publishable-key fixture. No production credential was read.
 Hosted deployment will use existing platform environment without changing it.
 
-## Live status, approval boundary and restoration correction
+## Live release, historical approval boundary and restoration correction
 
-Automatic approval review rejected the attempted production migration because it
-did not accept the attachment as explicit live-production authorization. The
-rejected action did not apply the function or migration. There are still **44
-canonical migrations** and the original function digest. No alternative live
-write or automatic deploy was attempted. Direct typed approval is requested
-only for this validated migration and existing-platform fix release, followed by
-read-only checks, commit/push and draft PR update. A new acceptance window remains
-outside this release.
+Automatic approval review initially rejected the attempted production migration
+because it did not accept the earlier attachment as explicit live-production
+authorization. That rejected action made no change. Main Boss later supplied
+direct authorization for this exact release. Canonical migration
+`20261005110330_phase5d_game_candidate_validation` then applied successfully.
+Canonical history contains **45 migrations** and the live read-body MD5 is the
+validated replacement `7b85e9c9ce6c4707042ee5a2cf73627d`. Owner `postgres`,
+security-definer status, stable volatility, empty search path and authenticated
+execute ACL remain intact. Regenerated public TypeScript types are byte-identical.
+No data, grant, policy, configuration or acceptance fixture was changed.
+
+Post-apply disposable validation passed the focused 12 assertions and existing
+Game Center 635 assertions plus 22 two-connection races. Typecheck, zero-warning
+lint, 339/339 application tests and production build passed. The application
+feedback/guidance change is released through the existing Boss platform branch.
+Read-only hosted health and baseline checks follow deployment. A new acceptance
+window remains outside this release.
 
 Read-only native hosted checks passed: Game Center loads as disabled for the
 restored organization; existing administrator can read the retained archived
@@ -196,17 +205,17 @@ This investigation does not open that window.
     before and passed after the fix.
 16. Root cause: A, candidate/write context mismatch; B, misleading error feedback.
 17. Fix: narrow candidate predicate, target guidance and validation feedback;
-    locally ready, not live-applied.
+    live-applied and released after direct authorization.
 18. Regressions: 12 SQL assertions and three new application tests.
 19. Typecheck: PASS.
 20. Lint: PASS, zero warnings.
 21. Application tests: 339/339 PASS.
 22. SQL: focused 12 plus existing 635 assertions and 22 races PASS.
 23. Build: PASS with existing synthetic public environment fixture.
-24. Deployment: blocked pending typed live authorization; existing deploy unchanged.
+24. Deployment: released through the existing Boss platform branch; read-only
+    deployment and health verification recorded in the final handoff.
 25. Hosted checks: read-only baseline/archive/admin/game/receipt/work checks PASS.
-26. Final SHA: local fix publication recorded in the handoff; remote remains
-    starting SHA until the live-release authorization boundary is resolved.
+26. Final SHA: exact pushed documentation successor recorded in the final handoff.
 27. PR #3: OPEN / DRAFT / UNMERGED; no merge.
 28. New window: recommend only after approved fix release and new owner approval.
 29. First gate: valid both-target Calendar occurrence -> one confirmed Football

@@ -152,8 +152,10 @@ The original unknown-cause record above is preserved. Subsequent safe RPC/SQL
 metadata proves both submissions reached PostgreSQL and failed
 `PT422: Invalid game context`: the internal opponent was not a Calendar target,
 but the candidate read path incorrectly offered that event. No canonical game
-was created and later removed. The local fix is validated; live application is
-awaiting typed approval after automatic approval review rejected it.
+was created and later removed. The narrow fix was subsequently directly
+authorized, applied as canonical
+`20261005110330_phase5d_game_candidate_validation`, released and verified. This
+release did not open another acceptance window or create a game or authority.
 
 Reporting correction: configurations, statuses and windows were restored, but
 revision counters remained monotonic as recorded by the restoration audit:

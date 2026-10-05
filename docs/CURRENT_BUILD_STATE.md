@@ -4,7 +4,7 @@
 
 ### October 5 creation-blocker investigation — latest checkpoint
 
-**Root cause PROVEN; fix validated locally, live release awaiting typed approval.**
+**Root cause PROVEN; narrow fix migrated, released and verified.**
 The original and retry reached Supabase/PostgreSQL and both returned
 `PT422: Invalid game context`. The Calendar event targeted Falcons only, while
 Game Center requires an internal Wildcats opponent to be targeted by the same
@@ -12,10 +12,16 @@ event. The candidate projection incorrectly offered it; the form also mislabeled
 HTTP 422 as an unconfirmed outcome. A narrow candidate-filter migration and
 validation-feedback/guidance fix passed 12 new SQL assertions, 635 existing Game
 Center assertions, 22 races, typecheck, lint, 339 application tests and build.
-Automatic approval review rejected applying the production migration because it
-did not accept attachment-based live authorization. No live fix, new game,
-temporary authority or acceptance window was created. Canonical history remains
-44 migrations and the original deployed read function. Phase 5D is INCOMPLETE.
+After direct authorization, canonical migration
+`20261005110330_phase5d_game_candidate_validation` replaced only the validated
+candidate read function. Its live body digest, owner, security-definer setting,
+volatility, search path and execute ACL match the validated contract; generated
+public types are byte-identical. The application feedback/guidance fix is released
+through the existing Boss platform branch. Post-apply checks passed the 12 focused
+assertions, 635 Game Center assertions, 22 races, typecheck, zero-warning lint,
+339/339 application tests and production build. Canonical history now contains
+45 migrations. No new game, temporary authority or acceptance window was created.
+Phase 5D remains INCOMPLETE pending separately authorized hosted acceptance.
 
 Correction to earlier wording: actual module configuration/status/windows were
 restored; monotonic revision counters were preserved (Calendar 10 -> 12, Sports
