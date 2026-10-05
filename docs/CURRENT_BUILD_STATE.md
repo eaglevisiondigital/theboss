@@ -1,5 +1,14 @@
 # Current build state
 
+## Phase 6A Season + Career Statistical Intelligence: IMPLEMENTATION AUTHORIZED
+
+October 5, 2026: Main Boss Chat approved the [architecture contract](SEASON_CAREER_INTELLIGENCE_ARCHITECTURE.md)
+with five binding decisions: sealed game-season attribution, positive evidence GP,
+explicit official eligibility, versioned ERA conventions, and current-or-pending
+hybrid materialization. Implementation/release is authorized for Phase 6A only;
+validation, live migration, deployment and hosted acceptance are not yet completed.
+Phase 5F remains COMPLETE. Historical evidence and security disclosures are preserved.
+
 ## Phase 5F Baseball + Softball Diamond Engine: COMPLETE
 
 October 5, 2026: the separately authorized remaining hosted window passed all
