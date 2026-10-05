@@ -756,3 +756,14 @@ unchanged massive suites. No next phase or additional window is authorized.
 Main Boss Chat authorized Phase 6A only from 2e5e8ae1a1fafb3eab92eedb69c95bc68f217fda. Contract commit d65385387658242cbb0e6d9c073e17abee64a96c precedes implementation and records all five binding decisions. Local implementation preserves finite official eligibility, immutable game-season attribution, positive GP, versioned ERA and current-or-pending rebuildable summaries. No standings, rankings, profiles or later phase.
 
 Release is paused following an unexpected browser-inventory tool disclosure of an unrelated application's credential-bearing tab URL. No value is reproduced here. No Phase 6A live migration, deployment or temporary acceptance authority was activated. This is a containment gate, not an architecture contradiction or accepted authorization substitute. Local validation proceeds; live release/hosted acceptance remain unverified.
+
+## October 5, 2026 — Phase 6A release and bounded acceptance closure
+
+Direct typed owner authorization released the existing validated checkpoint and only
+its four canonical migrations. No new product or architecture decision was invented.
+The scoped rebuild UI defect and CI portability defect were corrected within approved
+architecture, with regression validation. One fixed hosted window completed before
+all deadlines; administrator-first recovery and exact baseline checks passed.
+Safe-fixture/runtime evidence limits are explicitly retained in the 73-point report;
+no personal data or extra authority was fabricated to inflate hosted coverage.
+Phase 6A COMPLETE; PR #3 remains OPEN/DRAFT/UNMERGED. No Phase 6B started.

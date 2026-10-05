@@ -1,5 +1,46 @@
 # Current build state
 
+## Phase 6A Season + Career Statistical Intelligence: COMPLETE
+
+The exact validated local checkpoint was released under direct typed owner authorization.
+Only four prepared canonical migrations applied; history is **61**. RLS/ACL,
+empty search paths, constraints/indexes and canonical generated types verified.
+Released/deployed implementation: `a08cb44d26178a5ca80217f6990559592323656a`;
+Boss deployment `6ac41933b4318e00084b40be`; correction CI `37377372044` PASS.
+Validation: 13,711 SQL/bootstrap assertions, 164 races, 388 application tests,
+typecheck, zero-warning lint and production build PASS.
+
+One fixed hosted window ran **21:34:14.129883–21:51:25.304030 UTC October 5**.
+Native classification/replay, no-stat-change current-epoch replacement, immutable
+prior seals, scoped rebuild equivalence, athlete/team/career/Family Hub projections,
+guardian transfer access, unrelated-child denial, Wildcats privacy and immediate
+revocation passed. Actual hosted 320px/390px layouts passed. The narrow missing
+rebuild-control defect was fixed, regression tested and deployed inside the same
+unextended window; all authority was first restored while that correction ran.
+
+Administrator restored first at **21:49:03.093653 UTC**. Strict baseline verification
+at **21:52:07.949476 UTC**: original administrator valid; zero temporary guardian,
+Wildcats or operator authority; selected relationships/configuration/event equal
+baseline; archived/unpublished controlled resources; zero current official controlled
+contributions, refresh/notification work and unexpected fixtures. Recovery retired
+only after canonical and native checks. No deadline overrun or new window.
+
+Evidence limits remain explicit: hosted NULL-season fixture unavailable safely;
+unused-roster, multi-game/multi-season totals and forced pending-state cases retain
+SQL/RUNTIME evidence, not fabricated hosted positives. Native resource denials passed;
+no exported-session forged mutation or test-only endpoint used. No known remaining
+product/security defect. Existing advisor warnings and sanitized historical incident
+disclosures remain. No historical credential-bearing URL reused; no new credential
+exposure, real youth/customer data, invented DOB, weaker policy or later phase.
+
+See [complete 73-point report](PHASE_6A_COMPLETION_REPORT.md),
+[hosted evidence and cleanup](PHASE_6A_HOSTED_ACCEPTANCE.md),
+[validation history](PHASE_6A_VALIDATION.md) and
+[sanitized incident disclosure](PHASE_6A_SECURITY_INCIDENT.md).
+PR #3 stays OPEN/DRAFT/UNMERGED. STOP: no Phase 6B.
+
+### Historical Phase 6A pre-release checkpoint — preserved
+
 ## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — canonical migrated; release/hosted verification pending
 
 October 5, 2026: Main Boss Chat approved the [architecture contract](SEASON_CAREER_INTELLIGENCE_ARCHITECTURE.md)
@@ -1425,7 +1466,7 @@ database types regenerated. Full local validation: 13,066 SQL/bootstrap assertio
 138 coordinated races and 351 application tests. Hosted acceptance remains pending.
 No Phase 5E temporary authority is active or has been created.
 
-## Phase 6A typed-authorized canonical release progress
+## Historical Phase 6A typed-authorized canonical release progress
 
 The production approval gate is cleared by direct typed owner authorization.
 The four validated forward migrations applied as `20261005210800`,

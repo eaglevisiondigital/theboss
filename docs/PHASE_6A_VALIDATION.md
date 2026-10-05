@@ -173,3 +173,28 @@ rebuild authorization is unchanged. Three regression tests cover the actual
 administrator projection, wrong scope/top-level-only operation, and denied or
 guardian projections. Typecheck, zero-warning lint, **388/388 application tests**
 and production build pass. No schema/migration/security-policy change.
+
+## Final hosted release and cleanup
+
+Correction deployment `6ac41933b4318e00084b40be` published exact source
+`a08cb44d26178a5ca80217f6990559592323656a`. Correction CI `37377372044`
+passed application and complete database jobs. Canonical history 61 and generated
+types byte-identical at closing. The native scoped rebuild succeeded after the UI
+fix; complete team summary byte-identical to incremental output. Guardian transfer,
+Child2 denial, Wildcats privacy, revocation and actual 320px/390px rendering passed.
+
+The immutable-starts_at trigger rejected an attempted controlled activation update;
+the transaction rolled back, baseline was verified, and the successful activation
+preserved historical identity timestamps. No schema/trigger relaxation occurred.
+
+One window, actual start 21:34:14.129883 UTC, stop-new 21:49:50.650249,
+cleanup complete 21:51:25.304030, strict baseline verification 21:52:07.949476.
+Administrator restored first at 21:49:03.093653. Zero temporary authority,
+current official controlled contributions, refresh/notification work or unexpected
+fixtures; native original administrator access valid. Recovery retired 21:53:36.230732.
+Full actual timeline and limitations are in PHASE_6A_HOSTED_ACCEPTANCE.md.
+
+Closing advisors: 101 expected RLS/no-policy INFO findings, unchanged pre-existing
+leaked-password protection WARN; 181 unused-index INFO findings and existing absolute
+Auth connections INFO. No Auth change or unrelated advisor remediation. Historical
+failed fixture/harness/CI and credential-containment disclosures above remain intact.

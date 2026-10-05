@@ -1,3 +1,7 @@
+# Execution status: completed once; authority removed
+
+This reviewed plan was executed in one fixed window on October 5, 2026. See [actual acceptance and cleanup](PHASE_6A_HOSTED_ACCEPTANCE.md). No future window is authorized by this document. The original prepared-plan text and its then-current NOT ACTIVATED statements remain below as history.
+
 # Phase 6A controlled hosted acceptance — NOT ACTIVATED
 
 Prerequisites: containment confirmation for the sanitized browser disclosure;

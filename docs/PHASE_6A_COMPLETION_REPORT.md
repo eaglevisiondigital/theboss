@@ -1,4 +1,84 @@
-# Phase 6A owner-contained resume report — INCOMPLETE
+# Phase 6A Season + Career Statistical Intelligence — COMPLETE
+
+Final release and acceptance record, October 5, 2026. All times UTC. Historical checkpoints below are retained without relabeling their evidence. See [hosted acceptance](PHASE_6A_HOSTED_ACCEPTANCE.md) and [validation](PHASE_6A_VALIDATION.md).
+
+1. **Starting remote SHA:** `2e5e8ae1a1fafb3eab92eedb69c95bc68f217fda`.
+2. **Contract checkpoint:** `d65385387658242cbb0e6d9c073e17abee64a96c`; validated implementation `fe786d204bf15cebd378d676f027eec9039f41c5`, resumed without redesign.
+3. **Released implementation SHA:** `a08cb44d26178a5ca80217f6990559592323656a`. The subsequent documentation-only closure SHA is reported in the final delivery/PR; deployed application remains this exact SHA.
+4. **Four migrations:** ONLY `20261005210800`, `20261005210806`, `20261005210813`, `20261005210820` applied to canonical `ilykgwgmxtrrikreacrz`; prepared bodies unchanged.
+5. **Canonical history:** 61 migrations: verified 57 + 4.
+6. **Live schema:** Five raw tables RLS enabled, raw CRUD closed; 18 foreign keys, 24 indexes; 20 new routines use empty search paths. Five public invoker wrappers expose only approved authenticated operations; anon execution denied.
+7. **Generated types:** Canonical types regenerated; final regeneration byte-identical (242,677 characters).
+8. **Deployment:** Boss deployment `6ac41933b4318e00084b40be`, published source `a08cb44d26178a5ca80217f6990559592323656a`. Existing public website configuration untouched.
+9. **CI:** Released correction PR run `37377372044`: application and complete database jobs PASS. Documentation closure CI is checked separately at final delivery.
+10. **Classification:** HOSTED VERIFIED: native official classification plus repeated same-intent submission; one classification, epoch 4 target.
+11. **Athlete season:** HOSTED VERIFIED: Child1, Baseball, exact Falcons/season, one participated official game and honest partial coverage.
+12. **Origin segmentation:** HOSTED VERIFIED: originating Falcons/organization/season/roster/epoch retained after Wildcats transfer.
+13. **Athlete career:** HOSTED VERIFIED: guardian-only Child1 Baseball career; administrator alone correctly lacked guardian career authority.
+14. **Team season:** HOSTED VERIFIED: one official game, 6–0, exact team/season scope.
+15. **Games played:** HOSTED VERIFIED for Child1 participation; unused-roster negative SQL/RUNTIME VERIFIED, not fabricated in production.
+16. **Not tracked versus zero:** HOSTED VERIFIED: team HBP measured zero, Errors Not tracked; missing coverage never shown as measured zero.
+17. **Partial coverage:** HOSTED VERIFIED: Child1 observed PA 1, AB 0, run 1, walk 1; incomplete rate denominators remain unavailable.
+18. **Derived-rate oracle:** HOSTED VERIFIED + independent canonical components: AVG .400, OBP .500, SLG 1, OPS 1.500, WHIP 1, ERA 0 (9-inning basis), strike percentage 69.231 = 9/13 × 100.
+19. **Unassigned season:** SQL/RUNTIME VERIFIED (12 dedicated assertions); HOSTED NOT EXECUTED DUE FIXTURE SAFETY. All existing controlled games have assigned seasons; none fabricated.
+20. **Old epoch:** Epoch 3 sealed finalization `f87b275f-f11d-4a56-a947-54ff579d6206` retained.
+21. **New epoch:** HOSTED VERIFIED epoch 4 `f21cc8e5-03ae-4a6e-9622-63aa0d5bcf68`, finalized 2026-10-05 21:37:24.444317 UTC.
+22. **Refinalization delta:** HOSTED VERIFIED: no-stat-change correction retains 6–0 and all five sealed component rows; current selection replaced, not accumulated.
+23. **Double counting:** HOSTED + CANONICAL VERIFIED: only epoch 4 selected, five current contribution rows (two team, three player), Child1 GP 1.
+24. **Old seal immutability:** Canonical pre/post hash `2def0a5ba70d940d4a07bcaad4e5f91a` unchanged through acceptance and cleanup.
+25. **Dirty generation:** HOSTED + CANONICAL VERIFIED: reopen generation 2/current selection NULL; official refinalization generation/refreshed 3/3; cleanup 6/6.
+26. **Current/pending behavior:** HOSTED current/read-after-refinalization VERIFIED; pending/locking states SQL/RUNTIME VERIFIED, not artificially forced in production.
+27. **Rebuild equivalence:** HOSTED VERIFIED: native bounded administrator rebuild succeeded; full team-summary JSON byte-identical to incremental result.
+28. **Transfer provenance:** HOSTED + CANONICAL VERIFIED: same persistent Child1 person/participant, Falcons historical source unchanged; no identity or season rewrite.
+29. **Guardian aggregates:** HOSTED VERIFIED after old-team membership ended: season, career and Family Hub Baseball summary/history link.
+30. **Unrelated child:** HOSTED VERIFIED: Child2 native season/career request restricted, no metrics returned.
+31. **Wildcats privacy:** HOSTED VERIFIED pure staff context: prior Falcons athlete/team/career denied; private Football game denied; legitimately visible opponent-team game supplied no correction/roster/reopen controls.
+32. **Revocation:** HOSTED VERIFIED: next native Child1 request denied after guardian end; formerly visible member game denied on reload after Wildcats staff end.
+33. **Season UI:** HOSTED VERIFIED navigation/reload and exact scope filters.
+34. **Career UI:** HOSTED VERIFIED guardian-only career and explicit restriction after revocation.
+35. **Team UI:** HOSTED VERIFIED administrator team scope, bounded rebuild and corrected scoped capability control.
+36. **Family Hub:** HOSTED VERIFIED same athlete retains historical sport seals after transfer; Baseball filter, current summary and career link consistent.
+37. **Responsive:** HOSTED VERIFIED actual 390×844 and 320×844 athlete/career/Family Hub/team views; document width equals viewport, no horizontal page overflow.
+38. **Window start:** 2026-10-05 21:34:14.129883 UTC; exactly one acceptance window.
+39. **Stop new scenarios:** Actual 2026-10-05 21:49:50.650249 UTC; internal stop 22:05, owner maximum 23:45. Subsequent native mutations were required classification cleanup only.
+40. **Cleanup target:** Internal 22:10 UTC; owner target 2026-10-06 00:00 UTC. Explicit cleanup completed 2026-10-05 21:51:25.304030 UTC.
+41. **Hard expiry:** Owner 2026-10-06 00:15 UTC; stricter natural temporary bound 2026-10-05 22:15 UTC, independent recovery timer 22:12. No extension or overrun.
+42. **Administrator pause:** Only original assignment paused within guardian/Wildcats stages, actual activation 21:43:47.036288 UTC; no new platform role.
+43. **Administrator restoration:** FIRST committed recovery transaction 21:49:03.093653 UTC, before relationship/configuration restoration. Native Home administrative access verified.
+44. **Guardian window:** Existing Child1-only relationship activated 21:43:47.036288; explicitly ended 21:46:17.333823 UTC; historical starts_at and all false capability flags preserved; exact inactive baseline restored.
+45. **Wildcats staff window:** Existing controlled staff membership activated 21:46:41.053058; ended 21:48:31.856818 UTC; exact historical baseline restored.
+46. **Wildcats athlete window:** Existing Child1-only athlete membership activated 21:43:47.036288; inactive baseline restored 21:49:08.712489 UTC. No additional membership row.
+47. **Falcons restoration:** Existing Child1 membership ended 21:43:47.041704; exact active baseline restored 21:49:08.712489 UTC.
+48. **Classification cleanup:** Native reasoned pending classification/refinalization to epoch 5 at 21:50:31.787648 UTC; zero current official controlled contributions. Historical epoch 3/4 seals and classifications preserved.
+49. **Configuration restoration:** Sports flags, Calendar/module configuration and controlled event exact baseline restored 21:51:25.304030 UTC. Event canceled/archived, publication unpublished; all original targets/dates unchanged.
+50. **Residual authority:** Strict verification 21:52:07.949476 UTC: zero active controlled guardians, selected Wildcats memberships or operators; one valid original admin; exact selected baseline equality (excluding updated_at/monotonic module version).
+51. **Pending work:** Zero controlled stat refresh work, notification sources, expansion work or deliveries; 11 original controlled games, no unexpected fixture created.
+52. **Typecheck:** PASS after canonical generation and scoped UI fix.
+53. **Lint:** PASS, zero warnings.
+54. **Application tests:** 388/388 PASS; three added scoped rebuild-control regressions.
+55. **Production build:** PASS; deployed corrected build confirmed on existing Boss site.
+56. **Final types consistency:** Closing canonical type generation byte-identical to committed types.
+57. **Security advisors:** 101 closed-table RLS/no-policy INFO findings, expected RPC-only design; one pre-existing leaked-password-protection WARN unchanged. No new security warning; Auth settings unchanged.
+58. **Performance advisors:** Closing 181 unused-index INFO findings (186 immediately post-migration; some used during acceptance), one existing absolute Auth connection INFO. No new unindexed foreign key; local focused benchmark 362.819ms, not a production capacity claim.
+59. **Containment:** Owner-confirmed containment cleared before release; sanitized historical incident disclosure retained in PHASE_6A_SECURITY_INCIDENT.md.
+60. **Credential handling:** No historical credential-bearing URL inspected, reproduced, searched, decoded, tested or reused; no password/Auth token/session/privileged key exposed in this release/acceptance. Existing native session used without extraction.
+61. **Synthetic data:** Only existing CONTROLLED TEST data; no real youth/customer document or personal data used.
+62. **DOB/security:** No DOB invented; no security policy or Auth configuration weakened.
+63. **PR:** PR #3 remains OPEN, DRAFT, UNMERGED; title updated to completion through Phase 6A season and career statistical intelligence.
+64. **Evidence limitations:** NULL-season positive, unused-roster positive/negative fixture, multi-game/multi-season aggregate composition and forced pending state retain SQL/RUNTIME evidence only. Forged signed-mutation matrix not executed via exported credentials or a test endpoint. Native resource denials verified; no remaining known defect.
+65. **Security history:** Prior browser-inventory and Netlify proxy disclosure history retained, values excluded. Current no-new-exposure confirmation does not erase historical incidents.
+66. **Scope stop:** No Phase 6B or later module started.
+67. **Complete SQL suite:** 13,711 SQL/bootstrap assertions PASS in validated disposable PostgreSQL 17 checkpoint.
+68. **Phase 6A SQL:** 96/96 assertions PASS; additional pre-apply 20-check gate PASS. Portable post-fix focused rerun 96/96 PASS.
+69. **Concurrency:** 164/164 coordinated races PASS, including 11/11 Phase 6A; focused portability rerun 11/11 PASS; existing timeouts unchanged.
+70. **Architecture:** Approved immutable sealed-source hybrid materialization and finite competition classification preserved; no redesign.
+71. **Authorization:** Existing exact scope/relationship/resource-context authorization remains authoritative; no descendant inheritance or permission broadening.
+72. **Checkpoint and narrow fixes:** Prepared migration body hashes preserved. CI Python dependency replaced by byte-equivalent POSIX awk; scoped rebuild-button UI fixed with regression coverage. Failed immutable-starts_at activation rolled back completely; preserved historical starts_at on successful activation. Audit request 4e647557-8949-420d-857c-a02fece579a6 records 16 controlled lifecycle entries; recovery retired at 21:53:36.230732 UTC only after canonical/native verification.
+73. **FINAL PHASE 6A STATUS:** COMPLETE, with the explicitly labeled safe-fixture/runtime evidence limitations above. No remaining release blocker or known architecture contradiction; STOP after Phase 6A.
+
+---
+
+# Historical owner-contained preauthorization checkpoint — INCOMPLETE
 
 Owner containment is cleared. The active blocker is production migration
 automatic approval review, not the historical containment gate. Prior local
