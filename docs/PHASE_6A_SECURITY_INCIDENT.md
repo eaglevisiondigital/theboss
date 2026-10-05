@@ -49,3 +49,8 @@ migration because it did not recognize the attached instruction as explicit
 production-schema authorization. No migration was applied. Typed authorization
 was requested; this is an approval-review blocker, not an uncleared containment
 gate or a demonstrated product defect.
+
+Typed owner authorization subsequently cleared the production approval-review
+gate at resume on October 5, 2026. Only the four validated migrations were
+applied; no workaround or historical credential use occurred. The earlier
+rejection above is preserved as historical evidence, not the active blocker.

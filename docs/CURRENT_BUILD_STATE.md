@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — production approval-review gate
+## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — canonical migrated; release/hosted verification pending
 
 October 5, 2026: Main Boss Chat approved the [architecture contract](SEASON_CAREER_INTELLIGENCE_ARCHITECTURE.md)
 with five binding decisions: sealed game-season attribution, positive evidence GP,
@@ -1424,3 +1424,15 @@ October 5, 2026; canonical history 52 entries, 71 live structural checks passed,
 database types regenerated. Full local validation: 13,066 SQL/bootstrap assertions,
 138 coordinated races and 351 application tests. Hosted acceptance remains pending.
 No Phase 5E temporary authority is active or has been created.
+
+## Phase 6A typed-authorized canonical release progress
+
+The production approval gate is cleared by direct typed owner authorization.
+The four validated forward migrations applied as `20261005210800`,
+`20261005210806`, `20261005210813`, `20261005210820`; canonical history is 61.
+Stored bodies match source hashes; RLS/ACL/search paths/constraints/indexes
+verified. Canonical types regenerated and post-generation application checks
+pass. The existing local checkpoint was resumed without redesign or repeated
+massive suites. No temporary Phase 6A authority/window has been activated yet.
+Release source push/deployment/CI and hosted acceptance are the remaining gates;
+previous paused states above remain historical evidence.

@@ -107,3 +107,31 @@ by automatic approval review before application; no alternate execution path
 was attempted. Security/performance advisor baselines were captured read-only
 for later comparison; historical findings were not changed. Canonical type
 regeneration, release push, deployment, and hosted acceptance remain pending.
+
+## Canonical release application
+
+Typed authorization cleared review. Canonical count is **61**, with only:
+
+| Version | Name | Exact source-body MD5 |
+|---|---|---|
+| 20261005210800 | phase6a_intelligence_core | 81970068702de586c4b398801fa1fbdf |
+| 20261005210806 | phase6a_intelligence_sources | 7f9935046de25331861fab81166752f5 |
+| 20261005210813 | phase6a_intelligence_materialization | e6917e12cc93e48775400e6cd57533f0 |
+| 20261005210820 | phase6a_intelligence_reads | 50652a92b49b3c94ed451900ee64dc6a |
+
+MCP assigned canonical versions; prepared files were renamed to those versions
+without any body edit. Live stored statements match each original body exactly.
+All five tables have RLS and zero raw application/PUBLIC grants; 18 foreign keys
+and 24 indexes are present. All 20 new helper/entry functions have empty search
+paths, zero anon execution, closed internal helpers and only intended
+authenticated entry access. Five public wrappers are invokers; privileged
+authorized helpers are in boss_private. Tenant-qualified constraints, finite
+classification and current contribution uniqueness/generation checks verified.
+Canonical public types regenerated; post-generation typecheck, zero-warning lint,
+385 application tests and local production build PASS. No working key used in
+the local compile-only build.
+
+Advisors: new INFO only—five deliberately closed RLS tables without policies
+and 15 newly unused indexes. Historical leaked-password-protection WARN and
+Auth connection-sizing INFO remain unchanged. No historical remediation or
+security-policy change was made.
