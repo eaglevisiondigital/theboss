@@ -33,3 +33,19 @@ This record preserves the disclosure transparently. A blanket claim that no
 credential/session material was exposed is not valid for this tool result.
 Phase 6A must remain INCOMPLETE until remaining release gates and hosted acceptance
 are actually completed after containment. No later phase is started.
+
+## Owner-confirmed containment and resume instruction
+
+October 5, 2026: Main Boss Chat explicitly reports owner containment completed
+by signing out/revoking affected browser sessions and establishing fresh
+authenticated sessions. The containment gate is **CLEARED** on this owner
+confirmation. No credential-bearing value was sought, inspected, decoded,
+reproduced, tested or reused during resume. The original sanitized disclosure
+above remains historical evidence, including its actual tool-result exception.
+The security investigation is not reopened.
+
+A separate automatic approval-review gate rejected the first Phase 6A canonical
+migration because it did not recognize the attached instruction as explicit
+production-schema authorization. No migration was applied. Typed authorization
+was requested; this is an approval-review blocker, not an uncleared containment
+gate or a demonstrated product defect.

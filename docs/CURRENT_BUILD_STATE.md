@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — release containment gate
+## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — production approval-review gate
 
 October 5, 2026: Main Boss Chat approved the [architecture contract](SEASON_CAREER_INTELLIGENCE_ARCHITECTURE.md)
 with five binding decisions: sealed game-season attribution, positive evidence GP,
@@ -25,7 +25,10 @@ unchanged at the starting Phase 5F baseline. See the full
 
 An unrelated credential-bearing URL was unexpectedly surfaced by the browser
 inventory tool. No value is reproduced, searched, inspected further or used.
-Live release/hosted acceptance is paused for owner containment confirmation.
+Owner-confirmed containment is now **CLEARED**. Automatic approval review
+rejected the first canonical migration because it did not accept the attachment
+as typed production authorization; no migration applied. Explicit typed
+authorization is pending. The original incident disclosure remains historical.
 See the sanitized [incident record](PHASE_6A_SECURITY_INCIDENT.md). Earlier
 security disclosures and acceptance history remain unchanged.
 

@@ -1,6 +1,7 @@
 # Phase 6A validation checkpoint
 
-Status: LOCAL VALIDATION; live release paused for the sanitized containment gate.
+Status: LOCAL VALIDATION COMPLETE; owner-confirmed containment CLEARED.
+Live release is blocked by automatic production-migration approval review.
 Starting SHA `2e5e8ae1a1fafb3eab92eedb69c95bc68f217fda`; approved contract
 `d65385387658242cbb0e6d9c073e17abee64a96c`. Branch `build/boss-platform-v1`.
 
@@ -92,3 +93,17 @@ ever created. No native authenticated session was inspected.
 Final reducer fixes preserve unavailable combined ERA when any included origin
 contains mixed conventions; longest Football counters never acquire invented
 per-game means. Two regression assertions cover these conditions.
+
+## Owner-contained resume preflight
+
+Local checkpoint `fe786d204bf15cebd378d676f027eec9039f41c5` is clean and all
+162 frozen migration/test hashes match. Remote baseline remains
+`2e5e8ae1a1fafb3eab92eedb69c95bc68f217fda`; PR #3 is OPEN/DRAFT/UNMERGED
+and MERGEABLE. Focused fresh migration/RLS contract verification passed 20/20
+assertions and removed its disposable cluster; massive completed suites were
+not repeated. Canonical history still has exactly 57 migrations, latest
+`20261005165247`, and no Phase 6A tables. The first apply request was rejected
+by automatic approval review before application; no alternate execution path
+was attempted. Security/performance advisor baselines were captured read-only
+for later comparison; historical findings were not changed. Canonical type
+regeneration, release push, deployment, and hosted acceptance remain pending.

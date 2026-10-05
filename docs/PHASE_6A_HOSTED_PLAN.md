@@ -52,3 +52,23 @@ This is a prepared plan, not executed acceptance, a frozen deadline, or a claim
 that broader temporary privileges have been approved. Never use real youth/
 customer data, invented DOB, weaker policy, credentials or the historical Netlify
 proxy value. STOP after Phase 6A; no standings, leaderboards, profiles or later phase.
+
+## Main Boss Chat fixed resume authorization
+
+Owner-confirmed containment is cleared. Start no later than
+**2026-10-05 23:00:00 UTC**; stop new scenarios at **23:45:00 UTC**;
+explicit cleanup target **2026-10-06 00:00:00 UTC**; hard expiry
+**00:15:00 UTC**. These deadlines must not be extended. If release prerequisites
+prevent starting by 23:00, no temporary authority may be activated and a new
+window must be requested from Main Boss Chat. This window has NOT been activated.
+
+The supplied exact scope authorizes only the existing Child1-only guardian,
+bounded Child1 Wildcats athlete and controlled-account Wildcats staff
+relationships, ending/restoring the existing Child1 Falcons membership, and
+pausing/restoring the original platform-administrator assignment for pure scoped
+privacy stages. Independent administrator-first recovery must be prepared and
+rehearsed before activation; inability to guarantee recovery blocks any pause.
+End guardian before the Wildcats-only stage. No new role or identity is allowed.
+Use existing controlled sealed sport sources; no safe existing hosted NULL-season
+fixture means the positive remains SQL/RUNTIME VERIFIED with the stated fixture
+safety limitation. Do not manufacture season provenance.

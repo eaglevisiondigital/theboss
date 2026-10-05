@@ -1,4 +1,86 @@
-# Phase 6A 73-point checkpoint — INCOMPLETE
+# Phase 6A owner-contained resume report — INCOMPLETE
+
+Owner containment is cleared. The active blocker is production migration
+automatic approval review, not the historical containment gate. Prior local
+evidence is preserved below without rewriting its history.
+
+1. **Starting remote SHA:** `2e5e8ae1a1fafb3eab92eedb69c95bc68f217fda`.
+2. **Architecture contract:** `d65385387658242cbb0e6d9c073e17abee64a96c`, preserved.
+3. **Released final SHA:** None for Phase 6A; validated unpublished implementation `fe786d204bf15cebd378d676f027eec9039f41c5` remains local. This resume documentation checkpoint is reported alongside the artifact.
+4. **Four migrations:** Prepared core/sources/materialization/reads files unchanged and hash-verified. First apply rejected by automatic review; NONE APPLIED.
+5. **Canonical migration count:** 57, latest `20261005165247`; expected post-apply 61 not reached.
+6. **Live schema:** Read-only preflight confirms Phase 6A tables absent. Post-apply structural checks pending.
+7. **Canonical generated types:** Pending application; five provisional RPC declarations remain local only.
+8. **Deployment ID/source:** No Phase 6A deployment; dependent application has not been pushed.
+9. **CI:** Prior implementation CI PASS; unpublished Phase 6A CI not triggered.
+10. **Hosted classification:** NOT EXECUTED; controlled explicit classification scope approved in supplied plan.
+11. **Hosted athlete season:** NOT EXECUTED; local implementation/runtime proof retained.
+12. **Hosted team-origin segmentation:** NOT EXECUTED; origin provenance runtime proof retained.
+13. **Hosted athlete career:** NOT EXECUTED; sport-specific local projection retained.
+14. **Hosted team season:** NOT EXECUTED; exact-origin local projection retained.
+15. **Hosted GP/participation:** NOT EXECUTED; positive sport predicates and roster-only unknown runtime verified.
+16. **Hosted Not tracked/zero:** NOT EXECUTED; local runtime/render distinction verified.
+17. **Hosted partial coverage:** NOT EXECUTED; joint tracked cohort runtime verified.
+18. **Derived independent oracle:** Six sealed-source adapter/native engine oracles runtime verified; hosted components oracle pending.
+19. **NULL/unassigned season:** SQL/RUNTIME VERIFIED (12 lifecycle assertions). No safe existing canonical NULL-season game found in preflight; hosted positive remains unexecuted due fixture safety. No provenance fabricated.
+20. **Old epoch:** No hosted epoch selected/changed; local immutable epoch evidence retained.
+21. **New epoch:** No hosted refinalization executed.
+22. **Hosted aggregate delta:** NOT EXECUTED; local controlled epoch replacement verified.
+23. **Double count:** SQL/RUNTIME VERIFIED; hosted replay pending.
+24. **Old epoch immutability:** SQL/RUNTIME VERIFIED; hosted proof pending.
+25. **Dirty/new generation:** SQL/RUNTIME VERIFIED; live proof pending.
+26. **Freshness:** Current/pending and post-lock generation checks runtime verified; hosted pending.
+27. **Rebuild equality:** Native scoped incremental/rebuild equality runtime verified; hosted pending.
+28. **Transfer provenance:** SQL/RUNTIME VERIFIED; Phase 6A hosted transfer not activated.
+29. **Guardian aggregate:** SQL/RUNTIME VERIFIED; no temporary guardian activated.
+30. **Child2 denial:** SQL/RUNTIME VERIFIED; Phase 6A hosted denial pending.
+31. **Wildcats privacy:** SQL/RUNTIME VERIFIED; pure restricted hosted stage pending.
+32. **Revoked access:** Guardian/team termination races PASS; hosted revocation pending.
+33. **Athlete-season UI:** Implemented locally; unreleased.
+34. **Athlete-career UI:** Implemented locally; unreleased.
+35. **Team-season UI:** Implemented locally with exact scoped rebuild; unreleased.
+36. **Family Hub:** Safe guardian/self local summary and navigation implemented; unreleased.
+37. **Responsive hosted:** NOT EXECUTED. Exact 320px/390px local rendered evidence PASS retained.
+38. **Actual window start:** NOT ACTIVATED. Must begin no later than 2026-10-05 23:00:00 UTC; otherwise return for a new window without activating authority.
+39. **Stop new:** 2026-10-05 23:45:00 UTC, unchanged.
+40. **Cleanup target:** 2026-10-06 00:00:00 UTC, unchanged.
+41. **Hard expiry:** 2026-10-06 00:15:00 UTC, unchanged.
+42. **Administrator pause:** NOT ACTIVATED; independent prepared/rehearsed recovery required before any pause.
+43. **Administrator restoration:** Not needed in Phase 6A; current original administrator valid by read-only check at 20:56:46.627394 UTC.
+44. **Guardian activation/end:** NOT ACTIVATED; active selected Child1 guardian count zero.
+45. **Wildcats staff:** NOT ACTIVATED; selected active memberships zero.
+46. **Wildcats athlete:** NOT ACTIVATED; selected active memberships zero.
+47. **Falcons end/restoration:** No Phase 6A membership change.
+48. **Classification restoration:** No Phase 6A classification override applied.
+49. **Module/config restoration:** No Phase 6A module/config override applied.
+50. **Residual authority:** No temporary Phase 6A authority created; controlled operators, selected Wildcats memberships and Child1 guardian counts zero at 20:56:46.627394 UTC.
+51. **Pending controlled work:** No Phase 6A work created. Post-window comprehensive verification remains unexecuted.
+52. **Typecheck:** Prior final checkpoint PASS; no code/type changes during resume.
+53. **Lint:** Prior final checkpoint PASS, zero warnings.
+54. **Application tests:** 385/385 PASS retained; no massive suite repeated.
+55. **Production build:** Prior final checkpoint PASS with existing format-only CI fixtures; no release/deploy build yet.
+56. **Final canonical type consistency:** Pending migration and regeneration.
+57. **Advisors:** Pre-apply security/performance baseline captured read-only. Historical grouped notices include RLS without policy/leaked-password protection and unused-index/Auth connection sizing. No historical finding changed; post-apply new-issue comparison pending.
+58. **Performance:** Final full 2,000-contribution reduction 390.493ms within unchanged eight-second budget. Not production-capacity proof.
+59. **Containment:** OWNER-CONFIRMED CLEARED; fresh sessions after sign-out/revocation. Sanitized original incident preserved; no investigation reopened.
+60. **Credential handling on resume:** No surfaced value searched, inspected, decoded, reproduced, printed, tested or reused. Original tool-result exposure remains a disclosed historical exception.
+61. **Real youth/customer data:** None used for controlled tests; synthetic local data only.
+62. **DOB/age:** None invented or changed.
+63. **PR title/state:** Complete Boss platform through Phase 5F Baseball + Softball Diamond engine; OPEN/DRAFT/UNMERGED/MERGEABLE. Title remains accurate until Phase 6A release.
+64. **Evidence limitations:** Migration/types/advisors comparison/deployment/CI/hosted acceptance unexecuted. No hosted PASS inferred from SQL/runtime.
+65. **Security exceptions:** Sanitized browser disclosure retained with owner containment; separate migration auto-review rejection is an authorization gate, not a known product defect.
+66. **Later phase:** None started; strictly Phase 6A.
+67. **Full SQL/bootstrap:** 13,711 assertions PASS; unchanged final sources.
+68. **New assertions:** 96/96 PASS; focused pre-apply migration/RLS 20/20 PASS with ephemeral cluster removed.
+69. **Concurrency:** 164/164 PASS, including 11/11 Phase 6A; unchanged timeouts.
+70. **Architecture:** Five approved decisions retained without redesign.
+71. **Privacy/RLS model:** Deny-by-default closed tables, finite authenticated RPCs, origin versus self/guardian disclosure boundaries; no permission broadening.
+72. **Checkpoint integrity:** Clean starting tree at expected local commit; 162 frozen migration/test hashes match; no unexpected code/schema drift.
+73. **FINAL PHASE 6A STATUS:** **INCOMPLETE**. Automatic approval review rejected the first canonical migration because it did not recognize the attachment as explicit production-schema authorization. Typed authorization requested. No bypass, migration, push, deployment or authority activation occurred.
+
+---
+
+# Historical unpublished local checkpoint — prior to owner containment
 
 Local implementation/validation checkpoint only. Live release is paused for
 owner containment of the unexpected browser-tool disclosure, documented without
