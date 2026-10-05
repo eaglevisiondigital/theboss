@@ -1,5 +1,15 @@
 # Game Center foundation
 
+## Permanent tracking-profile and live-console amendment
+
+Main Boss Chat requires a shared optional-input layer across sport engines:
+[Boss Stat Tracking Profiles and Live Stat Console](STAT_TRACKING_PROFILES_ARCHITECTURE.md).
+Required scoring/state remains mandatory. Game-side snapshots preserve tracking
+expectations and coverage: not tracked is not zero. Volleyball must use this from
+inception; prior sports receive adapters without rewriting canonical facts or
+seals. Practice stays isolated from official writes/history. The linked model is
+proposed; integration and validation are pending. No later sport is started.
+
 ## Phase 5D Football extension and history portability
 
 Football is the third engine on the same Calendar/game, roster, operator,

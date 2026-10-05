@@ -1,5 +1,16 @@
 # Boss foundation implementation decisions
 
+## October 5, 2026 — permanent Stat Tracking Profile amendment
+
+Main Boss Chat requires shared sport-aware tracking profiles and a live console,
+with required facts protected, optional input selection, Quick Stats, immutable
+game expectations and explicit tracking coverage. See the [proposed data and
+interaction model](STAT_TRACKING_PROFILES_ARCHITECTURE.md). Volleyball must use
+this from inception; previous engines and historical seals remain intact. Exact
+scope authorization remains mandatory. Settings inheritance confers no authority.
+Practice is isolated from official data. Implementation and validation remain
+pending; this record is not a Phase 5E completion or live release claim.
+
 Current implementation status: **Phase 5D Football and athlete-history portability:
 COMPLETE.** The Main Boss Chat cleared containment and authorized the final fixed
 hosted window. Correct two-team Calendar targeting created one canonical Football
