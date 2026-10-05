@@ -15,6 +15,14 @@ const router: AppRouterInstance = { back() {}, forward() {}, refresh() {}, push(
 const row = { id, organization_id: id, event_id: event, occurrence_key: "2026-10-04T18:00:00", occurrence_mode: "single", version: 3, status: "live", start_at: "2026-10-04T23:00:00Z", end_at: "2026-10-05T00:00:00Z", timezone: "America/Chicago", title: "Controlled Falcons game", sport_key: "basketball", sport_label: "Basketball", primary: { team_id: team, label: "Falcons", score: 10, final_score: 10 }, opponent: { team_id: null, label: "External opponent", score: 8, final_score: 8 }, home_away: "home", roster_revision: 1, capabilities: { manage: true, operate: true, finalize: true, correct: true, start: true, view_roster: true }, roster: [], history: [], operators: [], finalizations: [] };
 const data = (changes: Record<string, unknown> = {}, family = false) => projectGameData({ features: { game_center: true, game_operations: true }, games: [row], ...changes }, family ? { ...query, view: "family" } : query)!;
 const render = (node: ReturnType<typeof createElement>) => renderToStaticMarkup(createElement(AppRouterContext.Provider, { value: router }, node));
+test("Game Center administrators can see the internal-matchup Calendar target requirement", () => {
+  const list = { ...query, game_id: undefined };
+  const html = render(createElement(GameConsole, { data: data({ capabilities: { configure: true, create: false } }), query: list }));
+  assert.match(html, /include both participating teams in the Calendar event&#x27;s targets/);
+  assert.doesNotMatch(html, /Open a Calendar game in Game Center/);
+  const family = render(createElement(GameConsole, { data: data({ capabilities: { configure: true } }, true), query: { ...list, view: "family" } }));
+  assert.doesNotMatch(family, /include both participating teams/);
+});
 test("assigned operator game detail shows score controls and explicit finalization confirmation", () => {
   const html = render(createElement(GameConsole, { data: data(), query })); assert.match(html, /Record score summary/); assert.match(html, /Finalize game/); assert.match(html, /<input(?=[^>]*name="confirmed")(?=[^>]*required)[^>]*>/); assert.match(html, /ordinary operations will close/); assert.match(html, /Calendar event/); assert.match(html, /Attendance and RSVP/); assert.doesNotMatch(html, /Career|Basketball shots|Live scoring engine/);
 });

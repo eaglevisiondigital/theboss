@@ -581,3 +581,20 @@ retained as audit history. Historical Phase 5C incidents are unchanged.
 new-team cases are not relabeled from SQL. Resolve the unconfirmed hosted game
 creation before requesting further owner direction; this record does not
 authorize another window or sport/module. See [the hosted record](PHASE_5D_HOSTED_ACCEPTANCE.md).
+
+
+## October 5, 2026 — Phase 5D creation-blocker investigation
+
+Safe canonical logs prove both requests failed PT422 in common game creation:
+the single Falcons-target Calendar event's internal Wildcats opponent was not
+an event target. Existing architecture already requires both teams. Preserve
+that boundary; narrow the candidate projection and classify 422 as validation.
+The local regression fails before and passes after the fix; 12 focused plus
+635 existing SQL assertions, 22 races and 339 application tests pass. Production
+application was rejected by automatic approval review pending typed live
+authorization; no live workaround or new acceptance window is authorized.
+
+The earlier report's version-equality wording is corrected: recovery explicitly
+preserved monotonic Calendar/Sports revisions (10 -> 12 / 15 -> 18) while
+restoring operational baselines. Preserve prior records and audit history.
+See [the investigation](PHASE_5D_CREATION_INVESTIGATION.md).

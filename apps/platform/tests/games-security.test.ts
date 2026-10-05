@@ -3,10 +3,27 @@ import test from "node:test";
 import { BOSS_SUPABASE_URL } from "../src/lib/env/validation";
 import { parseGameCommand, parseGameQuery, projectGameData, projectGameResult } from "../src/lib/games/input";
 import { performGameMutation, type GameClient } from "../src/lib/games/mutation";
+import { gameFormFailureMessage } from "../src/lib/games/feedback";
 
 const actor = "00000000-0000-4000-8000-000000000001", game = "00000000-0000-4000-8000-000000000002", team = "00000000-0000-4000-8000-000000000003", event = "00000000-0000-4000-8000-000000000004", participant = "00000000-0000-4000-8000-000000000005", requestId = "00000000-0000-4000-8000-000000000006", origin = "https://games.boss.invalid";
 const score = { operation: "game.score.set", input: { game_id: game, expected_version: 3, primary_score: 10, opponent_score: 8 } };
 const create = { operation: "game.create", input: { event_id: event, expected_event_version: 1, occurrence_key: "2026-10-04T18:00:00", primary_team_id: team, sport_key: "basketball", competition_type: "standard" } };
+test("Football create preserves the native occurrence, sport and event revision through the route", async () => {
+  const command = { operation: "game.create", input: { ...create.input, occurrence_key: "2026-10-05T00:25:00", sport_key: "football" } };
+  assert.deepEqual(parseGameCommand(command), command);
+  const m = mock();
+  assert.equal((await performGameMutation(request(command), m.client, origin)).status, 200);
+  assert.deepEqual(m.calls, [{ name: "boss_games_mutate", args: { p_request_id: requestId, p_command: command } }]);
+});
+test("a known game-create validation rejection is not presented as an unknown outcome", async () => {
+  const m = mock();
+  m.client.rpc = async () => ({ data: null, error: { code: "PT422" } });
+  const result = await performGameMutation(request({ ...create, input: { ...create.input, sport_key: "football" } }), m.client, origin);
+  assert.equal(result.status, 422);
+  assert.match(gameFormFailureMessage(result.status), /Review.*Calendar matchup targets/);
+  assert.doesNotMatch(gameFormFailureMessage(result.status), /could not be confirmed|Retry to safely check/);
+  assert.match(gameFormFailureMessage(503), /could not be confirmed.*same request/);
+});
 function request(command: unknown = score, headers: Record<string, string> = {}, body?: string) { return new Request(`${origin}/app/games/mutate`, { method: "POST", headers: { origin, host: "games.boss.invalid", "sec-fetch-site": "same-origin", "content-type": "application/json", ...headers }, body: body ?? JSON.stringify({ request_id: requestId, command }) }); }
 function mock() { const calls: unknown[] = []; let checks = 0;
   const client: GameClient = { auth: { getClaims: async () => ({ data: { claims: { sub: actor, iss: `${BOSS_SUPABASE_URL}/auth/v1`, role: "authenticated", exp: Math.floor(Date.now() / 1000) + 120 } }, error: null }), getUser: async () => { checks++; return { data: { user: { id: actor, is_anonymous: false } }, error: null }; } }, rpc: async (name, args) => { calls.push({ name, args }); return { data: { game_id: game, version: 4, replayed: false, message: "Saved.", internal_note: "OMIT_PRIVATE_FIELD" }, error: null }; } };

@@ -144,3 +144,20 @@ outside Git and reports. No later sport, aggregation or module was started.
 See the [81-point report](PHASE_5D_COMPLETION_REPORT.md) and
 [validation record](PHASE_5D_VALIDATION.md). **STOP after this window; Phase 5D
 closure remains blocked by incomplete hosted acceptance.**
+
+
+## October 5 subsequent read-only investigation — addendum
+
+The original unknown-cause record above is preserved. Subsequent safe RPC/SQL
+metadata proves both submissions reached PostgreSQL and failed
+`PT422: Invalid game context`: the internal opponent was not a Calendar target,
+but the candidate read path incorrectly offered that event. No canonical game
+was created and later removed. The local fix is validated; live application is
+awaiting typed approval after automatic approval review rejected it.
+
+Reporting correction: configurations, statuses and windows were restored, but
+revision counters remained monotonic as recorded by the restoration audit:
+Calendar 10 -> 12, Sports 15 -> 18. Earlier wording claiming version equality
+was incorrect. This does not change the on-time cleanup or zero temporary
+authority result. No new window or temporary relationship was created.
+See [the complete investigation](PHASE_5D_CREATION_INVESTIGATION.md).

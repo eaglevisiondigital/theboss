@@ -2,6 +2,29 @@
 
 ## Phase 5D Football + athlete-history portability: IN PROGRESS
 
+### October 5 creation-blocker investigation — latest checkpoint
+
+**Root cause PROVEN; fix validated locally, live release awaiting typed approval.**
+The original and retry reached Supabase/PostgreSQL and both returned
+`PT422: Invalid game context`. The Calendar event targeted Falcons only, while
+Game Center requires an internal Wildcats opponent to be targeted by the same
+event. The candidate projection incorrectly offered it; the form also mislabeled
+HTTP 422 as an unconfirmed outcome. A narrow candidate-filter migration and
+validation-feedback/guidance fix passed 12 new SQL assertions, 635 existing Game
+Center assertions, 22 races, typecheck, lint, 339 application tests and build.
+Automatic approval review rejected applying the production migration because it
+did not accept attachment-based live authorization. No live fix, new game,
+temporary authority or acceptance window was created. Canonical history remains
+44 migrations and the original deployed read function. Phase 5D is INCOMPLETE.
+
+Correction to earlier wording: actual module configuration/status/windows were
+restored; monotonic revision counters were preserved (Calendar 10 -> 12, Sports
+15 -> 18). Exact version equality was incorrectly reported. The cleanup audit
+records monotonic-version preservation; no restored security setting differs.
+See [the investigation and requested 33-point report](PHASE_5D_CREATION_INVESTIGATION.md).
+
+### October 5 original acceptance checkpoint — preserved
+
 **October 5, 2026: HOSTED ACCEPTANCE BLOCKED; SINGLE WINDOW CLOSED AND CLEAN.**
 The two exact Wildcats memberships were directly approved, but neither was
 created: native Football game creation remained unconfirmed after one idempotent

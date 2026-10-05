@@ -163,3 +163,25 @@ local implementation suite was repeated for the documentation-only window record
 Hosted Football scoring/oracle/correction/final/refinal and transfer/guardian/
 new-team privacy scenarios are unexecuted, not inferred PASS. See the complete
 [hosted matrix and safe audit IDs](PHASE_5D_HOSTED_ACCEPTANCE.md).
+
+
+## October 5 creation-blocker focused investigation
+
+Root cause is now evidenced: candidate generation omitted the existing internal
+opponent event-target boundary, and native HTTP 422 feedback was misleading.
+Disposable native Calendar reproduction returned the exact hosted PT422. The
+candidate exclusion regression failed before the fix and passed afterward:
+12 focused assertions. Existing Game Center suites passed 635 assertions and
+22 two-connection races; no full Football suite was repeated. Typecheck and
+zero-warning lint passed, all 339 application tests passed, and production build
+passed with the existing synthetic public build environment after an initial
+correct refusal of missing configuration. Both local clusters were removed.
+
+The function-only candidate migration is prepared and validated, but automatic
+approval review rejected production application pending typed live authorization.
+Canonical 44-entry history and original function digest remain unchanged.
+Hosted read-only baseline/admin/archive/game/receipt checks passed. No temporary
+authority or additional window exists. Operational baseline equality is verified;
+revision counters are intentionally monotonic (Calendar 10 -> 12, Sports 15 -> 18),
+correcting the earlier wording that also claimed version equality.
+See [full investigation evidence](PHASE_5D_CREATION_INVESTIGATION.md).
