@@ -155,6 +155,14 @@ feedback/guidance change is released through the existing Boss platform branch.
 Read-only hosted health and baseline checks follow deployment. A new acceptance
 window remains outside this release.
 
+Release-tool disclosure: the Netlify helper emitted a one-time proxy deployment
+URL and the deploy reader returned a routing token in tool output. A general
+browser inventory also surfaced credential-bearing URL material from an unrelated
+open tab. None of those values was used, repeated, saved to a file, committed or
+included in this record. No Boss password, Auth token, session value or privileged
+database key was requested or used. Owner-side expiry/revocation review is needed;
+this task therefore does not claim zero credential-material exposure.
+
 Read-only native hosted checks passed: Game Center loads as disabled for the
 restored organization; existing administrator can read the retained archived
 Football event, whose opponent and single Falcons target are visible. Canonical
@@ -222,6 +230,9 @@ This investigation does not open that window.
     game/receipt before any temporary acceptance authority.
 30. No temporary authority created: confirmed.
 31. Wildcats memberships not created: confirmed; no new controlled memberships.
-32. No credential/session material exposed: confirmed; no historical Netlify
-    proxy credential reused/reproduced, real youth/customer data or invented DOB.
+32. Credential disclosure: release tools emitted a one-time Netlify proxy URL,
+    deploy routing token and unrelated-tab credential-bearing URL in tool output.
+    None was used/repeated/stored/committed; no Boss password/Auth/session/key was
+    requested or used. Owner-side expiry/revocation review remains. No real
+    youth/customer data or invented DOB.
 33. No later phase started: confirmed. STOP at this investigation/release boundary.

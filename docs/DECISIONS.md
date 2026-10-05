@@ -617,3 +617,10 @@ application tests and production build passed. The fix is released through the
 existing Boss platform branch and PR #3 remains open, draft and unmerged. This
 release created no game, acceptance window, temporary authority or controlled
 membership and does not authorize Phase 5D hosted acceptance or a later phase.
+
+During release tooling, Netlify emitted a one-time proxy URL and deploy routing
+token in tool output; a browser inventory also surfaced credential-bearing URL
+material from an unrelated open tab. The values were not used, repeated, stored
+or committed. No Boss password, Auth/session value or privileged database key
+was requested or used. Preserve this disclosure and require owner-side expiry or
+revocation review; do not claim the release had zero credential-material exposure.

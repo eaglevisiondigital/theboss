@@ -23,6 +23,14 @@ assertions, 635 Game Center assertions, 22 races, typecheck, zero-warning lint,
 45 migrations. No new game, temporary authority or acceptance window was created.
 Phase 5D remains INCOMPLETE pending separately authorized hosted acceptance.
 
+Release-tool disclosure: the Netlify deployment helper emitted a one-time proxy
+URL and deploy metadata included a routing token in tool output. A general browser
+inventory also surfaced credential-bearing URL material from an unrelated open
+tab. None was used, repeated, saved to a file, committed or included in a report.
+No Boss password, Auth token, session value or privileged database key was
+requested or used. The newly surfaced external material requires owner-side
+expiry/revocation review and is not represented as “no credential exposure.”
+
 Correction to earlier wording: actual module configuration/status/windows were
 restored; monotonic revision counters were preserved (Calendar 10 -> 12, Sports
 15 -> 18). Exact version equality was incorrectly reported. The cleanup audit

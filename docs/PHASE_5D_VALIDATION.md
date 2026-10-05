@@ -191,3 +191,10 @@ additional window exists. Operational baseline equality is verified;
 revision counters are intentionally monotonic (Calendar 10 -> 12, Sports 15 -> 18),
 correcting the earlier wording that also claimed version equality.
 See [full investigation evidence](PHASE_5D_CREATION_INVESTIGATION.md).
+
+Release-tool security note: Netlify emitted a one-time proxy URL and deploy
+routing token in tool output, and a general browser inventory surfaced
+credential-bearing URL material from an unrelated open tab. None was used,
+repeated, stored or committed. No Boss password, Auth/session value or privileged
+database key was requested or used. Owner-side expiry/revocation review remains;
+zero credential-material exposure is not claimed.
