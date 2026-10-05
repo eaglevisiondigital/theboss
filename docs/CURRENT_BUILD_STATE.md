@@ -1,6 +1,49 @@
 # Current build state
 
-## Phase 5D Football + athlete-history portability: IN PROGRESS
+## Phase 5D Football + athlete-history portability: COMPLETE
+
+### October 5 final hosted acceptance and closure
+
+Main Boss Chat cleared the credential-containment gate and directly authorized
+one final bounded hosted window. The corrected two-team Calendar setup produced
+the exact Football candidate and exactly one canonical game. Native Game Center
+then completed the deterministic four-quarter Football scenario, correction,
+first finalization, authorized reopen, post-reopen correction and second
+finalization. The authoritative score was **Falcons 10–0 Wildcats**; both sealed
+epochs remain immutable. Family Hub preserved the controlled athlete's sealed
+Basketball, Soccer and Football history after the original-team membership was
+ended, while a Wildcats-only staff context could neither read that private
+prior-team athlete history nor obtain prior-team correction controls.
+
+The fixed window began **2026-10-05 12:13:39.836647 UTC**, stop-new was
+**12:48:39.836647**, cleanup target **12:58:39.836648**, and hard expiry
+**13:13:39.836648**. Explicit cleanup completed at
+**12:30:32.525299–12:30:32.532906 UTC**, more than 27 minutes before the cleanup
+target. Both temporary Wildcats memberships, the exact-game operator and the
+guardian stage were explicitly ended; the original administrator, original
+Falcons membership and selected module/relationship baseline were restored.
+The controlled event is canceled/unpublished, the game is final/unpublished,
+zero temporary authority and zero pending controlled work remain, and no deadline
+overrun occurred.
+
+Hosted acceptance found one narrow Football conversion-state defect: a completed
+touchdown try moved to kickoff while retaining its try-only `scoring_side`, which
+made the frontend projector reject the state. Migration
+`20261005122349_phase5d_football_conversion_state` clears that marker and safely
+backfills affected kickoff state. A focused regression now asserts the invariant.
+The canonical function and corrected state were verified live. This body-only
+function repair does not change generated public TypeScript signatures.
+Final validation passed **12,382 SQL/bootstrap assertions**, **123 coordinated
+races**, typecheck, zero-warning lint, **339/339 application tests** and the
+production build; the disposable PostgreSQL cluster was removed.
+
+The final evidence is recorded in
+[the 73-point completion report](PHASE_5D_COMPLETION_REPORT.md),
+[hosted acceptance](PHASE_5D_HOSTED_ACCEPTANCE.md),
+[validation](PHASE_5D_VALIDATION.md), and
+[performance](PHASE_5D_PERFORMANCE.md). Earlier incomplete checkpoints below are
+retained as historical evidence. Phase 5D is complete; no later sport or phase
+was started.
 
 ### October 5 creation-blocker investigation — latest checkpoint
 

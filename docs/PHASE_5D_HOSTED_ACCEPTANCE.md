@@ -1,4 +1,59 @@
-# Phase 5D controlled hosted acceptance — incomplete, safely restored
+# Phase 5D controlled hosted acceptance
+
+## Final window — complete and safely restored
+
+Run `88aedcae-fc82-4c59-8a54-f9fa6686cbdf` completed the mandatory corrected
+creation gate and the remaining Phase 5D hosted acceptance on October 5, 2026.
+The event explicitly targeted Falcons and Wildcats; exact candidate
+`8c90df4a-c258-41fd-815a-865692b5ec4a:2026-10-05T16:00:00` created exactly one
+canonical Football game, `1e4bec03-f7f7-4a6f-ad9e-59a0e562dd0a`, with a
+caller-bound request receipt. Native detail, reload and navigation all rendered.
+
+The hosted scenario exercised four quarters, clock/possession/down/distance/field
+state, rush, passing, sack, touchdown/XP, kickoff/return, punt/return,
+interception, fumble/recovery, field goal, penalty, downs, correction, final,
+reopen, post-reopen correction and refinalization. Both 10–0 final epochs remain
+immutable, with epoch 2 current. The Family Hub then preserved the controlled
+athlete's Basketball, Soccer and Football history after the original Falcons
+membership ended. The guardian-positive view returned only the controlled child;
+the Wildcats-only staff view returned a restricted-history result and no prior-
+team correction controls.
+
+| Fixed/actual point | UTC |
+| --- | --- |
+| Window start | 2026-10-05 12:13:39.836647 |
+| Stop new scenarios | 2026-10-05 12:48:39.836647 |
+| Cleanup target | 2026-10-05 12:58:39.836648 |
+| Hard expiry | 2026-10-05 13:13:39.836648 |
+| Exact-game operator start | 2026-10-05 12:16:28.881665 |
+| Wildcats memberships/guardian stage | 2026-10-05 12:28:36.751699 transaction; row starts 12:28:36.758604 / 12:28:36.760228 |
+| Guardian ended/admin temporarily paused | 2026-10-05 12:29:10.325707 |
+| Full explicit cleanup transaction | 2026-10-05 12:30:32.525299 |
+| Wildcats memberships explicitly ended | 2026-10-05 12:30:32.527048 / 12:30:32.527964 |
+| Operator explicitly ended | 2026-10-05 12:30:32.530605 |
+| Event cleanup complete | 2026-10-05 12:30:32.532906 |
+
+Cleanup completed before every fixed deadline. Current canonical checks show the
+original administrator and original Falcons membership active, both temporary
+Wildcats memberships inactive, the operator inactive, guardian baseline restored,
+selected Sports/Calendar configuration restored, the event canceled/unpublished,
+the final game unpublished, two finalizations preserved and zero pending
+controlled notification work.
+
+Acceptance exposed a narrow conversion-state defect after the extra point: the
+engine entered kickoff but retained the try-only scoring side, which made the
+frontend state projector reject the otherwise accepted game. Migration
+`20261005122349_phase5d_football_conversion_state` repaired the transition and
+backfilled the controlled kickoff state. Native controls then returned and the
+scenario completed. The regression suite now asserts that completed tries clear
+the marker. No other known Football defect remains.
+
+Forged signed hosted requests and wrong-sport forged POSTs that would require
+session extraction remain SQL/runtime verified and are not labeled hosted
+verified. No session or credential material was read. Responsive checks at 768,
+390 and 320 pixels found no horizontal overflow. No later phase was started.
+
+## Historical incomplete window — preserved
 
 The single approved window ran on October 5, 2026 UTC against the existing Boss
 platform and canonical Supabase project. **Phase 5D is not complete.** Native

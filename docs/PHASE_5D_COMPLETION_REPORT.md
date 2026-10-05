@@ -1,5 +1,177 @@
 # Phase 5D completion report
 
+## Final hosted acceptance and closure — October 5, 2026
+
+**Status: COMPLETE.** The corrected creation gate, deterministic Football game,
+two immutable finalization epochs, athlete-history portability, guardian access,
+new-team privacy, on-time cleanup and zero-residual checks all passed. One narrow
+conversion-state defect was fixed, migrated and covered by regression testing.
+
+1. **Starting SHA:** `7b4f6cbf39da65a07a5a515adb70bccfc250b48f` on
+   `build/boss-platform-v1`.
+2. **Final SHA:** recorded in this report after the final validation/documentation
+   commit and in PR #3.
+3. **Credential containment:** Main Boss Chat declared the previously emitted
+   Netlify proxy credential expired by its 30-minute design and recorded fresh
+   Netlify, GitHub and Supabase sessions. No prior credential-bearing value was
+   inspected, reproduced, searched for, tested, stored or reused.
+4. **Window:** start `12:13:39.836647`, stop-new `12:48:39.836647`, cleanup
+   target `12:58:39.836648`, hard expiry `13:13:39.836648` UTC.
+5. **Baseline:** audit `cbaa4299-7db9-4c62-95ac-23acfecd5268` captured the
+   original administrator, original Falcons membership, inactive guardian,
+   zero active operators, module configuration and zero Football games before
+   activation.
+6. **Calendar targets:** event `8c90df4a-c258-41fd-815a-865692b5ec4a`
+   targeted both Falcons and Wildcats explicitly, with Wildcats as the internal
+   opponent and neutral home/away state.
+7. **Candidate:** exact candidate
+   `8c90df4a-c258-41fd-815a-865692b5ec4a:2026-10-05T16:00:00` appeared only
+   with the corrected two-team target relationship.
+8. **Game creation:** native UI created exactly one Football game,
+   `1e4bec03-f7f7-4a6f-ad9e-59a0e562dd0a`; event and occurrence identity match.
+9. **Receipt/idempotency:** operation `4058e370-c9fc-4f59-b672-25888d49ab23`
+   and request receipt `85de24b7-ae8f-4850-8f80-72d2bc0f7e1d` exist; no
+   duplicate game was created.
+10. **Activation:** roster revision 1 and the Football state initialized with the
+    reviewed four-quarter, 720-second-quarter configuration.
+11. **Quarter/clock:** all four quarter boundaries and halftime completed; clock
+    was explicitly brought to zero for each period.
+12. **Field position:** native state controls and recorded plays produced coherent
+    bounded field state throughout the scenario.
+13. **Down/distance:** down, distance and line-to-gain transitions worked,
+    including explicit fourth-and-five state and turnover on downs.
+14. **Possession:** the initial rush was correctly refused until possession was
+    confirmed; kicks, interception, fumble recovery and downs changed possession
+    correctly.
+15. **Drives:** accepted facts produced coherent drive boundaries; the full local
+    projection suite independently validates drive reconstruction.
+16. **Hosted play families:** rush, complete/incomplete pass, sack, touchdown,
+    XP, kickoff/return, punt/return, interception/return, fumble/recovery/return,
+    field goal, penalty and turnover on downs were exercised natively.
+17. **Passing:** Child1 finished 1/2 for 10 yards; the opponent finished 0/1 with
+    one interception; the Wildcats defense recorded one sack.
+18. **Rushing:** Child1 recorded 3 carries for 67 yards and one touchdown;
+    Wildcats recorded one rush for 4 yards.
+19. **Receiving:** the completed 10-yard pass reconciled passer, receiver and team
+    output; target/receiving contracts remain covered by the runtime oracle.
+20. **Defense:** the hosted scenario exercised a sack, interception, forced
+    fumble and recovery without fabricating missing player attribution.
+21. **Tackle/sack/interception:** sack and interception/10-yard return reconciled;
+    the full tackle/TFL matrix remains SQL/runtime verified.
+22. **Fumble/recovery:** opponent forced and recovered the fumble, including the
+    recorded 5-yard return and correct possession transition.
+23. **FG/XP:** Falcons made one 40-yard field goal and one extra point.
+24. **Punts/returns:** Wildcats punted for 40 yards; Falcons returned it 5 yards;
+    kickoff return/touchback paths also executed.
+25. **Penalty:** an accepted penalty was recorded and later superseded through the
+    reviewed correction model; source history remained immutable.
+26. **Score:** Falcons 10, Wildcats 0 at both authoritative finalizations.
+27. **Team totals:** score, 10 passing yards, 67 rushing yards and exercised
+    turnover/return/kicking totals reconciled with the hosted facts.
+28. **Play-by-play:** chronological native play-by-play rendered accepted facts
+    and marked superseded correction sources without deleting them.
+29. **Correction:** penalty reversal succeeded, active results reconciled and the
+    immutable source remained available.
+30. **First final:** native finalization sealed epoch 1 at 10–0.
+31. **Stale final denial:** ordinary final-game controls were unavailable; the
+    authoritative SQL/runtime suite verifies stale final mutations fail closed.
+32. **Reopen:** an authorized reason was required and accepted through the native
+    reopen flow.
+33. **Refinalization:** turnover-on-downs reversal after reopen succeeded and a
+    second native finalization sealed epoch 2.
+34. **Epoch immutability:** epoch 2 is current; epoch 1 remains preserved and
+    unchanged.
+35. **Operator positive:** temporary exact-game operator
+    `361f2393-e7bf-4a06-86b7-838e3cfca24c` operated the controlled Falcons game.
+36. **Operator revocation:** it was explicitly ended at
+    `12:30:32.530605 UTC`; subsequent restricted context had no operation controls.
+37. **Security negatives:** unrelated/new-team private history and correction
+    controls were denied. Forged signed requests not constructible without
+    extracting session material remain SQL/runtime verified only.
+38. **Wrong sport:** cross-sport Football/Basketball/Soccer mutation denial is
+    SQL/runtime verified; no unsafe forged hosted request mechanism was created.
+39. **Athlete provenance:** the same persistent person/participant identity kept
+    organization, originating team, game, roster revision and epoch provenance.
+40. **Old team end:** original Child1 Falcons membership was ended during the
+    transfer stage without rewriting historical facts.
+41. **History preserved:** sealed Basketball, Soccer and both Football epochs
+    stayed connected after the original-team membership ended.
+42. **Guardian access:** with the reviewed guardian relationship temporarily
+    active, Family Hub showed the correct Child1 history and no unrelated child,
+    teammate, communication, attendance-reason, operator or audit data.
+43. **Wildcats memberships:** exact bounded staff membership
+    `9ec1b618-5fb2-4cdd-a41c-2b9e9fd48488` and athlete membership
+    `50628864-519a-465c-9a80-c7dce88d2508` began at
+    `12:28:36.758604` / `12:28:36.760228 UTC`.
+44. **New-team privacy:** Wildcats-only staff received an explicit restricted
+    athlete-history result and no private prior-team athlete statistics.
+45. **Correction isolation:** Wildcats-only staff saw no reopen, correction or
+    game-administration controls for the prior Falcons game.
+46. **Basketball compatibility:** Family Hub preserved two sealed Basketball
+    epochs with Falcons provenance.
+47. **Soccer compatibility:** Family Hub preserved two sealed Soccer epochs with
+    Falcons provenance.
+48. **Desktop:** native Game Center scenario and controls were exercised at the
+    ordinary desktop viewport.
+49. **Tablet:** 768px rendered with `scrollWidth = clientWidth = 768`.
+50. **390px:** rendered with `scrollWidth = clientWidth = 390`.
+51. **320px:** rendered with `scrollWidth = clientWidth = 320`; no horizontal
+    overflow and Game Center remained navigable.
+52. **Hosted timing:** the bounded native scenario completed without `57014` or
+    repeatable database timeout. No formal hosted SLA or synthetic load claim is
+    made; final local 1,000-play calls stayed under the eight-second bound.
+53. **Notifications:** no per-play notification was emitted. No controlled
+    notification event/job remained pending; existing low-frequency source and
+    replay behavior remains SQL/runtime verified.
+54. **Cleanup:** cleanup audit `a94b15fa-aef8-4e4f-91ee-33f8969825eb`
+    was written at `12:30:32.525299 UTC`; event cleanup completed by
+    `12:30:32.532906`, over 27 minutes before target and 42 minutes before expiry.
+55. **Membership cleanup:** staff/athlete memberships were explicitly inactivated
+    and ended at `12:30:32.527048` / `12:30:32.527964 UTC`.
+56. **Residual authority:** zero active temporary operator, role or Wildcats
+    membership remains.
+57. **Administrator:** the original platform-administrator assignment is active
+    with no end; native admin navigation was restored.
+58. **Module baseline:** Sports configuration `{}` and the exact prior Calendar
+    configuration/status/window were restored; monotonic versions remain audit
+    history rather than being rewound.
+59. **Resources:** controlled event is canceled/unpublished; controlled game is
+    final/unpublished with two immutable finalizations.
+60. **Pending work:** zero pending controlled notification source work remains.
+61. **Typecheck:** PASS on the final worktree.
+62. **Lint:** PASS with zero warnings.
+63. **Application tests/build:** 339/339 PASS. Production build PASS using the
+    repository's documented synthetic local build-format configuration; no
+    credential or live backend access was used.
+64. **Migrations/database:** canonical history contains the conversion repair as
+    `20261005122349_phase5d_football_conversion_state`; live function inspection
+    confirms the corrected transition. The final full disposable run passed
+    12,382 SQL/bootstrap assertions and 123 coordinated races, then removed its
+    private cluster.
+65. **Generated types:** verified; the repair changes only a stored-function body
+    and does not alter any public database signature or generated TypeScript type.
+66. **CI:** final push/PR CI result is recorded with the final SHA in PR #3.
+67. **PR:** #3 remains OPEN / DRAFT / UNMERGED.
+68. **Evidence limits:** forged signed-host requests and wrong-sport forged POSTs
+    remain `SQL/RUNTIME VERIFIED; HOSTED FORGED-REQUEST EXECUTION NOT AVAILABLE
+    THROUGH APPROVED TEST TOOLING.` Numeric hosted load capacity is not claimed.
+69. **Security/advisors:** no new Phase 5D security error. Advisors retain 80
+    intentional closed-RLS/no-policy INFO findings and the existing leaked-
+    password-protection WARN; performance retains 153 unused-index INFO findings
+    and one Auth connection-allocation INFO.
+70. **Credential/session handling:** no password, Auth token, session value,
+    privileged key or previously exposed proxy credential was requested, read,
+    printed, logged, stored, searched for, committed or reused.
+71. **Data:** only synthetic CONTROLLED TEST records were used; no real youth or
+    customer data was used.
+72. **Scope:** no Volleyball, Baseball/Softball, aggregate, public-athlete,
+    livestream, fundraising, Boss Bucks, Money Board, commerce, payments or later
+    phase was started.
+73. **Final Phase 5D status:** **COMPLETE.** No known Football product/runtime
+    defect remains; all temporary authority is removed and baseline is restored.
+
+## Historical incomplete checkpoint — preserved
+
 **Status: Phase 5D INCOMPLETE — native hosted Football creation blocked the
 single approved acceptance window. Implementation, local/canonical validation,
 deployment and readiness-head CI remain verified. Explicit cleanup and repeated

@@ -110,7 +110,7 @@ declare n jsonb:=f;spot integer:=coalesce((f->>'ball_spot')::integer,30);dn inte
  if p_type in('extra_point','two_point')then
  if phase<>'try'or p_side is distinct from f->>'scoring_side'then raise exception'No matching touchdown try'using errcode='PT409';end if;
  points:=case when coalesce((p->>'made')::boolean,false)then case p_type when'extra_point'then 1 else 2 end else 0 end;score_side:=p_side;
- return n||jsonb_build_object('phase','kickoff','points',points,'score_side',score_side,'first_down_side',null,'end_reason',null);end if;
+ return n||jsonb_build_object('phase','kickoff','scoring_side',null,'points',points,'score_side',score_side,'first_down_side',null,'end_reason',null);end if;
  if phase='try'then raise exception'Record the touchdown try before the next play'using errcode='PT409';end if;
  if p_type not in('kickoff','kickoff_return','penalty')and phase<>'scrimmage'then raise exception'Football requires a receiving possession'using errcode='PT409';end if;
  if p_type='fumble'then kind:=coalesce(p->>'base_play_type','none');end if;

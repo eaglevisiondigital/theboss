@@ -1,10 +1,19 @@
 # Boss foundation implementation decisions
 
 Current implementation status: **Phase 5D Football and athlete-history portability:
-IN PROGRESS**, authorized separately below. Its validated implementation is
-migrated and deployed; controlled hosted acceptance is still pending. The
-following Phase 5C owner-closure statement and its historical checkpoints remain
-preserved.
+COMPLETE.** The Main Boss Chat cleared containment and authorized the final fixed
+hosted window. Correct two-team Calendar targeting created one canonical Football
+game; the deterministic game, two final epochs, athlete-history portability,
+guardian access and new-team privacy passed. Cleanup completed before the fixed
+target with zero temporary authority and the original administrator restored.
+
+The hosted run established one implementation decision already implicit in the
+field-state contract: `scoring_side` exists only during the touchdown try and is
+cleared when the try transitions to kickoff. A versioned body-only repair and
+regression assertion enforce this invariant. It changes no role, tenant scope,
+product rule or generated public database type. Historical incomplete checkpoints
+and the sanitized deployment-proxy disclosure remain preserved below. No later
+sport or phase was started.
 
 Current owner status: **Phase 5C Soccer Live Scoring + Game Statistics: COMPLETE.**
 The [Main Boss Chat closure decision](#phase-5c-closure-by-main-boss-chat--october-4-2026)

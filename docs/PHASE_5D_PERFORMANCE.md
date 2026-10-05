@@ -1,5 +1,19 @@
 # Phase 5D Football performance
 
+## Final closure evidence
+
+The final hosted native scenario completed creation, ordinary operations,
+projections, four period transitions, first finalization, reopen/correction and
+refinalization without `57014` or a repeatable database timeout. Responsive Game
+Center rendering had no horizontal overflow at 768, 390 or 320 pixels. These are
+bounded acceptance observations, not a hosted load test or formal SLA.
+
+The post-fix focused 1,000-play disposable run kept every measured request below
+the unchanged eight-second bound. Its largest observed requests were play-by-play
+2,668.609 ms, detail 2,520.619 ms, period completion 2,736.923 ms and finalization
+3,392.586 ms; maximum ordinary append was 168.096 ms. The complete historical
+suite rerun provides the final regression evidence recorded in validation.
+
 Disposable PostgreSQL 17 measurements are local runtime evidence, not a hosted
 load test or production SLA. JIT matches the verified canonical setting. The
 existing eight-second request/race bound is retained; no timeout was increased.

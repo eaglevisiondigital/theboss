@@ -1,6 +1,38 @@
 # Phase 5D validation
 
-Phase 5D Football and bounded athlete-history portability are in progress.
+## Final closure validation — October 5, 2026
+
+Phase 5D Football and bounded athlete-history portability are **complete**.
+The final hosted window passed canonical creation, Football operation,
+final/reopen/refinalization, athlete-history portability, guardian-positive and
+new-team-private acceptance, followed by on-time explicit cleanup. Canonical
+read-only checks show the conversion repair present, zero active temporary
+operator/memberships, original administrator and Falcons membership active,
+controlled event/game unpublished and two finalization epochs preserved.
+
+The hosted conversion-state defect is covered by a new regression asserting that
+a completed touchdown try enters kickoff with `scoring_side` cleared. The focused
+Phase 5D disposable run applies every migration and passes the Football/history
+SQL suites plus 25 Football and two athlete-history races. The final full
+historical run passed **12,382 SQL/bootstrap assertions** and **123 coordinated
+races**, then removed its private cluster. Application validation,
+migration/type verification and CI results are recorded below and in the closure
+report. Canonical history contains
+46 migrations through `20261005122349_phase5d_football_conversion_state`.
+Generated public types are unchanged because the repair changes only a stored
+function body.
+
+Final platform validation passed typecheck, zero-warning lint, **339/339
+application tests** and the production build. The local build used the existing
+synthetic build-format values and made no live backend request.
+
+Post-repair advisors retain 80 intentional closed-RLS/no-policy INFO findings,
+the existing leaked-password-protection WARN, 153 unused-index INFO findings and
+one Auth connection-allocation INFO. No Auth/security setting was weakened.
+
+## Historical readiness and incomplete-window record — preserved
+
+Phase 5D Football and bounded athlete-history portability were in progress.
 The single October 5 hosted window stopped after unconfirmed native Football
 game creation; explicit restoration and strict final checks passed before the
 cleanup target. Phase 5D remains incomplete. The earlier readiness records below

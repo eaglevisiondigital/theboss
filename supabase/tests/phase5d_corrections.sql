@@ -120,6 +120,11 @@ select pg_temp.ff_play('dependent-fumble','rush','opponent',jsonb_build_object('
 select pg_temp.ff_create('dependent-touchdown');
 select pg_temp.ff_play('dependent-touchdown','rush','primary',jsonb_build_object('roster_id',pg_temp.ff_roster('dependent-touchdown','primary',2),'yards',70,'touchdown',true),'dependent-touchdown-source');
 select pg_temp.ff_play('dependent-touchdown','extra_point','primary',jsonb_build_object('roster_id',pg_temp.ff_roster('dependent-touchdown','primary',7),'made',true),'after-touchdown-try');
+reset role;
+select pg_temp.check('completed touchdown try clears the try-only scoring side before kickoff','FOOTBALL',
+ (select field_state->>'phase'='kickoff' and field_state->>'scoring_side' is null
+  from public.game_football_states where game_id=pg_temp.ff_game('dependent-touchdown')));
+set local role authenticated;select pg_temp.actor('admin');
 select pg_temp.ff_play('dependent-touchdown','kickoff','primary',jsonb_build_object('roster_id',pg_temp.ff_roster('dependent-touchdown','primary',7),'touchback',true,'result_side','opponent','result_ball_spot',25,'result_down',1,'result_distance',10),'after-touchdown-kickoff');
 select pg_temp.ff_play('dependent-touchdown','rush','opponent',jsonb_build_object('roster_id',pg_temp.ff_roster('dependent-touchdown','opponent',2),'yards',2),'after-touchdown-rush');
 reset role;
