@@ -150,3 +150,26 @@ for all five inherited sport suites. Focused disposable PostgreSQL 17 validation
 passed 96 Phase 6A assertions and 11 concurrency races; benchmark 362.819ms.
 The ephemeral cluster was removed. This correction changes test portability
 only, with no application, schema, migration or security-policy change.
+
+## Hosted rebuild-control defect and narrow correction
+
+Release CI `37375555846` passed both application and complete database jobs.
+The one hosted window began at 21:34:14.129883 UTC on October 5. Native
+classification/replay and no-stat-change refinalization passed (epoch 3 to 4,
+score 6–0). The archived/canceled synthetic Calendar occurrence initially
+correctly rejected finalization; its existing status was temporarily made
+scheduled, with exact baseline restoration prepared. No rule was weakened.
+
+The hosted statistics page omitted its administrator rebuild control because
+it checked top-level `organization.update`, while `boss_admin_read` projects
+that capability on the exact organization record. All temporary authority and
+module/event configuration were explicitly restored before fixing the UI
+(21:39:04.343859 UTC; independent zero-authority verification 21:39:44.657124).
+The controlled official epoch remains within the same fixed window pending
+classification cleanup; no acceptance deadline was extended.
+
+The UI now uses the scoped organization capability and current context. SQL
+rebuild authorization is unchanged. Three regression tests cover the actual
+administrator projection, wrong scope/top-level-only operation, and denied or
+guardian projections. Typecheck, zero-warning lint, **388/388 application tests**
+and production build pass. No schema/migration/security-policy change.
