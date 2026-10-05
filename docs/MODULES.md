@@ -262,3 +262,13 @@ scheduling, Game Center/scoring/statistics, livestreaming, products/orders/fulfi
 and CRM. Registration/forms/private document review and offline allocations are
 the bounded Phase 3B implementation above. No catalog/configuration row activates
 the later products.
+
+## Phase 5E Volleyball
+
+Volleyball is a Game Center adapter within Sports, using existing Calendar games,
+roster snapshots, exact operator assignments, finalization epochs and athlete
+history. Finite Sports flags are `volleyball_live_scoring`, `volleyball_stats`,
+`volleyball_play_by_play` and `volleyball_lineups`; they default off. Required
+match state remains independent of optional analytics depth. Basketball, Soccer
+and Football participate through catalog/console contracts while keeping their
+canonical engines. No Baseball/Softball or later module is introduced.

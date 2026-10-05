@@ -353,3 +353,21 @@ messaging and advanced sports remain absent. Phase 3B implements registration,
 private documents and cash/check allocation foundations described above, without
 executing card, ACH or Boss Bucks payments. Catalog rows do not implement later
 products.
+
+## Phase 5E prepared forward schema
+
+Shared tables: `game_stat_catalog_versions`, `game_stat_catalog_items`,
+`game_tracking_profiles`, `game_tracking_profile_revisions`,
+`game_tracking_snapshots`, `game_stat_coverage_intervals`,
+`game_finalization_tracking_seals`. Volleyball tables: `game_volleyball_states`,
+`game_volleyball_events`, `game_volleyball_finalizations`,
+`game_volleyball_final_stats`. All enable RLS immediately and revoke raw client
+access. Composite tenant/resource foreign keys have matching indexes. Catalogs,
+revisions, snapshots, coverage and final seals are immutable. Profile lifecycle
+updates preserve identity; authorized RPCs append audited revisions.
+
+Exact resolution order: sport default, organization, direct organization unit,
+team, matching team-season, game side. No implicit descendant inheritance.
+Intervals are ordered by canonical sequence; their end is the next snapshot
+boundary or finalization cutoff. Reopen/refinalize appends a new epoch without
+rewriting prior tracking/fact seals. **NOT TRACKED IS NOT ZERO** is permanent.

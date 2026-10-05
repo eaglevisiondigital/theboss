@@ -1,20 +1,20 @@
 import type { GameCommand } from "./contracts";
 import { gameResultMatchesCommand, parseGameCommand, projectGameResult } from "./input";
-export type GameIntentOutcome = { kind: "saved" | "busy" | "refresh" | "denied" | "invalid" | "unknown"; message: string; version?: number };
+export type GameIntentOutcome = { kind: "saved" | "busy" | "refresh" | "denied" | "invalid" | "unknown"; message: string; version?: number; event_id?: string };
 type Transport = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 /** One intent keeps its request ID until confirmed; a subsequent play is a new intent. */
 export class GameIntent {
   private inFlight = false;
   private retry: { command: GameCommand; id: string } | null = null;
   private confirmedVersion = 0;
-  constructor(private readonly makeId: () => string = () => crypto.randomUUID(), private readonly prefixes: readonly string[] = ["basketball.", "soccer.", "football."]) {}
+  constructor(private readonly makeId: () => string = () => crypto.randomUUID(), private readonly prefixes: readonly string[] = ["basketball.", "soccer.", "football.", "volleyball.", "tracking."]) {}
   waitingFor(version: number) { return this.inFlight || version < this.confirmedVersion; }
   hasUnconfirmed() { return this.retry !== null && !this.inFlight; }
   async execute(command: GameCommand, transport: Transport = fetch): Promise<GameIntentOutcome> {
     if (this.inFlight) return { kind: "busy", message: "A game change is being saved." };
     if (!parseGameCommand(command) || !this.prefixes.some(prefix => command.operation.startsWith(prefix))) return { kind: "invalid", message: "Review the game fields, then try again." };
     if (this.retry) return { kind: "unknown", message: "An earlier change is unconfirmed. Retry that change before recording another." };
-    if (Number(command.input.expected_version) < this.confirmedVersion) return { kind: "refresh", message: "Waiting for the updated game. Refresh if it does not appear." };
+    if (Number(command.operation === "tracking.profile.set" ? command.input.expected_game_version : command.input.expected_version) < this.confirmedVersion) return { kind: "refresh", message: "Waiting for the updated game. Refresh if it does not appear." };
     this.retry = { command: JSON.parse(JSON.stringify(command)) as GameCommand, id: this.makeId() };
     return this.send(transport);
   }
@@ -33,7 +33,7 @@ export class GameIntent {
       if (response.ok && result && gameResultMatchesCommand(result, intent.command)) {
         this.retry = null;
         this.confirmedVersion = Math.max(this.confirmedVersion, result.version);
-        return { kind: "saved", message: result.replayed ? "Already saved." : "Saved.", version: result.version };
+        return { kind: "saved", message: result.replayed ? "Already saved." : "Saved.", version: result.version, ...(result.event_id ? { event_id: result.event_id } : {}) };
       }
       if ([401, 403, 409, 422].includes(response.status)) {
         this.retry = null;

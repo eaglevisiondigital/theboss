@@ -419,3 +419,20 @@ No policy SQL, canonical schema or business behavior is implemented here.
 Implementation references: [Supabase SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client),
 [Supabase API keys](https://supabase.com/docs/guides/getting-started/api-keys),
 [Next.js CSP](https://nextjs.org/docs/app/guides/content-security-policy).
+
+## Phase 5E protected configuration and statistics
+
+Eleven prepared public tables are deny-by-default under RLS with no raw
+authenticated/anonymous/service-role CRUD grants. Private reducer, coverage,
+resolution and command helpers expose no client EXECUTE grants. The existing
+authenticated Game Center read/mutate boundaries are retained, with finite typed
+inputs and tenant/game/side/roster-revision identity binding.
+
+New profiles cannot grant access merely by naming a team or game. Disabled optional
+statistics reject forged input; required rally/state controls stay available.
+Corrections retain original evidence, validate the original tracking interval,
+and replay all later dependencies. Finalized games reject direct changes.
+Player coverage preserves gaps from missing attribution. Historical pre-profile
+Basketball/Soccer/Football records are labeled legacy/unknown without fabricated
+coverage or rewritten epochs. Practice is isolated synthetic state and cannot
+pass official command parsing. No Auth/security policy was weakened.

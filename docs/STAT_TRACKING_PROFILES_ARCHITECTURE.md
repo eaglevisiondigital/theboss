@@ -203,3 +203,15 @@ foundation introduces no second official ledger or production identity system.
 Volleyball does not yet have a completed console integration. This approved model
 creates no live schema, temporary authority or deployment. Keep PR #3 open,
 draft and unmerged. No Baseball/Softball or later module is started.
+
+## Approved implementation checkpoint
+
+Main Boss Chat approved this model in the October 5 Phase 5E continuation.
+The local implementation uses the catalog version `boss-tracking-v1`, existing
+Boss identities/scopes, six ordinary presets and immutable per-side snapshots.
+Quick Stats are ordered (maximum eight); required scoring/state controls remain
+separate. Volleyball is the first profile-aware live console. Earlier sport
+adapters define real finite catalogs/actions/prompts without changing their
+reducers, accepted facts or sealed history. Full practice UX remains deferred;
+the isolated synthetic contract is implemented. Runtime and release evidence
+will be recorded in Phase 5E validation/hosted reports.

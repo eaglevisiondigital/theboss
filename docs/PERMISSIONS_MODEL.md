@@ -333,3 +333,13 @@ appropriate entitlement/module capability, rollout availability, visibility and
 resource context. Permission alone is not a replacement for those module rules.
 Consent, sensitive-field projections, cross-unit inheritance and rollout override
 precedence are not inferred by this foundation.
+
+## Phase 5E stat configuration
+
+Existing `games.manage` mappings authorize exact-scope profile configuration;
+no roles, permissions or role mappings are added. A current scorekeeper/operator
+assignment does not grant configuration authority. Game-side edits use exact
+participating-team scope; organization/unit/team/season edits use their existing
+identities and relationship requirements. Current roles, memberships, resources,
+module policy and live Auth state are rechecked after lock waits. Settings
+inheritance never creates permission inheritance.

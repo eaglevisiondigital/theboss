@@ -1240,3 +1240,20 @@ assignments. None is implemented. Authentication alone grants no business
 authority, and verified JWT claims do not guarantee immediate revocation detection.
 See [security controls and limits](SECURITY_MODEL.md) and
 [package commands and configuration](../apps/platform/README.md).
+
+## Phase 5E implementation checkpoint (October 5)
+
+Phase 5E Volleyball and approved shared Stat Tracking Profiles/Live Stat Console
+are in local implementation/validation. Starting remote SHA is
+`83380a239fa3e6434a4b9d09f54852b1c0bc8597`; architecture was preserved in local
+commit `51ef9db`. Canonical migration history currently remains at 46 entries.
+No Phase 5E live migration, deployment or temporary hosted authority has been
+activated at this checkpoint. Final closure requires historical validation,
+canonical schema/types/advisors, deployment, one bounded hosted acceptance window,
+explicit cleanup and verified baseline restoration. No later sport/module began.
+
+Phase 5E canonical checkpoint: six validated forward migrations applied on
+October 5, 2026; canonical history 52 entries, 71 live structural checks passed,
+database types regenerated. Full local validation: 13,066 SQL/bootstrap assertions,
+138 coordinated races and 351 application tests. Hosted acceptance remains pending.
+No Phase 5E temporary authority is active or has been created.

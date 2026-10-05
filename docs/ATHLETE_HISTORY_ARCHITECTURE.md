@@ -128,3 +128,14 @@ migrations to a fresh private cluster, then passed 69 history SQL assertions
 and both guardian concurrency races. The runner removed the ephemeral cluster.
 This verifies the local history contract; the complete platform/database
 regressions and hosted acceptance remain separate release requirements.
+
+## Phase 5E Volleyball coverage
+
+Volleyball final stats join the existing athlete-history projection through the
+canonical finalization, original game/team/organization, roster revision and
+persistent person/participant identity. No second history store exists.
+Stat values carry tracked/not-tracked/partial coverage from the immutable epoch
+seal; untracked values remain null. Guardian authority is evaluated independently
+of current team membership. A new team relationship supplies no private prior-team
+history or original-team correction authority. Older sport epochs stay intact
+and receive only an honest legacy/unknown-coverage annotation.

@@ -95,3 +95,25 @@ two-connection races, exact canonical migration/types, application validation,
 deployment, one bounded controlled hosted window, on-time explicit cleanup and
 zero residual authority. No temporary live authority is activated during design
 or disposable validation. No later sport or aggregation is included.
+
+## October 5 approved model and implementation checkpoint
+
+Main Boss Chat approved the shared architecture and authorized Phase 5E in the
+latest assignment. The earlier proposal wording above is historical. The shared
+catalog, exact-context profiles, immutable per-side snapshots, coverage intervals,
+sealed coverage, and profile-aware Volleyball console are implemented locally.
+Live migrations/deployment and the single hosted acceptance window remain pending.
+
+Every rally contributes one team service attempt. A player service attempt is
+credited only when the strict court order identifies the server, or an accepted
+ace/service-error explicitly identifies one. Unknown attribution produces partial
+player coverage; it is never presented as a complete measured zero. Unattributed
+assisted-block participants and ace receivers likewise retain partial coverage.
+Play-by-play context uses the same canonical transition as scoring and replay.
+
+Configuration management reuses mapped `games.manage` with exact resource scope.
+The management surface exposes the selected organization plus explicitly filtered
+program/team and matching team-season contexts. It does not scan a tenant's full
+team hierarchy. Existing sport reducers and sealed history remain unchanged.
+Practice currently has the isolated synthetic in-memory contract; full practice
+UX is deferred as authorized. No official practice games or history rows are made.

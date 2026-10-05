@@ -10,6 +10,7 @@ phase5a_only=false
 phase5b_only=false
 phase5c_only=false
 phase5d_only=false
+phase5e_only=false
 if [[ $# != 0 ]]; then
   if [[ $# == 1 && "$1" == --test5a ]]; then
     phase5a_only=true
@@ -17,10 +18,12 @@ if [[ $# != 0 ]]; then
     phase5b_only=true
   elif [[ $# == 1 && "$1" == --test5c ]]; then
     phase5c_only=true
+  elif [[ $# == 1 && "$1" == --test5e ]]; then
+    phase5e_only=true
   elif [[ $# == 1 && "$1" == --test5d ]]; then
     phase5d_only=true
-  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcd])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase5c_soccer.sql | --test5a | --test5b | --test5c | --test5d]' >&2
+  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcde])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase5c_soccer.sql | --test5a | --test5b | --test5c | --test5d | --test5e]' >&2
     exit 1
   else
     selected_test=$2
@@ -110,11 +113,12 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql)
 if [[ "$phase5a_only" == true ]]; then tests=("$test_dir"/phase5a_*.sql);fi
 if [[ "$phase5b_only" == true ]]; then tests=("$test_dir"/phase5b_*.sql);fi
 if [[ "$phase5c_only" == true ]]; then tests=("$test_dir"/phase5c_*.sql);fi
 if [[ "$phase5d_only" == true ]]; then tests=("$test_dir"/phase5d_*.sql);fi
+if [[ "$phase5e_only" == true ]]; then tests=("$test_dir"/phase5e_*.sql);fi
 if [[ -n "$selected_test" ]]; then tests=("$test_dir/$selected_test");fi
 if [[ ${#tests[@]} == 0 ]]; then
     printf '%s\n' 'No selected PostgreSQL acceptance suites found.' >&2
@@ -172,6 +176,12 @@ if [[ "$phase5d_only" == true ]]; then
   exit 0
 fi
 
+if [[ "$phase5e_only" == true ]]; then
+  PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase5e_volleyball_concurrency.sh"
+  printf '%s\n' 'Focused Phase 5E SQL and concurrency tests passed. Full historical run remains required.'
+  exit 0
+fi
+
 concurrency_test=$test_dir/phase2a_hierarchy_concurrency.sh
 if [[ ! -s "$concurrency_test" ]]; then
   printf '%s\n' 'Phase 2A hierarchy concurrency test is missing.' >&2
@@ -212,7 +222,7 @@ fi
 printf 'Testing %s\n' "${registration_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$registration_concurrency_test"
-for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh phase4b_attendance_concurrency.sh phase4b_volunteers_concurrency.sh phase5a_games_concurrency.sh phase5b_basketball_concurrency.sh phase5c_soccer_concurrency.sh phase5d_football_concurrency.sh phase5d_athlete_history_concurrency.sh; do
+for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh phase4b_attendance_concurrency.sh phase4b_volunteers_concurrency.sh phase5a_games_concurrency.sh phase5b_basketball_concurrency.sh phase5c_soccer_concurrency.sh phase5d_football_concurrency.sh phase5d_athlete_history_concurrency.sh phase5e_volleyball_concurrency.sh; do
   concurrency_test=$test_dir/$phase4a_test
   if [[ ! -s "$concurrency_test" ]]; then
     printf 'Phase 4 concurrency test is missing: %s\n' "$phase4a_test" >&2
@@ -222,4 +232,4 @@ for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
     PGDATABASE=postgres PGUSER=postgres bash "$concurrency_test"
 done
-printf '%s\n' 'Phase 2A/2B/3A/3B/4A/4B/5A/5B/5C/5D PostgreSQL 17 authorization tests passed.'
+printf '%s\n' 'Phase 2A/2B/3A/3B/4A/4B/5A/5B/5C/5D/5E PostgreSQL 17 authorization tests passed.'
