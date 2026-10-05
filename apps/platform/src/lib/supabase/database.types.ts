@@ -2305,6 +2305,268 @@ export type Database = {
           },
         ]
       }
+      game_diamond_events: {
+        Row: {
+          actor_person_id: string
+          correction_of: string | null
+          created_at: string
+          event_type: string
+          game_id: string
+          id: string
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          payload: Json
+          reason: string | null
+          request_id: string
+          sequence: number
+        }
+        Insert: {
+          actor_person_id: string
+          correction_of?: string | null
+          created_at?: string
+          event_type: string
+          game_id: string
+          id?: string
+          operation_id: string
+          organization_id: string
+          origin_sequence: number
+          payload: Json
+          reason?: string | null
+          request_id: string
+          sequence: number
+        }
+        Update: {
+          actor_person_id?: string
+          correction_of?: string | null
+          created_at?: string
+          event_type?: string
+          game_id?: string
+          id?: string
+          operation_id?: string
+          organization_id?: string
+          origin_sequence?: number
+          payload?: Json
+          reason?: string | null
+          request_id?: string
+          sequence?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_diamond_events_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_diamond_events_organization_id_game_id_correction_of_fkey"
+            columns: ["organization_id", "game_id", "correction_of"]
+            isOneToOne: false
+            referencedRelation: "game_diamond_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_diamond_events_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "game_diamond_events_organization_id_game_id_operation_id_fkey"
+            columns: ["organization_id", "game_id", "operation_id"]
+            isOneToOne: false
+            referencedRelation: "game_operations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_diamond_final_stats: {
+        Row: {
+          finalization_id: string
+          game_id: string
+          id: string
+          organization_id: string
+          roster_id: string | null
+          side: string
+          stats: Json
+        }
+        Insert: {
+          finalization_id: string
+          game_id: string
+          id?: string
+          organization_id: string
+          roster_id?: string | null
+          side: string
+          stats: Json
+        }
+        Update: {
+          finalization_id?: string
+          game_id?: string
+          id?: string
+          organization_id?: string
+          roster_id?: string | null
+          side?: string
+          stats?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_diamond_final_stats_organization_id_game_id_finalizat_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_diamond_finalizations"
+            referencedColumns: ["organization_id", "game_id", "finalization_id"]
+          },
+          {
+            foreignKeyName: "game_diamond_final_stats_organization_id_game_id_roster_id_fkey"
+            columns: ["organization_id", "game_id", "roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_diamond_finalizations: {
+        Row: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          sport_key: string
+          state: Json
+        }
+        Insert: {
+          engine_version: string
+          epoch: number
+          event_sequence: number
+          finalization_id: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          sport_key: string
+          state: Json
+        }
+        Update: {
+          engine_version?: string
+          epoch?: number
+          event_sequence?: number
+          finalization_id?: string
+          game_id?: string
+          organization_id?: string
+          roster_revision?: number
+          sport_key?: string
+          state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_diamond_finalizations_organization_id_game_id_finaliz_fkey"
+            columns: ["organization_id", "game_id", "finalization_id"]
+            isOneToOne: false
+            referencedRelation: "game_finalizations"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_diamond_plate_appearances: {
+        Row: {
+          batter_roster_id: string | null
+          game_id: string
+          id: string
+          organization_id: string
+          pitcher_roster_id: string | null
+          side: string
+          start_event_id: string
+          start_sequence: number
+          start_state: Json
+        }
+        Insert: {
+          batter_roster_id?: string | null
+          game_id: string
+          id: string
+          organization_id: string
+          pitcher_roster_id?: string | null
+          side: string
+          start_event_id: string
+          start_sequence: number
+          start_state: Json
+        }
+        Update: {
+          batter_roster_id?: string | null
+          game_id?: string
+          id?: string
+          organization_id?: string
+          pitcher_roster_id?: string | null
+          side?: string
+          start_event_id?: string
+          start_sequence?: number
+          start_state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_diamond_plate_appearance_organization_id_game_id_batt_fkey"
+            columns: ["organization_id", "game_id", "batter_roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_diamond_plate_appearance_organization_id_game_id_pitc_fkey"
+            columns: ["organization_id", "game_id", "pitcher_roster_id"]
+            isOneToOne: false
+            referencedRelation: "game_roster_snapshots"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+          {
+            foreignKeyName: "game_diamond_plate_appearance_organization_id_game_id_star_fkey"
+            columns: ["organization_id", "game_id", "start_event_id"]
+            isOneToOne: false
+            referencedRelation: "game_diamond_events"
+            referencedColumns: ["organization_id", "game_id", "id"]
+          },
+        ]
+      }
+      game_diamond_states: {
+        Row: {
+          configuration: Json
+          engine_version: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          sport_key: string
+          state: Json
+        }
+        Insert: {
+          configuration: Json
+          engine_version?: string
+          game_id: string
+          organization_id: string
+          roster_revision: number
+          sport_key: string
+          state: Json
+        }
+        Update: {
+          configuration?: Json
+          engine_version?: string
+          game_id?: string
+          organization_id?: string
+          roster_revision?: number
+          sport_key?: string
+          state?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_diamond_states_organization_id_game_id_fkey"
+            columns: ["organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       game_finalization_tracking_seals: {
         Row: {
           coverage: Json

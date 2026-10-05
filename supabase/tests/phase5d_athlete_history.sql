@@ -96,7 +96,7 @@ select pg_temp.check('earlier keyset pages truthfully expose continuation','PAGI
 do $$declare bad jsonb;n integer:=0;begin
  for bad in select * from(values
  ('{"organization_id":"forged"}'::jsonb),('{"roster_id":"forged"}'),('{"limit":0}'),('{"limit":51}'),
- ('{"limit":-1}'),('{"limit":1.2}'),('{"limit":"1"}'),('{"sport_key":"baseball"}'),
+ ('{"limit":-1}'),('{"limit":1.2}'),('{"limit":"1"}'),('{"sport_key":"tennis"}'),
  ('{"child_person_id":"bad-uuid"}'),('{"child_person_id":null}'),('{"season_id":null}'),
  ('{"before_sealed_at":"infinity","before_finalization_id":"00000000-0000-0000-0000-000000000000","before_stat_id":"00000000-0000-0000-0000-000000000000"}'),
  ('{"before_stat_id":"00000000-0000-0000-0000-000000000000"}'),

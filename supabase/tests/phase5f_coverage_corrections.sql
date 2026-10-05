@@ -1,0 +1,41 @@
+begin;
+\ir phase5f/fixture.sql
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.dd_create('coverage','baseball','full');
+select pg_temp.dd_pa('coverage','pitch-pa');select pg_temp.dd_op('diamond.pitch.add','coverage','{"payload":{"kind":"pitch","outcome":"ball"}}');
+select pg_temp.dd_profile('coverage','opponent','essential');
+select pg_temp.dd_play('coverage','single',jsonb_build_array(pg_temp.dd_move(0,1)));
+select pg_temp.check('profile disable inside PA allows result without fabricated pitch','COVERAGE',pg_temp.dd_state('coverage')->'bases'->0->>'key'=pg_temp.ff_id('pitch-pa')::text);
+select pg_temp.check('observed pitch is partial after disabling','COVERAGE',(select t->'stats'->'pitches'@>'{"recorded_value":1,"coverage":"partially_tracked"}'from jsonb_array_elements(public.boss_games_read(pg_temp.query('coverage'))->'games')g cross join lateral jsonb_array_elements(g->'diamond'->'teams')t where t->>'side'='opponent'));
+select pg_temp.dd_profile('coverage','opponent','full');select pg_temp.dd_pa('coverage','pitch-pa2');
+select pg_temp.dd_op('diamond.pitch.add','coverage','{"payload":{"kind":"pitch","outcome":"in_play"}}');
+select pg_temp.dd_play('coverage','reached_on_error',jsonb_build_array(pg_temp.dd_move(1,2,'error'),pg_temp.dd_move(0,1,'error')));
+reset role;
+create temp table dd_fact(id uuid,payload jsonb);grant select on dd_fact to authenticated;
+insert into dd_fact select id,payload from public.game_diamond_events where game_id=pg_temp.ff_game('coverage')and event_type='play'order by sequence desc limit 1;
+set local role authenticated;select pg_temp.actor('admin');
+create temp table dd_field_command(cmd jsonb);grant select,insert on dd_field_command to authenticated;
+insert into dd_field_command select pg_temp.game_command('diamond.fielding.add','coverage',jsonb_build_object('sport_key','baseball','payload',jsonb_build_object('kind','fielding','side','opponent','stat','errors','roster_id',pg_temp.ff_roster('coverage','opponent',3),'position','2','play_event_id',id)))from dd_fact;
+select public.boss_games_mutate(pg_temp.ff_id('field-retry'),cmd)from dd_field_command;
+select public.boss_games_mutate(pg_temp.ff_id('field-retry'),cmd)from dd_field_command;
+select pg_temp.check('fielding receipt credits exactly once','FIELDING',pg_temp.dd_stats('coverage','opponent',3)->>'errors'='1');
+reset role;update pg_temp.phase5a_games f set version=g.version from public.games g where g.id=pg_temp.ff_game(f.label);
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.denied('dependent fielding prevents play rewriting',format('select pg_temp.dd_op(''diamond.event.correct'',''coverage'',%L::jsonb)',(select jsonb_build_object('event_id',id,'reason','Synthetic dependent correction','payload',payload||'{"result":"fielders_choice"}')from dd_fact)),'PT409');
+select pg_temp.denied('putout requires an out',format('select pg_temp.dd_op(''diamond.fielding.add'',''coverage'',%L::jsonb)',(select jsonb_build_object('payload',jsonb_build_object('kind','fielding','side','opponent','stat','putouts','roster_id',null,'position',null,'play_event_id',id))from dd_fact)),'PT409');
+-- A third fixture confirms immutable epochs and persistent PA identity after reopen.
+select pg_temp.dd_create('epochs');select pg_temp.dd_pa('epochs','epoch-hr');select pg_temp.dd_play('epochs','home_run',jsonb_build_array(pg_temp.dd_move(0,4)));
+do $$declare h int;n int;begin for h in 1..2 loop for n in 1..3 loop
+perform pg_temp.dd_pa('epochs','epoch-'||h||'-'||n);perform pg_temp.dd_play('epochs','other_out',jsonb_build_array(pg_temp.dd_move(0,null,'advance_on_play',false,true)));end loop;
+if h=1 then perform pg_temp.dd_op('diamond.half.start','epochs','{"payload":{"kind":"half_start"}}');end if;end loop;end$$;
+select pg_temp.game_op('game.finalize','epochs');select pg_temp.game_op('game.reopen','epochs','{"reason":"Synthetic reviewed correction"}');
+reset role;
+truncate dd_fact;insert into dd_fact select id,payload from public.game_diamond_events where game_id=pg_temp.ff_game('epochs')and event_type='play'order by sequence limit 1;
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.dd_op('diamond.event.correct','epochs',(select jsonb_build_object('event_id',id,'reason','Synthetic RBI adjudication','payload',jsonb_set(payload,'{moves,0,rbi}','false'))from dd_fact));
+select pg_temp.game_op('game.finalize','epochs');reset role;
+select pg_temp.check('two immutable final epochs','SEAL',(select count(*)=2 from public.game_diamond_finalizations where game_id=pg_temp.ff_game('epochs')));
+select pg_temp.check('first RBI seal preserved new adjudication zero','CORRECTION',(select min((s.stats->>'rbi')::int)=0 and max((s.stats->>'rbi')::int)=1 from public.game_diamond_final_stats s where game_id=pg_temp.ff_game('epochs')and side='primary'and roster_id is null));
+select pg_temp.check('PA starts preserved after corrections','PA',(select count(*)=7 from public.game_diamond_plate_appearances where game_id=pg_temp.ff_game('epochs')));
+select pg_temp.denied('sealed Diamond state cannot be changed','update public.game_diamond_finalizations set state=''{}''where game_id=pg_temp.ff_game(''epochs'')','23514');
+select pg_temp.check('exact replay after refinalization','REPLAY',pg_temp.dd_state('epochs')=boss_private.diamond_rebuild(pg_temp.ff_game('epochs')));
+select count(*)passed_assertions from pg_temp.phase5a_assertions;rollback;

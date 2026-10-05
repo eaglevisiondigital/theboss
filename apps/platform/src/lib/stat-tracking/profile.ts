@@ -8,6 +8,8 @@ const essentials: Record<TrackingSport, string[]> = {
   soccer: ["player_attribution", "assists", "shots", "saves"],
   football: ["player_attribution", "quick_rush", "quick_pass_complete", "quick_pass_incomplete"],
   volleyball: ["player_attribution", "kills", "assists", "digs", "service_aces", "service_errors", "solo_blocks", "block_assists"],
+  baseball: ["player_attribution", "baserunning"],
+  softball: ["player_attribution", "baserunning"],
 };
 export function resolveSelection(sport: TrackingSport, preset: TrackingPreset, selected: readonly string[] = [], quick?: readonly string[]): TrackingSelection {
   const catalog = statCatalog[sport];
@@ -25,7 +27,8 @@ export function resolveSelection(sport: TrackingSport, preset: TrackingPreset, s
   seed.forEach(add);
   // Derived measures become available only if every dependency is tracked.
   for (let i = 0; i < catalog.length; i++) for (const e of catalog) if (e.available && e.classification === "derived" && e.dependencies.length && e.dependencies.every(k => enabled.has(k))) enabled.add(e.key);
-  const defaultQuick = seed.filter(k => catalog.find(e => e.key === k)?.quick_eligible).slice(0, 8);
+  const quickSeed = sport === "baseball" || sport === "softball" ? [...new Set(["play_state", ...seed])] : seed;
+  const defaultQuick = quickSeed.filter(k => catalog.find(e => e.key === k)?.quick_eligible).slice(0, 8);
   const ordered = [...(quick ?? defaultQuick)];
   if (ordered.length > 8 || new Set(ordered).size !== ordered.length || ordered.some(k => !enabled.has(k) || !catalog.find(e => e.key === k)?.quick_eligible)) throw new Error("Invalid Quick Stats");
   return { catalog_version: catalogVersion, preset, enabled: catalog.filter(e => enabled.has(e.key)).map(e => e.key), quick: ordered };

@@ -7,7 +7,7 @@ import { zeroStats as soccerStats } from "./soccer-fixture";
 test("athlete history queries use only subject, sport, season and bounded complete keyset filters", () => {
   assert.deepEqual(parseAthleteHistoryQuery({ org: "unrelated", team: "unrelated", household: "unrelated" }), { limit: 20 });
   assert.deepEqual(parseAthleteHistoryQuery({ child: childId, history_sport: "football", history_season: originSeasonId, history_limit: "50" }), { limit: 50, child_person_id: childId, sport_key: "football", season_id: originSeasonId });
-  for (const params of [{ child: [childId, adultId] }, { history_sport: "baseball" }, { history_limit: "51" }, { history_limit: "0" }, { history_limit: ["20"] }, { history_season: "forged" }, { before_sealed_at: historyRecord.sealed_at }]) assert.equal(parseAthleteHistoryQuery(params), null);
+  for (const params of [{ child: [childId, adultId] }, { history_sport: "tennis" }, { history_limit: "51" }, { history_limit: "0" }, { history_limit: ["20"] }, { history_season: "forged" }, { before_sealed_at: historyRecord.sealed_at }]) assert.equal(parseAthleteHistoryQuery(params), null);
   const cursor = { before_sealed_at: historyRecord.sealed_at, before_finalization_id: historyRecord.finalization_id, before_stat_id: historyRecord.id }; assert.ok(parseAthleteHistoryQuery(cursor)); assert.equal(parseAthleteHistoryQuery({ ...cursor, before_stat_id: "invalid" }), null);
 });
 test("history projection whitelists only selected subject provenance and sport statistics", () => {

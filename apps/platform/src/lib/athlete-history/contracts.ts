@@ -1,4 +1,4 @@
-export const historySports = ["basketball", "soccer", "football", "volleyball"] as const;
+export const historySports = ["basketball", "soccer", "football", "volleyball", "baseball", "softball"] as const;
 export type HistorySport = typeof historySports[number];
 export type HistoryCursor = { sealed_at: string; finalization_id: string; stat_id: string };
 export type AthleteHistoryQuery = { child_person_id?: string; sport_key?: HistorySport; season_id?: string; limit: number; before_sealed_at?: string; before_finalization_id?: string; before_stat_id?: string };

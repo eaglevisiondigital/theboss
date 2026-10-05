@@ -1,5 +1,22 @@
 # Current build state
 
+## Phase 5F Baseball + Softball Diamond Engine: IN PROGRESS
+
+Main Boss Chat authorized Phase 5F from `8749f2df4bce553e7ca2a386532ef813655c4a86`.
+One shared `diamond-v1` engine extends canonical Calendar/Game Center, existing
+rosters/operator assignments, tracking snapshots/coverage and athlete history.
+Four canonical migrations applied; default-off Baseball/Softball features. Local focused
+validation passed 128 Diamond assertions and 15 genuine races; application
+validation passed typecheck, zero-warning lint, 372 tests and production build.
+Full historical validation passed 13,428 SQL/bootstrap assertions and 153 races.
+Canonical structural verification passed 49 checks; types regenerated. Deployment
+and the single controlled hosted window are pending at this checkpoint. No temporary Phase 5F authority is active.
+
+See [architecture](DIAMOND_ENGINE_ARCHITECTURE.md),
+[validation](PHASE_5F_VALIDATION.md), [performance](PHASE_5F_PERFORMANCE.md) and
+[prepared hosted plan](PHASE_5F_HOSTED_PLAN.md). Earlier closure and incident
+history below is retained verbatim. No later phase is authorized or started.
+
 ## Phase 5E Volleyball + Shared Stat Tracking Profiles / Live Stat Console: COMPLETE
 
 Main Boss Chat formally closed Phase 5E on October 5, 2026 after reviewing

@@ -709,3 +709,14 @@ or temporary authority. Existing cleanup and original-administrator evidence
 remain preserved, as do all timeout/performance and sanitized credential-incident
 disclosures. PR #3 must remain OPEN, DRAFT and UNMERGED. No Baseball/Softball or
 later phase/module is authorized or started. STOP after Phase 5E closure.
+
+## Phase 5F shared Diamond engine
+
+October 5, 2026: Main Boss Chat authorized one Baseball/Fastpitch Softball engine
+with versioned finite rules, canonical Game Center identity/operators/rosters,
+shared tracking profiles/coverage and sealed athlete history. The implementation
+uses `diamond-v1`; required state cannot be disabled and untracked detail is not
+measured zero. Federation-specific DH/DP-FLEX/courtesy, exhaustive earned-run
+reconstruction, mercy/time/pitch-rest enforcement remain documented foundations.
+No later module or aggregate is authorized. Hosted acceptance uses one fixed
+window, independent expected statistics and explicit prepared recovery.

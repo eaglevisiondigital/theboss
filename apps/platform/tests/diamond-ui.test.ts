@@ -1,0 +1,9 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import {createElement}from"react";import{renderToStaticMarkup}from"react-dom/server";
+import{AppRouterContext,type AppRouterInstance}from"next/dist/shared/lib/app-router-context.shared-runtime";
+import{GameIntentProvider}from"../src/components/games/intent-provider";import{DiamondPanel}from"../src/components/diamond/console";import{diamondDemo}from"./diamond-fixture";
+const router:AppRouterInstance={back(){},forward(){},refresh(){},push(){},replace(){},prefetch(){},bfcacheId:"diamond-synthetic"};
+export function renderDiamond(sport:"baseball"|"softball"="baseball",full=false,family=false){const game=diamondDemo(sport,full?"full":"essential");return renderToStaticMarkup(createElement(AppRouterContext.Provider,{value:router},createElement(GameIntentProvider,{version:game.version,children:createElement(DiamondPanel,{game,family})})));}
+test("both sports render one console with persistent state and contextual optional pitch entry",()=>{for(const sport of["baseball","softball"]as const){const lite=renderDiamond(sport);assert.match(lite,/Inning 1/);assert.match(lite,/0 outs/);assert.match(lite,/Base runners/);assert.match(lite,/Result Quick Actions/);assert.match(lite,/Synthetic primary athlete 1/);assert.doesNotMatch(lite,/Pitch Quick Actions|Optional pitch entry|earned attribution|Responsible fielder/);const full=renderDiamond(sport,true);assert.match(full,/0 balls/);assert.match(full,/called strike/);assert.match(full,/in play/);}});
+test("family console never renders operator, lineup editing or profile controls",()=>{const html=renderDiamond("baseball",true,true);assert.match(html,/Diamond Box Score/);assert.doesNotMatch(html,/Quick Actions|Start next batter|Save game-side profile|Set .* lineup|Save ordered play/);assert.match(html,/Not tracked/);});
