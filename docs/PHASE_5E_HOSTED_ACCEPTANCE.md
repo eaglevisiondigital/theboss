@@ -1,6 +1,13 @@
 # Phase 5E controlled hosted acceptance
 
-Status: **INCOMPLETE; single controlled window closed and clean.** Core hosted
+Current status: **COMPLETE by Main Boss Chat's final closure determination.**
+The owner accepts the documented Wildcats-only hosted negative and unavailable
+hosted 390px/320px viewport overrides as evidence limitations, not known defects.
+[Exact determination](DECISIONS.md#phase-5e-closure-by-main-boss-chat).
+No new window, temporary authority or hosted test is opened for closure. The
+execution record below is preserved; missing tests remain NOT HOSTED VERIFIED.
+
+Pre-closure checkpoint: **INCOMPLETE; single controlled window closed and clean.** Core hosted
 acceptance passed. Wildcats-only private-game/correction acceptance was not
 executed because the proposed administrator pause was rejected and its explicit
 approval did not arrive before the window closed. Smaller hosted viewport checks
@@ -186,5 +193,6 @@ No credential/session material was requested, entered, extracted, exposed,
 stored or committed during this window. No historical Netlify proxy value was
 inspected/reused/reproduced. Synthetic controlled records only; no DOB invented,
 real youth/customer documents or security-policy weakening. No later phase began.
-Main Boss Chat must determine closure or direct any separately authorized work;
-this record does not mark the missing hosted restricted-role check as passed.
+Main Boss Chat subsequently determined COMPLETE with the documented limitations
+accepted. This record does not mark the missing hosted restricted-role check as
+passed and closure does not authorize further hosted testing or another phase.
