@@ -1,6 +1,13 @@
 begin;
 \ir phase5f/fixture.sql
 set local role authenticated;select pg_temp.actor('admin');
+-- A saved baserunning fact must not break the complete detail projection.
+select pg_temp.dd_create('runner-read');select pg_temp.dd_pa('runner-read','runner-read-pa');
+select pg_temp.dd_play('runner-read','single',jsonb_build_array(pg_temp.dd_move(0,1)));
+select pg_temp.dd_op('diamond.runner.advance','runner-read',jsonb_build_object('payload',jsonb_build_object('kind','advance','moves',jsonb_build_array(pg_temp.dd_move(1,2,'stolen_base')))));
+select pg_temp.check('complete detail after stolen base stays available and reconciles credit','PROJECTION',jsonb_array_length(public.boss_games_read(pg_temp.query('runner-read'))->'games')=1 and pg_temp.dd_stats('runner-read','primary')->>'stolen_bases'='1');
+select pg_temp.dd_op('diamond.runner.advance','runner-read',jsonb_build_object('payload',jsonb_build_object('kind','advance','moves',jsonb_build_array(pg_temp.dd_move(2,3,'wild_pitch')))));
+select pg_temp.check('complete detail after wild pitch preserves pitching counter','PROJECTION',jsonb_array_length(public.boss_games_read(pg_temp.query('runner-read'))->'games')=1 and pg_temp.dd_stats('runner-read','opponent')->>'wild_pitches'='1');
 select pg_temp.dd_create('oracle');
 select pg_temp.dd_pa('oracle','pa1');
 select pg_temp.dd_play('oracle','single',jsonb_build_array(pg_temp.dd_move(0,1)));

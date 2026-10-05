@@ -107,3 +107,35 @@ Softball second-sport oracle: one HR plus three top outs, three bottom outs,
 **1–0**, **7 PA**, primary **1 H/1 HR/1 R**, opponent **0 H/0 R**.
 Any actual accepted divergence must be diagnosed or documented before claiming
 reconciliation; do not calculate expected values from the database's own output.
+
+## Eligible-roster adjustment before the pitcher/substitution stage
+
+Only two Falcons and one Wildcats athlete are eligible. Vacant slots cannot be
+used as an outgoing substitution identity. Before bottom-one PA four: change
+Falcons pitcher to unattributed, substitute Child1 with existing jersey #7 in
+slot one, then explicitly change pitcher to #7. The intervening unattributed
+appearance receives no PA/pitch/out. Child1 remains the original first-inning
+walker/scorer/stealer; top-two slot-one walk belongs to #7. Expected Child1
+Baseball record becomes **1 PA/0 AB/1 BB/1 R/1 SB**. Team batting/pitching and
+6–0 score expectations are unchanged. No extra identity or membership is added.
+This change is documented before the dependent substitutions/pitcher actions.
+
+## October 5 live checkpoint
+
+Implementation `bef48600f0da29a9989f8db2f940d63211d33d39` published in Boss
+deploy `6ac3d2bacea46a00083aa7f3`; exact implementation CI passed all four
+database/application jobs. Frozen baseline captured 16:39:38.685596 UTC; stop-new
+17:39:38.685596, cleanup target 17:54:38.685596, hard expiry 18:09:38.685596.
+Private restoration passed a rollback and independent controller was armed.
+Sports configuration activated at 16:41:50.115764 UTC with its own bounded end.
+Native Calendar event `8d196b33-ad04-4402-99ef-9f983dee4ce2` explicitly targets
+Falcons/Wildcats; canonical Baseball game `495326b6-8acb-4114-b2d2-57d3e33f95df`,
+occurrence `2026-10-05T19:00:00`, creation receipt count one. Exact-game operator
+activated at 16:46:00.430274 UTC, fixed expiry 18:09:38.685596. Guardian and
+Wildcats transfer authority remain inactive at this checkpoint.
+
+After the first native walk and steal, the detail read failed because a
+`diamond_totals` SQL alias conflicted with its local variable. Saved facts and
+state remain intact. A narrow replacement helper and explicit stolen-base/wild-
+pitch detail-read regressions are being validated before live application.
+No timeout, authorization, sport architecture or fixed deadline is changed.
