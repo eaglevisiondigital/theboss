@@ -1,6 +1,6 @@
 # Phase 5F controlled hosted plan
 
-Status: PREPARED; no acceptance authority or window activated.
+Status: original prepared plan below; current fixed-window checkpoints appended.
 Use only the existing CONTROLLED TEST organization, administrator, Falcons,
 Wildcats and synthetic participant identities. One shared `diamond-v1` engine;
 canonical project `ilykgwgmxtrrikreacrz`, existing Boss platform deployment.
@@ -136,6 +136,33 @@ Wildcats transfer authority remain inactive at this checkpoint.
 
 After the first native walk and steal, the detail read failed because a
 `diamond_totals` SQL alias conflicted with its local variable. Saved facts and
-state remain intact. A narrow replacement helper and explicit stolen-base/wild-
-pitch detail-read regressions are being validated before live application.
+state remain intact. The narrow replacement helper was applied as canonical migration
+`20261005165247_phase5f_runner_projection_fix.sql`; explicit stolen-base/wild-
+pitch detail-read regressions and full repair CI passed.
 No timeout, authorization, sport architecture or fixed deadline is changed.
+
+## Correction-stage adjustment before dependent hosted actions
+
+The console exposes corrections for the most recent twelve facts. To preserve
+honest native UI coverage without adding a test endpoint, perform the scoring
+movement RBI exclusion and restoration while that home-run play is recent;
+verify projected RBI 5 and 6 before finalization. Both sealed epochs retain RBI
+6. After reopening, reverse a recent explicitly attributed primary putout and
+replace it with the other eligible primary athlete; compare immutable first
+and second epoch player credit while team score/outs remain unchanged. No
+expected value is derived from the application's own reduction.
+
+Before finalization, the last primary putout is credited to the team without a
+player, then after reopening reversed and replaced with the current eligible
+pitcher jersey #7. Child1 has been substituted out, so do not fabricate an
+individual fielding credit for that athlete. Epoch one preserves team-only
+credit; epoch two preserves #7 player credit, with one team putout in both.
+
+## Window closed; no further activation
+
+The single window was explicitly restored at 17:18:23.605980–17:18:23.728901 UTC,
+before both deadlines. Strict baseline/zero-residual/native-admin checks passed.
+The remaining specific authorization requests were not received; no Softball
+operator, guardian stage, transfer, Wildcats membership or admin pause activated.
+This historical plan does not authorize opening another window. See the hosted
+addendum and INCOMPLETE 78-point report for executed evidence and exact gaps.

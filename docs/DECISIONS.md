@@ -720,3 +720,16 @@ measured zero. Federation-specific DH/DP-FLEX/courtesy, exhaustive earned-run
 reconstruction, mercy/time/pitch-rest enforcement remain documented foundations.
 No later module or aggregate is authorized. Hosted acceptance uses one fixed
 window, independent expected statistics and explicit prepared recovery.
+
+## Phase 5F controlled hosted stop — October 5, 2026
+
+The one fixed window was closed with explicit on-time cleanup and verified exact
+selected baselines, original administrator and zero temporary authority/work.
+Automatic approval review rejected the exact Softball operator grant for lack of
+specific recipient/game/team/expiry authorization in the trusted transcript.
+Requested scoped Softball, guardian/transfer and admin-pause authorizations were
+not received before closure; those stages were not activated. Phase 5F remains
+INCOMPLETE with those hosted gaps and separate mobile/forged-request tooling
+limitations transparently retained. No architecture contradiction is known.
+Main Boss Chat owns the next acceptance/closure decision; no new window, broader
+authority or later phase is created by this record. Prior incident history remains.

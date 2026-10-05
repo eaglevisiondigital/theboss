@@ -1,21 +1,40 @@
 # Current build state
 
-## Phase 5F Baseball + Softball Diamond Engine: IN PROGRESS
+## Phase 5F Baseball + Softball Diamond Engine: INCOMPLETE
 
-Main Boss Chat authorized Phase 5F from `8749f2df4bce553e7ca2a386532ef813655c4a86`.
-One shared `diamond-v1` engine extends canonical Calendar/Game Center, existing
-rosters/operator assignments, tracking snapshots/coverage and athlete history.
-Four canonical migrations applied; default-off Baseball/Softball features. Local focused
-validation passed 128 Diamond assertions and 15 genuine races; application
-validation passed typecheck, zero-warning lint, 372 tests and production build.
-Full historical validation passed 13,428 SQL/bootstrap assertions and 153 races.
-Canonical structural verification passed 49 checks; types regenerated. Deployment
-and the single controlled hosted window are pending at this checkpoint. No temporary Phase 5F authority is active.
+One shared `diamond-v1` engine is implemented, validated and deployed to Boss.
+Starting SHA `8749f2df4bce553e7ca2a386532ef813655c4a86`; validated repair
+`cce4b41c52c9dca056e83034301683764a4aa974`. Four prepared migrations plus a narrow
+hosted runner-projection alias fix bring canonical history to 57. Full final CI
+passed 13,430 SQL/bootstrap assertions, 153 genuine races, typecheck, zero-warning
+lint, 372 application tests and production build. Diamond-specific coverage is
+130 assertions and 15 races. Fresh canonical types are byte-identical.
 
-See [architecture](DIAMOND_ENGINE_ARCHITECTURE.md),
-[validation](PHASE_5F_VALIDATION.md), [performance](PHASE_5F_PERFORMANCE.md) and
-[prepared hosted plan](PHASE_5F_HOSTED_PLAN.md). Earlier closure and incident
-history below is retained verbatim. No later phase is authorized or started.
+The single October 5 controlled window froze start 16:39:38.685596, stop-new
+17:39:38.685596, cleanup target 17:54:38.685596 and hard expiry 18:09:38.685596 UTC.
+Recovery was prepared/tested/armed before activation. Native Baseball verified
+two-team creation, the independent 6–0 two-inning scorebook, complete/partial
+pitch coverage, substitutions/inherited runners, corrections and final epochs.
+Exact Baseball operator ended 17:11:50.925294; a held native mutation was denied.
+Original administrator remains active. Softball canonical creation passed, but
+its exact operator assignment was rejected by automatic approval review;
+specific typed authorization was not received before closure. Guardian/transfer/
+Wildcats stages were never activated; no pure Wildcats-only context is claimed.
+Explicit restoration completed 17:18:23.605980–17:18:23.728901 UTC, before both
+deadlines. All six selected baseline sections equal; zero temporary operators,
+memberships, active profiles or pending controlled work remain. Both games/events
+are archived/unpublished. Original administrator native Home remains valid.
+Recovery was retired only after strict verification. No further window is opened.
+Required Softball scoring/sealing and guardian/team-transfer/privacy hosted gates
+remain unverified. Main Boss Chat must determine the next scoped acceptance action.
+
+Local rendered 1280/768/390/320 checks passed; hosted viewport override still
+measured 1280px. SQL/runtime evidence is never promoted to unexecuted hosted proof.
+See [78-point record](PHASE_5F_COMPLETION_REPORT.md),
+[hosted acceptance](PHASE_5F_HOSTED_ACCEPTANCE.md),
+[architecture](DIAMOND_ENGINE_ARCHITECTURE.md), [validation](PHASE_5F_VALIDATION.md)
+and [performance](PHASE_5F_PERFORMANCE.md). Historical closure/incident evidence
+below is preserved. No later phase is authorized or started.
 
 ## Phase 5E Volleyball + Shared Stat Tracking Profiles / Live Stat Console: COMPLETE
 

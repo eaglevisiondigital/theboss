@@ -1,8 +1,9 @@
 # Boss Diamond engine — Phase 5F
 
-Status: authorized implementation in progress. Starting SHA
-`8749f2df4bce553e7ca2a386532ef813655c4a86`. No live migrations or temporary
-acceptance authority have been applied at this design checkpoint.
+Status: implementation and canonical migrations validated and deployed; hosted
+acceptance/cleanup closure is recorded separately. Starting SHA
+`8749f2df4bce553e7ca2a386532ef813655c4a86`. The design below remains the approved
+shared-engine boundary.
 
 ## Shared engine and canonical ownership
 
