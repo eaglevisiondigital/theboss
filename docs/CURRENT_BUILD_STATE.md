@@ -1,13 +1,33 @@
 # Current build state
 
-## Phase 6A Season + Career Statistical Intelligence: IMPLEMENTATION AUTHORIZED
+## Phase 6A Season + Career Statistical Intelligence: INCOMPLETE — release containment gate
 
 October 5, 2026: Main Boss Chat approved the [architecture contract](SEASON_CAREER_INTELLIGENCE_ARCHITECTURE.md)
 with five binding decisions: sealed game-season attribution, positive evidence GP,
 explicit official eligibility, versioned ERA conventions, and current-or-pending
 hybrid materialization. Implementation/release is authorized for Phase 6A only;
-validation, live migration, deployment and hosted acceptance are not yet completed.
+local validation is complete; live migration, deployment and hosted acceptance
+are not yet completed.
 Phase 5F remains COMPLETE. Historical evidence and security disclosures are preserved.
+
+The approved contract is committed as `d65385387658242cbb0e6d9c073e17abee64a96c`.
+Four migrations and the local season/career/team UI are prepared. Final frozen
+fresh PostgreSQL 17 validation passes **13,711 SQL/bootstrap assertions and 164
+coordinated races**, including 96 Phase 6A assertions and 11 new races. All frozen
+migration/test hashes match the workspace; the disposable database was removed.
+Final local typecheck, zero-warning lint, 385/385 application tests and production
+build pass. Actual-component 320px/390px local renders pass; hosted unverified.
+Canonical preflight still has 57 migrations and no Phase 6A tables. No live
+migration, deployment or temporary Phase 6A authority has been activated.
+The implementation checkpoint remains local/unpublished; PR #3 remote head is
+unchanged at the starting Phase 5F baseline. See the full
+[73-point checkpoint report](PHASE_6A_COMPLETION_REPORT.md).
+
+An unrelated credential-bearing URL was unexpectedly surfaced by the browser
+inventory tool. No value is reproduced, searched, inspected further or used.
+Live release/hosted acceptance is paused for owner containment confirmation.
+See the sanitized [incident record](PHASE_6A_SECURITY_INCIDENT.md). Earlier
+security disclosures and acceptance history remain unchanged.
 
 ## Phase 5F Baseball + Softball Diamond Engine: COMPLETE
 

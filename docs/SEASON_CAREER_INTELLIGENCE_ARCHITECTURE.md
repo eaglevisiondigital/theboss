@@ -35,7 +35,7 @@ These filenames without a directory prefix also refer to `supabase/migrations/`.
 
 A source contributes exactly when its canonical game has `status = 'final'` and its canonical finalization epoch equals `games.finalization_count`; sport header and roster revision must match that finalization. `latest_sealed` alone is insufficient: reopening retains the latest seal but removes current authority. Do not select `max(epoch)` independently of canonical game state, nor count all immutable history rows.
 
-Uniqueness is one selected canonical finalization per game, with one contribution per side/subject/stat definition. Fail closed on missing/contradictory matching sport seals. Publication, module flags, current memberships and current team labels do not rewrite this statistical identity. Archival inclusion policy is an explicit review question in section 22; publication is never an athlete-history permission.
+Uniqueness is one selected canonical finalization per game, with one contribution per side/subject/stat definition. Fail closed on missing/contradictory matching sport seals. Publication, module flags, current memberships and current team labels do not rewrite this statistical identity. Explicit official classification is required as approved above; publication is never an athlete-history permission.
 
 ## 3. Athlete season aggregates
 
@@ -181,7 +181,7 @@ Maintain existing event→game→authority lock order in mutations. New invalida
 | Numeric incremental deltas | Fast but difficult maxima, joint cohorts, duplicates and supersession; unnecessary first-version risk |
 | Hybrid, recommended | Canonical selector/invalidation + replaceable per-game projections + origin-slice summaries + optional private career summaries; bounded queued refresh and direct-seal oracle |
 
-Recommendation: hybrid with slice recomputation initially; incremental replacement can later optimize measured hotspots. Stored normalized contributions are disposable projection data, not copied raw facts or a second truth. Reads gate on generation/freshness and live authorization. No browser-controlled refresh or publicly executable privileged worker RPC. Asynchronous freshness policy (explicit pending versus bounded direct fallback) requires Main Boss Chat approval; zero stale-authoritative disclosure is mandatory regardless.
+Recommendation: hybrid with slice recomputation initially; incremental replacement can later optimize measured hotspots. Stored normalized contributions are disposable projection data, not copied raw facts or a second truth. Reads gate on generation/freshness and live authorization. No browser-controlled refresh or publicly executable privileged worker RPC. Approved freshness policy uses bounded eager/read refresh with explicit pending fallback; zero stale-authoritative disclosure is mandatory.
 
 ## 18. Rebuild strategy
 
@@ -291,6 +291,6 @@ Immediately explicitly restore baseline/admin/module/relationships, end all temp
 
 ## 30. Explicit deferred work and stop condition
 
-Deferred: all Phase 6A implementation/migrations/types/UI/jobs/production changes; standings, leaderboards, records (Phase 6B); athlete/recruiting/public/shared profiles (Phase 6C); additional sports or sport-source participation amendments; tournaments, association-specific official statistics policy, notifications about rankings, fundraising, Boss Bucks, Money Board, processors, commerce, livestreaming, SMS/Twilio and push infrastructure.
+Phase 6A implementation/migrations/types/UI/jobs and release are authorized under the five approved decisions. Deferred: standings, leaderboards, records (Phase 6B); athlete/recruiting/public/shared profiles (Phase 6C); additional sports or sport-source participation amendments; tournaments, association-specific official statistics policy, notifications about rankings, fundraising, Boss Bucks, Money Board, processors, commerce, livestreaming, SMS/Twilio and push infrastructure.
 
 Main Boss Chat has approved the five decisions above and authorized Phase 6A implementation, validation and release. Stop after the complete Phase 6A report. Standings, leaderboards, records, profiles and all later work remain deferred. The original architecture-only audit did not perform implementation or live changes.

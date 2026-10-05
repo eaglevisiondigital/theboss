@@ -343,3 +343,8 @@ participating-team scope; organization/unit/team/season edits use their existing
 identities and relationship requirements. Current roles, memberships, resources,
 module policy and live Auth state are rechecked after lock waits. Settings
 inheritance never creates permission inheritance.
+
+
+## Phase 6A prepared statistical intelligence
+
+Phase 6A introduces no new role permission or broader grant. Athlete career is subject/self/guardian only. Individual origin-team season slices additionally require explicit organization/team/season scope, existing games.view plus team.roster.view and original resource visibility. Team-season totals require exact existing games.view and every relevant official source game's existing visibility policy. Administrator status alone does not authorize a child's cross-team career. Operational rebuild requires existing organization.manage and the same disclosure policy as the requested projection. Classification uses current games.manage over the canonical game's required sides and requires reopen/refinalize after sealing.

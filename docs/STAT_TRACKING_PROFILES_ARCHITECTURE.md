@@ -216,3 +216,8 @@ adapters define real finite catalogs/actions/prompts without changing their
 reducers, accepted facts or sealed history. Full practice UX remains deferred;
 the isolated synthetic contract is implemented. Runtime and release evidence
 will be recorded in Phase 5E validation/hosted reports.
+
+
+## Phase 6A prepared statistical intelligence
+
+Phase 6A copies the sealed tracking snapshot/coverage into immutable contributions and applies metric-specific player attribution coverage before reducing. Measured zero, partial, Not tracked and legacy unknown remain distinct. Derived rates use jointly complete source cohorts and summed numerator/denominator components, never averaged game rates. Per-tracked-played-game means use complete measured appearances. ERA uses versioned integer-out conventions (Baseball 9, Fastpitch 7 unless explicitly configured); incompatible career bases return unavailable ERA with component/convention metadata.

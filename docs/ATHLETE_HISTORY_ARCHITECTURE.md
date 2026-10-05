@@ -150,3 +150,8 @@ and the still-active administrator assignment; history does not use an admin
 override to substitute for the subject/guardian relationship. This is separate
 from a pure Wildcats-only private-game correction test. No household/organization
 membership or registration/document/payment/communication capability was broadened.
+
+
+## Phase 6A prepared statistical intelligence
+
+Phase 6A adds authorized season/career summaries alongside the existing immutable athlete history, without replacing it. Statistical season uses GAME season provenance, while existing history retains its original season fields. Persistent person/participant identity, origin team/organization, roster revision and epoch survive transfers. Roster is not GP: finite accepted participation/fact predicates confirm appearances; partial/unknown coverage remains visible. Guardians retain permitted historical summaries after team membership ends. A new team obtains no prior private history or correction authority.

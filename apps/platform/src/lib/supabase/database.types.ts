@@ -7093,6 +7093,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      boss_stat_competition_classify: { Args: { p_game: string; p_class: string; p_reason: string; p_request: string }; Returns: Json }
+      boss_stat_rebuild: { Args: { p_query: Json; p_kind: string; p_after_game?: string }; Returns: Json }
+      boss_athlete_season_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_athlete_career_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_team_season_read: { Args: { p_query?: Json }; Returns: Json }
       boss_admin_mutate: {
         Args: { p_commands: Json; p_request_id: string }
         Returns: Json

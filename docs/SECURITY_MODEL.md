@@ -436,3 +436,8 @@ Player coverage preserves gaps from missing attribution. Historical pre-profile
 Basketball/Soccer/Football records are labeled legacy/unknown without fabricated
 coverage or rewritten epochs. Practice is isolated synthetic state and cannot
 pass official command parsing. No Auth/security policy was weakened.
+
+
+## Phase 6A prepared statistical intelligence
+
+Prepared Phase 6A tables enable RLS in their creation migration and revoke direct PUBLIC/anon/authenticated/service-role CRUD. Public statistical RPCs use finite scoped input and narrow private entry points. Self/current verified guardian may read private sport-career history; origin staff may read only explicit organization/team/season slices with existing games.view, team.roster.view for individuals, Calendar/Game Center eligibility and source-game visibility. Current-team relationship never authorizes prior-origin career history. Recheck identity, guardian and scoped role/membership after row waits. Pending projections disclose no stale totals. All changes remain local and unapplied pending release gates.

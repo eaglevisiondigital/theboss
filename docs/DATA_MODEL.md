@@ -371,3 +371,8 @@ team, matching team-season, game side. No implicit descendant inheritance.
 Intervals are ordered by canonical sequence; their end is the next snapshot
 boundary or finalization cutoff. Reopen/refinalize appends a new epoch without
 rewriting prior tracking/fact seals. **NOT TRACKED IS NOT ZERO** is permanent.
+
+
+## Phase 6A prepared statistical intelligence
+
+Five prepared Phase 6A tables separate immutable versioned competition classification/contributions from rebuildable current-epoch selectors, originating-team summaries and refresh work. Contributions bind canonical organization/game/final epoch, game season, roster revision, person/participant, tracking snapshot, source-stat identity, coverage, participation and definition versions. NULL game seasons remain unassigned career segments; no current membership attribution. Only explicitly official current final epochs contribute. No canonical Phase 6A migration has been applied at this checkpoint.

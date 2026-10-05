@@ -245,3 +245,8 @@ documented in [Basketball engine architecture](BASKETBALL_ENGINE_ARCHITECTURE.md
 one core game identity, operation ledger and finalization epoch, with typed
 Basketball state, plays and immutable statistical seals. No other sport engine or
 season/career statistics are included.
+
+
+## Phase 6A prepared statistical intelligence
+
+Prepared Phase 6A derives statistics only from the current authoritative sealed epoch of all six implemented sport engines. Versioned finite classification binds an epoch boundary; legacy sources remain pending. Finalize/reopen/refinalize atomically changes statistical generation/work; deferred bounded refresh runs after sport/tracking seals exist. Prior contributions and seals remain immutable. Contested origin locks return pending rather than waiting while retaining game locks. Silent season changes remain rejected by existing immutable game identity; no new season-correction architecture is invented.

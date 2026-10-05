@@ -14,6 +14,11 @@ import { loadAthleteHistory } from "@/lib/athlete-history/data";
 import { parseAthleteHistoryQuery } from "@/lib/athlete-history/input";
 import { AthleteHistoryHub } from "@/components/athlete-history/hub";
 
+import { loadStats } from "@/lib/stat-intelligence/data";
+import { StatIntelligenceHub } from "@/components/stat-intelligence/hub";
+import { parseStatQuery } from "@/lib/stat-intelligence/input";
+import Link from "next/link";
+
 export const metadata: Metadata = { title: "Families" };
 export const dynamic = "force-dynamic";
 
@@ -26,5 +31,7 @@ export default async function FamiliesPage({ searchParams }: { searchParams: Pro
   const historyQuery = parseAthleteHistoryQuery(query);
   if (!attendanceQuery || !volunteerQuery || !gameQuery || !historyQuery) return <p role="status" className="form-notice">Review the organization, child and history filters.</p>;
   const [data, attendance, volunteers, games, history] = await Promise.all([loadAdminView("families", typeof query.org === "string" ? query.org : undefined, search), loadAttendance(attendanceQuery), loadVolunteers(volunteerQuery), loadGames(gameQuery), loadAthleteHistory(historyQuery)]);
-  return <><AthleteHistoryHub data={history} query={historyQuery} organizationId={typeof query.org === "string" ? query.org : undefined} /><CoordinationHub family attendance={attendance} volunteers={volunteers} attendanceQuery={attendanceQuery} volunteerQuery={volunteerQuery} /><GameHub family data={games} query={gameQuery} /><AdminConsole view="families" data={data} query={search} /></>;
+  const statsQuery = parseStatQuery(query);
+  const career = statsQuery ? await loadStats("athlete_career", { sport_key: statsQuery.sport_key, ...(history.subject_person_id ? { person_id: history.subject_person_id } : statsQuery.person_id ? { person_id: statsQuery.person_id } : {}) }) : null;
+  return <>{career && <><StatIntelligenceHub data={career} title={`Family ${statsQuery!.sport_key} career summary`} /><Link className="button button-outline button-small" href={`/app/statistics?stats_sport=${statsQuery!.sport_key}${history.subject_person_id ? `&child=${history.subject_person_id}` : ""}${data.organizationId ? `&org=${data.organizationId}` : ""}`}>Season and career details</Link></>}<AthleteHistoryHub data={history} query={historyQuery} organizationId={typeof query.org === "string" ? query.org : undefined} /><CoordinationHub family attendance={attendance} volunteers={volunteers} attendanceQuery={attendanceQuery} volunteerQuery={volunteerQuery} /><GameHub family data={games} query={gameQuery} /><AdminConsole view="families" data={data} query={search} /></>;
 }

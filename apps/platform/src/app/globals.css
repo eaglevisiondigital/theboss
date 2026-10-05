@@ -907,3 +907,10 @@ button:disabled { cursor: wait; opacity: .65; }
 .diamond-runner-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: .75rem; }
 .diamond-base-strip + .live-stat-workspace { min-width: 0; }
 @media (max-width: 390px) { .diamond-base-strip { gap: .25rem; font-size: .85rem; } .diamond-base, .diamond-home { padding: .35rem; } }
+
+/* Season/career coverage needs room for honest denominators on small screens. */
+.stat-intelligence-hub .athlete-history-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 16px 0; }
+.stat-intelligence-hub .athlete-history-stats dd { overflow-wrap: anywhere; }
+.stat-intelligence-hub details { padding: 16px 0; }
+@media (max-width: 640px) { .stat-intelligence-hub .athlete-history-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 380px) { .stat-intelligence-hub .athlete-history-stats { grid-template-columns: minmax(0, 1fr); } }

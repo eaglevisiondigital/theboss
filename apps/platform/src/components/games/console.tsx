@@ -1,4 +1,5 @@
 "use client";
+import { StatManagement } from "../stat-intelligence/management";
 import { TrackingManagement } from "../stat-tracking/management";
 import Link from "next/link";
 import { DiamondPanel } from "../diamond/console";
@@ -40,6 +41,7 @@ function GameActions({ game, data }: { game: Game; data: GameData }) {
   const reversibleScore = scoreBoundary?.operation === "game.score.set" ? scoreBoundary : undefined;
   if (!operations && !caps.manage && !caps.publish) return null;
   return <section className="game-operations" aria-label="Game controls"><h3>Game controls</h3><div className="game-action-grid">
+    {caps.manage && game.status !== "final" && <div className="game-action-panel"><h4>Statistical eligibility</h4><p>Only official final games count in default season and career statistics. Reopen sealed games before changing eligibility.</p><StatManagement gameId={game.id} /></div>}
     {caps.roster_snapshot && <div className="game-action-panel"><h4>Game roster</h4><p>Preserve current eligible athletes and availability as a game-time snapshot.</p><GameForm label={game.roster_revision ? "Refresh roster snapshot" : "Snapshot game roster"} build={() => build("game.roster.snapshot")} /></div>}
     {operations && caps.start && ["scheduled", "pregame", "delayed"].includes(game.status) && <div className="game-action-panel"><h4>Ready to play</h4><GameForm label="Start Game" confirmation="I have reviewed the matchup and roster snapshot." build={() => build("game.start")} /></div>}
     {operations && caps.operate && active && allowedTransitions(game.status, caps.resume).length > 0 && <div className="game-action-panel"><h4>Game status</h4><GameForm label="Update game status" build={form => build("game.transition", { status: fieldText(form, "status") })}><label className="form-field"><span>Next status</span><select name="status" required>{allowedTransitions(game.status, caps.resume).map(status => <option key={status} value={status}>{humanize(status)}</option>)}</select></label></GameForm></div>}
