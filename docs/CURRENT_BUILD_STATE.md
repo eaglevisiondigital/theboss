@@ -1,5 +1,23 @@
 # Current build state
 
+## Phase 6B Standings + Leaderboards + Records: APPROVED — IMPLEMENTATION IN PROGRESS
+
+Planning-only audit at `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a` completed.
+See [architecture and implementation plan](STANDINGS_LEADERBOARDS_RECORDS_ARCHITECTURE.md)
+for all 50 required topics, existing schema/permission gaps, proposed internal competition
+model, shared Phase 6A dependency/freshness consumption and nine approval decisions.
+No parallel statistical engine. Recommend organization-internal first release;
+cross-organization competitions need an explicit result-sharing/match bridge because
+current games require same-tenant sides. Comparative athlete/career audiences require
+explicit approval and preserve self/guardian and prior-team privacy boundaries.
+
+Only planning/current-state Markdown changed locally. No migrations created, production
+access/change, application code, deployment, hosted window or temporary authority.
+61 canonical migrations remain the verified Phase 6A baseline, not freshly inspected here.
+PR #3 read as OPEN/DRAFT/UNMERGED at the unchanged inspected HEAD; no PR edits in this task.
+Main Boss Chat approved eleven binding decisions and the gated Phase 6B implementation/release sequence; the architecture document records the contract. Implementation begins only after its contract commit.
+No Phase 6C or later phase. Phase 6A completion and all historical evidence below remain intact.
+
 ## Phase 6A Season + Career Statistical Intelligence: COMPLETE
 
 The exact validated local checkpoint was released under direct typed owner authorization.
