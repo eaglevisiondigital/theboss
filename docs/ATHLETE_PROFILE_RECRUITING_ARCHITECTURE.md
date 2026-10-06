@@ -117,3 +117,13 @@ Phase 6C includes Family Hub and athlete-centered profile surfaces, consented
 showcase, external highlight references and share-link lifecycle. Public athlete
 directory/search, recruiter marketplace/CRM, direct private contact, full media
 hosting, badges/gamification, NIL, payments, commerce and later modules are excluded.
+
+## Phase 6E badge and recognition integration
+
+Canonical athlete honors remain Phase 6C rows. New source-aware cards distinguish
+current, historical, corrected, revoked, processing and unavailable state, verification
+level, category, sport and date in text. Existing verified guardians may select eligible
+showcase display separately from earning. The frozen showcase categories, current
+consent and active share link remain required. Correction/freshness changes refresh
+approved presentation without deleting history. Private peer rankings and award
+decision notes are excluded. Current-team staff gain no prior-team origin authority.

@@ -147,3 +147,12 @@ reconciliation and downstream-start lock cases retain SQL/runtime evidence.
 Cleanup ended all temporary authority, restored exact module configuration,
 archived the controlled resources and preserved immutable history before the
 fixed target. No future bracket format or Phase 6E work began.
+
+## Phase 6E championship recognition
+
+Team recognition consumes the latest authoritative championship/third-place advancement
+of the canonical bracket revision, retaining bracket, entry and generation provenance.
+Runner-up and third place remain distinct. Athlete recognition is optional and requires
+sealed confirmed participation for the awarded team in that tournament; current roster
+membership alone is insufficient. Ruling/forfeit outcomes produce legitimate team
+placement, never invented individual statistics or a manual MVP decision.

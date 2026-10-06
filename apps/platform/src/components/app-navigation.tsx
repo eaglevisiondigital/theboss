@@ -12,6 +12,7 @@ export function AppNavigation({ navigation = [], calendarAvailable = false, regi
   const labels: Record<AdminNavigation, string> = { organizations: "Organizations", people: "People", families: "Families", teams: "Teams", access: "Access", audit: "Audit" };
   const destinations = [
     { href: "/app", label: "Home" },
+    { href: "/app/achievements", label: "Awards & achievements" },
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),
     ...((attendanceAvailable || volunteersAvailable || gamesAvailable) && !navigation.includes("families") ? [{ href: "/app/families", label: "Family Hub" }] : []),
     ...(calendarAvailable ? [{ href: "/app/calendar", label: "Calendar" }] : []),

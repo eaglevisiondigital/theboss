@@ -487,3 +487,21 @@ Athlete cross-organization comparison and anonymous publication remain disabled.
 Guardian/self history access supplies no peer leaderboard or comparative rank.
 Current-team staff cannot inherit prior-origin career access. Signed writes enforce
 same origin and finite bounded JSON; stale projections disclose no private rows.
+
+## Phase 6E recognition boundaries
+
+All ten new public tables use RLS with raw client/service-role ACLs closed. Private
+helpers use empty search paths; protected caller RPCs preserve public SECURITY
+INVOKER wrappers. The recruiting adapter retains the established isolated
+`boss_recruiting_public` share boundary, without anonymous private-schema access.
+Finite source rules prohibit SQL/formulas and uploaded badge scripts/SVG. Display
+consent cannot create or approve an award. The former ad hoc `achievement.add` path
+is retired so enabled definitions and approval policy cannot be bypassed; historical
+honors remain valid. A narrow reused-origin helper correction binds its requested
+team argument explicitly, preventing a joined column from replacing the exact origin.
+Regression coverage denies transferred-team access to private prior honors.
+
+Source selector generations are checked in addition to summary freshness. Pending
+canonical refresh cannot be presented as a current badge. Private decision notes do
+not enter family/showcase/notification projections. Prior sanitized connector
+credential disclosures are retained; Phase 6E does not search for or reuse their values.

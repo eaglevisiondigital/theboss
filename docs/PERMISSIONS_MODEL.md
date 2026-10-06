@@ -393,3 +393,14 @@ retain platform/organization/exact unit/exact team scopes. Every mapping remains
 potential only: current exact relationship/resource/source/audience authorization
 and features are mandatory. No descendant inheritance or fake foreign membership.
 Guardian/self authority does not independently include comparative rankings.
+
+## Phase 6E minimal award capabilities
+
+Only `achievement_definitions.manage`, `awards.issue` and `awards.approve` are added.
+Their initial mappings are platform/organization administrators only. Existing profile,
+Game Center, roster and ranking audience authority governs reading source facts and
+recognitions. A role is potential capability: current exact scope, membership, resource,
+module and live identity checks still apply. Boss-owned semantics require current
+platform scope. Coach status does not imply nomination or approval. Guardian display
+choices use the existing verified `can_manage_profile` capability; no adult self-
+publication policy is invented.

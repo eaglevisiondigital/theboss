@@ -857,3 +857,20 @@ validation; deployment/CI precede one fixed synthetic hosted window and independ
 administrator-first recovery. No Phase 6C/publication/later module is authorized.
 No current Phase 6B production change or temporary acceptance authority is claimed
 at this local documentation checkpoint. Historical incidents and evidence stay intact.
+
+## Phase 6E implementation decisions within the approved assignment
+
+- Reuse immutable Phase 6C athlete honors; introduce a sidecar for current source
+  state and separate team/organization honors. Badges are presentation.
+- Keep definitions finite, versioned and explicitly enabled. No production milestone
+  catalog or universal tiers are seeded. Historical evaluation is explicit.
+- Standings championship requires an audited close decision over a resolved current
+  generation; no provisional table or unresolved tie implies champion.
+- Individual tournament honors require sealed confirmed participation in the awarded
+  team. Forfeit/team results cannot fabricate personal performance or MVP facts.
+- Human decisions remain organization verified; automatic canonical-source facts are
+  Boss verified. Source corrections cannot be overridden by award revocation.
+- Restricted records/leaderboards do not cross the showcase boundary. Adult self-
+  publication remains closed pending its previously unresolved policy decision.
+- Preserve the public INVOKER/private-helper pattern and every prior incident disclosure.
+  No Phase 7 or later module is authorized by this implementation.

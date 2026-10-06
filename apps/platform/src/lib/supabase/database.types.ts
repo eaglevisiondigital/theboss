@@ -14,12 +14,560 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievement_competition_closures: {
+        Row: {
+          actor_person_id: string
+          champion_entry_id: string
+          created_at: string
+          generation: number
+          id: string
+          reason: string
+          scope_id: string
+          source_hash: string
+        }
+        Insert: {
+          actor_person_id: string
+          champion_entry_id: string
+          created_at?: string
+          generation: number
+          id?: string
+          reason: string
+          scope_id: string
+          source_hash: string
+        }
+        Update: {
+          actor_person_id?: string
+          champion_entry_id?: string
+          created_at?: string
+          generation?: number
+          id?: string
+          reason?: string
+          scope_id?: string
+          source_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_competition_closures_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_competition_closures_champion_entry_id_fkey"
+            columns: ["champion_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_competition_closures_scope_id_fkey"
+            columns: ["scope_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      achievement_definition_revisions: {
+        Row: {
+          actor_person_id: string
+          approval_required: boolean
+          athlete_championship_policy: string
+          badge_icon: string
+          bracket_id: string | null
+          category: string
+          created_at: string
+          definition_id: string
+          description: string
+          effective_at: string
+          historical_evaluation: boolean
+          id: string
+          metric_key: string | null
+          name: string
+          placement: number | null
+          ranking_definition_id: string | null
+          revision: number
+          season_id: string | null
+          showcase_eligible: boolean
+          source_kind: string
+          sport_key: string | null
+          standings_scope_id: string | null
+          subject_type: string
+          team_id: string | null
+          threshold: number | null
+          tier: string | null
+        }
+        Insert: {
+          actor_person_id: string
+          approval_required?: boolean
+          athlete_championship_policy?: string
+          badge_icon?: string
+          bracket_id?: string | null
+          category: string
+          created_at?: string
+          definition_id: string
+          description?: string
+          effective_at?: string
+          historical_evaluation?: boolean
+          id?: string
+          metric_key?: string | null
+          name: string
+          placement?: number | null
+          ranking_definition_id?: string | null
+          revision: number
+          season_id?: string | null
+          showcase_eligible?: boolean
+          source_kind: string
+          sport_key?: string | null
+          standings_scope_id?: string | null
+          subject_type: string
+          team_id?: string | null
+          threshold?: number | null
+          tier?: string | null
+        }
+        Update: {
+          actor_person_id?: string
+          approval_required?: boolean
+          athlete_championship_policy?: string
+          badge_icon?: string
+          bracket_id?: string | null
+          category?: string
+          created_at?: string
+          definition_id?: string
+          description?: string
+          effective_at?: string
+          historical_evaluation?: boolean
+          id?: string
+          metric_key?: string | null
+          name?: string
+          placement?: number | null
+          ranking_definition_id?: string | null
+          revision?: number
+          season_id?: string | null
+          showcase_eligible?: boolean
+          source_kind?: string
+          sport_key?: string | null
+          standings_scope_id?: string | null
+          subject_type?: string
+          team_id?: string | null
+          threshold?: number | null
+          tier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_definition_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_bracket_id_fkey"
+            columns: ["bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_definition_id_fkey"
+            columns: ["definition_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_ranking_definition_id_fkey"
+            columns: ["ranking_definition_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_standings_scope_id_fkey"
+            columns: ["standings_scope_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definition_revisions_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      achievement_definitions: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          current_revision_id: string | null
+          definition_key: string
+          id: string
+          organization_id: string | null
+          owner_kind: string
+          status: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          current_revision_id?: string | null
+          definition_key: string
+          id?: string
+          organization_id?: string | null
+          owner_kind: string
+          status?: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          current_revision_id?: string | null
+          definition_key?: string
+          id?: string
+          organization_id?: string | null
+          owner_kind?: string
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_definition_current_fk"
+            columns: ["id", "current_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
+            referencedColumns: ["definition_id", "id"]
+          },
+          {
+            foreignKeyName: "achievement_definitions_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_definitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      achievement_display_choices: {
+        Row: {
+          actor_person_id: string
+          athlete_achievement_id: string
+          profile_id: string
+          show_on_profile: boolean
+          show_on_showcase: boolean
+          updated_at: string
+        }
+        Insert: {
+          actor_person_id: string
+          athlete_achievement_id: string
+          profile_id: string
+          show_on_profile?: boolean
+          show_on_showcase?: boolean
+          updated_at?: string
+        }
+        Update: {
+          actor_person_id?: string
+          athlete_achievement_id?: string
+          profile_id?: string
+          show_on_profile?: boolean
+          show_on_showcase?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_display_choices_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_display_choices_athlete_achievement_id_fkey"
+            columns: ["athlete_achievement_id"]
+            isOneToOne: true
+            referencedRelation: "athlete_achievements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_display_choices_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      achievement_history: {
+        Row: {
+          actor_person_id: string | null
+          created_at: string
+          event_type: string
+          id: string
+          recognition_id: string
+          source_generation: number
+          source_id: string
+          source_manifest: Json
+          state: string
+          version: number
+        }
+        Insert: {
+          actor_person_id?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          recognition_id: string
+          source_generation: number
+          source_id: string
+          source_manifest: Json
+          state: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          recognition_id?: string
+          source_generation?: number
+          source_id?: string
+          source_manifest?: Json
+          state?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_history_recognition_id_fkey"
+            columns: ["recognition_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_recognitions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      achievement_recognitions: {
+        Row: {
+          achieved_at: string
+          athlete_achievement_id: string | null
+          co_holder: boolean
+          context_key: string
+          current_holder: boolean
+          definition_revision_id: string
+          entity_achievement_id: string | null
+          id: string
+          organization_id: string
+          person_id: string | null
+          profile_id: string | null
+          recognized_at: string
+          season_id: string | null
+          source_generation: number
+          source_hash: string
+          source_id: string
+          source_manifest: Json
+          source_type: string
+          sport_key: string | null
+          state: string
+          subject_key: string
+          team_id: string | null
+          version: number
+        }
+        Insert: {
+          achieved_at: string
+          athlete_achievement_id?: string | null
+          co_holder?: boolean
+          context_key: string
+          current_holder?: boolean
+          definition_revision_id: string
+          entity_achievement_id?: string | null
+          id?: string
+          organization_id: string
+          person_id?: string | null
+          profile_id?: string | null
+          recognized_at?: string
+          season_id?: string | null
+          source_generation: number
+          source_hash: string
+          source_id: string
+          source_manifest: Json
+          source_type: string
+          sport_key?: string | null
+          state: string
+          subject_key: string
+          team_id?: string | null
+          version?: number
+        }
+        Update: {
+          achieved_at?: string
+          athlete_achievement_id?: string | null
+          co_holder?: boolean
+          context_key?: string
+          current_holder?: boolean
+          definition_revision_id?: string
+          entity_achievement_id?: string | null
+          id?: string
+          organization_id?: string
+          person_id?: string | null
+          profile_id?: string | null
+          recognized_at?: string
+          season_id?: string | null
+          source_generation?: number
+          source_hash?: string
+          source_id?: string
+          source_manifest?: Json
+          source_type?: string
+          sport_key?: string | null
+          state?: string
+          subject_key?: string
+          team_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_recognitions_athlete_achievement_id_fkey"
+            columns: ["athlete_achievement_id"]
+            isOneToOne: true
+            referencedRelation: "athlete_achievements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_definition_revision_id_fkey"
+            columns: ["definition_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_entity_achievement_id_fkey"
+            columns: ["entity_achievement_id"]
+            isOneToOne: true
+            referencedRelation: "entity_achievements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_recognitions_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      achievement_refresh_work: {
+        Row: {
+          cursor: string | null
+          definition_revision_id: string
+          organization_id: string
+          published_generation: number
+          state: string
+          target_generation: number
+          updated_at: string
+        }
+        Insert: {
+          cursor?: string | null
+          definition_revision_id: string
+          organization_id: string
+          published_generation?: number
+          state?: string
+          target_generation?: number
+          updated_at?: string
+        }
+        Update: {
+          cursor?: string | null
+          definition_revision_id?: string
+          organization_id?: string
+          published_generation?: number
+          state?: string
+          target_generation?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievement_refresh_work_definition_revision_id_fkey"
+            columns: ["definition_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "achievement_refresh_work_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       athlete_achievements: {
         Row: {
           achieved_on: string | null
           achievement_type: string
           actor_person_id: string
           created_at: string
+          definition_revision_id: string | null
           id: string
           organization_id: string | null
           profile_id: string
@@ -36,6 +584,7 @@ export type Database = {
           achievement_type: string
           actor_person_id: string
           created_at?: string
+          definition_revision_id?: string | null
           id?: string
           organization_id?: string | null
           profile_id: string
@@ -52,6 +601,7 @@ export type Database = {
           achievement_type?: string
           actor_person_id?: string
           created_at?: string
+          definition_revision_id?: string | null
           id?: string
           organization_id?: string | null
           profile_id?: string
@@ -69,6 +619,13 @@ export type Database = {
             columns: ["actor_person_id"]
             isOneToOne: false
             referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_definition_revision_id_fkey"
+            columns: ["definition_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
             referencedColumns: ["id"]
           },
           {
@@ -911,6 +1468,152 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organization_units"
             referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      award_decisions: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          decision: string
+          id: string
+          nomination_id: string
+          private_note: string
+          version: number
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          decision: string
+          id?: string
+          nomination_id: string
+          private_note: string
+          version: number
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          decision?: string
+          id?: string
+          nomination_id?: string
+          private_note?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "award_decisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_decisions_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "award_nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      award_nominations: {
+        Row: {
+          achieved_at: string
+          created_at: string
+          definition_revision_id: string
+          id: string
+          nominated_by_person_id: string
+          organization_id: string
+          profile_id: string | null
+          recognition_id: string | null
+          season_id: string | null
+          state: string
+          subject_key: string
+          subject_type: string
+          team_id: string | null
+          version: number
+        }
+        Insert: {
+          achieved_at: string
+          created_at?: string
+          definition_revision_id: string
+          id?: string
+          nominated_by_person_id: string
+          organization_id: string
+          profile_id?: string | null
+          recognition_id?: string | null
+          season_id?: string | null
+          state?: string
+          subject_key: string
+          subject_type: string
+          team_id?: string | null
+          version?: number
+        }
+        Update: {
+          achieved_at?: string
+          created_at?: string
+          definition_revision_id?: string
+          id?: string
+          nominated_by_person_id?: string
+          organization_id?: string
+          profile_id?: string | null
+          recognition_id?: string | null
+          season_id?: string | null
+          state?: string
+          subject_key?: string
+          subject_type?: string
+          team_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "award_nominations_definition_revision_id_fkey"
+            columns: ["definition_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_nominations_nominated_by_person_id_fkey"
+            columns: ["nominated_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_nominations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_nominations_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "award_nominations_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_nominations_recognition_id_fkey"
+            columns: ["recognition_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_recognitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "award_nominations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -2419,6 +3122,74 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "team_memberships"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      entity_achievements: {
+        Row: {
+          achieved_at: string
+          actor_person_id: string
+          definition_revision_id: string
+          id: string
+          organization_id: string
+          recognized_at: string
+          subject_type: string
+          team_id: string | null
+          title: string
+          verification_level: string
+        }
+        Insert: {
+          achieved_at: string
+          actor_person_id: string
+          definition_revision_id: string
+          id?: string
+          organization_id: string
+          recognized_at?: string
+          subject_type: string
+          team_id?: string | null
+          title: string
+          verification_level: string
+        }
+        Update: {
+          achieved_at?: string
+          actor_person_id?: string
+          definition_revision_id?: string
+          id?: string
+          organization_id?: string
+          recognized_at?: string
+          subject_type?: string
+          team_id?: string | null
+          title?: string
+          verification_level?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entity_achievements_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_achievements_definition_revision_id_fkey"
+            columns: ["definition_revision_id"]
+            isOneToOne: false
+            referencedRelation: "achievement_definition_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_achievements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_achievements_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
           },
         ]
       }
@@ -9878,6 +10649,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      boss_achievement_mutate: { Args: { p_command: Json }; Returns: Json }
+      boss_achievement_read: { Args: { p_query?: Json }; Returns: Json }
       boss_admin_mutate: {
         Args: { p_commands: Json; p_request_id: string }
         Returns: Json

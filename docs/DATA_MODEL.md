@@ -423,3 +423,14 @@ played rulings preserve canonical scores. Records retain definition/policy versi
 original organization/team/season/person/participant, game/finalization/epoch/source
 generation, qualification/coverage and separate achievement/recognition timestamps.
 Immutable prior recognition survives corrections and subsequent restoration.
+
+## Phase 6E verified recognition
+
+`athlete_achievements` remains the canonical athlete honor. Its optional immutable
+definition revision identifies Phase 6E issuance; earlier rows remain valid. New
+`entity_achievements` covers only team and organization recipients. Definitions,
+immutable revisions, source-aware recognition state/history, display choices, award
+nominations/decisions, competition-close snapshots, bounded refresh work and private
+request receipts supply recognition over existing facts. Source ID/generation,
+organization/team, sport/season, achieved/recognized dates and issuer remain distinct.
+No parallel athlete identity, score, statistics or records authority is introduced.

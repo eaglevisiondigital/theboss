@@ -270,3 +270,12 @@ No organization-specific product forks, tenant billing, regional discount rules
 or cross-product data sharing are implemented. Phase 3B cash/check charge allocation
 is a bounded registration foundation; wallet, processor and settlement ledgers
 remain future work. Canonical Boss records remain within its dedicated backend.
+
+## Phase 6E origin and relationship isolation
+
+Recognition retains its source organization/team even after transfer. Current-team
+staff require authority over that exact current subject/origin context. Wildcats
+membership cannot expose private Falcons honors, award notes or restricted peer
+rankings. Family access follows verified guardian authority; household membership
+alone grants nothing. Career definitions evaluate the explicitly scoped source
+organization and optional team; they do not infer cross-tenant aggregation rights.

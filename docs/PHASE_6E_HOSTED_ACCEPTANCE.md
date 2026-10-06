@@ -1,0 +1,84 @@
+# Phase 6E controlled hosted acceptance
+
+Status: PREPARED; no Phase 6E controlled window has been activated.
+
+## Scope and readiness
+
+Use canonical Boss Supabase `ilykgwgmxtrrikreacrz` and the existing
+`https://thebossplatform.netlify.app` deployment. Test only the existing
+CONTROLLED TEST account, Child1, Falcons/Wildcats, season and archived sports
+evidence. No new identity, date of birth, real customer data or provider delivery
+is needed. The supplied milestone examples are not production seed policy.
+
+Before activation, complete disposable SQL/concurrency validation, apply only the
+four prepared migrations, verify live schema/types/advisors, deploy and verify CI.
+Capture a fresh selected baseline and rehearse rollback recovery. The existing
+controlled administrator remains the recovery authority.
+
+Use one fixed window: cleanup target 35 minutes after activation, hard expiry
+45 minutes after activation. Record exact canonical UTC times at activation;
+never extend them. Each temporary role, operator, relationship and module window
+must use that hard expiry. Stop scenarios at the cleanup target and perform
+administrator-first recovery immediately. Natural expiry does not replace
+explicit restoration.
+
+## Planned evidence
+
+1. Reuse the controlled Volleyball game's sealed two tracked kills. Use supported
+   reopen/classification/refinalization operations to make this controlled source
+   temporarily eligible. Do not edit contributions or manufacture coverage.
+2. Create a synthetic, organization-scoped approved count definition and evaluate
+   a truthful athlete milestone. Repeated evaluation must not duplicate it.
+3. Use a synthetic private Phase 6B Volleyball record definition over the same
+   source; create and evaluate a record recognition. Peer ranking remains private.
+4. Reuse the archived, authoritative Phase 6D Falcons championship placement for
+   a team recognition. Do not award an athlete championship from current roster.
+5. Create one controlled organization-selected award, nominate/approve it and
+   verify distinct organization verification. Exercise revocation/restoration.
+6. Verify athlete profile and selected-child Family Hub presentation. Restore
+   only verified Child1 guardian profile management needed for consent/display.
+   Household membership alone must not authorize recognition access.
+7. Verify separate achievement selection and versioned showcase consent. The
+   unlisted showcase includes only eligible selected honors; excluding one keeps
+   the underlying canonical honor. Restricted record badges cannot be shared.
+8. Use the existing synthetic transfer case with narrowly bounded Wildcats
+   staff/athlete membership and exact-team staff capability. Pause administrator
+   only for the restricted stage. Remove guardian capability for the staff-only
+   negative; verify private Falcons notes/rankings are inaccessible. Restore
+   guardian context separately and verify historical access persists.
+9. Where safely executable, exclude the controlled source through supported
+   correction operations, refresh rankings/recognition and verify corrected
+   current presentation with immutable history retained.
+10. Verify management/cards/history/profile/Family/showcase at 1280, 768, 390 and
+    320 pixels. Labels, dates, verification text and keyboard controls convey
+    meaning without relying on icon/color. Reset viewport afterward.
+
+Unsupported browser actions remain explicitly SQL/RUNTIME VERIFIED, never
+reported as hosted proof. No token/cookie extraction, test-only production
+endpoint, policy weakening or repeated window is permitted.
+
+## Recovery and verification
+
+Restore and independently verify the original administrator first. End all new
+staff/operator/guardian assignments and restore the selected original Child1
+relationship state. Revoke controlled recruiting consents/share links and archive
+controlled showcase/definitions/competition fixtures as applicable. Restore exact
+Sports configuration/status/start/end and the controlled event/profile state.
+Return statistical eligibility to its excluded baseline through supported
+correction operations while retaining immutable classifications/finalization
+epochs. Clear controlled pending work, preserving history and audit evidence.
+
+Verify zero residual temporary authority, current original administrator, selected
+baseline equality, no active controlled share/definition/publication and zero
+pending controlled work. Audited inactive historical rows may remain.
+
+## Credential boundary
+
+The sanitized Phase 6D connector-output incident remains in the historical
+acceptance record. This release uses the owner's independently authenticated
+current Netlify CLI. It does not inspect, search for, reproduce, test or reuse the
+historical credential-bearing field or URL. No Auth configuration change is part
+of this phase.
+
+Actual activation, action and cleanup evidence will replace this prepared status
+after the single window. Phase 7 and all later modules remain out of scope.

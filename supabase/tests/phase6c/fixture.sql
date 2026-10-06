@@ -13,5 +13,8 @@ select pg_temp.pc('profile.create',jsonb_build_object('participant_id',pg_temp.f
 select pg_temp.pc('showcase.create',jsonb_build_object('profile_id',pg_temp.pc_id('profile')),'showcase');
 select pg_temp.pc('showcase.revise',jsonb_build_object('showcase_id',pg_temp.pc_id('showcase'),'expected_version',1,'profile_revision_id',public.boss_athlete_profile_read(pg_temp.pc_id('profile'),null)->'profile'->'profile'->>'current_revision_id','sport_keys',jsonb_build_array('baseball'),'visible_categories',jsonb_build_array('overview','sports','statistics','measurables','achievements','history','media'),'stat_metric_keys',jsonb_build_array('home_runs','hits'),'presentation',jsonb_build_object('headline','Synthetic athlete showcase')),'showcase-revision');
 select pg_temp.pc('measurable.add',jsonb_build_object('profile_id',pg_temp.pc_id('profile'),'sport_key','baseball','metric_key','sprint_seconds','value',5.10,'unit','s','measured_on',current_date,'provenance','organization_verified','visibility','showcase','organization_id',pg_temp.f('org'),'team_id',pg_temp.f('falcons'),'source_label','Synthetic combine'),'measurable');
-select pg_temp.pc('achievement.add',jsonb_build_object('profile_id',pg_temp.pc_id('profile'),'sport_key','baseball','achievement_type','team_award','title','Synthetic team award','achieved_on',current_date,'organization_id',pg_temp.f('org'),'visibility','showcase'),'achievement');
 reset role;
+-- Historical Phase 6C honor predates the Phase 6E definition/approval contract.
+insert into public.athlete_achievements(profile_id,sport_key,achievement_type,title,achieved_on,organization_id,verification_level,visibility,actor_person_id)
+values(pg_temp.pc_id('profile'),'baseball','team_award','Synthetic team award',current_date,pg_temp.f('org'),'organization_verified','showcase',pg_temp.f('admin'))returning id as legacy_achievement \gset
+insert into pg_temp.phase6c_ids values('achievement',:'legacy_achievement');

@@ -1,5 +1,25 @@
 # Current build state
 
+## Phase 6E Awards + Badges + Verified Achievements: IN PROGRESS
+
+Starting SHA `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`. Four prepared
+append-only migrations extend the canonical Phase 6C athlete honor store with
+versioned definitions, authoritative source recognition, team/organization honors,
+immutable decisions/history, separate display choices and bounded refresh work.
+The application includes Awards management, profile badges and authorized Family
+Hub presentation. No production milestone policy is seeded.
+
+The complete historical SQL/concurrency run and final focused Phase 6E suite
+pass: 17,384 unique reported SQL/bootstrap checks including 170 dedicated Phase
+6E checks, and 204 coordinated races including nine new races. Canonical history
+is 77, all four live migration hashes match prepared source, and all 45 new
+foreign-key vectors are indexed. Canonical types, typecheck, zero-warning lint,
+432 application tests and production build pass. Deployment and the single fixed
+hosted window remain pending.
+See [architecture](AWARDS_BADGES_ACHIEVEMENTS_ARCHITECTURE.md) and
+[controlled acceptance plan](PHASE_6E_HOSTED_ACCEPTANCE.md). PR #3 remains
+OPEN/DRAFT/UNMERGED. No later module has started.
+
 ## Phase 6D Tournament + Bracket Management: COMPLETE
 
 Starting SHA `d8482e30dea3918ceb2dd3f46d4ef971eb56428e`. Three canonical

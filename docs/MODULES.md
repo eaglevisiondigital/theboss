@@ -298,3 +298,14 @@ history. Finite Sports flags are `volleyball_live_scoring`, `volleyball_stats`,
 match state remains independent of optional analytics depth. Basketball, Soccer
 and Football participate through catalog/console contracts while keeping their
 canonical engines. No Baseball/Softball or later module is introduced.
+
+## Phase 6E Awards, Badges and Verified Achievements
+
+Awards are a recognition layer consuming enabled Sports/Game Center statistics,
+qualified rankings/record chronology, profiles and tournament placements. `/app/achievements`
+provides bounded authorized cards/history, finite organization definitions, evaluation/
+rebuild and nomination/approval controls. Profiles and Family Hub reuse those cards.
+Showcase inclusion requires separate display choice plus existing versioned consent.
+The internal feed is authorized recognition paging, not a public youth feed. Meaningful
+recognition/correction sources reuse Phase 4A notification routing and idempotency;
+no provider, SMS or push infrastructure is enabled.

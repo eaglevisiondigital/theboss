@@ -1,0 +1,33 @@
+begin;
+set local statement_timeout='8s';
+\ir phase6e/fixture.sql
+update public.guardian_relationships set can_manage_profile=true where id=pg_temp.f('guardian-child1');
+set local role authenticated;select pg_temp.actor('parent');
+select(public.boss_athlete_profile_mutate(jsonb_build_object('action','showcase.create','request_id',gen_random_uuid(),'input',jsonb_build_object('profile_id',pg_temp.pe_id('profile'))))->>'showcase_id')::uuid pe_showcase \gset
+insert into pg_temp.phase6e_ids values('showcase',:'pe_showcase');
+select public.boss_athlete_profile_mutate(jsonb_build_object('action','showcase.revise','request_id',gen_random_uuid(),'input',jsonb_build_object('showcase_id',pg_temp.pe_id('showcase'),'expected_version',1,'profile_revision_id',public.boss_athlete_profile_read(pg_temp.pe_id('profile'),null)->'profile'->'profile'->>'current_revision_id','sport_keys',jsonb_build_array('baseball'),'visible_categories',jsonb_build_array('overview','achievements'),'stat_metric_keys','[]'::jsonb,'presentation','{}'::jsonb)));
+reset role;
+set local role authenticated;select pg_temp.actor('parent');
+select public.boss_athlete_profile_mutate(jsonb_build_object('action','consent.grant','request_id',gen_random_uuid(),'input',jsonb_build_object('showcase_id',pg_temp.pe_id('showcase'),'showcase_revision_id',public.boss_athlete_profile_read(pg_temp.pe_id('profile'),null)->'profile'->'showcase'->>'current_revision_id','approved_categories',jsonb_build_array('overview','achievements'),'expires_at',clock_timestamp()+interval'1 hour')));
+select public.boss_athlete_profile_mutate(jsonb_build_object('action','showcase.publish','request_id',gen_random_uuid(),'input',jsonb_build_object('showcase_id',pg_temp.pe_id('showcase'),'expected_version',3)));
+select public.boss_athlete_profile_mutate(jsonb_build_object('action','share.create','request_id',gen_random_uuid(),'input',jsonb_build_object('showcase_id',pg_temp.pe_id('showcase'),'token_digest',repeat('e',64),'token_prefix','synthetic','expires_at',clock_timestamp()+interval'1 hour')));
+reset role;
+insert into pg_temp.phase6e_ids select'honor',athlete_achievement_id from public.achievement_recognitions where definition_revision_id=(select current_revision_id from public.achievement_definitions where id=pg_temp.pe_id('career_one'));
+select pg_temp.check('earned honor is not implicitly shared','SHOWCASE',jsonb_array_length(public.boss_recruiting_showcase_read(repeat('e',64))->'achievements')=0);
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.pe('display.set',jsonb_build_object('achievement_id',pg_temp.pe_id('honor'),'show_on_profile',true,'show_on_showcase',true));
+reset role;
+select pg_temp.check('separately approved achievement appears on consented showcase','SHOWCASE',jsonb_array_length(public.boss_recruiting_showcase_read(repeat('e',64))->'achievements')=1);
+select pg_temp.check('public badge carries no person or source identifiers','PRIVACY',(public.boss_recruiting_showcase_read(repeat('e',64))->'achievements')::text not like'%source_id%'and(public.boss_recruiting_showcase_read(repeat('e',64))->'achievements')::text not like'%profile_id%');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.pe('display.set',jsonb_build_object('achievement_id',pg_temp.pe_id('honor'),'show_on_profile',true,'show_on_showcase',false));
+reset role;
+select pg_temp.check('hiding badge retains canonical achievement','EARNED_DISPLAY',(select count(*)=1 from public.athlete_achievements where id=pg_temp.pe_id('honor'))and jsonb_array_length(public.boss_recruiting_showcase_read(repeat('e',64))->'achievements')=0);
+set local role authenticated;select pg_temp.actor('parent');select pg_temp.pe('display.set',jsonb_build_object('achievement_id',pg_temp.pe_id('honor'),'show_on_profile',true,'show_on_showcase',true));reset role;
+update public.guardian_relationships set authority_status='inactive'where id=pg_temp.f('guardian-child1');
+select pg_temp.check('guardian revocation defeats current public authority','REVOCATION',public.boss_recruiting_showcase_read(repeat('e',64))->>'available'='false');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.denied('stale guardian display mutation denied',format('select public.boss_achievement_mutate(%L::jsonb)',jsonb_build_object('action','display.set','request_id',gen_random_uuid(),'input',jsonb_build_object('achievement_id',pg_temp.pe_id('honor'),'show_on_profile',true,'show_on_showcase',true))),'PT403');
+reset role;
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;

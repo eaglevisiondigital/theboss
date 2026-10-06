@@ -955,3 +955,15 @@ button:disabled { cursor: wait; opacity: .65; }
 .recruiting-showcase a { overflow-wrap: anywhere; }
 @media(max-width: 700px) { .athlete-profile-hero, .athlete-profile-grid, .recruiting-showcase-grid { grid-template-columns: minmax(0, 1fr); } .athlete-profile-hero { padding: 1.25rem; } }
 @media(max-width: 390px) { .athlete-profile-panel, .recruiting-showcase-grid article { padding: .9rem; } .athlete-profile-subjects a, .athlete-profile-action .button { width: 100%; max-width: 100%; } .athlete-showcase-status { display: grid; grid-template-columns: minmax(0, 1fr); } }
+
+/* Phase 6E: finite badges keep meaning in text at every viewport. */
+.achievement-hub { display: grid; gap: 1.5rem; min-width: 0; }
+.achievement-badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; min-width: 0; }
+.achievement-badge { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; padding: 1rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--surface); min-width: 0; overflow-wrap: anywhere; }
+.achievement-badge h3, .achievement-badge p { margin: 0; }
+.achievement-symbol { font-size: 1.75rem; }
+.achievement-definition { padding: 1rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.achievement-history { display: grid; gap: .75rem; padding-left: 1.25rem; }
+.achievement-history li { overflow-wrap: anywhere; }
+.achievement-history span, .achievement-history time { display: block; }
+.achievement-hub select, .achievement-hub input, .achievement-hub textarea { max-width: 100%; min-width: 0; }

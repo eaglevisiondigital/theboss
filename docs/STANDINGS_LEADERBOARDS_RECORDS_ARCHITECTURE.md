@@ -818,3 +818,13 @@ Current production remains the Phase 6A/61-migration baseline pending completion
 of the fresh full database gate. See PHASE_6B_VALIDATION.md for actual results,
 including the corrected local performance issue; no unobserved hosted result is
 claimed. Historical proposed/deferred descriptions above remain planning history.
+
+## Phase 6E recognition consumers
+
+Definitions reference existing ranking definitions/scopes and immutable record events.
+Qualification, complete rate coverage, generation freshness and comparison audience
+remain authoritative; a badge cannot broaden ranking visibility. Co-holders remain
+co-holders, former holders may retain historical recognition, and canonical correction
+invalidates current presentation while preserving history. A standings championship
+requires an explicit current-generation close snapshot with one resolved first place
+and no outstanding counting result. No new ranking/statistics reducer is introduced.
