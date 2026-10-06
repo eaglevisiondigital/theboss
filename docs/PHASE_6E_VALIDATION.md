@@ -107,3 +107,36 @@ Final read-only canonical review after recovery: ACTIVE_HEALTHY, 78 migrations;
 security INFO 149 and existing leaked-password WARN 1; performance unused-index
 INFO 296 and existing Auth connection INFO 1. Earlier 303 unused-index count is
 preserved above as its original observation, not overwritten.
+
+
+## Subsequent source-baseline recovery validation — 2026-10-06
+
+Recovery used existing deployed code/schema only. A disposable PostgreSQL
+rehearsal passed **13 focused recovery assertions**, including immutable source
+correction, record-holder removal, corrected recognition, history retention,
+configuration cleanup and zero pending work. No full historical suite was redone
+for the recovery. The rehearsal caught cleanup ordering: archiving record
+configuration creates invalidation work, which must be settled through the existing
+bounded worker before final definition deactivation.
+
+One canonical recovery-only window appended pending classification revision 2 and
+refinalized epoch 4 through native signed original-administrator controls. Read-only
+canonical checks prove five current pending/zero official contributions, exactly
+one current set, unchanged logical identities and all ten prior immutable rows,
+fresh selection and five source summaries, no current record candidates/holders,
+retained record history with source-correction invalidation, corrected milestone
+and record recognition, retained recognition history, zero pending work and exact
+selected semantic authority/configuration/resource baseline. No affected Volleyball
+leaderboard scope exists; profile statistics use the refreshed shared summaries.
+
+Original administrator remained active; native Home was verified after cleanup.
+Explicit restoration at **16:33:18.060776 UTC** met target **16:41:05.237068 UTC**
+and hard expiry **16:44:05.237068 UTC**. Final strict verification occurred at
+**16:37:01.593760 UTC**. The original acceptance deadline failure remains intact.
+No new acceptance stage, code/schema/Auth/security/deployment change, credential
+inspection or later phase occurred. Phase 6E is still INCOMPLETE. See
+[33-point recovery report](PHASE_6E_RECOVERY_REPORT.md) for counts and exact scope.
+
+After factual documentation changes, typecheck, zero-warning lint, **432/432**
+application tests and production build passed again using the existing non-working
+CI compilation fixtures. No application source or generated type changed.

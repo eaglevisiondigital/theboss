@@ -1,7 +1,9 @@
 # Phase 6E fixed-window cleanup incident
 
-Status: INCOMPLETE; administrator/authority recovery complete, synthetic source
-classification recovery outstanding. This record is not a closure determination.
+Status: Phase 6E INCOMPLETE; authority cleanup and subsequent data/source baseline
+recovery complete. This record is not a closure determination. The original
+incident evidence below is preserved as recorded; see the subsequent recovery-only
+follow-up at the end for current state.
 All timestamps below are canonical UTC on 2026-10-06 unless explicitly marked
 browser observation. No private operational script or credential value is included.
 
@@ -122,3 +124,51 @@ sessions were used through native controls. Private operational recovery files
 remain outside the repository. No real youth/customer data, invented DOB, Auth
 setting change, policy weakening, public youth directory or later phase was used.
 The sanitized historical Netlify connector incident disclosures remain preserved.
+
+
+## Subsequent recovery-only follow-up — 2026-10-06
+
+This is **DATA/SOURCE BASELINE RECOVERY**, following the earlier **AUTHORITY
+CLEANUP**. Main Boss Chat explicitly authorized only this bounded recovery. The
+original missed cleanup target, missed hard expiry and late administrator
+restoration above remain operational failures and are not rewritten as on time.
+
+Before activation, the exact epoch-2 baseline was established as five pending
+contributions with no explicit classification revision through that epoch. The
+five current epoch-3 contributions were official. Disposable PostgreSQL rehearsal
+passed 13 recovery checks. Native original-administrator access and recovery
+controls were ready before activation.
+
+| Canonical UTC time | Subsequent recovery event |
+| --- | --- |
+| 16:29:05.237068 | One recovery-only window activated; original administrator remains active. Stop-new 16:33:05.237068, cleanup target 16:41:05.237068, hard expiry 16:44:05.237068. |
+| 16:29:33.274002 | Native supported `game.reopen`, sequence 40. |
+| 16:30:11.327739 | Native pending classification revision 2 appended, applies epoch 4. |
+| 16:30:30.916695 | Native `game.finalize`, sequence 41; epoch 4, unchanged 2:1 score and roster snapshot. |
+| 16:33:18.060776 | Audited administrator-first configuration/resource restoration complete; confirmation 16:33:18.064404. Both target and hard expiry met. |
+| 16:33:33.478613 | Zero temporary authority/work and selected operational baseline verified. |
+| 16:34:58.778835 | Five current pending/zero official, refreshed source generation, corrected recognition and zero current record holders verified. |
+| 16:35:51.920316 | All ten prior immutable contribution rows and old official epoch-3 rows match recorded integrity digests. |
+| 16:37:01.593760 | Strict final verification: no new authority/identity/team rows, zero pending notification jobs/deliveries, exact inactive/archived fixture configuration. |
+
+Canonical source correction, native private record rebuild and bounded recognition
+evaluations corrected the existing milestone and record. Archiving record
+configuration invalidates its work, so the existing bounded private ranking
+worker settled that queue before the final native definition deactivation. The
+existing championship definition briefly underwent a supported activate/deactivate
+status roundtrip to settle its invalidation work; no new championship evaluation
+or recognition occurred. No manually edited derived/work row was used to force
+zero counts.
+
+All source and recognition history remains. The five appended epoch-4 contributions
+are the sole current set; the five official epoch-3 contributions remain history.
+Original score, roster, identity/provenance and configuration/relationship semantics
+are preserved. No guardian, staff, operator, transfer, recruiting or public authority
+was activated; profile stayed archived. Original administrator remained valid and
+was verified natively afterward. Temporary module window, shares/consents, pending
+statistics/achievements/rankings/notifications and unexpected active fixtures are zero.
+
+**RECOVERED** describes this source-baseline follow-up only. Phase 6E remains
+**INCOMPLETE**; Main Boss Chat must separately decide unfinished acceptance or any
+accepted evidence limitations. No second acceptance window or later phase started.
+See [33-point recovery report](PHASE_6E_RECOVERY_REPORT.md).

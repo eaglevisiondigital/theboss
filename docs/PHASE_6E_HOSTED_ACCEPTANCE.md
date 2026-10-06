@@ -1,7 +1,9 @@
 # Phase 6E controlled hosted acceptance
 
-Status: SINGLE WINDOW ENDED; INCOMPLETE — cleanup incident and source-restoration
-blocker. No second acceptance window is authorized or activated.
+Status: SINGLE ACCEPTANCE WINDOW ENDED; INCOMPLETE — outstanding acceptance awaits
+Main Boss Chat's decision. No second acceptance window was activated. A separately
+authorized recovery-only follow-up restored source baseline; it is not additional
+acceptance evidence or a closure decision. See [recovery report](PHASE_6E_RECOVERY_REPORT.md).
 
 ## Actual acceptance record — 2026-10-06
 
@@ -122,3 +124,21 @@ of this phase.
 
 Actual activation, action and cleanup evidence will replace this prepared status
 after the single window. Phase 7 and all later modules remain out of scope.
+
+
+## Subsequent recovery-only follow-up — acceptance remains incomplete
+
+The explicitly authorized 16:29:05.237068 UTC recovery window restored the recorded
+pending source semantics through native reopen/classification/refinalization,
+refreshed records and corrected source-derived milestone/record recognition.
+Explicit restoration completed at 16:33:18.060776 UTC, before target and hard
+expiry; final strict verification completed at 16:37:01.593760 UTC. Original
+administrator stayed active, no person/guardian/transfer/share authority was added,
+and all temporary configuration was restored. Current contributions are pending
+5/official 0; prior immutable history remains; pending controlled work is zero.
+
+This follow-up did **not** rerun or close general acceptance. Family Hub, showcase,
+transfer/new-team privacy, retained guardian history and broader responsive/keyboard
+evidence retain their earlier status. The unresolved earlier showcase denial and
+original cleanup incident are preserved. Main Boss Chat alone decides remaining
+acceptance/closure. See [recovery report](PHASE_6E_RECOVERY_REPORT.md).

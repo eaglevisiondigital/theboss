@@ -1,8 +1,12 @@
 # Phase 6E completion report
 
-Status: RELEASED; **INCOMPLETE — fixed-window cleanup incident and synthetic
-source-restoration blocker**. This is the requested 82-point status handoff, not a
-closure claim. See [exact incident evidence](PHASE_6E_CLEANUP_INCIDENT.md).
+Current status: RELEASED; **INCOMPLETE — unfinished acceptance awaits Main Boss
+Chat's decision**. The separately authorized recovery-only follow-up restored
+the source baseline and corrected derived recognition before its fixed deadline.
+See [33-point recovery report](PHASE_6E_RECOVERY_REPORT.md). Recovery does not close
+Phase 6E. The original 82-point incident handoff below is preserved as historical
+evidence, including the original late cleanup and then-outstanding source blocker.
+See [exact incident evidence](PHASE_6E_CLEANUP_INCIDENT.md).
 
 1. Starting SHA: `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`.
 2. Validated approval-fix SHA `8d56f6c73bf371f65fda879ced9f61171f5c797d`; implementation SHA `68a7bb36b9b70a9d85c8e52b42fb6dcaf0affd40`. Final incident-documentation SHA is supplied in the handoff; source remains unchanged.

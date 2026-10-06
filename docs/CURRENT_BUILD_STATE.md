@@ -1,6 +1,25 @@
 # Current build state
 
-## Phase 6E Awards + Badges + Verified Achievements: INCOMPLETE — CLEANUP INCIDENT
+## Phase 6E Awards + Badges + Verified Achievements: INCOMPLETE — ACCEPTANCE DECISION PENDING
+
+**Recovery-only follow-up, 2026-10-06:** the residual statistical source has now
+been recovered through native `game.reopen`, pending classification and
+`game.finalize` at epoch 4. Five current contributions are pending, zero official;
+all ten prior immutable contribution rows are unchanged. Source summaries and
+private records were rebuilt; milestone/record recognitions are corrected with
+history retained. Explicit administrator-first configuration restoration finished
+at **16:33:18.060776 UTC**, before target **16:41:05.237068 UTC** and hard expiry
+**16:44:05.237068 UTC**. Read-only checks through **16:37:01.593760 UTC** prove
+selected semantic baseline equality, valid original administrator, zero temporary
+authority, zero active controlled shares/consents and zero pending controlled work.
+No general acceptance scenario or new authority was activated. See the
+[33-point recovery report](PHASE_6E_RECOVERY_REPORT.md).
+
+The original late-cleanup incident below remains an operational failure. Recovery
+does not close Phase 6E or accept the unfinished hosted evidence. Main Boss Chat
+must separately decide its disposition; no further window or phase is started.
+
+### Historical release and original incident record
 
 Starting SHA `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`; implementation
 `68a7bb36b9b70a9d85c8e52b42fb6dcaf0affd40`; validated manual-award fix

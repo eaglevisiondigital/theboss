@@ -887,3 +887,22 @@ authorized a further recovery/acceptance window. Phase 6E remains INCOMPLETE.
 Do not silently reopen a window, fabricate Auth state, rewrite immutable source
 history, weaken policy or start another phase. Preserve the exact incident record
 in PHASE_6E_CLEANUP_INCIDENT.md and the prior security disclosures.
+
+
+## Phase 6E source-baseline recovery — no acceptance/closure determination
+
+Main Boss Chat authorized one narrowly bounded **recovery-only** follow-up, using
+the recorded pending baseline and existing supported lifecycle. Original
+administrator remained active. Native reopen, pending classification revision 2
+and epoch-4 refinalization recovered five pending/zero official current sources;
+records and source-derived recognition were canonically rebuilt/corrected with
+immutable history retained. Explicit restoration finished at 16:33:18.060776 UTC,
+before the fixed cleanup target and hard expiry. Selected semantic baseline and
+zero temporary authority/pending work are verified.
+
+The original late-cleanup incident remains an operational failure. No guardian,
+staff, transfer, recruiting/share or additional acceptance authority was activated.
+No code/schema/security-policy change or new phase occurred. **Phase 6E remains
+INCOMPLETE.** Main Boss Chat must separately authorize unfinished acceptance or
+accept justified evidence limitations; recovery does not make that decision.
+See PHASE_6E_RECOVERY_REPORT.md and the preserved PHASE_6E_CLEANUP_INCIDENT.md.
