@@ -1,5 +1,11 @@
 # Awards, badges and verified achievements
 
+Manual award recognition preserves the explicitly approved achievement date;
+automatic source effective-date and historical-evaluation policy does not suppress
+a human decision about an earlier same-day accomplishment. Approval must create
+or update its canonical honor atomically. If the recipient closes before initial
+approval, the transaction conflicts and retains the nominated decision baseline.
+
 Phase 6E extends `athlete_achievements`, the canonical Phase 6C athlete honor
 store. Team and organization honors use `entity_achievements`; they never create
 athlete identities or automatically award every current roster member. Shared

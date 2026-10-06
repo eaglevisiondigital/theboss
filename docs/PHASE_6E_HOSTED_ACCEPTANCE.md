@@ -11,7 +11,7 @@ evidence. No new identity, date of birth, real customer data or provider deliver
 is needed. The supplied milestone examples are not production seed policy.
 
 Before activation, complete disposable SQL/concurrency validation, apply only the
-four prepared migrations, verify live schema/types/advisors, deploy and verify CI.
+four prepared migrations and validated manual-approval regression fix, verify live schema/types/advisors, deploy and verify CI.
 Capture a fresh selected baseline and rehearse rollback recovery. The existing
 controlled administrator remains the recovery authority.
 

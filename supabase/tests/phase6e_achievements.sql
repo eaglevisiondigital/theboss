@@ -43,6 +43,28 @@ select pg_temp.pe('definition.revise',jsonb_build_object('definition_id',pg_temp
 reset role;
 select pg_temp.check('threshold revision preserves old meaning','VERSION',(select array_agg(threshold order by revision)=array[2,3]::numeric[]from public.achievement_definition_revisions where definition_id=pg_temp.pe_id('career_two')));
 select pg_temp.denied('definition history cannot be rewritten',format('update public.achievement_definition_revisions set threshold=100 where definition_id=%L',pg_temp.pe_id('career_one')),'23514');
+-- Manual award dates may precede definition activation: the explicit decision is the source.
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.pe_definition('manual_current_policy',pg_temp.pe_rule('Same-day selected award','{"category":"sportsmanship","source_kind":"organization_decision","metric_key":null,"threshold":null,"historical_evaluation":false}')-array['metric_key','threshold']);
+select pg_temp.pe('award.nominate',jsonb_build_object('definition_id',pg_temp.pe_id('manual_current_policy'),'organization_id',pg_temp.f('org'),'team_id',pg_temp.f('falcons'),'season_id',pg_temp.f('season'),'profile_id',pg_temp.pe_id('profile'),'achieved_at',clock_timestamp()-interval'1 minute','note','Synthetic earlier same-day award'),'current-policy-award');
+select pg_temp.pe('award.approve',jsonb_build_object('nomination_id',pg_temp.pe_id('current-policy-award'),'expected_version',1,'note','Synthetic explicit selection'));
+reset role;
+select pg_temp.check('same-day manual decision creates its canonical honor','MANUAL_TIMING',(select n.state='awarded'and r.state='current'and aa.verification_level='organization_verified'from public.award_nominations n join public.achievement_recognitions r on r.id=n.recognition_id join public.athlete_achievements aa on aa.id=r.athlete_achievement_id where n.id=pg_temp.pe_id('current-policy-award')));
+select pg_temp.check('manual decision preserves explicit earlier achievement date','MANUAL_TIMING',(select r.achieved_at=n.achieved_at and r.achieved_at<d.effective_at from public.award_nominations n join public.achievement_recognitions r on r.id=n.recognition_id join public.achievement_definition_revisions d on d.id=n.definition_revision_id where n.id=pg_temp.pe_id('current-policy-award')));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.pe_definition('automatic_current_policy',pg_temp.pe_rule('No implicit retroactive milestone',jsonb_build_object('historical_evaluation',false,'effective_at',clock_timestamp()+interval'100 years')));
+select pg_temp.pe_evaluate('automatic_current_policy');
+reset role;
+select pg_temp.check('automatic effective-date policy remains enforced','EFFECTIVE_POLICY',not exists(select 1 from public.achievement_recognitions r join public.achievement_definition_revisions d on d.id=r.definition_revision_id where d.definition_id=pg_temp.pe_id('automatic_current_policy')));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.pe_definition('manual_closed_profile',pg_temp.pe_rule('Closed recipient award','{"category":"sportsmanship","source_kind":"organization_decision","metric_key":null,"threshold":null,"historical_evaluation":false}')-array['metric_key','threshold']);
+select pg_temp.pe('award.nominate',jsonb_build_object('definition_id',pg_temp.pe_id('manual_closed_profile'),'organization_id',pg_temp.f('org'),'team_id',pg_temp.f('falcons'),'season_id',pg_temp.f('season'),'profile_id',pg_temp.pe_id('profile'),'achieved_at',clock_timestamp(),'note','Synthetic recipient closure race'),'closed-profile-award');
+reset role;update public.athlete_profiles set status='archived'where id=pg_temp.pe_id('profile');
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.denied('closed recipient cannot silently approve an empty award',format('select public.boss_achievement_mutate(%L::jsonb)',jsonb_build_object('action','award.approve','request_id',gen_random_uuid(),'input',jsonb_build_object('nomination_id',pg_temp.pe_id('closed-profile-award'),'expected_version',1,'note','Synthetic no longer available recipient'))),'PT409');
+reset role;
+select pg_temp.check('failed approval retains nominated decision baseline','MANUAL_ATOMICITY',(select state='nominated'and version=1 and recognition_id is null from public.award_nominations where id=pg_temp.pe_id('closed-profile-award'))and(select count(*)=1 from public.award_decisions where nomination_id=pg_temp.pe_id('closed-profile-award')));
+update public.athlete_profiles set status='active'where id=pg_temp.pe_id('profile');
 -- Real canonical correction: remove the source from official qualification.
 set local role authenticated;select pg_temp.actor('admin');
 select pg_temp.game_op('game.reopen','ranking-game','{"reason":"Synthetic achievement source correction"}');
