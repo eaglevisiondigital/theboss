@@ -332,13 +332,17 @@ reset role;insert into rb_timings values('100-candidate rebuild batch',98*0+1000
 select clock_timestamp() batch_start_99 \gset
 select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('leaderboard','volume-definition'));
 reset role;insert into rb_timings values('100-candidate rebuild batch',99*0+1000*extract(epoch from clock_timestamp()-:'batch_start_99'::timestamptz));set local role authenticated;
+-- Publication must remain bounded even without favorable join estimates.
+set local enable_hashjoin=off;set local enable_mergejoin=off;
 select clock_timestamp() batch_start_100 \gset
 select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('leaderboard','volume-definition'));
 reset role;insert into rb_timings values('100-candidate rebuild batch',100*0+1000*extract(epoch from clock_timestamp()-:'batch_start_100'::timestamptz));set local role authenticated;
+set local enable_hashjoin=on;set local enable_mergejoin=on;
 select pg_temp.check('complete 10000-plus canonical candidate pool','SCALE',jsonb_array_length(public.boss_ranking_read(pg_temp.rb_q('leaderboard','volume-definition','{"limit":100}'))->'rows')=100);
 reset role;
 select pg_temp.check('whole source pool published atomically','SCALE',(select state='current'from public.ranking_scopes where id=pg_temp.rb_id('volume-scope'))and(select count(*)>=10000 from public.ranking_candidates where scope_id=pg_temp.rb_id('volume-scope')));
 select pg_temp.check('every rebuild request under unchanged eight-second timeout','TIMEOUT',not exists(select 1 from rb_timings where elapsed_ms>=8000));
+select pg_temp.check('every published rank equals whole-cohort competition rank','RANK',not exists(select 1 from(select rank,rank()over(order by value desc)::int expected from public.ranking_candidates where scope_id=pg_temp.rb_id('volume-scope')and qualification_state='qualified')ranked where rank is distinct from expected));
 select count(*)passed_assertions from pg_temp.phase5a_assertions;
 select label,count(*)requests,round(min(elapsed_ms),2)min_ms,round(max(elapsed_ms),2)max_ms,round(avg(elapsed_ms),2)mean_ms from rb_timings group by label order by label;
 rollback;

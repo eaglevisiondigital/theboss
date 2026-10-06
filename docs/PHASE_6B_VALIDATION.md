@@ -146,3 +146,46 @@ No temporary hosted authority has been activated. No Phase6C/later phase started
 Post-generation complete validation: strict typecheck, zero-warning lint, **399/399 application tests** and production build PASS. No dependency changes. Generated types differ from canonical output only by normalized final newline.
 
 Final complete-run scale timings:500-entry refresh **400.05ms**;101 candidate-batch requests **39.41–719.92ms**, mean **456.88ms**. These fresh complete-run measurements are the release evidence; earlier focused measurements remain development history.
+
+## Release CI performance repair checkpoint
+
+The first released implementation (`569b936`) passed local full validation and
+application CI, but PR CI run `37390143123` failed at the final 10,000-candidate
+publication request (`phase6b_performance.sql:333`) under the unchanged eight-second
+statement timeout. Push run `37390137576` was canceled at the old ten-minute overall
+job budget. These failures are retained as release evidence, not reported as green.
+
+A fifth **forward** Phase 6B repair migration is prepared. It replaces the joined
+materialized rank update with a single whole-cohort rank lookup and one generation
+update, avoiding sensitivity to a quadratic publication join plan. Original four
+applied bodies remain unchanged. The regression runs final publication with hash and
+merge joins unavailable and checks every published rank against the independent
+whole-cohort window calculation. No security, authorization or statistical semantics
+change; no request timeout increase.
+
+Fresh focused PostgreSQL: **7 assertions PASS**, 500-entry refresh **394.35ms**,
+101 candidate batches **41.52–717.60ms**, mean **335.32ms**. Full historical fresh
+SQL/concurrency validation is running before canonical repair application. CI's
+whole-job budget is proposed at 20 minutes to cover the expanded historical suite;
+each Phase 6B database request remains limited to eight seconds. No hosted acceptance
+window or temporary authority is active at this checkpoint.
+
+
+Repair release gate: full fresh PostgreSQL **15,053 SQL/bootstrap assertions**,
+**741 Phase 6B assertions**, **177 coordinated races**, all **179** frozen input hashes
+unchanged (the new forward body was subsequently renamed to its canonical version
+without changing its bytes). Complete-run timings: 500-entry **421.34ms**;
+101 batches **51.12–819.77ms**, mean **449.58ms**. Disposable cluster removed.
+
+Canonical repair `20261006000853_phase6b_rank_publication_plan.sql` applied;
+history **66**, exact MD5 `b6d95b5d06a89e619f261300ffebebca` /4450 characters,
+SHA256 `4df8c31a0e23ed710cc9d08aa93652cd4402ed39673a475cbd3ef314548df2d6`.
+Post-repair canonical **497 security/ACL/search-path checks PASS**. Canonical types
+regenerated and are byte-identical to prior generated types. Advisors retain only
+the same disclosed INFO/WARN categories; no new ERROR or Auth/security setting change.
+No temporary hosted authority or window was activated by repair/recovery rehearsals.
+
+Post-repair application checks: strict typecheck, zero-warning lint and399/399 tests
+PASS. The first local build invocation had no format environment and stopped at the
+configuration preflight; rerun with the same non-working format fixtures used by CI
+completed production build PASS. No live credential was read for either invocation.

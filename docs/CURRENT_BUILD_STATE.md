@@ -1,5 +1,25 @@
 # Current build state
 
+## Phase 6B: RELEASED; CI REPAIR APPLIED; HOSTED ACCEPTANCE PENDING
+
+Implementation `569b936e5688b03a85439b8d64763ebf61e2950a` deployed to the existing
+Boss platform (Netlify `6ac43645e55949564c6090ca`). Native competition navigation
+works. Initial application CI passed; database CI found a final 10,000-candidate
+publication timeout. The validated forward repair is applied as `20261006000853`;
+canonical history is **66**. Original four Phase 6B applied bodies are unchanged.
+
+Fresh repaired validation: **15,053 SQL/bootstrap assertions**, including **741**
+Phase 6B checks; **177 races**. Canonical 497-check security audit passes; regenerated
+types unchanged; advisors unchanged. Repair release CI is pending. No controlled
+hosted window or temporary authority has been activated. Restricted privacy stages
+require the separately requested bounded administrator-pause authorization.
+
+Phase 6B remains **INCOMPLETE** until release CI and the single controlled hosted
+acceptance/explicit cleanup are verified. No Phase 6C or later phase started.
+See [75-point checkpoint report](PHASE_6B_COMPLETION_REPORT.md).
+
+### Historical initial Phase 6B release checkpoint — preserved
+
 ## Phase 6B Standings + Leaderboards + Records: IMPLEMENTED; CANONICAL MIGRATED — RELEASE/ACCEPTANCE PENDING
 
 Starting SHA `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`; Main Boss Chat's eleven

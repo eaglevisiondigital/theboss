@@ -61,7 +61,9 @@ permissions:
 jobs:
   database:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Full historical SQL and 177 races now exceed the original ten-minute job budget.
+    # Phase 6B requests retain their independently enforced eight-second limit.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:

@@ -84,3 +84,49 @@ residue, pending controlled stat/ranking/notification work, temporary authority 
 unexpected fixtures; valid original administrator and selected baseline equality,
 excluding legitimate monotonic audit/version history. Recovery is retired only after
 strict canonical and native administrator verification. No Phase 6C or later phase.
+
+## Prepared bounded administrator pause request — not activated
+
+The original controlled administrator grant may be temporarily inactive only during
+three distinct privacy stages: exact Falcons staff, existing verified Child1 guardian,
+and exact newly controlled Competition Edition manager. Each pause is limited to ten
+minutes, with administrator restoration committed separately before changing stages.
+The original administrator row, start/end and status baseline have been frozen; the
+independent trusted management restoration transaction passed a rollback rehearsal.
+No browser session material is used by the recovery procedure.
+
+The single window is proposed at 75 minutes from activation: stop new scenarios at
++45 minutes, explicit cleanup target at +60, independent administrator-first authority
+recovery at +62, and fixed hard expiry at +75. Exact UTC timestamps are frozen before
+activation and never extended. Each pause also has its own ten-minute independent
+restoration deadline. Temporary relationships and assignments receive bounded expiry;
+they are explicitly ended regardless of natural expiration. This request does not
+activate a window or authorize an administrator pause by itself.
+
+## Prepared frozen acceptance oracle (no activation)
+
+Reuse three existing synthetic final sources only: Basketball 13–8 and 6–3,
+and Baseball 6–0, all Falcons versus Wildcats with the existing persistent identities.
+Basketball team points progress 13 → 19 when the second source becomes official,
+then return to 13 after native reasoned pending classification/refinalization of that
+second source. Preserve the superseded recognition and source epochs. A non-counting
+second assignment remains excluded from standings even when statistically official.
+One unplayed Wildcats-over-Tigers outcome-only forfeit can create a one-win tie with
+Falcons; head-to-head resolves that cohort to Falcons, while an unavailable
+strength-of-schedule criterion leaves it tied. No player statistics or differential
+is invented by the ruling.
+
+Baseball observed partial athlete runs produce actual one-run co-holders (Child1 and
+the existing synthetic adult). Child1 PA1 is below an explicit minPA2; Child2 PA2 can
+meet that threshold while partial coverage is explicitly disclosed. Complete-default
+athlete definitions remain incomplete. Complete team AVG uses H4 / AB10 = .400;
+explicit minPA10 selects the compatible team cohort, not an invented global standard.
+Counting/rate/record definitions retain separate private scopes and honest coverage.
+
+Cross-organization safe team projection may use one clearly controlled empty team
+fixture in the existing synthetic isolation organization, without a new identity,
+unit, season, roster, membership or organization role. Its exact ID must be registered
+before creation and archived during independent cleanup. Native safe TEAM projection
+is tested under the exact Edition manager; no foreign athlete authority follows.
+All competition/edition/definition IDs are registered immediately on native creation.
+Fixed expiry is applied to temporary edition/resource windows before privacy stages.
