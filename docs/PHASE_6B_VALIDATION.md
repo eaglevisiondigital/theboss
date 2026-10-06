@@ -1,4 +1,52 @@
-# Phase 6B validation — IN PROGRESS; UNRELEASED
+# Phase 6B validation — COMPLETE
+
+## Final hosted acceptance and closure — October 6, 2026
+
+The fixed window opened at **08:03:00 UTC**. Core standings, tiebreak explanation,
+unresolved tie, standings-only forfeit, private counting leaderboard, honest rate
+coverage, record co-holder/correction history, three rebuild equalities and the
+three restricted privacy contexts passed. The controlled refinalization advanced
+the second game from epoch 2 to official epoch 3; cleanup restored pending
+classification at epoch 4 and rebuilt through generation 34 with no current
+official controlled source.
+
+A hosted defect was found and repaired within scope: the Competition page requested
+a 210-day Game Center range although the canonical RPC accepts at most 93 days.
+`competitionGameRange` now requests 63 days back and 30 days forward. Regression
+coverage, strict typecheck, zero-warning lint and **400/400 application tests** pass.
+Commit `b75bc0f2808bc712513c79663e449d4e901a6786` is pushed and deployed; application
+and database release CI both pass.
+
+Administrator restoration/native verification occurred after staff, guardian and
+edition-manager pauses at **08:27:32.681506**, **08:29:11.961263** and
+**08:30:56.920367 UTC**. Their exact temporary contexts ended by
+**08:27:48.775717**, **08:29:25.350983** and **08:31:10.694252**. Controlled
+resource cleanup committed at **08:35:05.129564** and strict read-only verification
+passed at **08:35:58.476851**, before every deadline. Original administrator/account
+valid; active temporary role/team/guardian/competition authority, active controlled
+entries/groups/definitions/competitions/editions and pending ranking/stat/notification
+work all zero; selected module/event baselines exact. Recovery then retired.
+
+Accepted evidence limitations are retained: positive complete-rate qualification,
+better-performance record supersession/former-holder return, and a true cross-org
+positive entry lacked an approved existing fixture; hosted 390px/320px override
+remained at 1280px. These are not relabeled hosted passes and revealed no known
+product/security defect. Local mobile renders and applicable SQL/runtime authorization,
+qualification, record chronology and cross-tenant suites pass.
+
+Phase 6B is **COMPLETE WITH DOCUMENTED TEST-EVIDENCE LIMITATIONS**. No Phase 6C
+or later work started.
+
+Fresh post-cleanup connector checks confirm canonical `the-boss-platform` is
+`ACTIVE_HEALTHY` in `us-east-1`, history remains exactly **67**, and the final
+migration is `20261006004902_phase6b_bounded_private_page`. Security advisors retain
+only the known [closed-table RLS INFO](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
+and [leaked-password-protection WARN](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
+Performance advisors retain only [unused-index INFO](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index)
+and [Auth absolute-connection INFO](https://supabase.com/docs/guides/deployment/going-into-prod).
+No advisor ERROR or new Phase 6B advisor category appeared.
+
+## Preserved pre-release validation history
 
 Starting SHA `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`;
 approved contract commit `a858ebcaee1a7ce120334cd535fba38eb3adf7a1`.

@@ -1,29 +1,31 @@
 # Current build state
 
-## Phase 6B: RELEASED; CI VERIFIED; HOSTED AUTHORIZATION PENDING
+## Phase 6B Standings + Leaderboards + Records: COMPLETE
 
-The narrow native candidate-page repair is canonical as
-`20261006004902_phase6b_bounded_private_page.sql`; history is **67**.
-It resolves one generation page before label/holder joins and adds its matching
-order index. Source authorization, raw ACLs, business policy and the eight-second
-request timeout are unchanged. All six Phase6B applied bodies match local files.
+Main Boss Chat's fixed hosted window opened **2026-10-06 08:03:00 UTC**. Core
+standings, counted/non-counting separation, head-to-head explanation, unresolved
+tie, standings-only forfeit, counting leaderboard tie, honest rate coverage,
+record co-holder/correction history, recomputation and all three scoped privacy
+contexts passed. Administrator access was restored and natively verified after
+each bounded pause. Strict cleanup passed at **08:35:58.476851 UTC**, more than
+54 minutes before target: original administrator valid; zero active temporary
+authority, controlled active ranking resources or pending work; selected module
+and event baselines exact. Recovery was then retired.
 
-Fresh complete validation: **15,055 SQL/bootstrap assertions**, including **743**
-Phase6B checks; **177 coordinated races** and33 additional native sealed-source
-checks. All181 recorded input hashes unchanged; disposable cluster removed.
-Canonical497 security checks pass; regenerated types byte-identical; advisors
-retain disclosed INFO/WARN categories and no ERROR. Post-generation strict typecheck
-and zero-warning lint pass. Application CI399 tests/production build and both database release
-CI runs PASS: PR37396099518/push37396093279 at1c76cdfa7617a524834b39a514ed28870c8577f3. Private-page repair1c76cdfa7617a524834b39a514ed28870c8577f3
-is pushed and deployed as Netlify6ac445e14ee1bba3ea480c93; native signed reload passed. Previous mixed CI/failure/repair history is preserved.
+One hosted defect was fixed: the Competition game picker exceeded Game Center's
+93-day query contract. The bounded range fix and regression test are deployed at
+`b75bc0f2808bc712513c79663e449d4e901a6786`. Strict typecheck, zero-warning lint,
+**400/400** application tests, deployment and both application/database CI checks
+pass. Canonical history remains **67**; no hosted migration or security-policy
+change occurred.
 
-No controlled hosted window or temporary authority has been activated. Original
-administrator and selected module/event/guardian baseline remain valid/equal.
-Phase6B remains **INCOMPLETE** pending only the separately
-required bounded administrator-pause authorization before the one fixed hosted
-window. All35 required data acceptance scenarios and explicit cleanup remain
-unexecuted. No Phase6C or later phase started.
-See [75-point checkpoint report](PHASE_6B_COMPLETION_REPORT.md).
+Evidence limitations are explicit: positive fully covered rate qualification,
+better-performance record supersession/former-holder return and a true cross-org
+positive entry lacked an approved existing fixture; hosted mobile override remained
+1280px while local 390px/320px renders passed. Applicable SQL/runtime coverage
+passes and no known product/security defect remains. PR #3 stays OPEN/DRAFT/UNMERGED.
+See [the full 75-point report](PHASE_6B_COMPLETION_REPORT.md) and
+[hosted evidence](PHASE_6B_HOSTED_ACCEPTANCE.md). No Phase 6C or later phase started.
 
 ### Historical initial Phase 6B release checkpoint — preserved
 

@@ -1,5 +1,27 @@
 # Boss foundation implementation decisions
 
+## October 6, 2026 — Phase 6B closure
+
+**Phase 6B Standings + Leaderboards + Records is COMPLETE WITH DOCUMENTED
+TEST-EVIDENCE LIMITATIONS.** The single authorized window opened at 08:03 UTC;
+standings/tiebreak/forfeit, counting leaderboard/privacy, record co-holder/correction,
+refinalization/rebuild and all three restricted contexts passed. Original administrator
+access was restored after each pause. Strict zero-residual cleanup passed at
+08:35:58.476851 UTC, before target, and recovery was retired.
+
+The hosted Competition game picker exposed one narrow range-contract defect. Its
+63-day-back/30-day-forward fix and regression coverage are deployed at
+`b75bc0f2808bc712513c79663e449d4e901a6786`; final application/database CI is green.
+No migration, RLS, Auth or security-policy change was needed.
+
+Main Boss Chat's closure standard permits safe fixture/tooling limitations when
+transparent and no product defect exists. Positive complete-rate qualification,
+better-performance record supersession/former-holder return and an actual cross-org
+positive entry remain SQL/RUNTIME VERIFIED because approved hosted fixtures were
+unavailable. Hosted mobile override remained 1280px; local 390px/320px rendering
+passed. None is represented as HOSTED VERIFIED or as a known defect. PR #3 remains
+OPEN/DRAFT/UNMERGED. No Phase 6C or later phase started.
+
 ## October 5, 2026 — permanent Stat Tracking Profile amendment
 
 Main Boss Chat requires shared sport-aware tracking profiles and a live console,

@@ -1,10 +1,41 @@
-# Phase 6B controlled hosted acceptance — PREPARED; NOT ACTIVATED
+# Phase 6B controlled hosted acceptance — COMPLETE
 
-Implementation/release prerequisites: fresh full PostgreSQL/bootstrap/historical and
-Phase 6B suites, all races, application validation; four exact canonical migrations,
-65-row history, closed RLS/ACL/search paths/indexes, canonical generated types,
-Boss deployment and green CI. This document records a plan, not hosted passes.
-Only one fixed synthetic window may execute after these gates.
+The authorized fixed window ran from **2026-10-06 08:03:00 UTC** and completed
+strict cleanup at **08:35:58.476851 UTC**, before the 09:30 cleanup target and
+09:45 hard expiry. The original administrator was restored and natively verified
+after each of three distinct pauses. Zero residual temporary authority, controlled
+active configuration and pending work remained when recovery was retired.
+
+## Executed acceptance record
+
+- HOSTED VERIFIED: controlled edition, Falcons/Wildcats/Tigers entries and group;
+  two explicit game assignments; 13–8 counted result; non-counting official result;
+  outcome-only forfeit; head-to-head resolution and a legitimate unresolved tie.
+- HOSTED VERIFIED: exact `Why this rank?` explanation, incremental/rebuild equality,
+  freshness generations, equal-rank 3-point leaders, honest unavailable FT-rate
+  coverage, record co-holders, correction invalidation and four retained recognition
+  events.
+- HOSTED VERIFIED: reasoned epoch-3 official refinalization and cleanup epoch-4
+  pending reclassification without double counting.
+- HOSTED VERIFIED: exact Falcons staff, Child1 guardian and exact-edition manager
+  privacy contexts. Child2, peer comparison, private athlete leaderboards and a
+  forged edition remained denied according to context.
+- Exact pauses/restorations: staff `08:26:42.048051–08:27:32.681506`, guardian
+  `08:28:41.231366–08:29:11.961263`, manager
+  `08:29:59.816262–08:30:56.920367`. Temporary contexts ended by
+  `08:27:48.775717`, `08:29:25.350983` and `08:31:10.694252`, respectively.
+- One hosted defect was fixed: the Competition game picker requested 210 days
+  against a 93-day Game Center contract. The range is now 63 days back plus 30
+  forward, with regression coverage; deployed SHA is
+  `b75bc0f2808bc712513c79663e449d4e901a6786`.
+- SQL/RUNTIME VERIFIED; HOSTED POSITIVE UNVERIFIED DUE TO APPROVED FIXTURE:
+  a fully covered qualified FT-rate source, a better-performance record supersession
+  and former-holder return, and a true different-organization positive entry.
+- LOCAL RENDERED VERIFIED at 390px/320px; hosted viewport override remained 1280px.
+  No hosted mobile pass is inferred.
+
+The original prepared plan and pre-activation history below are preserved as the
+protocol that governed this completed window.
 
 ## Scope and deadline controls
 
@@ -85,7 +116,7 @@ unexpected fixtures; valid original administrator and selected baseline equality
 excluding legitimate monotonic audit/version history. Recovery is retired only after
 strict canonical and native administrator verification. No Phase 6C or later phase.
 
-## Prepared bounded administrator pause request — not activated
+## Historical prepared bounded administrator pause request
 
 The original controlled administrator grant may be temporarily inactive only during
 three distinct privacy stages: exact Falcons staff, existing verified Child1 guardian,
