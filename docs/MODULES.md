@@ -1,6 +1,6 @@
 # Modules and product access
 
-## Phase 6C Athlete Profiles and Recruiting Showcase
+## Phase 6C Athlete Profiles and Recruiting Showcase — COMPLETE
 
 Phase 6C extends the authenticated platform with `/app/athletes`, Family Hub profile
 links and an unlisted `/recruiting/[token]` presentation. It adds no independently

@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 6C Athlete Profiles + Recruiting Showcase: IMPLEMENTED; CANONICAL MIGRATED — HOSTED ACCEPTANCE PENDING
+## Phase 6C Athlete Profiles + Recruiting Showcase: COMPLETE
 
 Starting SHA `0e1b40ccfa1c3b2fdbd4a21e290ff3f164f95717`. Three
 append-only migrations create one presentation profile per canonical participant,
@@ -13,13 +13,24 @@ reader has no private-schema access.
 
 Fresh PostgreSQL 17 validation passes **15,327 SQL/bootstrap assertions and 185
 coordinated races**, including **272 Phase 6C assertions and 8 new races**. Canonical
-types are regenerated. Typecheck, zero-warning lint, **412/412** application tests
+types are regenerated. Typecheck, zero-warning lint, **413/413** application tests
 and the production build pass. Security advisors retain 130 intentional closed-RLS
 INFO findings and one pre-existing leaked-password-protection warning; performance
 advisors report 254 unused-index INFO findings and the existing Auth connection INFO.
-The fixed controlled hosted window, explicit cleanup, final deployment evidence and
-CI verification remain before closure. No public youth directory or later phase has
-started. See [the architecture contract](ATHLETE_PROFILE_RECRUITING_ARCHITECTURE.md).
+The fixed controlled hosted window verified Child1's persistent multi-origin identity,
+six current sport-summary sources, staff verification, guardian revision/consent,
+unlisted showcase publication, safe share projection, expiration/revocation and
+Wildcats transfer isolation. Cleanup restored the original administrator first,
+ended all temporary grants, archived the controlled profile/showcase and left zero
+active links or consents at **2026-10-06 10:12:48 UTC**, more than 22 minutes before
+the hard expiry. Desktop hosted layout had no overflow. The approved browser viewport
+override stayed at 1280px for the requested 768/390/320 sizes; those hosted widths are
+an explicit tooling evidence limitation, not a known defect. Correction propagation
+remains SQL/runtime verified because hosted mutation would have reopened unrelated
+sealed-stat architecture. No public youth directory or later phase started. See the
+[architecture contract](ATHLETE_PROFILE_RECRUITING_ARCHITECTURE.md),
+[validation record](PHASE_6C_VALIDATION.md), [hosted acceptance](PHASE_6C_HOSTED_ACCEPTANCE.md)
+and [completion report](PHASE_6C_COMPLETION_REPORT.md).
 
 ## Phase 6B Standings + Leaderboards + Records: COMPLETE
 

@@ -13,8 +13,15 @@ effect, minor publication requires a current guardian `can_manage_profile` grant
 and no athlete self-publication age rule is inferred. Raw share tokens are generated
 only on the application server and stored as digests. Public discovery and recruiter
 contact workflows remain future decisions. Three canonical migrations bring history
-to 70; full local database/application validation is green. Hosted acceptance and
-cleanup remain the final closure gate.
+to 70; full database/application validation is green.
+
+Phase 6C is complete after one bounded hosted window. Main Boss Chat's requirements
+were met for staff verification, guardian consent, unlisted sharing, stale-link
+denial and transferred-athlete privacy. Administrator-first cleanup completed before
+the hard expiry with zero temporary authority, active links or consents. Hosted
+correction mutation remains SQL/runtime verified, and 768/390/320 hosted viewport
+execution remains unavailable because the approved browser override stayed at
+1280px. These are evidence limitations, not known defects.
 
 ## October 6, 2026 — Phase 6B closure
 
