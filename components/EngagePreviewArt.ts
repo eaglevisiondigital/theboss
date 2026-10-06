@@ -69,7 +69,7 @@ function phoneContent(family:boolean) {
  [['home','Home'],['calendar','Calendar'],['people','Teams'],['chat','Inbox']].forEach(([kind,label],i)=>{let x=38+i*89;s+=i===1?r(x-8,649,38,25,'#fff0e6',10):'';s+=icon(x+2,653,kind,i===1?C.orange:C.muted,18)+t(x+(label==='Calendar'?-6:0),690,label,9,i===1?C.orange:C.muted,i===1?650:450);});
  return s+r(128,707,104,4,'#192630',2);
 }
-const phone=(w:number,h:number,family:boolean)=>r(0,0,w,h,'#25333e',w*.12,'#8b9aa5')+r(2,2,w-4,h-4,'#0b1219',w*.115)+`<svg x="5" y="5" width="${w-10}" height="${h-10}" viewBox="0 0 360 720" preserveAspectRatio="none" style="overflow:hidden;border-radius:20px">${phoneContent(family)}</svg>`;
+const phone=(w:number,h:number,family:boolean)=>`<defs><clipPath id="phone-${family?'family':'team'}"><rect x="5" y="5" width="${w-10}" height="${h-10}" rx="${w*.095}"/></clipPath></defs>`+r(0,0,w,h,'#25333e',w*.12,'#8b9aa5')+r(2,2,w-4,h-4,'#0b1219',w*.115)+`<g clip-path="url(#phone-${family?'family':'team'})"><svg x="5" y="5" width="${w-10}" height="${h-10}" viewBox="0 0 360 720" preserveAspectRatio="none" style="overflow:hidden;border-radius:20px">${phoneContent(family)}</svg></g>`;
 function bucks() {
  // Rich, compact discount preview with enough hierarchy to read in the small tile.
  let s=r(0,0,111,81,'#101c25')+`<path d="M0 66 111 19v62H0Z" fill="#20313d"/>`;
