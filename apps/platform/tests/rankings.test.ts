@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { emptyRankings } from "../src/lib/rankings/contracts";
-import { parseRankingQuery, projectRankings } from "../src/lib/rankings/input";
+import { competitionGameRange, parseRankingQuery, projectRankings } from "../src/lib/rankings/input";
 import { parseRankingCommand } from "../src/lib/rankings/action";
 import { performRankingMutation, type RankingClient } from "../src/lib/rankings/mutation";
 import { RankingsHub } from "../src/components/rankings/hub";
@@ -18,6 +18,11 @@ function mock() {
 test("ranking filters reject forged scope and absent comparative definition", () => {
   for (const q of [{ org: "forged" }, { org: id, product: "arbitrary" }, { edition: id, product: "leaderboard" }, { edition: id, product: "standings", definition: other }, { org: id, cursor: "invalid" }, { org: [id] }]) assert.equal(parseRankingQuery(q), null);
   assert.deepEqual(parseRankingQuery({ org: id }), { organization_id: id, limit: 50 });
+});
+test("competition game picker stays within the Game Center range contract", () => {
+  const now = new Date("2026-10-06T08:10:00.000Z"), range = competitionGameRange(now);
+  assert.equal(Date.parse(range.to) - Date.parse(range.from), 93 * 86400000);
+  assert.ok(Date.parse(range.from) <= Date.parse("2026-10-04T15:00:00.000Z"));
 });
 test("projection fails closed on stale rows, invalid qualification and unbounded pages", () => {
   for (const v of [{ contract: "rankings-v1", freshness: "pending", rows: [{ id, label: "STALE_PRIVATE_PEER", rank: 1 }] }, { contract: "rankings-v1", freshness: "current", rows: [{ id, rank: 1, qualification_state: "below_minimum" }] }, { contract: "rankings-v1", freshness: "current", rows: Array.from({ length: 101 }, () => ({ id })) }]) assert.equal(projectRankings(v), null);

@@ -6,6 +6,10 @@ import { emptyRankings, rankingProducts, type RankingData, type RankingEdition, 
 const numeric = (v: unknown) => typeof v === "number" && Number.isFinite(v) ? v : null;
 const text = (v: unknown, limit = 500) => typeof v === "string" && v.length <= limit ? v : null;
 const json = (v: unknown): Json | null => v === undefined || v === null ? null : JSON.stringify(v).length <= 32000 ? v as Json : null;
+const dayMs = 86400000;
+export function competitionGameRange(now = new Date()) {
+  return { from: new Date(now.getTime() - 63 * dayMs).toISOString(), to: new Date(now.getTime() + 30 * dayMs).toISOString() };
+}
 function edition(v: unknown): RankingEdition | null {
   if (!isRecord(v) || !statUuid(v.id) || !text(v.name, 200) || typeof v.sport_key !== "string" || !statSports.some(s => s === v.sport_key)) return null;
   return { id: v.id, name: v.name as string, sport_key: v.sport_key, ...(statUuid(v.competition_id) ? { competition_id: v.competition_id } : {}), ...(statUuid(v.season_id) ? { season_id: v.season_id } : {}), ...(text(v.competition_name, 200) ? { competition_name: v.competition_name as string } : {}), can_manage: v.can_manage === true, can_policy_manage: v.can_policy_manage === true };
