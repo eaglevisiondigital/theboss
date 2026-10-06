@@ -1,11 +1,14 @@
 import Image from "next/image";
+import OrganizationPreview from "@/components/OrganizationPreview";
 import Link from "next/link";
 import ApprovedHeader from "@/components/ApprovedHeader";
 import ApprovedFooter from "@/components/ApprovedFooter";
 import home from "../approvedHome.module.css";
 import s from "./organizations.module.css";
 export const metadata={title:"Who It’s For | The Boss Ecosystem",description:"Fundraising and connection for schools, sports teams, churches, nonprofits, community groups and camps. Find the Boss tools that fit your people and purpose."};
-function Art({crop,alt}:{crop:string;alt:string}){return <svg viewBox={crop} preserveAspectRatio="xMidYMid slice" role="img" aria-label={alt}><image href="/design/organizations-approved.png" width="787" height="1997"/></svg>}
+const photos:Record<string,string>={"21 548 242 182":"band","275 548 237 182":"volleyball","524 548 242 182":"outreach","21 817 364 194":"nonprofit","402 817 364 194":"camp"};
+function Art({crop,alt}:{crop:string;alt:string}){const name=photos[crop];if(!name)return <OrganizationPreview alt={alt}/>;const [, ,width,height]=crop.split(" ").map(Number);return <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" role="img" aria-label={alt}><image href={`/images/approved/organizations-${name}-clean.png`} width={width} height={height} preserveAspectRatio="xMidYMid slice"/></svg>}
+
 function Icon({kind}:{kind:string}){return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{kind==='fundraise'?<><path d="m5 13 20-8v21L5 19v-6Zm20-8 3-2v25l-3-2M7 20l3 9h6l-3-7M2 13v6"/></>:kind==='home'?<><path d="m2 15 14-12 14 12M6 13v16h20V13M12 29V18h8v11"/></>:<><circle cx="16" cy="9" r="4"/><path d="M9 28v-8c0-7 14-7 14 0v8H9Z"/><circle cx="5" cy="11" r="3"/><circle cx="27" cy="11" r="3"/><path d="M2 27v-8h4m24 8v-8h-4"/></>}</svg>}
 const audiences=[['Schools & student programs','Support classrooms, bands, clubs and student opportunities.','21 548 242 182','Marching band students in BOSS uniforms with brass instruments'],['Sports teams & leagues','Raise for seasons, equipment and travel while keeping teams connected.','275 548 237 182','A female coach with teenage volleyball players in BOSS jerseys'],['Churches & ministries','Bring support to youth, kids, camps and outreach.','524 548 242 182','Youth ministry volunteers and adult leaders packing outreach supplies'],['Nonprofits','Connect supporters with the work that matters.','21 817 364 194','Two adult volunteers working together on a community service project'],['Community groups & camps','Fund shared experiences and keep your community involved.','402 817 364 194','A camp counselor helping young children with an outdoor activity']];
 export default function Page(){return <div className={home.home}><a href="#main-content" className={home.skipLink}>Skip to content</a><ApprovedHeader/><main id="main-content" className={s.page}>
