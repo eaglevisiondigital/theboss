@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { parseAchievementCommand, projectAchievements, emptyAchievements } from "../src/lib/achievements/input";
 import { performAchievementMutation, type AchievementClient } from "../src/lib/achievements/mutation";
 import { AchievementBadges } from "../src/components/achievements/badges";
+import { RecruitingShowcaseView } from "../src/components/athlete-profiles/recruiting-showcase";
 const id = "10000000-0000-0000-0000-000000000001", other = "10000000-0000-0000-0000-000000000002", origin = "https://platform.boss.invalid";
 const command = { action: "definition.evaluate", request_id: id, input: { definition_id: other } };
 const card = { id, achievement_id: other, name: "Synthetic milestone", category: "statistical_milestone", subject_type: "athlete", state: "current", verification_level: "boss_verified", achieved_at: "2026-10-06T00:00:00Z", badge_icon: "milestone", source_type: "stat_summary", current: true };
@@ -14,9 +15,32 @@ test("achievement commands reject forged authority, formula and unknown actions"
 test("historical revisions can be refreshed without rewriting definition history", () => { assert.ok(parseAchievementCommand({ ...command, input: { definition_id: other, revision_id: id } })); });
 test("finite definition parser closes formula and SVG fields", () => { const rule = { name: "Synthetic", subject_type: "athlete", category: "statistical_milestone", source_kind: "athlete_game", sport_key: "baseball", metric_key: "hits", threshold: 1 }; const create = { ...command, action: "definition.create", input: { owner_kind: "organization", definition_key: "synthetic", organization_id: id, revision: rule } }; assert.ok(parseAchievementCommand(create)); assert.equal(parseAchievementCommand({ ...create, input: { ...create.input, revision: { ...rule, sql: "select true" } } }), null); assert.equal(parseAchievementCommand({ ...create, input: { ...create.input, revision: { ...rule, threshold: Infinity } } }), null); });
 test("untrusted achievement projection fails closed", () => { const data = { ...emptyAchievements(), contract: "achievements-v1", recognitions: [card] }; assert.ok(projectAchievements(data)); assert.equal(projectAchievements({ ...data, recognitions: [{ ...card, state: "invented" }] }), null); assert.equal(projectAchievements({ ...data, recognitions: Array(51).fill(card) }), null); assert.equal(projectAchievements({ ...data, can_manage: "true" }), null); });
-test("badge semantics remain text accessible without graphics", () => { const html = renderToStaticMarkup(createElement(AchievementBadges, { items: [card, { ...card, id: other, name: "Synthetic record", category: "record", co_holder: true }] })); assert.match(html, /aria-hidden="true"/); assert.match(html, /Boss verified/); assert.match(html, /Co-Record Holder/); assert.match(html, /2026-10-06/); assert.match(html, /Recognition history/); assert.doesNotMatch(html, /<svg|<script/); });
+test("badge semantics remain text accessible without graphics", () => { const html = renderToStaticMarkup(createElement(AchievementBadges, { allowHistoryLink: true, items: [card, { ...card, id: other, name: "Synthetic record", category: "record", co_holder: true }] })); assert.match(html, /aria-hidden="true"/); assert.match(html, /Boss verified/); assert.match(html, /Co-Record Holder/); assert.match(html, /2026-10-06/); assert.match(html, /Recognition history/); assert.doesNotMatch(html, /<svg|<script/); });
 test("badge labels distinguish pending, corrected and manual facts", () => { const html = renderToStaticMarkup(createElement(AchievementBadges, { items: [{ ...card, state: "processing" }, { ...card, id: other, state: "corrected", verification_level: "organization_verified" }] })); assert.match(html, /Processing source update/); assert.match(html, /Corrected by authoritative source/); assert.match(html, /Organization verified/); });
-test("consented public badge retains provenance text without private history links", () => { const { id: _id, achievement_id: _achievement, source_type: _source, ...publicCard } = card; void _id; void _achievement; void _source; const html = renderToStaticMarkup(createElement(AchievementBadges, { items: [publicCard] })); assert.match(html, /Boss verified/); assert.match(html, /statistical milestone/); assert.match(html, /2026-10-06/); assert.doesNotMatch(html, /\/app\/achievements|Recognition history/); });
+test("canonical public badges default to no private navigation without removing identity fields", () => {
+  const html = renderToStaticMarkup(createElement(AchievementBadges, { items: [card, { ...card, state: "corrected", verification_level: "organization_verified" }, { ...card, state: "historical" }] }));
+  for (const label of ["Synthetic milestone", "Boss verified", "Organization verified", "statistical milestone", "2026-10-06", "Verified recognition", "Corrected by authoritative source", "Historical recognition"]) assert.ok(html.includes(label), label);
+  assert.doesNotMatch(html, /Recognition history|\/app\//);
+  assert.ok(!html.includes(id) && !html.includes(other));
+});
+test("canonical internal badges expose history only with explicit presentation permission", () => {
+  const html = renderToStaticMarkup(createElement(AchievementBadges, { items: [card], allowHistoryLink: true }));
+  assert.match(html, /Recognition history/);
+  assert.ok(html.includes(`/app/achievements?recognition=${id}`));
+  assert.doesNotMatch(renderToStaticMarkup(createElement(AchievementBadges, { items: [card], allowHistoryLink: false })), /Recognition history|\/app\//);
+});
+test("actual recruiting composition retains canonical badge provenance and approved external media without internal navigation", () => {
+  const html = renderToStaticMarkup(createElement(RecruitingShowcaseView, { data: {
+    available: true, showcase_id: other, revision: 4, athlete: { display_name: "Synthetic athlete", bio: "Approved overview" }, sports: ["volleyball"],
+    achievements: [card, { ...card, state: "corrected", verification_level: "organization_verified" }],
+    statistics: [], measurables: [], history: [{ team: "Synthetic team", organization: "Synthetic organization", team_id: id }],
+    media: [{ title: "Approved highlight", url: "https://example.com/highlight", id }], privacy: { unlisted: true, searchable: false, contact_details_exposed: false }
+  } }));
+  for (const label of ["Synthetic athlete", "Synthetic milestone", "Boss verified", "Organization verified", "statistical milestone", "2026-10-06", "Corrected by authoritative source", "Unlisted"]) assert.ok(html.includes(label), label);
+  assert.match(html, /href="https:\/\/example.com\/highlight"/);
+  assert.doesNotMatch(html, /Recognition history|\/app\/|<form|<button|Family Hub|Admin console|Correct source/);
+  assert.ok(!html.includes(id) && !html.includes(other));
+});
 test("cross-origin achievement POST denies before RPC", async () => { const m = mock(); assert.equal((await performAchievementMutation(request(command, { origin: "https://attacker.invalid" }), m.client, origin)).status, 403); assert.equal(m.calls.length, 0); });
 test("wrong content type and oversized achievement request deny before RPC", async () => { const m = mock(); assert.equal((await performAchievementMutation(request(command, { "content-type": "text/plain" }), m.client, origin)).status, 422); assert.equal((await performAchievementMutation(request({ ...command, input: { ...command.input, note: "x".repeat(35000) } }), m.client, origin)).status, 422); assert.equal(m.calls.length, 0); });
 test("changed authenticated identity cannot mutate achievement", async () => { const m = mock(); m.client.auth.getUser = async () => ({ data: { user: { id: other } }, error: null }); assert.equal((await performAchievementMutation(request(), m.client, origin)).status, 401); assert.equal(m.calls.length, 0); });
