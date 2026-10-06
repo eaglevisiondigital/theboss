@@ -1,5 +1,39 @@
 # Phase 6E controlled hosted acceptance
 
+## Phase 6E presentation repair and closure — 2026-10-06
+
+**Phase 6E Awards + Badges + Verified Achievements: COMPLETE.** Main Boss Chat
+explicitly authorized the narrow presentation repair, regression coverage,
+existing-platform deployment, one minimal fixed verification window and closure
+when those checks succeeded. Repair commit `d168354ce8f8064f37b333f5c6c5369359ae0136`
+is live in Netlify deploy `6ac554c75410d9938cb7b4e9`.
+
+Shared badges now default to no private navigation. Authenticated achievement,
+profile and Family Hub compositions explicitly enable history links. The actual
+public recruiting composition preserves canonical cards and verification/date/state
+text while exposing zero internal links, management controls or rendered IDs.
+Authorized guardian history loads; anonymous private history returns 307 to login.
+No authorization bypass was observed. Consent/share security is unchanged.
+
+Focused tests **27/27**, typecheck, zero-warning lint, **434/434 application tests**
+and production build pass. Canonical migrations remain **78** and generated types
+are unchanged. Original administrator was restored first at **20:12:46.344831 UTC**;
+full explicit baseline restoration finished **20:13:37.738796 UTC**, before cleanup
+target **20:24:27.066342 UTC** and hard expiry **20:29:27.066342 UTC**. Strict check
+at **20:13:48.684061 UTC** confirms zero temporary effective authority, active
+shares/consents and pending work. All 15 contribution rows retain their original
+hash, current pending **5** / official **0**. No statistical source was mutated.
+
+See the [36-point repair and closure report](PHASE_6E_PRESENTATION_REPAIR_REPORT.md).
+Final documentation-head CI and SHA are reported in the release handoff after the
+CI gate. PR #3 remains OPEN/DRAFT/UNMERGED. No Phase 7A or later work began.
+Historical INCOMPLETE handoffs, original late-cleanup incident, recovery-only
+source restoration, ambiguous 403 and presentation-defect discovery remain below
+and in their linked records; this closure supersedes their status without rewriting
+the evidence.
+
+## Historical pre-repair checkpoint — preserved verbatim
+
 Current status: **INCOMPLETE — proven unlisted-showcase presentation blocker**.
 The separately authorized final window completed the remaining guardian, family,
 showcase-consent, transfer/privacy and responsive scenarios. Explicit restoration

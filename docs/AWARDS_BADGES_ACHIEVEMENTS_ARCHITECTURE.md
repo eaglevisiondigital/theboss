@@ -93,3 +93,17 @@ exact-origin helper uses an explicit parameter reference to avoid SQL column amb
 
 Phase 6E adds no public youth directory/feed, points economy, payment/marketplace,
 provider activation or later module. Prior sanitized security disclosures remain intact.
+
+## Explicit history-navigation presentation capability
+
+`AchievementBadges` accepts `allowHistoryLink`, defaulting to `false`. Canonical
+`id`, `achievement_id` and `source_type` remain legitimate projection fields;
+their presence does not enable private navigation. Authenticated achievement,
+profile and Family Hub compositions explicitly opt in; the public recruiting
+composition never opts in. This is presentation only, not an authorization grant.
+The private history operation still independently requires authentication and
+resource authorization. Recruiting consent, sharing, source truth and RLS are
+unchanged. The production page delegates to `RecruitingShowcaseView`, so its real
+composition is tested with canonical identity fields and approved external media.
+Public title/category/verification/date/current/corrected/historical labels remain.
+No public management, Family, administrator or correction navigation is added.

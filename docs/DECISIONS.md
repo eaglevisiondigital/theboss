@@ -932,3 +932,29 @@ No code/schema/security-policy change or new phase occurred. **Phase 6E remains
 INCOMPLETE.** Main Boss Chat must separately authorize unfinished acceptance or
 accept justified evidence limitations; recovery does not make that decision.
 See PHASE_6E_RECOVERY_REPORT.md and the preserved PHASE_6E_CLEANUP_INCIDENT.md.
+
+## Phase 6E narrow presentation repair and closure — 2026-10-06
+
+Main Boss Chat directly authorized repairing the remaining unlisted-showcase
+history-link defect and closing Phase 6E after deployment, focused hosted
+verification and explicit cleanup. Navigation is an explicit, default-false
+presentation capability; canonical data fields are retained. Internal authorized
+history remains available and independently protected. No architecture, schema,
+Auth, ACL/RLS, session or sports/statistical policy changed.
+
+The deployed repair passes canonical-card/default/internal and actual-recruiting
+composition regressions, 27 focused and 434 total application tests, typecheck,
+zero-warning lint and production build. One minimal window ran from
+20:09:27.066342 UTC; administrator-first restoration at 20:12:46.344831 UTC and
+full restoration at 20:13:37.738796 UTC preceded both fixed deadlines. No Wildcats,
+staff, operator/scorer, tournament, records/rankings or source-stat authority was
+activated. Zero temporary effective authority, active shares/consents and pending
+work are verified; original administrator and selected baseline remain valid.
+All 15 source rows are unchanged, pending 5 / official 0; migrations remain 78.
+
+**Phase 6E Awards + Badges + Verified Achievements: COMPLETE**, with final-head CI
+required to pass before the release handoff. Preserve every earlier INCOMPLETE
+record, deadline miss, source recovery, 403 ambiguity and sanitized credential
+incident disclosure as historical evidence. No evidence limitation was silently
+promoted to a newly executed hosted test. No Phase 7A or later phase is started.
+See PHASE_6E_PRESENTATION_REPAIR_REPORT.md.
