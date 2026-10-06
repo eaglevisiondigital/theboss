@@ -1,5 +1,23 @@
 # Phase 6E controlled hosted acceptance
 
+Current status: **INCOMPLETE — proven unlisted-showcase presentation blocker**.
+The separately authorized final window completed the remaining guardian, family,
+showcase-consent, transfer/privacy and responsive scenarios. Explicit restoration
+finished at **18:57:36.007237 UTC**, before target and hard expiry; temporary
+effective authority, active shares/consents and pending work are zero. The current
+source remains pending 5 / official 0, and all 15 contribution rows are unchanged.
+The earlier eligible-selection 403 did not recur under verified live capability.
+
+Saved hosted showcase evidence exposes an internal Recognition history link.
+Its target remains separately authenticated/authorized, with restricted native
+resource requests denied, but the intended unlisted presentation must not render
+that internal navigation. The actual public projection and renderer reproduce the
+problem locally; the existing test strips fields before rendering and misses it.
+No implementation change or another acceptance window was started. See the
+[final report and exact timeline](PHASE_6E_FINAL_ACCEPTANCE_REPORT.md).
+
+## Historical original-window status — preserved
+
 Status: SINGLE ACCEPTANCE WINDOW ENDED; INCOMPLETE — outstanding acceptance awaits
 Main Boss Chat's decision. No second acceptance window was activated. A separately
 authorized recovery-only follow-up restored source baseline; it is not additional

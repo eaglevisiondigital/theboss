@@ -1,6 +1,43 @@
 # Current build state
 
-## Phase 6E Awards + Badges + Verified Achievements: INCOMPLETE — ACCEPTANCE DECISION PENDING
+## Phase 6E Awards + Badges + Verified Achievements: INCOMPLETE — SHOWCASE PRESENTATION BLOCKER
+
+**Final authorized acceptance, 2026-10-06:** starting SHA
+`d20ea61ed37a4f62df295a728dce7901f707ad91`. The native eligible showcase selection
+passed with current guardian capability; the earlier ambiguous 403 did not recur.
+Selection/hiding, revision-specific consent, revocation, Family Hub, corrected
+milestone history, Wildcats-only privacy, guardian history after transfer and
+household-only denial passed. Actual 1280/768/390/320 widths passed for profile,
+Family Hub, showcase and authorized history without page-level overflow.
+
+One newly demonstrated presentation defect prevents closure: the unlisted showcase
+renders an internal **Recognition history** link. The public-card projection retains
+recognition ID/source type, and the shared renderer uses those fields to build an
+authenticated history link. Restricted native requests remained denied; no private
+history, notes, ranking context or contact data was demonstrated accessible. The
+existing isolated public-card test manually strips these fields and therefore does
+not cover the actual production projection. No repair, deployment or extra window
+was attempted after reviewing this evidence. This is a narrow implementation
+blocker, not an architecture contradiction or demonstrated authorization bypass.
+
+Fixed activation **18:45:19.455411 UTC**; stop-new **19:05:19.455411 UTC**;
+cleanup target **19:15:19.455411 UTC**; hard expiry **19:25:19.455411 UTC**.
+Administrator-first cleanup began **18:56:53.439219 UTC** and explicit restoration
+finished **18:57:36.007237 UTC**, before both deadlines. Strict verification at
+**18:59:33.776876 UTC** proves zero temporary effective authority, active shares,
+consents and pending work. Selected baseline equality passed; all 15 historical
+contribution rows are unchanged, with current pending **5** / official **0**.
+The original administrator is canonically and natively valid. Historical inactive
+test rows, consent/revision history and monotonic versions are retained.
+
+Final focused SQL checks **164/164**, recovery rehearsal **3/3**, typecheck,
+zero-warning lint, **432/432 application tests** and production build pass. Build
+uses the repository's existing synthetic CI configuration, not production secrets.
+Canonical history remains **78**; generated types and migrations are unchanged.
+Only documentation is changed. PR #3 remains OPEN/DRAFT/UNMERGED. No Phase 7A
+or later phase started. See the [final 50-point report](PHASE_6E_FINAL_ACCEPTANCE_REPORT.md).
+
+### Historical recovery checkpoint — preserved
 
 **Recovery-only follow-up, 2026-10-06:** the residual statistical source has now
 been recovered through native `game.reopen`, pending classification and

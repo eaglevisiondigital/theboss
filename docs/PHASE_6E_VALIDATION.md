@@ -1,6 +1,44 @@
 # Phase 6E validation
 
-Status: local/canonical/application validation passed and deployed; hosted
+Current status: final acceptance and cleanup recorded; **INCOMPLETE** because the
+unlisted showcase renders internal Recognition history navigation. The native
+eligible selection gate passed; it did not repeat the historical ambiguous 403.
+No code/schema/security-policy change or deployment was performed in this window.
+See [final 50-point report](PHASE_6E_FINAL_ACCEPTANCE_REPORT.md).
+
+Final disposable PostgreSQL rerun: **164 focused assertions** (28 achievements,
+117 security, 13 sources, 6 presentation), with a **3-assertion** rehearsal of the
+prepared canonical manual-award recovery. Typecheck, zero-warning lint,
+**432/432 application tests** and production build pass. The first build attempt
+correctly refused missing public configuration; the build then passed with the
+existing workflow's synthetic CI values. No production environment was read or
+changed. One abandoned, unattached user-owned local PostgreSQL IPC artifact was
+cleared after its creator was confirmed absent; active databases were untouched.
+
+Actual hosted widths were measured independently for showcase, Family Hub,
+profile/selection controls and authorized recognition history: **1280, 768, 390,
+320**, with no page-level overflow. Keyboard focus reached selection controls;
+statuses have `aria-live="polite"`, verification/state/selection meanings are text.
+Temporary viewport overrides were reset and agent-created tabs closed.
+
+**Correction to the historical public-rendering assertion below:** the isolated
+test manually removes ID/source-type fields from its fixture. The actual canonical
+public projection retains them, and the shared badge component renders an internal
+history link. Saved hosted evidence and a local render of the actual card shape
+demonstrate this gap. Permission checks on the target still deny restricted actors;
+no private history or unauthorized resource access was observed. This presentation
+defect remains unrepaired and blocks declaring Phase 6E COMPLETE.
+
+Canonical migration count remains **78**; generated-type SHA-256 is
+`daf9b9ea4f28451d398512ef397056875afb8c86b0c3fe0ccf7711496ba26522`, unchanged
+from starting HEAD. All selected baseline fields match (excluding expected audit
+timestamps and monotonic lifecycle versions). All 15 contribution rows retain
+hash `e12a9ac245f511da03eeafc0ecfc1e75`; current pending 5 / official 0. No source
+reopen, reclassification, game/finalization mutation or ranking fixture occurred.
+
+## Historical validation and release record — preserved
+
+Historical status: local/canonical/application validation passed and deployed; hosted
 acceptance INCOMPLETE after the fixed-window cleanup incident. Starting SHA is
 `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`.
 

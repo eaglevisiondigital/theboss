@@ -1,5 +1,31 @@
 # Boss foundation implementation decisions
 
+## October 6, 2026 — final Phase 6E acceptance, closure withheld
+
+Main Boss Chat directly authorized one final remaining-scenario window after
+source recovery. The valid native showcase selection passed under canonically
+verified current guardian capability. Family presentation, selection/hiding,
+revision-specific consent/revocation, current corrected-source presentation,
+Wildcats-only privacy, guardian longitudinal history, household-only denial and
+actual 1280/768/390/320 surfaces passed. There was no new statistical truth or
+source mutation. Each restricted context ended with administrator restoration
+verified before the next context. Cleanup completed **18:57:36.007237 UTC**,
+before fixed target **19:15:19.455411 UTC** and hard expiry **19:25:19.455411 UTC**.
+Original administrator and selected baseline are restored, temporary effective
+authority and pending work are zero, current source pending 5 / official 0.
+
+Closure is withheld because saved native showcase evidence reveals an internal
+Recognition history link on the unlisted projection. Production cards retain the
+recognition ID/source type used by the shared renderer; the public-rendering test
+manually strips them and misses the actual path. The history target still requires
+independent authenticated resource authority; private requests remained denied.
+This is an implementation/presentation defect within the approved boundary, not a
+new product decision or an observed access-control bypass. No new window,
+production repair, credential handling or later phase was attempted. Main Boss
+Chat receives the concrete blocker and complete acceptance/cleanup record in the
+[final 50-point report](PHASE_6E_FINAL_ACCEPTANCE_REPORT.md). All prior incident and
+recovery disclosures below remain intact.
+
 ## October 6, 2026 — Phase 6D tournament contract
 
 Phase 6D uses Competition Edition as the only tournament container and Calendar /

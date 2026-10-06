@@ -1,6 +1,17 @@
 # Phase 6E completion report
 
-Current status: RELEASED; **INCOMPLETE — unfinished acceptance awaits Main Boss
+Current status: RELEASED; **INCOMPLETE — unlisted-showcase presentation defect**.
+The final authorized remaining-scenario window passed the eligible selection gate,
+consent, family, corrected-source presentation, transfer privacy, guardian history,
+household-only denial and measured responsive checks. Cleanup finished before both
+deadlines with zero temporary effective authority and the recovered source intact.
+The sole demonstrated blocker is internal Recognition history navigation rendered
+on the unlisted showcase. No unauthorized history access was observed. See the
+[current 50-point final acceptance report](PHASE_6E_FINAL_ACCEPTANCE_REPORT.md).
+
+## Historical original 82-point incident handoff — preserved
+
+Historical status: RELEASED; **INCOMPLETE — unfinished acceptance awaits Main Boss
 Chat's decision**. The separately authorized recovery-only follow-up restored
 the source baseline and corrected derived recognition before its fixed deadline.
 See [33-point recovery report](PHASE_6E_RECOVERY_REPORT.md). Recovery does not close
