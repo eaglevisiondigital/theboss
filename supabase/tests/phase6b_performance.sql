@@ -338,8 +338,34 @@ select clock_timestamp() batch_start_100 \gset
 select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('leaderboard','volume-definition'));
 reset role;insert into rb_timings values('100-candidate rebuild batch',100*0+1000*extract(epoch from clock_timestamp()-:'batch_start_100'::timestamptz));set local role authenticated;
 set local enable_hashjoin=on;set local enable_mergejoin=on;
+-- Native private pages remain bounded even with adverse label-join choices.
+set local enable_hashjoin=off;set local enable_mergejoin=off;
+select coalesce((select calls from pg_stat_xact_user_functions where funcid='boss_private.games_can_view(uuid,public.games,jsonb)'::regprocedure),0) privacy_calls_before \gset
+select clock_timestamp() private_read_start \gset
 select pg_temp.check('complete 10000-plus canonical candidate pool','SCALE',jsonb_array_length(public.boss_ranking_read(pg_temp.rb_q('leaderboard','volume-definition','{"limit":100}'))->'rows')=100);
+select pg_temp.check('one distinct game authorization does not expand to athlete pool','PRIVACY_SCALE',coalesce((select calls from pg_stat_xact_user_functions where funcid='boss_private.games_can_view(uuid,public.games,jsonb)'::regprocedure),0)-:'privacy_calls_before'::bigint between 1 and 20);
 reset role;
+-- The trusted oracle reads closed raw projections; native requests keep the
+-- authenticated Data API role. Do not grant raw business-table access to tests.
+create temp table rb_private_page_oracle as
+select (select jsonb_build_object('scope_id',rc.scope_id,'generation',rc.built_generation,'rank',coalesce(rc.rank,2147483647),'id',rc.subject_key)
+ from public.ranking_candidates rc where rc.scope_id=pg_temp.rb_id('volume-scope')order by coalesce(rc.rank,2147483647),rc.subject_key offset 4999 limit 1)cursor,
+ (select jsonb_agg(to_jsonb(subject_key)order by position)from
+ (select subject_key,row_number()over(order by coalesce(rank,2147483647),subject_key)position from public.ranking_candidates where scope_id=pg_temp.rb_id('volume-scope'))oracle where position between 5001 and 5100)expected;
+grant select on rb_private_page_oracle to authenticated;
+set local role authenticated;
+do $$declare first jsonb;second jsonb;middle jsonb;cursor jsonb;expected jsonb;begin
+ first:=public.boss_ranking_read(pg_temp.rb_q('leaderboard','volume-definition','{"limit":100}'));
+ second:=public.boss_ranking_read(pg_temp.rb_q('leaderboard','volume-definition',jsonb_build_object('limit',100,'cursor',first->'next_cursor')));
+ select o.cursor,o.expected into cursor,expected from pg_temp.rb_private_page_oracle o;
+ middle:=public.boss_ranking_read(pg_temp.rb_q('leaderboard','volume-definition',jsonb_build_object('limit',100,'cursor',cursor)));
+ perform pg_temp.check('native next and deep cursor pages match independent ordered cohort','PAGINATION',jsonb_array_length(second->'rows')=100
+ and not exists(select 1 from jsonb_array_elements(first->'rows')a join jsonb_array_elements(second->'rows')b on a->>'id'=b->>'id')
+ and(select jsonb_agg(value->'id'order by ordinality)from jsonb_array_elements(middle->'rows')with ordinality)=expected);
+end$$;
+set local enable_hashjoin=on;set local enable_mergejoin=on;
+reset role;
+insert into rb_timings values('100-row native private read',1000*extract(epoch from clock_timestamp()-:'private_read_start'::timestamptz));
 select pg_temp.check('whole source pool published atomically','SCALE',(select state='current'from public.ranking_scopes where id=pg_temp.rb_id('volume-scope'))and(select count(*)>=10000 from public.ranking_candidates where scope_id=pg_temp.rb_id('volume-scope')));
 select pg_temp.check('every rebuild request under unchanged eight-second timeout','TIMEOUT',not exists(select 1 from rb_timings where elapsed_ms>=8000));
 select pg_temp.check('every published rank equals whole-cohort competition rank','RANK',not exists(select 1 from(select rank,rank()over(order by value desc)::int expected from public.ranking_candidates where scope_id=pg_temp.rb_id('volume-scope')and qualification_state='qualified')ranked where rank is distinct from expected));

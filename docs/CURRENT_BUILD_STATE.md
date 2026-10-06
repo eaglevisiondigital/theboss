@@ -1,21 +1,27 @@
 # Current build state
 
-## Phase 6B: RELEASED; CI REPAIR APPLIED; HOSTED ACCEPTANCE PENDING
+## Phase 6B: PRIVATE-READ REPAIR VALIDATED; RELEASE CI PENDING; HOSTED NOT ACTIVATED
 
-Implementation `569b936e5688b03a85439b8d64763ebf61e2950a` deployed to the existing
-Boss platform (Netlify `6ac43645e55949564c6090ca`). Native competition navigation
-works. Initial application CI passed; database CI found a final 10,000-candidate
-publication timeout. The validated forward repair is applied as `20261006000853`;
-canonical history is **66**. Original four Phase 6B applied bodies are unchanged.
+The narrow native candidate-page repair is canonical as
+`20261006004902_phase6b_bounded_private_page.sql`; history is **67**.
+It resolves one generation page before label/holder joins and adds its matching
+order index. Source authorization, raw ACLs, business policy and the eight-second
+request timeout are unchanged. All six Phase6B applied bodies match local files.
 
-Fresh repaired validation: **15,053 SQL/bootstrap assertions**, including **741**
-Phase 6B checks; **177 races**. Canonical 497-check security audit passes; regenerated
-types unchanged; advisors unchanged. Repair release CI is pending. No controlled
-hosted window or temporary authority has been activated. Restricted privacy stages
-require the separately requested bounded administrator-pause authorization.
+Fresh complete validation: **15,055 SQL/bootstrap assertions**, including **743**
+Phase6B checks; **177 coordinated races** and33 additional native sealed-source
+checks. All181 recorded input hashes unchanged; disposable cluster removed.
+Canonical497 security checks pass; regenerated types byte-identical; advisors
+retain disclosed INFO/WARN categories and no ERROR. Post-generation strict typecheck
+and zero-warning lint pass. Earlier399 app tests/production build passed; new release
+CI and deployment remain pending. Previous mixed CI/failure/repair history is preserved.
 
-Phase 6B remains **INCOMPLETE** until release CI and the single controlled hosted
-acceptance/explicit cleanup are verified. No Phase 6C or later phase started.
+No controlled hosted window or temporary authority has been activated. Original
+administrator and selected module/event/guardian baseline remain valid/equal.
+Phase6B remains **INCOMPLETE** pending new release CI/deployment and the separately
+required bounded administrator-pause authorization before the one fixed hosted
+window. All35 required data acceptance scenarios and explicit cleanup remain
+unexecuted. No Phase6C or later phase started.
 See [75-point checkpoint report](PHASE_6B_COMPLETION_REPORT.md).
 
 ### Historical initial Phase 6B release checkpoint — preserved

@@ -1,14 +1,17 @@
-# Phase6B 75-point report — RELEASE CHECKPOINT; HOSTED ACCEPTANCE PENDING
+# Phase6B 75-point report — PRIVATE-READ REPAIR VALIDATED; RELEASE CI PENDING; HOSTED NOT ACTIVATED
 
-Current checkpoint is factual; final release/acceptance evidence will replace pending entries.
+The narrow private-page repair is freshly validated and canonical. Commit/push,
+new deployment and both release CI runs are the next gate. Hosted acceptance is
+unexecuted pending that gate and the separately required administrator-pause
+authorization; SQL results are not hosted passes.
 
 1. **starting SHA.** `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`.
 
 2. **architecture contract commit.** `a858ebcaee1a7ce120334cd535fba38eb3adf7a1`; eleven binding Main Boss Chat decisions.
 
-3. **final SHA.** Released implementation `569b936e5688b03a85439b8d64763ebf61e2950a`; final closure SHA pending.
+3. **final SHA.** Previous repaired release SHA `82f9d739feea410b30fc40613faf4a4399bbd440`; the new private-page repair commit and final checkpoint SHA are reported in the completion message. Phase acceptance/closure is not yet complete.
 
-4. **migrations.** Four validated canonical bodies applied:20261005234038,234047,234054,234102; history61→65. A validated forward CI performance repair,20261006000853, brings history to66; all names/bodies match local files.
+4. **migrations.** Four validated canonical bodies applied:20261005234038,234047,234054,234102; history61→65. A validated forward CI performance repair,20261006000853, brings history to66. The second narrow forward repair,20261006004902, brings history to67; all six names/bodies match local files.
 
 5. **competition model.** Stable durable Competition plus canonical owning context; no inferred affiliation.
 
@@ -100,15 +103,15 @@ Current checkpoint is factual; final release/acceptance evidence will replace pe
 
 49. **revocation.** SQL/runtime post-wait and repeatable-read revocation/expiry denials PASS; hosted scoped revocation pending.
 
-50. **SQL assertion totals.** 15,053 SQL/bootstrap assertions PASS, all historical suites retained.
+50. **SQL assertion totals.** 15,055 SQL/bootstrap assertions PASS, all historical suites retained.
 
-51. **new Phase 6B assertions.** 741 new Phase6B assertions across12 suites PASS.
+51. **new Phase 6B assertions.** 743 new Phase6B assertions across12 suites PASS.
 
 52. **concurrency totals.** 177 genuine coordinated races PASS (164 historical+13 Phase6B).
 
 53. **new Phase 6B races.** Thirteen new races:finalize/refinalize/workers/policy/entry/generation/qualification lifetime/simultaneous sources/correction/bridge revocation/expiry/stale RR.
 
-54. **performance.** Complete-run500-entry refresh400.05ms;101 candidate requests39.41–719.92ms, mean456.88ms,10k pool;500-source chronology322.07ms. Eight-second timeout unchanged. Synthetic workloads, not hard caps/SLA.
+54. **performance.** Final fresh complete-run500-entry refresh401.19ms;101 candidate requests53.59–936.58ms, mean449.15ms,10k pool. Private-page verification block537.84ms includes first/next/deep pages plus the trusted oracle;500-source chronology233.74ms in the earlier full gate. Eight-second timeout unchanged. Synthetic workloads, not hard caps/SLA.
 
 55. **generated types.** Canonical TypeScript types regenerated; finite actual clients typecheck; normalized final newline only.
 
@@ -144,20 +147,30 @@ Current checkpoint is factual; final release/acceptance evidence will replace pe
 
 71. **typecheck/lint/tests/build.** Strict typecheck, zero-warning lint,399/399 app tests and production build PASS after canonical types; application CI PASS.
 
-72. **deployment/CI/PR.** Boss production deploy6ac43645e55949564c6090ca live; initial database CI failed/canceled; repaired release CI pending; PR3 OPEN/DRAFT/UNMERGED.
+72. **deployment/CI/PR.** Boss repaired production deploy6ac43cb0fbccaba863d587d3 live; initial database CI failed/canceled; repaired PR CI37392643781 PASS; push CI37392637982 FAILED on native private page timeout at82f9d739feea410b30fc40613faf4a4399bbd440; PR3 OPEN/DRAFT/UNMERGED.
 
 73. **evidence limitations/security exceptions.** No new credential exposure, Auth/security change, real youth/customer data or DOB. Historical sanitized incidents preserved. Local counting/performance defect fixed without timeout change. Unexecuted hosted cases are not passes.
 
 74. **confirmation no Phase 6C/later phase started.** No Phase6C or later phase started.
 
-75. **FINAL PHASE 6B STATUS:.** INCOMPLETE at this release checkpoint:remaining repair CI, separately required bounded administrator-pause authorization, and the single fixed hosted acceptance/explicit cleanup. This is not a final completion declaration.
+75. **FINAL PHASE 6B STATUS:.** INCOMPLETE: remaining private-page repair commit/push/deployment/CI plus the separately required bounded administrator-pause authorization. The one fixed controlled hosted window has not been opened; its35 required scenarios and explicit cleanup remain unexecuted. Release, canonical validation, deployment and PR CI have passed; push CI failed at native private read; a narrow forward repair is in validation. No Phase6C starts.
 
 
 
 Repair checkpoint: first release database CI failed at the final publication request;
 the full freshly validated forward repair is now canonical, preserving all four
-original applied bodies. Repair CI/hosted acceptance are pending. Post-repair types
+original applied bodies. Repair PR CI passed; push CI failed on a separate native private-read timeout. Hosted acceptance awaits the separately required administrator-pause authorization. Post-repair types
 regenerated identically; canonical security497 checks pass; advisors unchanged.
 Administrator-first and exact resource recovery rehearsals passed. No hosted window
 or temporary authority activated. Separate bounded administrator-pause authorization
 is pending under the attachment's explicit requirement.
+
+
+Second repair gate: complete fresh15,055 SQL/bootstrap assertions,743 Phase6B
+checks,177 races and33 additional native sealed-source checks PASS. All181 input
+hashes unchanged, ephemeral cluster removed. Canonical history67, exact sixth body
+MD5 `174156ecb5b98dae4601b15d5deafb9c`, SHA256
+`df19b4078ed6e3cb93949db98846c74dba0c8903de6f3499179b1d84ac59d508`.
+All six bodies match; new page index valid; canonical security497 PASS; generated
+types unchanged; advisors unchanged/no ERROR; focused post-generation typecheck/lint
+PASS. New release CI/deployment pending; hosted window still NOT ACTIVATED.
