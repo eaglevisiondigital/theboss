@@ -1,7 +1,7 @@
 # Phase 6E validation
 
-Status: local and canonical schema validation passed; application deployed; hosted
-acceptance remains pending. Starting SHA is
+Status: local/canonical/application validation passed and deployed; hosted
+acceptance INCOMPLETE after the fixed-window cleanup incident. Starting SHA is
 `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`.
 
 The four append-only migrations add the canonical honor extension, authoritative
@@ -87,3 +87,23 @@ Application deployment `6ac4f9858ab5b9c1603eb964` is READY from `68a7bb3`;
 432 application tests, typecheck, zero-warning lint and build pass. The fix changes
 canonical RPC implementation and SQL coverage only; deployed application bytes
 remain current. Original administrator and selected baseline remain intact.
+
+## Actual hosted outcome and cleanup incident
+
+The single fixed window executed core milestone, record, team championship and
+manual-award scenarios, with guardian profile presentation and four management
+viewport sizes verified. Explicit cleanup missed the fixed target and hard expiry.
+Administrator-first restoration was committed at 15:20:52.017742 UTC; zero residual
+temporary authority and zero controlled pending work are verified. Selected source
+baseline equality is **not** complete: the synthetic Volleyball source remains
+classified official in five current immutable contribution rows. No second window
+or security/Auth bypass was activated. Outstanding scenarios remain SQL/RUNTIME
+VERIFIED only, and the attempted showcase selection returned unresolved 403.
+See PHASE_6E_CLEANUP_INCIDENT.md and PHASE_6E_HOSTED_ACCEPTANCE.md.
+Both implementation/fix CI runs passed; final incident-documentation CI is reported
+with its exact commit in the handoff. No complete/closure claim is made.
+
+Final read-only canonical review after recovery: ACTIVE_HEALTHY, 78 migrations;
+security INFO 149 and existing leaked-password WARN 1; performance unused-index
+INFO 296 and existing Auth connection INFO 1. Earlier 303 unused-index count is
+preserved above as its original observation, not overwritten.

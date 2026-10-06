@@ -1,25 +1,47 @@
 # Current build state
 
-## Phase 6E Awards + Badges + Verified Achievements: IN PROGRESS
+## Phase 6E Awards + Badges + Verified Achievements: INCOMPLETE — CLEANUP INCIDENT
 
-Starting SHA `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`. Four prepared
-append-only migrations plus a validated manual-approval fix extend the canonical
-Phase 6C athlete honor store with
-versioned definitions, authoritative source recognition, team/organization honors,
-immutable decisions/history, separate display choices and bounded refresh work.
-The application includes Awards management, profile badges and authorized Family
-Hub presentation. No production milestone policy is seeded.
+Starting SHA `cc31206d4e851c4c5d81fc56526ef7a54b3c78dc`; implementation
+`68a7bb36b9b70a9d85c8e52b42fb6dcaf0affd40`; validated manual-award fix
+`8d56f6c73bf371f65fda879ced9f61171f5c797d`. Five append-only migrations are
+canonical (history **78**). Complete validation passes **17,389 SQL/bootstrap
+checks**, **175 dedicated Phase 6E assertions**, **204 races** including nine new,
+typecheck, zero-warning lint, **432 application tests** and production build.
+The application is deployed; both implementation/fix CI runs passed.
 
-The complete historical SQL/concurrency run and final focused Phase 6E suite
-pass: 17,389 unique reported SQL/bootstrap checks including 175 dedicated Phase
-6E checks, and 204 coordinated races including nine new races. Canonical history
-is 78, all five live migration hashes match prepared source, and all 45 new
-foreign-key vectors are indexed. Canonical types, typecheck, zero-warning lint,
-432 application tests and production build pass. The application is deployed; the single fixed
-hosted window remains pending.
-See [architecture](AWARDS_BADGES_ACHIEVEMENTS_ARCHITECTURE.md) and
-[controlled acceptance plan](PHASE_6E_HOSTED_ACCEPTANCE.md). PR #3 remains
-OPEN/DRAFT/UNMERGED. No later module has started.
+The sole hosted window activated at **2026-10-06 14:27:41.906939 UTC**, with
+cleanup target **15:02:41.906939 UTC** and unchanged hard expiry
+**15:12:41.906939 UTC**. Hosted milestone, private record-holder, team championship,
+manual nomination/approval/revoke/restore and guardian profile presentation passed.
+Management/cards passed 1280/768/390/320 widths. Family, showcase, transfer and
+source-correction acceptance were not completed. An attempted showcase selection
+returned 403; no accepted display mutation or reliable server timestamp establishes
+its cause. Do not classify that response as either a proven product defect or a
+completed positive scenario.
+
+Explicit administrator-first restoration was late: **15:20:52.017742 UTC**.
+The bounded guardian and temporary Sports module expired naturally at hard expiry;
+no canonical controlled mutations are recorded between hard expiry and restoration.
+Current original administrator is canonically and natively valid, temporary person
+and module authority is zero, active shares/consents are zero, controlled definitions
+are inactive, competition/edition archived, and pending controlled work was zero
+at **15:22:05.612390 UTC**. Transfer/Wildcats/scorer authority was never activated.
+
+**Selected baseline equality is incomplete:** five current immutable statistical
+contributions still classify the synthetic Volleyball source as `official` rather
+than its pre-window `pending`/excluded state. No authority is granted by this data
+residue. The ordinary correction path is closed by restored feature flags; no
+second window, fabricated Auth session, direct immutable-source rewrite or security
+weakening was used to recover it. Main Boss Chat must determine a narrowly bounded
+source-recovery path and disposition of outstanding acceptance. Do not declare
+Phase 6E complete or start another phase.
+
+See [incident and exact timeline](PHASE_6E_CLEANUP_INCIDENT.md),
+[hosted acceptance record](PHASE_6E_HOSTED_ACCEPTANCE.md),
+[82-point report](PHASE_6E_COMPLETION_REPORT.md) and
+[architecture](AWARDS_BADGES_ACHIEVEMENTS_ARCHITECTURE.md).
+PR #3 remains OPEN/DRAFT/UNMERGED. Prior incident history is preserved.
 
 ## Phase 6D Tournament + Bracket Management: COMPLETE
 

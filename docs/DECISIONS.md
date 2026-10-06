@@ -874,3 +874,16 @@ at this local documentation checkpoint. Historical incidents and evidence stay i
   publication remains closed pending its previously unresolved policy decision.
 - Preserve the public INVOKER/private-helper pattern and every prior incident disclosure.
   No Phase 7 or later module is authorized by this implementation.
+
+## Phase 6E fixed-window incident — no closure decision
+
+The single Phase 6E window missed explicit cleanup target and hard expiry.
+Administrator/relationships/modules and pending controlled work were recovered;
+temporary authority is zero. Synthetic statistical source eligibility remains
+above its pre-window excluded baseline. Core hosted recognition evidence remains
+valid, while unexecuted family/showcase/transfer/correction scenarios remain
+SQL/runtime evidence only. Main Boss Chat has not accepted these limitations or
+authorized a further recovery/acceptance window. Phase 6E remains INCOMPLETE.
+Do not silently reopen a window, fabricate Auth state, rewrite immutable source
+history, weaken policy or start another phase. Preserve the exact incident record
+in PHASE_6E_CLEANUP_INCIDENT.md and the prior security disclosures.

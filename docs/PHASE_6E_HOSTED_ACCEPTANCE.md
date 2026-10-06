@@ -1,6 +1,46 @@
 # Phase 6E controlled hosted acceptance
 
-Status: PREPARED; no Phase 6E controlled window has been activated.
+Status: SINGLE WINDOW ENDED; INCOMPLETE — cleanup incident and source-restoration
+blocker. No second acceptance window is authorized or activated.
+
+## Actual acceptance record — 2026-10-06
+
+- Fixed activation: 14:27:41.906939 UTC; target 15:02:41.906939 UTC;
+  hard expiry 15:12:41.906939 UTC. Baseline captured 14:27:30.114160 UTC;
+  guardian/transfer/manual-history recovery rehearsal passed in ROLLBACK before activation.
+- HOSTED VERIFIED: controlled Volleyball reopen, official classification and
+  refinalization (unchanged 2:1 score); one two-tracked-kill athlete milestone;
+  repeated bounded evaluation retained one recognition.
+- HOSTED VERIFIED: one private record scope rebuilt to current, Child1 current
+  holder of two tracked kills; corresponding Boss-verified record recognition.
+- HOSTED VERIFIED: archived Phase 6D Falcons championship produced one team
+  recognition. No individual championship or statistical MVP was fabricated.
+- HOSTED VERIFIED: organization-selected sportsmanship nomination/approval,
+  organization verification label, revocation and restoration with immutable history.
+- HOSTED VERIFIED: guardian-only Child1 profile showed eligible milestone/manual
+  honors and legacy honor; restricted record comparison did not appear.
+- HOSTED VERIFIED: organization management/cards at 1280/768/390/320 had document
+  scroll widths equal to viewport widths. Native keyboard focus reached a textbox.
+- NOT COMPLETED: Family Hub, eligible showcase hide/include/consent/public projection,
+  transfer/new-team privacy, retained guardian history after transfer and source
+  correction/current badge/history propagation. Applicable SQL/runtime coverage passes.
+- Showcase inclusion attempt returned 403 and created no display selection. The
+  failed request has no available authoritative server timestamp; expiry versus
+  earlier denial cannot be concluded from current state. This remains unresolved.
+- No scorer/Wildcats membership/head-coach transfer stage or recruiting share was activated.
+- Explicit recovery began/completed in the administrator-first transaction at
+  15:20:52.017742 UTC; zero person authority was verified at 15:20:52.577330 UTC.
+  Controlled pending work was cleared at 15:22:05.612390 UTC.
+- Original administrator is canonically and natively valid; guardian ended, Sports
+  configuration restored, original relationships untouched/restored, profile/event
+  archived/canceled/private, four definitions inactive, competition/edition archived,
+  no active links/consents and no pending controlled work.
+- Source restoration remains incomplete: five current contribution rows retain the
+  synthetic official epoch. No bypass/rewriting/new window was used. See the
+  [cleanup incident](PHASE_6E_CLEANUP_INCIDENT.md) for exact classification and next decision.
+
+## Historical prepared plan — preserved
+
 
 ## Scope and readiness
 
