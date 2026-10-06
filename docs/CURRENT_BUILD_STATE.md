@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 6B: PRIVATE-READ REPAIR VALIDATED; RELEASE CI PENDING; HOSTED NOT ACTIVATED
+## Phase 6B: RELEASED; CI VERIFIED; HOSTED AUTHORIZATION PENDING
 
 The narrow native candidate-page repair is canonical as
 `20261006004902_phase6b_bounded_private_page.sql`; history is **67**.
@@ -13,12 +13,13 @@ Phase6B checks; **177 coordinated races** and33 additional native sealed-source
 checks. All181 recorded input hashes unchanged; disposable cluster removed.
 Canonical497 security checks pass; regenerated types byte-identical; advisors
 retain disclosed INFO/WARN categories and no ERROR. Post-generation strict typecheck
-and zero-warning lint pass. Earlier399 app tests/production build passed; new release
-CI and deployment remain pending. Previous mixed CI/failure/repair history is preserved.
+and zero-warning lint pass. Application CI399 tests/production build and both database release
+CI runs PASS: PR37396099518/push37396093279 at1c76cdfa7617a524834b39a514ed28870c8577f3. Private-page repair1c76cdfa7617a524834b39a514ed28870c8577f3
+is pushed and deployed as Netlify6ac445e14ee1bba3ea480c93; native signed reload passed. Previous mixed CI/failure/repair history is preserved.
 
 No controlled hosted window or temporary authority has been activated. Original
 administrator and selected module/event/guardian baseline remain valid/equal.
-Phase6B remains **INCOMPLETE** pending new release CI/deployment and the separately
+Phase6B remains **INCOMPLETE** pending only the separately
 required bounded administrator-pause authorization before the one fixed hosted
 window. All35 required data acceptance scenarios and explicit cleanup remain
 unexecuted. No Phase6C or later phase started.

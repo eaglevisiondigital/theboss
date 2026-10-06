@@ -1,15 +1,14 @@
-# Phase6B 75-point report — PRIVATE-READ REPAIR VALIDATED; RELEASE CI PENDING; HOSTED NOT ACTIVATED
+# Phase6B 75-point report — RELEASED; CI VERIFIED; HOSTED AUTHORIZATION PENDING
 
-The narrow private-page repair is freshly validated and canonical. Commit/push,
-new deployment and both release CI runs are the next gate. Hosted acceptance is
-unexecuted pending that gate and the separately required administrator-pause
+The narrow private-page repair is freshly validated and canonical. Commit/push, Boss deployment and both release CI runs are complete. Hosted acceptance is
+unexecuted pending only the separately required administrator-pause
 authorization; SQL results are not hosted passes.
 
 1. **starting SHA.** `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`.
 
 2. **architecture contract commit.** `a858ebcaee1a7ce120334cd535fba38eb3adf7a1`; eleven binding Main Boss Chat decisions.
 
-3. **final SHA.** Previous repaired release SHA `82f9d739feea410b30fc40613faf4a4399bbd440`; the new private-page repair commit and final checkpoint SHA are reported in the completion message. Phase acceptance/closure is not yet complete.
+3. **final SHA.** Released private-page repair SHA `1c76cdfa7617a524834b39a514ed28870c8577f3`; the final documentation checkpoint SHA is reported in the completion message. Phase acceptance/closure is not yet complete.
 
 4. **migrations.** Four validated canonical bodies applied:20261005234038,234047,234054,234102; history61→65. A validated forward CI performance repair,20261006000853, brings history to66. The second narrow forward repair,20261006004902, brings history to67; all six names/bodies match local files.
 
@@ -147,13 +146,13 @@ authorization; SQL results are not hosted passes.
 
 71. **typecheck/lint/tests/build.** Strict typecheck, zero-warning lint,399/399 app tests and production build PASS after canonical types; application CI PASS.
 
-72. **deployment/CI/PR.** Boss repaired production deploy6ac43cb0fbccaba863d587d3 live; initial database CI failed/canceled; repaired PR CI37392643781 PASS; push CI37392637982 FAILED on native private page timeout at82f9d739feea410b30fc40613faf4a4399bbd440; PR3 OPEN/DRAFT/UNMERGED.
+72. **deployment/CI/PR.** Private-page repair production deploy6ac445e14ee1bba3ea480c93 live at1c76cdfa7617a524834b39a514ed28870c8577f3; native signed competition reload PASS. New PR CI37396099518 and push CI37396093279 PASS at1c76cdfa7617a524834b39a514ed28870c8577f3; historical failed/mixed runs retained in validation. PR3 OPEN/DRAFT/UNMERGED.
 
 73. **evidence limitations/security exceptions.** No new credential exposure, Auth/security change, real youth/customer data or DOB. Historical sanitized incidents preserved. Local counting/performance defect fixed without timeout change. Unexecuted hosted cases are not passes.
 
 74. **confirmation no Phase 6C/later phase started.** No Phase6C or later phase started.
 
-75. **FINAL PHASE 6B STATUS:.** INCOMPLETE: remaining private-page repair commit/push/deployment/CI plus the separately required bounded administrator-pause authorization. The one fixed controlled hosted window has not been opened; its35 required scenarios and explicit cleanup remain unexecuted. Release, canonical validation, deployment and PR CI have passed; push CI failed at native private read; a narrow forward repair is in validation. No Phase6C starts.
+75. **FINAL PHASE 6B STATUS:.** INCOMPLETE: only the separately required bounded administrator-pause authorization remains pending. The one fixed controlled hosted window has not been opened; all35 required data scenarios and explicit cleanup remain unexecuted. The private-page repair passed complete fresh local validation, canonical security/types/advisors, commit/push and deployment. No Phase6C starts.
 
 
 
@@ -174,3 +173,11 @@ MD5 `174156ecb5b98dae4601b15d5deafb9c`, SHA256
 All six bodies match; new page index valid; canonical security497 PASS; generated
 types unchanged; advisors unchanged/no ERROR; focused post-generation typecheck/lint
 PASS. New release CI/deployment pending; hosted window still NOT ACTIVATED.
+
+
+Current release gate PASS: PR37396099518 and push37396093279 at
+`1c76cdfa7617a524834b39a514ed28870c8577f3`; database and application jobs green.
+Pinned Linux PR performance:500-entry452.25ms;101 batches91.82–1119.76ms
+(mean801.69ms); first/next/deep private-page verification block912.60ms.
+The final documentation-only checkpoint SHA/CI are reported in the completion message.
+No hosted window or temporary authority activated; no Phase6C/later phase.
