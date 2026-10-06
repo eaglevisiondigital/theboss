@@ -1,5 +1,16 @@
 # Modules and product access
 
+## Phase 6D Tournament and Bracket Management
+
+`/app/tournaments` extends the Phase 6B competition product and existing
+Sports/Calendar/Game Center services; it adds no independently activated module.
+It supports single elimination, seed snapshots, byes, play-ins, third place,
+official advancement, corrections and rulings. Calendar owns scheduling and
+facility conflicts, Game Center owns sport results, Phase 6A/6B own statistics and
+rankings, and Phase 4A owns communications/notifications. Public bracket
+publication, double elimination, awards, registration fees and provider work stay
+disabled or deferred.
+
 ## Phase 6C Athlete Profiles and Recruiting Showcase — COMPLETE
 
 Phase 6C extends the authenticated platform with `/app/athletes`, Family Hub profile

@@ -1,5 +1,15 @@
 # Boss foundation permissions
 
+## Phase 6D tournament capability
+
+Phase 6D adds no permission or role key. Safe viewing reuses `competition.view`;
+bracket creation, seeding, linking, result processing and rebuild reuse
+`competition.manage`; administrative rulings require
+`competition.policy_manage`. The exact-edition competition-manager assignment is
+the narrow grant. Coaches and guardians may receive safe related-team projection,
+but team management, household membership, scoring roles and a known UUID never
+grant tournament mutation. Current authority is checked again after row locks.
+
 ## Phase 6C profile and showcase capability
 
 Six potential capabilities are added: `athlete_profiles.view`,

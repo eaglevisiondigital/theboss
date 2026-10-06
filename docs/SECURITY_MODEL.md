@@ -1,5 +1,15 @@
 # Boss platform security
 
+## Phase 6D tournament boundary
+
+Seven tournament tables and the private receipt table are closed RLS surfaces
+with no direct API-role access. Authenticated invoker RPCs enter fixed-search-path
+private helpers, validate finite input, exact edition/resource relationships,
+optimistic versions and caller-bound idempotency. Immutable triggers protect
+revisions, seeds, advancements and rulings. Mutations recheck current authority
+after blocking row locks. Anonymous publication remains disabled; safe projections
+exclude roster, participant, guardian, household and private sport data.
+
 ## Phase 6C profile, consent and share-link boundary
 
 Ten new public tables and the private receipt table have RLS enabled and no raw API

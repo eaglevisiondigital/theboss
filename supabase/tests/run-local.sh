@@ -15,6 +15,7 @@ phase5f_only=false
 phase6a_only=false
 phase6b_only=false
 phase6c_only=false
+phase6d_only=false
 if [[ $# != 0 ]]; then
   if [[ $# == 1 && "$1" == --test5a ]]; then
     phase5a_only=true
@@ -26,6 +27,8 @@ if [[ $# != 0 ]]; then
     phase6b_only=true
   elif [[ $# == 1 && "$1" == --test6c ]]; then
     phase6c_only=true
+  elif [[ $# == 1 && "$1" == --test6d ]]; then
+    phase6d_only=true
   elif [[ $# == 1 && "$1" == --test6a ]]; then
     phase6a_only=true
   elif [[ $# == 1 && "$1" == --test5f ]]; then
@@ -34,8 +37,8 @@ if [[ $# != 0 ]]; then
     phase5e_only=true
   elif [[ $# == 1 && "$1" == --test5d ]]; then
     phase5d_only=true
-  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcdef]|6[abc])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase6c_profiles_showcases.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c]' >&2
+  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcdef]|6[abcd])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase6d_tournament.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c | --test6d]' >&2
     exit 1
   else
     selected_test=$2
@@ -125,7 +128,7 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql "$test_dir"/phase6d_*.sql)
 if [[ "$phase5a_only" == true ]]; then tests=("$test_dir"/phase5a_*.sql);fi
 if [[ "$phase5b_only" == true ]]; then tests=("$test_dir"/phase5b_*.sql);fi
 if [[ "$phase5c_only" == true ]]; then tests=("$test_dir"/phase5c_*.sql);fi
@@ -133,6 +136,7 @@ if [[ "$phase5d_only" == true ]]; then tests=("$test_dir"/phase5d_*.sql);fi
 if [[ "$phase5e_only" == true ]]; then tests=("$test_dir"/phase5e_*.sql);fi
 if [[ "$phase6b_only" == true ]]; then tests=("$test_dir"/phase6b_*.sql);fi
 if [[ "$phase6c_only" == true ]]; then tests=("$test_dir"/phase6c_*.sql);fi
+if [[ "$phase6d_only" == true ]]; then tests=("$test_dir"/phase6d_*.sql);fi
 if [[ "$phase6a_only" == true ]]; then tests=("$test_dir"/phase6a_*.sql);fi
 if [[ "$phase5f_only" == true ]]; then tests=("$test_dir"/phase5f_*.sql);fi
 if [[ -n "$selected_test" ]]; then tests=("$test_dir/$selected_test");fi
@@ -157,7 +161,7 @@ for test_file in "${tests[@]}"; do
   fi
 done
 
-if [[ -z "$selected_test" && ( "$phase6a_only" == true || ( "$phase5a_only" == false && "$phase5b_only" == false && "$phase5c_only" == false && "$phase5d_only" == false && "$phase5e_only" == false && "$phase5f_only" == false && "$phase6b_only" == false && "$phase6c_only" == false ) ) ]]; then
+if [[ -z "$selected_test" && ( "$phase6a_only" == true || ( "$phase5a_only" == false && "$phase5b_only" == false && "$phase5c_only" == false && "$phase5d_only" == false && "$phase5e_only" == false && "$phase5f_only" == false && "$phase6b_only" == false && "$phase6c_only" == false && "$phase6d_only" == false ) ) ]]; then
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase6a_sealed_sources.sh"
 fi
 
@@ -212,6 +216,13 @@ if [[ "$phase6c_only" == true ]]; then
   if [[ ! -s "$test_dir/phase6c_athlete_profiles_concurrency.sh" ]]; then printf '%s\n' 'Phase 6C concurrency test is missing.' >&2;exit 1;fi
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase6c_athlete_profiles_concurrency.sh" || exit $?
   printf '%s\n' 'Focused Phase 6C SQL/concurrency passed; full historical validation remains required.'
+  exit 0
+fi
+
+if [[ "$phase6d_only" == true ]]; then
+  if [[ ! -s "$test_dir/phase6d_tournament_concurrency.sh" ]]; then printf '%s\n' 'Phase 6D concurrency test is missing.' >&2;exit 1;fi
+  PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase6d_tournament_concurrency.sh" || exit $?
+  printf '%s\n' 'Focused Phase 6D SQL/concurrency passed; full historical validation remains required.'
   exit 0
 fi
 
@@ -277,4 +288,25 @@ for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
     PGDATABASE=postgres PGUSER=postgres bash "$concurrency_test"
 done
-printf '%s\n' 'Phase 2A/2B/3A/3B/4A/4B/5A/5B/5C/5D/5E/5F PostgreSQL 17 authorization tests passed.'
+
+# Earlier concurrency suites intentionally retain synthetic rows until the
+# disposable cluster is removed. Phase 6D composes the established Phase 5A
+# and 6B fixtures, whose deterministic identifiers can therefore collide.
+# Reinitialize the same private, no-network cluster before the final race set
+# so the race test proves its own setup and invariants independently.
+"$postgres_bin_dir/pg_ctl" --pgdata "$data_dir" --mode immediate --wait stop >/dev/null
+rm -rf -- "$data_dir"
+"$postgres_bin_dir/initdb" --pgdata "$data_dir" --username boss_test_admin \
+  --auth-local trust --auth-host reject --encoding UTF8 --no-locale >/dev/null
+"$postgres_bin_dir/pg_ctl" --pgdata "$data_dir" --log "$test_run_dir/postgres-phase6d.log" \
+  --options "-c listen_addresses='' -c unix_socket_directories='$socket_dir' -c unix_socket_permissions=0700 -c log_statement=none -c jit=off -c track_functions=all" \
+  --wait start >/dev/null
+"${psql_bootstrap_command[@]}" --quiet --file "$test_dir/local-bootstrap.sql"
+for migration in "${migrations[@]}"; do
+  "${psql_command[@]}" --quiet --single-transaction --file "$migration"
+done
+concurrency_test=$test_dir/phase6d_tournament_concurrency.sh
+printf 'Testing %s in an isolated disposable database\n' "${concurrency_test##*/}"
+PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
+  PGDATABASE=postgres PGUSER=postgres bash "$concurrency_test"
+printf '%s\n' 'Phase 2A/2B/3A/3B/4A/4B/5A/5B/5C/5D/5E/5F/6A/6B/6C/6D PostgreSQL 17 authorization tests passed.'

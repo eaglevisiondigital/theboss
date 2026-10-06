@@ -1,5 +1,16 @@
 # Game Center foundation
 
+## Phase 6D tournament linkage
+
+A bracket match has stable identity before scheduling, then links exactly one
+authorized canonical Game Center game whose sport and entry teams match. Game
+Center remains authoritative for operators, roster, scoring, sport rules,
+statistics, finalization and correction epochs. Tournament advancement consumes
+only the current official winner/finalization and never replays sport events. A
+changed winner reconciles before downstream play; after downstream play starts it
+requires an explicit tournament ruling. See
+[the tournament architecture](TOURNAMENT_BRACKET_ARCHITECTURE.md).
+
 ## Phase 5E deployed implementation
 
 Volleyball and the approved shared stat catalog/profile/snapshot/coverage foundation

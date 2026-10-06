@@ -924,6 +924,15 @@ button:disabled { cursor: wait; opacity: .65; }
 .rankings-table details { min-width: 12rem; max-width: 22rem; white-space: normal; overflow-wrap: anywhere; }
 @media(max-width: 390px) { .rankings-product-navigation a { max-width: 100%; overflow-wrap: anywhere; } .rankings-hub .calendar-fieldset { min-width: 0; } }
 
+/* Tournament rounds scroll as columns on wide screens and become stacked match cards on phones. */
+.tournament-bracket { min-width: 0; }
+.tournament-seeds { columns: 2; gap: 2rem; }
+.tournament-rounds { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(17rem, 1fr); gap: 1rem; overflow-x: auto; overscroll-behavior-inline: contain; padding-block: 1rem; }
+.tournament-round { display: grid; align-content: start; gap: .75rem; min-width: 0; }
+.tournament-match { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; min-width: 0; overflow-wrap: anywhere; }
+.tournament-match p { margin-block: .55rem; }
+@media(max-width: 390px) { .tournament-seeds { columns: 1; } .tournament-rounds { display: block; overflow: visible; } .tournament-round { margin-block: 1.25rem; } .tournament-match { margin-block: .75rem; } }
+
 /* Phase 6C athlete presentation stays bounded and readable down to 320px. */
 .athlete-profile-hub, .recruiting-showcase { min-width: 0; }
 .athlete-profile-subjects { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1rem; }

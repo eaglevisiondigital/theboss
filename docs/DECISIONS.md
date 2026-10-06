@@ -1,5 +1,20 @@
 # Boss foundation implementation decisions
 
+## October 6, 2026 — Phase 6D tournament contract
+
+Phase 6D uses Competition Edition as the only tournament container and Calendar /
+Game Center as the only scheduled-game and result authorities. The initial engine
+is deterministic single elimination. Explicit stages, stable match identities,
+immutable seed/revision/advancement/ruling history and current-result reconciliation
+replace inferred labels or mutable bracket trees. Published standings and group
+qualification preserve exact scope, generation and rank; unresolved ties stop.
+
+Existing Phase 6B permissions and exact competition-manager assignments are
+sufficient, so no role or permission key is added. Anonymous publication, random
+draw, double elimination, consolation, round-robin finals and awards remain
+deferred. Notifications reuse the bounded Phase 4A engine; scheduling and game
+lifecycle messages remain owned by Calendar and Game Center.
+
 ## October 6, 2026 — Phase 6C Athlete Profile and Recruiting Showcase contract
 
 Phase 6C implements one presentation profile per existing participant/person and

@@ -8703,6 +8703,589 @@ export type Database = {
           },
         ]
       }
+      tournament_advancements: {
+        Row: {
+          actor_person_id: string
+          advancement_kind: string
+          bracket_id: string
+          created_at: string
+          destination_match_id: string | null
+          destination_side: string | null
+          edition_id: string
+          generation: number
+          id: string
+          loser_entry_id: string | null
+          reason: string
+          revision_id: string
+          source_finalization_count: number | null
+          source_game_id: string | null
+          source_match_id: string
+          status: string
+          supersedes_id: string | null
+          winner_entry_id: string
+        }
+        Insert: {
+          actor_person_id: string
+          advancement_kind: string
+          bracket_id: string
+          created_at?: string
+          destination_match_id?: string | null
+          destination_side?: string | null
+          edition_id: string
+          generation: number
+          id?: string
+          loser_entry_id?: string | null
+          reason: string
+          revision_id: string
+          source_finalization_count?: number | null
+          source_game_id?: string | null
+          source_match_id: string
+          status?: string
+          supersedes_id?: string | null
+          winner_entry_id: string
+        }
+        Update: {
+          actor_person_id?: string
+          advancement_kind?: string
+          bracket_id?: string
+          created_at?: string
+          destination_match_id?: string | null
+          destination_side?: string | null
+          edition_id?: string
+          generation?: number
+          id?: string
+          loser_entry_id?: string | null
+          reason?: string
+          revision_id?: string
+          source_finalization_count?: number | null
+          source_game_id?: string | null
+          source_match_id?: string
+          status?: string
+          supersedes_id?: string | null
+          winner_entry_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_advancements_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_bracket_id_destination_match_id_fkey"
+            columns: ["bracket_id", "destination_match_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_matches"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_bracket_id_revision_id_fkey"
+            columns: ["bracket_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_bracket_revisions"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_bracket_id_source_match_id_fkey"
+            columns: ["bracket_id", "source_match_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_matches"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_bracket_id_supersedes_id_fkey"
+            columns: ["bracket_id", "supersedes_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_advancements"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_edition_id_bracket_id_fkey"
+            columns: ["edition_id", "bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_edition_id_loser_entry_id_fkey"
+            columns: ["edition_id", "loser_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_advancements_edition_id_winner_entry_id_fkey"
+            columns: ["edition_id", "winner_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      tournament_bracket_revisions: {
+        Row: {
+          actor_person_id: string
+          bracket_id: string
+          created_at: string
+          edition_id: string
+          id: string
+          reason: string
+          revision: number
+          source_kind: string
+          source_manifest: Json
+          structure_digest: string
+        }
+        Insert: {
+          actor_person_id: string
+          bracket_id: string
+          created_at?: string
+          edition_id: string
+          id?: string
+          reason: string
+          revision: number
+          source_kind: string
+          source_manifest: Json
+          structure_digest: string
+        }
+        Update: {
+          actor_person_id?: string
+          bracket_id?: string
+          created_at?: string
+          edition_id?: string
+          id?: string
+          reason?: string
+          revision?: number
+          source_kind?: string
+          source_manifest?: Json
+          structure_digest?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_bracket_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_bracket_revisions_edition_id_bracket_id_fkey"
+            columns: ["edition_id", "bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      tournament_brackets: {
+        Row: {
+          bracket_size: number
+          bracket_type: string
+          champion_entry_id: string | null
+          configuration: Json
+          created_at: string
+          created_by_person_id: string
+          current_revision: number
+          edition_id: string
+          id: string
+          include_third_place: boolean
+          name: string
+          status: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          bracket_size: number
+          bracket_type?: string
+          champion_entry_id?: string | null
+          configuration?: Json
+          created_at?: string
+          created_by_person_id: string
+          current_revision?: number
+          edition_id: string
+          id?: string
+          include_third_place?: boolean
+          name: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          bracket_size?: number
+          bracket_type?: string
+          champion_entry_id?: string | null
+          configuration?: Json
+          created_at?: string
+          created_by_person_id?: string
+          current_revision?: number
+          edition_id?: string
+          id?: string
+          include_third_place?: boolean
+          name?: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_brackets_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_brackets_edition_id_champion_entry_id_fkey"
+            columns: ["edition_id", "champion_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_brackets_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tournament_matches: {
+        Row: {
+          bracket_id: string
+          created_at: string
+          edition_id: string
+          finalization_count: number | null
+          game_id: string | null
+          id: string
+          label: string
+          match_number: number
+          opponent_entry_id: string | null
+          opponent_source_kind: string
+          opponent_source_match_id: string | null
+          primary_entry_id: string | null
+          primary_source_kind: string
+          primary_source_match_id: string | null
+          revision_id: string
+          round_number: number
+          source_organization_id: string | null
+          stage_id: string
+          status: string
+          version: number
+        }
+        Insert: {
+          bracket_id: string
+          created_at?: string
+          edition_id: string
+          finalization_count?: number | null
+          game_id?: string | null
+          id?: string
+          label: string
+          match_number: number
+          opponent_entry_id?: string | null
+          opponent_source_kind: string
+          opponent_source_match_id?: string | null
+          primary_entry_id?: string | null
+          primary_source_kind: string
+          primary_source_match_id?: string | null
+          revision_id: string
+          round_number: number
+          source_organization_id?: string | null
+          stage_id: string
+          status?: string
+          version?: number
+        }
+        Update: {
+          bracket_id?: string
+          created_at?: string
+          edition_id?: string
+          finalization_count?: number | null
+          game_id?: string | null
+          id?: string
+          label?: string
+          match_number?: number
+          opponent_entry_id?: string | null
+          opponent_source_kind?: string
+          opponent_source_match_id?: string | null
+          primary_entry_id?: string | null
+          primary_source_kind?: string
+          primary_source_match_id?: string | null
+          revision_id?: string
+          round_number?: number
+          source_organization_id?: string | null
+          stage_id?: string
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_matches_bracket_id_opponent_source_match_id_fkey"
+            columns: ["bracket_id", "opponent_source_match_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_matches"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_bracket_id_primary_source_match_id_fkey"
+            columns: ["bracket_id", "primary_source_match_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_matches"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_bracket_id_revision_id_fkey"
+            columns: ["bracket_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_bracket_revisions"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_edition_id_bracket_id_fkey"
+            columns: ["edition_id", "bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_edition_id_opponent_entry_id_fkey"
+            columns: ["edition_id", "opponent_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_edition_id_primary_entry_id_fkey"
+            columns: ["edition_id", "primary_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_edition_id_stage_id_fkey"
+            columns: ["edition_id", "stage_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_stages"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_matches_source_organization_id_game_id_fkey"
+            columns: ["source_organization_id", "game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      tournament_rulings: {
+        Row: {
+          actor_person_id: string
+          bracket_id: string
+          created_at: string
+          edition_id: string
+          id: string
+          kind: string
+          loser_entry_id: string | null
+          match_id: string
+          reason: string
+          reversal_of_id: string | null
+          winner_entry_id: string | null
+        }
+        Insert: {
+          actor_person_id: string
+          bracket_id: string
+          created_at?: string
+          edition_id: string
+          id?: string
+          kind: string
+          loser_entry_id?: string | null
+          match_id: string
+          reason: string
+          reversal_of_id?: string | null
+          winner_entry_id?: string | null
+        }
+        Update: {
+          actor_person_id?: string
+          bracket_id?: string
+          created_at?: string
+          edition_id?: string
+          id?: string
+          kind?: string
+          loser_entry_id?: string | null
+          match_id?: string
+          reason?: string
+          reversal_of_id?: string | null
+          winner_entry_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_rulings_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_rulings_bracket_id_match_id_fkey"
+            columns: ["bracket_id", "match_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_matches"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_rulings_bracket_id_reversal_of_id_fkey"
+            columns: ["bracket_id", "reversal_of_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_rulings"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_rulings_edition_id_bracket_id_fkey"
+            columns: ["edition_id", "bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_rulings_edition_id_loser_entry_id_fkey"
+            columns: ["edition_id", "loser_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_rulings_edition_id_winner_entry_id_fkey"
+            columns: ["edition_id", "winner_entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+        ]
+      }
+      tournament_seeds: {
+        Row: {
+          bracket_id: string
+          created_at: string
+          edition_id: string
+          entry_id: string
+          id: string
+          override_reason: string | null
+          revision_id: string
+          seed: number
+          source_generation: number | null
+          source_rank: number | null
+          source_scope_id: string | null
+        }
+        Insert: {
+          bracket_id: string
+          created_at?: string
+          edition_id: string
+          entry_id: string
+          id?: string
+          override_reason?: string | null
+          revision_id: string
+          seed: number
+          source_generation?: number | null
+          source_rank?: number | null
+          source_scope_id?: string | null
+        }
+        Update: {
+          bracket_id?: string
+          created_at?: string
+          edition_id?: string
+          entry_id?: string
+          id?: string
+          override_reason?: string | null
+          revision_id?: string
+          seed?: number
+          source_generation?: number | null
+          source_rank?: number | null
+          source_scope_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_seeds_bracket_id_revision_id_fkey"
+            columns: ["bracket_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_bracket_revisions"
+            referencedColumns: ["bracket_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_seeds_edition_id_bracket_id_fkey"
+            columns: ["edition_id", "bracket_id"]
+            isOneToOne: false
+            referencedRelation: "tournament_brackets"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_seeds_edition_id_entry_id_fkey"
+            columns: ["edition_id", "entry_id"]
+            isOneToOne: false
+            referencedRelation: "competition_entries"
+            referencedColumns: ["edition_id", "id"]
+          },
+          {
+            foreignKeyName: "tournament_seeds_source_scope_id_fkey"
+            columns: ["source_scope_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_scopes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tournament_stages: {
+        Row: {
+          configuration: Json
+          created_at: string
+          created_by_person_id: string
+          edition_id: string
+          id: string
+          name: string
+          stage_order: number
+          stage_type: string
+          status: string
+          version: number
+        }
+        Insert: {
+          configuration?: Json
+          created_at?: string
+          created_by_person_id: string
+          edition_id: string
+          id?: string
+          name: string
+          stage_order: number
+          stage_type: string
+          status?: string
+          version?: number
+        }
+        Update: {
+          configuration?: Json
+          created_at?: string
+          created_by_person_id?: string
+          edition_id?: string
+          id?: string
+          name?: string
+          stage_order?: number
+          stage_type?: string
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_stages_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_stages_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "competition_editions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_accounts: {
         Row: {
           account_status: string
@@ -9364,6 +9947,8 @@ export type Database = {
         Returns: Json
       }
       boss_team_season_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_tournament_mutate: { Args: { p_command: Json }; Returns: Json }
+      boss_tournament_read: { Args: { p_query?: Json }; Returns: Json }
       boss_volunteers_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

@@ -1,5 +1,23 @@
 # Current build state
 
+## Phase 6D Tournament + Bracket Management: RELEASE CANDIDATE
+
+Starting SHA `d8482e30dea3918ceb2dd3f46d4ef971eb56428e`. Three prepared
+migrations add the sport-neutral single-elimination stage/bracket/match model,
+immutable seed/revision/advancement/ruling evidence, standings and group snapshot
+provenance, byes, third place, official Game Center result consumption, controlled
+correction reconciliation, safe placements and low-volume tournament notifications.
+The application adds `/app/tournaments` with desktop round progression and stacked
+390/320px cards, manual/revised and standings seeding, canonical game linking,
+result processing and rulings.
+
+Fresh PostgreSQL 17 validation passes the complete historical suite, **86 Phase 6D
+SQL assertions and 10 coordinated Phase 6D races**. The 16/32/64-team bounded
+benchmarks, strict typecheck, zero-warning lint, **420/420 application tests** and
+production build pass. Canonical migration, deployment, hosted acceptance and
+fixed-window cleanup remain release gates before this status becomes COMPLETE.
+See [the architecture contract](TOURNAMENT_BRACKET_ARCHITECTURE.md).
+
 ## Phase 6C Athlete Profiles + Recruiting Showcase: COMPLETE
 
 Starting SHA `0e1b40ccfa1c3b2fdbd4a21e290ff3f164f95717`. Three

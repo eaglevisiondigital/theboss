@@ -1,5 +1,14 @@
 # Phase 6B — Standings, Leaderboards and Records
 
+## Phase 6D seeding consumer
+
+Tournament seeding consumes only a current published standings scope. Acceptance
+copies the exact generation and rank into immutable tournament seed history;
+subsequent ranking rebuilds do not rewrite it. Equal ranks stop automatic seeding.
+Group crossover requires an explicit group scope/rank on each qualifying entry.
+Bracket outcomes remain topology and do not double count in standings unless the
+existing explicit competition game assignment says they count.
+
 **Status: APPROVED PHASE 6B IMPLEMENTATION CONTRACT.**
 October 5, 2026. Inspected branch `build/boss-platform-v1`, clean starting SHA
 `e673eb1ffbad13a0eab57e79d4741c9c9822eb9a`, repository

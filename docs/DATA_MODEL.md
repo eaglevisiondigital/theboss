@@ -1,5 +1,14 @@
 # Data model
 
+## Phase 6D tournament and bracket extension
+
+Tournament stages, brackets and stable matches extend an existing Phase 6B
+Competition Edition. Immutable revision, seed, advancement and ruling records
+preserve structure and decision provenance. A seed references an existing
+competition entry; a scheduled match references one existing Game Center game and
+its Calendar event. No team, schedule, score, roster or statistics record is
+duplicated. See [the tournament architecture](TOURNAMENT_BRACKET_ARCHITECTURE.md).
+
 ## Phase 6C Athlete Profile and Recruiting Showcase
 
 `athlete_profiles` is a one-to-one presentation extension of the existing

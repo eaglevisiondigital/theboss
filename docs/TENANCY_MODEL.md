@@ -1,5 +1,15 @@
 # Tenancy model
 
+## Phase 6D tournament isolation
+
+Every tournament row carries its Competition Edition boundary. Entries retain
+their owning team organization, while bracket projection shares only safe team
+identity, seed, schedule and result facts. Cross-organization participation does
+not grant roster, athlete, document, communication, history or correction access.
+Exact competition managers need no synthetic tenant/team membership. Guardian and
+coach reads remain current subject/team relationships; household membership alone
+does nothing.
+
 ## Phase 6C athlete-profile isolation
 
 The profile is globally anchored to one canonical participant/person while every
