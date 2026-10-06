@@ -61,9 +61,10 @@ rejected after any linked game starts.
 Tournament management presents only already-authorized Calendar/Game Center
 candidates whose sport and participating entry teams exactly match the resolved
 bracket match. Calendar remains authoritative for date, time, timezone, venue,
-resource conflicts, recurrence changes and cancellation. Optional rest policies
-remain future configuration; no minimum rest rule is invented. Existing Calendar
-supports multi-day and multi-venue scheduling.
+resource conflicts, recurrence changes and cancellation. Minimum rest is explicit
+per bracket: disabled with zero minutes, warn, or block. When disabled no rule is
+invented; when enabled the configured interval is evaluated against canonical game
+times. Existing Calendar supports multi-day and multi-venue scheduling.
 
 Game Center remains authoritative for roster, operators, scoring, sport rules,
 statistics, finalization and correction epochs. The tournament engine reads only
@@ -127,3 +128,22 @@ would require recorded inputs, actor, timestamp and deterministic evidence; it i
 deferred. Future public registration links Phase 3B Registration to Competition
 entries, and future fees use existing Charges/Fees. Awards, payments, commerce,
 livestreaming, SMS and push providers are outside Phase 6D.
+
+## Completion evidence
+
+Phase 6D is complete. The canonical project has 73 migrations. Fresh validation
+passes 15,429 SQL/bootstrap assertions, 195 races, typecheck, zero-warning lint,
+420 application tests and production build. One controlled hosted tournament
+verified manual seeds, a real bye without a fabricated game, Calendar/Game Center
+linkage, official-result advancement, configured rest warning, explicit ruling,
+champion projection, rebuild stability and all four required responsive widths.
+
+Hosted standings-snapshot seeding and restricted coach/family/competition-manager
+contexts were not fabricated without safe scoped fixtures; those cases retain
+SQL/runtime evidence. The hosted upstream result correction occurred after an
+explicit championship ruling had already completed the bracket, so Game Center
+correction/refinalization is hosted verified while the distinct pre-start
+reconciliation and downstream-start lock cases retain SQL/runtime evidence.
+Cleanup ended all temporary authority, restored exact module configuration,
+archived the controlled resources and preserved immutable history before the
+fixed target. No future bracket format or Phase 6E work began.

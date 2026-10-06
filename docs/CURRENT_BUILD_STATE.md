@@ -1,22 +1,48 @@
 # Current build state
 
-## Phase 6D Tournament + Bracket Management: RELEASE CANDIDATE
+## Phase 6D Tournament + Bracket Management: COMPLETE
 
-Starting SHA `d8482e30dea3918ceb2dd3f46d4ef971eb56428e`. Three prepared
-migrations add the sport-neutral single-elimination stage/bracket/match model,
-immutable seed/revision/advancement/ruling evidence, standings and group snapshot
-provenance, byes, third place, official Game Center result consumption, controlled
-correction reconciliation, safe placements and low-volume tournament notifications.
-The application adds `/app/tournaments` with desktop round progression and stacked
-390/320px cards, manual/revised and standings seeding, canonical game linking,
-result processing and rulings.
+Starting SHA `d8482e30dea3918ceb2dd3f46d4ef971eb56428e`. Three canonical
+migrations extend each Phase 6B Competition Edition with a sport-neutral,
+deterministic single-elimination stage/bracket/match model. Immutable seed,
+revision, advancement and ruling evidence; standings/group snapshot provenance;
+byes, play-ins, optional third place, official Game Center result consumption,
+controlled correction reconciliation, safe placements and low-volume tournament
+notifications are implemented. No parallel team, game, score or statistics system
+was created. Canonical history is **73** migrations.
 
-Fresh PostgreSQL 17 validation passes the complete historical suite, **86 Phase 6D
-SQL assertions and 10 coordinated Phase 6D races**. The 16/32/64-team bounded
-benchmarks, strict typecheck, zero-warning lint, **420/420 application tests** and
-production build pass. Canonical migration, deployment, hosted acceptance and
-fixed-window cleanup remain release gates before this status becomes COMPLETE.
-See [the architecture contract](TOURNAMENT_BRACKET_ARCHITECTURE.md).
+Fresh PostgreSQL 17 validation passes the complete historical suite: **15,429
+SQL/bootstrap assertions and 195 coordinated races**, including **86 dedicated
+Phase 6D assertions, 16 dynamic wrapper-security checks and 10 new races**.
+Bounded 16/32/64-team generation, 64-team rebuild and official-result advancement
+all pass without a timeout increase. Canonical types are regenerated. Typecheck,
+zero-warning lint, **420/420 application tests** and production build pass.
+
+Netlify production deploy `6ac4de6ca7ae43000821e72b` is READY from implementation
+commit `d5e8a5709ecd205a7de7f9294d33c9a3c456e656`. One fixed hosted window verified
+manual seeding, deterministic 4-slot generation, real bye behavior, canonical
+Calendar/Game Center linkage, two official semifinal finalization epochs, automatic
+advancement, a configured minimum-rest warning, explicit championship ruling,
+champion/runner-up projection, rebuild stability and 1280/768/390/320 responsive
+layouts without page-level overflow. Standings-snapshot seeding and restricted
+coach/family/competition-manager contexts retain SQL/runtime evidence because no
+safe scoped hosted fixture was activated. The upstream correction was executed only
+after the bracket had already completed through an explicit championship ruling;
+Game Center correction history is hosted verified, while pre-start bracket
+reconciliation and downstream-start denial remain SQL/runtime verified.
+
+Administrator-first cleanup completed at **2026-10-06 11:56:32.488355 UTC**,
+more than 22 minutes before target. The sole bounded operator assignment ended;
+the exact Sports `{}` baseline returned; all controlled events/games, stages,
+bracket, edition and competition are archived or inactive and unpublished; pending
+notification/ranking work is 0/0/0/0. Original administrator access is canonically
+and natively valid. Immutable tournament history remains: one revision, three seeds,
+four matches, three advancements and one ruling. See the
+[architecture contract](TOURNAMENT_BRACKET_ARCHITECTURE.md),
+[validation record](PHASE_6D_VALIDATION.md),
+[hosted acceptance](PHASE_6D_HOSTED_ACCEPTANCE.md) and
+[85-point completion report](PHASE_6D_COMPLETION_REPORT.md). PR #3 remains
+OPEN/DRAFT/UNMERGED. No Phase 6E or later module started.
 
 ## Phase 6C Athlete Profiles + Recruiting Showcase: COMPLETE
 

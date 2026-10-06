@@ -15,6 +15,22 @@ draw, double elimination, consolation, round-robin finals and awards remain
 deferred. Notifications reuse the bounded Phase 4A engine; scheduling and game
 lifecycle messages remain owned by Calendar and Game Center.
 
+Phase 6D is complete after one fixed controlled hosted window. Main Boss Chat's
+requirements were met for deterministic manual seeding, bye/play-in structure,
+Calendar/Game Center linkage, official-result advancement, rest warning, explicit
+championship ruling, champion projection, rebuild stability and 1280/768/390/320
+rendering. Cleanup restored the original administrator first, ended the only
+temporary operator assignment, restored the exact Sports baseline and archived the
+controlled resources before the fixed target with zero pending work.
+
+Standings-snapshot hosted seeding and the restricted coach/family/competition-manager
+contexts remain SQL/runtime verified because no safe controlled fixture was activated.
+The hosted result correction occurred after the bracket had already completed through
+an explicit ruling, so only Game Center correction/refinalization is claimed hosted;
+the distinct tournament reconciliation and downstream lock cases remain SQL/runtime
+verified. These are transparent test-evidence limits, not known product defects.
+Random draw and later bracket formats remain deferred. No Phase 6E started.
+
 ## October 6, 2026 — Phase 6C Athlete Profile and Recruiting Showcase contract
 
 Phase 6C implements one presentation profile per existing participant/person and
