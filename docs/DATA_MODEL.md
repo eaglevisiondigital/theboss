@@ -1,5 +1,22 @@
 # Data model
 
+## Phase 6C Athlete Profile and Recruiting Showcase
+
+`athlete_profiles` is a one-to-one presentation extension of the existing
+participant/person pair. It does not create identity, membership or statistical
+truth. Immutable `athlete_profile_revisions` hold approved presentation fields;
+append-oriented measurables, achievements, verifications and media references keep
+actor, date, source and visibility provenance. Historical origins remain the
+canonical memberships and Phase 6A/6B materializations.
+
+`recruiting_showcases` points to immutable showcase revisions, one explicit active
+consent and the published profile revision. Consent records retain subject, actor,
+categories, version, grant/revocation and optional expiry. Share-link rows store a
+SHA-256 digest and short display prefix only; raw 256-bit tokens exist solely in the
+bounded server response. Current stat/record/ranking facts are read by reference
+from existing materializations and are never copied into a second stat database.
+See [the full architecture](ATHLETE_PROFILE_RECRUITING_ARCHITECTURE.md).
+
 ## Phase 5D Football and portable sealed athlete history
 
 Football adds bounded state, typed whole-play facts, current lineup state,

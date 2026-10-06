@@ -1,5 +1,22 @@
 # Boss foundation permissions
 
+## Phase 6C profile and showcase capability
+
+Six potential capabilities are added: `athlete_profiles.view`,
+`athlete_profiles.manage`, `athlete_profiles.verify`,
+`recruiting_showcases.view`, `recruiting_showcases.manage` and
+`recruiting_showcases.publish`. Platform/organization administration receives the
+finite management set; sport/program administration receives current scoped view,
+verification and limited showcase view; head coach/team administration receives
+exact-team view and verification only.
+
+Every use still requires current person, tenant, exact team/organization,
+participant and resource relationships. A role mapping or remembered identifier
+never authorizes access. Minor publication requires a current verified guardian
+with `can_manage_profile` and revision/category-specific consent. Household
+membership grants nothing. Phase 6C does not infer athlete self-publication from an
+Auth account and introduces no public-discovery capability.
+
 ## Phase 5D Football and athlete history
 
 Football reuses exact-game operating assignments and existing scoped game

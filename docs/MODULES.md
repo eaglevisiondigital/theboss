@@ -1,5 +1,20 @@
 # Modules and product access
 
+## Phase 6C Athlete Profiles and Recruiting Showcase
+
+Phase 6C extends the authenticated platform with `/app/athletes`, Family Hub profile
+links and an unlisted `/recruiting/[token]` presentation. It adds no independently
+activatable organization module or feature flag: access is derived from existing
+identity, current relationship, permission and consent contracts. Profile
+completeness is informational and never changes visibility.
+
+Showcases start as private drafts. A current authorized guardian approves the exact
+revision/categories before publication; a manager may create, revoke or expire
+individual links and disable the showcase. Highlight support is limited to approved
+HTTPS references. Recruiter contact interest remains a documented future inbox
+contract; no recruiter CRM, direct contact disclosure, public athlete directory,
+media hosting, marketplace or later module is activated.
+
 ## Phase 5D Football controls
 
 `football_live_scoring`, `football_stats`, `football_play_by_play` and

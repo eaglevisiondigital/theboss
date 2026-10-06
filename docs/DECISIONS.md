@@ -1,5 +1,21 @@
 # Boss foundation implementation decisions
 
+## October 6, 2026 — Phase 6C Athlete Profile and Recruiting Showcase contract
+
+Phase 6C implements one presentation profile per existing participant/person and
+keeps Phase 6A/6B as the only statistical truth. Presentation revisions,
+measurements, honors, consent and share-link lifecycle are explicit records with
+provenance. A showcase is an unlisted, consented projection; it does not create a
+second identity, stat store or public youth profile.
+
+The initial publication policy is intentionally closed: household membership has no
+effect, minor publication requires a current guardian `can_manage_profile` grant,
+and no athlete self-publication age rule is inferred. Raw share tokens are generated
+only on the application server and stored as digests. Public discovery and recruiter
+contact workflows remain future decisions. Three canonical migrations bring history
+to 70; full local database/application validation is green. Hosted acceptance and
+cleanup remain the final closure gate.
+
 ## October 6, 2026 — Phase 6B closure
 
 **Phase 6B Standings + Leaderboards + Records is COMPLETE WITH DOCUMENTED

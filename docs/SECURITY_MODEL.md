@@ -1,5 +1,22 @@
 # Boss platform security
 
+## Phase 6C profile, consent and share-link boundary
+
+Ten new public tables and the private receipt table have RLS enabled and no raw API
+role access. Public authenticated RPCs are invokers over closed fixed-path private
+helpers. Mutations verify a live current identity, finite input, relationship and
+permission before and after row locks, bind idempotency receipts to the caller and
+enforce optimistic revisions. Immutable history triggers protect profile/showcase
+revisions, measurements, achievements, verifications and media facts.
+
+Unlisted recruiting links use a 256-bit random raw token generated on the server;
+only its SHA-256 digest reaches PostgreSQL. Every read rechecks link status/expiry,
+profile/showcase state, published revision and current consent. Responses are
+no-store and noindex. Public output excludes DOB-derived age, addresses, guardian
+identity/contact, household, attendance, medical, documents, private corrections
+and internal controls. Revocation immediately closes subsequent reads and preserves
+audit history.
+
 ## Phase 5D Football and history isolation
 
 Football raw state/facts/lineups/seals/stats have closed RLS and no direct client

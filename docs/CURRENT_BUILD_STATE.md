@@ -1,5 +1,26 @@
 # Current build state
 
+## Phase 6C Athlete Profiles + Recruiting Showcase: IMPLEMENTED; CANONICAL MIGRATED — HOSTED ACCEPTANCE PENDING
+
+Starting SHA `0e1b40ccfa1c3b2fdbd4a21e290ff3f164f95717`. Three
+append-only migrations create one presentation profile per canonical participant,
+immutable profile/showcase revisions, provenance-bearing measurables and
+achievements, explicit guardian consent and digest-only revocable share links.
+Canonical history is **70** migrations. Ten new public tables are closed RLS
+surfaces, all 40 new foreign-key vectors are indexed, public entry functions are
+invokers, private helpers have fixed empty search paths and the anonymous share
+reader has no private-schema access.
+
+Fresh PostgreSQL 17 validation passes **15,327 SQL/bootstrap assertions and 185
+coordinated races**, including **272 Phase 6C assertions and 8 new races**. Canonical
+types are regenerated. Typecheck, zero-warning lint, **412/412** application tests
+and the production build pass. Security advisors retain 130 intentional closed-RLS
+INFO findings and one pre-existing leaked-password-protection warning; performance
+advisors report 254 unused-index INFO findings and the existing Auth connection INFO.
+The fixed controlled hosted window, explicit cleanup, final deployment evidence and
+CI verification remain before closure. No public youth directory or later phase has
+started. See [the architecture contract](ATHLETE_PROFILE_RECRUITING_ARCHITECTURE.md).
+
 ## Phase 6B Standings + Leaderboards + Records: COMPLETE
 
 Main Boss Chat's fixed hosted window opened **2026-10-06 08:03:00 UTC**. Core

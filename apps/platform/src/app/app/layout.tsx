@@ -12,12 +12,13 @@ import { attendanceNavigationAvailable } from "@/lib/attendance/data";
 import { volunteersNavigationAvailable } from "@/lib/volunteers/data";
 import { rankingsNavigationAvailable } from "@/lib/rankings/data";
 import { gamesNavigationAvailable } from "@/lib/games/data";
+import { athleteProfilesNavigationAvailable } from "@/lib/athlete-profiles/data";
 
 export default async function AppLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   await requireSession();
-  const [data, calendarAvailable, registrationAvailable, communicationsAvailable, notifications, attendanceAvailable, volunteersAvailable, gamesAvailable, rankingsAvailable] = await Promise.all([loadAdminView("home"), calendarNavigationAvailable(), registrationNavigationAvailable(), communicationsNavigationAvailable(), loadNotifications({ view: "summary", limit: 5 }), attendanceNavigationAvailable(), volunteersNavigationAvailable(), gamesNavigationAvailable(), rankingsNavigationAvailable()]);
+  const [data, calendarAvailable, registrationAvailable, communicationsAvailable, notifications, attendanceAvailable, volunteersAvailable, gamesAvailable, rankingsAvailable, athleteProfilesAvailable] = await Promise.all([loadAdminView("home"), calendarNavigationAvailable(), registrationNavigationAvailable(), communicationsNavigationAvailable(), loadNotifications({ view: "summary", limit: 5 }), attendanceNavigationAvailable(), volunteersNavigationAvailable(), gamesNavigationAvailable(), rankingsNavigationAvailable(), athleteProfilesNavigationAvailable()]);
 
   return (
     <div className="authenticated-page admin-shell">
@@ -30,7 +31,7 @@ export default async function AppLayout({
             <button type="submit" className="button button-small button-outline">Sign out</button>
           </form>
         </div>
-        <div className="container"><Suspense fallback={<nav className="app-navigation" aria-label="Main navigation" />}><AppNavigation navigation={data.navigation} calendarAvailable={calendarAvailable} registrationAvailable={registrationAvailable} communicationsAvailable={communicationsAvailable} notificationsAvailable={!notifications.unavailable && notifications.availability.in_app} attendanceAvailable={attendanceAvailable} volunteersAvailable={volunteersAvailable} gamesAvailable={gamesAvailable} rankingsAvailable={rankingsAvailable} /></Suspense></div>
+        <div className="container"><Suspense fallback={<nav className="app-navigation" aria-label="Main navigation" />}><AppNavigation navigation={data.navigation} calendarAvailable={calendarAvailable} registrationAvailable={registrationAvailable} communicationsAvailable={communicationsAvailable} notificationsAvailable={!notifications.unavailable && notifications.availability.in_app} attendanceAvailable={attendanceAvailable} volunteersAvailable={volunteersAvailable} gamesAvailable={gamesAvailable} rankingsAvailable={rankingsAvailable} athleteProfilesAvailable={athleteProfilesAvailable} /></Suspense></div>
       </header>
       <main id="main-content" className="app-main container">{children}</main>
       <footer className="app-footer container"><span>The Boss platform</span><span>Operational core</span></footer>

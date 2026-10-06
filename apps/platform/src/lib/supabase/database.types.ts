@@ -14,6 +14,442 @@ export type Database = {
   }
   public: {
     Tables: {
+      athlete_achievements: {
+        Row: {
+          achieved_on: string | null
+          achievement_type: string
+          actor_person_id: string
+          created_at: string
+          id: string
+          organization_id: string | null
+          profile_id: string
+          season_id: string | null
+          source_ranking_candidate_id: string | null
+          source_record_event_id: string | null
+          sport_key: string | null
+          title: string
+          verification_level: string
+          visibility: string
+        }
+        Insert: {
+          achieved_on?: string | null
+          achievement_type: string
+          actor_person_id: string
+          created_at?: string
+          id?: string
+          organization_id?: string | null
+          profile_id: string
+          season_id?: string | null
+          source_ranking_candidate_id?: string | null
+          source_record_event_id?: string | null
+          sport_key?: string | null
+          title: string
+          verification_level: string
+          visibility?: string
+        }
+        Update: {
+          achieved_on?: string | null
+          achievement_type?: string
+          actor_person_id?: string
+          created_at?: string
+          id?: string
+          organization_id?: string | null
+          profile_id?: string
+          season_id?: string | null
+          source_ranking_candidate_id?: string | null
+          source_record_event_id?: string | null
+          sport_key?: string | null
+          title?: string
+          verification_level?: string
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_achievements_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_source_ranking_candidate_id_fkey"
+            columns: ["source_ranking_candidate_id"]
+            isOneToOne: false
+            referencedRelation: "ranking_candidates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_source_record_event_id_fkey"
+            columns: ["source_record_event_id"]
+            isOneToOne: false
+            referencedRelation: "record_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_achievements_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      athlete_measurables: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          id: string
+          measured_on: string
+          metric_key: string
+          organization_id: string | null
+          profile_id: string
+          provenance: string
+          source_label: string | null
+          sport_key: string
+          team_id: string | null
+          unit: string
+          value: number
+          verification_state: string
+          visibility: string
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          id?: string
+          measured_on: string
+          metric_key: string
+          organization_id?: string | null
+          profile_id: string
+          provenance: string
+          source_label?: string | null
+          sport_key: string
+          team_id?: string | null
+          unit: string
+          value: number
+          verification_state: string
+          visibility?: string
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          id?: string
+          measured_on?: string
+          metric_key?: string
+          organization_id?: string | null
+          profile_id?: string
+          provenance?: string
+          source_label?: string | null
+          sport_key?: string
+          team_id?: string | null
+          unit?: string
+          value?: number
+          verification_state?: string
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_measurables_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_measurables_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_measurables_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "athlete_measurables_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_measurables_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      athlete_media_links: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          id: string
+          media_type: string
+          profile_id: string
+          rights_state: string
+          source: string
+          sport_key: string | null
+          title: string
+          url: string
+          visibility: string
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          id?: string
+          media_type: string
+          profile_id: string
+          rights_state: string
+          source: string
+          sport_key?: string | null
+          title: string
+          url: string
+          visibility?: string
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          id?: string
+          media_type?: string
+          profile_id?: string
+          rights_state?: string
+          source?: string
+          sport_key?: string | null
+          title?: string
+          url?: string
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_media_links_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_media_links_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_media_links_sport_key_fkey"
+            columns: ["sport_key"]
+            isOneToOne: false
+            referencedRelation: "game_sports"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      athlete_profile_revisions: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          entered_by: string
+          id: string
+          profile_id: string
+          revision: number
+          safe_fields: Json
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          entered_by: string
+          id?: string
+          profile_id: string
+          revision: number
+          safe_fields?: Json
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          entered_by?: string
+          id?: string
+          profile_id?: string
+          revision?: number
+          safe_fields?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_profile_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profile_revisions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_profile_verifications: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          field_digest: string
+          field_key: string
+          id: string
+          organization_id: string
+          profile_id: string
+          profile_revision_id: string
+          team_id: string | null
+          verification_state: string
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          field_digest: string
+          field_key: string
+          id?: string
+          organization_id: string
+          profile_id: string
+          profile_revision_id: string
+          team_id?: string | null
+          verification_state: string
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          field_digest?: string
+          field_key?: string
+          id?: string
+          organization_id?: string
+          profile_id?: string
+          profile_revision_id?: string
+          team_id?: string | null
+          verification_state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_profile_verifications_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profile_verifications_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profile_verifications_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "athlete_profile_verifications_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profile_verifications_profile_id_profile_revision__fkey"
+            columns: ["profile_id", "profile_revision_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profile_revisions"
+            referencedColumns: ["profile_id", "id"]
+          },
+        ]
+      }
+      athlete_profiles: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          current_revision_id: string | null
+          id: string
+          participant_id: string
+          person_id: string
+          status: string
+          updated_at: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          current_revision_id?: string | null
+          id?: string
+          participant_id: string
+          person_id: string
+          status?: string
+          updated_at?: string
+          version?: number
+          visibility?: string
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          current_revision_id?: string | null
+          id?: string
+          participant_id?: string
+          person_id?: string
+          status?: string
+          updated_at?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_profiles_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profiles_current_revision_fk"
+            columns: ["id", "current_revision_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profile_revisions"
+            referencedColumns: ["profile_id", "id"]
+          },
+          {
+            foreignKeyName: "athlete_profiles_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+        ]
+      }
       attendance_checkin_history: {
         Row: {
           actor_person_id: string
@@ -6396,6 +6832,273 @@ export type Database = {
           },
         ]
       }
+      recruiting_consents: {
+        Row: {
+          actor_kind: string
+          actor_person_id: string
+          approved_categories: string[]
+          consent_version: number
+          expires_at: string | null
+          granted_at: string
+          id: string
+          revoked_at: string | null
+          showcase_id: string
+          showcase_revision_id: string
+          status: string
+          subject_person_id: string
+        }
+        Insert: {
+          actor_kind: string
+          actor_person_id: string
+          approved_categories: string[]
+          consent_version: number
+          expires_at?: string | null
+          granted_at?: string
+          id?: string
+          revoked_at?: string | null
+          showcase_id: string
+          showcase_revision_id: string
+          status?: string
+          subject_person_id: string
+        }
+        Update: {
+          actor_kind?: string
+          actor_person_id?: string
+          approved_categories?: string[]
+          consent_version?: number
+          expires_at?: string | null
+          granted_at?: string
+          id?: string
+          revoked_at?: string | null
+          showcase_id?: string
+          showcase_revision_id?: string
+          status?: string
+          subject_person_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruiting_consents_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_consents_showcase_id_fkey"
+            columns: ["showcase_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_consents_showcase_id_showcase_revision_id_fkey"
+            columns: ["showcase_id", "showcase_revision_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcase_revisions"
+            referencedColumns: ["showcase_id", "id"]
+          },
+          {
+            foreignKeyName: "recruiting_consents_subject_person_id_fkey"
+            columns: ["subject_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recruiting_share_links: {
+        Row: {
+          access_count: number
+          created_at: string
+          created_by_person_id: string
+          expires_at: string | null
+          id: string
+          last_accessed_at: string | null
+          revoked_at: string | null
+          showcase_id: string
+          status: string
+          token_digest: string
+          token_prefix: string
+        }
+        Insert: {
+          access_count?: number
+          created_at?: string
+          created_by_person_id: string
+          expires_at?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          revoked_at?: string | null
+          showcase_id: string
+          status?: string
+          token_digest: string
+          token_prefix: string
+        }
+        Update: {
+          access_count?: number
+          created_at?: string
+          created_by_person_id?: string
+          expires_at?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          revoked_at?: string | null
+          showcase_id?: string
+          status?: string
+          token_digest?: string
+          token_prefix?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruiting_share_links_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_share_links_showcase_id_fkey"
+            columns: ["showcase_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recruiting_showcase_revisions: {
+        Row: {
+          actor_person_id: string
+          created_at: string
+          id: string
+          presentation: Json
+          profile_revision_id: string
+          revision: number
+          showcase_id: string
+          sport_keys: string[]
+          stat_metric_keys: string[]
+          visible_categories: string[]
+        }
+        Insert: {
+          actor_person_id: string
+          created_at?: string
+          id?: string
+          presentation?: Json
+          profile_revision_id: string
+          revision: number
+          showcase_id: string
+          sport_keys?: string[]
+          stat_metric_keys?: string[]
+          visible_categories?: string[]
+        }
+        Update: {
+          actor_person_id?: string
+          created_at?: string
+          id?: string
+          presentation?: Json
+          profile_revision_id?: string
+          revision?: number
+          showcase_id?: string
+          sport_keys?: string[]
+          stat_metric_keys?: string[]
+          visible_categories?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruiting_showcase_revisions_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcase_revisions_profile_revision_id_fkey"
+            columns: ["profile_revision_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profile_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcase_revisions_showcase_id_fkey"
+            columns: ["showcase_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recruiting_showcases: {
+        Row: {
+          created_at: string
+          created_by_person_id: string
+          current_consent_id: string | null
+          current_revision_id: string | null
+          id: string
+          profile_id: string
+          published_revision_id: string | null
+          state: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by_person_id: string
+          current_consent_id?: string | null
+          current_revision_id?: string | null
+          id?: string
+          profile_id: string
+          published_revision_id?: string | null
+          state?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by_person_id?: string
+          current_consent_id?: string | null
+          current_revision_id?: string | null
+          id?: string
+          profile_id?: string
+          published_revision_id?: string | null
+          state?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruiting_showcases_created_by_person_id_fkey"
+            columns: ["created_by_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcases_current_consent_fk"
+            columns: ["current_consent_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_consents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcases_current_revision_fk"
+            columns: ["id", "current_revision_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcase_revisions"
+            referencedColumns: ["showcase_id", "id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcases_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiting_showcases_published_revision_fk"
+            columns: ["id", "published_revision_id"]
+            isOneToOne: false
+            referencedRelation: "recruiting_showcase_revisions"
+            referencedColumns: ["showcase_id", "id"]
+          },
+        ]
+      }
       registration_coupons: {
         Row: {
           adjustment_type: string
@@ -8602,6 +9305,12 @@ export type Database = {
       }
       boss_athlete_career_read: { Args: { p_query?: Json }; Returns: Json }
       boss_athlete_history_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_athlete_profile_mutate: { Args: { command: Json }; Returns: Json }
+      boss_athlete_profile_navigation: { Args: never; Returns: boolean }
+      boss_athlete_profile_read: {
+        Args: { p_participant_id?: string; p_profile_id?: string }
+        Returns: Json
+      }
       boss_athlete_season_read: { Args: { p_query?: Json }; Returns: Json }
       boss_attendance_mutate: {
         Args: { p_command: Json; p_request_id: string }
@@ -8632,6 +9341,10 @@ export type Database = {
       boss_notifications_read: { Args: { p_query?: Json }; Returns: Json }
       boss_ranking_mutate: { Args: { p_command: Json }; Returns: Json }
       boss_ranking_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_recruiting_showcase_read: {
+        Args: { p_token_digest: string }
+        Returns: Json
+      }
       boss_registration_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

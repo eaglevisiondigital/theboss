@@ -923,3 +923,26 @@ button:disabled { cursor: wait; opacity: .65; }
 .rankings-table th, .rankings-table td { padding: .65rem; border-bottom: 1px solid var(--border-color, #d9d9d9); text-align: left; vertical-align: top; }
 .rankings-table details { min-width: 12rem; max-width: 22rem; white-space: normal; overflow-wrap: anywhere; }
 @media(max-width: 390px) { .rankings-product-navigation a { max-width: 100%; overflow-wrap: anywhere; } .rankings-hub .calendar-fieldset { min-width: 0; } }
+
+/* Phase 6C athlete presentation stays bounded and readable down to 320px. */
+.athlete-profile-hub, .recruiting-showcase { min-width: 0; }
+.athlete-profile-subjects { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1rem; }
+.athlete-profile-hero { display: grid; grid-template-columns: minmax(0, 3fr) minmax(12rem, 1fr); gap: 1.25rem; align-items: center; padding: clamp(1.25rem, 4vw, 2.5rem); margin-block: 1.25rem; border-radius: 1.25rem; background: linear-gradient(135deg, #101d32, #183b52); color: #fff; }
+.athlete-profile-hero h2, .recruiting-showcase h1 { margin-block: .25rem .75rem; font-size: clamp(2rem, 6vw, 4rem); overflow-wrap: anywhere; }
+.athlete-completeness { display: grid; gap: .2rem; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); border-radius: 1rem; }
+.athlete-completeness strong { font-size: 2rem; }
+.athlete-profile-grid, .recruiting-showcase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.athlete-profile-panel, .recruiting-showcase-grid article { min-width: 0; padding: 1.25rem; border: 1px solid var(--border-color, #d9d9d9); border-radius: 1rem; margin-block: 1rem; overflow-wrap: anywhere; }
+.athlete-profile-panel ul, .recruiting-showcase ul { padding-left: 1.25rem; }
+.athlete-profile-panel li { display: grid; gap: .15rem; margin-block: .75rem; }
+.athlete-profile-action { margin-block: .75rem; }
+.athlete-profile-action textarea { width: 100%; min-height: 7rem; resize: vertical; }
+.athlete-showcase-status { display: flex; flex-wrap: wrap; gap: 1rem; }
+.athlete-showcase-status div { min-width: 8rem; }
+.athlete-showcase-status dd { margin: .25rem 0 0; font-weight: 700; }
+.athlete-share-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; padding-block: .75rem; border-top: 1px solid var(--border-color, #d9d9d9); overflow-wrap: anywhere; }
+.recruiting-showcase { width: min(72rem, calc(100% - 2rem)); margin-inline: auto; padding-block: clamp(1.5rem, 6vw, 4rem); }
+.recruiting-showcase-header { padding: clamp(1.5rem, 5vw, 3.5rem); border-radius: 1.5rem; background: linear-gradient(135deg, #101d32, #134a5e); color: #fff; }
+.recruiting-showcase a { overflow-wrap: anywhere; }
+@media(max-width: 700px) { .athlete-profile-hero, .athlete-profile-grid, .recruiting-showcase-grid { grid-template-columns: minmax(0, 1fr); } .athlete-profile-hero { padding: 1.25rem; } }
+@media(max-width: 390px) { .athlete-profile-panel, .recruiting-showcase-grid article { padding: .9rem; } .athlete-profile-subjects a, .athlete-profile-action .button { width: 100%; max-width: 100%; } .athlete-showcase-status { display: grid; grid-template-columns: minmax(0, 1fr); } }

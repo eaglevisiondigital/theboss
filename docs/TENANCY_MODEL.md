@@ -1,5 +1,19 @@
 # Tenancy model
 
+## Phase 6C athlete-profile isolation
+
+The profile is globally anchored to one canonical participant/person while every
+staff view remains derived from a current exact tenant/team relationship. Historical
+statistics retain their originating organization, team, season and sealed source.
+A transfer does not rewrite provenance, and a new-team relationship cannot unlock
+old-team corrections, notes, rosters, communications or private comparative data.
+
+Self/current guardian projections are subject-bound. Household membership alone is
+not authority. The unlisted recruiting reader authorizes one active link digest,
+active showcase revision and current consent, then emits only approved safe fields.
+It has no tenant browsing, roster, Family Hub, document or administration path.
+There is no public athlete listing or cross-tenant search endpoint.
+
 ## Phase 5A canonical game isolation
 
 Game Center uses the Calendar tenant and one exact competitive occurrence.
