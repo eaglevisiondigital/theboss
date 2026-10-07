@@ -22,6 +22,6 @@ export default function Page() {
       </section>
       <InformationForm />
     </main>
-    <ApprovedFooter />
+    <ApprovedFooter showInformationCTA={false} />
   </div>;
 }
