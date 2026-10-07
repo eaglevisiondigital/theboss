@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { parseDiscountCommand, parseDiscountPublicCommand, discountsQuery } from "../src/lib/discounts/input";
+import { parseDiscountCommand, parseDiscountPublicCommand, discountsQuery, physicalBatchScope } from "../src/lib/discounts/input";
 import { emptyDiscounts, validDiscountData, coverageLabel, eligibleUpgradeMembers, type DiscountMember, type DiscountCatalogItem } from "../src/lib/discounts/contracts";
 import { performDiscountMutation, performPublicDiscountMutation, discountFailure, type DiscountsClient, type PublicDiscountsClient } from "../src/lib/discounts/mutation";
 import { DigitalCard } from "../src/components/discounts/console";
@@ -46,3 +46,5 @@ test("upgrade choices require the same subject, product, geography and permitted
  assert.deepEqual(eligibleUpgradeMembers([current],product),[current]);
  for (const changed of [{...current,product_id:other},{...current,subject_type:"household" as const},{...current,base_source_id:null},{...current,effective:{...current.effective,available:false}},{...current,effective:{...current.effective,region:"NY"}},{...current,effective:{...current.effective,tier:"state" as const}}]) assert.deepEqual(eligibleUpgradeMembers([changed],product),[]);
 });
+
+test("unassigned platform stock omits organization while organization and campaign ownership preserve exact scope", () => { assert.deepEqual(physicalBatchScope(id,"platform",true),{}); for (const owner of ["organization","campaign","platform"]) { assert.deepEqual(physicalBatchScope(id,owner,false),{organization_id:id}); } for (const owner of ["organization","campaign"]) { assert.deepEqual(physicalBatchScope(id,owner,true),{organization_id:id}); } });

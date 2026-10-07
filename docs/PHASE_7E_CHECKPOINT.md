@@ -83,3 +83,9 @@ release and the single controlled hosted window remain pending at this checkpoin
 Post-generation application gate passes typecheck, lint, 562/562 tests and build.
 The regenerated client now checks membership projection RPC names and arguments
 against canonical signatures rather than the pre-migration structural cast.
+
+A final narrow native-form fix honors unassigned platform stock by omitting its
+organization field only when platform ownership and the explicit unassigned
+choice are both selected. Organization/campaign ownership retains exact scope.
+Regression coverage and final typecheck/lint/**563/563** tests/build pass. No SQL
+source, permission or production policy changed for this form correction.

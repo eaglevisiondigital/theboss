@@ -60,3 +60,9 @@ Post-generation strict typecheck, zero-warning lint, **562/562** application tes
 and production build pass against the canonical 107-migration types. Four
 duplicate local Next.js generated cache files were removed before validation;
 no application or database behavior changed for that local artifact correction.
+
+A final narrow native-form fix honors unassigned platform stock by omitting its
+organization field only when platform ownership and the explicit unassigned
+choice are both selected. Organization/campaign ownership retains exact scope.
+Regression coverage and final typecheck/lint/**563/563** tests/build pass. No SQL
+source, permission or production policy changed for this form correction.

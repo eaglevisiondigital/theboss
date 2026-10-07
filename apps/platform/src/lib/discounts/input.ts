@@ -48,3 +48,5 @@ export function parseDiscountPublicCommand(value: unknown, path: string): Discou
  if (value.action !== "trial.start" && !value.input.capability || value.action === "product.claim" && !value.input.item_id || value.action === "product.prepare" && (!value.input.revision_id || !value.input.organization_id || !["card", "ach"].includes(String(value.input.method)) || !Number.isSafeInteger(value.input.quantity) || Number(value.input.quantity) < 1 || Number(value.input.quantity) > 100)) return null;
  return { action: value.action, request_id: value.request_id, input: value.input };
 }
+
+export function physicalBatchScope(organizationId: string, owner: string, unassigned: boolean): { organization_id?: string } { return owner === "platform" && unassigned ? {} : { organization_id: organizationId }; }
