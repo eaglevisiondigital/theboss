@@ -46,7 +46,7 @@ export default function ApprovedHomepageSections() {
         <Link className={f.button} href="/money-board">Explore the Money Board</Link>
       </div>
       <figure className={f.moneyPhone}>
-        <img src="/images/approved/money-board-original.png" width="751" height="1492" alt="Approved Digital Money Board app preview"/>
+        <svg viewBox="0 0 751 1492" width="751" height="1492" role="img" aria-label="Approved Digital Money Board app preview"><defs><clipPath id="home-money-phone-outline"><rect x="16" y="8" width="720" height="1474" rx="130"/><rect x="9" y="229" width="9" height="51" rx="3"/><rect x="9" y="340" width="9" height="92" rx="3"/><rect x="9" y="464" width="9" height="91" rx="3"/><rect x="734" y="382" width="8" height="165" rx="3"/></clipPath></defs><image href="/images/approved/money-board-original.png" width="751" height="1492" clipPath="url(#home-money-phone-outline)"/></svg>
         <figcaption>Illustrative product preview</figcaption>
       </figure></div>
     </section>
