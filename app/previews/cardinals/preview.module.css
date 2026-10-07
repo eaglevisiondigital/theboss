@@ -5,3 +5,5 @@
 /* Use the approved phone artwork, with only its surrounding backdrop clipped. */
 .board{background:transparent;border-radius:0;padding:0;box-shadow:none;transform:none;overflow:visible;width:100%;max-width:350px;justify-self:center}.moneyPhone{display:block;width:100%;height:auto}.board .stamp{top:27%;left:-5%;width:110%;font-size:clamp(24px,2.8vw,34px);padding:15px 6px}.board>p{color:#686a70;margin-top:16px;font-size:10px}.boardHeader,.tiles{display:none}
 @media(max-width:600px){.board{max-width:310px}.board .stamp{font-size:28px;left:-2%;width:104%}}
+
+.donation{display:grid;grid-template-columns:1fr auto;gap:22px 32px;align-items:center;margin-top:24px;padding:30px 32px;background:#fff;border:1px solid #e6dedc;border-top:4px solid var(--red);border-radius:16px}.donation h3{margin:12px 0}.donation p{font-size:14px;line-height:1.7;color:#65666c}.donation .donationNote{grid-column:1/-1;border-top:1px solid #eee3e4;padding-top:18px;font-size:12px;color:#6d454d}.donation button{min-width:195px}@media(max-width:600px){.donation{grid-template-columns:1fr;padding:26px;gap:20px}.donation button{width:100%}.donation .donationNote{grid-column:auto}}

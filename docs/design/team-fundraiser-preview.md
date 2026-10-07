@@ -9,3 +9,5 @@ Photo generated using built-in image-generation tool. Prompt: premium photoreali
 Owner correction: use a centered cardinal bird logo on each team hat instead of B. Built-in image edit requested only replacement of five cap logos, preserving all other photograph details. Manual sample carousel includes touch swipe, previous/next buttons and numbered pagination.
 
 October 7 owner review: replace code-drawn Money Board with approved money-board-original.png on both preview routes. Source remains unchanged; reuse homepage SVG phone-outline clipping to hide surrounding gray backdrop. Overlay Mission Accomplished on the phone. The $10,000 completed campaign remains in adjacent page copy; phone is approved illustrative app artwork.
+
+Owner addition: both previews include a standalone Make a Donation action and the note: Any donation over $25 receives the Boss Bucks digital discount card, good for one year of discounts in your local community. Threshold is strictly greater than $25. Preview action only, no payment processing.
