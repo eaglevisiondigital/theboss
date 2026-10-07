@@ -13,6 +13,21 @@ const discovery = [
   ["05", "Connect to your website", "Help customers learn more, browse your menu, book a service or follow a link to your own online ordering experience where available."],
   ["06", "Give them a reason to return", "A useful, clearly explained offer gives members a reason to choose you again. Set the participating locations, eligible purchases and redemption frequency that fit your business."],
 ];
+const offerTypes = [
+  ["%", "Percentage off", "A clear saving on eligible purchases."],
+  ["$", "Dollar savings", "A set amount off a qualifying visit."],
+  ["2", "Buy one, get one", "Give customers another reason to share."],
+  ["+", "Complimentary item", "Add something extra to their experience."],
+  ["★", "Member pricing", "Make membership feel valuable."],
+];
+const backOfficeFeatures = [
+  ["01", "Digital, physical or both", "Choose whether to offer your discount on Boss Bucks Digital, participating physical fundraising cards, or both. Select the formats that fit your business."],
+  ["02", "More offers. More reasons to visit.", "Add additional discounts and special offers so customers have more ways to find value at your business. Keep the details and redemption terms clear for each offer."],
+  ["03", "The right offer at each location", "Manage multiple locations and choose which discounts apply at each one. Give individual locations relevant offers while keeping your business information together."],
+  ["04", "Turn slow days into opportunities", "Future push-notification tools are planned to help you share timely promotions with opted-in supporters, giving them a reason to stop in on slower days or explore a special offer."],
+  ["05", "Put promotions on Boss Bucks", "Submit special offers for discovery on Boss Bucks, with the goal of bringing more attention, visits and revenue opportunities to your participating locations."],
+  ["06", "One place to manage the details", "Planned self-service registration, business profiles, location details and offer submission will bring your merchant setup together in one back office."],
+];
 const steps = [
   ["01", "Start the conversation", "Tell us about your business, where you operate and the offer you have in mind. Request a free Boss Bucks Digital listing."],
   ["02", "Shape your offer", "We’ll follow up to discuss your business information, participating locations, offer details and redemption rules."],
@@ -34,12 +49,21 @@ export default function Page() {
       </section>
       <section className={s.offer}>
         <div><p className={s.eyebrow}>MAKE THE OFFER WORTH THE VISIT</p><h2>A great offer<br/>is an <em>invitation.</em></h2><p>The quality of your offer matters. Give members a clear, compelling reason to choose your business, with terms your team can explain and honor confidently.</p><Link className={s.primary} href="/merchant-partner">Let’s Talk About Your Offer <span aria-hidden="true">→</span></Link></div>
-        <div className={s.offerPanel}><h3>Value that fits your business.</h3><div className={s.offerTypes}><span>Percentage off</span><span>Dollar savings</span><span>Buy one, get one</span><span>Complimentary item</span><span>Member pricing</span></div><ul><li>Clearly state what the customer receives.</li><li>Identify eligible purchases and participating locations.</li><li>Explain exclusions, timing and how often it can be used.</li><li>Make redemption simple for customers and staff.</li></ul><p className={s.note}>Proposed offers are reviewed for fit and clarity. We’ll discuss the options available for your business.</p></div>
+        <div className={s.offerPanel}>
+          <div className={s.offerPanelHeader}><p className={s.eyebrow}>YOUR BUSINESS. YOUR OFFER.</p><h3>Value that fits<br/>your business.</h3><p>Make the next visit worth choosing you.</p></div>
+          <div className={s.offerPanelBody}><div className={s.offerTypes}>{offerTypes.map(([symbol,title,copy])=><div className={s.offerType} key={title}><span aria-hidden="true">{symbol}</span><div><h4>{title}</h4><p>{copy}</p></div></div>)}</div>
+          <div className={s.offerChecklist}><h4>A great offer is easy to understand.</h4><ul><li>State the saving and eligible purchases.</li><li>Choose participating locations.</li><li>Explain exclusions, timing and usage limits.</li><li>Keep redemption simple for customers and staff.</li></ul></div><p className={s.note}>Proposed offers are reviewed for fit and clarity. We’ll help you explore the options for your business.</p></div>
+        </div>
       </section>
       <section className={s.join}>
         <div className={s.sectionHeading}><div><p className={s.eyebrow}>ONE LOCATION OR MANY</p><h2>A free listing.<br/><em>A simple next step.</em></h2></div><p>Restaurants, shops, services and family experiences can all bring something valuable to the network. Tell us about your local business, regional group or nationwide footprint.</p></div>
         <div className={s.steps}>{steps.map(([number,title,copy])=><article key={number}><span className={s.number}>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
-        <div className={s.future}><span>COMING LATER</span><div><h3>Your merchant back office.</h3><p>Planned self-service tools will connect registration, business and location setup, and discount submission in one place. For now, start with the merchant inquiry form and our team will guide the next step.</p></div></div>
+        <div className={s.future}>
+          <div className={s.futureHeading}><div><span className={s.futureBadge}>PLANNED MERCHANT TOOLS</span><h3>Your offers. Your locations.<br/><em>Your merchant back office.</em></h3></div><p>More control over how you show up. More ways to give supporters a reason to choose you. Here’s what we’re planning for your merchant workspace.</p></div>
+          <div className={s.futureGrid}>{backOfficeFeatures.map(([number,title,copy])=><article key={number}><span className={s.futureNumber}>{number}</span><h4>{title}</h4><p>{copy}</p></article>)}</div>
+          <div className={s.futureNext}><div><h4>Start the conversation today.</h4><p>Tell us about your business and the offers you have in mind. Our team will guide your next step while these tools are being developed.</p></div><Link className={s.primary} href="/merchant-partner">Explore a Free Digital Listing <span aria-hidden="true">→</span></Link></div>
+          <p className={s.futureNote}>These are planned capabilities, not tools available today. Physical-card participation and offers are subject to program availability and approval. Future notifications will respect supporter opt-in preferences; promotion tools do not guarantee visits or revenue.</p>
+        </div>
       </section>
       <section className={s.closing}><p className={s.eyebrow}>BE PART OF SOMETHING BIGGER</p><h2>Welcome more possibilities.<br/><em>Partner like a Boss.</em></h2><p>Let’s talk about your business, your community and a free listing on Boss Bucks Digital.</p><div className={s.actions}><Link className={s.primary} href="/merchant-partner">Get Listed Free <span aria-hidden="true">→</span></Link><Link className={s.secondary} href="/request-information">I Have a Question</Link></div><p className={s.heroNote}>An inquiry starts the conversation. It does not automatically publish a listing.</p></section>
     </main><ApprovedFooter />
