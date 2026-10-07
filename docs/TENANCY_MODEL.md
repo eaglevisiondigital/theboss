@@ -297,3 +297,9 @@ future restricted-use organization.
 A household owns one wallet per currency; every household bucket preserves its originating organization permanently. Master per-currency totals are family-only display aggregates. Organization finance receives only its own slice, never another organization bucket or cross-organization family total. Child transfers do not rewrite source restrictions.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Every charge/payment/consumption/recovery/release retains originating organization and currency. Organization A recovery or payment return cannot consume, release or disclose Organization B grants. Participant and campaign attribution remain immutable provenance; same authorized household may use its same-organization grants across children.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

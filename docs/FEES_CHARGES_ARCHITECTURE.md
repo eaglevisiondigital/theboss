@@ -136,3 +136,9 @@ paid tile identity is never silently reopened by a reversal.
 Boss Bucks Phase 7B charge preview is read-only: current wallet and payment guardian authority, canonical charge household/participant/currency, and same originating organization determine due, available, maximum eligibility and remaining future tender. No payment allocation, debit, reservation or charge balance change occurs. Future Phase 7C must support any authorized parent-to-organization canonical charge, with atomic same-organization debit and idempotent split tender.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Canonical payment evidence now includes ledger-backed `boss_bucks`. Existing cash/check RPC remains cash/check only. One obligation can receive distinct immutable Boss Bucks/cash/check tenders; current charge balance derives from adjustments and net allocations. Payment plans retain original installment history; internal redemption does not create processor fees or charitable characterization.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

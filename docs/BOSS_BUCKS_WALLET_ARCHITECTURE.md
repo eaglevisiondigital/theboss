@@ -87,3 +87,9 @@ Fresh reads fence guardian/access/module state and the wallet; postings take the
 same wallet exclusively. Reconstruction shares that fence. No timeout was raised.
 No provider or expiration scheduler is enabled; expired value is excluded by the
 current clock before a bounded trusted expiration batch materializes its journal.
+
+## Phase 7C integration (October 7, 2026)
+
+Phase 7C adds atomic same-organization charge spending, FEFO grant consumption and finance-authorized partial returns. Source loss removes unspent value and records same-organization spent-value recovery without negative spendable availability. Later original grants satisfy recovery first. Returning a covered payment releases actual replacement applications most recently applied first, preserving current source validity and expiry; dependent invalid-source recovery is unwound with immutable lineage.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

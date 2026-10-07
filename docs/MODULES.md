@@ -326,3 +326,9 @@ channel configurations are explicitly non-executable.
 Phase 7B reuses boss_bucks with finite false-default wallet, fundraising_issuance, family_wallet, organization_wallet_reporting and charge_eligibility_preview controls. Signed feature configuration preserves existing module activation/window rules. It enables no providers, discount membership, spending, transfer or settlement capability.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Phase 7C extends the existing `boss_bucks` module with false-default `wallet_spending`, `charge_payments` and `split_tender` features. Existing registration/canonical charge context is reused. No provider, external settlement or merchant module is activated; controlled hosted flags are temporary and restored explicitly.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

@@ -425,3 +425,9 @@ never substitute. Public participant display/leaderboards require approval.
 Phase 7B adds boss_bucks.view/manage/financial_view/policy_manage only. Platform and own-organization owner/admin potential is retained; finance receives view/financial_view only. Every request still needs current exact scope, module and resource context. Team leaders and dependents receive no full-wallet visibility. Guardian can_manage_boss_bucks defaults false and is independent of payments/fundraising/documents.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+`boss_bucks.payment_reverse` is mapped only to the existing approved platform/organization admin and finance roles. Role mapping is potential capability; current exact organization and resource authority is still required. Family spend requires current wallet manager, explicit Boss Bucks guardian and payment guardian capabilities, household relationship and participant context. Household membership alone is insufficient.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

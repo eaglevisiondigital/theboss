@@ -526,3 +526,9 @@ canonical rate bounds, idempotency and post-lock expiry/authority checks.
 All Phase 7B raw tables have RLS and zero browser SELECT/INSERT/UPDATE/DELETE/TRUNCATE ACL. Signed INVOKER read/mutate RPCs call narrow private checked implementations. Trusted issuance/reversal/owner-resolution helpers are closed to anon/authenticated/service_role. Current explicit wallet access, guardian capability and actor/dependent household membership are mandatory; revocation is checked again after lock waits. No public token authorizes wallet access.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Raw financial tables are RLS-enabled with closed direct ACLs. Authenticated-only public invoker RPCs call closed empty-search-path helpers. Current identity, managed session, relationship, feature and role state is rechecked after physical fences and before replay. UUID-sorted charge locks, wallet/account/grant fences and deferred balanced-lineage proof prevent partial or duplicate execution. No provider credentials, card/ACH or public debit endpoint.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

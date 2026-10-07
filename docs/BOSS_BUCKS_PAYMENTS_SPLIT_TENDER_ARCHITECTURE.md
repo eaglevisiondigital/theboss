@@ -1,7 +1,8 @@
-# Phase 7C payment architecture checkpoint
+# Phase 7C Boss Bucks payments and split tender
 
-Status: LOCAL IMPLEMENTATION IN PROGRESS. No Phase 7C canonical migration,
-deployment or controlled acceptance window has been executed.
+Status: COMPLETE. Six migrations are canonical, implementation deployed and the
+sole hosted window cleaned up. Positive hosted financial evidence is limited
+by the explicitly approved absence of trusted paid sources.
 
 The approved scope makes `boss_bucks` an internal method on the existing
 canonical payments and allocations. Charges retain their existing derived

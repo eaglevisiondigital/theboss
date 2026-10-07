@@ -1,8 +1,13 @@
-# Phase 7C controlled hosted plan (not activated)
+# Phase 7C controlled hosted plan (executed once and closed)
 
-Main Boss Chat resolved the covered-recovery rule. Release and activation remain
-gated on complete validation of the updated migration checkpoint. No hosted window has
-been opened. This plan creates no trusted success evidence or wallet value.
+Main Boss Chat resolved covered recovery and all release gates passed. The sole
+window activated 08:21:16.339247 UTC October 7; explicit restoration completed
+08:27:06.945473 before fixed target 08:41:16.339247/hard expiry 08:51:16.339247.
+No trusted success evidence or wallet value was fabricated. Results and private
+restore-command rejection/recovery are in the
+[acceptance record](PHASE_7C_ACCEPTANCE_ADDENDUM.md). Do not reopen a window.
+
+The reviewed pre-activation plan follows, preserved as evidence.
 
 After validated migration, canonical type generation, advisors, CI and deployment:
 

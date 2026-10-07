@@ -1043,3 +1043,17 @@ This supersedes the pending decision gate above without deleting its checkpoint
 history. The local implementation and independent SQL/race coverage are being
 updated and revalidated before the already authorized canonical release.
 No provider, external settlement or Phase 7D rule is established.
+
+## Phase 7C release and controlled closure (October 7, 2026)
+
+Binding replacement-recovery release is implemented with exact immutable lineage,
+most-recent-application-first partial unwind, current validity/expiry preservation
+and balanced dependent cancellation. Six validated migrations canonical; Phase
+7C COMPLETE within approved non-payment hosted boundary. Positive financial cases
+retain SQL/runtime because no trusted paid source exists. Forged signed POST
+execution is not claimed as hosted; no fake source or broader authority permitted.
+
+Sole hosted window explicitly restored before fixed deadline. First private
+restore-command revision error rejected atomically, immediately corrected/recovered;
+sanitized evidence in acceptance/validation. Prior incidents preserved. PR #3 open,
+draft, unmerged. No provider/settlement decision or Phase 7D authorized here.

@@ -195,3 +195,9 @@ Fundraising enrolls those identities without replacing or copying youth profiles
 Phase 7B consumes typed trusted success evidence directly. Each new intent snapshots an immutable none/percentage policy and explicit authorized household binding. Unknown owners hold issuance; private exact-source owner resolution appends evidence without changing the captured policy. Unpaid intents, reservations and future recurring installments issue no value. Supporter trial/gift qualification remains separate; configured pages show only a finite may-earn indicator.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Phase 7C source corrections use cumulative remaining authoritative gross and captured earning basis points, retaining immutable original success/policy/person/campaign/team/unit provenance. Original invalid source value is never resurrected by payment returns. Canonical trusted sources remain absent at release; no fake paid fundraising, wallet grant or provider evidence may be manufactured.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.

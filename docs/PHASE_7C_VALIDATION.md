@@ -1,12 +1,11 @@
-# Phase 7C local validation checkpoint
+# Phase 7C validation and release evidence
 
-Status: MIGRATED; release/controlled hosted acceptance in progress. The exact
-binding-rule checkpoint passed the complete fresh historical runner: **18,899**
-unique assertions (18,838 across 118 SQL suites, 28 bootstrap, 33 sealed-source)
-and **261** coordinated races, including **461** Phase 7C assertions and **33**
-Phase 7C races. Each SQL summary is counted once, excluding duplicate cleanup
-echoes. Six exact migrations advanced canonical history **89→95**. No controlled
-hosted window has been activated yet.
+Status: COMPLETE within the approved hosted non-payment boundary. Exact binding
+checkpoint passes **18,899** unique SQL/bootstrap/sealed assertions, **261** races,
+**470/470** app tests, strict typecheck, zero-warning lint and build after canonical
+generation. Six migrations advance history **89→95**; live RLS/ACL/index checks
+pass; implementation deployed READY. Sole hosted window explicitly restored
+before fixed deadline. See [acceptance/cleanup](PHASE_7C_ACCEPTANCE_ADDENDUM.md).
 
 ## Environment and isolation
 
@@ -28,12 +27,12 @@ deactivation and managed-session removal are exercised without real Auth materia
   The prior checkpoint passed 18,802 unique SQL/bootstrap/sealed assertions and
   254 races; it preceded the binding release implementation and is retained as
   historical evidence, not the final release gate.
-- Focused binding-release run: 459 SQL assertions and 33 observed races PASS.
+- Historical focused binding run: 459 SQL assertions and 33 races PASS; final complete run includes 461 Phase 7C assertions and all 33 races.
   Seven independent release suites cover full $80, partial $30, multiple grants,
   expiration, invalid/partially invalid replacement and a shared dependency
   chain. Cross-organization release checks and both recovery/source/spend race
-  orders pass. The final run must also include the subsequent two unpaired-release
-  denial/atomicity assertions and the corresponding deferred proof.
+  orders pass. The final fresh complete run includes the subsequent two unpaired-release
+  denial/atomicity assertions and corresponding deferred proof; both PASS.
 - Typecheck: PASS, generated route types and strict `tsc --noEmit`.
 - Lint: PASS, zero warnings.
 - Application tests: 470/470 PASS.
@@ -96,7 +95,7 @@ bytes. The eight-second deferred proof limit remains unchanged. This was a local
 pre-release regression, not a canonical incident. The final combined historical
 SQL/bootstrap/sealed-source/concurrency run passes after this fix.
 
-## Canonical/published read-only verification
+## Historical pre-release read-only verification
 
 At `2026-10-07 06:19:14.501555 UTC`, canonical history was 89, last migration
 `20261007040726`; Phase 7C tender table absent; original controlled platform
@@ -170,8 +169,8 @@ UTC. Read-only verification at **08:02:07.455778 UTC** confirms history 95, all
 six tables, zero RLS/raw ACL/private-helper ACL/empty-search-path failures and
 zero uncovered new foreign keys. Both public Boss Bucks RPCs are invoker,
 empty-path, authenticated-only boundaries. Grants and tenders remain zero.
-Canonical TypeScript types regenerated; focused post-generation validation is
-running before commit/deployment.
+Canonical TypeScript types regenerated; strict post-generation typecheck/lint,
+470 tests and production build PASS before commit/deployment.
 
 Post-migration security advisor reports intentional closed-RLS/no-policy tables
 and the pre-existing leaked-password-protection warning. Performance reports
@@ -182,3 +181,33 @@ Remediation: [closed RLS notice](https://supabase.com/docs/guides/database/datab
 [Auth password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection),
 [unused indexes](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index),
 [Auth connection allocation](https://supabase.com/docs/guides/deployment/going-into-prod).
+
+## Actual deployment and hosted closure
+
+Implementation `830437a5cced65c67ca48b3237e35100c5876451` is READY in production
+Boss Git CD deploy `6ac5fcdd4304eb00084b0a9d`, published 08:04:15.062 UTC October 7.
+Implementation push/PR CI PASS. Sole controlled hosted window verified native
+unpaid $500 charge creation/cancellation and receipts, own zero-balance checkout,
+Family Hub, navigation/reload, four real viewport widths, own-org zero reporting,
+unrelated-module restriction and fresh signed READ denial after guardian removal
+while household memberships remained current. Positive financial and forged POST
+cases retain explicit SQL/runtime classification/source-tooling limitations.
+
+Fixed activation 08:21:16.339247; target 08:41:16.339247; hard expiry
+08:51:16.339247 UTC. Original administrator preserved. Restoration committed
+08:27:06.945473; zero authority/work and exact selected baseline verified.
+First private restore tried to increment a trigger-owned module version and
+rolled back with 23514. New scenarios stopped; command immediately corrected to
+let the existing trigger own revisioning, and recovery succeeded before deadline.
+No deadline extension/overrun, product/schema/security fix or extra window.
+Baseline-only rehearsal did not exercise a new active module row; future recovery
+rehearsal must include an actual disposable active module fixture. Operational
+finding preserved transparently; private scripts not reproduced.
+
+All 19 original modules, roles, guardian/household/org/team business hashes and
+15 immutable sports source hashes match baseline. Sports pending 5/official 0.
+Wallet retired/access ended, registration archived (real revision 1→3), native
+unpaid charge canceled. Payments/allocations unchanged 6/6; new financial evidence
+zero. Four controlled audit events and two native receipts retained. No Auth,
+provider, timeout, RLS or credential setting changed. Viewport reset/tab closed.
+Closing documentation SHA and final CI are verified in the release handoff.

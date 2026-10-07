@@ -453,3 +453,9 @@ and DIGITAL_MONEY_BOARD_ARCHITECTURE.md. No wallet or provider execution exists.
 Phase 7B adds 11 deny-by-default Boss Bucks entities: household/currency wallets, explicit access, immutable earning revisions, fundraiser household bindings, intent policy/owner snapshots, exact trusted owner resolutions, organization/currency accounts, typed source grants, journals, postings and history. A private request-receipt table protects signed-command replay. No authoritative mutable balance exists.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C integration (October 7, 2026)
+
+Canonical charges/payments/allocations remain authoritative. Six additive tables record tender-to-wallet linkage, allocation/grant consumption, payment restoration, source corrections, recovery claims and immutable recovery movements. Covered returns unwind actual replacement-grant lineage; no replacement wallet or mutable authoritative balance.
+
+See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
