@@ -188,3 +188,10 @@ Recurring schedule cancellation follows unpaid intent/campaign cancellation.
 Planned installments are non-executable and do not count as financial value.
 Intake creates canonical people/participants through existing approved workflows;
 Fundraising enrolls those identities without replacing or copying youth profiles.
+
+
+## Phase 7B wallet boundary
+
+Phase 7B consumes typed trusted success evidence directly. Each new intent snapshots an immutable none/percentage policy and explicit authorized household binding. Unknown owners hold issuance; private exact-source owner resolution appends evidence without changing the captured policy. Unpaid intents, reservations and future recurring installments issue no value. Supporter trial/gift qualification remains separate; configured pages show only a finite may-earn indicator.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

@@ -62,3 +62,10 @@ create a new immutable generation only before settled claims/current reservation
 Leaderboards default off; public participants additionally require current
 approved display/share and explicit guardian/adult opt-in. Exact program views
 and participant cursors retain bounded payloads.
+
+
+## Phase 7B wallet boundary
+
+Phase 7B wallet grant provenance references canonical success evidence, intent, board/tile, share/QR and source reference. Reservations and unpaid tiles never earn Boss Bucks. The may-earn indicator reveals no family balance or wallet identity; reward membership qualification is independent. No paid fixture or mark-paid route is introduced.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

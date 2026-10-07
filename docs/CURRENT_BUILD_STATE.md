@@ -1,5 +1,24 @@
 # Current build state
 
+## Phase 7B Boss Bucks Wallet + Organization-Restricted Ledger: RELEASE VALIDATED; HOSTED ACCEPTANCE PENDING
+
+Phase 7B reuses boss_bucks with one household/currency wallet, immutable
+organization-restricted balanced journals, explicit false-default guardian wallet
+authority, source-bound none/percentage earning revisions, fresh family/finance
+projections and read-only charge eligibility. Five validated canonical migrations
+advance history 83→88. RLS, raw ACL, trusted helper ACL, empty search paths and FK
+indexes pass live checks; canonical types regenerated. Historical tests and all
+228 races pass; final focused SQL adds owner-resolution and malformed journal
+coverage. Application tests 454/454, typecheck, zero-warning lint and build pass.
+The single fixed hosted empty-wallet window and cleanup remain pending; no
+temporary Phase 7B authority has been activated. Canonical trusted success count
+is zero, so positive hosted issuance retains the approved non-payment limitation.
+No spending, provider, settlement, transfer or membership product is implemented.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md) and
+[validation](PHASE_7B_VALIDATION.md). Historical closures/disclosures below remain
+unchanged. No Phase 7C began.
+
 ## Phase 7A Fundraising Core + Digital Money Board: COMPLETE
 
 Main Boss Chat authorized Phase 7A from `da001f8b9402b48ca74e80e133946fe2f62522ed`.

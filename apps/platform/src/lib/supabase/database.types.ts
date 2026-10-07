@@ -1617,6 +1617,686 @@ export type Database = {
           },
         ]
       }
+      boss_bucks_access: {
+        Row: {
+          access_kind: string
+          created_at: string
+          ends_at: string | null
+          guardian_relationship_id: string
+          id: string
+          organization_id: string
+          person_id: string
+          starts_at: string
+          status: string
+          wallet_id: string
+        }
+        Insert: {
+          access_kind: string
+          created_at?: string
+          ends_at?: string | null
+          guardian_relationship_id: string
+          id?: string
+          organization_id: string
+          person_id: string
+          starts_at?: string
+          status?: string
+          wallet_id: string
+        }
+        Update: {
+          access_kind?: string
+          created_at?: string
+          ends_at?: string | null
+          guardian_relationship_id?: string
+          id?: string
+          organization_id?: string
+          person_id?: string
+          starts_at?: string
+          status?: string
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_access_guardian_relationship_id_fkey"
+            columns: ["guardian_relationship_id"]
+            isOneToOne: false
+            referencedRelation: "guardian_relationships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_access_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_access_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_access_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_accounts: {
+        Row: {
+          created_at: string
+          currency: string
+          household_id: string | null
+          id: string
+          kind: string
+          organization_id: string
+          wallet_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          currency: string
+          household_id?: string | null
+          id?: string
+          kind: string
+          organization_id: string
+          wallet_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          household_id?: string | null
+          id?: string
+          kind?: string
+          organization_id?: string
+          wallet_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_accounts_wallet_id_household_id_currency_fkey"
+            columns: ["wallet_id", "household_id", "currency"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
+            referencedColumns: ["id", "household_id", "currency"]
+          },
+        ]
+      }
+      boss_bucks_fundraiser_bindings: {
+        Row: {
+          authorized_by: string
+          created_at: string
+          fundraiser_id: string
+          guardian_relationship_id: string
+          household_id: string
+        }
+        Insert: {
+          authorized_by: string
+          created_at?: string
+          fundraiser_id: string
+          guardian_relationship_id: string
+          household_id: string
+        }
+        Update: {
+          authorized_by?: string
+          created_at?: string
+          fundraiser_id?: string
+          guardian_relationship_id?: string
+          household_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_fundraiser_bindings_authorized_by_fkey"
+            columns: ["authorized_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_fundraiser_bindings_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_fundraiser_bindings_guardian_relationship_id_fkey"
+            columns: ["guardian_relationship_id"]
+            isOneToOne: false
+            referencedRelation: "guardian_relationships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_fundraiser_bindings_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_grants: {
+        Row: {
+          account_id: string
+          amount_minor: number
+          available_at: string
+          campaign_id: string
+          created_at: string
+          currency: string
+          evidence_id: string
+          expires_at: string | null
+          fundraiser_id: string
+          household_id: string
+          id: string
+          intent_id: string
+          organization_id: string
+          participant_id: string
+          person_id: string
+          policy_revision_id: string
+          provenance: Json
+          team_id: string | null
+          unit_id: string | null
+          wallet_id: string
+        }
+        Insert: {
+          account_id: string
+          amount_minor: number
+          available_at: string
+          campaign_id: string
+          created_at?: string
+          currency: string
+          evidence_id: string
+          expires_at?: string | null
+          fundraiser_id: string
+          household_id: string
+          id?: string
+          intent_id: string
+          organization_id: string
+          participant_id: string
+          person_id: string
+          policy_revision_id: string
+          provenance: Json
+          team_id?: string | null
+          unit_id?: string | null
+          wallet_id: string
+        }
+        Update: {
+          account_id?: string
+          amount_minor?: number
+          available_at?: string
+          campaign_id?: string
+          created_at?: string
+          currency?: string
+          evidence_id?: string
+          expires_at?: string | null
+          fundraiser_id?: string
+          household_id?: string
+          id?: string
+          intent_id?: string
+          organization_id?: string
+          participant_id?: string
+          person_id?: string
+          policy_revision_id?: string
+          provenance?: Json
+          team_id?: string | null
+          unit_id?: string | null
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_grants_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_success_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_source_snapshots"
+            referencedColumns: ["intent_id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_policy_revision_id_fkey"
+            columns: ["policy_revision_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_policy_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_grants_wallet_id_household_id_currency_fkey"
+            columns: ["wallet_id", "household_id", "currency"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
+            referencedColumns: ["id", "household_id", "currency"]
+          },
+        ]
+      }
+      boss_bucks_history: {
+        Row: {
+          action: string
+          actor_person_id: string | null
+          created_at: string
+          details: Json
+          grant_id: string | null
+          id: string
+          organization_id: string | null
+          request_id: string | null
+          wallet_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_person_id?: string | null
+          created_at?: string
+          details?: Json
+          grant_id?: string | null
+          id?: string
+          organization_id?: string | null
+          request_id?: string | null
+          wallet_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_person_id?: string | null
+          created_at?: string
+          details?: Json
+          grant_id?: string | null
+          id?: string
+          organization_id?: string | null
+          request_id?: string | null
+          wallet_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_history_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_history_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_history_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_journals: {
+        Row: {
+          created_at: string
+          currency: string
+          grant_id: string
+          id: string
+          kind: string
+          original_journal_id: string | null
+          reason: string
+        }
+        Insert: {
+          created_at?: string
+          currency: string
+          grant_id: string
+          id?: string
+          kind: string
+          original_journal_id?: string | null
+          reason: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          grant_id?: string
+          id?: string
+          kind?: string
+          original_journal_id?: string | null
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_journals_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_journals_original_journal_id_fkey"
+            columns: ["original_journal_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_owner_resolutions: {
+        Row: {
+          authorized_by: string
+          created_at: string
+          guardian_relationship_id: string
+          household_id: string
+          intent_id: string
+        }
+        Insert: {
+          authorized_by: string
+          created_at?: string
+          guardian_relationship_id: string
+          household_id: string
+          intent_id: string
+        }
+        Update: {
+          authorized_by?: string
+          created_at?: string
+          guardian_relationship_id?: string
+          household_id?: string
+          intent_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_owner_resolutions_authorized_by_fkey"
+            columns: ["authorized_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_owner_resolutions_guardian_relationship_id_fkey"
+            columns: ["guardian_relationship_id"]
+            isOneToOne: false
+            referencedRelation: "guardian_relationships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_owner_resolutions_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_owner_resolutions_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "boss_bucks_source_snapshots"
+            referencedColumns: ["intent_id"]
+          },
+        ]
+      }
+      boss_bucks_policy_revisions: {
+        Row: {
+          availability_seconds: number
+          basis_points: number
+          campaign_id: string
+          channels: string[]
+          created_at: string
+          created_by: string
+          currency: string
+          expiry_seconds: number | null
+          id: string
+          mode: string
+          organization_id: string
+          request_id: string
+          revision: number
+        }
+        Insert: {
+          availability_seconds?: number
+          basis_points: number
+          campaign_id: string
+          channels: string[]
+          created_at?: string
+          created_by: string
+          currency: string
+          expiry_seconds?: number | null
+          id?: string
+          mode: string
+          organization_id: string
+          request_id: string
+          revision: number
+        }
+        Update: {
+          availability_seconds?: number
+          basis_points?: number
+          campaign_id?: string
+          channels?: string[]
+          created_at?: string
+          created_by?: string
+          currency?: string
+          expiry_seconds?: number | null
+          id?: string
+          mode?: string
+          organization_id?: string
+          request_id?: string
+          revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_policy_revisions_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_policy_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_policy_revisions_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_policy_revisions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_postings: {
+        Row: {
+          account_id: string
+          amount_minor: number
+          created_at: string
+          currency: string
+          id: string
+          journal_id: string
+        }
+        Insert: {
+          account_id: string
+          amount_minor: number
+          created_at?: string
+          currency: string
+          id?: string
+          journal_id: string
+        }
+        Update: {
+          account_id?: string
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          journal_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_postings_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_postings_journal_id_fkey"
+            columns: ["journal_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_source_snapshots: {
+        Row: {
+          created_at: string
+          household_id: string | null
+          intent_id: string
+          organization_id: string
+          policy_revision_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          household_id?: string | null
+          intent_id: string
+          organization_id: string
+          policy_revision_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          household_id?: string | null
+          intent_id?: string
+          organization_id?: string
+          policy_revision_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_source_snapshots_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_source_snapshots_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_source_snapshots_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_source_snapshots_policy_revision_id_fkey"
+            columns: ["policy_revision_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_policy_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_wallets: {
+        Row: {
+          created_at: string
+          currency: string
+          household_id: string
+          id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          currency: string
+          household_id: string
+          id?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          household_id?: string
+          id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_wallets_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       charge_adjustments: {
         Row: {
           adjustment_type: string
@@ -6884,6 +7564,7 @@ export type Database = {
       guardian_relationships: {
         Row: {
           authority_status: string
+          can_manage_boss_bucks: boolean
           can_manage_fundraising: boolean
           can_manage_payments: boolean
           can_manage_profile: boolean
@@ -6905,6 +7586,7 @@ export type Database = {
         }
         Insert: {
           authority_status?: string
+          can_manage_boss_bucks?: boolean
           can_manage_fundraising?: boolean
           can_manage_payments?: boolean
           can_manage_profile?: boolean
@@ -6926,6 +7608,7 @@ export type Database = {
         }
         Update: {
           authority_status?: string
+          can_manage_boss_bucks?: boolean
           can_manage_fundraising?: boolean
           can_manage_payments?: boolean
           can_manage_profile?: boolean
@@ -11574,6 +12257,8 @@ export type Database = {
         Returns: Json
       }
       boss_attendance_read: { Args: { p_query: Json }; Returns: Json }
+      boss_bucks_mutate: { Args: { command: Json }; Returns: Json }
+      boss_bucks_read: { Args: { query?: Json }; Returns: Json }
       boss_calendar_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

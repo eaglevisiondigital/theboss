@@ -129,3 +129,10 @@ idempotent source reference. They then feed immutable success evidence, receipt
 and reward qualification. Refund/chargeback/reward reversal must append source
 lineage and safely reverse dependent allocations/issuance in later phases;
 paid tile identity is never silently reopened by a reversal.
+
+
+## Phase 7B wallet boundary
+
+Boss Bucks Phase 7B charge preview is read-only: current wallet and payment guardian authority, canonical charge household/participant/currency, and same originating organization determine due, available, maximum eligibility and remaining future tender. No payment allocation, debit, reservation or charge balance change occurs. Future Phase 7C must support any authorized parent-to-organization canonical charge, with atomic same-organization debit and idempotent split tender.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

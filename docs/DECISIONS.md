@@ -987,3 +987,10 @@ controlled publications/participation are archived and pending work is zero.
 Selected baseline hashes and the Phase 6E sports/achievement/recruiting baseline
 match. Inactive audited history is preserved. Phase 7A is COMPLETE; Phase 7B
 requires its own approved architecture and implementation assignment.
+
+
+## Phase 7B wallet boundary
+
+Main Boss Chat authorized Phase 7B internal family wallet and organization-restricted immutable ledger from 98a2b47f3f5339eab93eef9b685bb4ffb15d6e26. Earning defaults to none; no historic-source backfill or production earning rate is seeded. Positive hosted issuance may remain SQL/RUNTIME VERIFIED; HOSTED POSITIVE UNVERIFIED DUE TO APPROVED NON-PAYMENT SOURCE LIMITATION when canonical trusted sources are absent. Source partial-refund proportionality and already-spent clawback/settlement liability remain future product decisions.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

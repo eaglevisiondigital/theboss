@@ -319,3 +319,10 @@ context. Fundraising works with Sports/Calendar disabled and does not activate
 Messaging, Boss Bucks, Commerce, providers or other modules. Existing Phase 4A
 notifications are used only when already available. Future physical/digital card
 channel configurations are explicitly non-executable.
+
+
+## Phase 7B wallet boundary
+
+Phase 7B reuses boss_bucks with finite false-default wallet, fundraising_issuance, family_wallet, organization_wallet_reporting and charge_eligibility_preview controls. Signed feature configuration preserves existing module activation/window rules. It enables no providers, discount membership, spending, transfer or settlement capability.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

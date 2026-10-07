@@ -418,3 +418,10 @@ platform-wide authority. Exact scope, relationship, module and resource checks
 remain mandatory. `can_manage_fundraising` is a separate false-default guardian
 capability. Household membership, an Auth account and unrelated capabilities
 never substitute. Public participant display/leaderboards require approval.
+
+
+## Phase 7B wallet boundary
+
+Phase 7B adds boss_bucks.view/manage/financial_view/policy_manage only. Platform and own-organization owner/admin potential is retained; finance receives view/financial_view only. Every request still needs current exact scope, module and resource context. Team leaders and dependents receive no full-wallet visibility. Guardian can_manage_boss_bucks defaults false and is independent of payments/fundraising/documents.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

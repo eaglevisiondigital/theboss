@@ -446,3 +446,10 @@ append-only history. Private receipts, rate windows and milestones support
 idempotency. Raised totals are projections of immutable success evidence.
 Participant transfers do not rewrite provenance. See FUNDRAISING_ARCHITECTURE.md
 and DIGITAL_MONEY_BOARD_ARCHITECTURE.md. No wallet or provider execution exists.
+
+
+## Phase 7B wallet boundary
+
+Phase 7B adds 11 deny-by-default Boss Bucks entities: household/currency wallets, explicit access, immutable earning revisions, fundraiser household bindings, intent policy/owner snapshots, exact trusted owner resolutions, organization/currency accounts, typed source grants, journals, postings and history. A private request-receipt table protects signed-command replay. No authoritative mutable balance exists.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

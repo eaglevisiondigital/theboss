@@ -290,3 +290,10 @@ internal IDs never become anonymous authority. Guest donors do not become Boss
 accounts. Current relationship revocation closes participant shares and blocked
 writes recheck after locks. Success provenance retains the originating and
 future restricted-use organization.
+
+
+## Phase 7B wallet boundary
+
+A household owns one wallet per currency; every household bucket preserves its originating organization permanently. Master per-currency totals are family-only display aggregates. Organization finance receives only its own slice, never another organization bucket or cross-organization family total. Child transfers do not rewrite source restrictions.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).

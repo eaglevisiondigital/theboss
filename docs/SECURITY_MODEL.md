@@ -519,3 +519,10 @@ capabilities use CSPRNG, are memory-only in the UI, hash-only in canonical recor
 and omitted from receipts/audits. Opaque shares do not grant management or private
 profile access. Public writes enforce finite inputs, same-origin server POST,
 canonical rate bounds, idempotency and post-lock expiry/authority checks.
+
+
+## Phase 7B wallet boundary
+
+All Phase 7B raw tables have RLS and zero browser SELECT/INSERT/UPDATE/DELETE/TRUNCATE ACL. Signed INVOKER read/mutate RPCs call narrow private checked implementations. Trusted issuance/reversal/owner-resolution helpers are closed to anon/authenticated/service_role. Current explicit wallet access, guardian capability and actor/dependent household membership are mandatory; revocation is checked again after lock waits. No public token authorizes wallet access.
+
+See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
