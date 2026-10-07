@@ -38,4 +38,4 @@ def composite(scene_name, source_name, crop, corners, output, finger=None):
     print(output,result.size,(ASSETS/output).stat().st_size,'bytes; all pixels outside mask preserved')
 
 composite('account-discount-bbq.png','discounts-original.png',(240,42,857,1344),[(858,235),(1086,228),(1087,730),(858,730)],'account-discount-bbq-exact.webp')
-composite('account-earned-sideline.png','boss-bucks-wallet-approved.png',(46,37,839,1726),[(960,287),(1188,301),(1134,802),(890,773)],'account-earned-sideline-exact.webp',[(850,700),(880,695),(900,690),(917,687),(928,689),(936,694),(940,700),(940,709),(935,718),(925,729),(910,740),(895,750),(875,763),(850,775)])
+composite('account-earned-sideline.png','boss-bucks-wallet-approved.png',(46,37,839,1726),[(959,292),(1180,307),(1126,805),(890,779)],'account-earned-sideline-exact.webp',[(850,700),(880,695),(900,690),(917,687),(928,689),(936,694),(940,700),(940,709),(935,718),(925,729),(910,740),(895,750),(875,763),(850,775)])
