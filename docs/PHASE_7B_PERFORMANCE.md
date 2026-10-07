@@ -2,8 +2,8 @@
 
 Disposable fixture: 5,000 trusted synthetic source contributions/ledger grants and
 5,000 unrelated household wallets. Final focused measurements: family read
-64.649 ms, organization report 307.684 ms, reconstruction 10.649 ms, family JSON
-29,585 bytes. Earlier controlled run: 103.339/132.953/9.410 ms. These are local
+65.583 ms, organization report 143.148 ms, reconstruction 10.640 ms, family JSON
+29,573 bytes. Earlier controlled run: 103.339/132.953/9.410 ms. These are local
 measurements, not a national-load or production latency guarantee.
 
 Family selects an indexed explicit-access cohort (maximum 20 currency wallets),

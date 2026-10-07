@@ -1,21 +1,21 @@
 # Phase 7B validation
 
 Starting branch: build/boss-platform-v1, 98a2b47f3f5339eab93eef9b685bb4ffb15d6e26.
-Five exact validated SQL files applied to canonical Boss. Tool-recorded canonical
-versions are 20261007035435, 20261007035439, 20261007035442, 20261007035446 and
-20261007035450; local filenames match that history without changing validated SQL.
-History is 88. Live checks pass for 11 wallet tables, RLS, zero raw anon/authenticated/
+Five prepared validated SQL files plus one narrow corrective migration applied to canonical Boss. Tool-recorded canonical
+versions are 20261007035435, 20261007035439, 20261007035442, 20261007035446 ,
+20261007035450 and corrective 20261007040726; local filenames match that history without changing validated SQL.
+History is 89. Live checks pass for 11 wallet tables, RLS, zero raw anon/authenticated/
 service-role ACL, trusted helper closure, empty search paths and complete FK indexes.
 No earning policy or historical source credit was seeded.
 
 Full historical PostgreSQL 17 run passed, including bootstrap, sealed sources and
 228 coordinated races (217 historical + 11 wallet). Final focused Phase 7B run
-passed operations 13, long-ledger 10, policy/preview 18, scopes 8 and wallet/ACL 158;
-7 additional malformed-journal assertions pass. New explicit Phase 7B total: 214.
-Across the full run plus the final focused additions: 18,843 SQL/bootstrap/sealed
-assertions (18,790 full-run table-reported + 33 sealed + 20 new focused additions).
+passed operations 13, long-ledger 10, policy/preview 18, scopes 8 and wallet/ACL 165;
+7 additional malformed-journal assertions pass. New explicit Phase 7B total: 221.
+Across the full run plus the final focused additions: 18,850 SQL/bootstrap/sealed
+assertions (18,790 full-run table-reported + 33 sealed + 27 new focused additions).
 Historical schema/ACL loops legitimately expand with the new domain; this total
-is measured from current output rather than adding 214 to an old handoff count.
+is measured from current output rather than adding 221 to an old handoff count.
 Historical catalog assertions exclude only the exact four new permissions and
 eleven reviewed wallet tables; their historical invariants remain enforced.
 
@@ -50,3 +50,12 @@ disclosed; Phase 7B changes no dependencies and grants no provider secret access
 Canonical positive issuance classification: SQL/RUNTIME VERIFIED; HOSTED POSITIVE
 UNVERIFIED DUE TO APPROVED NON-PAYMENT SOURCE LIMITATION. Canonical trusted
 success evidence count is zero. Hosted empty-wallet acceptance remains pending.
+
+The final explicit-access regression exposed a table-specific trigger dispatch
+defect before any temporary hosted authority was activated. The shared identity
+trigger evaluated a wallet-only field on an access row. Corrective migration
+20261007040726 dispatches by table before resolving fields; it changes no identity
+rule or permission. All six Phase 7B suites and 11 races pass after correction,
+including explicit access ending, fresh-authority replay denial, independent
+guardian revocation, two-currency separation, retirement and immutable currency.
+Canonical generated type structure is unchanged by the private trigger fix.

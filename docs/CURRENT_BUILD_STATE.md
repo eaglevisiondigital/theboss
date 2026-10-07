@@ -5,8 +5,8 @@
 Phase 7B reuses boss_bucks with one household/currency wallet, immutable
 organization-restricted balanced journals, explicit false-default guardian wallet
 authority, source-bound none/percentage earning revisions, fresh family/finance
-projections and read-only charge eligibility. Five validated canonical migrations
-advance history 83→88. RLS, raw ACL, trusted helper ACL, empty search paths and FK
+projections and read-only charge eligibility. Five prepared canonical migrations plus one narrow trigger-dispatch correction
+advance history 83→89. RLS, raw ACL, trusted helper ACL, empty search paths and FK
 indexes pass live checks; canonical types regenerated. Historical tests and all
 228 races pass; final focused SQL adds owner-resolution and malformed journal
 coverage. Application tests 454/454, typecheck, zero-warning lint and build pass.
