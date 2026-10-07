@@ -16,14 +16,16 @@ race(){ local label=$1 writer_sql=$2 contender_sql=$3 expected=$4 hold=${5:-0};l
 setup(){
  local label=$1 method=${2:-card} stage=${3:-submitted} timing=${4:-ordinary}
  prefix="boss-phase7d-race-$label";org="md5('$prefix:org')::uuid";checkout="md5('$prefix:checkout-case')::uuid"
- python3 - "$test_dir" "$race_dir/7d-$label-fixture.sql" "$prefix" <<'PY'
-import sys
-from pathlib import Path
-root=Path(sys.argv[1]);s='\n'.join('\n'.join(line for line in (root/p).read_text().splitlines() if not line.startswith('\\ir ')) for p in ['phase7b/fixture.sql','phase7c/fixture.sql','phase7d/fixture.sql'])
-s=s.replace("'rails-source'",repr(sys.argv[3]+'-rails-source')).replace("md5('rails'||label)","md5('"+sys.argv[3]+"rails'||label)").replace("md5('rails-second'||label)","md5('"+sys.argv[3]+"rails-second'||label)")
-s=s.replace('boss-phase7b-test:',sys.argv[3]+':').replace('synthetic-phase7b-', 'synthetic-'+sys.argv[3].replace('_','-')+'-').replace('phase7b.example.invalid',sys.argv[3]+'.example.invalid').replace("60 milliseconds","1 second")
-Path(sys.argv[2]).write_text(s)
-PY
+ # Keep the runner compatible with the pinned, networkless PostgreSQL image.
+ # Its base shell tools are available; Python is deliberately not a dependency.
+ awk '!/^\\ir /' "$test_dir/phase7b/fixture.sql" "$test_dir/phase7c/fixture.sql" "$test_dir/phase7d/fixture.sql" |
+ sed -e "s/'rails-source'/'$prefix-rails-source'/g" \
+     -e "s/md5('rails'||label)/md5('${prefix}rails'||label)/g" \
+     -e "s/md5('rails-second'||label)/md5('${prefix}rails-second'||label)/g" \
+     -e "s/boss-phase7b-test:/$prefix:/g" \
+     -e "s/synthetic-phase7b-/synthetic-${prefix//_/-}-/g" \
+     -e "s/phase7b\\.example\\.invalid/$prefix.example.invalid/g" \
+     -e 's/60 milliseconds/1 second/g' >"$race_dir/7d-$label-fixture.sql"
  local prepare="select pg_temp.checkout('case','$method',1,$([[ $timing == expiry ]]&&printf true||printf false));"
  if [[ $stage == fee || $stage == fee_ready ]];then
  prepare="select pg_temp.actor('parent');select public.boss_payments_mutate(jsonb_build_object('action','checkout.prepare','request_id',pg_temp.f('fee-request'),'input',jsonb_build_object('organization_id',pg_temp.f('org'),'routing_id',pg_temp.f('rails-route'),'method','card','currency','USD','bucks_minor',0,'allocations',jsonb_build_array(jsonb_build_object('charge_id',pg_temp.f('charge-camp'),'amount_minor',10000,'bucks_minor',0)))));"
@@ -64,11 +66,7 @@ assert_one 'success first requires explicit original tender correction'
 setup tile_release
 # Supply only the synthetic fixture capability generated from the known label;
 # this is not a browser cookie, Auth token or real customer capability.
-capability=$(python3 - "$prefix" <<'PY'
-import hashlib,sys
-print(hashlib.md5((sys.argv[1]+'railscase').encode()).hexdigest()+hashlib.md5((sys.argv[1]+'rails-secondcase').encode()).hexdigest())
-PY
-)
+capability=$(lookup "select md5('${prefix}railscase')||md5('${prefix}rails-secondcase')")
 path=$(lookup "select path from public.fundraising_shares where fundraiser_id in(select fundraiser_id from public.fundraising_intents where id=(select intent_id from public.payment_checkouts where id=$checkout))")
 race tile_release "$(receive captured)" "select public.boss_fundraising_support(jsonb_build_object('action','release','request_id',gen_random_uuid(),'input',jsonb_build_object('path','$path','capability','$capability')));" PT409
 assert_one 'published paid tile cannot be released by supporter cancellation'

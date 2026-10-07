@@ -1,6 +1,6 @@
 # Phase 7D validation checkpoint
 
-Status: final release validation in progress; unpublished from `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`. Fresh canonical read: ACTIVE_HEALTHY, exactly 95 migrations and none Phase 7D. PR #3 remains open, draft and unmerged; published baseline CI passes.
+Status: release/hosted closure in progress from `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`. The historical checkpoint below records the original 95-migration state; canonical history is now 101. PR #3 remains open, draft and unmerged.
 
 The original two populated migrations are preserved byte-for-byte. The reported six validated drafts were not present: four dependent CLI-generated migrations now complete the actual six-file source set. No claimed hash is substituted for a missing file. The final manifest must record the actual tested six hashes before canonical application.
 
@@ -27,3 +27,21 @@ Security advisor: intentional closed RLS tables without policies ([explanation](
 The initial migration call was automatically rejected before execution because the attachment was not accepted as exact production authorization. A fresh read confirmed no write; direct typed owner authorization was received, and only then were the same six hash-tested sources applied.
 
 Post-generation validation: strict typecheck, zero-warning lint, **543/543** application tests and production build PASS against actual canonical types. The new read RPC uses the generated signature with bounded JSON shape validation. No production secret was read. Final schema filenames match canonical versions with identical SQL bytes; historical release checks and all 283 races remain valid.
+
+## Release CI harness correction
+
+Implementation `37ea3eda85c25261e20be0b4266979db0e9d617e` deployed READY through
+the existing Boss Git deployment at **18:01:20.023 UTC October 7** (deploy
+`6ac688c3cf574700087a54c6`). Both push/PR application jobs passed. Their database
+jobs passed SQL/bootstrap/sealed suites and prior concurrency checks, then exited
+127 because the new Phase 7D race fixture generator called Python, which is absent
+from the pinned networkless PostgreSQL image. The hosted acceptance window stayed
+inactive.
+
+The narrow correction replaces Python fixture transformations with the image's
+existing awk/sed and computes the synthetic capability digest in PostgreSQL.
+Race scenarios, SQL assertions, migration bytes, application behavior, runner
+isolation, statement timeout and security policy are unchanged. The focused
+disposable run passes all 318 Phase 7D assertions and 22 observed races; its
+cluster was removed. Replacement full release CI remains required before
+activating the single hosted window.

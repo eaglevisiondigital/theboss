@@ -13,7 +13,11 @@ holds and committed eligibility across natural expiry. Historical financial
 assumptions remain documented. Provider-positive evidence is **LOCAL CONTRACT
 TESTED; SANDBOX UNAVAILABLE**; no operational processor account/secret resolver,
 private worker credential, real money movement or recurring execution is enabled.
-Deployment, green release CI and the single controlled hosted window/cleanup remain.
+Implementation `37ea3eda85c25261e20be0b4266979db0e9d617e` deployed READY through
+existing Git CD at **18:01:20.023 UTC October 7**. Application release CI passed;
+database CI exposed an unavailable Python dependency in the new race harness.
+The dependency is being corrected without changing scenarios or runtime behavior.
+Green replacement release CI and the single controlled hosted window/cleanup remain.
 No temporary hosted authority has been activated. Advisors and source/baseline
 checks are recorded in [validation](PHASE_7D_VALIDATION.md); exact sources in
 [manifest](PHASE_7D_MIGRATION_MANIFEST.md); pending acceptance in
