@@ -20,3 +20,7 @@ Canonical post-migration verifier passes all supporting new foreign-key indexes,
 validated constraints and raw table/function ACLs. Performance advisors retain the
 existing unused-index and absolute Auth-connection-allocation information. No new
 error or timeout change; no unrelated index removed.
+
+Hosted consumer/organization/public screens pass all four requested widths with
+no document overflow. Trial/claim/inventory/replacement/retirement/reload/navigation
+complete within the single fixed window; no hosted timeout or policy weakening.

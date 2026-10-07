@@ -1,6 +1,6 @@
 # Boss Bucks physical card architecture
 
-Status: Phase 7E local implementation; live release/acceptance pending.
+Status: Phase 7E COMPLETE within the approved unavailable-provider boundary.
 
 Each batch is explicitly platform-, organization- or campaign-owned and tied to
 one immutable physical product revision. Each canonical credential has a unique

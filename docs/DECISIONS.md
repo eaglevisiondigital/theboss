@@ -1106,3 +1106,14 @@ migrations until the exact tested six migration gate passes. One fixed controlle
 hosted window with baseline-first recovery and administrator-first cleanup is
 required. No temporary authority, Merchant Platform or later phase is activated
 by this documentation. Prior security/timing/performance disclosures stay intact.
+
+## Phase 7E release and acceptance closure
+
+Direct typed owner authorization cleared the pre-execution migration gate. Six
+exact validated migrations applied 101→107; final source deployed with green
+implementation CI. One fixed hosted trial/physical-card window was explicitly
+restored at 22:47:41.384772 UTC October 7, ahead of its 23:01:12.904705 cleanup
+target and 23:11:12.904705 hard expiry. Baseline equality and zero residual access
+verified. Phase 7E COMPLETE within the existing unavailable-provider boundary.
+No Merchant Platform or later-phase authorization is inferred. Prior incidents
+and evidence limitations remain intact.

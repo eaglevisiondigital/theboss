@@ -1,6 +1,6 @@
 # Boss Bucks product orders and fulfillment
 
-Status: Phase 7E local implementation; live release/acceptance pending.
+Status: Phase 7E COMPLETE within the approved unavailable-provider boundary.
 
 `commerce` currently supplies a module identity, not a reusable active order engine.
 The native order core is therefore deliberately limited to approved Boss Bucks

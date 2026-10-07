@@ -1,7 +1,7 @@
 # Boss Bucks Discounts membership architecture
 
 Phase 7E source checkpoint: `8760547f4e69e5c097640030090f1d92e87ac237`.
-Status: LOCAL IMPLEMENTATION; canonical release and hosted acceptance pending.
+Status: Phase 7E COMPLETE within the approved unavailable-provider boundary.
 
 Boss Bucks Wallet is earned, organization-restricted fundraising value. Boss Bucks
 Discounts is consumer product access. Neither grants the other, organization/team

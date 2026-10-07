@@ -1,15 +1,42 @@
-# Phase 7E release in progress
+# Current build state
 
-Direct typed owner authorization received. All six exact validated migrations are
-applied to canonical Boss Supabase: **101 → 107**. SQL hashes are unchanged and
-local filenames match actual canonical versions. All **81** live schema/RLS/ACL/
-search-path/index checks pass. Canonical TypeScript types regenerated; original
-21 module rows, administrator, relationships, finances and sport/achievement
-baselines remain equal. Advisors retain only disclosed findings, with no new error.
-Post-generation validation, deployment/CI and the single bounded hosted window
-with explicit recovery remain release gates. Phase 7E is **INCOMPLETE** until these
-steps and cleanup finish. No temporary authority or next phase has been activated.
-The prior rejected authorization attempt below is retained as historical evidence.
+## Phase 7E Physical + Digital Boss Bucks Membership and Campaign System: COMPLETE
+
+Direct typed owner authorization cleared the historical gate. Six exact tested
+migrations are applied to canonical Boss Supabase: **101 → 107**; SQL hashes are
+unchanged, canonical versions aligned, **81** live schema/RLS/ACL/search-path/index
+checks pass and canonical types are regenerated. Full runtime validation passes
+**21,449** unique SQL/bootstrap/sealed assertions and **293** races, including
+**251** dedicated new assertions and **10** new races. Final typecheck, zero-warning
+lint, **563/563** application tests and production build pass. Implementation push/
+PR CI pass. Existing Boss Git deployment **6ac6c6c7f3ac220008f2c302** is READY at
+**22:25:41.811 UTC October 7**, source `05b5f06164f01569a8e2f36cb12c660722f685c7`.
+
+One controlled hosted window verifies public 30-day trial, concealed native claim,
+private digital card, reload/navigation/Family Hub, duplicate active-trial denial,
+three-card print/activation/replay/replacement/old-proof denial/void/archive,
+configured unavailable upgrades, separate Wallet access, native resource denial
+and all **12** consumer/organization/public 1280/768/390/320 layout/label checks.
+Activation **22:41:12.904705**, scenario stop **22:56:12.904705**, cleanup target
+**23:01:12.904705**, hard expiry **23:11:12.904705 UTC October 7**. Explicit recovery
+completed **22:47:41.384772**, zero residual verified **22:47:43.767002**, baseline
+hash/count equality **22:47:48.445007**. Original administrator remained valid.
+All 21 original module business rows and selected relationship/Wallet/financial/
+sports/achievement baselines are equal. Two new inactive, ended, cleared module
+history rows remain. Four products/revisions and campaign retired, one batch
+archived, two cards void/one replaced, three sources revoked; all private proofs revoked, zero
+pending sources/jobs/deliveries. No second window or deadline extension.
+
+Positive paid products/gifts/upgrades/capture/ACH/refunds/settlement retain
+**SQL/RUNTIME VERIFIED; LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE**. No fabricated
+paid success, real money, operational processor secrets/worker or recurring executor.
+Household-positive and restricted-role/forged POST evidence remain SQL/runtime;
+native GET/resource denial and post-cleanup revocation are hosted verified. No new
+security exception. Original incident disclosures and prior acceptance history remain.
+See [148-point report](PHASE_7E_COMPLETION_REPORT.md),
+[acceptance](PHASE_7E_ACCEPTANCE_ADDENDUM.md), [validation](PHASE_7E_VALIDATION.md),
+[manifest](PHASE_7E_MIGRATION_MANIFEST.md) and the three architecture documents.
+PR #3 stays OPEN/DRAFT/UNMERGED. No Merchant Platform or later phase started.
 
 ## Historical Phase 7E preauthorization checkpoint
 
@@ -29,7 +56,7 @@ See [checkpoint](PHASE_7E_CHECKPOINT.md) and [validation](PHASE_7E_VALIDATION.md
 
 # Current build state
 
-## Phase 7E Physical + Digital Boss Bucks Membership and Campaign System: INCOMPLETE
+## Historical Phase 7E local implementation checkpoint: INCOMPLETE
 
 Local implementation from `8760547f4e69e5c097640030090f1d92e87ac237` is in validation.
 Canonical Supabase remains ACTIVE_HEALTHY with 101 migrations; no Phase 7E live

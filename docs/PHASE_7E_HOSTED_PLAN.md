@@ -1,3 +1,9 @@
+# Executed Phase 7E controlled hosted plan
+
+The plan below executed once on October 7. Native scenarios and explicit cleanup
+pass; no deadline extension or new window. Exact results and limitations are in
+PHASE_7E_ACCEPTANCE_ADDENDUM.md. Preparation text below is historical.
+
 # Phase 7E controlled hosted acceptance plan
 
 Status: PREPARED; not activated. Exact recovery preflight passes in disposable
