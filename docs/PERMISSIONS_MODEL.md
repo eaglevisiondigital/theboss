@@ -404,3 +404,17 @@ module and live identity checks still apply. Boss-owned semantics require curren
 platform scope. Coach status does not imply nomination or approval. Guardian display
 choices use the existing verified `can_manage_profile` capability; no adult self-
 publication policy is invented.
+
+
+## Phase 7A local extension (release validation pending)
+
+Phase 7A adds seven exact permissions: fundraising.view/create/manage/publish/
+financial_view and money_board.view/manage. Super/platform and organization
+owner/administrator potential mappings include management. Director, exact
+program/sport/team administrators and head coaches have progress views only.
+Finance roles have fundraising progress/private finance potential, with current
+organization relationship required; only super/platform administrators have
+platform-wide authority. Exact scope, relationship, module and resource checks
+remain mandatory. `can_manage_fundraising` is a separate false-default guardian
+capability. Household membership, an Auth account and unrelated capabilities
+never substitute. Public participant display/leaderboards require approval.

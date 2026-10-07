@@ -505,3 +505,17 @@ Source selector generations are checked in addition to summary freshness. Pendin
 canonical refresh cannot be presented as a current badge. Private decision notes do
 not enter family/showcase/notification projections. Prior sanitized connector
 credential disclosures are retained; Phase 6E does not search for or reuse their values.
+
+
+## Phase 7A local extension (release validation pending)
+
+Phase 7A public tables enable RLS with no direct client ACL or policy. Authenticated
+management/read wrappers enforce live Auth, modules, exact role context and
+current participant/guardian relationships. Anonymous access uses only two
+finite definers in `boss_fundraising_public`, without opening `boss_private`.
+Success ingestion is private and executable by no ordinary anon/authenticated/
+service client. No mark-paid/simulated-payment production route exists. Guest
+capabilities use CSPRNG, are memory-only in the UI, hash-only in canonical records
+and omitted from receipts/audits. Opaque shares do not grant management or private
+profile access. Public writes enforce finite inputs, same-origin server POST,
+canonical rate bounds, idempotency and post-lock expiry/authority checks.

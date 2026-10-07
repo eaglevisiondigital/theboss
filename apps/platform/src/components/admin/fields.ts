@@ -28,6 +28,7 @@ export const organizationFields: AdminField[] = [
   { ...text("default_currency", "Currency code", true), value: "USD", maxLength: 3 }, status(),
 ];
 export const guardianFlags: AdminField[] = [
+  { name: "can_manage_fundraising", label: "Fundraising capability", type: "checkbox", value: false, hint: "Permits accepting and sharing this dependent’s fundraiser only with current campaign and participant eligibility." },
   { name: "can_manage_profile", label: "Manage dependent profile", type: "checkbox", hint: "Permits approved non-sensitive profile changes." },
   { name: "can_register", label: "Registration capability", type: "checkbox" },
   { name: "can_sign_waivers", label: "Waiver capability", type: "checkbox" },

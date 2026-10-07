@@ -3755,6 +3755,707 @@ export type Database = {
         }
         Relationships: []
       }
+      fundraising_campaigns: {
+        Row: {
+          allow_adult_self_sharing: boolean
+          allow_anonymous: boolean
+          allow_fee_cover: boolean
+          allow_recurring: boolean
+          allow_team_sharing: boolean
+          branding: Json
+          channels: string[]
+          created_at: string
+          created_by: string
+          currency: string
+          description: string
+          ends_at: string
+          goal_minor: number
+          id: string
+          indexable: boolean
+          launch_at: string | null
+          leaderboard_visibility: string
+          name: string
+          organization_id: string
+          public_path: string
+          public_visible: boolean
+          reward_policy: Json
+          scope: string
+          starts_at: string
+          status: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          allow_adult_self_sharing?: boolean
+          allow_anonymous?: boolean
+          allow_fee_cover?: boolean
+          allow_recurring?: boolean
+          allow_team_sharing?: boolean
+          branding?: Json
+          channels?: string[]
+          created_at?: string
+          created_by: string
+          currency: string
+          description?: string
+          ends_at: string
+          goal_minor: number
+          id?: string
+          indexable?: boolean
+          launch_at?: string | null
+          leaderboard_visibility?: string
+          name: string
+          organization_id: string
+          public_path?: string
+          public_visible?: boolean
+          reward_policy?: Json
+          scope: string
+          starts_at: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          allow_adult_self_sharing?: boolean
+          allow_anonymous?: boolean
+          allow_fee_cover?: boolean
+          allow_recurring?: boolean
+          allow_team_sharing?: boolean
+          branding?: Json
+          channels?: string[]
+          created_at?: string
+          created_by?: string
+          currency?: string
+          description?: string
+          ends_at?: string
+          goal_minor?: number
+          id?: string
+          indexable?: boolean
+          launch_at?: string | null
+          leaderboard_visibility?: string
+          name?: string
+          organization_id?: string
+          public_path?: string
+          public_visible?: boolean
+          reward_policy?: Json
+          scope?: string
+          starts_at?: string
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_campaigns_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_campaigns_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_donors: {
+        Row: {
+          created_at: string
+          display_name: string
+          email: string | null
+          id: string
+          mobile: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          email?: string | null
+          id?: string
+          mobile?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          id?: string
+          mobile?: string | null
+        }
+        Relationships: []
+      }
+      fundraising_fundraisers: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          ends_at: string | null
+          goal_minor: number | null
+          household_id: string | null
+          id: string
+          leaderboard_opt_in: boolean
+          organization_id: string
+          participant_id: string
+          person_id: string
+          public_display_name: string | null
+          starts_at: string
+          status: string
+          team_id: string | null
+          unit_id: string | null
+          version: number
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          ends_at?: string | null
+          goal_minor?: number | null
+          household_id?: string | null
+          id?: string
+          leaderboard_opt_in?: boolean
+          organization_id: string
+          participant_id: string
+          person_id: string
+          public_display_name?: string | null
+          starts_at?: string
+          status?: string
+          team_id?: string | null
+          unit_id?: string | null
+          version?: number
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          ends_at?: string | null
+          goal_minor?: number | null
+          household_id?: string | null
+          id?: string
+          leaderboard_opt_in?: boolean
+          organization_id?: string
+          participant_id?: string
+          person_id?: string
+          public_display_name?: string | null
+          starts_at?: string
+          status?: string
+          team_id?: string | null
+          unit_id?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_fundraisers_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_fundraisers_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_fundraisers_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_fundraisers_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_fundraisers_participant_id_person_id_fkey"
+            columns: ["participant_id", "person_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id", "person_id"]
+          },
+        ]
+      }
+      fundraising_history: {
+        Row: {
+          action: string
+          actor_person_id: string | null
+          campaign_id: string
+          created_at: string
+          details: Json
+          fundraiser_id: string | null
+          id: string
+          request_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_person_id?: string | null
+          campaign_id: string
+          created_at?: string
+          details?: Json
+          fundraiser_id?: string | null
+          id?: string
+          request_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_person_id?: string | null
+          campaign_id?: string
+          created_at?: string
+          details?: Json
+          fundraiser_id?: string | null
+          id?: string
+          request_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_history_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_history_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_history_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_intent_events: {
+        Row: {
+          amount_minor: number | null
+          created_at: string
+          id: string
+          intent_id: string
+          source_event_id: string | null
+          source_reference: string | null
+          state: string
+        }
+        Insert: {
+          amount_minor?: number | null
+          created_at?: string
+          id?: string
+          intent_id: string
+          source_event_id?: string | null
+          source_reference?: string | null
+          state: string
+        }
+        Update: {
+          amount_minor?: number | null
+          created_at?: string
+          id?: string
+          intent_id?: string
+          source_event_id?: string | null
+          source_reference?: string | null
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_intent_events_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intent_events_source_event_id_fkey"
+            columns: ["source_event_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intent_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_intents: {
+        Row: {
+          amount_minor: number
+          anonymous: boolean
+          board_id: string | null
+          campaign_id: string
+          capability_digest: string
+          created_at: string
+          currency: string
+          donor_id: string
+          expires_at: string
+          fee_cover: boolean
+          fundraiser_id: string | null
+          id: string
+          provenance: Json
+          request_id: string
+          reservation_id: string | null
+          reward_policy: Json
+          share_id: string | null
+          source_kind: string
+          tile_id: string | null
+        }
+        Insert: {
+          amount_minor: number
+          anonymous: boolean
+          board_id?: string | null
+          campaign_id: string
+          capability_digest: string
+          created_at?: string
+          currency: string
+          donor_id: string
+          expires_at: string
+          fee_cover: boolean
+          fundraiser_id?: string | null
+          id?: string
+          provenance: Json
+          request_id: string
+          reservation_id?: string | null
+          reward_policy: Json
+          share_id?: string | null
+          source_kind: string
+          tile_id?: string | null
+        }
+        Update: {
+          amount_minor?: number
+          anonymous?: boolean
+          board_id?: string | null
+          campaign_id?: string
+          capability_digest?: string
+          created_at?: string
+          currency?: string
+          donor_id?: string
+          expires_at?: string
+          fee_cover?: boolean
+          fundraiser_id?: string | null
+          id?: string
+          provenance?: Json
+          request_id?: string
+          reservation_id?: string | null
+          reward_policy?: Json
+          share_id?: string | null
+          source_kind?: string
+          tile_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_intents_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "money_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_donors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_reservation_id_fkey"
+            columns: ["reservation_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_reservations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_share_id_fkey"
+            columns: ["share_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_shares"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_intents_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_recurring_commitments: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          id: string
+          intent_id: string
+          months: number
+          starts_on: string
+          status: string
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          id?: string
+          intent_id: string
+          months: number
+          starts_on: string
+          status?: string
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          id?: string
+          intent_id?: string
+          months?: number
+          starts_on?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_recurring_commitments_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_recurring_occurrences: {
+        Row: {
+          amount_minor: number
+          commitment_id: string
+          due_on: string
+          ordinal: number
+        }
+        Insert: {
+          amount_minor: number
+          commitment_id: string
+          due_on: string
+          ordinal: number
+        }
+        Update: {
+          amount_minor?: number
+          commitment_id?: string
+          due_on?: string
+          ordinal?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_recurring_occurrences_commitment_id_fkey"
+            columns: ["commitment_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_recurring_commitments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_reward_qualifications: {
+        Row: {
+          created_at: string
+          evidence_id: string
+          id: string
+          policy: Json
+          provenance: Json
+          qualified: boolean
+          status: string
+          trial_days: number | null
+        }
+        Insert: {
+          created_at?: string
+          evidence_id: string
+          id?: string
+          policy: Json
+          provenance: Json
+          qualified: boolean
+          status: string
+          trial_days?: number | null
+        }
+        Update: {
+          created_at?: string
+          evidence_id?: string
+          id?: string
+          policy?: Json
+          provenance?: Json
+          qualified?: boolean
+          status?: string
+          trial_days?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_reward_qualifications_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_success_evidence"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_shares: {
+        Row: {
+          authorized_by: string
+          created_at: string
+          fundraiser_id: string
+          id: string
+          path: string
+          revoked_at: string | null
+          status: string
+        }
+        Insert: {
+          authorized_by: string
+          created_at?: string
+          fundraiser_id: string
+          id?: string
+          path?: string
+          revoked_at?: string | null
+          status?: string
+        }
+        Update: {
+          authorized_by?: string
+          created_at?: string
+          fundraiser_id?: string
+          id?: string
+          path?: string
+          revoked_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_shares_authorized_by_fkey"
+            columns: ["authorized_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_shares_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_success_evidence: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          currency: string
+          id: string
+          intent_id: string
+          provenance: Json
+          settled_at: string
+          source_reference: string
+          source_system: string
+          tile_id: string | null
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          currency: string
+          id?: string
+          intent_id: string
+          provenance: Json
+          settled_at: string
+          source_reference: string
+          source_system: string
+          tile_id?: string | null
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          intent_id?: string
+          provenance?: Json
+          settled_at?: string
+          source_reference?: string
+          source_system?: string
+          tile_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_success_evidence_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_success_evidence_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: true
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_targets: {
+        Row: {
+          campaign_id: string
+          goal_minor: number | null
+          id: string
+          organization_id: string
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          campaign_id: string
+          goal_minor?: number | null
+          id?: string
+          organization_id: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          campaign_id?: string
+          goal_minor?: number | null
+          id?: string
+          organization_id?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_targets_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_targets_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_targets_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_targets_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       game_basketball_events: {
         Row: {
           actor_person_id: string
@@ -6183,6 +6884,7 @@ export type Database = {
       guardian_relationships: {
         Row: {
           authority_status: string
+          can_manage_fundraising: boolean
           can_manage_payments: boolean
           can_manage_profile: boolean
           can_receive_communications: boolean
@@ -6203,6 +6905,7 @@ export type Database = {
         }
         Insert: {
           authority_status?: string
+          can_manage_fundraising?: boolean
           can_manage_payments?: boolean
           can_manage_profile?: boolean
           can_receive_communications?: boolean
@@ -6223,6 +6926,7 @@ export type Database = {
         }
         Update: {
           authority_status?: string
+          can_manage_fundraising?: boolean
           can_manage_payments?: boolean
           can_manage_profile?: boolean
           can_receive_communications?: boolean
@@ -6365,6 +7069,203 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      money_board_generations: {
+        Row: {
+          board_id: string
+          created_at: string
+          generation: number
+          id: string
+          increment_minor: number
+          start_minor: number
+          tile_count: number
+        }
+        Insert: {
+          board_id: string
+          created_at?: string
+          generation: number
+          id?: string
+          increment_minor: number
+          start_minor: number
+          tile_count: number
+        }
+        Update: {
+          board_id?: string
+          created_at?: string
+          generation?: number
+          id?: string
+          increment_minor?: number
+          start_minor?: number
+          tile_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_generations_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "money_boards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_reservations: {
+        Row: {
+          capability_digest: string
+          expires_at: string
+          id: string
+          release_reason: string | null
+          released_at: string | null
+          request_id: string
+          starts_at: string
+          tile_id: string
+        }
+        Insert: {
+          capability_digest: string
+          expires_at: string
+          id?: string
+          release_reason?: string | null
+          released_at?: string | null
+          request_id: string
+          starts_at?: string
+          tile_id: string
+        }
+        Update: {
+          capability_digest?: string
+          expires_at?: string
+          id?: string
+          release_reason?: string | null
+          released_at?: string | null
+          request_id?: string
+          starts_at?: string
+          tile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_reservations_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_tiles: {
+        Row: {
+          amount_minor: number
+          board_id: string
+          created_at: string
+          generation_id: string
+          id: string
+          ordinal: number
+        }
+        Insert: {
+          amount_minor: number
+          board_id: string
+          created_at?: string
+          generation_id: string
+          id?: string
+          ordinal: number
+        }
+        Update: {
+          amount_minor?: number
+          board_id?: string
+          created_at?: string
+          generation_id?: string
+          id?: string
+          ordinal?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_tiles_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "money_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_tiles_generation_id_fkey"
+            columns: ["generation_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_generations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_boards: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          fundraiser_id: string | null
+          goal_minor: number
+          id: string
+          increment_minor: number
+          public_path: string
+          reservation_seconds: number
+          start_minor: number
+          status: string
+          team_id: string | null
+          tile_count: number
+          title: string
+          version: number
+          visibility: string
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          fundraiser_id?: string | null
+          goal_minor: number
+          id?: string
+          increment_minor: number
+          public_path?: string
+          reservation_seconds?: number
+          start_minor: number
+          status?: string
+          team_id?: string | null
+          tile_count: number
+          title: string
+          version?: number
+          visibility?: string
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          fundraiser_id?: string | null
+          goal_minor?: number
+          id?: string
+          increment_minor?: number
+          public_path?: string
+          reservation_seconds?: number
+          start_minor?: number
+          status?: string
+          team_id?: string | null
+          tile_count?: number
+          title?: string
+          version?: number
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_boards_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_boards_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "money_boards_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notification_deliveries: {
         Row: {
@@ -10685,6 +11586,14 @@ export type Database = {
         Returns: Json
       }
       boss_communications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_fundraising_mutate: { Args: { command: Json }; Returns: Json }
+      boss_fundraising_navigation: { Args: never; Returns: boolean }
+      boss_fundraising_public: {
+        Args: { offset_ordinal?: number; path: string }
+        Returns: Json
+      }
+      boss_fundraising_read: { Args: { query: Json }; Returns: Json }
+      boss_fundraising_support: { Args: { command: Json }; Returns: Json }
       boss_games_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

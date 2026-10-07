@@ -1,5 +1,22 @@
 # Current build state
 
+## Phase 7A Fundraising Core + Digital Money Board — in progress
+
+Main Boss Chat authorized Phase 7A from `da001f8b9402b48ca74e80e133946fe2f62522ed`.
+Five local migrations reuse `fundraising` and `money_board`; `boss_bucks` remains
+unimplemented. Local work adds campaign/participant/family management, explicit
+false-default guardian fundraising authority, approved random shares and QR,
+private guest donor/intent provenance, deterministic Money Boards, bounded
+reservation/claim operations, monthly commitment schedules and future trial/gift
+qualification. The trusted success boundary has no public or authenticated
+payment simulation endpoint. No provider, wallet or later phase is implemented.
+
+Local implementation and full historical validation are underway. Canonical
+migration baseline is still 78; no Phase 7A migration or hosted acceptance window
+has been activated. Release/acceptance/cleanup remain pending. This section will
+be updated only from actual validation and hosted evidence. Phase 6E and all
+historical incident disclosures below remain intact.
+
 ## Phase 6E presentation repair and closure — 2026-10-06
 
 **Phase 6E Awards + Badges + Verified Achievements: COMPLETE.** Main Boss Chat

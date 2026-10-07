@@ -279,3 +279,14 @@ membership cannot expose private Falcons honors, award notes or restricted peer
 rankings. Family access follows verified guardian authority; household membership
 alone grants nothing. Career definitions evaluate the explicitly scoped source
 organization and optional team; they do not infer cross-tenant aggregation rights.
+
+
+## Phase 7A local extension (release validation pending)
+
+Fundraising records use one canonical campaign and participant identity with
+exact organization/unit/team attribution. Explicit targets do not inherit
+unit descendants. Public opaque paths resolve finite approved display fields;
+internal IDs never become anonymous authority. Guest donors do not become Boss
+accounts. Current relationship revocation closes participant shares and blocked
+writes recheck after locks. Success provenance retains the originating and
+future restricted-use organization.

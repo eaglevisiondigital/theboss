@@ -117,3 +117,15 @@ balance, debit, transferable value, fundraising ledger or actual Boss Bucks acti
 
 See [Permissions](PERMISSIONS_MODEL.md), [Registration](REGISTRATION_ARCHITECTURE.md)
 and [Decisions](DECISIONS.md).
+
+
+## Phase 7A local extension (release validation pending)
+
+Phase 7A fundraising intents retain donor fee-cover preference only. No fee
+quote, processor fee, net settlement, payout, payment collection, receivable
+allocation or Boss Bucks credit is executed. Future reviewed payment adapters
+must verify external evidence, match exact intent/currency/amount and bind one
+idempotent source reference. They then feed immutable success evidence, receipt
+and reward qualification. Refund/chargeback/reward reversal must append source
+lineage and safely reverse dependent allocations/issuance in later phases;
+paid tile identity is never silently reopened by a reversal.

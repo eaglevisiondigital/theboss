@@ -967,3 +967,26 @@ button:disabled { cursor: wait; opacity: .65; }
 .achievement-history li { overflow-wrap: anywhere; }
 .achievement-history span, .achievement-history time { display: block; }
 .achievement-hub select, .achievement-hub input, .achievement-hub textarea { max-width: 100%; min-width: 0; }
+/* Phase 7A: scoped public Money Board and authenticated fundraising controls. */
+.fundraising-public { max-width: 960px; padding-block: 2rem 4rem; }
+.fundraising-public h1 { font-size: clamp(2rem, 6vw, 3.5rem); overflow-wrap: anywhere; }
+.fundraising-panel, .money-board { border: 1px solid #494949; border-radius: 1rem; padding: clamp(.75rem, 3vw, 1.5rem); margin-block: 1rem; min-width: 0; }
+.fundraising-fundraiser { border-top: 1px solid #494949; padding-block: 1rem; }
+.fundraising-form, .fundraising-filters, .fundraising-progress { display: grid; gap: .8rem; margin-block: 1rem; min-width: 0; }
+.fundraising-form { max-width: 640px; }
+.fundraising-form label, .fundraising-filters label { display: grid; gap: .4rem; min-width: 0; }
+.fundraising-form input, .fundraising-form select, .fundraising-form textarea, .fundraising-filters select { width: 100%; min-width: 0; box-sizing: border-box; border: 1px solid #666; border-radius: .4rem; padding: .65rem; color: #fff; background: #181818; }
+.fundraising-form fieldset { min-width: 0; border: 1px solid #666; padding: .7rem; }
+.fundraising-form .fundraising-check { display: flex; gap: .7rem; align-items: center; }
+.fundraising-check input[type=checkbox] { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; }
+.fundraising-progress progress { width: 100%; accent-color: #ff7a18; }
+.fundraising-panel .button { margin: .3rem; max-width: 100%; white-space: normal; }
+.money-board-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: .6rem; margin-block: 1rem; }
+.money-tile { display: grid; gap: .4rem; min-height: 80px; border: 2px solid #ff8b32; border-radius: .6rem; padding: .6rem; background: #151515; color: #fff; cursor: pointer; }
+.money-tile strong { font-size: 1.15rem; }.money-tile span { font-size: .78rem; text-transform: capitalize; }
+.money-tile:disabled { border-color: #777; cursor: default; }.tile-claimed { background: #ff7a18; color: #111; }
+.money-tile:focus-visible, .fundraising-form :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.fundraising-share { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }.fundraising-qr { display: grid; gap: .5rem; max-width: 100%; }.fundraising-qr img { max-width: 100%; height: auto; background: #fff; }
+.fundraising-console h3, .fundraising-console h4, .fundraising-public p { overflow-wrap: anywhere; }
+@media(min-width: 768px) { .fundraising-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; } }
+@media(max-width: 390px) { .money-board-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }.fundraising-panel .button { margin-inline: 0; width: 100%; }.fundraising-share { display: grid; } }

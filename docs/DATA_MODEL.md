@@ -434,3 +434,15 @@ nominations/decisions, competition-close snapshots, bounded refresh work and pri
 request receipts supply recognition over existing facts. Source ID/generation,
 organization/team, sport/season, achieved/recognized dates and issuer remain distinct.
 No parallel athlete identity, score, statistics or records authority is introduced.
+
+
+## Phase 7A local extension (release validation pending)
+
+Phase 7A adds 16 RLS-closed tables for campaigns, exact team/program targets,
+canonical participant fundraisers, approved random share paths, deterministic
+boards/generations/tiles, private donors, reservations, immutable intents/events/
+success evidence, recurring commitments/occurrences, reward qualification and
+append-only history. Private receipts, rate windows and milestones support
+idempotency. Raised totals are projections of immutable success evidence.
+Participant transfers do not rewrite provenance. See FUNDRAISING_ARCHITECTURE.md
+and DIGITAL_MONEY_BOARD_ARCHITECTURE.md. No wallet or provider execution exists.

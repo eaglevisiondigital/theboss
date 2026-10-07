@@ -309,3 +309,13 @@ Showcase inclusion requires separate display choice plus existing versioned cons
 The internal feed is authorized recognition paging, not a public youth feed. Meaningful
 recognition/correction sources reuse Phase 4A notification routing and idempotency;
 no provider, SMS or push infrastructure is enabled.
+
+
+## Phase 7A local extension (release validation pending)
+
+Phase 7A implements the existing Fundraising and Money Board catalog entries.
+Money Board requires its own enabled module plus a current Fundraising campaign
+context. Fundraising works with Sports/Calendar disabled and does not activate
+Messaging, Boss Bucks, Commerce, providers or other modules. Existing Phase 4A
+notifications are used only when already available. Future physical/digital card
+channel configurations are explicitly non-executable.

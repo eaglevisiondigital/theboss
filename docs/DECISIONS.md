@@ -958,3 +958,17 @@ record, deadline miss, source recovery, 403 ambiguity and sanitized credential
 incident disclosure as historical evidence. No evidence limitation was silently
 promoted to a newly executed hosted test. No Phase 7A or later phase is started.
 See PHASE_6E_PRESENTATION_REPAIR_REPORT.md.
+
+
+## Phase 7A local extension (release validation pending)
+
+Main Boss Chat authorized Phase 7A only. Use integer minor units and immutable
+settled evidence for raised totals; no editable raised-total field. Preserve
+canonical participant identity, explicit targets and source attribution. Add
+false-default guardian fundraising capability, approved public display and
+opt-in participant leaderboard inclusion. Recurring tile support is amount per
+month: only the first verified success claims that tile; unpaid future planned
+occurrences count as no value. Use bounded generation batches and reads, rather
+than treating 100,000 tested tiles as a product cap. Reward qualification uses
+configurable integer threshold and explicit strict `gt`; USD 2500 fails and
+2501 qualifies, with fulfillment pending. No wallet/payment provider execution.
