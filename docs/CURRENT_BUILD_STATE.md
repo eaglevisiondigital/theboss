@@ -1,5 +1,27 @@
 # Current build state
 
+## Phase 7C Boss Bucks Spending + Canonical Charge Payments + Split Tender: INCOMPLETE
+
+Main Boss Chat authorized Phase 7C from
+`e65703adb5aa6cb03d4ba7bae475d52ae48ea26c` and resolved covered-recovery returns.
+Actual replacement-grant lineage is unwound deterministically, preserving
+validity/expiry; invalid original sources are never resurrected. Six tested
+migrations are applied; canonical history **95**. Live RLS/ACL/search-path/FK
+checks pass and canonical types are regenerated.
+
+The complete fresh historical PostgreSQL runner passes **18,899** unique
+SQL/bootstrap/sealed-source assertions and **261** coordinated races, including
+**461** Phase 7C assertions and **33** races. Typecheck, zero-warning lint,
+**470/470** application tests and build pass before canonical generation;
+post-generation validation and release/hosted acceptance are in progress.
+No temporary hosted authority is active. Positive live financial evidence remains
+limited by zero trusted paid fundraising sources; no fake earning is permitted.
+
+See [payment architecture](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md),
+[validation](PHASE_7C_VALIDATION.md) and
+[121-point report](PHASE_7C_COMPLETION_REPORT.md).
+No Phase 7D began. Historical stop statements below describe their prior closures.
+
 ## Phase 7B Boss Bucks Wallet + Organization-Restricted Ledger: COMPLETE
 
 Phase 7B reuses boss_bucks with one household/currency wallet, immutable

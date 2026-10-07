@@ -1730,6 +1730,58 @@ export type Database = {
           },
         ]
       }
+      boss_bucks_consumptions: {
+        Row: {
+          allocation_id: string
+          amount_minor: number
+          created_at: string
+          grant_id: string
+          id: string
+          journal_id: string
+          ordinal: number
+        }
+        Insert: {
+          allocation_id: string
+          amount_minor: number
+          created_at?: string
+          grant_id: string
+          id?: string
+          journal_id: string
+          ordinal: number
+        }
+        Update: {
+          allocation_id?: string
+          amount_minor?: number
+          created_at?: string
+          grant_id?: string
+          id?: string
+          journal_id?: string
+          ordinal?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_consumptions_allocation_id_fkey"
+            columns: ["allocation_id"]
+            isOneToOne: false
+            referencedRelation: "payment_allocations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_consumptions_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_consumptions_journal_id_fkey"
+            columns: ["journal_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       boss_bucks_fundraiser_bindings: {
         Row: {
           authorized_by: string
@@ -1997,6 +2049,7 @@ export type Database = {
       }
       boss_bucks_journals: {
         Row: {
+          amount_minor: number | null
           created_at: string
           currency: string
           grant_id: string
@@ -2006,6 +2059,7 @@ export type Database = {
           reason: string
         }
         Insert: {
+          amount_minor?: number | null
           created_at?: string
           currency: string
           grant_id: string
@@ -2015,6 +2069,7 @@ export type Database = {
           reason: string
         }
         Update: {
+          amount_minor?: number | null
           created_at?: string
           currency?: string
           grant_id?: string
@@ -2212,6 +2267,218 @@ export type Database = {
           },
         ]
       }
+      boss_bucks_recovery_claims: {
+        Row: {
+          created_at: string
+          grant_id: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          grant_id: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          grant_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_recovery_claims_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: true
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_recovery_movements: {
+        Row: {
+          amount_minor: number
+          cause_release_id: string | null
+          claim_id: string
+          created_at: string
+          id: string
+          invalid_release_journal_id: string | null
+          journal_id: string
+          kind: string
+          original_movement_id: string | null
+          payment_reversal_id: string | null
+          replacement_grant_id: string | null
+        }
+        Insert: {
+          amount_minor: number
+          cause_release_id?: string | null
+          claim_id: string
+          created_at?: string
+          id?: string
+          invalid_release_journal_id?: string | null
+          journal_id: string
+          kind: string
+          original_movement_id?: string | null
+          payment_reversal_id?: string | null
+          replacement_grant_id?: string | null
+        }
+        Update: {
+          amount_minor?: number
+          cause_release_id?: string | null
+          claim_id?: string
+          created_at?: string
+          id?: string
+          invalid_release_journal_id?: string | null
+          journal_id?: string
+          kind?: string
+          original_movement_id?: string | null
+          payment_reversal_id?: string | null
+          replacement_grant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_cause_release_id_fkey"
+            columns: ["cause_release_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_recovery_movements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_claim_id_fkey"
+            columns: ["claim_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_recovery_claims"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_invalid_release_journal_id_fkey"
+            columns: ["invalid_release_journal_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_journal_id_fkey"
+            columns: ["journal_id"]
+            isOneToOne: true
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_original_movement_id_fkey"
+            columns: ["original_movement_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_recovery_movements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_payment_reversal_id_fkey"
+            columns: ["payment_reversal_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_tenders"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_recovery_movements_replacement_grant_id_fkey"
+            columns: ["replacement_grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_restorations: {
+        Row: {
+          allocation_id: string
+          amount_minor: number
+          consumption_id: string
+          created_at: string
+          id: string
+          journal_id: string
+        }
+        Insert: {
+          allocation_id: string
+          amount_minor: number
+          consumption_id: string
+          created_at?: string
+          id?: string
+          journal_id: string
+        }
+        Update: {
+          allocation_id?: string
+          amount_minor?: number
+          consumption_id?: string
+          created_at?: string
+          id?: string
+          journal_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_restorations_allocation_id_fkey"
+            columns: ["allocation_id"]
+            isOneToOne: false
+            referencedRelation: "payment_allocations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_restorations_consumption_id_fkey"
+            columns: ["consumption_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_consumptions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_restorations_journal_id_fkey"
+            columns: ["journal_id"]
+            isOneToOne: true
+            referencedRelation: "boss_bucks_journals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_source_corrections: {
+        Row: {
+          created_at: string
+          entitlement_minor: number
+          grant_id: string
+          id: string
+          remaining_source_minor: number
+          source_event_id: string | null
+          source_key: string
+        }
+        Insert: {
+          created_at?: string
+          entitlement_minor: number
+          grant_id: string
+          id?: string
+          remaining_source_minor: number
+          source_event_id?: string | null
+          source_key: string
+        }
+        Update: {
+          created_at?: string
+          entitlement_minor?: number
+          grant_id?: string
+          id?: string
+          remaining_source_minor?: number
+          source_event_id?: string | null
+          source_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_source_corrections_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_source_corrections_source_event_id_fkey"
+            columns: ["source_event_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intent_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       boss_bucks_source_snapshots: {
         Row: {
           created_at: string
@@ -2261,6 +2528,85 @@ export type Database = {
             columns: ["policy_revision_id"]
             isOneToOne: false
             referencedRelation: "boss_bucks_policy_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boss_bucks_tenders: {
+        Row: {
+          actor_person_id: string
+          checkout_id: string
+          created_at: string
+          currency: string
+          organization_id: string
+          original_payment_id: string | null
+          payment_id: string
+          request_id: string
+          wallet_id: string
+        }
+        Insert: {
+          actor_person_id: string
+          checkout_id: string
+          created_at?: string
+          currency: string
+          organization_id: string
+          original_payment_id?: string | null
+          payment_id: string
+          request_id: string
+          wallet_id: string
+        }
+        Update: {
+          actor_person_id?: string
+          checkout_id?: string
+          created_at?: string
+          currency?: string
+          organization_id?: string
+          original_payment_id?: string | null
+          payment_id?: string
+          request_id?: string
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_tenders_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_tenders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_tenders_organization_id_payment_id_fkey"
+            columns: ["organization_id", "payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_tenders_original_payment_id_fkey"
+            columns: ["original_payment_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_tenders"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_tenders_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_tenders_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
             referencedColumns: ["id"]
           },
         ]
@@ -4718,6 +5064,7 @@ export type Database = {
           created_at: string
           id: string
           intent_id: string
+          remaining_valid_amount_minor: number | null
           source_event_id: string | null
           source_reference: string | null
           state: string
@@ -4727,6 +5074,7 @@ export type Database = {
           created_at?: string
           id?: string
           intent_id: string
+          remaining_valid_amount_minor?: number | null
           source_event_id?: string | null
           source_reference?: string | null
           state: string
@@ -4736,6 +5084,7 @@ export type Database = {
           created_at?: string
           id?: string
           intent_id?: string
+          remaining_valid_amount_minor?: number | null
           source_event_id?: string | null
           source_reference?: string | null
           state?: string

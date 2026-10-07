@@ -26,9 +26,10 @@ export const object = (value: Json | undefined): RegistrationRow => typeof value
 export const rows = (value: Json | undefined): RegistrationRow[] => Array.isArray(value) ? value.flatMap(item => typeof item === "object" && item !== null && !Array.isArray(item) ? [item] : []) : [];
 export const money = (minor: number, currency = "USD") => { try { return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(minor / 100); } catch { return minor + " " + currency + " minor units"; } };
 
-// Nonexecuting integration taxonomy. Current database writes and HTTP commands
-// accept OfflinePaymentMethod only. Activating a planned source needs separate
-// schema/execution approval and cannot authorize cross-organization wallet spend.
+// Cash/check keep their authorized offline workflow. Boss Bucks execution uses
+// its current-session wallet/payment contract with explicit guardian authority.
+// External methods remain nonexecuting until Phase 7D approval.
 export type OfflinePaymentMethod = "cash" | "check";
-export type PlannedPaymentMethod = "card" | "ach" | "boss_bucks";
+export type CanonicalPaymentMethod = OfflinePaymentMethod | "boss_bucks";
+export type PlannedPaymentMethod = "card" | "ach";
 export type PlannedPaymentSource = Readonly<{ method: PlannedPaymentMethod; execution: "future_approval_required"; organizationId: string; chargeId: string; currency: string; amountMinor: number; sourceReference: string }>;

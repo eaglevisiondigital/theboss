@@ -1006,3 +1006,40 @@ started. The 109-point report and acceptance addendum preserve the exact evidenc
 rolled-back recovery attempts and all historical incident disclosures.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+## Phase 7C pending covered-recovery payment reversal decision
+
+Main Boss Chat authorized internal Boss Bucks spending, canonical charge payments,
+split tender, append-only reversals and same-organization future-earn recovery.
+Those rules do not specify returning later replacement earnings after they have
+already satisfied a now-returned original payment's recovery claim.
+
+Concrete case: $80 is spent, its original source is invalidated, a later valid
+earning satisfies the $80 recovery, and finance then returns that original
+charge payment. Proposed direction, awaiting approval: cancel the original
+recovery and release the consumed replacement value to its original sources,
+preserving household, organization, currency, current validity and expiry;
+dependent source corrections must remain balanced and cannot revive invalid or
+expired value. Alternative: deny the covered-recovery reversal pending separate
+approved handling. Neither alternative is recorded here as an approved rule.
+
+The unpublished local checkpoint atomically refuses this case. No canonical
+release will occur until the financial direction is resolved and its cases are
+validated. Original Phase 7B and historical security/incident records remain
+unchanged. No provider, settlement, payout, transfer or Phase 7D work is activated.
+
+## Phase 7C binding recovery-release decision — October 7, 2026
+
+Main Boss Chat directly resolved the preceding pending decision: a returned
+canonical Boss Bucks payment must release applicable covered recovery through
+its actual replacement grants. Original invalid value must never reactivate.
+Replacement value retains its original source, captured policy, household,
+organization, currency, attribution, availability and expiration. Invalid or
+expired replacement value stays unavailable; dependent invalid-source recovery
+must unwind consistently. Partial returns are bounded to their actual exposure,
+with most-recent application first and stable-ID tie breaking.
+
+This supersedes the pending decision gate above without deleting its checkpoint
+history. The local implementation and independent SQL/race coverage are being
+updated and revalidated before the already authorized canonical release.
+No provider, external settlement or Phase 7D rule is established.
