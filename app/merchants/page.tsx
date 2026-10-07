@@ -13,6 +13,12 @@ const discovery = [
   ["05", "Connect to your website", "Help customers learn more, browse your menu, book a service or follow a link to your own online ordering experience where available."],
   ["06", "Give them a reason to return", "A useful, clearly explained offer gives members a reason to choose you again. Set the participating locations, eligible purchases and redemption frequency that fit your business."],
 ];
+const dealMockups = [
+  { file: "merchant-deals-sonic.png", title: "Everyday favorites", copy: "Buy-one-get-one offers and extras worth stopping for.", x: 140, y: 6, width: 744, height: 1503, radius: 128 },
+  { file: "merchant-deals-dining.png", title: "More value when dining out", copy: "Dollar savings, meal deals and offers that bring people together.", x: 144, y: 10, width: 733, height: 1464, radius: 128 },
+  { file: "merchant-deals-restaurants.png", title: "A little extra with every visit", copy: "Complimentary items, percentage savings and restaurant specials.", x: 130, y: 10, width: 762, height: 1489, radius: 132 },
+  { file: "merchant-deals-services.png", title: "Savings beyond the table", copy: "Everyday value across automotive, home, beauty and personal services.", x: 130, y: 10, width: 762, height: 1489, radius: 132 },
+];
 const offerTypes = [
   ["%", "Percentage off", "A clear saving on eligible purchases."],
   ["$", "Dollar savings", "A set amount off a qualifying visit."],
@@ -53,6 +59,20 @@ export default function Page() {
           <div className={s.offerPanelHeader}><p className={s.eyebrow}>YOUR BUSINESS. YOUR OFFER.</p><h3>Value that fits<br/>your business.</h3><p>Make the next visit worth choosing you.</p></div>
           <div className={s.offerPanelBody}><div className={s.offerTypes}>{offerTypes.map(([symbol,title,copy])=><div className={s.offerType} key={title}><span aria-hidden="true">{symbol}</span><div><h4>{title}</h4><p>{copy}</p></div></div>)}</div>
           <div className={s.offerChecklist}><h4>A great offer is easy to understand.</h4><ul><li>State the saving and eligible purchases.</li><li>Choose participating locations.</li><li>Explain exclusions, timing and usage limits.</li><li>Keep redemption simple for customers and staff.</li></ul></div><p className={s.note}>Proposed offers are reviewed for fit and clarity. We’ll help you explore the options for your business.</p></div>
+        </div>
+        <div className={s.appShowcase}>
+          <div className={s.showcaseHeading}><p className={s.eyebrow}>SEE THE POSSIBILITIES</p><h2>Great offers.<br/><em>Made to stand out.</em></h2><p>A closer look at the Boss Bucks Digital discount experience, from restaurant favorites to everyday services.</p></div>
+          <div className={s.mockupGrid}>{dealMockups.map((mockup,index)=><figure className={s.mockupCard} key={mockup.file}>
+            <a className={s.mockupLink} href={`/images/approved/${mockup.file}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${mockup.title} mockup at full resolution (new tab)`}>
+              <svg viewBox="115 0 794 1536" role="img" aria-label={`${mockup.title}: illustrative Boss Bucks Digital offers`}>
+                <defs><clipPath id={`merchant-phone-${index}`}><rect x={mockup.x} y={mockup.y} width={mockup.width} height={mockup.height} rx={mockup.radius}/></clipPath></defs>
+                <image href={`/images/approved/${mockup.file}`} width="1024" height="1536" clipPath={`url(#merchant-phone-${index})`}/>
+              </svg>
+              <span className={s.viewMockup}>View full-resolution mockup <span aria-hidden="true">↗</span></span>
+            </a>
+            <figcaption><h3>{mockup.title}</h3><p>{mockup.copy}</p></figcaption>
+          </figure>)}</div>
+          <p className={s.showcaseNote}>Illustrative app mockups. Featured brands and offers demonstrate the experience and do not confirm current participation or offer availability.</p>
         </div>
       </section>
       <section className={s.join}>
