@@ -3988,6 +3988,1389 @@ export type Database = {
           },
         ]
       }
+      discount_campaign_products: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          created_by: string
+          ends_at: string | null
+          gift_enabled: boolean
+          id: string
+          organization_id: string
+          revision_id: string
+          sale_enabled: boolean
+          starts_at: string
+          status: string
+          trial_enabled: boolean
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          created_by: string
+          ends_at?: string | null
+          gift_enabled?: boolean
+          id?: string
+          organization_id: string
+          revision_id: string
+          sale_enabled?: boolean
+          starts_at: string
+          status?: string
+          trial_enabled?: boolean
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          created_by?: string
+          ends_at?: string | null
+          gift_enabled?: boolean
+          id?: string
+          organization_id?: string
+          revision_id?: string
+          sale_enabled?: boolean
+          starts_at?: string
+          status?: string
+          trial_enabled?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_campaign_products_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_campaign_products_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_campaign_products_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_card_batches: {
+        Row: {
+          campaign_id: string | null
+          controlled: boolean
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+          organization_id: string | null
+          owner_type: string
+          printed_at: string | null
+          quantity: number
+          revision_id: string
+          status: string
+        }
+        Insert: {
+          campaign_id?: string | null
+          controlled?: boolean
+          created_at?: string
+          created_by: string
+          id?: string
+          name: string
+          organization_id?: string | null
+          owner_type: string
+          printed_at?: string | null
+          quantity: number
+          revision_id: string
+          status?: string
+        }
+        Update: {
+          campaign_id?: string | null
+          controlled?: boolean
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
+          organization_id?: string | null
+          owner_type?: string
+          printed_at?: string | null
+          quantity?: number
+          revision_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_card_batches_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_batches_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_card_batches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_batches_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_card_history: {
+        Row: {
+          action: string
+          actor_id: string | null
+          campaign_id: string | null
+          card_id: string
+          created_at: string
+          fundraiser_id: string | null
+          id: string
+          organization_id: string | null
+          source_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          campaign_id?: string | null
+          card_id: string
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          organization_id?: string | null
+          source_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          campaign_id?: string | null
+          card_id?: string
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          organization_id?: string | null
+          source_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_card_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_history_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_history_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "discount_physical_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_history_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_card_history_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_entitlement_links: {
+        Row: {
+          created_at: string
+          entitlement_id: string
+          source_id: string
+        }
+        Insert: {
+          created_at?: string
+          entitlement_id: string
+          source_id: string
+        }
+        Update: {
+          created_at?: string
+          entitlement_id?: string
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_entitlement_links_entitlement_id_fkey"
+            columns: ["entitlement_id"]
+            isOneToOne: true
+            referencedRelation: "entitlements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_entitlement_links_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: true
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_fulfillment_history: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          fulfillment_id: string
+          id: string
+          state: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          fulfillment_id: string
+          id?: string
+          state: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          fulfillment_id?: string
+          id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_fulfillment_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_fulfillment_history_fulfillment_id_fkey"
+            columns: ["fulfillment_id"]
+            isOneToOne: false
+            referencedRelation: "discount_fulfillments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_fulfillments: {
+        Row: {
+          card_id: string | null
+          created_at: string
+          id: string
+          item_id: string
+          state: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          card_id?: string | null
+          created_at?: string
+          id?: string
+          item_id: string
+          state: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          card_id?: string | null
+          created_at?: string
+          id?: string
+          item_id?: string
+          state?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_fulfillments_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: true
+            referencedRelation: "discount_physical_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_fulfillments_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: true
+            referencedRelation: "discount_order_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_intent_product_snapshots: {
+        Row: {
+          binding_id: string
+          created_at: string
+          intent_id: string
+          revision_id: string
+          trial_membership_id: string | null
+        }
+        Insert: {
+          binding_id: string
+          created_at?: string
+          intent_id: string
+          revision_id: string
+          trial_membership_id?: string | null
+        }
+        Update: {
+          binding_id?: string
+          created_at?: string
+          intent_id?: string
+          revision_id?: string
+          trial_membership_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_intent_product_snapshots_binding_id_fkey"
+            columns: ["binding_id"]
+            isOneToOne: false
+            referencedRelation: "discount_campaign_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_intent_product_snapshots_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_intent_product_snapshots_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_intent_product_snapshots_trial_membership_id_fkey"
+            columns: ["trial_membership_id"]
+            isOneToOne: false
+            referencedRelation: "discount_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_member_sources: {
+        Row: {
+          base_source_id: string | null
+          campaign_id: string | null
+          created_at: string
+          donor_id: string | null
+          ends_at: string
+          fundraiser_id: string | null
+          id: string
+          intent_id: string | null
+          kind: string
+          membership_id: string
+          organization_id: string | null
+          provenance: Json
+          qualification_id: string | null
+          revision_id: string
+          source_key: string
+          starts_at: string
+          tier: string
+        }
+        Insert: {
+          base_source_id?: string | null
+          campaign_id?: string | null
+          created_at?: string
+          donor_id?: string | null
+          ends_at: string
+          fundraiser_id?: string | null
+          id?: string
+          intent_id?: string | null
+          kind: string
+          membership_id: string
+          organization_id?: string | null
+          provenance?: Json
+          qualification_id?: string | null
+          revision_id: string
+          source_key: string
+          starts_at: string
+          tier: string
+        }
+        Update: {
+          base_source_id?: string | null
+          campaign_id?: string | null
+          created_at?: string
+          donor_id?: string | null
+          ends_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          intent_id?: string | null
+          kind?: string
+          membership_id?: string
+          organization_id?: string | null
+          provenance?: Json
+          qualification_id?: string | null
+          revision_id?: string
+          source_key?: string
+          starts_at?: string
+          tier?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_member_sources_base_source_id_fkey"
+            columns: ["base_source_id"]
+            isOneToOne: false
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_donors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "discount_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_qualification_id_fkey"
+            columns: ["qualification_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_reward_qualifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_member_sources_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_membership_history: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json
+          id: string
+          membership_id: string | null
+          organization_id: string | null
+          request_id: string | null
+          resource_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          membership_id?: string | null
+          organization_id?: string | null
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          membership_id?: string | null
+          organization_id?: string | null
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_membership_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_membership_history_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "discount_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_membership_history_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_memberships: {
+        Row: {
+          country: string
+          created_at: string
+          display_id: string
+          household_id: string | null
+          id: string
+          market: string
+          person_id: string | null
+          product_id: string
+          region: string
+          state: string
+          subject_id: string | null
+          subject_type: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          display_id?: string
+          household_id?: string | null
+          id?: string
+          market: string
+          person_id?: string | null
+          product_id: string
+          region: string
+          state?: string
+          subject_id?: string | null
+          subject_type: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          display_id?: string
+          household_id?: string | null
+          id?: string
+          market?: string
+          person_id?: string | null
+          product_id?: string
+          region?: string
+          state?: string
+          subject_id?: string | null
+          subject_type?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_memberships_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_memberships_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_memberships_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_order_history: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string | null
+          kind: string
+          order_id: string
+          source_event_id: string | null
+          source_key: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          kind: string
+          order_id: string
+          source_event_id?: string | null
+          source_key: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          kind?: string
+          order_id?: string
+          source_event_id?: string | null
+          source_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_order_history_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "discount_order_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_order_history_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "discount_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_order_items: {
+        Row: {
+          created_at: string
+          fulfillment_type: string
+          id: string
+          kind: string
+          order_id: string
+          ordinal: number
+          organization_credit_minor: number
+          platform_retained_minor: number
+          price_minor: number
+          product_cost_minor: number
+          product_id: string
+          revision_id: string
+          snapshot: Json
+          source_id: string | null
+          tier: string
+        }
+        Insert: {
+          created_at?: string
+          fulfillment_type: string
+          id?: string
+          kind: string
+          order_id: string
+          ordinal: number
+          organization_credit_minor: number
+          platform_retained_minor: number
+          price_minor: number
+          product_cost_minor: number
+          product_id: string
+          revision_id: string
+          snapshot: Json
+          source_id?: string | null
+          tier: string
+        }
+        Update: {
+          created_at?: string
+          fulfillment_type?: string
+          id?: string
+          kind?: string
+          order_id?: string
+          ordinal?: number
+          organization_credit_minor?: number
+          platform_retained_minor?: number
+          price_minor?: number
+          product_cost_minor?: number
+          product_id?: string
+          revision_id?: string
+          snapshot?: Json
+          source_id?: string | null
+          tier?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "discount_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_order_items_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_order_items_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: true
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_orders: {
+        Row: {
+          base_source_id: string | null
+          buyer_person_id: string | null
+          campaign_id: string | null
+          channel: string
+          checkout_id: string | null
+          command_digest: string
+          created_at: string
+          currency: string
+          fundraiser_id: string | null
+          guest_digest: string | null
+          id: string
+          organization_id: string
+          payment_id: string | null
+          quantity: number
+          request_id: string
+          revision_id: string
+          share_id: string | null
+          state: string
+          subject_id: string | null
+          subject_type: string
+          total_minor: number
+          updated_at: string
+        }
+        Insert: {
+          base_source_id?: string | null
+          buyer_person_id?: string | null
+          campaign_id?: string | null
+          channel: string
+          checkout_id?: string | null
+          command_digest: string
+          created_at?: string
+          currency: string
+          fundraiser_id?: string | null
+          guest_digest?: string | null
+          id?: string
+          organization_id: string
+          payment_id?: string | null
+          quantity: number
+          request_id: string
+          revision_id: string
+          share_id?: string | null
+          state?: string
+          subject_id?: string | null
+          subject_type: string
+          total_minor: number
+          updated_at?: string
+        }
+        Update: {
+          base_source_id?: string | null
+          buyer_person_id?: string | null
+          campaign_id?: string | null
+          channel?: string
+          checkout_id?: string | null
+          command_digest?: string
+          created_at?: string
+          currency?: string
+          fundraiser_id?: string | null
+          guest_digest?: string | null
+          id?: string
+          organization_id?: string
+          payment_id?: string | null
+          quantity?: number
+          request_id?: string
+          revision_id?: string
+          share_id?: string | null
+          state?: string
+          subject_id?: string | null
+          subject_type?: string
+          total_minor?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_orders_base_source_id_fkey"
+            columns: ["base_source_id"]
+            isOneToOne: false
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_buyer_person_id_fkey"
+            columns: ["buyer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_orders_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: true
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_orders_share_id_fkey"
+            columns: ["share_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_shares"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_physical_cards: {
+        Row: {
+          batch_id: string
+          campaign_id: string | null
+          claimed_at: string | null
+          claimed_by: string | null
+          created_at: string
+          fundraiser_id: string | null
+          id: string
+          membership_id: string | null
+          order_item_id: string | null
+          ordinal: number
+          organization_id: string | null
+          printed_at: string | null
+          replaced_by: string | null
+          serial: string
+          sold_at: string | null
+          state: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          batch_id: string
+          campaign_id?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          membership_id?: string | null
+          order_item_id?: string | null
+          ordinal: number
+          organization_id?: string | null
+          printed_at?: string | null
+          replaced_by?: string | null
+          serial?: string
+          sold_at?: string | null
+          state?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          batch_id?: string
+          campaign_id?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          membership_id?: string | null
+          order_item_id?: string | null
+          ordinal?: number
+          organization_id?: string | null
+          printed_at?: string | null
+          replaced_by?: string | null
+          serial?: string
+          sold_at?: string | null
+          state?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_card_order_item_fk"
+            columns: ["order_item_id"]
+            isOneToOne: true
+            referencedRelation: "discount_order_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "discount_card_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_claimed_by_fkey"
+            columns: ["claimed_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "discount_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_physical_cards_replaced_by_fkey"
+            columns: ["replaced_by"]
+            isOneToOne: true
+            referencedRelation: "discount_physical_cards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_product_credits: {
+        Row: {
+          amount_minor: number
+          campaign_id: string
+          created_at: string
+          fundraiser_id: string | null
+          id: string
+          item_id: string
+          payment_id: string
+          source_event_id: string | null
+          source_key: string
+        }
+        Insert: {
+          amount_minor: number
+          campaign_id: string
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          item_id: string
+          payment_id: string
+          source_event_id?: string | null
+          source_key: string
+        }
+        Update: {
+          amount_minor?: number
+          campaign_id?: string
+          created_at?: string
+          fundraiser_id?: string | null
+          id?: string
+          item_id?: string
+          payment_id?: string
+          source_event_id?: string | null
+          source_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_product_credits_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_credits_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_credits_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "discount_order_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_credits_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_product_revisions: {
+        Row: {
+          card_validity_days: number | null
+          claim_policy: string
+          country: string
+          created_at: string
+          created_by: string
+          currency: string
+          ends_at: string | null
+          fulfillment_type: string
+          gift_enabled: boolean
+          id: string
+          market: string
+          membership_product_id: string
+          organization_credit_minor: number | null
+          organization_id: string | null
+          platform_retained_minor: number | null
+          price_minor: number
+          product_cost_minor: number | null
+          product_id: string
+          refund_policy: string
+          region: string
+          revision: number
+          sale_channels: string[]
+          settlement_policy_id: string | null
+          starts_at: string
+          subject_type: string
+          term_days: number | null
+          tier: string
+          trial_days: number | null
+          trial_enabled: boolean
+          upgrade_from_tiers: string[]
+          upgrade_policy: string
+          validity_anchor: string | null
+        }
+        Insert: {
+          card_validity_days?: number | null
+          claim_policy: string
+          country: string
+          created_at?: string
+          created_by: string
+          currency: string
+          ends_at?: string | null
+          fulfillment_type: string
+          gift_enabled?: boolean
+          id?: string
+          market: string
+          membership_product_id: string
+          organization_credit_minor?: number | null
+          organization_id?: string | null
+          platform_retained_minor?: number | null
+          price_minor: number
+          product_cost_minor?: number | null
+          product_id: string
+          refund_policy?: string
+          region: string
+          revision: number
+          sale_channels?: string[]
+          settlement_policy_id?: string | null
+          starts_at: string
+          subject_type: string
+          term_days?: number | null
+          tier: string
+          trial_days?: number | null
+          trial_enabled?: boolean
+          upgrade_from_tiers?: string[]
+          upgrade_policy?: string
+          validity_anchor?: string | null
+        }
+        Update: {
+          card_validity_days?: number | null
+          claim_policy?: string
+          country?: string
+          created_at?: string
+          created_by?: string
+          currency?: string
+          ends_at?: string | null
+          fulfillment_type?: string
+          gift_enabled?: boolean
+          id?: string
+          market?: string
+          membership_product_id?: string
+          organization_credit_minor?: number | null
+          organization_id?: string | null
+          platform_retained_minor?: number | null
+          price_minor?: number
+          product_cost_minor?: number | null
+          product_id?: string
+          refund_policy?: string
+          region?: string
+          revision?: number
+          sale_channels?: string[]
+          settlement_policy_id?: string | null
+          starts_at?: string
+          subject_type?: string
+          term_days?: number | null
+          tier?: string
+          trial_days?: number | null
+          trial_enabled?: boolean
+          upgrade_from_tiers?: string[]
+          upgrade_policy?: string
+          validity_anchor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_product_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_revisions_membership_product_id_fkey"
+            columns: ["membership_product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_revisions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_revisions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_product_revisions_settlement_policy_id_fkey"
+            columns: ["settlement_policy_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_policy_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_products: {
+        Row: {
+          code: string
+          created_at: string
+          created_by: string
+          id: string
+          kind: string
+          name: string
+          status: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          created_by: string
+          id?: string
+          kind: string
+          name: string
+          status?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          kind?: string
+          name?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_products_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_refund_items: {
+        Row: {
+          created_at: string
+          item_id: string
+          refund_id: string
+        }
+        Insert: {
+          created_at?: string
+          item_id: string
+          refund_id: string
+        }
+        Update: {
+          created_at?: string
+          item_id?: string
+          refund_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_refund_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "discount_order_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_refund_items_refund_id_fkey"
+            columns: ["refund_id"]
+            isOneToOne: false
+            referencedRelation: "payment_refund_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_revision_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          revision_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          revision_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          revision_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_revision_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_revision_events_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_source_revocations: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          id: string
+          reason: string
+          source_event_id: string | null
+          source_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          reason: string
+          source_event_id?: string | null
+          source_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          reason?: string
+          source_event_id?: string | null
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_source_revocations_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_source_revocations_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: true
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       document_requirements: {
         Row: {
           allowed_mime_types: string[]
@@ -9981,6 +11364,7 @@ export type Database = {
           note: string | null
           organization_id: string
           payer_person_id: string | null
+          product_order_id: string | null
           received_at: string
           recorded_by_person_id: string | null
           reference: string | null
@@ -9998,6 +11382,7 @@ export type Database = {
           note?: string | null
           organization_id: string
           payer_person_id?: string | null
+          product_order_id?: string | null
           received_at: string
           recorded_by_person_id?: string | null
           reference?: string | null
@@ -10015,6 +11400,7 @@ export type Database = {
           note?: string | null
           organization_id?: string
           payer_person_id?: string | null
+          product_order_id?: string | null
           received_at?: string
           recorded_by_person_id?: string | null
           reference?: string | null
@@ -10049,6 +11435,13 @@ export type Database = {
             columns: ["payer_person_id"]
             isOneToOne: false
             referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_product_order_id_fkey"
+            columns: ["product_order_id"]
+            isOneToOne: false
+            referencedRelation: "discount_orders"
             referencedColumns: ["id"]
           },
           {
@@ -14458,6 +15851,13 @@ export type Database = {
         Returns: Json
       }
       boss_communications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_discounts_catalog: {
+        Args: { organization_id?: string; path?: string }
+        Returns: Json
+      }
+      boss_discounts_mutate: { Args: { command: Json }; Returns: Json }
+      boss_discounts_read: { Args: { query?: Json }; Returns: Json }
+      boss_discounts_support: { Args: { command: Json }; Returns: Json }
       boss_fundraising_mutate: { Args: { command: Json }; Returns: Json }
       boss_fundraising_navigation: { Args: never; Returns: boolean }
       boss_fundraising_public: {

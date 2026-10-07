@@ -111,3 +111,11 @@ Definitive failure or reviewed cancellation explicitly ends those holds. Actual
 spend still preserves the Phase 7C grant validity/expiration and source-entitlement
 constraints; changed/invalid source value makes captured money unallocated for
 review rather than inventing wallet value.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Wallet value and Discounts membership are separate products. A membership purchase, physical claim, gift, trial or coverage upgrade never grants Wallet access, issues a Wallet grant, debits Wallet value or allocates charges. Discount entitlements are canonical product access only; existing guardian/source/recovery constraints remain authoritative for Wallet.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

@@ -230,3 +230,11 @@ settlement and organization payout are separate states. Reversals append to vali
 capture chronology and use the existing source/recovery chain.
 
 Implementation/release evidence is tracked in [Phase 7D](PHASE_7D_CHECKPOINT.md).
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Boss Bucks products coexist with direct support and Money Board. Product sales preserve exact original campaign/fundraiser/team/unit/share attribution and credit the explicit frozen organization amount only after canonical verified product payment. Product-sale credit never mints Wallet value. Trusted 7A gift qualification and immutable trial/donor lineage remain authoritative; anonymous public display permits private claim fulfillment. Currency must match campaign sale configuration.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

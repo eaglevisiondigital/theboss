@@ -1,4 +1,47 @@
+# Phase 7E release in progress
+
+Direct typed owner authorization received. All six exact validated migrations are
+applied to canonical Boss Supabase: **101 → 107**. SQL hashes are unchanged and
+local filenames match actual canonical versions. All **81** live schema/RLS/ACL/
+search-path/index checks pass. Canonical TypeScript types regenerated; original
+21 module rows, administrator, relationships, finances and sport/achievement
+baselines remain equal. Advisors retain only disclosed findings, with no new error.
+Post-generation validation, deployment/CI and the single bounded hosted window
+with explicit recovery remain release gates. Phase 7E is **INCOMPLETE** until these
+steps and cleanup finish. No temporary authority or next phase has been activated.
+The prior rejected authorization attempt below is retained as historical evidence.
+
+## Historical Phase 7E preauthorization checkpoint
+
+Phase 7E is INCOMPLETE and local only. The final full local database run passes
+21,449 unique SQL/bootstrap/sealed assertions and 293 races (251 dedicated new
+assertions; ten new races). Application typecheck/lint/562 tests/build and twelve
+synthetic responsive checks pass. Separate 81-check schema and four-check exact
+recovery preflights pass. Canonical Supabase remains ACTIVE_HEALTHY with 101
+migrations and zero Phase 7E tables.
+
+Automatic approval review rejected the first Phase 7E canonical migration before
+execution because the attachment was not recognized as direct typed production
+authorization. The exact six-source manifest and bounded hosted/recovery plan are
+prepared. No live release, temporary authority, commit/push or next phase occurred.
+PR #3 remains OPEN/DRAFT/UNMERGED at the Phase 7D source; its existing CI is green.
+See [checkpoint](PHASE_7E_CHECKPOINT.md) and [validation](PHASE_7E_VALIDATION.md).
+
 # Current build state
+
+## Phase 7E Physical + Digital Boss Bucks Membership and Campaign System: INCOMPLETE
+
+Local implementation from `8760547f4e69e5c097640030090f1d92e87ac237` is in validation.
+Canonical Supabase remains ACTIVE_HEALTHY with 101 migrations; no Phase 7E live
+migration, deployment, temporary authority or hosted window has begun. Eight
+focused SQL suites and ten coordinated races pass at the checkpoint; 561
+application tests, strict typecheck and zero-warning lint pass. Twelve isolated
+synthetic consumer/organization/public layout checks pass 1280/768/390/320 widths.
+Full historical database validation, exact manifest, canonical types/advisors,
+release, one bounded hosted window and explicit cleanup remain required.
+See [checkpoint](PHASE_7E_CHECKPOINT.md) and the new membership/card/fulfillment
+architecture documents. Provider positives retain LOCAL CONTRACT TESTED;
+SANDBOX UNAVAILABLE. No fake hosted payment or Merchant Platform is authorized.
 
 ## Phase 7D External Payment Rails + Settlement + Reconciliation: COMPLETE
 

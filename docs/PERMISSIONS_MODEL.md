@@ -436,3 +436,11 @@ See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCH
 ## Phase 7D finite financial permissions
 
 `payments.refund`, `payments.provider_manage`, `settlements.view`, `settlements.manage`, and `settlements.reconcile` extend the finite catalog. Role mapping expresses potential only. Live Auth, current account status, exact organization relationship, active module feature and exact resource scope remain authoritative. Ordinary finance does not receive provider management. Family charge payment derives from current self/explicit guardian payment authority, never household membership alone. Guest authority is the original unguessable contribution capability, not a financial role.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+The finite keys are boss_bucks.membership_view, membership_manage, product_manage, inventory_manage and fulfillment_manage. Platform catalog/pricing remains platform-only. Approved organization owner/administrator mappings still require current exact organization membership and feature policy; mapping is potential capability, never scope authority. Consumer/household benefits do not grant business, guardian, Wallet or merchant access. Refunds also require existing payments.refund authority and exact original items.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

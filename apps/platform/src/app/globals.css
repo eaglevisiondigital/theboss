@@ -899,7 +899,7 @@ button:disabled { cursor: wait; opacity: .65; }
 
 /* Diamond keeps bases and critical game state readable on the stacked console. */
 .diamond-base-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; width: min(100%, 28rem); margin-block: .5rem; }
-.diamond-base, .diamond-home { min-width: 0; padding: .5rem; border: 1px solid var(--border); border-radius: .35rem; text-align: center; overflow-wrap: anywhere; }
+.diamond-base, .diamond-home { min-width: 0; padding: .5rem; border: 1px solid var(--line); border-radius: .35rem; text-align: center; overflow-wrap: anywhere; }
 .diamond-base-2 { grid-column: 2; grid-row: 1; }
 .diamond-base-3 { grid-column: 1; grid-row: 2; }
 .diamond-base-1 { grid-column: 3; grid-row: 2; }
@@ -1004,3 +1004,22 @@ button:disabled { cursor: wait; opacity: .65; }
 .payment-console fieldset input { min-height:44px; max-width:100%; width:100%; padding:.5rem; font:inherit; }
 .payment-console :focus-visible { outline:3px solid #1b79ad; outline-offset:3px; }
 .payment-console p { margin-block:.75rem; }
+
+/* Consumer Discounts and narrow product inventory. */
+.discounts-console { display: grid; gap: 2rem; min-width: 0; }
+.discounts-console section { min-width: 0; }
+.discount-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,19rem),1fr)); gap: 1rem; }
+.discount-panel { padding: clamp(1rem,3vw,1.75rem); border: 1px solid var(--line); border-radius: 1rem; margin-block: .75rem; min-width: 0; }
+.discount-form { display: grid; gap: 1rem; margin-block: 1rem; }
+.discount-form label { display: grid; gap: .35rem; min-width: 0; font-weight: 600; }
+.discount-form input, .discount-form select { width: 100%; max-width: 100%; min-width: 0; padding: .65rem; border: 1px solid var(--line); border-radius: .4rem; background: var(--surface); color: inherit; }
+.discount-form fieldset, .discounts-console fieldset { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; }
+.discount-check { display: flex !important; align-items: flex-start; gap: .6rem; overflow-wrap: anywhere; margin-block: .5rem; }
+.discount-check input { width: auto; flex: 0 0 auto; margin-top: .3rem; }
+.discount-digital-card { background: linear-gradient(120deg,#091931,#13294b); color: #fff; border: 1px solid #9d854e; border-radius: 1.2rem; padding: clamp(1rem,3vw,2rem); max-width: 38rem; margin-block: 1rem; overflow-wrap: anywhere; }
+.discount-card-inactive { background: #283342; border-color: #657180; }
+.discount-digital-card .eyebrow { color: #d8b76a; }
+.discount-display-id { font-family: monospace; letter-spacing: .04em; }
+.discount-export { border: 2px solid #9d854e; border-radius: .6rem; padding: 1rem; overflow-wrap: anywhere; }
+.discounts-console .button { white-space: normal; height: auto; min-height: 2.75rem; max-width: 100%; text-align: center; margin: .25rem .25rem .25rem 0; }
+@media(max-width:480px) { .discount-grid { grid-template-columns: minmax(0,1fr); } .discounts-console .button { width:100%; } }

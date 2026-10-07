@@ -1,7 +1,7 @@
 import type { Json } from "../supabase/database.types";
 import { statUuid } from "../stat-intelligence/input";
 import { bucksRecord, type BucksCommand } from "./contracts";
-export const walletFeatures = ["wallet", "fundraising_issuance", "family_wallet", "organization_wallet_reporting", "charge_eligibility_preview", "wallet_spending", "charge_payments", "split_tender"] as const;
+export const walletFeatures = ["wallet", "fundraising_issuance", "family_wallet", "organization_wallet_reporting", "charge_eligibility_preview", "wallet_spending", "charge_payments", "split_tender", "discount_membership", "membership_trials", "physical_cards", "membership_sales", "membership_upgrades"] as const;
 const fields: Record<string, string[]> = { "features.configure": ["organization_id", "features"], "wallet.provision": ["organization_id", "household_id", "dependent_person_id", "currency"], "policy.create": ["campaign_id", "mode", "basis_points", "currency", "channels", "availability_seconds", "expiry_seconds"], "fundraiser.bind_household": ["fundraiser_id", "household_id"], "access.end": ["wallet_id"], "payment.spend": ["wallet_id", "organization_id", "currency", "amount_minor", "allocations", "checkout_id"], "payment.reverse": ["payment_id", "allocations", "reason"] };
 export function paymentMinor(value: unknown): number | null {
  if (typeof value !== "number" && typeof value !== "string" || !/^[1-9][0-9]{0,9}$/.test(String(value))) return null;

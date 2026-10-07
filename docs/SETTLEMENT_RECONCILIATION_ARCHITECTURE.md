@@ -62,3 +62,11 @@ a second Boss payout. Refund-before-settlement uses remaining principal/gross,
 not the original already-refunded economic amount. Source corrections preserve
 original capture chronology and the existing Phase 7C earning recovery chain.
 No live-provider or release-completion claim is made by these local checks.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Product settlement and dependent reversals use exact immutable original-item organization credit/cost/retained economics through the shared ledger. Exact-item refund requests prevent duplicate correction reservations. Unmapped unsolicited item corrections are held for review before guessing an allocation; affected product benefits/payable/credit projections remain held. No unrelated source is suspended and no automatic new resolution policy is invented.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

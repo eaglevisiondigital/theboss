@@ -22,6 +22,7 @@ phase7a_only=false
 phase7b_only=false
 phase7c_only=false
 phase7d_only=false
+phase7e_only=false
 if [[ $# != 0 ]]; then
   if [[ $# == 1 && "$1" == --concurrency ]]; then
     concurrency_only=true
@@ -37,6 +38,8 @@ if [[ $# != 0 ]]; then
     phase6c_only=true
   elif [[ $# == 1 && "$1" == --test7b ]]; then
     phase7b_only=true
+  elif [[ $# == 1 && "$1" == --test7e ]]; then
+    phase7e_only=true
   elif [[ $# == 1 && "$1" == --test7d ]]; then
     phase7d_only=true
   elif [[ $# == 1 && "$1" == --test7c ]]; then
@@ -55,8 +58,8 @@ if [[ $# != 0 ]]; then
     phase5e_only=true
   elif [[ $# == 1 && "$1" == --test5d ]]; then
     phase5d_only=true
-  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcdef]|6[abcde]|7[abcd])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase6d_tournament.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c | --test6d | --test6e | --test7a | --test7b | --test7c | --test7d | --concurrency]' >&2
+  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcdef]|6[abcde]|7[abcde])_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase6d_tournament.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c | --test6d | --test6e | --test7a | --test7b | --test7c | --test7d | --test7e | --concurrency]' >&2
     exit 1
   else
     selected_test=$2
@@ -146,7 +149,7 @@ for migration in "${migrations[@]}"; do
   "${psql_command[@]}" --quiet --single-transaction --file "$migration"
 done
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql "$test_dir"/phase6d_*.sql "$test_dir"/phase6e_*.sql "$test_dir"/phase7a_*.sql "$test_dir"/phase7b_*.sql "$test_dir"/phase7c_*.sql "$test_dir"/phase7d_*.sql)
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql "$test_dir"/phase6d_*.sql "$test_dir"/phase6e_*.sql "$test_dir"/phase7a_*.sql "$test_dir"/phase7b_*.sql "$test_dir"/phase7c_*.sql "$test_dir"/phase7d_*.sql "$test_dir"/phase7e_*.sql)
 if [[ "$phase5a_only" == true ]]; then tests=("$test_dir"/phase5a_*.sql);fi
 if [[ "$phase5b_only" == true ]]; then tests=("$test_dir"/phase5b_*.sql);fi
 if [[ "$phase5c_only" == true ]]; then tests=("$test_dir"/phase5c_*.sql);fi
@@ -155,6 +158,7 @@ if [[ "$phase5e_only" == true ]]; then tests=("$test_dir"/phase5e_*.sql);fi
 if [[ "$phase6b_only" == true ]]; then tests=("$test_dir"/phase6b_*.sql);fi
 if [[ "$phase6c_only" == true ]]; then tests=("$test_dir"/phase6c_*.sql);fi
 if [[ "$phase7b_only" == true ]]; then tests=("$test_dir"/phase7b_*.sql);fi
+if [[ "$phase7e_only" == true ]]; then tests=("$test_dir"/phase7e_*.sql);fi
 if [[ "$phase7d_only" == true ]]; then tests=("$test_dir"/phase7d_*.sql);fi
 if [[ "$phase7c_only" == true ]]; then tests=("$test_dir"/phase7c_*.sql);fi
 if [[ "$phase7a_only" == true ]]; then tests=("$test_dir"/phase7a_*.sql);fi
@@ -187,7 +191,7 @@ for test_file in "${tests[@]}"; do
 done
 fi
 
-if [[ -z "$selected_test" && ( "$phase6a_only" == true || ( "$phase5a_only" == false && "$phase5b_only" == false && "$phase5c_only" == false && "$phase5d_only" == false && "$phase5e_only" == false && "$phase5f_only" == false && "$phase6b_only" == false && "$phase6c_only" == false && "$phase6d_only" == false && "$phase6e_only" == false && "$phase7a_only" == false && "$phase7b_only" == false && "$phase7c_only" == false && "$phase7d_only" == false ) ) ]]; then
+if [[ -z "$selected_test" && ( "$phase6a_only" == true || ( "$phase5a_only" == false && "$phase5b_only" == false && "$phase5c_only" == false && "$phase5d_only" == false && "$phase5e_only" == false && "$phase5f_only" == false && "$phase6b_only" == false && "$phase6c_only" == false && "$phase6d_only" == false && "$phase6e_only" == false && "$phase7a_only" == false && "$phase7b_only" == false && "$phase7c_only" == false && "$phase7d_only" == false && "$phase7e_only" == false ) ) ]]; then
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase6a_sealed_sources.sh"
 fi
 
@@ -248,6 +252,11 @@ fi
 if [[ "$phase7b_only" == true ]]; then
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase7b_wallet_concurrency.sh"
   printf "%s\n" "Focused Phase 7B SQL/concurrency passed; full historical and concurrency validation remains required."
+  exit 0
+fi
+if [[ "$phase7e_only" == true ]]; then
+  PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase7e_membership_concurrency.sh"
+  printf '%s\n' 'Phase 7E focused SQL validation passed; full historical validation remains required.'
   exit 0
 fi
 if [[ "$phase7d_only" == true ]]; then
@@ -334,7 +343,7 @@ fi
 printf 'Testing %s\n' "${registration_concurrency_test##*/}"
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
   PGDATABASE=postgres PGUSER=postgres bash "$registration_concurrency_test"
-for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh phase4b_attendance_concurrency.sh phase4b_volunteers_concurrency.sh phase5a_games_concurrency.sh phase5b_basketball_concurrency.sh phase5c_soccer_concurrency.sh phase5d_football_concurrency.sh phase5d_athlete_history_concurrency.sh phase5e_volleyball_concurrency.sh phase5f_diamond_concurrency.sh phase6a_intelligence_concurrency.sh phase6b_ranking_concurrency.sh phase6c_athlete_profiles_concurrency.sh phase6e_achievements_concurrency.sh phase7a_fundraising_concurrency.sh phase7b_wallet_concurrency.sh phase7c_payments_concurrency.sh phase7d_payments_concurrency.sh; do
+for phase4a_test in phase4a_communications_concurrency.sh phase4a_notifications_concurrency.sh phase4b_attendance_concurrency.sh phase4b_volunteers_concurrency.sh phase5a_games_concurrency.sh phase5b_basketball_concurrency.sh phase5c_soccer_concurrency.sh phase5d_football_concurrency.sh phase5d_athlete_history_concurrency.sh phase5e_volleyball_concurrency.sh phase5f_diamond_concurrency.sh phase6a_intelligence_concurrency.sh phase6b_ranking_concurrency.sh phase6c_athlete_profiles_concurrency.sh phase6e_achievements_concurrency.sh phase7a_fundraising_concurrency.sh phase7b_wallet_concurrency.sh phase7c_payments_concurrency.sh phase7d_payments_concurrency.sh phase7e_membership_concurrency.sh; do
   concurrency_test=$test_dir/$phase4a_test
   if [[ ! -s "$concurrency_test" ]]; then
     printf 'Phase 4 concurrency test is missing: %s\n' "$phase4a_test" >&2
@@ -368,5 +377,5 @@ PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
 if [[ "$concurrency_only" == true ]]; then
   printf '%s\n' 'All sealed-source/bootstrap/concurrency checks passed; SQL suites are a separate required validation stage.'
 else
-  printf '%s\n' 'Phase 2A through Phase 7D PostgreSQL 17 authorization/bootstrap/concurrency tests passed.'
+  printf '%s\n' 'Phase 2A through Phase 7E PostgreSQL 17 authorization/bootstrap/concurrency tests passed.'
 fi

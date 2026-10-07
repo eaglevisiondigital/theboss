@@ -308,3 +308,11 @@ See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCH
 ## Phase 7D processing and financial isolation
 
 Processing accounts, exact organization/campaign/team/unit routing, checkout charges, wallet grant slices, original tender corrections and settlement sources retain organization/currency lineage. No descendant inheritance or cross-organization account fallback exists. Provider references are unique within an exact account. Organization settlement deficits offset only that same organization and currency; family wallet recovery is separate. Direct merchant settlement cannot authorize a second Boss payout.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Product identity is persistent across sources while org/campaign/fundraiser/share attribution remains explicit. Household benefit subjects follow an explicit product policy, independently of guardian or fundraising authority. Exact current person/household and organization/team contexts authorize each read or mutation; no descendant inheritance, contact-based identity merge or cross-organization inventory transfer is introduced.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

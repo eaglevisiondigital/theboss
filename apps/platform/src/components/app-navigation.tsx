@@ -13,7 +13,8 @@ export function AppNavigation({ navigation = [], calendarAvailable = false, regi
   const destinations = [
     { href: "/app", label: "Home" },
     { href: "/app/achievements", label: "Awards & achievements" },
-    { href: "/app/boss-bucks", label: "Boss Bucks" },
+    { href: "/app/boss-bucks", label: "Boss Bucks Wallet" },
+    { href: "/app/boss-bucks/discounts", label: "Boss Bucks Discounts" },
     { href: "/app/payments", label: "Payments" },
     ...(fundraisingAvailable ? [{ href: "/app/fundraising", label: "Fundraising" }] : []),
     ...navigation.map((view) => ({ href: `/app/${view}`, label: labels[view] })),

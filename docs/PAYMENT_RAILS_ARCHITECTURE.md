@@ -111,3 +111,11 @@ a second Boss payout. Refund-before-settlement uses remaining principal/gross,
 not the original already-refunded economic amount. Source corrections preserve
 original capture chronology and the existing Phase 7C earning recovery chain.
 No live-provider or release-completion claim is made by these local checks.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Boss Bucks products extend the existing finite products purpose and frozen dispatch snapshot. Verified card capture fulfills; authorization does not. Final approved ACH success fulfills; pending/unknown hold the original attempt. Guest canonical payments reference their exact product order rather than a fabricated person. Native cancellation is unsubmitted-only; explicitly invalidated late positives remain unallocated/review without membership or inventory. No new operational provider, secret resolver, real instrument or money movement is enabled.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

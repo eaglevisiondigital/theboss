@@ -537,3 +537,11 @@ See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCH
 ## Phase 7D private execution boundary
 
 All new raw financial/provider/settlement tables are RLS enabled and closed to anon, authenticated, service_role and the private worker. Signed finite projections/commands recheck live Auth and exact business authority. The `boss_payment_worker` role is NOLOGIN, NOINHERIT and NOBYPASSRLS; only finite claim/normalized-finish/reconciliation/profile/review entry points are granted. No operational worker login, production secrets or provider account is provisioned. Private binding rows contain secret handles only. Webhook bodies are bounded, verified as polling hints and dropped; authoritative retrieval establishes evidence. Collection tokens are transient and never persisted by the execution repository. No raw PAN/CVV/bank fields, production simulation endpoint, Auth changes or timeout increase is introduced.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Phase 7E raw tables/private proofs use RLS and closed ACLs. Signed same-origin JSON routes require verified users and current server scope; guest flows require their exact opaque original capability and public share context. One-time business claim/activation handoffs are digest-only in storage and excluded from ordinary reads, audit, replay receipts and notifications. Private shipping information uses a separate current authorized order read. No Auth/provider/key material or historical credential-bearing URL is accessed or reproduced by this phase.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

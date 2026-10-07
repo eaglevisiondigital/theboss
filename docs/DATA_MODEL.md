@@ -464,3 +464,11 @@ See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCH
 ## Phase 7D payment and settlement records
 
 Canonical processing accounts and private verified secret handles feed immutable routing and settlement-policy revisions. Checkout reservations and provider operations are attempts, not paid truth. Verified external tenders reference existing payments/allocations; fundraising success retains its original evidence and downstream source lineage. Eligibility commits freeze submission context. Attempt invalidations and late-success review cases preserve unresolved money. Settlement sources/events/accounts/journals/postings, requests/history, corrections/disputes, deficits/offsets and bounded reconciliation runs/items are append-only, tenant-scoped and RLS closed. Saved provider references and explicit revocable consents are foundations; recurring execution remains inactive.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Phase 7E adds native product/revision, exact-subject membership/source/revocation/history, canonical entitlement links, private claim digests, physical batch/card/replacement history, product orders/items, private delivery contacts, fulfillment, exact-item refunds and analytical campaign credit. Canonical payments gain an exact product-order reference for verified guest commercial lineage; the shared payment/settlement engine remains authoritative. No production product/economics/default geography is seeded.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

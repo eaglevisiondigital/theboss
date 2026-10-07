@@ -1,0 +1,44 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir phase7e/fixture.sql
+create function pg_temp.item(label text,n integer default 1)returns uuid language sql stable security definer set search_path=''as $$select id from public.discount_order_items where order_id=pg_temp.did(label,'order_id')and ordinal=n$$;
+grant execute on function pg_temp.item(text,integer)to authenticated;
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.dm('stock','batch.create',jsonb_build_object('revision_id',pg_temp.did('card90','revision_id'),'organization_id',pg_temp.f('org'),'owner_type','organization','name','SYNTHETIC fulfillment stock','quantity',3,'controlled',true));
+select pg_temp.dm('stock-print','cards.print',jsonb_build_object('organization_id',pg_temp.f('org'),'card_ids',(select jsonb_agg(c->'card_id')from jsonb_array_elements(pg_temp.dr('stock')->'one_time_cards')c)));
+select pg_temp.actor('parent');select pg_temp.product_order('physical-sale','card90','card',1,jsonb_build_object('path',pg_temp.fpath('share')));reset role;
+select boss_private.rails_dispatch(pg_temp.did('physical-sale','checkout_id'));select pg_temp.product_receive('physical-sale','captured');
+select pg_temp.check('physical capture allocates exactly one credential','FULFILLMENT',(select count(*)=1 from public.discount_physical_cards where order_item_id=pg_temp.item('physical-sale')));
+select pg_temp.check('allocation alone creates no digital trial','SEPARATION',not exists(select 1 from public.discount_member_sources));
+select pg_temp.check('physical sale exact campaign credit','ECONOMICS',(select sum(amount_minor)=1750 from public.discount_product_credits where item_id=pg_temp.item('physical-sale')));
+select boss_private.discount_fulfill(pg_temp.did('physical-sale','order_id'));
+select pg_temp.check('fulfillment retry creates no duplicate allocation or credit','IDEMPOTENCY',(select count(*)=1 from public.discount_fulfillments where item_id=pg_temp.item('physical-sale'))and(select count(*)=1 from public.discount_product_credits where item_id=pg_temp.item('physical-sale')));
+-- Resolve only the synthetic private print handoff locally, never print codes.
+insert into discount_test_results select 'sold-card',c from jsonb_array_elements(pg_temp.dr('stock')->'one_time_cards')c where(c->>'card_id')::uuid=(select id from public.discount_physical_cards where order_item_id=pg_temp.item('physical-sale'));
+insert into discount_test_results select 'replacement-stock',jsonb_agg(c order by c->>'card_id')from jsonb_array_elements(pg_temp.dr('stock')->'one_time_cards')c where c->>'card_id'<>pg_temp.dr('sold-card')->>'card_id';
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.dm('physical-claim','card.claim',jsonb_build_object('serial',pg_temp.dr('sold-card')->>'serial','activation_secret',pg_temp.dr('sold-card')->>'activation_secret'));
+select pg_temp.actor('admin');
+select pg_temp.dm('replacement-1','card.replace',jsonb_build_object('card_id',pg_temp.dr('sold-card')->>'card_id','replacement_card_id',pg_temp.dr('replacement-stock')->0->>'card_id','reason','lost'));
+select pg_temp.dm('replacement-2','card.replace',jsonb_build_object('card_id',pg_temp.did('replacement-1','card_id'),'replacement_card_id',pg_temp.dr('replacement-stock')->1->>'card_id','reason','damaged'));
+select pg_temp.dm('refund-card','order.refund',jsonb_build_object('order_id',pg_temp.did('physical-sale','order_id'),'item_ids',jsonb_build_array(pg_temp.item('physical-sale')),'reason','Synthetic original-item correction'));
+reset role;
+select boss_private.rails_refund_dispatch(pg_temp.did('refund-card','refund_id'));
+select boss_private.rails_refund_receive(pg_temp.did('refund-card','refund_id'),'SYNTHETIC card refund','refunded','LOCAL-CARD-REFUND',2500,'USD',clock_timestamp(),repeat('a',64));
+select pg_temp.check('claimed refunded credential is void, never recycled','REFUND',(select state='replaced'and order_item_id is not null from public.discount_physical_cards where id=(pg_temp.dr('sold-card')->>'card_id')::uuid));
+select pg_temp.check('refund voids final replacement and preserves audited ancestors','REPLACEMENT',(select state='void'from public.discount_physical_cards where id=pg_temp.did('replacement-2','card_id'))and(select state='replaced'from public.discount_physical_cards where id=pg_temp.did('replacement-1','card_id')));
+select pg_temp.check('refund revokes all replacement secrets without recycling','REPLACEMENT',(select count(*)=3 and bool_and(revoked_at is not null)from boss_private.discount_card_secrets where card_id in(select (value->>'card_id')::uuid from jsonb_array_elements(pg_temp.dr('stock')->'one_time_cards'))));
+select pg_temp.check('original card trial revoked on original-item refund','REFUND',(boss_private.discount_effective(pg_temp.did('physical-claim'))->>'state')='expired');
+select pg_temp.check('refund exactly reverses item organization credit','ECONOMICS',(select sum(amount_minor)=0 from public.discount_product_credits where item_id=pg_temp.item('physical-sale')));
+select pg_temp.check('refund uses canonical original tender and journal','LINEAGE',exists(select 1 from public.external_payment_corrections e join public.discount_orders o on o.payment_id=e.original_payment_id where o.id=pg_temp.did('physical-sale','order_id')));
+set local role authenticated;select pg_temp.actor('parent');select pg_temp.product_order('digital-campaign','base30','card',1,jsonb_build_object('path',pg_temp.fpath('share')));reset role;
+select boss_private.rails_dispatch(pg_temp.did('digital-campaign','checkout_id'));select pg_temp.product_receive('digital-campaign','captured');select pg_temp.product_receive('digital-campaign','settled');
+select boss_private.rails_settlement_match(o.payment_id,e.id,0)from public.discount_orders o join public.provider_event_evidence e on e.event_reference='digital-campaign-settled'where o.id=pg_temp.did('digital-campaign','order_id');
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.dm('refund-digital','order.refund',jsonb_build_object('order_id',pg_temp.did('digital-campaign','order_id'),'item_ids',jsonb_build_array(pg_temp.item('digital-campaign')),'reason','Synthetic settled correction'));reset role;
+select boss_private.rails_refund_dispatch(pg_temp.did('refund-digital','refund_id'));
+select boss_private.rails_refund_receive(pg_temp.did('refund-digital','refund_id'),'SYNTHETIC digital refund','refunded','LOCAL-DIGITAL-REFUND',2500,'USD',clock_timestamp(),repeat('b',64));
+select pg_temp.check('settled refund uses original item economics, not later price','SETTLEMENT',exists(select 1 from public.settlement_deficits d join public.payments p on p.id=d.correction_payment_id join public.discount_orders o on o.payment_id=p.reversal_of_id where o.id=pg_temp.did('digital-campaign','order_id')and d.amount_minor=1750));
+select pg_temp.check('product refund never affects existing Wallet grant','SEPARATION',(select count(*)=1 from public.boss_bucks_grants));
+select pg_temp.check('all shared settlement journals balance','ACCOUNTING',not exists(select journal_id from public.settlement_postings group by journal_id having sum(amount_minor)<>0));
+set constraints all immediate;
+select count(*)passed_assertions,'Phase 7E physical fulfillment and original-item refunds'::text suite from phase5a_assertions;rollback;

@@ -337,3 +337,11 @@ See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCH
 ## Phase 7D payments module
 
 The payments module catalog supports online payments, card/ACH, saved methods, provider configuration, refunds, reconciliation and settlement features. No organization is enabled merely by migration or a role mapping. Account draft creation is distinct from private merchant verification/activation. Missing operational infrastructure keeps card/ACH checkout and webhook execution unavailable. Existing cash/check and canonical Boss Bucks flows remain independent. No physical/digital Boss Bucks membership or Phase 7E product is activated.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+The existing boss_bucks module gains discount_membership, membership_trials, physical_cards, membership_sales and membership_upgrades features. These do not enable Wallet/payment features, commerce, Merchant Platform, SMS or push. Products fail closed without explicit dated revision, configured geography/terms/economics and an approved current payment route/policy.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).

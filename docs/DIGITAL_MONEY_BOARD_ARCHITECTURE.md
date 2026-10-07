@@ -74,3 +74,11 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 ## Phase 7D provider-pending tile hold
 
 After valid provider submission, ordinary tile/intent expiry cannot release or reassign an unresolved tile. Pending ACH counts no raised value, reward, paid claim or wallet earning. Final approved ACH or captured CARD applies the existing trusted success chain once, using frozen provenance/policies even after natural expiry. Explicit cancellation/release followed by contradictory success creates canonical unallocated review and no second claimant. Refunds preserve the historical permanent tile claim.
+
+## Phase 7E membership/product integration
+
+Status: local implementation; canonical release and hosted acceptance pending.
+
+Phase 7E campaign membership/trial/gift/card options coexist with the existing board; they do not replace tiles, bypass reservations, mark support paid or mint Wallet grants from product purchases. Gift conversion uses the original exact donor/intent and trusted >2500 USD qualification. Private claims never reveal board supporter account, household, shipping or Wallet data.
+
+See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
