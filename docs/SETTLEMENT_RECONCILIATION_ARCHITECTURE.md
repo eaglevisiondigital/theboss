@@ -1,6 +1,9 @@
 # Phase 7D settlement and reconciliation
 
-Current status: LOCAL IMPLEMENTATION VALIDATED; final release gates in progress.
+Current status: COMPLETE within the approved unavailable-provider boundary;
+canonical schema, full local/CI validation, deployed finance presentation and
+controlled hosted restoration verified. External payout/provider-positive evidence
+remains unavailable. See [acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md).
 The financial timing decisions are resolved.
 
 Historical pre-resolution status (retained): PROPOSED LOCAL DESIGN; settlement

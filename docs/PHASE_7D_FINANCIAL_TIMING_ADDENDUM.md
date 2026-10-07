@@ -1,6 +1,6 @@
 # Phase 7D binding financial timing addendum
 
-Status: local/canonical financial rule implementation validated; deployment/hosted closure pending. See [133-point report](PHASE_7D_COMPLETION_REPORT.md).
+Status: COMPLETE within the approved unavailable-provider boundary; canonical release and single hosted acceptance/restoration verified. See [133-point report](PHASE_7D_COMPLETION_REPORT.md).
 
 1. Card capture success implemented separately from authorization, settlement and payout.
 2. Authorization-only creates no canonical/fundraising/earning success.
@@ -22,7 +22,7 @@ Status: local/canonical financial rule implementation validated; deployment/host
 18. 283 genuine database races total; 22 Phase 7D.
 19. 543/543 application tests PASS, including 38 provider contract tests.
 20. 101 canonical migrations; exactly six tested sources applied from 95.
-21. Provider positives LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. Hosted deployment/window pending.
-22. Phase 7D IN PROGRESS until release/hosted cleanup/documentation finishes.
+21. Provider positives LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. Deployment READY; hosted family zero-source split/disabled collection, config/reporting, GET isolation, revocation, widths and cleanup verified.
+22. Phase 7D COMPLETE within the approved unavailable-provider boundary; one fixed window explicitly restored before target, zero residual temporary access/work, original administrator and selected baseline valid.
 23. No real production money movement occurred or is authorized by these release steps.
 24. No Phase 7E or later phase started.

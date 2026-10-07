@@ -1,11 +1,11 @@
 # Phase 7D 133-point completion record
 
-Status: IN PROGRESS. Local implementation validated; final historical run and authorized live release/acceptance remain. This record does not assert completion or live evidence prematurely.
+Status: COMPLETE within the approved unavailable-provider boundary. Six canonical migrations, deployment, full validation and the single controlled hosted window/restoration are complete. Live processor collection and payout remain unavailable until separately approved infrastructure/account certification exists.
 
-Evidence: [validation](PHASE_7D_VALIDATION.md), [six-source manifest](PHASE_7D_MIGRATION_MANIFEST.md), [hosted plan](PHASE_7D_HOSTED_PLAN.md), [architecture](PAYMENT_RAILS_ARCHITECTURE.md).
+Evidence: [validation](PHASE_7D_VALIDATION.md), [six-source manifest](PHASE_7D_MIGRATION_MANIFEST.md), [hosted acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md), [hosted plan](PHASE_7D_HOSTED_PLAN.md), [architecture](PAYMENT_RAILS_ARCHITECTURE.md).
 
 1. **Starting SHA.** dc55c6cb2f9dc11c0b111b5783a4ec174721c361.
-2. **Final SHA.** Unpublished; final release SHA pending.
+2. **Final SHA.** Release checkpoint c425cb05ca5cff331a0ecd020036f4857cd90219; application implementation/deployment 37ea3eda85c25261e20be0b4266979db0e9d617e. The subsequent documentation-only closure head is reported in the final delivery and PR; this committed record does not claim to contain its own Git hash.
 3. **Migrations.** Six exact tested migrations applied to canonical Boss: 95→101. Canonical filenames/hash mapping in manifest; original two source bytes unchanged.
 4. **Provider-neutral architecture.** Provider-neutral durable attempt, verified evidence, canonical payment/allocation, independent settlement and immutable correction boundaries implemented locally.
 5. **Authorize.Net adapter.** Authorize.Net finite token/profile sale, authorization/capture/void, card original-reference refund, query, signed webhook and bounded report contracts; no live account.
@@ -84,7 +84,7 @@ Evidence: [validation](PHASE_7D_VALIDATION.md), [six-source manifest](PHASE_7D_M
 78. **Fraud metadata.** Allowlisted AVS/CVV-result/decision categories only; actual CVV and customer/provider narrative are discarded.
 79. **Decline normalization.** Finite sanitized decline/unknown categories; provider raw decline/body text does not cross the public API.
 80. **Logging protections.** No real password/Auth session/token/key/provider secret, instrument or historical Netlify proxy value retrieved, reproduced or committed during this continuation.
-81. **Audit.** Append-only payment/settlement/request/provider review and controlled-window audit design; live acceptance audit pending.
+81. **Audit.** Six immutable live payment-history rows record activation, native draft creation/disable, guardian revocation, administrator-first cleanup and restoration. Native charge.create/cancel audits and two private request receipts remain; no Auth identifiers or private recovery SQL are included in evidence.
 82. **Idempotency.** Request/operation/event/command digest equality with original replay result; changed-context replay conflicts and no duplicate ledger effects.
 83. **SQL assertion total.** 20,442 unique SQL/bootstrap/sealed assertions PASS: 20,381 across 126 suites +28 bootstrap +33 sealed. Each summary counted once; isolated tournament replay and historical cleanup echoes excluded.
 84. **New Phase 7D assertions.** 318 direct Phase 7D assertions PASS across eight suites, including ACH split and actual active-module recovery rehearsal.
@@ -99,11 +99,11 @@ Evidence: [validation](PHASE_7D_VALIDATION.md), [six-source manifest](PHASE_7D_M
 93. **Authorize.Net sandbox result.** LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. No approved account/credentials/instrument supplied or requested in chat.
 94. **NMI sandbox result.** LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. Exact NMI production certification remains closed.
 95. **Production provider result classification.** UNVERIFIED/NOT EXECUTED: no separately authorized real production money movement.
-96. **Hosted disabled/no-provider checkout.** Pending Phase 7D deployment and controlled window; synthetic local disabled UI passes.
-97. **Hosted family checkout.** Pending hosted window; local guarded charge/split/presentation tests pass.
-98. **Hosted fundraising checkout.** Local capability/intent/disabled provider boundary implemented; hosted execution pending within approved unavailable-provider boundary.
-99. **Boss Bucks + card split result.** SQL/runtime verified $30 Bucks + $70 captured card pays one $100 charge once; hosted positive unavailable.
-100. **Boss Bucks + ACH split result.** SQL/runtime verified $30 Bucks + $70 approved final ACH, pending holds and subsequent return; hosted positive unavailable.
+96. **Hosted disabled/no-provider checkout.** HOSTED VERIFIED: card/ACH collection stays disabled without an approved account/secure collection runtime; no instrument input, provider call or payment attempt created.
+97. **Hosted family checkout.** HOSTED VERIFIED: exactly one synthetic unpaid $500 Child1 charge, $0 eligible Bucks/$500 external preview, over-eligible selection rejection, navigation/reload and post-revocation signed family denial. No positive provider payment claimed.
+98. **Hosted fundraising checkout.** HOSTED VERIFIED unavailable boundary: existing revoked share/archived campaign returns unavailable with no payment collection form. Local public capability/intent/late-success cases are SQL/runtime evidence; public provider-positive execution unavailable.
+99. **Boss Bucks + card split result.** SQL/RUNTIME VERIFIED $30 Bucks + $70 captured card pays one $100 charge once; HOSTED POSITIVE UNVERIFIED because no approved provider account/paid Bucks source exists. Hosted zero-source split presentation passes.
+100. **Boss Bucks + ACH split result.** SQL/RUNTIME VERIFIED $30 Bucks + $70 approved final ACH, durable pending holds and subsequent return; HOSTED POSITIVE UNVERIFIED under the approved unavailable-provider boundary.
 101. **Refund split result.** SQL/runtime explicit $35 external and $15 Bucks partial return preserves original tenders/allocations; ACH return and separate Bucks return also pass.
 102. **Settlement direct-mode test.** SQL/runtime direct-provider attribution/no duplicate payout verified; no external production evidence.
 103. **Settlement platform-managed test.** SQL/runtime managed payable/reservations/cancel/offset verified; no outbound payout provider activated.
@@ -113,25 +113,25 @@ Evidence: [validation](PHASE_7D_VALIDATION.md), [six-source manifest](PHASE_7D_M
 107. **Settlement-deficit recovery.** SQL/runtime direct settled deficit plus future same-org offset/replay invariants pass.
 108. **Fundraising payment end-to-end.** SQL/runtime one captured card creates one canonical success/progress/tile/reward/earning/settlement source; repeated evidence adds none.
 109. **Fundraising chargeback end-to-end.** SQL/runtime captured fundraising correction invokes original source entitlement/recovery and preserves earlier successful chronology.
-110. **1280.** LOCAL RENDERED VERIFIED: synthetic family/finance 1280px, no overflow/unlabelled input/unnamed button. Hosted pending.
-111. **768.** LOCAL RENDERED VERIFIED: 768px; hosted pending.
-112. **390.** LOCAL RENDERED VERIFIED: 390px; hosted pending.
-113. **320.** LOCAL RENDERED VERIFIED: 320px; hosted pending.
-114. **Accessibility.** Local labels/names/status live region, visible focus and 44px touch controls; hosted keyboard/navigation validation pending.
+110. **1280.** HOSTED AND LOCAL RENDERED VERIFIED: family and finance at 1280px, no document overflow/unlabelled controls/unnamed buttons.
+111. **768.** HOSTED AND LOCAL RENDERED VERIFIED: family and finance at 768px with the same checks.
+112. **390.** HOSTED AND LOCAL RENDERED VERIFIED: family and finance at 390px with the same checks.
+113. **320.** HOSTED AND LOCAL RENDERED VERIFIED: family and finance at 320px with the same checks; viewport override reset.
+114. **Accessibility.** HOSTED VERIFIED: labels/names/live status, split-input keyboard focus, invalid empty policy focus, safe navigation/reload and disabled external payment; local visible focus/44px controls pass.
 115. **Advisors.** Post-migration advisors reviewed: intentional closed RLS/no-policy INFO, pre-existing leaked-password-protection WARN, unused-index/Auth connection allocation INFO. Links/details in validation; no Auth/security weakening.
 116. **Generated types.** Actual canonical 101-migration TypeScript types regenerated; generated payment RPC signature adopted and all post-generation checks pass.
 117. **Typecheck.** PASS before release and after canonical type generation.
 118. **Lint.** PASS with zero warnings before release and after canonical type generation.
 119. **Application tests.** 543/543 PASS after canonical type generation; 38 provider contract tests, no provider network call.
 120. **Build.** PASS after canonical type generation with nonfunctional build fixture; no production secret read.
-121. **Deployment.** Pending authorized Git CD release; existing platform remains the prior published deployment.
-122. **Cleanup.** No window activated, no temporary authority created; baseline hashes/counts remain unchanged after rejected migration attempt.
-123. **Phase 7C baseline protection.** Canonical payments/allocations 6/6; wallet grants/trusted success zero; original roles/org/team/guardian/household/module state preserved.
-124. **Phase 6E baseline protection.** Fresh superset baseline: all 65 immutable sports rows and one achievement unchanged. Historical selected-source acceptance counts remain preserved in their original reports.
-125. **Final CI.** Published baseline database/application CI SUCCESS; no Phase 7D commit/CI yet.
-126. **PR status.** PR #3 OPEN/DRAFT/UNMERGED; Phase 7D title/body update pending successful release, no merge.
-127. **Evidence limitations.** No approved processor account/secret resolver/private operational worker, secure collection or payout rail. All provider-positive results are local contracts, not sandbox/production. Hosted acceptance pending.
-128. **Security exceptions.** Initial migration call automatically rejected before execution; fresh read confirmed no change. Exact direct owner authorization received; same six tested SQL sources then applied successfully.
+121. **Deployment.** READY existing Boss Git CD deploy 6ac688c3cf574700087a54c6 at 18:01:20.023 UTC October 7, source 37ea3eda85c25261e20be0b4266979db0e9d617e. Harness/closure changes do not change deployed application or migration bytes; no manual proxy deploy or public-website production change.
+122. **Cleanup.** One window activated 18:33:27.198907 UTC; cleanup target 18:53:27.198907/hard expiry 19:03:27.198907. Explicit administrator-first restoration confirmed 18:38:28.206401; zero residual authority/work verified 18:38:55.818434. No extension, repeat, cleanup overrun or failed recovery transaction.
+123. **Phase 7C baseline protection.** HOSTED/canonical verified: original administrator valid; guardian/households/all 20 original module business rows and role/org/team hashes equal; wallet retired/access ended, registration/offering archived, native unpaid charge canceled, sandbox draft disabled. Payments/allocations 6/6, wallet grants/trusted success zero.
+124. **Phase 6E baseline protection.** Fresh superset baseline equal: all 65 immutable sports rows and one achievement unchanged. Historical selected-source counts/incidents remain intact; no sports or achievement lifecycle changed.
+125. **Final CI.** Full push and PR release CI SUCCESS on c425cb05ca5cff331a0ecd020036f4857cd90219; PR run 37665654817 database finished 18:32:02 UTC. Initial database CI dependency failure and narrow validated harness correction are disclosed. Final documentation-only head must remain green before delivery; exact final check is reported in PR/final delivery.
+126. **PR status.** PR #3 OPEN/DRAFT/UNMERGED. Title: Build Boss platform through Phase 7D Payment Rails + Settlement + Reconciliation. Body reflects live migration/deployment/acceptance, limitations and preserved incident history; no merge.
+127. **Evidence limitations.** Authorize.Net/NMI positives LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. No approved processor account/private operational worker/secret resolver/secure collection/payout rail. Restricted-role/forged signed POST matrix SQL/RUNTIME VERIFIED; HOSTED execution unavailable through approved native tooling. Native family GET isolation/guardian revocation are HOSTED VERIFIED. No evidence limitation is relabeled a hosted provider pass.
+128. **Security exceptions.** Initial migration call automatically rejected before execution; fresh read confirmed no change, exact direct owner authorization then allowed the same six sources. Initial CI Python dependency failure corrected in the harness only. A historical controlled Phase 7C recovery snippet was inadvertently included in earlier tool output; no credential/session/key/instrument/real person data was present, and it is not reproduced in committed reports. Phase 7D activation/recovery scripts remained private. Historical timeout/proxy disclosures preserved; prior proxy value never inspected/reused/reproduced.
 129. **Confirmation no raw card/CVV/bank data stored.** Confirmed: no raw PAN/CVV/bank data stored; nonfunctional local contract placeholders only.
 130. **Confirmation no real production money movement occurred without separate approval.** Confirmed: no real production money movement performed, and none authorized by this phase release.
 131. **Confirmation no physical/digital Boss Bucks membership product activated.** Confirmed: no physical/digital Boss Bucks membership product activated.

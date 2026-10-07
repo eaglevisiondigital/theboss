@@ -1062,3 +1062,27 @@ draft, unmerged. No provider/settlement decision or Phase 7D authorized here.
 ## Main Boss Chat Phase 7D financial timing resolution
 
 Main Boss Chat explicitly supersedes the earlier Phase 7A settled-only fundraising timing for CARD: verified capture establishes payment/fundraising success before batch or organization settlement; authorization alone does not. ACH requires its approved final provider success. Submitted unknown/ACH attempts hold charges, grant slices and tiles beyond short reservation clocks. Eligibility is frozen at valid submission; natural clocks do not invalidate it. Explicit cancellation/invalidation produces late-success review without automatic allocation, tile claim or wallet issuance. Historical assumptions and incident disclosures remain intact. Production money movement still requires separate funding authorization; unavailable sandbox/operational infrastructure is an evidence limitation, not fabricated success.
+
+## Phase 7D canonical release and controlled closure (October 7, 2026)
+
+Direct typed owner authorization permitted the exact six hash-tested canonical
+migrations (95→101) after an initial automatic approval rejection produced no
+write. Full SQL/bootstrap/sealed/race and application gates passed; existing Boss
+Git CD deployed the implementation. A missing Python dependency in the pinned
+networkless CI image was corrected only in the race harness, with all scenarios
+and timeouts preserved; replacement full CI passed.
+
+The approved single window kept administrator authority active, restored only
+Child1 payment capability/two households and bounded Payments configuration, and
+created one unpaid charge/one unverified sandbox draft. Native family/configuration/
+finance/disabled-execution/isolation/revocation/responsive acceptance passed.
+Explicit administrator-first restoration completed before target, zero residual
+temporary authority/work and exact selected business baseline were verified.
+Inactive/canceled fixture history remains audited; no real payment source added.
+
+Phase 7D COMPLETE within the approved unavailable-provider boundary. Authorize.Net/
+NMI positives are LOCAL CONTRACT TESTED; SANDBOX UNAVAILABLE. Live secure collection,
+operational worker, certified accounts and payout remain closed; restricted/forged
+hosted POST execution is not claimed. No product decision, invented rate, security
+weakening, real money movement, new acceptance window or Phase 7E is authorized by
+this closure. Historical timing/performance/security disclosures remain intact.

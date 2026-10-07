@@ -1,6 +1,12 @@
 # Phase 7D controlled hosted plan
 
-Status: prepared; no window activated. Live release is gated on the final local
+Status: EXECUTED AND RESTORED. The approved single window ran 18:33:27.198907–
+18:38:28.206401 UTC October 7, before its 18:53:27.198907 cleanup target and
+19:03:27.198907 fixed hard expiry. Zero residual authority/work and selected
+baseline equality verified. See [actual acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md).
+The reviewed plan below is retained; no second activation is authorized.
+
+Original plan: live release is gated on the final local
 historical suite, six exact hashes, canonical migration/type/advisor checks and
 green implementation CI/deployment. Main Boss Chat supplied the release and
 controlled-test authorization; no production transaction is authorized.

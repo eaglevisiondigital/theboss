@@ -1,5 +1,9 @@
 # Phase 7D local checkpoint and required financial direction
 
+Current disposition: **RESOLVED AND RELEASED**. Main Boss Chat supplied binding financial rules and direct live authorization. Six exact sources are canonical (101 migrations); deployment/full CI and the single controlled hosted restoration are complete within the approved unavailable-provider boundary. See [current build](CURRENT_BUILD_STATE.md), [completion](PHASE_7D_COMPLETION_REPORT.md) and [acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md).
+
+## Historical unpublished checkpoint (preserved)
+
 Status: INCOMPLETE; local and unpublished. October 7, 2026.
 Starting/current published SHA: `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`.
 Branch: `build/boss-platform-v1`.

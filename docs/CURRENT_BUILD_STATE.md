@@ -1,6 +1,6 @@
 # Current build state
 
-## Phase 7D External Payment Rails + Settlement + Reconciliation: IN PROGRESS
+## Phase 7D External Payment Rails + Settlement + Reconciliation: COMPLETE
 
 Authorized from `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`. All six tested migrations
 are applied to canonical Boss Supabase: **95→101**. SQL byte hashes are unchanged;
@@ -14,14 +14,36 @@ assumptions remain documented. Provider-positive evidence is **LOCAL CONTRACT
 TESTED; SANDBOX UNAVAILABLE**; no operational processor account/secret resolver,
 private worker credential, real money movement or recurring execution is enabled.
 Implementation `37ea3eda85c25261e20be0b4266979db0e9d617e` deployed READY through
-existing Git CD at **18:01:20.023 UTC October 7**. Application release CI passed;
-database CI exposed an unavailable Python dependency in the new race harness.
-The dependency is being corrected without changing scenarios or runtime behavior.
-Green replacement release CI and the single controlled hosted window/cleanup remain.
-No temporary hosted authority has been activated. Advisors and source/baseline
-checks are recorded in [validation](PHASE_7D_VALIDATION.md); exact sources in
-[manifest](PHASE_7D_MIGRATION_MANIFEST.md); pending acceptance in
-[plan](PHASE_7D_HOSTED_PLAN.md). Phase 7C closure/history below remains intact.
+existing Git CD at **18:01:20.023 UTC October 7**. Initial database CI exposed an
+unavailable Python dependency in the new race harness; the narrow shell/SQL
+correction passed all 318 Phase 7D assertions/22 races. Full push and PR CI passed
+on release checkpoint `c425cb05ca5cff331a0ecd020036f4857cd90219` with unchanged
+application/migration bytes.
+
+The single controlled hosted window verifies native unpaid $500 charge creation,
+$0 eligible Bucks/$500 external split, disabled card/ACH, sandbox draft save and
+disable, no verified route/payout, empty settlement/recovery/reconciliation,
+explicit policy validation, navigation/reload, family GET isolation, guardian
+revocation/household-only denial and all 1280/768/390/320 widths. Activation
+**18:33:27.198907 UTC**, cleanup target **18:53:27.198907**, hard expiry
+**19:03:27.198907**. Explicit administrator-first restoration confirmed
+**18:38:28.206401**; zero residual authority/work verified **18:38:55.818434**.
+Original administrator/guardian/households/all 20 original module business rows
+and role/org/team hashes restored; wallet retired/access ended, registration and
+offering archived, native charge canceled and sandbox draft disabled. Payments
+and allocations remain 6/6, grants/trusted success zero; all 65 sports rows and one
+achievement unchanged. Inactive controlled history is preserved. No second window,
+deadline extension, provider transaction, actual financial source or Phase 7E.
+
+Completion is within the approved unavailable-provider boundary. Positive external
+payments/refunds/settlement remain SQL/runtime and local adapter contracts;
+processor certification/secure collection/operational worker/payout are unavailable.
+Restricted/forged hosted POST execution is not claimed; native family GET negatives
+are verified. Full [133-point report](PHASE_7D_COMPLETION_REPORT.md),
+[24-point timing addendum](PHASE_7D_FINANCIAL_TIMING_ADDENDUM.md),
+[acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md), [validation](PHASE_7D_VALIDATION.md)
+and [manifest](PHASE_7D_MIGRATION_MANIFEST.md) retain limitations/incidents honestly.
+Phase 7C closure/history below remains intact.
 
 ## Phase 7C Boss Bucks Spending + Canonical Charge Payments + Split Tender: COMPLETE
 

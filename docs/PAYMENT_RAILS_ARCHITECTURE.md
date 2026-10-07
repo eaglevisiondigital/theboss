@@ -1,13 +1,19 @@
 # Phase 7D payment rails
 
-Status: IN PROGRESS. Starting head `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`.
+Status: COMPLETE within the approved unavailable-provider boundary. Starting head `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`.
 Canonical baseline was 95; six tested migrations are applied, history 101. No operational processor account or private worker is provisioned.
+
+Canonical release, deployment, full validation and the sole controlled hosted
+window/restoration are complete. Live collection/payout require separately
+approved certified infrastructure. See [completion](PHASE_7D_COMPLETION_REPORT.md)
+and [actual acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md). Historical checkpoints
+below remain unchanged as evidence of the decision/implementation sequence.
 
 ## Historical pre-resolution checkpoint
 
 The following checkpoint description predates the binding financial resolution.
-Current local execution, settlement, corrections, signed UI and worker contracts
-are implemented and undergoing final release validation. No operational payment
+Current execution, settlement, corrections, signed UI and worker contracts
+are implemented and validated. No operational payment
 worker/account is provisioned.
 
 This was a local design/checkpoint, not a completed execution implementation.
