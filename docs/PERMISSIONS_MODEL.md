@@ -431,3 +431,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 `boss_bucks.payment_reverse` is mapped only to the existing approved platform/organization admin and finance roles. Role mapping is potential capability; current exact organization and resource authority is still required. Family spend requires current wallet manager, explicit Boss Bucks guardian and payment guardian capabilities, household relationship and participant context. Household membership alone is insufficient.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D finite financial permissions
+
+`payments.refund`, `payments.provider_manage`, `settlements.view`, `settlements.manage`, and `settlements.reconcile` extend the finite catalog. Role mapping expresses potential only. Live Auth, current account status, exact organization relationship, active module feature and exact resource scope remain authoritative. Ordinary finance does not receive provider management. Family charge payment derives from current self/explicit guardian payment authority, never household membership alone. Guest authority is the original unguessable contribution capability, not a financial role.

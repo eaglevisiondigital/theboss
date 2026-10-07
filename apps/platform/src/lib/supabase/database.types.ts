@@ -1730,6 +1730,39 @@ export type Database = {
           },
         ]
       }
+      boss_bucks_checkout_reservations: {
+        Row: {
+          amount_minor: number
+          checkout_id: string
+          grant_id: string
+        }
+        Insert: {
+          amount_minor: number
+          checkout_id: string
+          grant_id: string
+        }
+        Update: {
+          amount_minor?: number
+          checkout_id?: string
+          grant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boss_bucks_checkout_reservations_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "boss_bucks_checkout_reservations_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_grants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       boss_bucks_consumptions: {
         Row: {
           allocation_id: string
@@ -2788,6 +2821,45 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "registrations"
             referencedColumns: ["organization_id", "id", "participant_id"]
+          },
+        ]
+      }
+      checkout_charge_allocations: {
+        Row: {
+          bucks_minor: number
+          charge_id: string
+          checkout_id: string
+          organization_id: string
+          principal_minor: number
+        }
+        Insert: {
+          bucks_minor: number
+          charge_id: string
+          checkout_id: string
+          organization_id: string
+          principal_minor: number
+        }
+        Update: {
+          bucks_minor?: number
+          charge_id?: string
+          checkout_id?: string
+          organization_id?: string
+          principal_minor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "checkout_charge_allocations_organization_id_charge_id_fkey"
+            columns: ["organization_id", "charge_id"]
+            isOneToOne: false
+            referencedRelation: "charges"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "checkout_charge_allocations_organization_id_checkout_id_fkey"
+            columns: ["organization_id", "checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["organization_id", "id"]
           },
         ]
       }
@@ -4672,6 +4744,141 @@ export type Database = {
           },
         ]
       }
+      external_payment_corrections: {
+        Row: {
+          created_at: string
+          event_id: string
+          kind: string
+          original_payment_id: string
+          principal_minor: number
+          refund_request_id: string | null
+          reversal_payment_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          kind: string
+          original_payment_id: string
+          principal_minor: number
+          refund_request_id?: string | null
+          reversal_payment_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          kind?: string
+          original_payment_id?: string
+          principal_minor?: number
+          refund_request_id?: string | null
+          reversal_payment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "external_payment_corrections_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "external_payment_corrections_original_payment_id_fkey"
+            columns: ["original_payment_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_tenders"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "external_payment_corrections_refund_request_id_fkey"
+            columns: ["refund_request_id"]
+            isOneToOne: false
+            referencedRelation: "payment_refund_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "external_payment_corrections_reversal_payment_id_fkey"
+            columns: ["reversal_payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      external_payment_tenders: {
+        Row: {
+          checkout_id: string
+          created_at: string
+          event_id: string
+          operation_id: string
+          organization_id: string
+          original_payment_id: string | null
+          payment_id: string
+          purpose: string
+        }
+        Insert: {
+          checkout_id: string
+          created_at?: string
+          event_id: string
+          operation_id: string
+          organization_id: string
+          original_payment_id?: string | null
+          payment_id: string
+          purpose: string
+        }
+        Update: {
+          checkout_id?: string
+          created_at?: string
+          event_id?: string
+          operation_id?: string
+          organization_id?: string
+          original_payment_id?: string | null
+          payment_id?: string
+          purpose?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "external_payment_tenders_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "external_payment_tenders_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: false
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "external_payment_tenders_organization_id_checkout_id_fkey"
+            columns: ["organization_id", "checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "external_payment_tenders_organization_id_payment_id_fkey"
+            columns: ["organization_id", "payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "external_payment_tenders_original_payment_id_fkey"
+            columns: ["original_payment_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_tenders"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "external_payment_tenders_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feature_flag_overrides: {
         Row: {
           configuration: Json
@@ -5378,36 +5585,42 @@ export type Database = {
       fundraising_success_evidence: {
         Row: {
           amount_minor: number
+          captured_at: string | null
           created_at: string
           currency: string
           id: string
           intent_id: string
+          payment_success_at: string | null
           provenance: Json
-          settled_at: string
+          settled_at: string | null
           source_reference: string
           source_system: string
           tile_id: string | null
         }
         Insert: {
           amount_minor: number
+          captured_at?: string | null
           created_at?: string
           currency: string
           id?: string
           intent_id: string
+          payment_success_at?: string | null
           provenance: Json
-          settled_at: string
+          settled_at?: string | null
           source_reference: string
           source_system: string
           tile_id?: string | null
         }
         Update: {
           amount_minor?: number
+          captured_at?: string | null
           created_at?: string
           currency?: string
           id?: string
           intent_id?: string
+          payment_success_at?: string | null
           provenance?: Json
-          settled_at?: string
+          settled_at?: string | null
           source_reference?: string
           source_system?: string
           tile_id?: string | null
@@ -8868,6 +9081,437 @@ export type Database = {
           },
         ]
       }
+      payment_attempt_invalidations: {
+        Row: {
+          actor_id: string | null
+          checkout_id: string
+          created_at: string
+          event_id: string | null
+          reason: string
+        }
+        Insert: {
+          actor_id?: string | null
+          checkout_id: string
+          created_at?: string
+          event_id?: string | null
+          reason: string
+        }
+        Update: {
+          actor_id?: string | null
+          checkout_id?: string
+          created_at?: string
+          event_id?: string | null
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_attempt_invalidations_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_attempt_invalidations_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: true
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_attempt_invalidations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_checkout_events: {
+        Row: {
+          checkout_id: string
+          created_at: string
+          id: string
+          kind: string
+          operation_id: string | null
+        }
+        Insert: {
+          checkout_id: string
+          created_at?: string
+          id?: string
+          kind: string
+          operation_id?: string | null
+        }
+        Update: {
+          checkout_id?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          operation_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_checkout_events_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkout_events_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: false
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_checkouts: {
+        Row: {
+          account_id: string
+          actor_person_id: string | null
+          bucks_minor: number
+          capability_digest: string | null
+          command_hash: string
+          created_at: string
+          currency: string
+          donor_covered_fee_minor: number
+          expires_at: string
+          external_minor: number
+          id: string
+          intent_id: string | null
+          method: string
+          organization_id: string
+          platform_fee_minor: number
+          policy_id: string | null
+          principal_minor: number
+          purpose: string
+          request_id: string
+          routing_id: string
+          state: string
+          wallet_id: string | null
+        }
+        Insert: {
+          account_id: string
+          actor_person_id?: string | null
+          bucks_minor?: number
+          capability_digest?: string | null
+          command_hash: string
+          created_at?: string
+          currency: string
+          donor_covered_fee_minor?: number
+          expires_at: string
+          external_minor: number
+          id?: string
+          intent_id?: string | null
+          method: string
+          organization_id: string
+          platform_fee_minor?: number
+          policy_id?: string | null
+          principal_minor: number
+          purpose: string
+          request_id: string
+          routing_id: string
+          state?: string
+          wallet_id?: string | null
+        }
+        Update: {
+          account_id?: string
+          actor_person_id?: string | null
+          bucks_minor?: number
+          capability_digest?: string | null
+          command_hash?: string
+          created_at?: string
+          currency?: string
+          donor_covered_fee_minor?: number
+          expires_at?: string
+          external_minor?: number
+          id?: string
+          intent_id?: string | null
+          method?: string
+          organization_id?: string
+          platform_fee_minor?: number
+          policy_id?: string | null
+          principal_minor?: number
+          purpose?: string
+          request_id?: string
+          routing_id?: string
+          state?: string
+          wallet_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_checkouts_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_organization_id_account_id_fkey"
+            columns: ["organization_id", "account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_policy_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_routing_id_fkey"
+            columns: ["routing_id"]
+            isOneToOne: false
+            referencedRelation: "payment_routing_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_checkouts_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_dispute_cases: {
+        Row: {
+          amount_minor: number
+          case_reference: string
+          category: string
+          created_at: string
+          event_id: string
+          id: string
+          payment_id: string
+        }
+        Insert: {
+          amount_minor: number
+          case_reference: string
+          category: string
+          created_at?: string
+          event_id: string
+          id?: string
+          payment_id: string
+        }
+        Update: {
+          amount_minor?: number
+          case_reference?: string
+          category?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          payment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_dispute_cases_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_dispute_cases_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_tenders"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      payment_eligibility_commits: {
+        Row: {
+          checkout_id: string
+          eligibility_committed_at: string
+          operation_id: string
+          organization_id: string
+          snapshot: Json
+        }
+        Insert: {
+          checkout_id: string
+          eligibility_committed_at?: string
+          operation_id: string
+          organization_id: string
+          snapshot: Json
+        }
+        Update: {
+          checkout_id?: string
+          eligibility_committed_at?: string
+          operation_id?: string
+          organization_id?: string
+          snapshot?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_eligibility_commits_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: true
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_eligibility_commits_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: true
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_eligibility_commits_organization_id_checkout_id_fkey"
+            columns: ["organization_id", "checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_eligibility_commits_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_execution_consents: {
+        Row: {
+          created_at: string
+          donor_id: string | null
+          ends_at: string | null
+          id: string
+          method_id: string
+          person_id: string | null
+          plan_id: string | null
+          recurring_commitment_id: string | null
+          revoked_at: string | null
+          starts_at: string
+        }
+        Insert: {
+          created_at?: string
+          donor_id?: string | null
+          ends_at?: string | null
+          id?: string
+          method_id: string
+          person_id?: string | null
+          plan_id?: string | null
+          recurring_commitment_id?: string | null
+          revoked_at?: string | null
+          starts_at: string
+        }
+        Update: {
+          created_at?: string
+          donor_id?: string | null
+          ends_at?: string | null
+          id?: string
+          method_id?: string
+          person_id?: string | null
+          plan_id?: string | null
+          recurring_commitment_id?: string | null
+          revoked_at?: string | null
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_execution_consents_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_donors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_execution_consents_method_id_fkey"
+            columns: ["method_id"]
+            isOneToOne: false
+            referencedRelation: "saved_payment_methods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_execution_consents_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_execution_consents_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "payment_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_execution_consents_recurring_commitment_id_fkey"
+            columns: ["recurring_commitment_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_recurring_commitments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_history: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json
+          id: string
+          organization_id: string
+          request_id: string | null
+          resource_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          organization_id: string
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          organization_id?: string
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_history_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       payment_installments: {
         Row: {
           amount_minor: number
@@ -8971,18 +9615,374 @@ export type Database = {
           },
         ]
       }
+      payment_reconciliation_items: {
+        Row: {
+          created_at: string
+          event_id: string | null
+          id: string
+          operation_id: string | null
+          provider_reference: string
+          run_id: string
+          state: string
+        }
+        Insert: {
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          operation_id?: string | null
+          provider_reference: string
+          run_id: string
+          state: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          operation_id?: string | null
+          provider_reference?: string
+          run_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_reconciliation_items_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_reconciliation_items_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: false
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_reconciliation_items_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "payment_reconciliation_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_reconciliation_runs: {
+        Row: {
+          account_id: string
+          command_digest: string
+          created_at: string
+          from_at: string
+          id: string
+          request_id: string
+          to_at: string
+        }
+        Insert: {
+          account_id: string
+          command_digest: string
+          created_at?: string
+          from_at: string
+          id?: string
+          request_id: string
+          to_at: string
+        }
+        Update: {
+          account_id?: string
+          command_digest?: string
+          created_at?: string
+          from_at?: string
+          id?: string
+          request_id?: string
+          to_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_reconciliation_runs_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_recurring_work: {
+        Row: {
+          checkout_id: string | null
+          commitment_id: string
+          consent_id: string
+          created_at: string
+          id: string
+          ordinal: number
+          state: string
+        }
+        Insert: {
+          checkout_id?: string | null
+          commitment_id: string
+          consent_id: string
+          created_at?: string
+          id?: string
+          ordinal: number
+          state?: string
+        }
+        Update: {
+          checkout_id?: string | null
+          commitment_id?: string
+          consent_id?: string
+          created_at?: string
+          id?: string
+          ordinal?: number
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_recurring_work_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_recurring_work_commitment_id_ordinal_fkey"
+            columns: ["commitment_id", "ordinal"]
+            isOneToOne: true
+            referencedRelation: "fundraising_recurring_occurrences"
+            referencedColumns: ["commitment_id", "ordinal"]
+          },
+          {
+            foreignKeyName: "payment_recurring_work_consent_id_fkey"
+            columns: ["consent_id"]
+            isOneToOne: false
+            referencedRelation: "payment_execution_consents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_refund_requests: {
+        Row: {
+          actor_id: string
+          amount_minor: number
+          command: Json
+          created_at: string
+          id: string
+          operation_id: string
+          organization_id: string
+          payment_id: string
+          principal_minor: number
+          request_id: string
+        }
+        Insert: {
+          actor_id: string
+          amount_minor: number
+          command: Json
+          created_at?: string
+          id?: string
+          operation_id: string
+          organization_id: string
+          payment_id: string
+          principal_minor: number
+          request_id: string
+        }
+        Update: {
+          actor_id?: string
+          amount_minor?: number
+          command?: Json
+          created_at?: string
+          id?: string
+          operation_id?: string
+          organization_id?: string
+          payment_id?: string
+          principal_minor?: number
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_refund_requests_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_refund_requests_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: true
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_refund_requests_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_refund_requests_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_tenders"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      payment_review_cases: {
+        Row: {
+          checkout_id: string
+          created_at: string
+          event_id: string
+          id: string
+          reason: string
+        }
+        Insert: {
+          checkout_id: string
+          created_at?: string
+          event_id: string
+          id?: string
+          reason: string
+        }
+        Update: {
+          checkout_id?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_review_cases_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_review_cases_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_routing_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          routing_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          routing_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          routing_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_routing_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_routing_events_routing_id_fkey"
+            columns: ["routing_id"]
+            isOneToOne: false
+            referencedRelation: "payment_routing_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_routing_revisions: {
+        Row: {
+          account_id: string
+          created_at: string
+          created_by: string
+          currency: string
+          ends_at: string | null
+          id: string
+          organization_id: string
+          purpose: string
+          revision: number
+          scope_id: string
+          scope_type: string
+          starts_at: string
+        }
+        Insert: {
+          account_id: string
+          created_at?: string
+          created_by: string
+          currency: string
+          ends_at?: string | null
+          id?: string
+          organization_id: string
+          purpose: string
+          revision: number
+          scope_id: string
+          scope_type: string
+          starts_at: string
+        }
+        Update: {
+          account_id?: string
+          created_at?: string
+          created_by?: string
+          currency?: string
+          ends_at?: string | null
+          id?: string
+          organization_id?: string
+          purpose?: string
+          revision?: number
+          scope_id?: string
+          scope_type?: string
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_routing_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_routing_revisions_organization_id_account_id_fkey"
+            columns: ["organization_id", "account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "payment_routing_revisions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       payments: {
         Row: {
           amount_minor: number
           created_at: string
           currency: string
+          fundraising_intent_id: string | null
           id: string
           method: string
           note: string | null
           organization_id: string
-          payer_person_id: string
+          payer_person_id: string | null
           received_at: string
-          recorded_by_person_id: string
+          recorded_by_person_id: string | null
           reference: string | null
           reversal_of_id: string | null
           source_reference: string | null
@@ -8992,13 +9992,14 @@ export type Database = {
           amount_minor: number
           created_at?: string
           currency: string
+          fundraising_intent_id?: string | null
           id?: string
           method: string
           note?: string | null
           organization_id: string
-          payer_person_id: string
+          payer_person_id?: string | null
           received_at: string
-          recorded_by_person_id: string
+          recorded_by_person_id?: string | null
           reference?: string | null
           reversal_of_id?: string | null
           source_reference?: string | null
@@ -9008,19 +10009,27 @@ export type Database = {
           amount_minor?: number
           created_at?: string
           currency?: string
+          fundraising_intent_id?: string | null
           id?: string
           method?: string
           note?: string | null
           organization_id?: string
-          payer_person_id?: string
+          payer_person_id?: string | null
           received_at?: string
-          recorded_by_person_id?: string
+          recorded_by_person_id?: string | null
           reference?: string | null
           reversal_of_id?: string | null
           source_reference?: string | null
           status?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "payments_fundraising_intent_id_fkey"
+            columns: ["fundraising_intent_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "payments_organization_id_fkey"
             columns: ["organization_id"]
@@ -9125,6 +10134,221 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      processing_accounts: {
+        Row: {
+          capabilities: string[]
+          country: string
+          created_at: string
+          created_by: string
+          currencies: string[]
+          environment: string
+          id: string
+          merchant_owner: string
+          merchant_reference: string
+          name: string
+          organization_id: string
+          provider: string
+          settlement_mode: string
+          statement_descriptor: string | null
+          status: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          capabilities?: string[]
+          country: string
+          created_at?: string
+          created_by: string
+          currencies: string[]
+          environment: string
+          id?: string
+          merchant_owner: string
+          merchant_reference: string
+          name: string
+          organization_id: string
+          provider: string
+          settlement_mode: string
+          statement_descriptor?: string | null
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          capabilities?: string[]
+          country?: string
+          created_at?: string
+          created_by?: string
+          currencies?: string[]
+          environment?: string
+          id?: string
+          merchant_owner?: string
+          merchant_reference?: string
+          name?: string
+          organization_id?: string
+          provider?: string
+          settlement_mode?: string
+          statement_descriptor?: string | null
+          status?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "processing_accounts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "processing_accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_event_evidence: {
+        Row: {
+          account_id: string
+          amount_minor: number
+          body_digest: string
+          created_at: string
+          currency: string
+          event_reference: string
+          id: string
+          kind: string
+          occurred_at: string
+          operation_id: string | null
+          safe_metadata: Json
+          transaction_reference: string
+        }
+        Insert: {
+          account_id: string
+          amount_minor: number
+          body_digest: string
+          created_at?: string
+          currency: string
+          event_reference: string
+          id?: string
+          kind: string
+          occurred_at: string
+          operation_id?: string | null
+          safe_metadata?: Json
+          transaction_reference: string
+        }
+        Update: {
+          account_id?: string
+          amount_minor?: number
+          body_digest?: string
+          created_at?: string
+          currency?: string
+          event_reference?: string
+          id?: string
+          kind?: string
+          occurred_at?: string
+          operation_id?: string | null
+          safe_metadata?: Json
+          transaction_reference?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_event_evidence_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_event_evidence_operation_id_fkey"
+            columns: ["operation_id"]
+            isOneToOne: false
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_operations: {
+        Row: {
+          account_id: string
+          amount_minor: number
+          checkout_id: string
+          created_at: string
+          currency: string
+          dispatched_at: string | null
+          id: string
+          kind: string
+          organization_id: string
+          parent_operation_id: string | null
+          provider_request_reference: string
+          provider_transaction_reference: string | null
+          request_id: string
+          state: string
+        }
+        Insert: {
+          account_id: string
+          amount_minor: number
+          checkout_id: string
+          created_at?: string
+          currency: string
+          dispatched_at?: string | null
+          id?: string
+          kind: string
+          organization_id: string
+          parent_operation_id?: string | null
+          provider_request_reference: string
+          provider_transaction_reference?: string | null
+          request_id: string
+          state?: string
+        }
+        Update: {
+          account_id?: string
+          amount_minor?: number
+          checkout_id?: string
+          created_at?: string
+          currency?: string
+          dispatched_at?: string | null
+          id?: string
+          kind?: string
+          organization_id?: string
+          parent_operation_id?: string | null
+          provider_request_reference?: string
+          provider_transaction_reference?: string | null
+          request_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_operations_organization_id_account_id_fkey"
+            columns: ["organization_id", "account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "provider_operations_organization_id_checkout_id_fkey"
+            columns: ["organization_id", "checkout_id"]
+            isOneToOne: false
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "provider_operations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_operations_parent_operation_id_fkey"
+            columns: ["parent_operation_id"]
+            isOneToOne: false
+            referencedRelation: "provider_operations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ranking_candidates: {
         Row: {
@@ -10754,6 +11978,76 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_payment_methods: {
+        Row: {
+          account_id: string
+          brand: string | null
+          created_at: string
+          customer_reference: string
+          donor_id: string | null
+          expires_month: number | null
+          expires_year: number | null
+          id: string
+          last_four: string | null
+          method: string
+          person_id: string | null
+          profile_reference: string
+          revoked_at: string | null
+        }
+        Insert: {
+          account_id: string
+          brand?: string | null
+          created_at?: string
+          customer_reference: string
+          donor_id?: string | null
+          expires_month?: number | null
+          expires_year?: number | null
+          id?: string
+          last_four?: string | null
+          method: string
+          person_id?: string | null
+          profile_reference: string
+          revoked_at?: string | null
+        }
+        Update: {
+          account_id?: string
+          brand?: string | null
+          created_at?: string
+          customer_reference?: string
+          donor_id?: string | null
+          expires_month?: number | null
+          expires_year?: number | null
+          id?: string
+          last_four?: string | null
+          method?: string
+          person_id?: string | null
+          profile_reference?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_payment_methods_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_payment_methods_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_donors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_payment_methods_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       seasons: {
         Row: {
           created_at: string
@@ -10808,6 +12102,550 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organization_units"
             referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      settlement_accounts: {
+        Row: {
+          account_id: string | null
+          created_at: string
+          currency: string
+          id: string
+          kind: string
+          organization_id: string
+        }
+        Insert: {
+          account_id?: string | null
+          created_at?: string
+          currency: string
+          id?: string
+          kind: string
+          organization_id: string
+        }
+        Update: {
+          account_id?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          kind?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_accounts_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_deficit_offsets: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          deficit_id: string
+          id: string
+          payment_id: string
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          deficit_id: string
+          id?: string
+          payment_id: string
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          deficit_id?: string
+          id?: string
+          payment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_deficit_offsets_deficit_id_fkey"
+            columns: ["deficit_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_deficits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_deficit_offsets_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      settlement_deficits: {
+        Row: {
+          amount_minor: number
+          correction_payment_id: string
+          created_at: string
+          currency: string
+          id: string
+          organization_id: string
+        }
+        Insert: {
+          amount_minor: number
+          correction_payment_id: string
+          created_at?: string
+          currency: string
+          id?: string
+          organization_id: string
+        }
+        Update: {
+          amount_minor?: number
+          correction_payment_id?: string
+          created_at?: string
+          currency?: string
+          id?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_deficits_correction_payment_id_fkey"
+            columns: ["correction_payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_deficits_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_events: {
+        Row: {
+          amount_minor: number | null
+          created_at: string
+          id: string
+          kind: string
+          payment_id: string
+          processor_fee_minor: number | null
+          provider_event_id: string | null
+          source_key: string
+        }
+        Insert: {
+          amount_minor?: number | null
+          created_at?: string
+          id?: string
+          kind: string
+          payment_id: string
+          processor_fee_minor?: number | null
+          provider_event_id?: string | null
+          source_key: string
+        }
+        Update: {
+          amount_minor?: number | null
+          created_at?: string
+          id?: string
+          kind?: string
+          payment_id?: string
+          processor_fee_minor?: number | null
+          provider_event_id?: string | null
+          source_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_events_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "settlement_events_provider_event_id_fkey"
+            columns: ["provider_event_id"]
+            isOneToOne: false
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_journals: {
+        Row: {
+          created_at: string
+          currency: string
+          event_id: string
+          id: string
+          kind: string
+          payment_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency: string
+          event_id: string
+          id?: string
+          kind: string
+          payment_id: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          event_id?: string
+          id?: string
+          kind?: string
+          payment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_journals_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_journals_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      settlement_policy_revisions: {
+        Row: {
+          availability_seconds: number
+          created_at: string
+          created_by: string
+          currency: string
+          estimated_processor_basis_points: number | null
+          estimated_processor_flat_minor: number | null
+          id: string
+          organization_basis_points: number
+          organization_id: string
+          platform_basis_points: number
+          platform_fee_minor: number
+          processor_fee_owner: string
+          product_cost_basis_points: number
+          purpose: string
+          request_target_seconds: number | null
+          revision: number
+        }
+        Insert: {
+          availability_seconds: number
+          created_at?: string
+          created_by: string
+          currency: string
+          estimated_processor_basis_points?: number | null
+          estimated_processor_flat_minor?: number | null
+          id?: string
+          organization_basis_points: number
+          organization_id: string
+          platform_basis_points: number
+          platform_fee_minor?: number
+          processor_fee_owner: string
+          product_cost_basis_points: number
+          purpose: string
+          request_target_seconds?: number | null
+          revision: number
+        }
+        Update: {
+          availability_seconds?: number
+          created_at?: string
+          created_by?: string
+          currency?: string
+          estimated_processor_basis_points?: number | null
+          estimated_processor_flat_minor?: number | null
+          id?: string
+          organization_basis_points?: number
+          organization_id?: string
+          platform_basis_points?: number
+          platform_fee_minor?: number
+          processor_fee_owner?: string
+          product_cost_basis_points?: number
+          purpose?: string
+          request_target_seconds?: number | null
+          revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_policy_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_policy_revisions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_postings: {
+        Row: {
+          account_id: string
+          amount_minor: number
+          created_at: string
+          id: string
+          journal_id: string
+          source_allocation_id: string | null
+        }
+        Insert: {
+          account_id: string
+          amount_minor: number
+          created_at?: string
+          id?: string
+          journal_id: string
+          source_allocation_id?: string | null
+        }
+        Update: {
+          account_id?: string
+          amount_minor?: number
+          created_at?: string
+          id?: string
+          journal_id?: string
+          source_allocation_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_postings_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_postings_journal_id_fkey"
+            columns: ["journal_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_journals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_postings_source_allocation_id_fkey"
+            columns: ["source_allocation_id"]
+            isOneToOne: false
+            referencedRelation: "payment_allocations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_request_history: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          id: string
+          request_id: string
+          state: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          request_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          request_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_request_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_request_history_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_request_items: {
+        Row: {
+          amount_minor: number
+          payment_id: string
+          request_id: string
+        }
+        Insert: {
+          amount_minor: number
+          payment_id: string
+          request_id: string
+        }
+        Update: {
+          amount_minor?: number
+          payment_id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_request_items_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+          {
+            foreignKeyName: "settlement_request_items_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_requests: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          currency: string
+          id: string
+          organization_id: string
+          request_id: string
+          requested_by: string
+          state: string
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          currency: string
+          id?: string
+          organization_id: string
+          request_id: string
+          requested_by: string
+          state?: string
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          organization_id?: string
+          request_id?: string
+          requested_by?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_requests_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_requests_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_sources: {
+        Row: {
+          account_id: string | null
+          available_at: string | null
+          created_at: string
+          currency: string
+          donor_fee_minor: number
+          gross_minor: number
+          method: string
+          organization_id: string
+          payment_id: string
+          payment_success_at: string
+          platform_fee_minor: number
+          policy_id: string | null
+          principal_minor: number
+          purpose: string
+          settlement_mode: string
+        }
+        Insert: {
+          account_id?: string | null
+          available_at?: string | null
+          created_at?: string
+          currency: string
+          donor_fee_minor: number
+          gross_minor: number
+          method: string
+          organization_id: string
+          payment_id: string
+          payment_success_at: string
+          platform_fee_minor: number
+          policy_id?: string | null
+          principal_minor: number
+          purpose: string
+          settlement_mode: string
+        }
+        Update: {
+          account_id?: string | null
+          available_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_fee_minor?: number
+          gross_minor?: number
+          method?: string
+          organization_id?: string
+          payment_id?: string
+          payment_success_at?: string
+          platform_fee_minor?: number
+          policy_id?: string | null
+          principal_minor?: number
+          purpose?: string
+          settlement_mode?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_sources_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_sources_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_sources_organization_id_payment_id_fkey"
+            columns: ["organization_id", "payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "settlement_sources_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlement_sources_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_policy_revisions"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -12638,6 +14476,9 @@ export type Database = {
         Returns: Json
       }
       boss_notifications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_payments_mutate: { Args: { command: Json }; Returns: Json }
+      boss_payments_read: { Args: { query?: Json }; Returns: Json }
+      boss_payments_support: { Args: { command: Json }; Returns: Json }
       boss_ranking_mutate: { Args: { p_command: Json }; Returns: Json }
       boss_ranking_read: { Args: { p_query?: Json }; Returns: Json }
       boss_recruiting_showcase_read: {

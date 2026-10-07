@@ -459,3 +459,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Canonical charges/payments/allocations remain authoritative. Six additive tables record tender-to-wallet linkage, allocation/grant consumption, payment restoration, source corrections, recovery claims and immutable recovery movements. Covered returns unwind actual replacement-grant lineage; no replacement wallet or mutable authoritative balance.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D payment and settlement records
+
+Canonical processing accounts and private verified secret handles feed immutable routing and settlement-policy revisions. Checkout reservations and provider operations are attempts, not paid truth. Verified external tenders reference existing payments/allocations; fundraising success retains its original evidence and downstream source lineage. Eligibility commits freeze submission context. Attempt invalidations and late-success review cases preserve unresolved money. Settlement sources/events/accounts/journals/postings, requests/history, corrections/disputes, deficits/offsets and bounded reconciliation runs/items are append-only, tenant-scoped and RLS closed. Saved provider references and explicit revocable consents are foundations; recurring execution remains inactive.

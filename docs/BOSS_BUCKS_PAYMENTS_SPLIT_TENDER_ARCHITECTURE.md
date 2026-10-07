@@ -103,3 +103,8 @@ bounded reservation/commit/release lifecycle, provider idempotency, current
 authorization rechecks, charge/wallet expiry, settlement and recovery exposure.
 Phase 7C neither reserves external value nor creates a provider payment. A
 remaining charge balance means unpaid; internal redemption has no processor fee.
+
+
+## Phase 7D external coordination
+
+External prepare reserves existing grants and charge slices without posting a second wallet ledger. Submission extends unresolved reservation protection; capture/final ACH converts reserved slices into existing canonical payments, tender, allocations, journals and grant consumptions. Failure releases the hold; invalid original sources are never resurrected. A mixed refund requires explicit original external allocations plus the existing Phase 7C wallet reversal path. Replacement grants that covered recovery unwind under the binding Phase 7C correction/release semantics. Organization settlement exposure and family recovery remain separate.

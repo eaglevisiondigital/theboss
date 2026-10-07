@@ -789,7 +789,7 @@ BEGIN
 END;
 $test$;
 SELECT pg_temp.expect_true('organization view includes all module classifications','READ',
- (SELECT jsonb_array_length(result->'records'->'modules')=14 AND NOT EXISTS(
+ (SELECT jsonb_array_length(result->'records'->'modules')=(SELECT count(*) FROM public.modules) AND NOT EXISTS(
   SELECT 1 FROM jsonb_array_elements(result->'records'->'modules') m
   WHERE m->'fields'->>'implementation_status' IS DISTINCT FROM CASE m->'fields'->>'module_key' WHEN 'calendar' THEN 'Implemented: Events and calendar' WHEN 'registration' THEN 'Implemented: Registration, forms and private documents' WHEN 'messaging' THEN 'Implemented: Communications and notifications' WHEN 'volunteers' THEN 'Implemented: Volunteer coordination' WHEN 'fundraising' THEN 'Implemented: Fundraising core' WHEN 'money_board' THEN 'Implemented: Digital Money Board' WHEN 'boss_bucks' THEN 'Implemented: Family wallet, restricted ledger and charge payments' ELSE 'Future / not implemented' END
    OR m->'fields'->>'activation_status' NOT IN('active','inactive'))

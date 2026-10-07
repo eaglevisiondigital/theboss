@@ -1057,3 +1057,8 @@ Sole hosted window explicitly restored before fixed deadline. First private
 restore-command revision error rejected atomically, immediately corrected/recovered;
 sanitized evidence in acceptance/validation. Prior incidents preserved. PR #3 open,
 draft, unmerged. No provider/settlement decision or Phase 7D authorized here.
+
+
+## Main Boss Chat Phase 7D financial timing resolution
+
+Main Boss Chat explicitly supersedes the earlier Phase 7A settled-only fundraising timing for CARD: verified capture establishes payment/fundraising success before batch or organization settlement; authorization alone does not. ACH requires its approved final provider success. Submitted unknown/ACH attempts hold charges, grant slices and tiles beyond short reservation clocks. Eligibility is frozen at valid submission; natural clocks do not invalidate it. Explicit cancellation/invalidation produces late-success review without automatic allocation, tile claim or wallet issuance. Historical assumptions and incident disclosures remain intact. Production money movement still requires separate funding authorization; unavailable sandbox/operational infrastructure is an evidence limitation, not fabricated success.

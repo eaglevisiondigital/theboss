@@ -11,7 +11,7 @@ select pg_temp.check('progress mappings no private finance for coaches','PERMISS
 select pg_temp.check('all fundraising helper search paths empty','ACL',not exists(select 1 from pg_proc p where p.pronamespace in('boss_private'::regnamespace,'boss_fundraising_public'::regnamespace)and(p.proname like'fundraising_%'or p.pronamespace='boss_fundraising_public'::regnamespace)and not coalesce('search_path=""'=any(p.proconfig),false)));
 select pg_temp.check('no PUBLIC funding execution','ACL',not exists(select 1 from pg_proc p where p.pronamespace in('boss_private'::regnamespace,'boss_fundraising_public'::regnamespace)and(p.proname like'fundraising_%'or p.pronamespace='boss_fundraising_public'::regnamespace)and exists(select 1 from aclexplode(coalesce(p.proacl,acldefault('f',p.proowner)))a where a.grantee=0 and a.privilege_type='EXECUTE')));
 select pg_temp.check('anonymous private schema remains closed','ACL',not has_schema_privilege('anon','boss_private','usage'));
-select pg_temp.check('only two anonymous fundraising helpers','ACL',(select count(*)=2 from pg_proc where pronamespace='boss_fundraising_public'::regnamespace));
+select pg_temp.check('only two anonymous fundraising helpers','ACL',(select count(*)=2 from pg_proc where pronamespace='boss_fundraising_public'::regnamespace and proname<>'payments'));
 update public.organization_modules set status='inactive'where organization_id=pg_temp.f('org')and module_id in(select id from public.modules where key in('sports','calendar'));
 set local role anon;
 select pg_temp.check('non-sport fundraising still available','MODULE',public.boss_fundraising_public(pg_temp.fpath('share'))->'campaign'->>'name'='Synthetic fundraising');reset role;

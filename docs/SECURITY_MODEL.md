@@ -532,3 +532,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Raw financial tables are RLS-enabled with closed direct ACLs. Authenticated-only public invoker RPCs call closed empty-search-path helpers. Current identity, managed session, relationship, feature and role state is rechecked after physical fences and before replay. UUID-sorted charge locks, wallet/account/grant fences and deferred balanced-lineage proof prevent partial or duplicate execution. No provider credentials, card/ACH or public debit endpoint.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D private execution boundary
+
+All new raw financial/provider/settlement tables are RLS enabled and closed to anon, authenticated, service_role and the private worker. Signed finite projections/commands recheck live Auth and exact business authority. The `boss_payment_worker` role is NOLOGIN, NOINHERIT and NOBYPASSRLS; only finite claim/normalized-finish/reconciliation/profile/review entry points are granted. No operational worker login, production secrets or provider account is provisioned. Private binding rows contain secret handles only. Webhook bodies are bounded, verified as polling hints and dropped; authoritative retrieval establishes evidence. Collection tokens are transient and never persisted by the execution repository. No raw PAN/CVV/bank fields, production simulation endpoint, Auth changes or timeout increase is introduced.

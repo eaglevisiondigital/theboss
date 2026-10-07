@@ -93,3 +93,21 @@ current clock before a bounded trusted expiration batch materializes its journal
 Phase 7C adds atomic same-organization charge spending, FEFO grant consumption and finance-authorized partial returns. Source loss removes unspent value and records same-organization spent-value recovery without negative spendable availability. Later original grants satisfy recovery first. Returning a covered payment releases actual replacement applications most recently applied first, preserving current source validity and expiry; dependent invalid-source recovery is unwound with immutable lineage.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+## Phase 7D Main Boss Chat timing amendment (October 7, 2026)
+
+Historical settled-only fundraising assumptions are retained above. Verified card
+capture now establishes the trusted earning source before provider settlement;
+ACH acceptance/pending does not. Earnings use the originally captured policy and
+household/attribution eligibility; a natural campaign/reservation/relationship
+clock expiry cannot dynamically replace the committed policy. Payment success
+time is distinct from provider settlement time. Explicit terminal invalidation
+routes later money to review without automatic issuance. Source corrections and
+Phase 7C replacement-grant recovery-release remain authoritative.
+
+Checkout reservations add no journal or spendable value. Once dispatched,
+unknown/ACH holds retain the reserved slices after the checkout's short expiry.
+Definitive failure or reviewed cancellation explicitly ends those holds. Actual
+spend still preserves the Phase 7C grant validity/expiration and source-entitlement
+constraints; changed/invalid source value makes captured money unallocated for
+review rather than inventing wallet value.

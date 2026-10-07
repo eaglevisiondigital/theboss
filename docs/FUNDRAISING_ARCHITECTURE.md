@@ -201,3 +201,32 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Phase 7C source corrections use cumulative remaining authoritative gross and captured earning basis points, retaining immutable original success/policy/person/campaign/team/unit provenance. Original invalid source value is never resurrected by payment returns. Canonical trusted sources remain absent at release; no fake paid fundraising, wallet grant or provider evidence may be manufactured.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+## Main Boss Chat Phase 7D financial supersession (October 7, 2026)
+
+The historical Phase 7A settled-only assumptions above remain recorded. Main Boss
+Chat explicitly narrows them for card payments: verified capture/successful sale
+establishes canonical payment and fundraising success before batch settlement or
+organization remittance. Authorization alone establishes neither. Card evidence
+records a distinct captured/payment-success time; it is never relabeled settled.
+The six-argument historical trusted-source integration retains its settled-only
+contract. Its closed committed-provider extension shares the canonical evidence,
+reward, notification and Boss Bucks dependency boundary.
+
+Submitted ACH remains payment-pending until the adapter/account contract confirms
+final success. Unknown outcomes preserve the same operation and reference; no new
+charge is automatically sent. Submitted charge, wallet and Money Board holds
+survive the ordinary reservation clock. Natural campaign end stops new submissions
+but permits a previously committed in-flight success using immutable original
+eligibility and policy/attribution snapshots. Explicit cancellation, invalidation,
+release or detachment blocks automatic late-success allocations/claims/earnings;
+verified money instead becomes canonical unallocated review evidence.
+
+Explicit campaign cancellation requires reconciliation of already submitted
+attempts. It is not evidence that the provider did not charge. A permanently paid
+Money Board claim remains historical after refund; pending unresolved tiles cannot
+be released/reassigned through ordinary expiry. Payment success, provider
+settlement and organization payout are separate states. Reversals append to valid
+capture chronology and use the existing source/recovery chain.
+
+Implementation/release evidence is tracked in [Phase 7D](PHASE_7D_CHECKPOINT.md).

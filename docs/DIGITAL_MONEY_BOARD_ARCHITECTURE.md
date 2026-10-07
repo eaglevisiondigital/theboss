@@ -69,3 +69,8 @@ and participant cursors retain bounded payloads.
 Phase 7B wallet grant provenance references canonical success evidence, intent, board/tile, share/QR and source reference. Reservations and unpaid tiles never earn Boss Bucks. The may-earn indicator reveals no family balance or wallet identity; reward membership qualification is independent. No paid fixture or mark-paid route is introduced.
 
 See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
+
+
+## Phase 7D provider-pending tile hold
+
+After valid provider submission, ordinary tile/intent expiry cannot release or reassign an unresolved tile. Pending ACH counts no raised value, reward, paid claim or wallet earning. Final approved ACH or captured CARD applies the existing trusted success chain once, using frozen provenance/policies even after natural expiry. Explicit cancellation/release followed by contradictory success creates canonical unallocated review and no second claimant. Refunds preserve the historical permanent tile claim.

@@ -142,3 +142,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Canonical payment evidence now includes ledger-backed `boss_bucks`. Existing cash/check RPC remains cash/check only. One obligation can receive distinct immutable Boss Bucks/cash/check tenders; current charge balance derives from adjustments and net allocations. Payment plans retain original installment history; internal redemption does not create processor fees or charitable characterization.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D canonical external tender
+
+Signed family checkout reuses canonical charge balances and allocations. Prepare reserves exact obligation and eligible FEFO grant slices without creating a payment. Provider dispatch atomically freezes current authority and routing. Verified card capture or final ACH success commits the original external tender and existing Boss Bucks spend; definitive failure releases reservations. Unknown attempts retain their original identity and holds. Changed/canceled obligations route verified money to unallocated review. Refunds name original tenders and allocations explicitly; mixed refunds are an audited saga, not a guessed tender selection or network-wide atomic transaction.

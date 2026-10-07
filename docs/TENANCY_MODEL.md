@@ -303,3 +303,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Every charge/payment/consumption/recovery/release retains originating organization and currency. Organization A recovery or payment return cannot consume, release or disclose Organization B grants. Participant and campaign attribution remain immutable provenance; same authorized household may use its same-organization grants across children.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D processing and financial isolation
+
+Processing accounts, exact organization/campaign/team/unit routing, checkout charges, wallet grant slices, original tender corrections and settlement sources retain organization/currency lineage. No descendant inheritance or cross-organization account fallback exists. Provider references are unique within an exact account. Organization settlement deficits offset only that same organization and currency; family wallet recovery is separate. Direct merchant settlement cannot authorize a second Boss payout.

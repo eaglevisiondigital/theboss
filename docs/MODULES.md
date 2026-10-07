@@ -332,3 +332,8 @@ See [wallet architecture](BOSS_BUCKS_WALLET_ARCHITECTURE.md).
 Phase 7C extends the existing `boss_bucks` module with false-default `wallet_spending`, `charge_payments` and `split_tender` features. Existing registration/canonical charge context is reused. No provider, external settlement or merchant module is activated; controlled hosted flags are temporary and restored explicitly.
 
 See [Boss Bucks payments and split tender](BOSS_BUCKS_PAYMENTS_SPLIT_TENDER_ARCHITECTURE.md) and [Phase 7C validation](PHASE_7C_VALIDATION.md). Historical phase statements above remain historical.
+
+
+## Phase 7D payments module
+
+The payments module catalog supports online payments, card/ACH, saved methods, provider configuration, refunds, reconciliation and settlement features. No organization is enabled merely by migration or a role mapping. Account draft creation is distinct from private merchant verification/activation. Missing operational infrastructure keeps card/ACH checkout and webhook execution unavailable. Existing cash/check and canonical Boss Bucks flows remain independent. No physical/digital Boss Bucks membership or Phase 7E product is activated.

@@ -1,5 +1,24 @@
 # Current build state
 
+## Phase 7D External Payment Rails + Settlement + Reconciliation: IN PROGRESS
+
+Authorized from `dc55c6cb2f9dc11c0b111b5783a4ec174721c361`. All six tested migrations
+are applied to canonical Boss Supabase: **95→101**. SQL byte hashes are unchanged;
+canonical types and post-generation application checks pass. Full runtime gate:
+**20,442** unique SQL/bootstrap/sealed assertions, **283** races (22 Phase 7D),
+**543/543** application tests, strict typecheck, zero-warning lint and production build.
+
+Main Boss Chat resolved capture-before-settlement, durable submitted ACH/unknown
+holds and committed eligibility across natural expiry. Historical financial
+assumptions remain documented. Provider-positive evidence is **LOCAL CONTRACT
+TESTED; SANDBOX UNAVAILABLE**; no operational processor account/secret resolver,
+private worker credential, real money movement or recurring execution is enabled.
+Deployment, green release CI and the single controlled hosted window/cleanup remain.
+No temporary hosted authority has been activated. Advisors and source/baseline
+checks are recorded in [validation](PHASE_7D_VALIDATION.md); exact sources in
+[manifest](PHASE_7D_MIGRATION_MANIFEST.md); pending acceptance in
+[plan](PHASE_7D_HOSTED_PLAN.md). Phase 7C closure/history below remains intact.
+
 ## Phase 7C Boss Bucks Spending + Canonical Charge Payments + Split Tender: COMPLETE
 
 Main Boss Chat authorized Phase 7C from
