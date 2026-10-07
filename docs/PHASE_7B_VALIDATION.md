@@ -49,7 +49,9 @@ disclosed; Phase 7B changes no dependencies and grants no provider secret access
 
 Canonical positive issuance classification: SQL/RUNTIME VERIFIED; HOSTED POSITIVE
 UNVERIFIED DUE TO APPROVED NON-PAYMENT SOURCE LIMITATION. Canonical trusted
-success evidence count is zero. Hosted empty-wallet acceptance remains pending.
+success evidence count is zero. Hosted empty-wallet acceptance and explicit cleanup
+are complete; see PHASE_7B_ACCEPTANCE_ADDENDUM.md. Final application deployed
+95a044723a921171936e9081f1282f6de35c708d; no temporary authority remains.
 
 The final explicit-access regression exposed a table-specific trigger dispatch
 defect before any temporary hosted authority was activated. The shared identity
@@ -59,3 +61,24 @@ rule or permission. All six Phase 7B suites and 11 races pass after correction,
 including explicit access ending, fresh-authority replay denial, independent
 guardian revocation, two-currency separation, retirement and immutable currency.
 Canonical generated type structure is unchanged by the private trigger fix.
+
+Hosted 320px verification then exposed an outer organization form selector that
+was missing from the local component fixture. The existing sizing rule now covers
+that control; the fixture includes the outer form. Post-fix typecheck, zero-warning
+lint, all 454 tests and build pass. Native published own-org report at 320px has
+innerWidth = scrollWidth = 320. All other hosted wallet/preview/Family Hub widths
+passed. Final canonical generation matches committed types exactly.
+
+Post-correction canonical verification: 89 migrations, 11 wallet tables with RLS,
+zero raw anon/authenticated/service_role table grants, zero unindexed wallet FKs
+and zero wallet routines lacking empty search_path. Security/performance advisors
+have no ERROR; post-cleanup unused-index count is 343 after controlled read activity.
+No Auth or timeout setting changed. All temporary authority ended before the fixed
+cleanup target; sports baselines and source hashes match. Expected updated_at
+changes on restored historical relationships are transparently retained.
+
+The superseded 084e4b7 push run failed the historical Attendance Calendar race
+synchronization; its equivalent PR run passed. It did not report a wallet assertion
+failure. Local full historical and corrected focused runs passed. Final head CI
+is checked separately and recorded in the final release handoff; this failed
+historical run is not erased or described as a pass.

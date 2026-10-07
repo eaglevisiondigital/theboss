@@ -1,6 +1,8 @@
 # Phase 7B: Boss Bucks family wallet
 
-Status: local implementation complete; canonical release/hosted acceptance pending. The Phase 7B handoff approves this internal,
+Status: COMPLETE; canonical release, bounded hosted acceptance and explicit cleanup complete.
+See PHASE_7B_ACCEPTANCE_ADDENDUM.md for classified evidence and approved source limitation.
+The Phase 7B handoff approves this internal,
 non-spending value boundary. No payment provider or production earning rate is seeded.
 
 One canonical household owns one wallet for each currency contract. Children are
