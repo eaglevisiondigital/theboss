@@ -1,3 +1,4 @@
+import FundraiserSampleCTA from "@/components/FundraiserSampleCTA";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import s from "../product.module.css";
@@ -27,7 +28,8 @@ export default function Page(){
       <div className={s.steps}><div className={s.step}><span>01</span><h3>Organization Joins</h3><p>A team or organization starts with fundraising or engagement.</p></div><div className={s.step}><span>02</span><h3>Supporters Enter</h3><p>People register through participant links, QR codes or public campaign pages.</p></div><div className={s.step}><span>03</span><h3>Value Continues</h3><p>Digital savings, Family Hub and future ecosystem features extend the relationship.</p></div><div className={s.step}><span>04</span><h3>Community Compounds</h3><p>More organizations, families and merchants make the network more useful for everyone.</p></div></div>
     </section>
 
-    <section className={s.cta}><h2>One ecosystem. Multiple ways to make an impact.</h2><a href="/fundraising/get-started">Get Started →</a></section>
+    <FundraiserSampleCTA/>
+<section className={s.cta}><h2>One ecosystem. Multiple ways to make an impact.</h2><a href="/fundraising/get-started">Get Started →</a></section>
     <SiteFooter/>
   </main>
 }
