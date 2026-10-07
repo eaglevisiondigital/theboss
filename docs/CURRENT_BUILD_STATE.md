@@ -1,9 +1,9 @@
 # Current build state
 
-## Phase 7A Fundraising Core + Digital Money Board — in progress
+## Phase 7A Fundraising Core + Digital Money Board: COMPLETE
 
 Main Boss Chat authorized Phase 7A from `da001f8b9402b48ca74e80e133946fe2f62522ed`.
-Five local migrations reuse `fundraising` and `money_board`; `boss_bucks` remains
+Five canonical migrations reuse `fundraising` and `money_board`; `boss_bucks` remains
 unimplemented. Local work adds campaign/participant/family management, explicit
 false-default guardian fundraising authority, approved random shares and QR,
 private guest donor/intent provenance, deterministic Money Boards, bounded
@@ -11,11 +11,42 @@ reservation/claim operations, monthly commitment schedules and future trial/gift
 qualification. The trusted success boundary has no public or authenticated
 payment simulation endpoint. No provider, wallet or later phase is implemented.
 
-Local implementation and full historical validation are underway. Canonical
-migration baseline is still 78; no Phase 7A migration or hosted acceptance window
-has been activated. Release/acceptance/cleanup remain pending. This section will
-be updated only from actual validation and hosted evidence. Phase 6E and all
-historical incident disclosures below remain intact.
+Implementation `e96370c547c9453c5a977a8d81ac114fa852839e` is deployed through
+production Git CD in Netlify deploy `6ac58d58b1753f0008181990`, published at
+2026-10-07 00:08:32.108 UTC. Canonical history is **83** (78→83); canonical
+types and live RLS/ACL/search-path/FK-index checks pass. Full validation passes
+**17,475 SQL/bootstrap/sealed assertions** across 98 SQL suites plus fresh
+bootstrap/sealed checks, **217 coordinated races** (209 new assertions / 13 new
+races), typecheck, zero-warning lint, **445/445 application tests** and build.
+Both implementation-head GitHub CI runs pass; the final documentation head must
+pass the same gates before the release handoff.
+
+One fixed hosted non-payment window verified campaign/explicit team goals,
+Child1 enrollment and guardian acceptance, share create/reset/revocation, QR,
+published six-tile Money Board, competing reservation denial, explicit release,
+eight-minute natural expiry, anonymous six-month commitment and display-name QR
+intent with fee-cover preferences. Raised/claimed value remained zero. Actual
+public, family and team dashboard views fit 1280/768/390/320 widths. Native
+unrelated-child access and a stale signed share-reset after guardian revocation
+were denied. Paid progress, permanent paid tiles, strict $25/$25.01 qualification,
+broader forged/restricted-role matrices and notifications retain SQL/runtime
+evidence; no live payment fixture, session extraction or extra window was used.
+
+Activation was **2026-10-07 00:20:55.232513 UTC**, cleanup target
+**00:55:55.232513 UTC**, hard expiry **01:05:55.232513 UTC**. Guardian authority
+was explicitly removed at **00:32:49.575572 UTC**. Administrator-first full
+restoration finished at **00:33:20.798984 UTC**. Checks at **00:33:28–00:33:34 UTC**
+prove zero temporary authority, active controlled campaigns/fundraisers/boards/
+shares or pending work, valid original administrator and exact selected baseline
+hash equality. Phase 6E remains pending **5** / official **0**, with all 15
+immutable source rows unchanged. Inactive test rows/audit history remain preserved.
+
+See the [109-point report](PHASE_7A_COMPLETION_REPORT.md),
+[hosted acceptance/cleanup record](PHASE_7A_ACCEPTANCE_ADDENDUM.md) and
+[validation](PHASE_7A_VALIDATION.md). Existing Auth advisor and development-only
+dependency exceptions remain disclosed. PR #3 stays OPEN/DRAFT/UNMERGED.
+No payment provider, Boss Bucks wallet or Phase 7B/later implementation began.
+Phase 6E and all historical incident disclosures below remain intact.
 
 ## Phase 6E presentation repair and closure — 2026-10-06
 

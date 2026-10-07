@@ -960,7 +960,7 @@ promoted to a newly executed hosted test. No Phase 7A or later phase is started.
 See PHASE_6E_PRESENTATION_REPAIR_REPORT.md.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A extension — completed within the non-payment boundary
 
 Main Boss Chat authorized Phase 7A only. Use integer minor units and immutable
 settled evidence for raised totals; no editable raised-total field. Preserve
@@ -972,3 +972,18 @@ occurrences count as no value. Use bounded generation batches and reads, rather
 than treating 100,000 tested tiles as a product cap. Reward qualification uses
 configurable integer threshold and explicit strict `gt`; USD 2500 fails and
 2501 qualifies, with fulfillment pending. No wallet/payment provider execution.
+
+Five reviewed migrations are canonical (78→83) and the validated implementation
+is deployed. One fixed hosted window verified the permitted non-payment paths;
+paid-state/reward outcomes and broader forged/restricted-role/notification matrices
+retain SQL/runtime evidence. Messaging was unavailable in the controlled baseline
+and was not enabled. No customer payment bypass, fabricated Auth session, DOB or
+extra acceptance window was introduced to manufacture additional hosted evidence.
+
+Explicit administrator-first restoration completed at 2026-10-07 00:33:20.798984
+UTC, before target 00:55:55.232513 UTC and hard expiry 01:05:55.232513 UTC.
+Temporary fundraising-only guardian and two module assignments are inactive;
+controlled publications/participation are archived and pending work is zero.
+Selected baseline hashes and the Phase 6E sports/achievement/recruiting baseline
+match. Inactive audited history is preserved. Phase 7A is COMPLETE; Phase 7B
+requires its own approved architecture and implementation assignment.

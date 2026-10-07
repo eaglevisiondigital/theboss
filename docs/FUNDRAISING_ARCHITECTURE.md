@@ -1,7 +1,9 @@
 # Fundraising core — Phase 7A
 
-Status: local implementation and validation in progress. Canonical migration,
-release and one controlled hosted non-payment acceptance window remain required.
+Status: Phase 7A COMPLETE. Canonical migration, release, full validation and one
+controlled hosted non-payment acceptance window with explicit cleanup passed.
+See PHASE_7A_COMPLETION_REPORT.md and PHASE_7A_ACCEPTANCE_ADDENDUM.md for evidence
+classification and the financial execution boundary.
 Starting checkpoint: `da001f8b9402b48ca74e80e133946fe2f62522ed`.
 
 ## Canonical ownership and modules

@@ -1,7 +1,8 @@
 # Phase 7A validation
 
-Status: local validation and canonical migration complete; deployment and hosted
-acceptance pending. Starting SHA: `da001f8b9402b48ca74e80e133946fe2f62522ed`.
+Status: Phase 7A COMPLETE. Local validation, canonical migration, deployment,
+fixed hosted non-payment acceptance and explicit cleanup passed.
+Starting SHA: `da001f8b9402b48ca74e80e133946fe2f62522ed`.
 
 Focused SQL covers direct ACL/RLS, explicit scopes/guardian/current memberships,
 module independence, safe public attribution/privacy, reservation lifecycle,
@@ -52,5 +53,27 @@ indexes and existing Auth absolute connection allocation INFO 1. No new warning
 or error was introduced. Do not remove protective FK/access indexes to silence
 unused-index notices on this pre-production dataset.
 
-CI and hosted/non-payment acceptance/cleanup will be appended from actual
-evidence. Preserve all prior phase/incident history.
+Production Git CD deploy `6ac58d58b1753f0008181990` published implementation
+`e96370c547c9453c5a977a8d81ac114fa852839e` at 2026-10-07 00:08:32.108 UTC.
+Both implementation-head GitHub workflows passed: push 37550325414 and PR
+37550330439. The PR database job completed in 11m27s; application job in 1m05s.
+Final documentation-head workflow results are a required release-handoff gate.
+
+The single hosted window began at 00:20:55.232513 UTC. Campaign/selected teams,
+participant/guardian, share reset, QR, Money Board publication, competing
+reservation, release, natural expiry, non-payment intents, monthly plan,
+anonymous/display choice, attribution and fee-cover preference passed. Native
+org/team/family navigation and reload passed; public/family/team views showed
+zero page-level overflow at actual 1280/768/390/320 widths. The $5 reservation
+expired at 00:31:54.125596 UTC and returned available without deleting its history.
+Unrelated-child family GET and stale signed share-reset after guardian removal
+were denied. Raised/claimed value stayed zero; there were no hosted paid fixtures.
+
+Guardian removal committed at 00:32:49.575572 UTC. Administrator-first full
+cleanup finished at 00:33:20.798984 UTC, ahead of target 00:55:55.232513 UTC and
+hard expiry 01:05:55.232513 UTC. Finite checks confirm zero temporary authority,
+active controlled publications/resources and pending controlled work. Exact
+selected baseline hashes match; prior immutable sports hash and pending 5 /
+official 0 remain unchanged. No runtime defect or architecture contradiction was
+observed. See PHASE_7A_ACCEPTANCE_ADDENDUM.md for safe audit timeline and explicit
+SQL/runtime-only limitations. Preserve all prior phase/incident history.

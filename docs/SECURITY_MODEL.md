@@ -507,7 +507,7 @@ not enter family/showcase/notification projections. Prior sanitized connector
 credential disclosures are retained; Phase 6E does not search for or reuse their values.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Phase 7A public tables enable RLS with no direct client ACL or policy. Authenticated
 management/read wrappers enforce live Auth, modules, exact role context and

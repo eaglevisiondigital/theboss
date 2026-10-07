@@ -1,6 +1,8 @@
 # Phase 7A controlled hosted acceptance plan
 
-Status: prepared; no activation before final release validation.
+Status: executed once after final release validation on 2026-10-07; explicit
+cleanup completed before both fixed deadlines. Preserve this reviewed plan.
+Actual results and timestamps are in PHASE_7A_ACCEPTANCE_ADDENDUM.md.
 
 Only the existing Boss platform and canonical Boss Supabase are used. Existing
 CONTROLLED TEST organization, Falcons, Wildcats and Child1 identities are reused.

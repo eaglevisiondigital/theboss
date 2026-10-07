@@ -119,7 +119,7 @@ See [Permissions](PERMISSIONS_MODEL.md), [Registration](REGISTRATION_ARCHITECTUR
 and [Decisions](DECISIONS.md).
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Phase 7A fundraising intents retain donor fee-cover preference only. No fee
 quote, processor fee, net settlement, payout, payment collection, receivable

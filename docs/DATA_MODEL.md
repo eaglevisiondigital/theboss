@@ -436,7 +436,7 @@ organization/team, sport/season, achieved/recognized dates and issuer remain dis
 No parallel athlete identity, score, statistics or records authority is introduced.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Phase 7A adds 16 RLS-closed tables for campaigns, exact team/program targets,
 canonical participant fundraisers, approved random share paths, deterministic

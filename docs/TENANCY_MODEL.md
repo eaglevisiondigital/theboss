@@ -281,7 +281,7 @@ alone grants nothing. Career definitions evaluate the explicitly scoped source
 organization and optional team; they do not infer cross-tenant aggregation rights.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Fundraising records use one canonical campaign and participant identity with
 exact organization/unit/team attribution. Explicit targets do not inherit

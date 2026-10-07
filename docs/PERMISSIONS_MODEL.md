@@ -406,7 +406,7 @@ choices use the existing verified `can_manage_profile` capability; no adult self
 publication policy is invented.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Phase 7A adds seven exact permissions: fundraising.view/create/manage/publish/
 financial_view and money_board.view/manage. Super/platform and organization

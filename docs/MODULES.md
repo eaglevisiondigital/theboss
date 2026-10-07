@@ -311,7 +311,7 @@ recognition/correction sources reuse Phase 4A notification routing and idempoten
 no provider, SMS or push infrastructure is enabled.
 
 
-## Phase 7A local extension (release validation pending)
+## Phase 7A canonical extension — COMPLETE
 
 Phase 7A implements the existing Fundraising and Money Board catalog entries.
 Money Board requires its own enabled module plus a current Fundraising campaign

@@ -1,7 +1,8 @@
 # Digital Money Board — Phase 7A
 
-Status: local implementation/validation; canonical release and hosted acceptance
-remain outstanding. Uses existing `money_board` plus live `fundraising` context.
+Status: Phase 7A COMPLETE; canonical release and the fixed hosted non-payment
+acceptance window passed with explicit cleanup. Uses existing `money_board` plus
+live `fundraising` context. Paid claims remain SQL/runtime evidence only.
 
 A board belongs to exactly one canonical campaign and optionally one fundraiser
 or exact team. Unique null-aware ownership prevents accidental duplicate default
