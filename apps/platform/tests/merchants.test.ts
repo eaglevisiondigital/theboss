@@ -61,6 +61,19 @@ test("shared corporate offers hide global editing from local editors",()=>{
  const data:MerchantData={merchant:{id,name:"Synthetic",status:"active",claim_state:"reviewed"},can_offers:true,offers:[{id:other,family_id:id,terms,weekly_special:false,weekdays:[0,1],starts_at:"2026-10-08T00:00:00Z",ends_at:"2026-12-01T00:00:00Z",usage_limit:2,reset_period:"lifetime",can_global_edit:false}]};
  const html=render(createElement(MerchantPortal,{data,merchantId:id,locationId:other}));assert.doesNotMatch(html,/Pause revision|Archive revision|Submit for review/);
 });
+test("a confirmed draft-to-review projection renders its review form without changing offer terms",()=>{
+ const offer={id:other,family_id:id,terms,revision:1,weekly_special:false,weekdays:[0,1,2,3,4,5,6],starts_at:"2026-10-08T00:00:00Z",ends_at:"2026-10-08T12:05:00Z",usage_limit:2,reset_period:"lifetime",can_global_edit:true};
+ const base:MerchantData={merchant:{id,name:"Synthetic",status:"active",claim_state:"unclaimed"},can_offers:true,can_review:true};
+ const project=(state:string,canReview=true):MerchantData=>({...base,can_review:canReview,offers:[{...offer,state}]});
+ for(const state of ["draft","pending_review","published","paused","archived"]){
+  const data=project(state);assert.ok(validMerchantData(data));
+  const html=render(createElement(MerchantPortal,{data,merchantId:id}));
+  assert.match(html,/Synthetic discount|12\.5% off/);assert.match(html,/2<!-- --> uses|2 uses/);
+  assert.equal(html.includes("Record offer review"),state==="pending_review");
+ }
+ const restrictedReview=render(createElement(MerchantPortal,{data:project("pending_review",false),merchantId:id}));
+ assert.doesNotMatch(restrictedReview,/Record offer review|Approve publication/);
+});
 test("clerk confirmation starts with code verification and hides redeem until verified",()=>{
  const html=render(createElement(RedemptionConsole,{merchantId:id,locationId:other,busy:false,act:async()=>null}));assert.match(html,/Verify current eligibility|type="password"|autoComplete="off"/i);assert.doesNotMatch(html,/>Confirm redemption once</);
 });

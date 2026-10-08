@@ -2,20 +2,45 @@
 
 ## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: INCOMPLETE
 
-The exact validated checkpoint from `64bfc2feff14e2a3348893fffb09221b8aefe5e3`
-is now canonically migrated under direct typed owner authorization: **107 → 113**.
-All six SQL hashes are preserved and **209/209** live schema/RLS/ACL/search-path/
-index checks pass. Thirty original business-table baselines are unchanged.
-Canonical types are regenerated; final typecheck/lint/**579** application tests/
-production build pass. Local complete validation: **22,673** unique assertions,
-**308** races, twelve recovery checks and 28 synthetic responsive checks.
+The validated checkpoint from `64bfc2feff14e2a3348893fffb09221b8aefe5e3`
+is canonically migrated under direct typed owner authorization: **107 → 113**.
+Six exact SQL hashes are preserved; **209/209** final schema/RLS/ACL/search-path/
+index checks pass. Canonical types match a fresh generation. Local validation:
+**22,673** unique SQL/bootstrap/sealed assertions, **308** races, twelve recovery
+checks, 28 synthetic responsive checks, strict typecheck, zero-warning lint,
+**580/580** application tests and production build PASS. Both full release CI runs
+at `b887958f8f82ed0bc86732ef0eb3312b3ea82e77` passed. Final evidence/test commit CI
+is recorded in the completion report and PR. Production app source
+`2a396fc62852b75d91bd05b9d87909302809affc` is deployed READY; subsequent changes
+are test harness, regression coverage and documentation only.
 
-Release deployment/CI and the single controlled hosted acceptance window remain
-required. No temporary authority is activated. The historical pre-execution
-automatic approval rejection remains documented in [checkpoint](PHASE_8A_CHECKPOINT.md).
-See [manifest](PHASE_8A_MIGRATION_MANIFEST.md), [validation](PHASE_8A_VALIDATION.md)
-and [hosted plan](PHASE_8A_HOSTED_PLAN.md). No Phase 8B or later module.
-Prior completion history and sanitized disclosures follow intact.
+The single controlled hosted window activated **2026-10-08 11:35:16.665219 UTC**.
+Native profile/claim/self-approval denial, free zero-offer listing approval, two
+locations, immutable allowance family and percentage draft succeeded. Submission
+committed `pending_review` at **11:39:04.826631 UTC**, then the refreshed page
+showed the application error boundary. Scenarios stopped. Administrator-first
+restoration was audited **11:57:52.087815**, explicit full merchant cleanup
+**11:58:07.873974**, and zero residual verified **11:58:37.536399 UTC**. Cleanup
+preceded the **12:10:16.665219** target and **12:20:16.665219** hard expiry. No
+restricted-role grant or trial source was ever issued; the administrator was
+never paused. All thirty selected original business baselines match. Controlled
+resources are archived/inactive/ended; all audit-linked pending work is zero.
+
+The hosted refresh failure is unresolved, with no reproduced implementation
+cause: upstream mutation/read requests returned 200, the restored read-only page
+loads, and an isolated synthetic Next/React mutation-refresh/reload passes.
+Focused projection regression coverage also passes. No speculative application
+fix or second acceptance window was made. Publication, weekly-special,
+member/redemption, restricted-role, CRM and populated responsive scenarios remain
+**SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED AFTER STOPPED WINDOW**. Phase 8A cannot
+be marked complete from this evidence.
+
+See [completion report](PHASE_8A_COMPLETION_REPORT.md),
+[actual acceptance](PHASE_8A_HOSTED_ACCEPTANCE.md),
+[manifest](PHASE_8A_MIGRATION_MANIFEST.md), [validation](PHASE_8A_VALIDATION.md)
+and [original plan](PHASE_8A_HOSTED_PLAN.md). The historical automatic approval
+rejection and all prior sanitized disclosures remain intact. No Phase 8B or later
+module was started. PR #3 remains OPEN/DRAFT/UNMERGED.
 
 # Current build state
 

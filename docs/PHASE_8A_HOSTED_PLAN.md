@@ -1,7 +1,13 @@
 # Phase 8A controlled hosted plan
 
-Status: PREPARED, NOT ACTIVATED. Canonical migration/deployment/CI and the exact
-local recovery preflight must pass first. One fixed window only: stop scenarios
+Status: SINGLE WINDOW STOPPED AND EXPLICITLY CLEANED on October 8, 2026.
+See [actual acceptance](PHASE_8A_HOSTED_ACCEPTANCE.md) for timestamps, partial
+results and the unresolved refresh failure. Do not re-execute this plan or reopen
+temporary authority under the original one-window authorization.
+
+The original reviewed plan below is retained as historical planned coverage.
+Canonical migration/deployment/CI and the exact local recovery preflight passed
+before activation. One fixed window only: stop scenarios
 at 30 minutes, explicit cleanup target at 35 minutes, hard expiry at 45 minutes.
 Record database UTC activation and all three deadlines before any temporary grant.
 Never extend the window. Check time before each stage; browser failure or deadline

@@ -1,6 +1,7 @@
 # Phase 8A validation
 
-Status: LOCAL GATE PASS; canonical release and hosted acceptance pending.
+Status: LOCAL/CANONICAL RELEASE GATES PASS; HOSTED ACCEPTANCE PARTIAL, STOPPED
+AND CLEANED. Phase 8A remains INCOMPLETE. See the actual acceptance addendum.
 
 The complete PostgreSQL 17 historical run passes 22,673 unique SQL/bootstrap/sealed
 assertions: 22,612 in 142 SQL suites, 28 trusted bootstrap checks and 33 sealed-source
@@ -103,3 +104,46 @@ Private script field/lifecycle/fixture errors were corrected before any live
 authority activation. One exact 56-byte orphan from the failed sandbox startup
 was removed only after key, owner, unattached state and dead-process verification;
 other running PostgreSQL services/kernel settings were untouched.
+
+
+## Final release and stopped hosted evidence
+
+Both replacement full CI runs **37728918164** and **37728923438** passed at
+`b887958f8f82ed0bc86732ef0eb3312b3ea82e77`, including the complete database suite.
+The existing Git deployment **6ac71a056fbc2f0008a359de** is READY, published
+**2026-10-08 04:21:02.851 UTC**, application source
+`2a396fc62852b75d91bd05b9d87909302809affc`. Later changes do not alter deployed
+application or migration bytes.
+
+The single hosted window stopped after a confirmed native offer submission caused
+an application error boundary during refresh. The mutation and all thirteen
+relevant upstream requests returned HTTP 200 in the narrow 11:38:45–11:41:00 UTC
+log window (endpoint/status aggregates only, no headers/session/credential values).
+The immutable pending-review event is timestamped **11:39:04.826631 UTC**. No
+specific exception survived in the approved browser diagnostic stream; exact
+page-failure onset and root cause are unknown. This is an observed hosted runtime
+failure, not an accepted evidence limitation or a demonstrated security defect.
+
+The production read-only archived merchant page loads after cleanup. An isolated
+local Next 16.3.7/React 19.3.0 diagnostic imports the unchanged MerchantPortal and
+runs a synthetic POST → router.refresh → pending-review form → reload successfully.
+It has no Auth/database connection and no production test endpoint. Its localhost
+server/tab were closed. A new application regression checks draft/pending-review/
+published/paused/archived projection rendering, unchanged terms/allowance and
+reviewer-only controls. It does not establish hosted PASS or fix an unknown cause.
+No speculative application, schema, Auth, policy or timeout change was made.
+
+Final strict typecheck, zero-warning lint, **580/580** tests and production build
+pass. **209/209** final live schema checks pass. Canonical history is exactly
+**113** and a fresh type generation matches the committed types. All **30** original
+selected baseline hashes/counts match. At **13:00:51.723756 UTC** controlled market
+is inactive, trial product/campaign archived, trial binding ended, zero issued
+trial sources, zero ever-created operational/staff/sales grants and zero pending
+controlled event/expansion/delivery work across merchant/trial/campaign lineage.
+Original administrator validity was reconfirmed **13:02:46.568446 UTC**.
+
+Final advisors retain 272 closed-raw-table INFO findings and the existing leaked
+password-protection WARN. Unused-index INFO count is now 523 (541 at initial
+release); existing Auth connection-allocation INFO remains. Query activity can
+change unused-index evidence. No index, Auth or security policy was changed.
+See [actual hosted results and cleanup](PHASE_8A_HOSTED_ACCEPTANCE.md).

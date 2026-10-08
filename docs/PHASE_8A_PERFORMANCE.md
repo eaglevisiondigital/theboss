@@ -28,3 +28,15 @@ IANA names at migration time, computes current market coverage once, prefilters
 indexed active commerce/location/review targets and checks current eligibility
 again before emitting final offers. No security check or request timeout was
 removed. All relevant historical and new authorization/race tests pass.
+
+
+## Hosted refresh observation
+
+The single hosted window stopped after native offer submission committed and the
+subsequent refreshed page displayed the error boundary. Narrow safe upstream
+endpoint/status aggregates show HTTP 200 for the mutation, merchant read and the
+other layout reads; they do not establish end-to-end browser timing or root cause.
+No hosted performance PASS, production SLA or timeout diagnosis is inferred from
+these aggregates. Local synthetic mutation-refresh/reload passes, and the restored
+read-only archived merchant page loads. The failure remains unresolved; no timeout
+increase, infrastructure mutation or second hosted window was used.

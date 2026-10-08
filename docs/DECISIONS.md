@@ -1131,3 +1131,21 @@ IANA names avoid enumerating timezones for every location. Consumer projections
 prefilter indexed geography before evaluating current member/offer evidence.
 One verified identity limits independent claim approval and two-person oversight
 hosted evidence; never fabricate identities. No new product/financial defaults.
+
+
+## Phase 8A authorized release and partial hosted acceptance — October 8, 2026
+
+Direct typed owner authorization released the six exact tested sources: canonical
+history 107 → 113, generated types, schema gates, deployment and both full CI runs
+pass. One bounded controlled window ran; an offer submission committed, then the
+hosted page refresh failed. Administrator-first cleanup completed before all
+fixed deadlines; all original selected baselines match and zero temporary grants,
+trial entitlement or pending controlled work remain. No administrator pause or
+restricted-role grant occurred.
+
+The failure did not reproduce in the isolated synthetic Next/React transition.
+Preserve the observed runtime failure and incomplete hosted matrix instead of
+inventing a cause, speculative fix or hosted PASS. Phase 8A remains INCOMPLETE;
+no evidence-closure determination or additional window is authorized here.
+Independent ownership approval/two-person oversight still require a legitimate
+second controlled identity; do not manufacture one. No Phase 8B was started.
