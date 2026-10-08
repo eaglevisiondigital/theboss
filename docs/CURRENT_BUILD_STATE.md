@@ -2,6 +2,51 @@
 
 ## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: INCOMPLETE
 
+### Latest authorized final window — October 8, 2026
+
+Starting source `1583744d2b5da501973d8237a3f66b2b2ce90100` was independently
+verified with green push/PR CI, READY diagnostic deploy `6ac7d4fc548d68000805ec4d`,
+113 canonical migrations, valid original administrator, thirty matching selected
+baselines and zero effective merchant authority or pending controlled work.
+Archived-page browser/provider correlation and repeated historical retrieval
+passed; independent disposable recovery rehearsal passed before activation.
+
+One additional window was explicitly authorized; it activated at
+**18:44:03.072482 UTC**, with stop-new **19:09:03.072482**, cleanup target
+**19:19:03.072482** and hard expiry **19:29:03.072482**. No extension.
+Original percentage submission committed once and its refreshed pending-review
+page, full reload and navigation return passed. Publication, pause, immutable
+weekly replacement, public listing privacy, native new trial, exact-location
+member offer, concealed redemption/confirmation/history and replay denial passed.
+Merchant-admin and Location A manager views respected the observed control scope.
+
+The exact-market sales-rep lead committed once at **19:06:35.538206 UTC**
+(signed receipt), but the hosted UI reported it could not confirm the change and
+offered a same-request retry. No retry, speculative repair or new scenario followed.
+No sanitized merchant-sales exception/status/correlation was emitted; its cause
+is **UNKNOWN**. This observed confirmation failure prevents Phase 8A closure.
+
+Administrator-first recovery was audited at **19:08:29.487847 UTC**; prepared
+cleanup at **19:09:15.074395**. A controlled lead outside the prepared label filter
+was explicitly inactivated through the supported operation at **19:13:46.604361**.
+All zero-residual checks completed at **19:14:49.145764**, before both deadlines.
+Administrator valid; all thirty selected baselines and achievement hash equal;
+zero temporary authority, active trial/capability/resource/configuration or pending
+controlled work. New inactive/audited history is retained separately.
+
+Populated member deals were measured at 1280/768/390/320 with no page overflow.
+The same override did not change the other tabs from 1280; their mobile evidence
+is not claimed. Offer-editor/clerk restricted contexts, CRM follow-on actions,
+wrong-location signed mutation and complete responsive/accessibility coverage did
+not execute after the stop. The original submission's historical server trace was
+not returned; client receipt/render linkage and a later matching live server-read
+trace were captured. Independent ownership/two-person oversight remain limited
+by one legitimate verified identity. See the dated acceptance/report addenda for
+exact classifications. No application/schema/migration/Auth/security-policy change;
+documentation only. No Phase 8B. PR #3 remains OPEN/DRAFT/UNMERGED.
+
+### Earlier release and diagnostic record — retained history
+
 The validated checkpoint from `64bfc2feff14e2a3348893fffb09221b8aefe5e3`
 is canonically migrated under direct typed owner authorization: **107 → 113**.
 Six exact SQL hashes are preserved; **209/209** final schema/RLS/ACL/search-path/

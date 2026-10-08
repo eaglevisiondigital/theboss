@@ -1149,3 +1149,29 @@ inventing a cause, speculative fix or hosted PASS. Phase 8A remains INCOMPLETE;
 no evidence-closure determination or additional window is authorized here.
 Independent ownership approval/two-person oversight still require a legitimate
 second controlled identity; do not manufacture one. No Phase 8B was started.
+
+## Phase 8A final authorized window stopped on sales confirmation — October 8, 2026
+
+Main Boss Chat explicitly authorized one additional fixed 25/35/45-minute window
+from diagnostic source `1583744d2b5da501973d8237a3f66b2b2ce90100`. Retrieval and
+baseline gates passed before activation at 18:44:03.072482 UTC. Original offer
+submission/refresh/reload/navigation, publication, pause, weekly replacement,
+listing privacy, native new trial, concealed redemption and replay denial passed.
+Success does not identify the original unknown refresh cause.
+
+A restricted exact-market lead committed once at 19:06:35.538206 UTC (receipt),
+but native UI could not confirm the change. No retry, speculative repair or further
+scenario followed. Merchant-sales sanitized error/status/correlation was unavailable;
+root cause remains UNKNOWN. Phase 8A stays INCOMPLETE; no evidence limitations
+were accepted for closure and no new window is inferred or authorized here.
+
+Administrator-first recovery was audited at 19:08:29.487847 UTC. Prepared cleanup
+ended grants and archived resources at 19:09:15.074395. Its label filter missed one
+controlled sales lead; that exact residual was inactivated with the supported
+version-checked operation at 19:13:46.604361. Zero-residual verification completed
+19:14:49.145764, before cleanup target 19:19:03.072482 and expiry 19:29:03.072482.
+All 30 selected baseline hashes/counts and achievement hash match. New inactive,
+revoked and audited history remains immutable. No existing source/financial history
+rewritten, policy weakened, credential/proof exposed or application/schema change.
+Prior timing/performance/security disclosures remain intact. Documentation only;
+PR #3 stays OPEN/DRAFT/UNMERGED. No Phase 8B or additional sport/module.

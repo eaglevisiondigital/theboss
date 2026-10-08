@@ -1,5 +1,13 @@
 # Phase 8A release and partial hosted acceptance report
 
+**Latest determination, October 8, 2026:** Phase 8A remains **INCOMPLETE**.
+The explicitly authorized additional window passed the original offer refresh
+path, publication, replacement, weekly presentation and concealed redemption.
+A restricted sales lead committed once, but its hosted UI could not confirm the
+change. Testing stopped without retry or repair; full cleanup and zero-residual
+verification finished before both deadlines. The dated 42-point addendum below
+is the current result. The original release report is preserved as history.
+
 **PHASE 8A INCOMPLETE — SINGLE HOSTED WINDOW STOPPED AND CLEANED.**
 
 Direct typed owner authorization released the six exact tested migrations,
@@ -177,3 +185,58 @@ unchanged as historical preauthorization evidence.
 | 145 | Recommended Phase 8B Partner Network direction. | Phase 8B NOT STARTED. Main Boss Chat retains approval of any licensed Partner Network adapter, provenance, territory/entitlement mapping and data-sharing contract decisions. |
 
 Explicit confirmations: zero residual temporary authority; original administrator valid; no password/Auth token/session value/privileged key/provider secret exposed; historical Netlify proxy value not inspected/reused/reproduced; synthetic data only, no real youth/customer data; no later phase. Initial merchant tools remain FREE. No Phase 8B direction is implemented.
+
+## Final controlled hosted acceptance: 42-point addendum — October 8, 2026
+
+**INCOMPLETE.** The original refresh gate passed; the new sales confirmation failure
+stopped acceptance. Prior reports and incident disclosures are preserved.
+
+| # | Item | Actual result |
+| ---: | --- | --- |
+| 1 | Starting SHA | 1583744d2b5da501973d8237a3f66b2b2ce90100. |
+| 2 | Final SHA | Documentation-only commit identified by the final release receipt/PR head; application source remains the starting SHA. |
+| 3 | Diagnostic retrieval preflight | HOSTED VERIFIED: archived correlation matched browser/provider, commit/deploy and UTC; repeated bounded lookup and private export passed. |
+| 4 | Baseline verification | SQL/RUNTIME VERIFIED (live): 113 migrations, admin valid, grants/work zero, 30 selected baseline hashes/counts equal; achievement recorded. |
+| 5 | Window timestamps | 2026-10-08 UTC: activation 18:44:03.072482; stop-new 19:09:03.072482; cleanup target 19:19:03.072482; hard expiry 19:29:03.072482. No extensions. |
+| 6 | Offer submission | HOSTED VERIFIED: revision 1 pending_review once at 18:48:44.367893 UTC; client receipt 200. |
+| 7 | Router refresh | HOSTED VERIFIED: pending-review page, terms and review controls rendered. |
+| 8 | Full reload | HOSTED VERIFIED; navigation away/back also passed. |
+| 9 | Diagnostic correlation | HOSTED VERIFIED original client receipt→render parent linkage and later matching live server read/render. Original submission historical server trace not retrieved; full chain not claimed. |
+| 10 | Error recurrence | Original offer boundary absent. Different sales-lead confirmation FAILED. |
+| 11 | Root cause | UNKNOWN for the historical offer failure and new sales confirmation notice; no speculative fix. |
+| 12 | Listing-only merchant | HOSTED VERIFIED: active listing remained when its sole offer was paused; free tools, no billing. |
+| 13 | Public directory | HOSTED VERIFIED: profile and two locations; private offer economics absent. |
+| 14 | Offer approval/publication | HOSTED VERIFIED using legitimate existing platform reviewer controls; no ownership-rule bypass. |
+| 15 | Revision/pause | HOSTED VERIFIED: pause, immutable weekly revision 2, publication archives revision 1; stable family retained. |
+| 16 | Weekly special | HOSTED VERIFIED: weekdays 1–5, local 09:00–20:00, Location A timezone; DST SQL/RUNTIME VERIFIED. |
+| 17 | Multi-location | HOSTED VERIFIED: two locations, A-only offer; B created later received no implicit offer applicability. |
+| 18 | Membership eligibility | HOSTED VERIFIED: pretrial nonmember denial, legitimate native new trial, same-market access. New source revoked; old sources unchanged. Other geography negatives SQL/RUNTIME VERIFIED. |
+| 19 | Redemption intent | HOSTED VERIFIED via concealed native control; proof never revealed. |
+| 20 | Redemption confirmation | HOSTED VERIFIED: native verification and exactly one confirmation/row; uses 2→1 and history. |
+| 21 | Replay denial | HOSTED VERIFIED: consumed-proof re-verification denied, confirmation disabled; one canonical redemption. |
+| 22 | Wrong-location behavior | SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED FIXTURE/IDENTITY/TOOLING LIMITATION for signed mutation; A-only member offer and restricted location projection hosted observed. |
+| 23 | Merchant role isolation | HOSTED VERIFIED merchant_admin, exact-A location_manager, exact-market sales_rep observed contexts. Offer_editor/clerk restricted stages SQL/RUNTIME VERIFIED; not executed after stop. |
+| 24 | Sales CRM | FAILED: one lead/receipt committed at 19:06:35.538206 UTC, but UI could not confirm and offered retry. No retry/activity/pipeline/conversion followed. |
+| 25 | 1280px | HOSTED VERIFIED measured deals, sales and public directory at inner/client/scroll 1280. |
+| 26 | 768px | HOSTED VERIFIED populated deals at 768/768/768. Other tabs stayed 1280; no mobile claim. |
+| 27 | 390px | HOSTED VERIFIED populated deals at 390/390/390; other screens not claimed. |
+| 28 | 320px | HOSTED VERIFIED populated deals at 320/320/320; other screens not claimed. |
+| 29 | Accessibility | LOCAL APPLICATION VERIFIED; native labels/live statuses observed; complete hosted keyboard/screen-reader audit unexecuted. |
+| 30 | Cleanup timestamps | Admin-first 19:08:29.487847; prepared cleanup 19:09:15.074395; missed-label lead explicitly inactive 19:13:46.604361; final zero check 19:14:49.145764 UTC. |
+| 31 | Cleanup target met | YES; full explicit cleanup and verification before 19:19:03.072482 UTC. |
+| 32 | Hard expiry met | YES; before 19:29:03.072482 UTC; no expiry extension. |
+| 33 | Original administrator | SQL/RUNTIME VERIFIED live and HOSTED VERIFIED restored review controls; valid at final check. |
+| 34 | Residual temporary authority | SQL/RUNTIME VERIFIED live: ZERO operational/staff/sales authority; each original admin restored first. |
+| 35 | Residual work/resources | SQL/RUNTIME VERIFIED live: ZERO active resources/configuration/trials/capabilities and pending events/expansions/deliveries. |
+| 36 | Baseline equality | SQL/RUNTIME VERIFIED live: all 30 selected original hash/count rows and achievement hash match. Inactive/audited new history retained separately. |
+| 37 | Source/financial protection | Original Phase 7E source/history, Phase 7D payments/allocations, Wallet and sports unchanged. Trial was newly issued and revoked, not revived. |
+| 38 | Tests/CI | Starting push/PR full CI PASS (589 application tests; typecheck/lint/build and database suite). Disposable recovery re-rehearsal PASS. Docs diff check and final documentation CI recorded in release receipt. |
+| 39 | PR #3 | OPEN / DRAFT / UNMERGED; documentation-only update, no merge. |
+| 40 | Security exceptions | No new credential/session exposure; no proof extraction, historical proxy inspection/reuse, real youth/customer data, policy weakening, migration or application change. Prior disclosures retained. |
+| 41 | Outstanding limitations | Original submission server trace missing; merchant-sales sanitized failure detail absent; editor/clerk and CRM follow-ons unexecuted after failure; wrong-location/forged tooling, independent identity and remaining responsive/accessibility evidence limited. None promoted to hosted PASS. |
+| 42 | Final Phase 8A status | INCOMPLETE: sales-lead hosted confirmation failure requires a separately reviewed diagnosis. No further window or Phase 8B. STOP. |
+
+See the final-window acceptance addendum for the exact audit timeline, diagnostic
+retrieval limits, fixture-label cleanup recovery and per-scenario classifications.
+No source/schema/security repair was made. A later task must diagnose the observed
+sales confirmation failure before any newly reviewed acceptance window.
