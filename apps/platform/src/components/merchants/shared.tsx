@@ -6,16 +6,21 @@ import { record, type Terms, type MerchantData, type Market } from "@/lib/mercha
 import { parseMerchantCommand, type MerchantCommand } from "@/lib/merchants/input";
 import { money } from "@/lib/fundraising/contracts";
 import type { MerchantAction } from "@/lib/merchants/fields";
+import { MERCHANT_CORRELATION_HEADER } from "@/lib/merchants/diagnostics";
+import { merchantClientDiagnostic, merchantClientReceipt } from "@/lib/merchants/diagnostics-client";
 export type Act = (action: MerchantAction, input: Record<string, Json>) => Promise<Record<string, unknown> | null>;
 export function useMerchantAction() {
  const router = useRouter(), [busy, setBusy] = useState(false), [message, setMessage] = useState("");
  const pending = useRef<MerchantCommand | null>(null), [retry, setRetry] = useState(false);
  async function send(command: MerchantCommand): Promise<Record<string, unknown> | null> {
   if (busy) return null; setBusy(true); setRetry(false);
-  try { const response = await fetch("/app/merchants/mutate", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify(command) }), data: unknown = await response.json();
+  try { const response = await fetch("/app/merchants/mutate", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify(command) });
+   merchantClientReceipt(response.headers.get(MERCHANT_CORRELATION_HEADER),response.status,command.action==="offer.status"?"offer.status":"merchant.mutation");
+   const data: unknown = await response.json();
    if (!record(data) || data.ok !== true) { setMessage(record(data) && typeof data.error === "string" ? data.error : "The change could not be confirmed."); setRetry(response.status >= 500); return null; }
-   setMessage(data.replayed ? "Existing request confirmed." : "Change confirmed."); pending.current = null; router.refresh(); return data;
-  } catch { setMessage("This request could not be confirmed. Retry the same request safely."); setRetry(true); return null; } finally { setBusy(false); }
+   setMessage(data.replayed ? "Existing request confirmed." : "Change confirmed."); pending.current = null;
+   merchantClientDiagnostic({stage:"refresh_requested",observedAt:"src/components/merchants/shared.tsx"});router.refresh();return data;
+  } catch(error) { merchantClientDiagnostic({stage:"client_exception",observedAt:"src/components/merchants/shared.tsx",classification:"exception",error});setMessage("This request could not be confirmed. Retry the same request safely."); setRetry(true); return null; } finally { setBusy(false); }
  }
  const act: Act = async (action, input) => { const command = parseMerchantCommand({ action, input, request_id: crypto.randomUUID() }); if (!command) { setMessage("Review the merchant fields."); return null; } pending.current = command; return send(command); };
  return { act, busy, status: <div role="status" aria-live="polite"><p>{message}</p>{retry && <button className="button button-outline" disabled={busy} onClick={() => { if (pending.current) void send(pending.current); }}>Retry the same request</button>}</div> };

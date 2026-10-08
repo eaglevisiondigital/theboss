@@ -1,14 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { merchantClientRendered } from "@/lib/merchants/diagnostics-client";
 import type { Json } from "@/lib/supabase/database.types";
 import type { MerchantData, Location, Terms } from "@/lib/merchants/contracts";
 import { validMerchantTerms } from "@/lib/merchants/contracts";
 import { minorAmount } from "@/lib/fundraising/contracts";
 import { CategoryChoice, MarketChoice, MerchantState, TermsSummary, formText, optionalText, optionalDate, useMerchantAction, type Act } from "./shared";
-export function MerchantPortal({ data, merchantId, locationId }: { data: MerchantData; merchantId?: string; locationId?: string }) {
+export function MerchantPortal({ data, merchantId, locationId, diagnosticCorrelation }: { data: MerchantData; merchantId?: string; locationId?: string; diagnosticCorrelation?: string }) {
  const router = useRouter(), { act, busy, status } = useMerchantAction();
+ useEffect(()=>{if(diagnosticCorrelation)merchantClientRendered(diagnosticCorrelation);},[diagnosticCorrelation]);
  if (data.unavailable || data.restricted) return <MerchantState data={data} />;
  const m = data.merchant, scope = { merchant_id: merchantId ?? "" };
  if (!m) return <div className="merchant-workspace"><p>Initial merchant tools are free, including listing-only businesses with no offers. Your Boss account remains your only identity.</p>

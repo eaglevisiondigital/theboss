@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
+  // Compile only existing Netlify public build identifiers, never environment data.
+  env: {
+    BOSS_DIAGNOSTIC_COMMIT: /^[a-f0-9]{40}$/.test(process.env.COMMIT_REF ?? "") ? process.env.COMMIT_REF : "local",
+    BOSS_DIAGNOSTIC_DEPLOY: /^[a-f0-9]{24}$/.test(process.env.DEPLOY_ID ?? "") ? process.env.DEPLOY_ID : "local",
+  },
   turbopack: { root: path.resolve(process.cwd()) },
   outputFileTracingRoot: path.resolve(process.cwd()),
   async headers() {

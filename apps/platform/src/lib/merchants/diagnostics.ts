@@ -1,0 +1,63 @@
+// One finite diagnostic channel. Never serialize an Error, request or projection.
+export const MERCHANT_DIAGNOSTIC_PREFIX = "BOSS_MERCHANT_DIAGNOSTIC ";
+export const MERCHANT_CORRELATION_HEADER = "x-boss-merchant-diagnostic";
+export const merchantDiagnosticStages = ["page_enter", "read_started", "read_completed", "contract_rejected", "read_failed", "mutation_started", "mutation_completed", "receipt_received", "refresh_requested", "client_rendered", "server_exception", "error_boundary", "retry_requested", "client_exception"] as const;
+export type MerchantDiagnosticStage = typeof merchantDiagnosticStages[number];
+export type MerchantDiagnosticPhase = "server-component" | "server-render" | "server-route" | "server-proxy" | "client" | "client-boundary";
+const phases: MerchantDiagnosticPhase[] = ["server-component", "server-render", "server-route", "server-proxy", "client", "client-boundary"];
+const classifications = ["event", "exception", "contract-rejected", "scope-denied", "upstream-unavailable"] as const;
+type Classification = typeof classifications[number];
+const files = ["src/app/app/merchants/page.tsx", "src/app/app/merchants/mutate/route.ts", "src/components/merchants/portal.tsx", "src/components/merchants/shared.tsx", "src/lib/merchants/data.ts", "src/lib/merchants/contracts.ts", "src/lib/merchants/mutation.ts", "src/app/app/layout.tsx", "src/app/error.tsx", "src/instrumentation.ts", "src/instrumentation-client.ts", "src/proxy.ts"] as const;
+type DiagnosticFile = typeof files[number];
+export function validMerchantCorrelation(value: unknown): value is string {
+ return typeof value === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(value);
+}
+export function merchantDiagnosticPath(value: unknown) {
+ if (typeof value !== "string") return false;
+ const path = value.split(/[?#]/, 1)[0];
+ return path === "/app/merchants" || path === "/app/merchants/mutate";
+}
+function property(error: unknown, key: string): unknown {
+ try { return error !== null && typeof error === "object" ? Reflect.get(error, key) : undefined; } catch { return undefined; }
+}
+export function merchantErrorDetails(error: unknown) {
+ const name = property(error, "name"), digest = property(error, "digest"), stack = property(error, "stack");
+ const category = ["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError", "AggregateError", "URIError", "EvalError"].includes(String(typeof name === "string" ? name : "")) ? name as string : "UnknownError";
+ let source: { file: DiagnosticFile; line: number; column: number } | null = null;
+ if (typeof stack === "string" && stack.length <= 32_000) {
+  // Only frame lines and exact repository files; omit messages, URLs and other frames.
+  for (const frame of stack.split("\n").slice(1, 21)) {
+   if (!/^\s*at\s/.test(frame)) continue;
+   for (const file of files) {
+    const at = frame.indexOf(file + ":");
+    if (at < 0 || (at > 0 && !/[/(\\]/.test(frame[at - 1]))) continue;
+    const location = /^(\d{1,6}):(\d{1,6})(?:\)|\s|$)/.exec(frame.slice(at + file.length + 1));
+    if (location && Number(location[1]) > 0 && Number(location[2]) > 0) { source = { file, line: Number(location[1]), column: Number(location[2]) }; break; }
+   }
+   if (source) break;
+  }
+ }
+ return { exception_category: category, digest: typeof digest === "string" && /^[0-9]{1,20}$/.test(digest) ? digest : null, source };
+}
+export type MerchantDiagnosticInput = { correlationId: string; parentCorrelationId?: string | null; stage: MerchantDiagnosticStage; phase: MerchantDiagnosticPhase; observedAt: DiagnosticFile; classification?: Classification; operation?: "offer.status" | "merchant.mutation" | "merchant.read"; status?: number; error?: unknown };
+export function merchantDiagnosticRecord(input: MerchantDiagnosticInput) {
+ if (!validMerchantCorrelation(input.correlationId) || !merchantDiagnosticStages.includes(input.stage) || !phases.includes(input.phase) || !files.includes(input.observedAt)) return null;
+ const details = input.error === undefined ? { exception_category: null, digest: null, source: null } : merchantErrorDetails(input.error);
+ const commit = process.env.BOSS_DIAGNOSTIC_COMMIT, deploy = process.env.BOSS_DIAGNOSTIC_DEPLOY;
+ return {
+  schema: "boss.merchant.diagnostic.v1", timestamp: new Date().toISOString(),
+  commit: typeof commit === "string" && /^[a-f0-9]{40}$/.test(commit) ? commit : "local",
+  deployment: typeof deploy === "string" && /^[a-f0-9]{24}$/.test(deploy) ? deploy : "local",
+  route: "/app/merchants", phase: input.phase, stage: input.stage,
+  correlation_id: input.correlationId,
+  parent_correlation_id: validMerchantCorrelation(input.parentCorrelationId) ? input.parentCorrelationId : null,
+  observed_at: input.observedAt,
+  classification: classifications.includes(input.classification ?? "event") ? input.classification ?? "event" : "event",
+  operation: ["offer.status", "merchant.mutation", "merchant.read"].includes(input.operation ?? "") ? input.operation : null,
+  http_status: Number.isInteger(input.status) && Number(input.status) >= 100 && Number(input.status) <= 599 ? input.status : null,
+  ...details,
+ };
+}
+export function emitMerchantDiagnostic(input: MerchantDiagnosticInput, sink: (line: string) => void = line => console.info(line)) {
+ try { const record = merchantDiagnosticRecord(input); if (record) sink(MERCHANT_DIAGNOSTIC_PREFIX + JSON.stringify(record)); } catch { /* Diagnostics must never break the application. */ }
+}

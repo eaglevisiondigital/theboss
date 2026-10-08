@@ -8,11 +8,14 @@ Six exact SQL hashes are preserved; **209/209** final schema/RLS/ACL/search-path
 index checks pass. Canonical types match a fresh generation. Local validation:
 **22,673** unique SQL/bootstrap/sealed assertions, **308** races, twelve recovery
 checks, 28 synthetic responsive checks, strict typecheck, zero-warning lint,
-**580/580** application tests and production build PASS. Both full release CI runs
+**580/580** application tests and production build PASS at the original release.
+The separate sanitized diagnostic validation now passes **589/589** tests.
+Both full release CI runs
 at `b887958f8f82ed0bc86732ef0eb3312b3ea82e77` passed. Final evidence/test commit CI
 is recorded in the completion report and PR. Production app source
-`2a396fc62852b75d91bd05b9d87909302809affc` is deployed READY; subsequent changes
-are test harness, regression coverage and documentation only.
+`2a396fc62852b75d91bd05b9d87909302809affc` was deployed READY in the initial
+release. The later diagnostic release adds narrowly scoped capture only; its
+deployment/retrieval results are recorded in the diagnostic completion report.
 
 The single controlled hosted window activated **2026-10-08 11:35:16.665219 UTC**.
 Native profile/claim/self-approval denial, free zero-offer listing approval, two
@@ -34,6 +37,15 @@ fix or second acceptance window was made. Publication, weekly-special,
 member/redemption, restricted-role, CRM and populated responsive scenarios remain
 **SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED AFTER STOPPED WINDOW**. Phase 8A cannot
 be marked complete from this evidence.
+
+Under the subsequent direct diagnostic authorization, supported Next 16.3.7
+server/client hooks now emit an explicit sanitized merchant-only channel with
+opaque correlation links, stage/module boundaries and digest joins. Local native
+mutation/refresh, deliberate harmless exception, safe boundary, supported retry
+and pending-review reload pass. The original hosted cause remains UNKNOWN; no
+speculative business fix or new acceptance window is authorized. Existing Netlify
+function logs and private sanitized export provide the documented retrieval gate.
+See [diagnostic behavior, validation and retention](PHASE_8A_DIAGNOSTICS.md).
 
 See [completion report](PHASE_8A_COMPLETION_REPORT.md),
 [actual acceptance](PHASE_8A_HOSTED_ACCEPTANCE.md),
