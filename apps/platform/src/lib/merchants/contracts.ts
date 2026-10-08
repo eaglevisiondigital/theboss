@@ -51,7 +51,12 @@ export function validMerchantData(value: unknown): value is MerchantData {
 }
 export function validMerchantReceipt(value: unknown, action: string): value is Record<string,unknown> {
  if (!record(value) || privateMaterial(value) || value.action !== action || typeof value.replayed !== "boolean") return false;
+ const salesFields: Record<string,string[]> = {
+  "lead.create":["lead_id","merchant_id","version"],"lead.state":["lead_id","merchant_id","version"],"lead.reassign":["lead_id","merchant_id","version"],
+  "lead.convert":["lead_id","merchant_id","version"],"lead.activity":["lead_id","resource_id"],"sales.grant":["resource_id"],"sales.end":["resource_id"]
+ };
+ if (salesFields[action] && (salesFields[action].some(k=>!Object.hasOwn(value,k)) || Object.keys(value).some(k=>!["action","replayed",...salesFields[action]].includes(k)))) return false;
  const allowed = ["action","replayed","market_id","merchant_id","resource_id","version","lead_id","intent_id","expires_at","redemption_id","correction_id","valid","title","terms","remaining_uses"];
  if (Object.keys(value).some(k=>!allowed.includes(k))) return false;
- return Object.entries(value).every(([k,v])=>k.endsWith("_id") ? uuid(v) : k==="terms" ? validMerchantTerms(v) : k==="expires_at" ? date(v) : k==="version" ? number(v,1) : k==="remaining_uses" ? v===null || number(v) : k==="valid" ? v===true : true);
+ return Object.entries(value).every(([k,v])=>k.endsWith("_id") ? uuid(v) || k==="merchant_id" && v===null && ["lead.create","lead.state","lead.reassign"].includes(action) : k==="terms" ? validMerchantTerms(v) : k==="expires_at" ? date(v) : k==="version" ? number(v,1) : k==="remaining_uses" ? v===null || number(v) : k==="valid" ? v===true : true);
 }

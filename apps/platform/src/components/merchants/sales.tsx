@@ -1,11 +1,15 @@
 "use client";
+import { useEffect } from "react";
+import { merchantClientRendered } from "@/lib/merchants/diagnostics-client";
 import Link from "next/link";
 import type { Json } from "@/lib/supabase/database.types";
 import { merchantPageLink } from "@/lib/merchants/input";
 import type { MerchantData } from "@/lib/merchants/contracts";
 import { CategoryChoice, MarketChoice, MerchantState, formText, optionalText, optionalDate, useMerchantAction } from "./shared";
-export function MerchantSales({ data, query = {} }: { data: MerchantData; query?: Record<string, Json> }) {
- const { act, busy, status } = useMerchantAction();if(data.unavailable || data.restricted) return <MerchantState data={data} />;
+export function MerchantSales({ data, query = {}, diagnosticCorrelation }: { data: MerchantData; query?: Record<string, Json>; diagnosticCorrelation?: string }) {
+ const { act, busy, status } = useMerchantAction();
+ useEffect(()=>{if(diagnosticCorrelation)merchantClientRendered(diagnosticCorrelation,true);},[diagnosticCorrelation]);
+ if(data.unavailable || data.restricted) return <MerchantState data={data} />;
  return <div className="merchant-workspace"><p>Work within your assigned market and opportunities. Conversion preserves acquisition attribution and creates a prospect; it does not approve the merchant or grant ownership. Initial merchant tools remain free.</p>
  {data.can_create && <section className="merchant-panel"><h2>Create a merchant lead</h2><form className="merchant-form" action={async form => { await act("lead.create", { name: formText(form,"name"), category: formText(form,"category"), source: formText(form,"source"), market_id: formText(form,"market_id"), ...optionalText(form,"rep_id"), ...optionalText(form,"manager_id") }); }}><label>Prospect business name<input required name="name" maxLength={120} /></label><MarketChoice markets={data.markets} /><CategoryChoice categories={data.categories} /><label>Acquisition source<input name="source" maxLength={120} required /></label><label>Assigned rep ID (blank for yourself)<input name="rep_id" /></label><label>Assigned manager ID (optional)<input name="manager_id" /></label><button disabled={busy} className="button button-primary">Create assigned lead</button></form></section>}
  <section><h2>Assigned sales pipeline</h2>{!data.leads?.length && <p>No opportunities are available in your current assignment.</p>}<div className="merchant-grid">{data.leads?.map(l=><article key={l.id} className="merchant-panel"><h3>{l.name}</h3><p>{l.state.replaceAll("_"," ")} · Acquisition source {l.source}</p>{l.merchant_id && <Link href={`/app/merchants?merchant_id=${l.merchant_id}`}>Converted merchant, where separately authorized</Link>}

@@ -1175,3 +1175,21 @@ revoked and audited history remains immutable. No existing source/financial hist
 rewritten, policy weakened, credential/proof exposed or application/schema change.
 Prior timing/performance/security disclosures remain intact. Documentation only;
 PR #3 stays OPEN/DRAFT/UNMERGED. No Phase 8B or additional sport/module.
+
+## Phase 8A Sales receipt contract repair — October 8, 2026
+
+Main Boss Chat authorized diagnosis and a proven narrow application/diagnostic
+repair from `8e82ed4a46744eee880d476ab19d799ca897570d`, including validated Git CD
+release and read-only archived diagnostic retrieval. It did not authorize another
+hosted acceptance window or production merchant/Sales mutation.
+
+Canonical receipt field-type evidence and real original Next/React reproduction
+prove rejection of legitimate `merchant_id:null` before lead conversion. Correct
+only those finite Sales receipt shapes; preserve private-field rejection, canonical
+signed replay/digest/current-authority checks and existing business/security rules.
+Add finite Sales diagnostics and honest success/rejection/unknown handling; keep
+unknown commands bound to their original request identity. No database correction,
+new telemetry framework, public receipt endpoint, privileged shortcut or timeout
+change. Phase 8A remains INCOMPLETE pending separately authorized hosted Sales
+confirmation and closure determination. Earlier offer root cause is still unknown;
+all acceptance, cleanup and historical security disclosures are preserved.

@@ -2,6 +2,19 @@
 
 ## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: INCOMPLETE
 
+### Latest Sales diagnosis/repair — October 8, 2026
+
+The canonical unconverted lead receipt has `merchant_id: null`; the application
+UUID-only receipt validator rejected it after commit. This specific mismatch is
+PROVEN and narrowly corrected, with real local Next/React before/after and fault/
+replay integration. 599 application tests, typecheck, zero-warning lint and build
+PASS. Existing diagnostics now include Sales and distinct confirmation outcomes.
+Production migration/business state/authority are unchanged; no acceptance window
+opened. Phase 8A stays **INCOMPLETE** pending separately authorized hosted Sales
+confirmation/CRM evidence and Main Boss Chat closure review. See
+[Sales diagnosis](PHASE_8A_SALES_DIAGNOSIS.md). Release/CI/READY retrieval evidence
+is recorded in the final handoff and PR #3. Prior failure/security history follows.
+
 ### Latest authorized final window — October 8, 2026
 
 Starting source `1583744d2b5da501973d8237a3f66b2b2ce90100` was independently

@@ -5,7 +5,7 @@ import { validMerchantData, type MerchantData } from "./contracts";
 import { emitMerchantDiagnostic, validMerchantCorrelation, type MerchantDiagnosticStage } from "./diagnostics";
 export async function loadMerchants(query: Record<string, Json>, directory = false, correlationId?: string): Promise<MerchantData> {
  const diagnostic = (stage: MerchantDiagnosticStage, extra: {error?:unknown;status?:number;classification?:"scope-denied"|"upstream-unavailable"|"contract-rejected"}={}) => {
-  if(validMerchantCorrelation(correlationId)) emitMerchantDiagnostic({correlationId,stage,phase:"server-component",observedAt:"src/lib/merchants/data.ts",operation:"merchant.read",...extra});
+  if(validMerchantCorrelation(correlationId)) emitMerchantDiagnostic({correlationId,stage,phase:"server-component",observedAt:"src/lib/merchants/data.ts",operation:query.mode==="sales"?"sales.read":"merchant.read",...extra});
  };
  diagnostic("read_started");
  try {

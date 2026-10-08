@@ -54,3 +54,19 @@ test("browser boundary and runtime diagnostics are merchant-only and do not reco
 test("error boundary keeps the supported retry interface and never renders exception details",()=>{
  const html=renderToStaticMarkup(createElement(ErrorPage,{error:Object.assign(new Error("PRIVATE"),{digest:"4567"}),retry(){}}));assert.match(html,/We couldn’t load this page|Try again|Go to home/);assert.doesNotMatch(html,/PRIVATE|4567/);
 });
+
+test("sales route and finite sales operation categories preserve diagnostic privacy",()=>{
+ assert.ok(merchantDiagnosticPath("/app/merchant-sales?person_id=PRIVATE"));assert.equal(merchantDiagnosticPath("/app/merchant-sales-other"),false);
+ for(const operation of ["lead.create","lead.activity","lead.state","lead.reassign","lead.convert","sales.grant","sales.end","sales.read"] as const){
+  const r=merchantDiagnosticRecord({...base,operation,observedAt:"src/components/merchants/sales.tsx"});assert.equal(r?.route,"/app/merchant-sales");assert.equal(r?.operation,operation);
+ }
+ const r=merchantDiagnosticRecord({...base,operation:"PRIVATE" as MerchantDiagnosticInput["operation"],route:"PRIVATE" as MerchantDiagnosticInput["route"]});assert.equal(r?.operation,null);assert.equal(r?.route,"/app/merchants");
+});
+test("sales server errors use the exact sales route and safe known source",()=>{
+ const rows=capture(()=>onRequestError({name:"TypeError",message:"PRIVATE",stack:"TypeError: PRIVATE\n at render (/src/app/app/merchant-sales/page.tsx:20:2)"},{path:"/app/merchant-sales?lead=PRIVATE",method:"GET",headers:{[MERCHANT_CORRELATION_HEADER]:id,cookie:"PRIVATE"}},{routerKind:"App Router",routePath:"PRIVATE",routeType:"render",renderSource:"server-rendering",revalidateReason:undefined}));
+ assert.equal(rows[0].route,"/app/merchant-sales");assert.deepEqual(rows[0].source,{file:"src/app/app/merchant-sales/page.tsx",line:20,column:2});assert.doesNotMatch(JSON.stringify(rows),/PRIVATE/);
+});
+test("accepted mutation then error boundary is a refresh failure without losing confirmed response evidence",()=>{
+ const original=Object.getOwnPropertyDescriptor(globalThis,"window");Object.defineProperty(globalThis,"window",{configurable:true,value:{location:{pathname:"/app/merchant-sales"}}});
+ try{clearMerchantClientTrace();const rows=capture(()=>{merchantClientRendered(id,true);merchantClientReceipt(next,200,"lead.create");merchantClientDiagnostic({stage:"response_accepted",observedAt:"src/lib/merchants/action.ts",classification:"confirmed-success",operation:"lead.create"});merchantClientDiagnostic({stage:"refresh_requested",observedAt:"src/components/merchants/shared.tsx"});merchantClientDiagnostic({stage:"error_boundary",observedAt:"src/app/error.tsx",classification:"exception",error:new TypeError("PRIVATE")});});assert.equal(rows.at(-1).classification,"refresh-failed");assert.equal(rows.at(-1).correlation_id,next);assert.equal(rows[2].classification,"confirmed-success");assert.doesNotMatch(JSON.stringify(rows),/PRIVATE/);}finally{clearMerchantClientTrace();if(original)Object.defineProperty(globalThis,"window",original);else Reflect.deleteProperty(globalThis,"window");}
+});

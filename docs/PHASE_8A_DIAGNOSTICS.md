@@ -139,3 +139,21 @@ enabled, preserve any failure before cleanup, and stop on a new boundary failure
 Publication, weekly-special, membership/redemption, restricted-role, sales CRM
 and populated responsive scenarios retain their existing hosted-unverified labels.
 No Phase 8B or Partner Network integration is part of diagnostic readiness.
+
+## Sales coverage extension — October 8, 2026
+
+The channel now additionally covers `/app/merchant-sales`. Sales page/read/render
+and Next error hooks share the same opaque correlation architecture. Explicit
+operations: `lead.create`, `lead.activity`, `lead.state`, `lead.reassign`,
+`lead.convert`, `sales.grant`, `sales.end`, `sales.read`. The existing shared
+mutation route still emits its constant merchant route boundary; action-specific
+RPC/receipt records identify Sales through finite operation categories and share
+that route correlation. No resource context is serialized.
+
+New finite stages/classifications distinguish transport response loss, non-2xx,
+HTTP-200 invalid JSON, canonical receipt rejection, confirmed response, true
+rejection and a subsequent refresh/render error. Browser failure after accepted
+receipt is `refresh-failed`; it does not reverse the recorded success. No raw
+body/header, prospect information, command/receipt, private identifiers or arbitrary
+error text is retained. Existing merchant privacy, filtering, retention and export
+rules above remain unchanged. See [Sales diagnosis](PHASE_8A_SALES_DIAGNOSIS.md).
