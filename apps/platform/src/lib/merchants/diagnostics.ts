@@ -1,7 +1,7 @@
 // One finite diagnostic channel. Never serialize an Error, request or projection.
 export const MERCHANT_DIAGNOSTIC_PREFIX = "BOSS_MERCHANT_DIAGNOSTIC ";
 export const MERCHANT_CORRELATION_HEADER = "x-boss-merchant-diagnostic";
-export const merchantDiagnosticStages = ["page_enter", "read_started", "read_completed", "contract_rejected", "read_failed", "mutation_started", "mutation_completed", "receipt_received", "refresh_requested", "client_rendered", "server_exception", "error_boundary", "retry_requested", "client_exception", "rpc_completed", "rpc_failed", "operation_rejected", "response_not_received", "http_rejected", "json_rejected", "receipt_rejected", "response_accepted"] as const;
+export const merchantDiagnosticStages = ["page_enter", "read_started", "read_completed", "contract_rejected", "read_failed", "mutation_started", "mutation_completed", "receipt_received", "refresh_requested", "client_rendered", "server_exception", "error_boundary", "retry_requested", "client_exception", "rpc_completed", "rpc_failed", "operation_rejected", "response_not_received", "http_rejected", "json_rejected", "receipt_rejected", "response_accepted", "reconciliation_unavailable"] as const;
 export type MerchantDiagnosticStage = typeof merchantDiagnosticStages[number];
 export type MerchantDiagnosticPhase = "server-component" | "server-render" | "server-route" | "server-proxy" | "client" | "client-boundary";
 const phases: MerchantDiagnosticPhase[] = ["server-component", "server-render", "server-route", "server-proxy", "client", "client-boundary"];

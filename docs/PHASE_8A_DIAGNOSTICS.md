@@ -157,3 +157,8 @@ receipt is `refresh-failed`; it does not reverse the recorded success. No raw
 body/header, prospect information, command/receipt, private identifiers or arbitrary
 error text is retained. Existing merchant privacy, filtering, retention and export
 rules above remain unchanged. See [Sales diagnosis](PHASE_8A_SALES_DIAGNOSIS.md).
+
+A denied replay does not resolve the original unknown commit. The client preserves
+that original command/request ID, keeps new actions blocked, and emits the finite
+`reconciliation_unavailable`/`unknown-result` stage until canonical replay succeeds
+or the owner reviews state. No raw receipt or additional lookup endpoint is added.

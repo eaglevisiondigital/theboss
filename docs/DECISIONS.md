@@ -1193,3 +1193,8 @@ new telemetry framework, public receipt endpoint, privileged shortcut or timeout
 change. Phase 8A remains INCOMPLETE pending separately authorized hosted Sales
 confirmation and closure determination. Earlier offer root cause is still unknown;
 all acceptance, cleanup and historical security disclosures are preserved.
+
+A denied replay does not resolve the original unknown commit. The client preserves
+that original command/request ID, keeps new actions blocked, and emits the finite
+`reconciliation_unavailable`/`unknown-result` stage until canonical replay succeeds
+or the owner reviews state. No raw receipt or additional lookup endpoint is added.

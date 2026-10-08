@@ -83,3 +83,8 @@ test("safe sales diagnostics cover transport, HTTP, JSON, receipt acceptance and
   assert.equal(rows.at(-1)?.parent_correlation_id,id);assert.ok(rows.every(r=>r.route==="/app/merchant-sales"));assert.doesNotMatch(JSON.stringify(rows),/PRIVATE|Synthetic lead|80000000-0000-4000-8000-000000000002.*name/);
  }finally{console.info=original;clearMerchantClientTrace();if(descriptor)Object.defineProperty(globalThis,"window",descriptor);else Reflect.deleteProperty(globalThis,"window");}
 });
+
+test("denied reconciliation cannot turn an unknown original commit into confirmed rejection",async()=>{
+ const result=await requestMerchantMutation(parsed(),async()=>response({ok:false,outcome:"rejected",error:"Synthetic current-scope denial"},403),true);
+ assert.equal(result.outcome,"unknown");assert.match(result.message,/original request is still unconfirmed/);
+});

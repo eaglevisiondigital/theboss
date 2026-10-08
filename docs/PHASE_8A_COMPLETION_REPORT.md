@@ -294,8 +294,8 @@ and conflict create zero leads. Changed input with the original request ID retur
 render error records `refresh-failed`, with matching server/client digest. The
 mutation/server-RPC/refreshed-read correlation chain matches.
 
-Validation: **36/36 focused tests**, **599/599 application tests**, strict typecheck,
-zero-warning lint and production build PASS. Ten added regression tests cover
+Validation: **37/37 focused tests**, **600/600 application tests**, strict typecheck,
+zero-warning lint and production build PASS. Eleven added regression tests cover
 Sales contracts/outcomes/replay and diagnostic privacy/route/error correlation.
 Executable SQL is unchanged; no SQL suite rerun is required by this repair.
 Existing SQL/runtime authorization/concurrency evidence remains authoritative.
@@ -325,3 +325,13 @@ feasible CRM follow-ons and administrator-first explicit cleanup. Restore/check
 zero authority/work and all selected baselines before closure review. Do not
 fabricate a second identity or infer hosted PASS from local tests. No new window
 is authorized or opened by this diagnostic repair.
+
+### Unknown-result reconciliation guard
+
+A denied retry proves rejection of the current attempt, not the outcome of a
+previous unconfirmed request. The client retains the original command/request ID
+and blocks new actions when reconciliation is denied; it does not relabel the
+original commit as failed. A separate regression fails before this guard and
+passes afterward. Local native response loss → revoked synthetic authority →
+denied retry → restored synthetic authority → original receipt confirmation is
+verified without creating a second lead. No production authority changed.

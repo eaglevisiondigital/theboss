@@ -13,11 +13,11 @@ export type Act = (action: MerchantAction, input: Record<string, Json>) => Promi
 export function useMerchantAction() {
  const router = useRouter(), [busy, setBusy] = useState(false), [message, setMessage] = useState("");
  const pending = useRef<MerchantCommand | null>(null), sending=useRef(false), [retry, setRetry] = useState(false);
- async function send(command: MerchantCommand): Promise<Record<string, unknown> | null> {
+ async function send(command: MerchantCommand, previouslyUnconfirmed=false): Promise<Record<string, unknown> | null> {
   if (sending.current) return null;
   sending.current=true;setBusy(true);setRetry(false);
   try {
-   const result=await requestMerchantMutation(command);
+   const result=await requestMerchantMutation(command,undefined,previouslyUnconfirmed);
    if(result.outcome!=="confirmed-success") {
     setMessage(result.message);setRetry(result.outcome==="unknown");
     if(result.outcome==="confirmed-rejection")pending.current=null;
@@ -36,7 +36,7 @@ export function useMerchantAction() {
   if (!command) { setMessage("Review the merchant fields."); return null; }
   pending.current=command;return send(command);
  };
- return { act, busy:busy || retry, status: <div role="status" aria-live="polite"><p>{message}</p>{retry && <button className="button button-outline" disabled={busy} onClick={() => { if (pending.current) void send(pending.current); }}>Retry the same request</button>}</div> };
+ return { act, busy:busy || retry, status: <div role="status" aria-live="polite"><p>{message}</p>{retry && <button className="button button-outline" disabled={busy} onClick={() => { if (pending.current) void send(pending.current,true); }}>Retry the same request</button>}</div> };
 }
 export const formText = (form: FormData, name: string) => String(form.get(name) ?? "").trim();
 export function optionalText(form: FormData, name: string) { const v = formText(form, name); return v ? { [name]: v } : {}; }

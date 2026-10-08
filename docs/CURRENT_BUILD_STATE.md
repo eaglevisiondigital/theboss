@@ -7,7 +7,7 @@
 The canonical unconverted lead receipt has `merchant_id: null`; the application
 UUID-only receipt validator rejected it after commit. This specific mismatch is
 PROVEN and narrowly corrected, with real local Next/React before/after and fault/
-replay integration. 599 application tests, typecheck, zero-warning lint and build
+replay integration. 600 application tests, typecheck, zero-warning lint and build
 PASS. Existing diagnostics now include Sales and distinct confirmation outcomes.
 Production migration/business state/authority are unchanged; no acceptance window
 opened. Phase 8A stays **INCOMPLETE** pending separately authorized hosted Sales
