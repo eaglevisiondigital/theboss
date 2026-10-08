@@ -316,3 +316,13 @@ Status: local implementation; canonical release and hosted acceptance pending.
 Product identity is persistent across sources while org/campaign/fundraiser/share attribution remains explicit. Household benefit subjects follow an explicit product policy, independently of guardian or fundraising authority. Exact current person/household and organization/team contexts authorize each read or mutation; no descendant inheritance, contact-based identity merge or cross-organization inventory transfer is introduced.
 
 See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint represents merchants as independent canonical business
+resources, without fake organization/team/household tenancy. Exact merchant,
+location and approved-market boundaries authorize operations. Boss identity,
+organizations, families and sports remain separate. Multi-location targeting is
+explicit and does not imply sibling/franchise authority. Membership country,
+region and market derive from current Phase 7E discount sources.

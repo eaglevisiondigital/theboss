@@ -444,3 +444,15 @@ Status: local implementation; canonical release and hosted acceptance pending.
 The finite keys are boss_bucks.membership_view, membership_manage, product_manage, inventory_manage and fulfillment_manage. Platform catalog/pricing remains platform-only. Approved organization owner/administrator mappings still require current exact organization membership and feature policy; mapping is potential capability, never scope authority. Consumer/household benefits do not grant business, guardian, Wallet or merchant access. Refunds also require existing payments.refund authority and exact original items.
 
 See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint adds eight resource roles and twelve permissions.
+Permission mapping alone never grants access. Merchant/location assignments,
+scoped Boss reviewer assignments and market sales assignments remain separate.
+Owners/admins have operational company scope; location managers and clerks have
+exact location scope. Ownership requires independent reviewed claim approval.
+Sales relationships grant no merchant employee or member rights. Generic
+foundation role assignment cannot mint merchant access. No descendant inheritance.
+See MERCHANT_PLATFORM_ARCHITECTURE.md and MERCHANT_SALES_NETWORK_ARCHITECTURE.md.

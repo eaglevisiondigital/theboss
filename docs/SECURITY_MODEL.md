@@ -545,3 +545,16 @@ Status: local implementation; canonical release and hosted acceptance pending.
 Phase 7E raw tables/private proofs use RLS and closed ACLs. Signed same-origin JSON routes require verified users and current server scope; guest flows require their exact opaque original capability and public share context. One-time business claim/activation handoffs are digest-only in storage and excluded from ordinary reads, audit, replay receipts and notifications. Private shipping information uses a separate current authorized order read. No Auth/provider/key material or historical credential-bearing URL is accessed or reproduced by this phase.
 
 See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint closes raw merchant table access with RLS and revoked
+client/worker ACLs. Finite live-auth RPCs enforce current resource assignments,
+module availability and membership provenance. Intent digests bind exact person,
+source, location, offer and reset window; atomic locks and deferred commit proof
+prevent duplicate/final-use races. Safe projections exclude consumer contacts,
+family/sports records and private proofs. Public directory has no offer terms or
+redemption mechanics. Same-origin bounded JSON, immutable audit and current
+permission rechecks on replay apply. Prior incident disclosures remain unchanged.
+Canonical migration and hosted security evidence remain pending.

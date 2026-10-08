@@ -141,7 +141,7 @@ select pg_temp.check('safe audit excludes note content','AUDIT',not exists(selec
 select pg_temp.check('dedicated guardian default false','GUARDIAN',(select column_default='false' from information_schema.columns where table_schema='public' and table_name='guardian_relationships' and column_name='can_respond_attendance'));
 create temp table saved_attendance_context(fingerprint text,original_key text);insert into saved_attendance_context values(boss_private.attendance_context(pg_temp.f('recurring'),pg_temp.key('recurring')),pg_temp.key('recurring'));
 set local timezone='Pacific/Auckland';select pg_temp.check('timezone-independent context fingerprint','CONTEXT',(select fingerprint=boss_private.attendance_context(pg_temp.f('recurring'),original_key) from saved_attendance_context));set local timezone='UTC';
-select pg_temp.check('no role/auth created by implementation','MODEL',(select count(*)=21 from public.roles WHERE key <> 'competition_manager'));
+select pg_temp.check('no role/auth created by implementation','MODEL',(select count(*)=21 from public.roles WHERE key not in('competition_manager','merchant_owner','merchant_admin','location_manager','offer_editor','redemption_clerk','sales_rep','regional_manager','support_reviewer')));
 -- Changing single/recurring mode cannot alias retired keys into a new context.
 update public.events set recurrence='{"frequency":"daily","interval":1,"count":3}'::jsonb,version=version+1 where id=pg_temp.f('keep-event');
 select pg_temp.check('single-to-recurring retires original pin','CONTEXT',(select occurrence_mode='retired' from public.attendance_responses where event_id=pg_temp.f('keep-event')) and boss_private.attendance_occurrence(pg_temp.f('keep-event'),pg_temp.key('keep-event')) is null);

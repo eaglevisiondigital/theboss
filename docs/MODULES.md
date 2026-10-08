@@ -345,3 +345,13 @@ Status: local implementation; canonical release and hosted acceptance pending.
 The existing boss_bucks module gains discount_membership, membership_trials, physical_cards, membership_sales and membership_upgrades features. These do not enable Wallet/payment features, commerce, Merchant Platform, SMS or push. Products fail closed without explicit dated revision, configured geography/terms/economics and an approved current payment route/policy.
 
 See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint reuses the existing commerce catalog with exact merchant
+module configuration. Initial listings, offers, redemption tools and sales CRM
+are free. Boss Bucks Discounts supplies membership/geographic eligibility;
+Wallet value cannot be spent at merchants. No merchant billing, promotion fees,
+retail payment processing, external partner feed/SSO, travel, SMS or push activation.
+No Phase 8B is started.

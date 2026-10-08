@@ -1117,3 +1117,17 @@ target and 23:11:12.904705 hard expiry. Baseline equality and zero residual acce
 verified. Phase 7E COMPLETE within the existing unavailable-provider boundary.
 No Merchant Platform or later-phase authorization is inferred. Prior incidents
 and evidence limitations remain intact.
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A uses independent merchant business resources and reuses commerce,
+canonical Boss identity/permissions, Phase 7E discounts and Phase 4A notifications.
+All revisions use review, including presentation changes, so no material-change
+classification can bypass review. Family usage policy is immutable across revisions;
+a changed allowance policy requires a new family. Exact assignments authorize
+locations/territories without implicit hierarchy. Cached authoritative PostgreSQL
+IANA names avoid enumerating timezones for every location. Consumer projections
+prefilter indexed geography before evaluating current member/offer evidence.
+One verified identity limits independent claim approval and two-person oversight
+hosted evidence; never fabricate identities. No new product/financial defaults.

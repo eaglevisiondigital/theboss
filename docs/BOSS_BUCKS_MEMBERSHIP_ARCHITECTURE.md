@@ -89,3 +89,14 @@ configured location. It must consume source-validated entitlement facts, minimiz
 PII and independently authorize merchant operations. Physical credential validity
 is separate from the attached digital-trial window. No merchant/redemption endpoint
 or general commerce module is implemented by Phase 7E.
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint consumes current Phase 7E source, subject, coverage,
+revocation and expiry evidence for native merchant discovery/redemption. Merchant
+roles and favorites do not create discount membership. Household membership alone
+does not create a source; a legitimate shared household discount source still uses
+Phase 7E subject policy. Local/state/nationwide remain country bounded. No mutable
+Wallet balance or merchant tender participates. No old revoked source is revived.
+See MERCHANT_OFFERS_REDEMPTION_ARCHITECTURE.md.

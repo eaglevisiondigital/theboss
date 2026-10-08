@@ -1,5 +1,24 @@
 # Current build state
 
+## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: INCOMPLETE
+
+The exact validated checkpoint from `64bfc2feff14e2a3348893fffb09221b8aefe5e3`
+is now canonically migrated under direct typed owner authorization: **107 → 113**.
+All six SQL hashes are preserved and **209/209** live schema/RLS/ACL/search-path/
+index checks pass. Thirty original business-table baselines are unchanged.
+Canonical types are regenerated; final typecheck/lint/**579** application tests/
+production build pass. Local complete validation: **22,673** unique assertions,
+**308** races, twelve recovery checks and 28 synthetic responsive checks.
+
+Release deployment/CI and the single controlled hosted acceptance window remain
+required. No temporary authority is activated. The historical pre-execution
+automatic approval rejection remains documented in [checkpoint](PHASE_8A_CHECKPOINT.md).
+See [manifest](PHASE_8A_MIGRATION_MANIFEST.md), [validation](PHASE_8A_VALIDATION.md)
+and [hosted plan](PHASE_8A_HOSTED_PLAN.md). No Phase 8B or later module.
+Prior completion history and sanitized disclosures follow intact.
+
+# Current build state
+
 ## Phase 7E Physical + Digital Boss Bucks Membership and Campaign System: COMPLETE
 
 Direct typed owner authorization cleared the historical gate. Six exact tested

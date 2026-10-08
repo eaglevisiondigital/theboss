@@ -1023,3 +1023,19 @@ button:disabled { cursor: wait; opacity: .65; }
 .discount-export { border: 2px solid #9d854e; border-radius: .6rem; padding: 1rem; overflow-wrap: anywhere; }
 .discounts-console .button { white-space: normal; height: auto; min-height: 2.75rem; max-width: 100%; text-align: center; margin: .25rem .25rem .25rem 0; }
 @media(max-width:480px) { .discount-grid { grid-template-columns: minmax(0,1fr); } .discounts-console .button { width:100%; } }
+.merchant-workspace { display: grid; gap: 1.5rem; min-width: 0; }
+.merchant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1rem; }
+.merchant-panel { padding: 1.25rem; background: var(--color-surface, #fff); border: 1px solid #d8e0e7; border-radius: 1rem; min-width: 0; overflow-wrap: anywhere; }
+.merchant-panel h2, .merchant-panel h3, .merchant-panel h4 { margin-top: 0; }
+.merchant-form { display: grid; gap: 1rem; min-width: 0; }
+.merchant-form label { display: grid; gap: .35rem; font-weight: 600; min-width: 0; }
+.merchant-form input, .merchant-form select, .merchant-form textarea { box-sizing: border-box; width: 100%; min-width: 0; max-width: 100%; padding: .65rem; border: 1px solid #a7b4c1; border-radius: .5rem; font: inherit; background: #fff; color: #182535; }
+.merchant-form textarea { min-height: 5rem; resize: vertical; }
+.merchant-form fieldset { min-width: 0; margin: 0; border: 1px solid #d8e0e7; padding: 1rem; }
+.merchant-form .merchant-check, .merchant-check { display: flex; align-items: flex-start; gap: .5rem; }
+.merchant-check input[type=checkbox] { width: auto; margin-top: .3rem; flex: 0 0 auto; }
+.merchant-actions, .merchant-weekdays { display: flex; flex-wrap: wrap; gap: .5rem; }
+.merchant-panel .button { white-space: normal; max-width: 100%; margin: .25rem 0; }
+.merchant-panel img { max-width: 100%; height: auto; }
+.merchant-terms p { margin: .35rem 0; }
+.merchant-panel :focus-visible, .merchant-form :focus-visible { outline: 3px solid #095dcc; outline-offset: 3px; }

@@ -9668,6 +9668,1231 @@ export type Database = {
         }
         Relationships: []
       }
+      merchant_access_assignments: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          granted_by: string
+          id: string
+          location_id: string | null
+          merchant_id: string
+          person_id: string
+          role_id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by: string
+          id?: string
+          location_id?: string | null
+          merchant_id: string
+          person_id: string
+          role_id: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by?: string
+          id?: string
+          location_id?: string | null
+          merchant_id?: string
+          person_id?: string
+          role_id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_access_assignments_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_access_assignments_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_access_assignments_merchant_id_location_id_fkey"
+            columns: ["merchant_id", "location_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_locations"
+            referencedColumns: ["merchant_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_access_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_access_assignments_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_categories: {
+        Row: {
+          key: string
+          name: string
+          status: string
+        }
+        Insert: {
+          key: string
+          name: string
+          status?: string
+        }
+        Update: {
+          key?: string
+          name?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      merchant_claims: {
+        Row: {
+          created_at: string
+          id: string
+          merchant_id: string
+          person_id: string
+          review_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          state: string
+          statement: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          merchant_id: string
+          person_id: string
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state?: string
+          statement: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          merchant_id?: string
+          person_id?: string
+          review_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state?: string
+          statement?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_claims_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_claims_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_claims_reviewed_by_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_favorites: {
+        Row: {
+          created_at: string
+          merchant_id: string
+          person_id: string
+        }
+        Insert: {
+          created_at?: string
+          merchant_id: string
+          person_id: string
+        }
+        Update: {
+          created_at?: string
+          merchant_id?: string
+          person_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_favorites_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_favorites_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_history: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          details: Json
+          id: string
+          merchant_id: string | null
+          request_id: string | null
+          resource_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          details?: Json
+          id?: string
+          merchant_id?: string | null
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          details?: Json
+          id?: string
+          merchant_id?: string | null
+          request_id?: string | null
+          resource_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_history_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_locations: {
+        Row: {
+          address: string
+          city: string
+          created_at: string
+          hours_note: string
+          id: string
+          market_id: string
+          merchant_id: string
+          name: string
+          phone: string | null
+          postal_code: string
+          status: string
+          timezone: string
+          version: number
+          website: string | null
+        }
+        Insert: {
+          address: string
+          city: string
+          created_at?: string
+          hours_note?: string
+          id?: string
+          market_id: string
+          merchant_id: string
+          name: string
+          phone?: string | null
+          postal_code: string
+          status?: string
+          timezone: string
+          version?: number
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          city?: string
+          created_at?: string
+          hours_note?: string
+          id?: string
+          market_id?: string
+          merchant_id?: string
+          name?: string
+          phone?: string | null
+          postal_code?: string
+          status?: string
+          timezone?: string
+          version?: number
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_locations_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_locations_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_markets: {
+        Row: {
+          country: string
+          created_at: string
+          id: string
+          market: string
+          region: string
+          status: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          id?: string
+          market: string
+          region: string
+          status?: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          id?: string
+          market?: string
+          region?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      merchant_modules: {
+        Row: {
+          configuration: Json
+          ends_at: string | null
+          merchant_id: string
+          module_id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          configuration?: Json
+          ends_at?: string | null
+          merchant_id: string
+          module_id: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          configuration?: Json
+          ends_at?: string | null
+          merchant_id?: string
+          module_id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_modules_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: true
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_modules_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_offer_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          reason: string
+          revision_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          reason?: string
+          revision_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          reason?: string
+          revision_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_offer_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_offer_events_revision_id_fkey"
+            columns: ["revision_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_offer_families: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          merchant_id: string
+          period_end: string | null
+          period_start: string | null
+          reset_period: string
+          status: string
+          usage_limit: number | null
+          usage_timezone: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          merchant_id: string
+          period_end?: string | null
+          period_start?: string | null
+          reset_period: string
+          status?: string
+          usage_limit?: number | null
+          usage_timezone: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          merchant_id?: string
+          period_end?: string | null
+          period_start?: string | null
+          reset_period?: string
+          status?: string
+          usage_limit?: number | null
+          usage_timezone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_offer_families_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_offer_families_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_offer_local_state: {
+        Row: {
+          family_id: string
+          location_id: string
+          merchant_id: string
+          paused: boolean
+          presentation_note: string
+          version: number
+        }
+        Insert: {
+          family_id: string
+          location_id: string
+          merchant_id: string
+          paused?: boolean
+          presentation_note?: string
+          version?: number
+        }
+        Update: {
+          family_id?: string
+          location_id?: string
+          merchant_id?: string
+          paused?: boolean
+          presentation_note?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_offer_local_state_merchant_id_family_id_fkey"
+            columns: ["merchant_id", "family_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_families"
+            referencedColumns: ["merchant_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_offer_local_state_merchant_id_location_id_fkey"
+            columns: ["merchant_id", "location_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_locations"
+            referencedColumns: ["merchant_id", "id"]
+          },
+        ]
+      }
+      merchant_offer_locations: {
+        Row: {
+          created_at: string
+          location_id: string
+          merchant_id: string
+          revision_id: string
+        }
+        Insert: {
+          created_at?: string
+          location_id: string
+          merchant_id: string
+          revision_id: string
+        }
+        Update: {
+          created_at?: string
+          location_id?: string
+          merchant_id?: string
+          revision_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_offer_locations_merchant_id_location_id_fkey"
+            columns: ["merchant_id", "location_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_locations"
+            referencedColumns: ["merchant_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_offer_locations_merchant_id_revision_id_fkey"
+            columns: ["merchant_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_revisions"
+            referencedColumns: ["merchant_id", "id"]
+          },
+        ]
+      }
+      merchant_offer_revisions: {
+        Row: {
+          allow_local_pause: boolean
+          amount_minor: number | null
+          benefit_description: string | null
+          benefit_quantity: number | null
+          buy_quantity: number | null
+          created_at: string
+          created_by: string
+          currency: string | null
+          description: string
+          discount_bps: number | null
+          ends_at: string
+          exclusions: string
+          family_id: string
+          id: string
+          include_future: boolean
+          local_end: string | null
+          local_start: string | null
+          location_policy: string
+          merchant_id: string
+          minimum_minor: number | null
+          offer_type: string
+          purchase_description: string | null
+          qualification: string
+          qualifying_description: string | null
+          revision: number
+          stacking: string
+          stacking_policy: string | null
+          starts_at: string
+          title: string
+          weekdays: number[]
+          weekly_special: boolean
+        }
+        Insert: {
+          allow_local_pause?: boolean
+          amount_minor?: number | null
+          benefit_description?: string | null
+          benefit_quantity?: number | null
+          buy_quantity?: number | null
+          created_at?: string
+          created_by: string
+          currency?: string | null
+          description?: string
+          discount_bps?: number | null
+          ends_at: string
+          exclusions?: string
+          family_id: string
+          id?: string
+          include_future?: boolean
+          local_end?: string | null
+          local_start?: string | null
+          location_policy: string
+          merchant_id: string
+          minimum_minor?: number | null
+          offer_type: string
+          purchase_description?: string | null
+          qualification: string
+          qualifying_description?: string | null
+          revision: number
+          stacking: string
+          stacking_policy?: string | null
+          starts_at: string
+          title: string
+          weekdays?: number[]
+          weekly_special?: boolean
+        }
+        Update: {
+          allow_local_pause?: boolean
+          amount_minor?: number | null
+          benefit_description?: string | null
+          benefit_quantity?: number | null
+          buy_quantity?: number | null
+          created_at?: string
+          created_by?: string
+          currency?: string | null
+          description?: string
+          discount_bps?: number | null
+          ends_at?: string
+          exclusions?: string
+          family_id?: string
+          id?: string
+          include_future?: boolean
+          local_end?: string | null
+          local_start?: string | null
+          location_policy?: string
+          merchant_id?: string
+          minimum_minor?: number | null
+          offer_type?: string
+          purchase_description?: string | null
+          qualification?: string
+          qualifying_description?: string | null
+          revision?: number
+          stacking?: string
+          stacking_policy?: string | null
+          starts_at?: string
+          title?: string
+          weekdays?: number[]
+          weekly_special?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_offer_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_offer_revisions_merchant_id_family_id_fkey"
+            columns: ["merchant_id", "family_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_families"
+            referencedColumns: ["merchant_id", "id"]
+          },
+        ]
+      }
+      merchant_redemption_corrections: {
+        Row: {
+          created_at: string
+          id: string
+          reason: string
+          redemption_id: string
+          restore_allowance: boolean
+          reviewer_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          reason: string
+          redemption_id: string
+          restore_allowance?: boolean
+          reviewer_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          reason?: string
+          redemption_id?: string
+          restore_allowance?: boolean
+          reviewer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_redemption_corrections_redemption_id_fkey"
+            columns: ["redemption_id"]
+            isOneToOne: true
+            referencedRelation: "merchant_redemptions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_redemption_corrections_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_redemptions: {
+        Row: {
+          clerk_id: string
+          created_at: string
+          family_id: string
+          id: string
+          intent_id: string
+          location_id: string
+          membership_id: string
+          merchant_id: string
+          person_id: string
+          revision_id: string
+          source_id: string
+          terms_snapshot: Json
+          window_key: string
+        }
+        Insert: {
+          clerk_id: string
+          created_at?: string
+          family_id: string
+          id?: string
+          intent_id: string
+          location_id: string
+          membership_id: string
+          merchant_id: string
+          person_id: string
+          revision_id: string
+          source_id: string
+          terms_snapshot: Json
+          window_key: string
+        }
+        Update: {
+          clerk_id?: string
+          created_at?: string
+          family_id?: string
+          id?: string
+          intent_id?: string
+          location_id?: string
+          membership_id?: string
+          merchant_id?: string
+          person_id?: string
+          revision_id?: string
+          source_id?: string
+          terms_snapshot?: Json
+          window_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_redemptions_clerk_id_fkey"
+            columns: ["clerk_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_family_id_revision_id_fkey"
+            columns: ["family_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_revisions"
+            referencedColumns: ["family_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "discount_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_merchant_id_family_id_fkey"
+            columns: ["merchant_id", "family_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_offer_families"
+            referencedColumns: ["merchant_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_merchant_id_location_id_fkey"
+            columns: ["merchant_id", "location_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_locations"
+            referencedColumns: ["merchant_id", "id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_redemptions_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "discount_member_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_sales_activities: {
+        Row: {
+          actor_id: string
+          created_at: string
+          due_at: string | null
+          id: string
+          kind: string
+          lead_id: string
+          note: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          kind: string
+          lead_id: string
+          note: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          kind?: string
+          lead_id?: string
+          note?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_sales_activities_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_activities_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_sales_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_sales_assignments: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          granted_by: string
+          id: string
+          manager_id: string | null
+          market_id: string
+          person_id: string
+          role_id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by: string
+          id?: string
+          manager_id?: string | null
+          market_id: string
+          person_id: string
+          role_id: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by?: string
+          id?: string
+          manager_id?: string | null
+          market_id?: string
+          person_id?: string
+          role_id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_sales_assignments_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_assignments_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_assignments_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_assignments_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_sales_history: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          id: string
+          lead_id: string
+          manager_id: string | null
+          market_id: string
+          merchant_id: string | null
+          rep_id: string
+          source: string
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          id?: string
+          lead_id: string
+          manager_id?: string | null
+          market_id: string
+          merchant_id?: string | null
+          rep_id: string
+          source: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          id?: string
+          lead_id?: string
+          manager_id?: string | null
+          market_id?: string
+          merchant_id?: string | null
+          rep_id?: string
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_sales_history_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_history_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_sales_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_history_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_history_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_history_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_history_rep_id_fkey"
+            columns: ["rep_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_sales_leads: {
+        Row: {
+          category: string
+          converted_at: string | null
+          created_at: string
+          id: string
+          manager_id: string | null
+          market_id: string
+          merchant_id: string | null
+          name: string
+          rep_id: string
+          source: string
+          state: string
+          version: number
+        }
+        Insert: {
+          category: string
+          converted_at?: string | null
+          created_at?: string
+          id?: string
+          manager_id?: string | null
+          market_id: string
+          merchant_id?: string | null
+          name: string
+          rep_id: string
+          source: string
+          state?: string
+          version?: number
+        }
+        Update: {
+          category?: string
+          converted_at?: string | null
+          created_at?: string
+          id?: string
+          manager_id?: string | null
+          market_id?: string
+          merchant_id?: string | null
+          name?: string
+          rep_id?: string
+          source?: string
+          state?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_sales_leads_category_fkey"
+            columns: ["category"]
+            isOneToOne: false
+            referencedRelation: "merchant_categories"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "merchant_sales_leads_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_leads_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_leads_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: true
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_sales_leads_rep_id_fkey"
+            columns: ["rep_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchant_staff_assignments: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          granted_by: string
+          id: string
+          merchant_id: string
+          person_id: string
+          role_id: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by: string
+          id?: string
+          merchant_id: string
+          person_id: string
+          role_id: string
+          starts_at?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          granted_by?: string
+          id?: string
+          merchant_id?: string
+          person_id?: string
+          role_id?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_staff_assignments_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_staff_assignments_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_staff_assignments_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchant_staff_assignments_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchants: {
+        Row: {
+          category: string
+          claim_state: string
+          controlled: boolean
+          created_at: string
+          created_by: string
+          description: string
+          id: string
+          legal_name: string | null
+          logo_ref: string | null
+          name: string
+          primary_market_id: string
+          public_phone: string | null
+          status: string
+          updated_at: string
+          version: number
+          website: string | null
+        }
+        Insert: {
+          category: string
+          claim_state?: string
+          controlled?: boolean
+          created_at?: string
+          created_by: string
+          description?: string
+          id?: string
+          legal_name?: string | null
+          logo_ref?: string | null
+          name: string
+          primary_market_id: string
+          public_phone?: string | null
+          status?: string
+          updated_at?: string
+          version?: number
+          website?: string | null
+        }
+        Update: {
+          category?: string
+          claim_state?: string
+          controlled?: boolean
+          created_at?: string
+          created_by?: string
+          description?: string
+          id?: string
+          legal_name?: string | null
+          logo_ref?: string | null
+          name?: string
+          primary_market_id?: string
+          public_phone?: string | null
+          status?: string
+          updated_at?: string
+          version?: number
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchants_category_fkey"
+            columns: ["category"]
+            isOneToOne: false
+            referencedRelation: "merchant_categories"
+            referencedColumns: ["key"]
+          },
+          {
+            foreignKeyName: "merchants_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "merchants_primary_market_id_fkey"
+            columns: ["primary_market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       modules: {
         Row: {
           created_at: string
@@ -9906,7 +11131,7 @@ export type Database = {
           id: string
           next_attempt_at: string
           notification_id: string
-          organization_id: string
+          organization_id: string | null
           processing_until: string | null
           provider_message_reference: string | null
           sent_at: string | null
@@ -9923,7 +11148,7 @@ export type Database = {
           id?: string
           next_attempt_at?: string
           notification_id: string
-          organization_id: string
+          organization_id?: string | null
           processing_until?: string | null
           provider_message_reference?: string | null
           sent_at?: string | null
@@ -9940,7 +11165,7 @@ export type Database = {
           id?: string
           next_attempt_at?: string
           notification_id?: string
-          organization_id?: string
+          organization_id?: string | null
           processing_until?: string | null
           provider_message_reference?: string | null
           sent_at?: string | null
@@ -9948,6 +11173,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "deliveries_notification_id_fk"
+            columns: ["notification_id"]
+            isOneToOne: false
+            referencedRelation: "notifications"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "notification_deliveries_organization_id_notification_id_fkey"
             columns: ["organization_id", "notification_id"]
@@ -9962,8 +11194,9 @@ export type Database = {
           created_at: string
           event_type: string
           id: string
+          merchant_id: string | null
           occurred_at: string
-          organization_id: string
+          organization_id: string | null
           safe_data: Json
           scheduled_at: string
           source_id: string
@@ -9976,8 +11209,9 @@ export type Database = {
           created_at?: string
           event_type: string
           id?: string
+          merchant_id?: string | null
           occurred_at?: string
-          organization_id: string
+          organization_id?: string | null
           safe_data?: Json
           scheduled_at?: string
           source_id: string
@@ -9990,8 +11224,9 @@ export type Database = {
           created_at?: string
           event_type?: string
           id?: string
+          merchant_id?: string | null
           occurred_at?: string
-          organization_id?: string
+          organization_id?: string | null
           safe_data?: Json
           scheduled_at?: string
           source_id?: string
@@ -10001,6 +11236,13 @@ export type Database = {
           status?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "notification_events_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "notification_events_organization_id_fkey"
             columns: ["organization_id"]
@@ -10074,7 +11316,7 @@ export type Database = {
           created_at: string
           id: string
           notification_event_id: string
-          organization_id: string
+          organization_id: string | null
           read_at: string | null
           recipient_person_id: string
         }
@@ -10083,7 +11325,7 @@ export type Database = {
           created_at?: string
           id?: string
           notification_event_id: string
-          organization_id: string
+          organization_id?: string | null
           read_at?: string | null
           recipient_person_id: string
         }
@@ -10092,11 +11334,18 @@ export type Database = {
           created_at?: string
           id?: string
           notification_event_id?: string
-          organization_id?: string
+          organization_id?: string | null
           read_at?: string | null
           recipient_person_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "notifications_event_id_fk"
+            columns: ["notification_event_id"]
+            isOneToOne: false
+            referencedRelation: "notification_events"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "notifications_organization_id_notification_event_id_fkey"
             columns: ["organization_id", "notification_event_id"]
@@ -15871,6 +17120,9 @@ export type Database = {
         Returns: Json
       }
       boss_games_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_merchants_directory: { Args: { query?: Json }; Returns: Json }
+      boss_merchants_mutate: { Args: { command: Json }; Returns: Json }
+      boss_merchants_read: { Args: { query?: Json }; Returns: Json }
       boss_notifications_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

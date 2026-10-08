@@ -472,3 +472,14 @@ Status: local implementation; canonical release and hosted acceptance pending.
 Phase 7E adds native product/revision, exact-subject membership/source/revocation/history, canonical entitlement links, private claim digests, physical batch/card/replacement history, product orders/items, private delivery contacts, fulfillment, exact-item refunds and analytical campaign credit. Canonical payments gain an exact product-order reference for verified guest commercial lineage; the shared payment/settlement engine remains authoritative. No production product/economics/default geography is seeded.
 
 See [membership](BOSS_BUCKS_MEMBERSHIP_ARCHITECTURE.md), [physical cards](BOSS_BUCKS_PHYSICAL_CARD_ARCHITECTURE.md) and [fulfillment](BOSS_BUCKS_PRODUCT_FULFILLMENT_ARCHITECTURE.md).
+
+
+## Phase 8A local implementation checkpoint
+
+Phase 8A local checkpoint adds 21 public merchant tables and three closed private
+support tables. Merchant business identity is distinct from organizations/persons.
+Exact access, markets/locations, reviewed immutable offer families/revisions,
+private proof intents, immutable redemptions/corrections and sales attribution
+are canonical. Native merchant notification sources carry explicit merchant
+lineage; existing organization sources still require organization context.
+See MERCHANT_PLATFORM_ARCHITECTURE.md and PHASE_8A_MIGRATION_MANIFEST.md.
