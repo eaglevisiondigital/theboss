@@ -83,3 +83,23 @@ findings; existing leaked-password-protection WARN; 541 unused-index INFO findin
 absolute Auth connection allocation INFO. No Auth or policy weakening, index
 removal or timeout increase. Deployment/CI and the single controlled hosted window
 remain pending. No temporary authority or new trial source has been created.
+
+## Release CI harness portability correction
+
+The first release push `2a396fc62852b75d91bd05b9d87909302809affc` passed both
+application CI jobs and deployed READY. Database CI passed historical SQL and
+prior races, then failed the new Phase 8A expected-error matcher because the
+pinned minimal PostgreSQL image lacks ripgrep. The expected duplicate-claim
+PT409 occurred; the missing matcher executable caused the failure. The single
+matcher now uses standard fixed-string grep available in that image. Focused
+247 assertions, 209 schema checks, twelve recovery checks and fifteen races pass
+after this harness-only fix. No application/schema/migration/security behavior
+changed. Fresh full CI is required before controlled hosted activation.
+
+The exact private bounded setup, legitimate native trial RPC, all five sequential
+restricted-role transitions and administrator-first cleanup were additionally
+preflighted in disposable PostgreSQL. Six selected recovery assertions pass.
+Private script field/lifecycle/fixture errors were corrected before any live
+authority activation. One exact 56-byte orphan from the failed sandbox startup
+was removed only after key, owner, unattached state and dead-process verification;
+other running PostgreSQL services/kernel settings were untouched.

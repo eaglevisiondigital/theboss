@@ -1,9 +1,8 @@
 # Phase 8A exact migration manifest
 
-Status: PREPARED, LOCAL ONLY. Canonical Boss `ilykgwgmxtrrikreacrz` is healthy
-with exactly 107 migrations. Apply these six sources in order only after the
-complete local gate and prepared recovery checks pass. Expected history: 107 → 113.
-No Phase 8A canonical migration has been applied.
+Status: LIVE APPLIED. Canonical Boss `ilykgwgmxtrrikreacrz` is healthy with
+113 migrations. Six exact prepared sources applied under direct typed owner
+authorization after the complete local and recovery gates passed: **107 → 113**.
 
 | Prepared migration | SHA-256 |
 | --- | --- |
@@ -19,9 +18,8 @@ canonical application assigns different migration versions. No schema/seed conta
 a real merchant, customer, person assignment, membership entitlement or secret.
 
 Automatic approval review rejected the first canonical application before
-execution. Read-only recheck confirms 107 entries and zero merchant tables/roles.
-Direct typed authorization for these six exact sources and the remaining bounded
-release steps is pending. SQL hashes and local validated implementation remain intact.
+execution. At that historical point, read-only recheck confirmed 107 entries and zero merchant tables/roles.
+Direct typed authorization subsequently cleared the exact release gate. SQL hashes and local validated implementation remain intact.
 
 ## Live application
 
