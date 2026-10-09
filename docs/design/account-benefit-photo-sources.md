@@ -1,0 +1,17 @@
+# Boss Bucks Account benefit imagery
+
+Updated 2026-10-07. User authorized generated photographic scenes. These are illustrative scenes, not verified customers or transactions.
+
+Built-in image generation produced account-discount-bbq.png and account-earned-sideline.png at 1536 x 1024. Original approved phone sources remain unchanged. Screen details in generated scenes are reference-based, not pixel-identical composites.
+
+Matching shared header/photo rows align both cards. Existing outer width and breakpoints retained. Images use object-fit:cover without stretching.
+
+## Prompts
+
+Create a crystal-clear premium lifestyle photograph, landscape 3:2, high resolution. A naturally attractive ordinary adult woman at the checkout counter of a warm contemporary barbecue restaurant, showing her phone to redeem a discount. View from beside her shoulder, her complete natural face visible in three-quarter profile on left, phone prominently at center-right facing camera, realistic checkout register and barbecue meal on counter in background. Compose ALL face and phone inside central 80% of frame with comfortable margins. Phone is a realistically sized tall modern Pro Max iPhone held naturally by one anatomically correct hand, full phone visible, no stretched proportions. Use input image as the exact phone-screen design reference: BOSS BUCKS DISCOUNTS, Cox Bros BBQ, $5 OFF ANY PURCHASE. Preserve supplied interface layout, colors, text and proportions. Real lens optics, natural skin pores, correct eyes pupils eyelids teeth fingers, crisp focus on face and phone, authentic soft indoor window light. No illustration, no waxy skin, no distorted anatomy, no added text outside phone, no collage or floating phone.
+
+Create a crystal-clear premium lifestyle photograph, landscape 3:2, high resolution. Mom at a community soccer sideline looking at her phone ready to pay soccer fees, soccer game and goal recognizable in gently defocused background. View beside her shoulder, her complete natural face in three-quarter profile on left, phone prominently center-right facing camera. Compose ALL face and phone inside central 80% of frame with comfortable margins. Full realistically sized tall modern Pro Max iPhone held naturally in one anatomically correct hand, other index finger poised near pay button without covering it. Use input as exact screen design reference preserving all artwork, B+ icon, typography, orange/black layout, $718 Boss Bucks Balance, Soccer Fees $250, PAY WITH BOSS BUCKS button. Do not redesign the screen. Real lens optics, natural skin pores, anatomically correct eyes pupils eyelids teeth and fingers. Crisp focus face and phone, soft daylight, normal clothing no hat. Background players distant with no prominent faces. No illustration, plastic skin, malformed anatomy, collage, floating device or text outside phone.
+
+## Approved screen correction
+
+User authorized direct non-generative compositing. The two `*-exact.webp` assets replace only the phone displays with the original approved screen artwork, matched by perspective transform. Soccer fingertip remains above the display. No generated text is used in these replacement screens. Output is 4608 x 3072, WebP quality 95. Scene photography is upsampled from the approved 1536 x 1024 originals, not newly captured detail. The source screen artwork supplies the additional display detail. Script: `scripts/design/composite-benefit-screens.py`. No CSS, layout, copy or other sections changed. Fine print remains small at normal card sizes.

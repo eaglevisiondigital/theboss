@@ -1,0 +1,7 @@
+import ApprovedHeader from '@/components/ApprovedHeader';
+import ApprovedFooter from '@/components/ApprovedFooter';
+import home from '@/app/approvedHome.module.css';
+import Intake from './Intake';
+import s from './intake.module.css';
+export const metadata={title:'Start a Fundraiser',description:'Tell The Boss about your organization, fundraising goals, launch timing and preferred fundraising options.'};
+export default function Page(){return <div className={home.home}><a className={home.skipLink} href="#main-content">Skip to content</a><ApprovedHeader/><main id="main-content" className={s.page}><section className={s.hero}><div><p>START A FUNDRAISER</p><h1>Your goal.<br/>Our tools.<br/><span>Let’s make it happen.</span></h1><p>Tell us about your organization, your fundraising goals and the tools you’re interested in. We’ll help you plan your next step.</p></div><svg viewBox="447 48 378 257" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Two community organizers planning a fundraiser together at a sports field"><image href="/design/fundraising-intake-approved.png" width="825" height="1907"/></svg></section><p style={{maxWidth:1300,margin:"0 auto",padding:"24px 24px 0",lineHeight:1.6}}>Just exploring? <a href="/request-information" style={{color:"#a83200",fontWeight:700,textDecoration:"underline"}}>Request information about the Boss products that interest you.</a></p><Intake/></main><ApprovedFooter/></div>}
