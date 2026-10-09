@@ -1,5 +1,19 @@
 # Phase 8B1 controlled hosted acceptance
 
+## October 9, 2026 UTC: Main Boss Chat formal Phase 8B1 closure
+
+**Phase 8B1 Partner Network Architecture + Integration Foundation: COMPLETE within its documented evidence limitations.** Main Boss Chat explicitly accepted the successfully executed single controlled hosted window, preserved SQL/runtime and local evidence, continuous live-monitoring substitute, administrator-first explicit cleanup and all 264 unchanged original business baselines. This decision supersedes the historical INCOMPLETE checkpoints below; it does not rewrite their observations or reclassify any unexecuted test as passed.
+
+Reviewed closing evidence SHA: `c47faaad07ab6cae2facebb650c372e69d376018`. Its full [push CI](https://github.com/eaglevisiondigital/theboss/actions/runs/37963080521) and [PR CI](https://github.com/eaglevisiondigital/theboss/actions/runs/37963084627) passed application and disposable database/security/recovery jobs. Typecheck, zero-warning lint, 666/666 application tests and production build passed. Final documentation-only closure SHA and its applicable CI are returned separately after push.
+
+The exact acceptance matrix is retained. Same-request replay after confirmed success, signed self-approval denial, independent positive reviewer, native anonymous directory, membership-specific authority, synthetic ingestion, approval-dependent suspension and complete accessibility acceptance remain **HOSTED UNVERIFIED DUE TO APPROVED LIMITATION**, with their existing SQL/RUNTIME VERIFIED and LOCAL APPLICATION VERIFIED evidence preserved. Disabled self-approval control, measured hosted administration/discovery widths, native lifecycle and cleanup remain verified only to their actual tested extent. Historical Netlify retrieval remains **UNSATISFIED**; historical hosted error root cause remains **UNKNOWN**. The proven local timestamp repair is not retrospective attribution. Main Boss Chat's live-observation substitute applies only to the completed Phase 8B1 window.
+
+Fresh read-only canonical verification at **2026-10-09T17:26:47.958041Z** confirms **119 migrations**, zero operational adapters, zero credential readiness, zero active Partner providers/territories/open snapshots and zero Partner transactions. No production database, application, Auth/security policy or business state changed for this closure. No temporary authority or new acceptance window was activated. All original acceptance/cleanup evidence, immutable history, prior failures/security disclosures and Phase 8A pre-rollout checklist remain intact below.
+
+This closes the nonoperational foundation only. Live national Partner integrations, bookings, gift-card transactions, payouts, real money movement and Phase 8B2 remain unapproved. PR #3 stays **OPEN / DRAFT / UNMERGED**. The separately authorized Digital Money Board milestone is an isolated synthetic visual preview; it begins only after this documentation closure and final applicable CI succeed. It does not authorize production fundraising integration or a payment/backend phase.
+
+### Preserved acceptance and incident history
+
 ## October 9, 2026 UTC: original controlled hosted window executed and cleaned
 
 **Phase 8B1 INCOMPLETE pending Main Boss Chat formal closure/evidence-limit determination.** The one previously unused window is now **USED**; no second window is authorized. All safely executable native scenarios passed without an observed product/security defect. Exact signed replay after confirmed success and signed self-approval denial were not executable through the native controls; they remain SQL/RUNTIME VERIFIED and HOSTED UNVERIFIED DUE TO APPROVED LIMITATION. Independent review, licensed catalog ingestion and approval-dependent suspension likewise retain honest evidence limits. No skipped case is promoted to hosted PASS.
