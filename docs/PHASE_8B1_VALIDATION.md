@@ -1,5 +1,11 @@
 # Phase 8B1 local validation
 
+## October 9, 2026 UTC: authorized portability repair and conditional resumption
+
+Main Boss Chat directly authorized the narrow [portable schema/type probe repair](PHASE_8B1_PROBE_REPAIR.md) from `157d677c4bbc109936d4b0d131b60e009ef96aa2`. Bash/psql catalog comparison replaces the unavailable Python dependency; disposable schema and TypeScript negative controls reject mismatches and restored positive validation passes. The compile-only canonical type bridge, strict typecheck, zero-warning lint, 645 application tests and production build pass locally. The unchanged actual pinned PostgreSQL image must still pass both push and PR CI before hosted activation. Canonical history remains 119 with six unchanged hashes and all 264 original baselines equal. No hosted window or temporary authority has been activated. Phase 8B1 remains INCOMPLETE pending its remaining verified gates; Phase 8B2 has not started.
+
+The earlier failed release and acceptance checkpoints below are preserved historical evidence.
+
 ## Release gate stop: October 9, 2026 UTC
 
 **Phase 8B1: INCOMPLETE. No hosted acceptance window was opened.** Main Boss Chat's failed-material-gate stop condition was followed. No repair, temporary authority or provider fixture was introduced after this gate failed.
@@ -114,3 +120,9 @@ Phase 8A's six pre-rollout items and all historical incident disclosures remain 
 ## Fresh native regression during controlled release
 
 After canonical generation and staged cast removal, the eight native Merchant SQL/security suites pass again, including 209 schema checks, twelve exact administrator-first recovery checks and fifteen coordinated Merchant races. This repeats prior coverage and does not inflate unique assertion/race totals. Frozen migration content and the original 113 local files remain unchanged.
+
+## Fresh complete local validation after portability repair
+
+October 9, 2026 UTC: the complete disposable PostgreSQL run exited successfully and removed its cluster. Actual unique totals are 23,726 SQL assertions in 149 suites (23,204 historical/generic plus 522 Partner), 28 bootstrap and 33 sealed-source checks: **23,787 aggregate**. All **318 coordinated races** passed (308 historical plus ten Partner). Repeated cleanup/tournament summaries are excluded from unique totals. Both probe negative controls rejected mismatches and restored positive verification passed. The preserved Phase 8A schema gate passed 209/209 and its administrator-first recovery passed twelve checks separately; Partner lifecycle/recovery passed 277. The prior 2,065 independent upgrade-preservation checks remain historical evidence because this task changes no migration.
+
+Strict typecheck, zero-warning lint, **645/645 application tests** and production build passed after the canonical compile-only bridge was included. Actual pinned-image verification and release/hosted results remain pending until independently observed; local success does not substitute for CI.

@@ -1273,3 +1273,7 @@ Main Boss Chat approved the six exact frozen sources and controlled release sequ
 ## Phase 8B1 release stop at CI: October 9, 2026 UTC
 
 Followed Main Boss Chat's material-gate STOP condition after push/PR database CI failed on `python3: command not found` in the new disposable type probe. Canonical history 119/security/types and 264 unchanged business baselines pass; Git CD release is READY and application CI passes. No hosted window or temporary authority was activated. Phase 8B1 remains INCOMPLETE. A narrow CI probe portability task needs review before continuing; no unapproved repair or Phase 8B2 started. Prior history and all Phase 8A disclosures remain intact.
+
+## Phase 8B1 portability repair authorization: October 9, 2026 UTC
+
+Main Boss Chat explicitly authorizes only the schema/type harness correction and conditional resumption of the original unused window after all existing gates pass. PostgreSQL catalog metadata and deterministic TypeScript comparison replace Python without changing the pinned image, isolation, migrations or application behavior. Disposable negative controls and the canonical compile-only type bridge preserve meaningful validation. Actual pinned-image evidence must come from the unchanged GitHub database jobs because Docker is unavailable locally. Prior failed CI remains disclosed. The window is not activated while release gates remain pending; no broader authority, external execution or Phase 8B2 is authorized.

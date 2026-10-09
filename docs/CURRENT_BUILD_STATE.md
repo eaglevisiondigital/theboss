@@ -1,5 +1,11 @@
 # Current build state
 
+## October 9, 2026 UTC: authorized portability repair and conditional resumption
+
+Main Boss Chat directly authorized the narrow [portable schema/type probe repair](PHASE_8B1_PROBE_REPAIR.md) from `157d677c4bbc109936d4b0d131b60e009ef96aa2`. Bash/psql catalog comparison replaces the unavailable Python dependency; disposable schema and TypeScript negative controls reject mismatches and restored positive validation passes. The compile-only canonical type bridge, strict typecheck, zero-warning lint, 645 application tests and production build pass locally. The unchanged actual pinned PostgreSQL image must still pass both push and PR CI before hosted activation. Canonical history remains 119 with six unchanged hashes and all 264 original baselines equal. No hosted window or temporary authority has been activated. Phase 8B1 remains INCOMPLETE pending its remaining verified gates; Phase 8B2 has not started.
+
+The earlier failed release and acceptance checkpoints below are preserved historical evidence.
+
 ## Phase 8B1: INCOMPLETE, stopped at release CI gate
 
 The exact six authorized migrations are applied (canonical 119); generated types, schema/security, 264 unchanged business baselines and local application/database validation pass. Release `3064028c66eb5ab0a380927c4a7ea53aac00f003` is deployed READY through Git CD. Both release CI database jobs fail before assertions because the new type probe needs Python absent from the pinned PostgreSQL image; application jobs pass. No hosted window, controlled provider fixture or temporary authority was activated. Original administrator and zero residual Partner work/authority were verified at 2026-10-09T07:32:20.093797Z. Main Boss Chat must review the narrow CI portability blocker before resumption; no repair or Phase 8B2 was started. See [stop evidence](PHASE_8B1_COMPLETION_REPORT.md). Earlier release/checkpoint entries below are preserved historical progress.

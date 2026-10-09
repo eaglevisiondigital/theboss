@@ -1,5 +1,11 @@
 # Phase 8B1 completion report
 
+## October 9, 2026 UTC: authorized portability repair
+
+Starting SHA `157d677c4bbc109936d4b0d131b60e009ef96aa2`. The narrow Bash/psql schema/type probe replaces the unavailable Python dependency while preserving all sixteen table and three RPC contracts. Disposable schema/type negative controls fail as required and restored validation passes. A compile-only bridge checks supplemental contracts against canonical generated types. Strict typecheck, zero-warning lint, 645/645 application tests and production build pass locally. No application behavior or migration changed.
+
+Phase 8B1 remains INCOMPLETE until both push/PR database and application jobs pass, the corrected commit is READY and the remaining authorized release/acceptance gates are verified. Docker is unavailable locally; actual pinned-image verification will be reported from the unchanged isolated GitHub job. No hosted window, temporary authority or controlled Partner resource has been activated. Canonical 119/six source hashes/admin/264 baselines remain verified. See [repair details](PHASE_8B1_PROBE_REPAIR.md). Prior failure evidence below remains intact; Phase 8B2 has not started.
+
 ## Release gate stop: October 9, 2026 UTC
 
 **Phase 8B1: INCOMPLETE. No hosted acceptance window was opened.** Main Boss Chat's failed-material-gate stop condition was followed. No repair, temporary authority or provider fixture was introduced after this gate failed.
@@ -120,3 +126,9 @@ Validated October 9, 2026 UTC. Local evidence only; the prior Phase 8A closure/e
 59. **No external activation.** Confirmed. No selected/contracted real provider, live API/feed, redirect/SSO, external catalog or operational provider credentials.
 60. **No real transactions.** Confirmed. No real money movement, booking, travel purchase, gift-card issuance/inventory, invoice, commission accrual/collection, settlement or payout; no real youth/customer data.
 61. **Next controlled release.** Main Boss Chat reviews manifest/checkpoint and approves the exact release, then the prepared administrator-first fixed-window sequence may proceed. No second window or Phase 8B2 is authorized. STOP at this checkpoint.
+
+## Fresh complete local validation after portability repair
+
+October 9, 2026 UTC: the complete disposable PostgreSQL run exited successfully and removed its cluster. Actual unique totals are 23,726 SQL assertions in 149 suites (23,204 historical/generic plus 522 Partner), 28 bootstrap and 33 sealed-source checks: **23,787 aggregate**. All **318 coordinated races** passed (308 historical plus ten Partner). Repeated cleanup/tournament summaries are excluded from unique totals. Both probe negative controls rejected mismatches and restored positive verification passed. The preserved Phase 8A schema gate passed 209/209 and its administrator-first recovery passed twelve checks separately; Partner lifecycle/recovery passed 277. The prior 2,065 independent upgrade-preservation checks remain historical evidence because this task changes no migration.
+
+Strict typecheck, zero-warning lint, **645/645 application tests** and production build passed after the canonical compile-only bridge was included. Actual pinned-image verification and release/hosted results remain pending until independently observed; local success does not substitute for CI.
