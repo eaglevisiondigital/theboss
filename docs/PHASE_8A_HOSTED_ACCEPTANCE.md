@@ -1,5 +1,49 @@
 # Phase 8A actual hosted acceptance — October 8, 2026
 
+## Formal Main Boss Chat closure — October 8, 2026
+
+**Phase 8A: COMPLETE within its documented evidence boundary.** Main Boss Chat
+reviewed the complete acceptance record at closing evidence SHA `8c66ec13e05a8591ee1bdb133efe766d91b90018`
+and approved closure with documented evidence limitations. This final decision
+supersedes the earlier INCOMPLETE checkpoint status; it does not replace or
+reclassify any historical test result, incident disclosure or failure evidence.
+
+Passing hosted Sales confirmation, offer lifecycle, membership, redemption, CRM
+and administrator-first cleanup evidence remains authoritative. The closing
+record verifies the original administrator, zero residual temporary authority and
+pending controlled work, and equality of selected financial, Wallet, membership,
+sports and achievement baselines. Canonical migration history remains 113 in that
+verified record. This documentation-only closure performs no new live verification.
+
+**HOSTED VERIFIED**, **SQL/RUNTIME VERIFIED**, **LOCAL APPLICATION VERIFIED** and
+**HOSTED UNVERIFIED** classifications remain distinct. Unexecuted scenarios remain
+unverified. The earlier unexplained offer-refresh failure remains unresolved as to
+cause; later successful refresh evidence does not establish its original cause.
+Main Boss Chat accepted the documented evidence boundary, rather than treating
+unavailable hosted evidence as a passed test. Closure does not complete the pending
+pre-rollout checklist below or authorize production rollout.
+
+### Pending pre-rollout acceptance checklist
+
+- Populated merchant and Sales mobile viewport verification; requested viewport
+  overrides that did not change measured width remain HOSTED UNVERIFIED.
+- Remaining editor/clerk restricted-role scenarios.
+- Independent second-identity approval and oversight.
+- Hosted forged-request and wrong-location scenarios where permitted tooling
+  becomes available.
+- Additional keyboard and screen-reader accessibility acceptance.
+- Continued monitoring of the earlier unexplained offer-refresh failure.
+
+These items require separately authorized follow-up where applicable. No new
+acceptance window, temporary authority, migration, application feature, financial
+operation or Phase 8B is authorized or started by this closure. PR #3 remains
+OPEN / DRAFT / UNMERGED. All prior security and incident disclosures are retained.
+
+## Preserved historical checkpoints and acceptance evidence
+
+The records below retain their original checkpoint status and findings. The formal
+closure decision above is the current Phase 8A status.
+
 **Current Sales-only result:** native creation/confirmation/refresh/reload and
 feasible CRM follow-ons are HOSTED VERIFIED. Explicit cleanup preceded both
 deadlines; administrator/baselines restored, residual authority/work zero.
