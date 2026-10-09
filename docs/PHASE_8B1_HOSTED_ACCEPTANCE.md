@@ -1,5 +1,15 @@
 # Phase 8B1 controlled hosted acceptance
 
+## October 9, 2026 UTC: diagnostic-only deployment and single-read recurrence
+
+**Phase 8B1 INCOMPLETE; original controlled hosted window UNUSED.** Diagnostic source `b04d6dac13a20d252e61a558a124f1116fe0b018` was published READY at `2026-10-09T14:34:16.285Z`, deployment `6ac8fb478f02520008751221`. The separately authorized single harmless Partner read was executed with the existing administrator session and finite live server observer. No acceptance preflight was resumed.
+
+Server entry/read/completion at `14:39:16.884Z` / `14:39:17.269Z` / `14:39:17.635Z` matched read/render correlation `1faa4eb5-55f2-481b-9664-53068f497746`; read HTTP 200. A generic Error recurred at `14:39:19.363Z`, correlation `e81ebf18-7b2c-4ee7-98d9-f131dfe9a514`, followed by successful rendering at `14:39:19.366Z`, with no visible boundary. New finite fields prove **window_error / uninitialized** for this new event: the global error listener fired before registered Partner trace context, yielding the existing fresh-UUID fallback. They do not identify the producer or prove hydration recovery. Source/digest/status remain null; **root cause UNKNOWN**. Historical v1 records are not retroactively classified.
+
+Hosted activity stopped immediately; no reload, second read, mutation, fixture or temporary authority followed. Five finite records were privately retained/reopened equal; task tabs closed. Read-only administrator-first verification at `14:40:01.809900Z` through `14:40:05.128104Z` confirms administrator valid, **264/264** original count/hash baselines equal, **119** migrations/six unchanged hashes, intact RLS/ACL/helper paths, all **17** Partner relations empty, zero pending work, zero temporary authority and adapters OFF. Merchant, membership, financial, Wallet and sports baselines remain intact.
+
+Local tests remain 663/663, focused diagnostics 30/30, strict typecheck, zero-warning lint and production build PASS. Release/final documentation push and PR CI are separately verified in GitHub and the completion report; no hosted acceptance PASS or phase closure follows from CI. Retain STOP on all unexpected errors. Historical retrieval remains UNSATISFIED/UNKNOWN; live alternative remains conditional. No Phase 8B2. See [full diagnostic review](PHASE_8B1_CLIENT_EXCEPTION_REVIEW.md); all earlier incidents and evidence are preserved.
+
 ## October 9, 2026 UTC: separately authorized client attribution review
 
 **Phase 8B1 INCOMPLETE; original hosted window UNUSED.** Review of the unchanged five-record export and pinned Next/React source establishes a diagnostic gap: error and rejection listeners were indistinguishable, and an event before effect-time read registration could receive a fresh opaque UUID. The historical cause remains **UNKNOWN**. Actual production-mode local experiments reproduce the broad pattern from global Error, unhandled rejection and controlled hydration recovery; genuine client/server failures activate the native boundary. Similar Merchant timing is not proof of a common cause.
