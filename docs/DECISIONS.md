@@ -1198,3 +1198,26 @@ A denied replay does not resolve the original unknown commit. The client preserv
 that original command/request ID, keeps new actions blocked, and emits the finite
 `reconciliation_unavailable`/`unknown-result` stage until canonical replay succeeds
 or the owner reviews state. No raw receipt or additional lookup endpoint is added.
+
+## Phase 8A Sales-only acceptance and closure referral - October 8, 2026
+
+Main Boss Chat separately authorized one 20/28/35-minute Sales-only hosted window
+from corrected commit 6f18e4f3359fea048b9c64baa40dade4848c844f. Native creation,
+HTTP 200 confirmation, refresh/reload/navigation, activity, pipeline and one
+conversion passed with one lead/prospect and preserved attribution. Exact-market
+restricted native reads passed; no forged signed mutation or artificial transport
+failure was performed. No application/database/security change was necessary.
+
+Use exact native-created identifiers and controlled-market lineage for cleanup,
+independent of labels. Administrator-first explicit cleanup completed October 9
+01:03:15.526922 UTC, before target 01:23:51.931021 and expiry 01:30:51.931021.
+Thirty original baselines match; administrator valid; temporary authority,
+active controlled resources and pending work zero. Preserve inactive audited
+grant, lead, prospect, activity, conversion and receipt history.
+
+Requested Sales mobile overrides still measured 1280; no hosted mobile PASS.
+Repeated signed conversion/reconciliation and earlier identity/restricted-role/
+forged-request/accessibility limits keep honest SQL/runtime/local/unverified
+classifications. Refer evidence to Main Boss Chat for final closure review;
+Phase 8A remains INCOMPLETE until that determination. Do not open another window
+or begin Phase 8B. Preserve all earlier incidents and security disclosures.

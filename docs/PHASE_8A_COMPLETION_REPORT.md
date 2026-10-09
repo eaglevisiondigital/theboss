@@ -1,5 +1,15 @@
 # Phase 8A release and partial hosted acceptance report
 
+**Current Sales-only result, October 8:** corrected source
+`6f18e4f3359fea048b9c64baa40dade4848c844f` passed native Sales creation/HTTP200
+confirmation/refresh/reload, activity, pipeline and one conversion with intact
+attribution. Restricted exact-market native denial passed. Administrator-first
+cleanup and all 30 baseline checks passed before deadlines; zero authority/work.
+Phase 8A remains INCOMPLETE pending Main Boss Chat closure review and retained
+evidence limitations. See the dated Sales-only hosted addendum below.
+
+## Preserved prior completion record
+
 **Latest determination, October 8, 2026:** Phase 8A remains **INCOMPLETE**.
 The explicitly authorized additional window passed the original offer refresh
 path, publication, replacement, weekly presentation and concealed redemption.
@@ -335,3 +345,47 @@ original commit as failed. A separate regression fails before this guard and
 passes afterward. Local native response loss → revoked synthetic authority →
 denied retry → restored synthetic authority → original receipt confirmation is
 verified without creating a second lead. No production authority changed.
+
+## Sales-only final acceptance report - October 8, 2026
+
+Event timestamps below are October 9 UTC. The original reports above remain
+historical; this Sales-only evidence supersedes the unverified Sales gate without
+rewriting earlier failures or incident disclosures.
+
+| # | Required result | Actual result |
+| ---: | --- | --- |
+| 1 | Starting SHA | 6f18e4f3359fea048b9c64baa40dade4848c844f. |
+| 2 | Final SHA | Documentation-only release; exact SHA recorded in final handoff/PR. Acceptance source is unchanged corrected SHA above. |
+| 3 | Deployment/CI | Corrected deploy 6ac824140688f90008e78efa READY; both corrected-source full CI runs PASS. Final documentation CI recorded at handoff. |
+| 4 | Diagnostic preflight | HOSTED VERIFIED: archived browser/server correlation, exact build, repeated bounded lookup and finite private export. |
+| 5 | Recovery rehearsal | PASS: fresh disposable PostgreSQL 17, all 113 migrations, exact setup/conversion/restriction/admin-first restoration/lineage cleanup. |
+| 6 | Baseline preflight | Thirty hashes/counts match; administrator valid; historical resources inactive; temporary authority/work zero. |
+| 7 | Activation/deadlines | 00:55:51.931021 activation; 01:15:51.931021 stop-new; 01:23:51.931021 cleanup target; 01:30:51.931021 expiry. No extension. |
+| 8 | Lead creation | HOSTED VERIFIED: one native synthetic lead. |
+| 9 | HTTP/client confirmation | HOSTED VERIFIED: HTTP 200, receipt accepted, “Change confirmed.” |
+| 10 | Receipt count | Canonical read-only verification: exactly one create receipt. |
+| 11 | Null merchant_id | Canonical pre-conversion null field accepted by corrected application. |
+| 12 | Router refresh | HOSTED VERIFIED: linked refreshed server read/client render, populated pipeline. |
+| 13 | Full reload | HOSTED VERIFIED before and after conversion; native navigation away/back passed. |
+| 14 | Exactly one lead | HOSTED VERIFIED single visible lead; canonical count one, retained inactive after cleanup. |
+| 15 | Activity | HOSTED VERIFIED: one native note/receipt, visible after refresh/reload. |
+| 16 | Pipeline | HOSTED VERIFIED: new→contacted with current version, version 2 and immutable attribution history. |
+| 17 | Conversion | HOSTED VERIFIED: submitted/version 3, one prospect/unclaimed merchant and one conversion receipt. No ownership/approval grant. |
+| 18 | Attribution | Canonical verification: three history rows preserve source/rep/market; native acquisition source persists. |
+| 19 | Duplicate conversion | HOSTED VERIFIED control removed/reload and one prospect. Repeated signed conversion/replay remains SQL/RUNTIME VERIFIED; LOCAL APPLICATION VERIFIED; not deliberately executed hosted. |
+| 20 | Sales scope denial | HOSTED VERIFIED native reads: exact-market rep sees own lead, prior-market lead withheld, platform/reassign controls absent. Administrator restored between stages. |
+| 21 | Responsive widths | HOSTED VERIFIED measured 1280 with no overflow/labeled controls. Requested 768/390/320 still measured 1280: HOSTED UNVERIFIED DUE TO APPROVED TOOLING LIMITATION. No full accessibility-audit claim. |
+| 22 | Errors/diagnostics | No recurrence; create, linked refreshed read and conversion browser/server records match corrected SHA/deploy. Separate historical offer root cause remains unknown. |
+| 23 | Admin-first cleanup | Restricted restore 01:01:30.695406; assignment ended 01:01:35.263381; cleanup admin verification 01:03:09.750889; cleanup 01:03:15.526922. |
+| 24 | Deadlines | Both met. Cleanup 7 minutes 23.595 seconds after activation. |
+| 25 | Residuals | Independent final checks: zero authority/active controlled resources/modules/markets/pending work; immutable inactive history retained. |
+| 26 | Thirty baselines | All original selected hashes/counts equal before/after. |
+| 27 | Financial/Wallet/sports | Phase 7E sources/membership, Phase 7D payments/allocations, Wallet, sports and achievement count/hash unchanged; 113 migrations. |
+| 28 | Security | No credential/session/proof exposure or historical proxy inspection/reuse; synthetic data only; no money, schema/Auth/RLS/timeout or external-integration change. |
+| 29 | Final CI | Applicable full documentation-head validation must be green before handoff; actual result/link recorded in handoff/PR. Corrected application baseline: 600 tests/typecheck/zero-warning lint/build PASS. |
+| 30 | PR #3 | OPEN / DRAFT / UNMERGED; no merge. |
+| 31 | Remaining limits | No naturally unknown hosted retry; repeated signed conversion, editor/clerk restricted stages, forged/wrong-location requests, independent second identity and other mobile/accessibility limits retain SQL/runtime/local or honestly unverified hosted classifications. |
+| 32 | Recommendation | Eligible for Main Boss Chat closure review with retained limitations; Phase 8A remains INCOMPLETE pending that decision. No new window or Phase 8B. STOP. |
+
+Full timestamps, finite diagnostic chain and preserved evidence classifications:
+[Sales-only hosted addendum](PHASE_8A_HOSTED_ACCEPTANCE.md).

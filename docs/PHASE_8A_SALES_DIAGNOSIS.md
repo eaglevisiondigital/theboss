@@ -1,5 +1,12 @@
 # Phase 8A Sales CRM confirmation diagnosis
 
+**Latest hosted evidence:** the separately authorized Sales-only window verified
+the corrected native receipt/confirmation/refresh/reload and feasible CRM
+follow-ons. Zero residual authority/work and all 30 baselines verified after
+administrator-first cleanup before both deadlines. The prior diagnosis below
+is preserved; see the final hosted addendum at the end. Phase8A remains INCOMPLETE
+pending Main Boss Chat closure review; no Phase 8B.
+
 ## Sales confirmation diagnosis and narrow repair — October 8, 2026
 
 Phase 8A remains **INCOMPLETE**. Starting SHA:
@@ -94,3 +101,32 @@ original commit as failed. A separate regression fails before this guard and
 passes afterward. Local native response loss → revoked synthetic authority →
 denied retry → restored synthetic authority → original receipt confirmation is
 verified without creating a second lead. No production authority changed.
+
+## Corrected Sales workflow hosted verified - October 8, 2026
+
+The separately authorized one-window Sales acceptance used the exact corrected
+commit `6f18e4f3359fea048b9c64baa40dade4848c844f`. Native lead creation now
+receives HTTP 200, accepts the legitimate null merchant_id and displays success.
+Canonical verification confirms one lead/create receipt. Router refresh, full
+reload, away/back navigation, activity, current-version state transition and one
+prospect conversion all passed. Source/rep/market attribution remains intact.
+No unknown result occurred, so no production retry or artificial response-loss
+test was executed. The repeat-conversion control disappears after reload; its
+signed replay/conflict protections retain SQL/runtime/local evidence.
+
+The existing finite diagnostic chain matched browser/server mutation and linked
+refreshed read at the corrected build. Exact-market restricted native reads
+withheld the old market's opportunity. Administrator was restored and verified
+FIRST; the bounded assignment was ended. Explicit cleanup completed
+2026-10-09 01:03:15.526922 UTC, before both deadlines. Thirty original baselines
+match; effective authority/active resources/pending controlled work zero, original
+administrator valid and canonical migrations 113. No additional application fix
+or database/security change was necessary. Full proof and retained viewport/
+identity/forged-request limitations appear in the
+[dated hosted addendum](PHASE_8A_HOSTED_ACCEPTANCE.md).
+
+The earlier hosted Sales failure remains preserved as history; its proven
+receipt mismatch is now verified corrected in hosted use. Do not infer a root
+cause for the separate earlier offer-refresh incident. Main Boss Chat retains
+final closure authority. Phase 8A remains INCOMPLETE pending that determination;
+no Phase 8B or automatic further window.

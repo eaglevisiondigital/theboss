@@ -2,6 +2,28 @@
 
 ## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: INCOMPLETE
 
+### Sales-only hosted acceptance passed - October 8, 2026
+
+The separately authorized Sales-only window used corrected source
+`6f18e4f3359fea048b9c64baa40dade4848c844f`. Native lead creation received HTTP 200,
+accepted legitimate null merchant_id and confirmed success; refresh, full reload,
+away/back navigation, activity, pipeline state and one prospect conversion passed.
+Exact-market restricted reads withheld the prior market's opportunity. The
+administrator was restored FIRST and the temporary assignment ended immediately.
+Cleanup at **2026-10-09 01:03:15.526922 UTC** preceded **01:23:51.931021** target
+and **01:30:51.931021** expiry. All 30 selected baselines match; original
+administrator valid, temporary authority/active resources/pending work zero and
+113 migrations unchanged. Historical offer failure cause remains unknown;
+prior acceptance/security disclosures are preserved.
+
+Sales 1280px was measured and passed. Requests for 768/390/320 still measured 1280;
+these and the earlier role/identity/forged-request limitations remain honestly
+unverified through approved hosted tooling. No application/schema/security change
+in this assignment. Phase 8A remains **INCOMPLETE pending Main Boss Chat closure
+determination**, now eligible for review after the mandatory Sales gate and feasible
+follow-ons passed. No automatic new window or Phase 8B. See the dated
+[Sales hosted addendum](PHASE_8A_HOSTED_ACCEPTANCE.md).
+
 ### Latest Sales diagnosis/repair — October 8, 2026
 
 The canonical unconverted lead receipt has `merchant_id: null`; the application

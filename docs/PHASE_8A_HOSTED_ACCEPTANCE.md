@@ -1,5 +1,13 @@
 # Phase 8A actual hosted acceptance — October 8, 2026
 
+**Current Sales-only result:** native creation/confirmation/refresh/reload and
+feasible CRM follow-ons are HOSTED VERIFIED. Explicit cleanup preceded both
+deadlines; administrator/baselines restored, residual authority/work zero.
+Phase 8A remains INCOMPLETE pending Main Boss Chat closure determination. See the
+October 8 Sales-only final addendum at the end; prior evidence below is historical.
+
+## Preserved prior hosted record
+
 **Latest result:** the separately authorized final window reproduced the original
 offer submission/refresh/reload successfully, then stopped on a different native
 sales-lead confirmation failure. Phase 8A remains **INCOMPLETE**. See the dated
@@ -390,3 +398,112 @@ original commit as failed. A separate regression fails before this guard and
 passes afterward. Local native response loss → revoked synthetic authority →
 denied retry → restored synthetic authority → original receipt confirmation is
 verified without creating a second lead. No production authority changed.
+
+## Sales-only final hosted acceptance - October 8, 2026
+
+Main Boss Chat separately authorized exactly one Sales-only window from
+`6f18e4f3359fea048b9c64baa40dade4848c844f`. The corrected native Sales workflow
+is **HOSTED VERIFIED**. Phase 8A remains **INCOMPLETE pending Main Boss Chat
+closure determination**; the required Sales gate and feasible follow-ons passed.
+No known new product/security defect was observed. Prior incidents, failures,
+security disclosures and evidence classifications remain intact below.
+
+All event times in this addendum are **October 9, 2026 UTC** (October 8 local).
+The source/deployment during acceptance was exactly the corrected SHA, READY
+Netlify deploy `6ac824140688f90008e78efa`; its push and PR full CI were green.
+Canonical Supabase was ACTIVE_HEALTHY with 113 migrations. Thirty selected
+baseline hashes/counts matched before activation, original administrator was
+valid, historical Sales resources were inactive and effective temporary
+authority/pending controlled work were zero.
+
+A fresh disposable PostgreSQL 17 rehearsal applied all 113 migrations and
+exercised the exact controlled setup, conversion, restricted context,
+administrator-first restoration and lineage cleanup successfully. Initial local
+runtime/include/caller-context issues were resolved only in the private rehearsal;
+a confirmed task-created unattached shared-memory segment was removed. No kernel,
+live-service, production timeout or security setting changed. Harmless archived
+Sales browser/server diagnostics matched, repeated bounded retrieval passed and
+only finite allowlisted private JSON exports were retained.
+
+### Exact window and restoration
+
+| Event | UTC timestamp |
+| --- | --- |
+| Authoritative activation | 00:55:51.931021 |
+| Stop starting new scenarios | 01:15:51.931021 |
+| Cleanup target | 01:23:51.931021 |
+| Hard expiry | 01:30:51.931021 |
+| Exact-market sales_rep assignment starts | 01:00:52.149911 |
+| Restricted-stage administrator restored/verified | 01:01:30.695406 |
+| Temporary Sales assignment explicitly ended | 01:01:35.263381 |
+| Cleanup administrator-first verification | 01:03:09.750889 |
+| Explicit resource/work cleanup | 01:03:15.526922 |
+| Final resources/receipts check | 01:04:08.843539 |
+| Final administrator/migration/authority check | 01:04:18.870813 |
+
+No extension. Cleanup took 7 minutes 23.595 seconds from activation and completed
+before both deadlines. Only one existing verified controlled identity and
+synthetic Sales context were used. Permanent administrator access stayed intact
+for positive workflows; its original row was paused only for the short exact-market
+denial stage. The assignment initially ended at the unchanged hard expiry and was
+explicitly ended much earlier. No merchant, location, guardian, household,
+organization/team or generic platform role was granted. No module was activated.
+The new market is a resource without its own authority/expiry column; it was
+explicitly inactivated. The converted prospect's default module stayed inactive.
+
+### Actual hosted results and limitations
+
+| Scenario | Evidence classification and observed result |
+| --- | --- |
+| Native lead creation/confirmation | **HOSTED VERIFIED**: exactly one native submission; HTTP 200; valid canonical receipt accepted; “Change confirmed.” No unknown result or retry. |
+| Pre-conversion receipt contract | Canonical read-only verification: one lead/create receipt; legitimate null merchant_id accepted. No raw receipt exported. |
+| Router refresh/full reload/navigation | **HOSTED VERIFIED**: populated pipeline, one lead after refresh/reload and native away/back navigation, no error boundary. |
+| Sales activity | **HOSTED VERIFIED**: one synthetic note, HTTP 200 confirmation, visible after refresh and full reload; one activity/receipt. No external contact. |
+| Pipeline transition | **HOSTED VERIFIED**: current-version new→contacted, version 2, HTTP 200; two immutable history rows and unchanged attribution at that stage. |
+| Conversion/attribution | **HOSTED VERIFIED**: one conversion, HTTP 200, submitted/version 3, one prospect/unclaimed merchant and one conversion receipt; three immutable Sales history rows preserve acquisition/rep/market. No ownership grant or merchant approval. |
+| Duplicate conversion | **HOSTED VERIFIED**: conversion control removed after conversion and reload, one canonical prospect. Repeated signed conversion/replay was not deliberately executed; **SQL/RUNTIME VERIFIED; LOCAL APPLICATION VERIFIED** evidence retained. |
+| Sales scope | **HOSTED VERIFIED** native reads: exact-market sales_rep sees own opportunity; no reassignment/platform assignment controls; prior market's controlled lead is withheld. No forged signed mutation claim. |
+| 1280px Sales layout/labels | **HOSTED VERIFIED**: measured inner/client/scroll widths 1280, no page overflow, card within width, visible inputs labeled, usable native controls/confirmation. |
+| 768/390/320px Sales layouts | **HOSTED UNVERIFIED DUE TO APPROVED TOOLING LIMITATION**: requested overrides still measured 1280; no mobile hosted PASS claimed. Prior local rendered evidence remains separately classified. No formal full accessibility audit claimed. |
+| Response-loss/reconciliation | **SQL/RUNTIME VERIFIED; LOCAL APPLICATION VERIFIED**: no production transport interruption or naturally unknown result; no new-ID retry. |
+| Other merchant role/identity/forged-request limits | Prior editor/clerk restricted stages, wrong-location/forged signed requests, independent second-identity oversight and other page-responsive/accessibility limits retain their earlier honest classifications. They were not re-executed in this Sales-only window. |
+
+The create mutation's client/server correlation is
+`5a02b976-6a0e-4c13-95b7-334ddf632472`: server RPC completion 00:56:40.559,
+server HTTP 200 00:56:40.560, client accepted response 00:56:40.664,
+refresh requested 00:56:40.665. Refreshed read correlation
+`74bda440-4b4d-4c8a-9550-ebc96698c78b` completed HTTP 200 at 00:56:41.421;
+client render at 00:56:42.575 explicitly links its parent to the create.
+Conversion server/client records also matched the corrected deployment.
+The provider's fixed preflight log end time was refreshed before later retrieval.
+Only finite stages/status/correlation/build metadata were inspected/exported.
+There was no application-error recurrence. This successful Sales evidence does
+not establish the separate historical offer-refresh root cause.
+
+### Final cleanup and baseline evidence
+
+Independent exact-ID/market-lineage inventory, rather than label prefixes,
+captured the lead, converted prospect, activity, grant and related notification
+sources. Original administrator was verified FIRST. The assignment ended,
+lead became inactive, prospect archived, market inactive and related queued work
+canceled/retired. Existing archived/history records were not rewritten.
+
+Final verification: zero effective operational/staff/Sales authority, zero active
+controlled lead/prospect/market/module/capability/trial, zero pending controlled
+events/expansions/deliveries and valid original administrator. Exactly one inactive
+lead, one archived prospect, one activity, three Sales history rows, one create
+receipt and one conversion receipt remain as legitimate immutable/audited history.
+All **30** original selected hashes/counts match; achievement count/hash unchanged.
+Original Phase 7E source/membership, Phase 7D payments/allocations, Wallet and sports
+baselines remain intact. Canonical migrations remain **113**.
+
+No real customer/youth data, money, new Auth identity, credential/session material,
+redemption proof, historical proxy value, production endpoint, schema/migration,
+Auth/RLS change, timeout change, external integration or Phase 8B. Existing
+offer/listing/weekly/location/trial/redemption acceptance was not repeated.
+
+The release delta for this assignment is documentation only. Final documentation
+SHA and applicable full CI results are recorded in the handoff and PR #3, which stays
+**OPEN / DRAFT / UNMERGED**. Recommend Main Boss Chat review for closure with the
+retained identity/tooling limits. Do not declare Phase 8A COMPLETE automatically
+or open another window. STOP; no Phase 8B.
