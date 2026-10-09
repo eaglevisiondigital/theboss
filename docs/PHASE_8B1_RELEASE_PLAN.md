@@ -1,5 +1,15 @@
 # Phase 8B1 gated release and recovery plan
 
+## October 9, 2026 UTC: shared timestamp hydration defect isolated and corrected locally
+
+**Phase 8B1 INCOMPLETE; original controlled hosted window UNUSED.** Production-mode local differential tests with pinned Next 16.3.7/React 19.3.0 prove that the shared populated notification drawer rendered timestamps in implicit server/browser timezones. UTC/PDT text mismatch causes recoverable React 418 and same-error global dispatch before Partner trace registration. Static/empty controls are clean; actual shell, Partner admin/discovery, Merchant and listener-off/on reproduce before repair. Clean Chrome Guest also reproduces. The minimal shared timestamp correction renders UTC identically for SSR/first hydration, then preserves browser-local time; all populated browser comparisons are clean afterward.
+
+This is **LOCAL APPLICATION VERIFIED**, not historical hosted attribution. The producing module of the earlier hosted Error remains **UNKNOWN**; this mechanism is a supported explanation. Deliberate uncaught script error also yields an early global Error followed by successful rendering. Component/server/rejection/hydration/global negative controls remain distinct; no production listener/classification/STOP rule was changed.
+
+Failing-before/passing-after NotificationCard regression; three new tests; focused **103/103**, full application **666/666**, strict typecheck, zero-warning lint and normal production build PASS. Read-only canonical checks confirm **119** migrations/six unchanged hashes, administrator valid, **264/264** original business baselines equal, all **17** Partner relations empty, no pending work or temporary authority, providers OFF. No schema/Auth/financial/provider state changed. Only the proven narrow repair, regressions and evidence documentation may be released; exact CI/READY metadata is returned separately after observation. No production Boss application read or hosted window is authorized here.
+
+See [causal matrix, negative controls and 24-point investigation record](PHASE_8B1_HYDRATION_ISOLATION.md). Main Boss Chat must decide the next bounded post-repair diagnostic preflight separately. All earlier incidents/evidence remain preserved below. No Phase 8B2.
+
 ## October 9, 2026 UTC: diagnostic-only deployment and single-read recurrence
 
 **Phase 8B1 INCOMPLETE; original controlled hosted window UNUSED.** Diagnostic source `b04d6dac13a20d252e61a558a124f1116fe0b018` was published READY at `2026-10-09T14:34:16.285Z`, deployment `6ac8fb478f02520008751221`. The separately authorized single harmless Partner read was executed with the existing administrator session and finite live server observer. No acceptance preflight was resumed.
