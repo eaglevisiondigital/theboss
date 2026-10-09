@@ -4,3 +4,23 @@
 @media(max-width:380px){.productCard{grid-template-columns:1fr}.productCard svg{max-width:190px}}
 
 .productCopy .trialCallout{margin-top:16px;padding-top:16px;border-top:1px solid #eaded4}.trialCallout strong{display:block;color:#ac3300;margin-bottom:5px}
+.paths{background:linear-gradient(180deg,#fff,#fff8f1);}
+.paths .heading{align-items:center;}
+.pathGrid article{padding:30px;border:1px solid #e9ddd2;border-top:3px solid #f56822;border-radius:16px;box-shadow:0 12px 30px #18242d07;}
+.pathTop{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.pathIcon{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;border-radius:13px;background:#fff0e4;color:#b53600;}
+.pathIcon svg{width:26px;height:26px;}
+.pathKicker{font-size:10px;line-height:1.5;font-weight:800;letter-spacing:.08em;color:#a53100;}
+.pathGrid h3{font-size:25px;}
+.pathGrid p{margin-bottom:28px;max-width:490px;}
+.pathGrid a{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:52px;padding:15px 20px;background:#19252e;color:#fff;border:1px solid #19252e;border-radius:8px;font-size:14px;line-height:1.4;}
+.pathGrid a:hover{background:#2a3c49;}
+.pathGrid article:first-child{background:linear-gradient(135deg,#fff3e6,#fff 65%);border-color:#edc1a0;}
+.pathGrid article:first-child a{background:#bd3900;border-color:#bd3900;}
+.pathGrid article:first-child a:hover{background:#9c2f00;}
+.pathHelp{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0 0;margin-top:28px;border-top:1px solid #e8d7c8;}
+.pathHelp p{font-size:14px;}
+.pathHelp strong{color:#19252e;}
+.pathHelp a{display:inline-flex;align-items:center;gap:20px;flex-shrink:0;padding:13px 20px;min-height:48px;border:1px solid #bf3900;border-radius:8px;color:#a53100;text-decoration:none;font-size:14px;font-weight:800;background:white;}
+.pathHelp a:hover{background:#fff0e4;}
+@media(max-width:650px){.pathGrid article{padding:24px;}.pathGrid h3{font-size:23px;}.pathHelp{align-items:flex-start;flex-direction:column;gap:16px;}.pathHelp a{width:100%;justify-content:space-between;}}
