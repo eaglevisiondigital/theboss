@@ -1,5 +1,20 @@
 # Phase 8B1 completion report
 
+## October 9, 2026 UTC: Partner diagnostic instrumentation and approved single-window alternative
+
+Main Boss Chat explicitly approved continuous live server/browser monitoring with immediate private finite-field retention **only for the original unused Phase 8B1 window**. Historical Netlify retrieval remains unsatisfied and its root cause UNKNOWN. This does not waive other preflight, security, recovery or deadline gates.
+
+The Partner administration/discovery pages, read loader, signed mutation route/RPC, client confirmation/refresh/render, Next server/client hooks and safe error boundary now have the independent `BOSS_PARTNER_DIAGNOSTIC` finite channel. Only constant routes, supported operations, safe classifications/statuses, opaque trace links, build identity and allowlisted exception metadata are emitted. Shared exception sanitization preserves existing Merchant/Sales behavior. No new endpoint/vendor/database table/Auth mechanism or production fault injection was introduced. Command payloads and canonical receipts are not diagnostic records; unknown results retain the original request for existing same-request reconciliation.
+
+Local strict typecheck, zero-warning lint, **654/654 application tests**, focused Partner/Merchant diagnostic checks and production build pass. An isolated copy of the actual Partner page/route/components, using a synthetic local RPC transport, confirms native prospect submission, receipt, refresh, reload, navigation and one-shot local error boundary/retry; server/client trace and numeric digest linkage are privately retained. This is LOCAL APPLICATION VERIFIED, not hosted or canonical RPC evidence. The local PostgreSQL rerun cannot initialize because macOS shared-memory IDs are exhausted; no host setting or unrelated process was changed. Fresh disposable Linux database/security/recovery CI remains required before hosted activation.
+
+**Phase 8B1 remains INCOMPLETE. The single hosted window is UNUSED.** Commit/push CI, exact READY diagnostic deployment, two retained matching harmless Partner reads, canonical 119/six unchanged hashes/264 original baselines, administrator/zero-authority/providers-OFF checks and independently exercised administrator-first recovery must pass before activation. Live observation must remain active through final cleanup/baseline verification, with prompt private exports after critical stages. Any monitoring loss or unexplained Partner failure stops new scenarios and triggers administrator-first cleanup. The unchanged maximum deadlines are activation +25/+35/+45 minutes with no extensions. No provider capability or Phase 8B2 is enabled.
+
+See [Partner diagnostics](PHASE_8B1_PARTNER_DIAGNOSTICS.md). Prior failed CI, historical retrieval investigation, incidents and acceptance history below remain preserved.
+
+### Preserved earlier checkpoints
+
+
 ## October 9, 2026 UTC: portability repair validated; hosted resumption stopped at diagnostic preflight
 
 **Phase 8B1 remains INCOMPLETE. The original single hosted window remains unused.** The narrow repair is committed/pushed as `7c44c6251c436a13996c464b4798d4fd34d0a137`. Netlify published that exact commit READY at `2026-10-09T08:00:09.888Z` (deploy `6ac89ee8964e350008f5fd4a`). No migration, application behavior or security contract changed.

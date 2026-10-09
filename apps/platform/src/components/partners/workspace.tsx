@@ -1,19 +1,22 @@
 "use client";
 import type { Json } from "@/lib/supabase/database.types";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { useRouter } from "next/navigation";
 import { PARTNER_STATES,PARTNER_METHODS,PARTNER_CAPABILITIES,type PartnerAdminData } from "@/lib/partners/contracts";
-import { parsePartnerCommand,validPartnerReceipt,type PartnerCommand } from "@/lib/partners/input";
-export function PartnerWorkspace({data}:{data:PartnerAdminData}) {
+import { parsePartnerCommand,type PartnerCommand } from "@/lib/partners/input";
+import {requestPartnerMutation}from"@/lib/partners/action";
+import {partnerClientDiagnostic,partnerClientRendered}from"@/lib/partners/diagnostics-client";
+export function PartnerWorkspace({data,diagnosticCorrelation}:{data:PartnerAdminData;diagnosticCorrelation?:string}) {
+ useEffect(()=>{if(diagnosticCorrelation)partnerClientRendered(diagnosticCorrelation);},[diagnosticCorrelation]);
  const router=useRouter(),[message,setMessage]=useState(""),[busy,setBusy]=useState(false),[pending,setPending]=useState<PartnerCommand|null>(null);
  if("unavailable"in data)return <p role="status">{data.restricted?"Partner administration is restricted.":"Partner administration is currently unavailable."}</p>;
  async function send(command:PartnerCommand,reconciling=false) {
   setBusy(true);setPending(command);setMessage("Submitting provider change.");
-  try {const response=await fetch("/app/partners/mutate",{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify(command)}),body:unknown=await response.json();
-   if(typeof body==="object"&&body!==null&&"ok"in body&&body.ok===true){const receipt={...body};delete(receipt as {ok?:unknown}).ok;if(response.ok&&validPartnerReceipt(receipt)){setPending(null);setMessage("Provider change confirmed.");router.refresh();return;}}
-   if(!reconciling&&!response.ok&&typeof body==="object"&&body!==null&&"outcome"in body&&body.outcome==="rejected"){setPending(null);setMessage("Provider operation declined. Review the current record and access.");}
+  try {const result=await requestPartnerMutation(command,undefined,reconciling);
+   if(result.outcome==="confirmed-success"){setPending(null);setMessage("Provider change confirmed.");partnerClientDiagnostic({stage:"refresh_requested",observedAt:"src/components/partners/workspace.tsx",operation:command.action});router.refresh();return;}
+   if(result.outcome==="confirmed-rejection"){setPending(null);setMessage("Provider operation declined. Review the current record and access.");}
    else setMessage("This change could not be confirmed. Retry the same request safely.");
-  }catch{setMessage("This change could not be confirmed. Retry the same request safely.");}finally{setBusy(false);}
+  }catch(error){partnerClientDiagnostic({stage:"client_exception",observedAt:"src/components/partners/workspace.tsx",classification:"refresh-failed",error});setMessage("This change could not be confirmed. Retry the same request safely.");}finally{setBusy(false);}
  }
  function submit(event:React.FormEvent<HTMLFormElement>,action:PartnerCommand["action"],providerId?:string,version?:number) {
   event.preventDefault();const form=new FormData(event.currentTarget),input:Record<string,Json>={};
@@ -25,7 +28,7 @@ export function PartnerWorkspace({data}:{data:PartnerAdminData}) {
   const command=parsePartnerCommand({request_id:crypto.randomUUID(),action,input});if(command)void send(command);else setMessage("Review the provider fields.");
  }
  return <section className="partner-workspace admin-workspace" aria-label="Partner administration"><p>Partner integrations are off. Registry and review records do not activate consumer benefits.</p><p role="status" aria-live="polite">{message}</p>
- {pending&&<button className="button button-outline" disabled={busy} onClick={()=>void send(pending,true)}>Retry the same request</button>}
+ {pending&&<button className="button button-outline" disabled={busy} onClick={()=>{partnerClientDiagnostic({stage:"retry_requested",observedAt:"src/components/partners/workspace.tsx",operation:pending.action});void send(pending,true);}}>Retry the same request</button>}
  <form className="admin-panel" onSubmit={e=>submit(e,"provider.create")}><h2>Add provider prospect</h2>
  <label>Provider reference<input name="key" required minLength={3} maxLength={80} pattern="[a-z][a-z0-9_-]{2,79}"/></label>
  <label>Display name<input name="name" required maxLength={120}/></label><label>Legal organization reference<input name="legal_reference" maxLength={200}/></label>

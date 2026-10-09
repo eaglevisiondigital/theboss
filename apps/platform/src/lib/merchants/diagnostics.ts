@@ -1,3 +1,4 @@
+import { finiteErrorDetails } from "../diagnostics/error";
 // One finite diagnostic channel. Never serialize an Error, request or projection.
 export const MERCHANT_DIAGNOSTIC_PREFIX = "BOSS_MERCHANT_DIAGNOSTIC ";
 export const MERCHANT_CORRELATION_HEADER = "x-boss-merchant-diagnostic";
@@ -24,28 +25,7 @@ export function merchantDiagnosticPath(value: unknown) {
  const path = value.split(/[?#]/, 1)[0];
  return path === "/app/merchants" || path === "/app/merchants/mutate" || path === "/app/merchant-sales";
 }
-function property(error: unknown, key: string): unknown {
- try { return error !== null && typeof error === "object" ? Reflect.get(error, key) : undefined; } catch { return undefined; }
-}
-export function merchantErrorDetails(error: unknown) {
- const name = property(error, "name"), digest = property(error, "digest"), stack = property(error, "stack");
- const category = ["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError", "AggregateError", "URIError", "EvalError"].includes(String(typeof name === "string" ? name : "")) ? name as string : "UnknownError";
- let source: { file: DiagnosticFile; line: number; column: number } | null = null;
- if (typeof stack === "string" && stack.length <= 32_000) {
-  // Only frame lines and exact repository files; omit messages, URLs and other frames.
-  for (const frame of stack.split("\n").slice(1, 21)) {
-   if (!/^\s*at\s/.test(frame)) continue;
-   for (const file of files) {
-    const at = frame.indexOf(file + ":");
-    if (at < 0 || (at > 0 && !/[/(\\]/.test(frame[at - 1]))) continue;
-    const location = /^(\d{1,6}):(\d{1,6})(?:\)|\s|$)/.exec(frame.slice(at + file.length + 1));
-    if (location && Number(location[1]) > 0 && Number(location[2]) > 0) { source = { file, line: Number(location[1]), column: Number(location[2]) }; break; }
-   }
-   if (source) break;
-  }
- }
- return { exception_category: category, digest: typeof digest === "string" && /^[0-9]{1,20}$/.test(digest) ? digest : null, source };
-}
+export function merchantErrorDetails(error: unknown) { return finiteErrorDetails(error,files); }
 export type MerchantDiagnosticInput = { correlationId: string; parentCorrelationId?: string | null; stage: MerchantDiagnosticStage; phase: MerchantDiagnosticPhase; observedAt: DiagnosticFile; classification?: Classification; operation?: MerchantDiagnosticOperation; route?: MerchantDiagnosticRoute; status?: number; error?: unknown };
 export function merchantDiagnosticRecord(input: MerchantDiagnosticInput) {
  if (!validMerchantCorrelation(input.correlationId) || !merchantDiagnosticStages.includes(input.stage) || !phases.includes(input.phase) || !files.includes(input.observedAt)) return null;
