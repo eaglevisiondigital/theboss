@@ -22,5 +22,5 @@ for(const required of ["connect-src 'none'","form-action 'none'","frame-ancestor
 const page=await readFile(new URL('index.html',root),'utf8');
 assert(page.includes('DEMO / PREVIEW')); assert(page.includes('noindex, nofollow, noarchive'));
 assert(!page.includes('data-netlify')); assert(!page.includes('<form'));
-assert.equal(files.length,12,'Only reviewed static files may ship');
+assert.equal(files.length,13,'Only reviewed static files may ship');
 console.log('PASS: reviewed static artifact, no backend/persistence/environment/function material, enforced isolation and noindex.');

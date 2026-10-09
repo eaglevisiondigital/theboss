@@ -1,8 +1,10 @@
+import {rangePages,createRangePicker} from './range-picker.mjs';
 import {GOAL,BOARDS,createDemo,getTile,cartItems,cartTotal,addToCart,removeFromCart,clearCart,beginHold,release,expireHolds,confirmHold,simulateAvailabilityChange,pageInfo,pageTiles,setPage,jumpAmount,spinCandidate} from './state.mjs';
 const $=id=>document.getElementById(id);
 const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
 let config=BOARDS[0],demo=createDemo(Date.now(),config),spinId=null,opener=null,dialogStage='cart',confirmation=null;
 const dialog=$('reservation');
+const rangePicker=createRangePicker({trigger:$('range'),value:$('range-value'),panel:$('range-popover'),options:$('range-options'),hint:$('range-hint'),next:$('jump-toggle'),onSelect:movePage});
 function announce(text){$('status').textContent=text;}
 function element(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;}
 function focusTile(id){document.querySelector(`[data-tile="${id}"]`)?.focus();}
@@ -27,9 +29,7 @@ function renderNavigation(){
   $('page-caption').textContent=`Page ${info.page+1} of ${info.pages.toLocaleString()}`;
   $('page-input').value=String(info.page+1);$('page-input').max=String(info.pages);$('page-total').textContent=`/ ${info.pages.toLocaleString()}`;
   $('first').disabled=$('previous').disabled=info.page===0;$('last').disabled=$('next').disabled=info.page===info.pages-1;
-  // Direct range selection stays bounded even for thousands of pages.
-  const pages=new Set([0,info.pages-1]);if(info.pages<=20){for(let page=0;page<info.pages;page++)pages.add(page);}else for(let page=Math.max(0,info.page-3);page<=Math.min(info.pages-1,info.page+3);page++)pages.add(page);
-  $('range').replaceChildren(...[...pages].sort((a,b)=>a-b).map(page=>{const range=pageInfo(demo,page);const option=element('option','',`${money(range.start)}–${money(range.end)}`);option.value=String(page);option.selected=page===demo.page;return option;}));
+  rangePicker.update({selected:info.page,total:info.pages,items:rangePages(info.page,info.pages).map(page=>{const range=pageInfo(demo,page);return {page,label:`${money(range.start)}–${money(range.end)}`};})});
 }
 function removeButton(tile,location){const button=element('button','remove','×');button.type='button';button.setAttribute('aria-label',`Remove ${money(tile.amount)} from ${location}`);button.addEventListener('click',()=>{removeFromCart(demo,tile.id);render();if(dialog.open){renderReview();$('release').focus();}announce(`${money(tile.amount)} removed. ${demo.cart.size} tiles remain; subtotal ${money(cartTotal(demo))}.`);});return button;}
 function renderCart(){
@@ -86,7 +86,7 @@ $('close').addEventListener('click',closeReview);$('release').addEventListener('
  dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const controls=[...dialog.querySelectorAll('button,input,summary')].filter(node=>!node.disabled&&!node.hidden&&node.getClientRects().length&&(node.type!=='radio'||node.checked));const first=controls[0],last=controls.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});
 $('continue').addEventListener('click',checkout);$('claim').addEventListener('click',confirm);$('conflict').addEventListener('click',()=>{if(!demo.hold)return;const id=demo.hold.items.find(item=>getTile(demo,item).owner===demo.hold.id);if(id===undefined)return;simulateAvailabilityChange(demo,id);$('checkout-status').textContent=`Demo availability changed for ${money(getTile(demo,id).amount)}. Confirmation will recheck the complete group.`;render();renderReview();$('claim').focus();announce($('checkout-status').textContent);});
 for(const id of ['reset','menu-reset','footer-reset'])$(id).addEventListener('click',reset);
-$('range').addEventListener('change',event=>movePage(Number(event.target.value)));$('first').addEventListener('click',()=>movePage(0));$('last').addEventListener('click',()=>movePage(demo.board.pages-1));$('previous').addEventListener('click',()=>movePage(demo.page-1));$('next').addEventListener('click',()=>movePage(demo.page+1));$('page-input').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();const page=Number(event.target.value);if(!Number.isInteger(page)||page<1||page>demo.board.pages){announce(`Use a page number from 1 to ${demo.board.pages}.`);return;}movePage(page-1);}});
+$('first').addEventListener('click',()=>movePage(0));$('last').addEventListener('click',()=>movePage(demo.board.pages-1));$('previous').addEventListener('click',()=>movePage(demo.page-1));$('next').addEventListener('click',()=>movePage(demo.page+1));$('page-input').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();const page=Number(event.target.value);if(!Number.isInteger(page)||page<1||page>demo.board.pages){announce(`Use a page number from 1 to ${demo.board.pages}.`);return;}movePage(page-1);}});
 // Cancel Enter's default activation before transferring focus to a tile.
 $('search-toggle').addEventListener('click',showSearch);$('jump-toggle').addEventListener('click',showSearch);$('show-amount').addEventListener('click',showJump);$('jump').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();showJump();}});
 $('board-config').addEventListener('change',event=>{$('custom-config').hidden=event.target.value!=='custom';if(event.target.value!=='custom')applyBoard(BOARDS[Number(event.target.value)]);});$('apply-config').addEventListener('click',()=>applyBoard({name:'Custom demo board',start:Number($('custom-start').value),end:Number($('custom-end').value),step:Number($('custom-step').value)}));

@@ -173,3 +173,30 @@ fieldset{display:grid;grid-template-columns:1fr 1fr;gap:0 8px;margin-bottom:7px}
   .footer p { grid-column:1/-1; grid-row:2; font-size:9px; }
   .footer > .text-button { grid-column:2; grid-row:1; font-size:10px; }
 }
+
+/* Final range-picker refinement; all other approved presentation is retained. */
+.range-picker { flex:0 1 360px; width:360px; min-width:0; }
+#range { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:44px; padding:10px 14px; border:1px solid #536167; border-radius:7px; background:#182226; color:#fff; font:700 13px/1.4 Inter,sans-serif; text-align:left; }
+#range:hover { background:#202e33; border-color:#7c9099; }
+#range[aria-expanded="true"] { border-color:#ff4f00; }
+#range-value { min-width:0; overflow-wrap:anywhere; }
+.range-chevron { width:8px; height:8px; flex-shrink:0; border-right:2px solid #a6b5bb; border-bottom:2px solid #a6b5bb; transform:rotate(45deg); margin:0 2px 4px 0; }
+#range[aria-expanded="true"] .range-chevron { transform:rotate(225deg); margin-bottom:0; border-color:#ff4f00; }
+.range-popover { position:fixed; z-index:30; box-sizing:border-box; overflow:auto; overscroll-behavior:contain; padding:16px; border:1px solid #47585f; border-radius:10px; background:#111b1f; box-shadow:0 18px 60px #000b,0 2px 8px #0008; }
+.range-menu-heading { color:#fff; font-size:10px; font-weight:800; letter-spacing:1.5px; }
+.range-hint { margin:5px 0 12px; color:#aabac1; font-size:10px; line-height:1.5; }
+.range-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+.range-option { min-width:0; min-height:44px; padding:10px 8px; border:1px solid #304249; border-radius:6px; background:#1a272c; color:#e8eff2; font:600 12px/1.4 Inter,sans-serif; text-align:left; overflow-wrap:anywhere; }
+.range-option:hover { background:#25363e; border-color:#69818c; }
+.range-option[aria-checked="true"] { background:#ff4f00; color:#080c0d; border-color:#ff4f00; font-weight:800; }
+#range:focus-visible,.range-option:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+.amount-navigation > .jump-toggle { min-height:44px; padding:10px 16px; border:1px solid #ff4f00; border-radius:7px; background:#ff4f00; color:#080c0d; font-size:12px; font-weight:800; }
+.amount-navigation > .jump-toggle:hover { background:#ff7433; border-color:#ff7433; }
+@media(max-width:600px) {
+  .range-picker { flex:1 1 0; width:auto; }
+  #range { padding:10px; font-size:12px; gap:8px; }
+  .range-options { grid-template-columns:minmax(0,1fr); }
+  .range-popover { padding:14px; }
+  .range-option { padding:11px 13px; font-size:13px; }
+  .amount-navigation > .jump-toggle { flex:none; padding:10px; font-size:10px; }
+}

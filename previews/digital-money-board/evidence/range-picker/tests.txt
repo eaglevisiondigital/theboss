@@ -1,0 +1,45 @@
+✔ cart selects more than ten unique tiles without creating reservations (1.788709ms)
+✔ duplicates including numeric aliases are rejected; individual removal and clear work (0.365417ms)
+✔ the example four-tile subtotal is exactly $185 and survives page navigation (0.199791ms)
+✔ generated $1 ranges match boundaries and have at most 50 rendered tiles (0.822459ms)
+✔ all increments and starting values produce correct complete page coverage (1.82975ms)
+✔ jump finds $175 and preserves the existing cart (0.17325ms)
+✔ invalid and off-series jumps never invent a tile (0.144208ms)
+✔ claimed and externally reserved tiles are excluded from the cart (0.080834ms)
+✔ checkout creates one coordinated deadline without adding progress (0.22375ms)
+✔ availability conflict before hold creates no partial reservations (0.178917ms)
+✔ availability conflict during a hold fails the entire group without progress (0.183041ms)
+✔ coordinated group expiry releases every owned hold and preserves selections (0.097167ms)
+✔ a four-tile confirmation increments by $185 once and denies replay (0.138709ms)
+✔ individual removal from held group does not extend the deadline (0.128709ms)
+✔ cancellation preserves selections; clearing a hold releases all cart authority (0.222542ms)
+✔ spin excludes selected, held and claimed tiles on every page (0.316958ms)
+✔ large custom series uses sparse state and bounded page rendering (0.104958ms)
+✔ small collections and configuration validation work without a product tile ceiling (0.340417ms)
+✔ reset does not retain cart, holds, confirmed totals or modified availability (0.083625ms)
+✔ range shortcuts retain complete small boards and bound million-page boards to nine (2.617625ms)
+✔ opening focuses selected range, exposes checked state and accessible label without changing page (0.669708ms)
+✔ desktop arrows follow both columns; Home/End stay bounded and never select (0.237916ms)
+✔ mobile arrows move one row; Escape restores trigger without submitting (0.14875ms)
+✔ pointer selection closes the menu before invoking page callback exactly once (0.1405ms)
+✔ outside pointer/focus dismiss without stealing focus; internal clicks do not dismiss (0.166084ms)
+✔ Tab moves to Jump to Amount, Shift+Tab returns to selector with no focus trap (0.112208ms)
+✔ timer rerender preserves focused range, selected ARIA state and bounded shortcuts (0.163959ms)
+✔ picker callback integrates with real generated pages while cart and jump remain intact (0.629583ms)
+✔ scrolling the trigger outside the usable viewport dismisses the menu and restores focus (0.180875ms)
+✔ a reservation changes neither totals nor activity and can be released (0.88625ms)
+✔ claimed, reserved and missing tiles cannot be claimed through selection (1.18775ms)
+✔ only one pending demo selection is allowed (0.104917ms)
+✔ a simulated claim increments once and prevents replay (0.134792ms)
+✔ the expiry boundary prevents late claims and frees selected and seeded holds (0.095666ms)
+✔ expiry does not release a hold before its deadline (0.109875ms)
+✔ spin selects only available tiles, including its random boundary values (0.233125ms)
+✔ attribution accepts only fictional choices and reset creates independent state (0.112375ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.078167

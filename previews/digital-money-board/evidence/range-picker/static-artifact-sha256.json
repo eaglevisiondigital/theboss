@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-10-09T22:12:05.353359+00:00",
+  "files": [
+    {
+      "path": "assets/Inter-LICENSE.txt",
+      "status": 200,
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+      "matches_local": true
+    },
+    {
+      "path": "assets/approved-desktop.png",
+      "status": 200,
+      "sha256": "50dc943fa283dbfe2526a16e64f1cd016605eceff7c7df9fcb64ae3588ed1a2c",
+      "matches_local": true
+    },
+    {
+      "path": "assets/inter-400.woff2",
+      "status": 200,
+      "sha256": "31dec70eae779982802788e227486bcd67e97a7edac1b93efcef9b344a37af2b",
+      "matches_local": true
+    },
+    {
+      "path": "assets/inter-500.woff2",
+      "status": 200,
+      "sha256": "daede94db0c5b37c9c17aee79d46bcfbf5a38dd13135dffa7ce726c7cd81f150",
+      "matches_local": true
+    },
+    {
+      "path": "assets/inter-800.woff2",
+      "status": 200,
+      "sha256": "08fed777483464cdf38a46c44fa8f524eeca1c0535fd690b9c73b83d23beaddb",
+      "matches_local": true
+    },
+    {
+      "path": "assets/inter-900.woff2",
+      "status": 200,
+      "sha256": "254d033598f9aea180eb7d2bcf0edd17c83f750f4926010f0316cb6f39507bd0",
+      "matches_local": true
+    },
+    {
+      "path": "demo.mjs",
+      "status": 200,
+      "sha256": "40fb908272b4fa0123d4ea69c15425c3990b771810c56930cc1dbc7e01922d7b",
+      "matches_local": true
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "191d7d7f4b8d7cc183e6b70619f641da6691917866b021b815782d7b46fa0c58",
+      "matches_local": true
+    },
+    {
+      "path": "range-picker.mjs",
+      "status": 200,
+      "sha256": "a6d8151f0bcf89aa8f9266fe6755c6840f39846eeab78c38cb19fd212e4abd27",
+      "matches_local": true
+    },
+    {
+      "path": "robots.txt",
+      "status": 200,
+      "sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+      "matches_local": true
+    },
+    {
+      "path": "state.mjs",
+      "status": 200,
+      "sha256": "07259f88897fcbf1bd922ec8bb170f19cc88427de4a257004595009e3911d0a6",
+      "matches_local": true
+    },
+    {
+      "path": "styles.css",
+      "status": 200,
+      "sha256": "c70e86b885af0afd0b9e8dd9de82e9017175142b80e3ee1ce4da1caded3b5f80",
+      "matches_local": true
+    }
+  ],
+  "headers": {
+    "Content-Security-Policy": "default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'",
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()"
+  }
+}

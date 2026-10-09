@@ -1,0 +1,75 @@
+[
+  {
+    "cart": "$5",
+    "focus": "$51–$100",
+    "page": "Page 1 of 10",
+    "stage": "mobile keyboard focus without selection"
+  },
+  {
+    "cart": "$5",
+    "checked": "$451–$500",
+    "focus": "$451–$500",
+    "page": "Page 10 of 10",
+    "stage": "native Enter selection and current selection on reopen",
+    "status": "Showing $451–$500, page 10 of 10. Cart preserved."
+  },
+  {
+    "focus": "jump-toggle",
+    "hidden": true,
+    "stage": "Tab dismissal"
+  },
+  {
+    "cart": "$5",
+    "hidden": true,
+    "jump": "Showing $175. available.",
+    "stage": "Jump preserves cart and exposes unobstructed focused tile",
+    "stickyTop": 850,
+    "tileBottom": 371.9296875
+  },
+  {
+    "focus": "jump",
+    "hidden": true,
+    "stage": "outside click"
+  },
+  {
+    "expanded": "false",
+    "focus": "range",
+    "hidden": true,
+    "stage": "scroll away dismissal"
+  },
+  {
+    "height": 640,
+    "panel": {
+      "bottom": 478,
+      "height": 292.0703125,
+      "left": 12,
+      "right": 308,
+      "top": 185.9296875,
+      "width": 296,
+      "x": 12,
+      "y": 185.9296875
+    },
+    "scrollWidth": 320,
+    "stage": "320 x 640 menu clears sticky cart",
+    "sticky": {
+      "bottom": 564,
+      "height": 74,
+      "left": 0,
+      "right": 320,
+      "top": 490,
+      "width": 320,
+      "x": 0,
+      "y": 490
+    },
+    "width": 320
+  },
+  {
+    "hint": "Nearby ranges + first and last. Jump to any amount.",
+    "options": 9,
+    "pages": "/ 20,000",
+    "scrollWidth": 320,
+    "selected": "$499,951–$500,000",
+    "stage": "million dollar board bounded nearby ranges",
+    "width": 320
+  }
+]
