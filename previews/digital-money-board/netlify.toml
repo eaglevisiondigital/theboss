@@ -1,0 +1,5 @@
+# Isolated static preview. Never use the platform/public-website configuration.
+[build]
+  publish = "public"
+[build.processing]
+  skip_processing = true

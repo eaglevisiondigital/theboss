@@ -1,0 +1,42 @@
+[
+  {
+    "columns": 6,
+    "documentWidth": 1440,
+    "modeHeight": 44,
+    "tileHeight": 130,
+    "tileWidth": 183.5,
+    "width": 1440
+  },
+  {
+    "columns": 6,
+    "documentWidth": 1280,
+    "modeHeight": 44,
+    "tileHeight": 130,
+    "tileWidth": 183.5,
+    "width": 1280
+  },
+  {
+    "columns": 4,
+    "documentWidth": 768,
+    "modeHeight": 44,
+    "tileHeight": 118,
+    "tileWidth": 167,
+    "width": 768
+  },
+  {
+    "columns": 3,
+    "documentWidth": 390,
+    "modeHeight": 44,
+    "tileHeight": 106,
+    "tileWidth": 112,
+    "width": 390
+  },
+  {
+    "columns": 3,
+    "documentWidth": 320,
+    "modeHeight": 44,
+    "tileHeight": 100,
+    "tileWidth": 90,
+    "width": 320
+  }
+]
