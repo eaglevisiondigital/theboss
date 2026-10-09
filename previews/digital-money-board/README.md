@@ -1,3 +1,5 @@
+> **2026-10-09 Round 3 final polish:** Focused presentation-only refinement deployed as `6ac95b8d6b3127b3fd893100` (READY). See [ROUND_3_REPORT.md](ROUND_3_REPORT.md) for before/after comparisons, exact changes, hosted screenshots at five widths, 27 passing tests and preserved behavior. JavaScript/state, approved tile design and B+ artwork are unchanged. Earlier reports and incident history remain intact below.
+
 > **2026-10-09 refinement addendum:** The revised multi-tile cart and amount-navigation preview is deployed as `6ac945a91e087b6fb8bf0737` (READY). See [REFINEMENT_REPORT.md](REFINEMENT_REPORT.md) for current implementation, 27 passing tests, actual hosted evidence, inspected local Money Board reference and remaining visual approval differences. The initial report below is preserved as historical evidence; its original single-selection layout and unavailable-reference statements do not describe this new revision.
 
 # Digital Money Board visual preview — 2026-10-09

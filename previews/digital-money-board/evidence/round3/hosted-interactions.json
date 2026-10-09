@@ -1,0 +1,29 @@
+{
+  "cart": {
+    "count": "4 tiles selected",
+    "focusOutline": "3px",
+    "jumpFocused": "$175, available",
+    "total": "$185"
+  },
+  "spin": {
+    "cart": "4 tiles selected",
+    "dialogOpen": false,
+    "selected": "true",
+    "total": "$185"
+  },
+  "forwardFocus": "close",
+  "reverseFocus": "release",
+  "cancellation": {
+    "count": "4 tiles selected",
+    "focus": "sticky-review"
+  },
+  "confirmation": {
+    "raised": "$7,025",
+    "status": "4 tiles simulated for Demo Supporter. $185 added exactly once. No money was collected."
+  },
+  "reset": {
+    "cartHidden": true,
+    "raised": "$6,840"
+  },
+  "console": []
+}

@@ -1,0 +1,69 @@
+{
+  "deployment": "6ac95b8d6b3127b3fd893100",
+  "http_status": 200,
+  "security_headers": {
+    "Content-Security-Policy": "default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'",
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()"
+  },
+  "files": [
+    {
+      "path": "assets/Inter-LICENSE.txt",
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+      "matches": true
+    },
+    {
+      "path": "assets/approved-desktop.png",
+      "sha256": "50dc943fa283dbfe2526a16e64f1cd016605eceff7c7df9fcb64ae3588ed1a2c",
+      "matches": true
+    },
+    {
+      "path": "assets/inter-400.woff2",
+      "sha256": "31dec70eae779982802788e227486bcd67e97a7edac1b93efcef9b344a37af2b",
+      "matches": true
+    },
+    {
+      "path": "assets/inter-500.woff2",
+      "sha256": "daede94db0c5b37c9c17aee79d46bcfbf5a38dd13135dffa7ce726c7cd81f150",
+      "matches": true
+    },
+    {
+      "path": "assets/inter-800.woff2",
+      "sha256": "08fed777483464cdf38a46c44fa8f524eeca1c0535fd690b9c73b83d23beaddb",
+      "matches": true
+    },
+    {
+      "path": "assets/inter-900.woff2",
+      "sha256": "254d033598f9aea180eb7d2bcf0edd17c83f750f4926010f0316cb6f39507bd0",
+      "matches": true
+    },
+    {
+      "path": "demo.mjs",
+      "sha256": "64d444f56f2ed489c0607b71ff2fa23cd004206633afe83dce3e01348807773b",
+      "matches": true
+    },
+    {
+      "path": "index.html",
+      "sha256": "e93e27429bc585d3a81e77b45d9ef6a70d0d086cad316baa5bb4bad4274ddbc7",
+      "matches": true
+    },
+    {
+      "path": "robots.txt",
+      "sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+      "matches": true
+    },
+    {
+      "path": "state.mjs",
+      "sha256": "07259f88897fcbf1bd922ec8bb170f19cc88427de4a257004595009e3911d0a6",
+      "matches": true
+    },
+    {
+      "path": "styles.css",
+      "sha256": "f54dad431953053fbf1a2afe60b8e9ee6ac5e02a57d1a5afacf01c38bb87bc99",
+      "matches": true
+    }
+  ],
+  "javascript_identical_to_reviewed_starting_commit": true
+}

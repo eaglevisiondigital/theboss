@@ -1,0 +1,292 @@
+{
+  "localWidths": [
+    {
+      "activityCardHeight": 58,
+      "cueHeight": 20,
+      "disclosureOpenHeight": 48,
+      "documentWidth": 1440,
+      "footerResetHeight": 44,
+      "height": 1000,
+      "infoColumns": 3,
+      "modes": [
+        {
+          "groupCenterDelta": 0.00390625,
+          "groupWidth": 143.6484375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "donate-mode",
+          "width": 438
+        },
+        {
+          "groupCenterDelta": 0,
+          "groupWidth": 126.359375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "spin-mode",
+          "width": 438
+        }
+      ],
+      "paginationControlHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "paginationWidth": 377.4765625,
+      "tileColumns": 5,
+      "tileHeight": 96.1953125,
+      "tileWidth": 169.59375,
+      "width": 1440,
+      "headingTopDelta": 0
+    },
+    {
+      "activityCardHeight": 58,
+      "cueHeight": 20,
+      "disclosureOpenHeight": 48,
+      "documentWidth": 1280,
+      "footerResetHeight": 44,
+      "height": 1000,
+      "infoColumns": 3,
+      "modes": [
+        {
+          "groupCenterDelta": 0.00390625,
+          "groupWidth": 143.6484375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "donate-mode",
+          "width": 438
+        },
+        {
+          "groupCenterDelta": 0,
+          "groupWidth": 126.359375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "spin-mode",
+          "width": 438
+        }
+      ],
+      "paginationControlHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "paginationWidth": 377.4765625,
+      "tileColumns": 5,
+      "tileHeight": 96.1953125,
+      "tileWidth": 169.59375,
+      "width": 1280,
+      "headingTopDelta": 0
+    },
+    {
+      "activityCardHeight": 58,
+      "cueHeight": 20,
+      "disclosureOpenHeight": 48,
+      "documentWidth": 768,
+      "footerResetHeight": 44,
+      "height": 1000,
+      "infoColumns": 3,
+      "modes": [
+        {
+          "groupCenterDelta": 0.00390625,
+          "groupWidth": 143.6484375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "donate-mode",
+          "width": 346
+        },
+        {
+          "groupCenterDelta": 0,
+          "groupWidth": 126.359375,
+          "height": 65,
+          "iconHeight": 28,
+          "iconWidth": 28,
+          "id": "spin-mode",
+          "width": 346
+        }
+      ],
+      "paginationControlHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "paginationWidth": 377.4765625,
+      "tileColumns": 5,
+      "tileHeight": 96.1953125,
+      "tileWidth": 132.796875,
+      "width": 768,
+      "headingTopDelta": 0
+    },
+    {
+      "activityCardHeight": 58,
+      "cueHeight": 20,
+      "disclosureOpenHeight": 46,
+      "documentWidth": 390,
+      "footerResetHeight": 44,
+      "height": 1000,
+      "infoColumns": 1,
+      "modes": [
+        {
+          "groupCenterDelta": 0,
+          "groupWidth": 122.453125,
+          "height": 55,
+          "iconHeight": 24,
+          "iconWidth": 24,
+          "id": "donate-mode",
+          "width": 176.5
+        },
+        {
+          "groupCenterDelta": 0.00390625,
+          "groupWidth": 107.3203125,
+          "height": 55,
+          "iconHeight": 24,
+          "iconWidth": 24,
+          "id": "spin-mode",
+          "width": 176.5
+        }
+      ],
+      "paginationControlHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "paginationWidth": 274.9765625,
+      "tileColumns": 3,
+      "tileHeight": 74,
+      "tileWidth": 115.328125,
+      "width": 390,
+      "headingTopDelta": 0
+    },
+    {
+      "activityCardHeight": 58,
+      "cueHeight": 20,
+      "disclosureOpenHeight": 46,
+      "documentWidth": 320,
+      "footerResetHeight": 44,
+      "height": 1000,
+      "infoColumns": 1,
+      "modes": [
+        {
+          "groupCenterDelta": 0,
+          "groupWidth": 122.453125,
+          "height": 55,
+          "iconHeight": 24,
+          "iconWidth": 24,
+          "id": "donate-mode",
+          "width": 141.5
+        },
+        {
+          "groupCenterDelta": 0.00390625,
+          "groupWidth": 107.3203125,
+          "height": 55,
+          "iconHeight": 24,
+          "iconWidth": 24,
+          "id": "spin-mode",
+          "width": 141.5
+        }
+      ],
+      "paginationControlHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "paginationWidth": 274.9765625,
+      "tileColumns": 3,
+      "tileHeight": 72,
+      "tileWidth": 92,
+      "width": 320,
+      "headingTopDelta": 0
+    }
+  ],
+  "clearance": [
+    {
+      "cart": "1 tile selected",
+      "documentWidth": 1440,
+      "footerResetBottom": 884.7734375,
+      "footerResetHeight": 44,
+      "footerResetWidth": 89.921875,
+      "navTop": 924,
+      "stickyBottom": 0,
+      "stickyTop": 0,
+      "stickyVisible": false,
+      "width": 1440
+    },
+    {
+      "cart": "1 tile selected",
+      "documentWidth": 1280,
+      "footerResetBottom": 884.7734375,
+      "footerResetHeight": 44,
+      "footerResetWidth": 89.921875,
+      "navTop": 924,
+      "stickyBottom": 0,
+      "stickyTop": 0,
+      "stickyVisible": false,
+      "width": 1280
+    },
+    {
+      "cart": "1 tile selected",
+      "documentWidth": 768,
+      "footerResetBottom": 810.8671875,
+      "footerResetHeight": 44,
+      "footerResetWidth": 89.921875,
+      "navTop": 924,
+      "stickyBottom": 924,
+      "stickyTop": 850,
+      "stickyVisible": true,
+      "width": 768
+    },
+    {
+      "cart": "1 tile selected",
+      "documentWidth": 390,
+      "footerResetBottom": 772.1484375,
+      "footerResetHeight": 44,
+      "footerResetWidth": 84.1171875,
+      "navTop": 924,
+      "stickyBottom": 924,
+      "stickyTop": 850,
+      "stickyVisible": true,
+      "width": 390
+    },
+    {
+      "cart": "1 tile selected",
+      "documentWidth": 320,
+      "footerResetBottom": 772.1796875,
+      "footerResetHeight": 44,
+      "footerResetWidth": 84.1171875,
+      "navTop": 924,
+      "stickyBottom": 924,
+      "stickyTop": 850,
+      "stickyVisible": true,
+      "width": 320
+    }
+  ],
+  "localBrowser": {
+    "cartExampleTotal": 185,
+    "spinPreservedCart": true,
+    "spinAddUnique": true,
+    "removeRestoresExampleTotal": true,
+    "confirmationRaised": 7025,
+    "resetRaised": 6840,
+    "jumpPreservedCart": true,
+    "focusOutlinePx": 3,
+    "forwardWrap": "close",
+    "reverseWrap": "release",
+    "cancelPreservedCart": true,
+    "customMillionPaginationVerified": true,
+    "smallBoardVerified": true,
+    "consoleErrorsWarnings": []
+  }
+}

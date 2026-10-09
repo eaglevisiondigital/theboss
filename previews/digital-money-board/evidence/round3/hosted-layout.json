@@ -1,0 +1,202 @@
+[
+  {
+    "activityHeight": 58,
+    "avatarWidth": 34,
+    "controlHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ],
+    "cueHeight": 20,
+    "documentWidth": 1440,
+    "infoColumns": 3,
+    "labelTopDelta": 0,
+    "modes": [
+      {
+        "centerDelta": 0.00390625,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "donate-mode",
+        "width": 438
+      },
+      {
+        "centerDelta": 0,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "spin-mode",
+        "width": 438
+      }
+    ],
+    "paginationControlsFit": true,
+    "paginationWidth": 377.4765625,
+    "tileHeight": 96.1953125,
+    "tileWidth": 169.59375,
+    "width": 1440
+  },
+  {
+    "activityHeight": 58,
+    "avatarWidth": 34,
+    "controlHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ],
+    "cueHeight": 20,
+    "documentWidth": 1280,
+    "infoColumns": 3,
+    "labelTopDelta": 0,
+    "modes": [
+      {
+        "centerDelta": 0.00390625,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "donate-mode",
+        "width": 438
+      },
+      {
+        "centerDelta": 0,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "spin-mode",
+        "width": 438
+      }
+    ],
+    "paginationControlsFit": true,
+    "paginationWidth": 377.4765625,
+    "tileHeight": 96.1953125,
+    "tileWidth": 169.59375,
+    "width": 1280
+  },
+  {
+    "activityHeight": 58,
+    "avatarWidth": 34,
+    "controlHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ],
+    "cueHeight": 20,
+    "documentWidth": 768,
+    "infoColumns": 3,
+    "labelTopDelta": 0,
+    "modes": [
+      {
+        "centerDelta": 0.00390625,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "donate-mode",
+        "width": 346
+      },
+      {
+        "centerDelta": 0,
+        "contentFits": true,
+        "height": 65,
+        "iconHeight": 28,
+        "iconWidth": 28,
+        "id": "spin-mode",
+        "width": 346
+      }
+    ],
+    "paginationControlsFit": true,
+    "paginationWidth": 377.4765625,
+    "tileHeight": 96.1953125,
+    "tileWidth": 132.796875,
+    "width": 768
+  },
+  {
+    "activityHeight": 58,
+    "avatarWidth": 34,
+    "controlHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ],
+    "cueHeight": 20,
+    "documentWidth": 390,
+    "infoColumns": 1,
+    "labelTopDelta": 0,
+    "modes": [
+      {
+        "centerDelta": 0,
+        "contentFits": true,
+        "height": 55,
+        "iconHeight": 24,
+        "iconWidth": 24,
+        "id": "donate-mode",
+        "width": 176.5
+      },
+      {
+        "centerDelta": 0.00390625,
+        "contentFits": true,
+        "height": 55,
+        "iconHeight": 24,
+        "iconWidth": 24,
+        "id": "spin-mode",
+        "width": 176.5
+      }
+    ],
+    "paginationControlsFit": true,
+    "paginationWidth": 274.9765625,
+    "tileHeight": 74,
+    "tileWidth": 115.328125,
+    "width": 390
+  },
+  {
+    "activityHeight": 58,
+    "avatarWidth": 34,
+    "controlHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ],
+    "cueHeight": 20,
+    "documentWidth": 320,
+    "infoColumns": 1,
+    "labelTopDelta": 0,
+    "modes": [
+      {
+        "centerDelta": 0,
+        "contentFits": true,
+        "height": 55,
+        "iconHeight": 24,
+        "iconWidth": 24,
+        "id": "donate-mode",
+        "width": 141.5
+      },
+      {
+        "centerDelta": 0.00390625,
+        "contentFits": true,
+        "height": 55,
+        "iconHeight": 24,
+        "iconWidth": 24,
+        "id": "spin-mode",
+        "width": 141.5
+      }
+    ],
+    "paginationControlsFit": true,
+    "paginationWidth": 274.9765625,
+    "tileHeight": 72,
+    "tileWidth": 92,
+    "width": 320
+  }
+]
