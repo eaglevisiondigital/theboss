@@ -1,0 +1,64 @@
+begin;
+set local statement_timeout='8s';
+\ir phase6b/fixture.sql
+create function pg_temp.record_game(label text,primary_homers int,opponent_homers int)returns void language plpgsql as $$declare half int;hits int;i int;begin
+ perform pg_temp.dd_create(label,'baseball','essential');
+ perform public.boss_stat_competition_classify(pg_temp.ff_game(label),'official','Synthetic chronological record source',gen_random_uuid());
+ for half in 1..2 loop
+ hits:=case half when 1 then primary_homers else opponent_homers end;
+ if hits>0 then
+ perform pg_temp.dd_pa(label,label||'-hr1-'||half);perform pg_temp.dd_play(label,'home_run',jsonb_build_array(pg_temp.dd_move(0,4)));
+ if hits=2 then for i in 1..3 loop
+ perform pg_temp.dd_pa(label,label||'-walk-'||half||'-'||i);perform pg_temp.dd_play(label,'walk',(select jsonb_agg(pg_temp.dd_move(n,n+1,'walk')order by n desc)from generate_series(0,i-1)n));end loop;
+ perform pg_temp.dd_pa(label,label||'-hr2-'||half);perform pg_temp.dd_play(label,'home_run',jsonb_build_array(pg_temp.dd_move(3,4),pg_temp.dd_move(2,4),pg_temp.dd_move(1,4),pg_temp.dd_move(0,4)));end if;
+ end if;
+ for i in 1..3 loop perform pg_temp.dd_pa(label,label||'-out-'||half||'-'||i);perform pg_temp.dd_play(label,'other_out',jsonb_build_array(pg_temp.dd_move(0,null,'advance_on_play',false,true)));end loop;
+ if half=1 then perform pg_temp.dd_op('diamond.half.start',label,'{"payload":{"kind":"half_start"}}');end if;
+ end loop;
+ perform pg_temp.game_op('game.finalize',label);
+ perform pg_temp.rb('game.assign',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'game_id',pg_temp.ff_game(label),'primary_entry_id',pg_temp.rb_id('falcons-entry'),'opponent_entry_id',pg_temp.rb_id('wildcats-entry'),'game_type','league','counts_for_standings',true,'reason','Synthetic chronological record assignment'));
+end$$;
+revoke all on function pg_temp.record_game(text,int,int)from public;grant execute on function pg_temp.record_game(text,int,int)to authenticated;
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.rb('definition.create',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'source_organization_id',pg_temp.f('org'),'season_id',pg_temp.f('season'),'product','records','source_kind','athlete_season','name','Synthetic co-holder record','metric_key','home_runs','metric_kind','count','direction','high','qualification','{}'::jsonb),'record');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('records','record'),'record-scope');
+reset role;
+create temp table original_record as select *from public.record_events where definition_id=pg_temp.rb_id('record');
+select pg_temp.check('initial one source one holder','RECORD',(select count(*)=1 from public.record_current_holders where definition_id=pg_temp.rb_id('record')));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.record_game('coholder-game',0,1);
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('records','record'));
+reset role;
+select pg_temp.check('canonical second athlete joins equal value','COHOLDER',(select count(*)=2 from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record')and e.value=1));
+select pg_temp.check('equal source produces immutable co-holder recognition','COHOLDER',(select count(*)=1 from public.record_events where definition_id=pg_temp.rb_id('record')and event_type='co_holder_added'));
+select pg_temp.check('first holder recognition retained under tie','HISTORY',(select to_jsonb(old)=to_jsonb(now)from original_record old join public.record_events now using(id)));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.record_game('record-breaking-game',2,0);
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('records','record'));
+reset role;
+select pg_temp.check('native second source first athlete three career-season HR','SUPERSESSION',(select count(*)=1 and min(e.value)=3 from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record')));
+select pg_temp.check('new record value is a new recognition, not false restoration','SUPERSESSION',exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and value=3 and event_type='recognized'));
+select pg_temp.check('other athlete superseded without deletion','SUPERSESSION',exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and subject_key=pg_temp.f('child2')::text and event_type='superseded'));
+select pg_temp.check('achievement does not use recognition clock','CHRONOLOGY',not exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and achieved_at>recognized_at));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.game_op('game.reopen','record-breaking-game','{"reason":"Synthetic correction removes record-breaking source"}');
+select public.boss_stat_competition_classify(pg_temp.ff_game('record-breaking-game'),'excluded','Synthetic corrected eligibility',gen_random_uuid());
+select pg_temp.game_op('game.finalize','record-breaking-game');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('records','record'));
+reset role;
+select pg_temp.check('correction recomputes all surviving candidates','RESTORATION',(select count(*)=2 and min(e.value)=1 and max(e.value)=1 from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record')));
+select pg_temp.check('former co-holder restored automatically','RESTORATION',exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and subject_key=pg_temp.f('child2')::text and event_type='restored'));
+select pg_temp.check('breaking recognition invalidated by source correction','CORRECTION',exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and event_type='invalidated_by_source_correction'and value=3));
+select pg_temp.check('initial recognition still byte-identical','HISTORY',(select to_jsonb(old)=to_jsonb(now)from original_record old join public.record_events now using(id)));
+create temp table prior_holders as select h.subject_key,e.value,e.source_manifest from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record');
+select boss_private.ranking_dirty_edition(pg_temp.rb_id('edition'));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q('records','record'));
+reset role;
+select pg_temp.check('full recompute equals prior current canonical holder set','REBUILD',not exists((select *from prior_holders except select h.subject_key,e.value,e.source_manifest from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record'))union all(select h.subject_key,e.value,e.source_manifest from public.record_current_holders h join public.record_events e on e.id=h.event_id where h.definition_id=pg_temp.rb_id('record')except select *from prior_holders)));
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.rb('definition.end',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'definition_id',pg_temp.rb_id('record')));
+reset role;
+select pg_temp.check('ended record policy retains disposition evidence','POLICY',exists(select 1 from public.record_events where definition_id=pg_temp.rb_id('record')and event_type='policy_superseded'));
+select pg_temp.check('ended definition has no current holder','POLICY',not exists(select 1 from public.record_current_holders where definition_id=pg_temp.rb_id('record')));
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;

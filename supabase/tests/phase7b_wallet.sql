@@ -1,0 +1,58 @@
+\set ON_ERROR_STOP on
+begin;
+set local statement_timeout='8s';
+\ir phase7b/fixture.sql
+select pg_temp.check('one household currency wallet','IDENTITY',(select count(*)=1 from public.boss_bucks_wallets where household_id=pg_temp.f('household')));
+select pg_temp.check('no earned value from intents or gift policy','SOURCE',boss_private.bucks_available(pg_temp.w())=0);
+select pg_temp.success('first',2501);
+set constraints all immediate;
+set constraints all deferred;
+select pg_temp.check('integer floor earning independent of gift','VALUE',boss_private.bucks_available(pg_temp.w())=1250);
+select pg_temp.check('balanced journal','LEDGER',(select sum(amount_minor)=0 and count(*)=2 from public.boss_bucks_postings));
+select pg_temp.check('same currency source immutable lineage','SOURCE',(select bool_and(g.household_id=pg_temp.f('household')and g.organization_id=pg_temp.f('org')and g.person_id=pg_temp.f('child1')and g.participant_id=pg_temp.f('participant-child1')and g.campaign_id=pg_temp.fid('campaign')and g.currency='USD'and g.expires_at is null)from public.boss_bucks_grants g));
+select pg_temp.check('no duplicate source value','IDEMPOTENCY',boss_private.bucks_issue((select id from public.fundraising_success_evidence where source_reference='first'))=(select id from public.boss_bucks_grants limit 1)and boss_private.bucks_available(pg_temp.w())=1250);
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.check('authorized family sees currency total','AUTH',public.boss_bucks_read(jsonb_build_object('wallet_id',pg_temp.w()))->'wallets'->0->>'available_minor'='1250');
+select pg_temp.check('family no donor or private source','PRIVACY',public.boss_bucks_read(jsonb_build_object('wallet_id',pg_temp.w()))::text!~'(source_reference|donor_id|email|mobile)');
+select pg_temp.check('child provenance attribution','ATTRIBUTION',public.boss_bucks_read(jsonb_build_object('wallet_id',pg_temp.w()))->'wallets'->0->'children'->0->>'earned_minor'='1250');
+select pg_temp.actor('household-only');
+select pg_temp.denied('household membership is not wallet access',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('wallet_id',pg_temp.w())));
+select pg_temp.actor('coach');
+select pg_temp.denied('team coach no organization finance',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('mode','organization','organization_id',pg_temp.f('org'))));
+select pg_temp.actor('other-admin');
+select pg_temp.denied('unrelated org finance denied',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('mode','organization','organization_id',pg_temp.f('org'))));
+select pg_temp.actor('admin');
+select pg_temp.check('own org report restricted','ORG',jsonb_array_length(public.boss_bucks_read(jsonb_build_object('mode','organization','organization_id',pg_temp.f('org')))->'reports')=1);
+select pg_temp.denied('admin role does not substitute family relationship',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('wallet_id',pg_temp.w())));
+reset role;
+select pg_temp.check('rebuild matches fresh ledger','REBUILD',boss_private.bucks_rebuild(pg_temp.w())->0->>'available_minor'='1250');
+select pg_temp.check('reversal reference source once','REVERSAL',boss_private.bucks_reverse_source((select id from public.fundraising_success_evidence where source_reference='first'),'Synthetic source reversal')is not null);
+select pg_temp.check('reversal idempotent','REVERSAL',boss_private.bucks_reverse_source((select id from public.fundraising_success_evidence where source_reference='first'),'Synthetic source reversal')is not null and(select count(*)=1 from public.boss_bucks_journals where kind='reversal'));
+set constraints all immediate;
+select pg_temp.check('no negative available after reversal','VALUE',boss_private.bucks_available(pg_temp.w())=0);
+select pg_temp.check('history retained original earning','HISTORY',(select count(*)=1 from public.boss_bucks_grants)and(select count(*)=2 from public.boss_bucks_journals));
+select pg_temp.denied('immutable organization restriction','update public.boss_bucks_grants set organization_id=pg_temp.f(''other-org'')','23514');
+select pg_temp.denied('immutable postings','update public.boss_bucks_postings set amount_minor=amount_minor+1','23514');
+select pg_temp.denied('immutable source snapshot','delete from public.boss_bucks_source_snapshots','23514');
+select pg_temp.denied('immutable policy','update public.boss_bucks_policy_revisions set basis_points=10000','23514');
+set local role authenticated;select pg_temp.actor('parent');
+insert into wallet_ids select 'cad',(pg_temp.bm('wallet.provision',jsonb_build_object('organization_id',pg_temp.f('org'),'household_id',pg_temp.f('household'),'dependent_person_id',pg_temp.f('child1'),'currency','CAD'))->>'wallet_id')::uuid;
+select pg_temp.check('currencies remain separate wallets and totals','CURRENCY',jsonb_array_length(public.boss_bucks_read()->'wallets')=2 and(public.boss_bucks_read()->'wallets')@>jsonb_build_array(jsonb_build_object('currency','CAD','available_minor','0')));
+select pg_temp.check('repeat household currency provision remains canonical','IDENTITY',(pg_temp.bm('wallet.provision',jsonb_build_object('organization_id',pg_temp.f('org'),'household_id',pg_temp.f('household'),'dependent_person_id',pg_temp.f('child1'),'currency','USD'))->>'wallet_id')::uuid=pg_temp.w());
+select pg_temp.check('manager can explicitly end its wallet access','ACCESS',pg_temp.bm('access.end',jsonb_build_object('wallet_id',pg_temp.w()),pg_temp.f('end-access-request'))->>'action'='access.end');
+select pg_temp.denied('ended wallet access independently denied',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('wallet_id',pg_temp.w())));
+select pg_temp.denied('ended authority cannot replay old signed receipt',format('select pg_temp.bm(''access.end'',%L,%L)',jsonb_build_object('wallet_id',pg_temp.w()),pg_temp.f('end-access-request')));reset role;
+update public.guardian_relationships set can_manage_boss_bucks=false where id=pg_temp.f('guardian-child1');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.denied('guardian revocation immediately denies',format('select public.boss_bucks_read(%L::jsonb)',jsonb_build_object('wallet_id',(select id from wallet_ids where label='cad'))));
+reset role;
+update public.boss_bucks_wallets set status='retired'where id=(select id from wallet_ids where label='cad');
+select pg_temp.check('empty wallet retirement retains its identity','IDENTITY',(select status='retired'and currency='CAD'and household_id=pg_temp.f('household')from public.boss_bucks_wallets where id=(select id from wallet_ids where label='cad')));
+select pg_temp.denied('wallet currency cannot be repointed','update public.boss_bucks_wallets set currency=''EUR''where id=(select id from wallet_ids where label=''cad'')','23514');
+do $$declare t record;r text;begin for t in select oid,relname,relrowsecurity from pg_class where relnamespace='public'::regnamespace and relkind='r'and relname like'boss_bucks_%'loop
+ perform pg_temp.check(t.relname||' RLS','ACL',t.relrowsecurity);
+ foreach r in array array['anon','authenticated','service_role']loop perform pg_temp.check(t.relname||' closed '||r,'ACL',not has_table_privilege(r,t.oid,'SELECT,INSERT,UPDATE,DELETE,TRUNCATE'));end loop;end loop;
+ for t in select oid,proname from pg_proc where pronamespace='boss_private'::regnamespace and proname like'bucks_%'and proname not in('bucks_read','bucks_mutate','bucks_admin_feature')loop
+ foreach r in array array['anon','authenticated','service_role']loop perform pg_temp.check(t.proname||' closed '||r,'TRUSTED',not has_function_privilege(r,t.oid,'execute'));end loop;end loop;end$$;
+select count(*)passed_assertions,'Phase 7B wallet' suite from phase5a_assertions;
+rollback;

@@ -1,0 +1,22 @@
+begin;
+\ir phase5f/fixture.sql
+create temp table rule_state(c jsonb,s jsonb);
+insert into rule_state values(pg_temp.dd_config(),boss_private.diamond_initial(pg_temp.dd_config()));
+update rule_state set s=boss_private.diamond_transition(c,s,'{"kind":"half_start"}');
+select pg_temp.check('anonymous orders preserve required scoring with optional lineups disabled','LINEUP',(select s->'orders'->'primary'='[null,null,null,null]'::jsonb and s->>'status'='active'from rule_state));
+update rule_state set s=boss_private.diamond_transition(c,s,'{"kind":"pa_start","key":"first","batter":null,"pitch_tracking":false}');
+update rule_state set s=boss_private.diamond_transition(c,s,jsonb_build_object('kind','play','result','single','moves',jsonb_build_array(pg_temp.dd_move(0,1))));
+update rule_state set s=boss_private.diamond_transition(c,s,'{"kind":"pa_start","key":"second","batter":null,"pitch_tracking":false}');
+select pg_temp.denied('cannot pass stationary leading runner','select boss_private.diamond_transition(c,s,jsonb_build_object(''kind'',''play'',''result'',''triple'',''moves'',jsonb_build_array(pg_temp.dd_move(0,3))))from rule_state','PT409');
+select pg_temp.denied('home run cannot score trailing runner before lead','select boss_private.diamond_transition(c,s,jsonb_build_object(''kind'',''play'',''result'',''home_run'',''moves'',jsonb_build_array(pg_temp.dd_move(0,4),pg_temp.dd_move(1,4))))from rule_state','PT409');
+select pg_temp.denied('walk cannot omit forced runner','select boss_private.diamond_transition(c,s,jsonb_build_object(''kind'',''play'',''result'',''walk'',''moves'',jsonb_build_array(pg_temp.dd_move(0,1,''walk''))))from rule_state','PT409');
+select pg_temp.denied('dropped third strike requires vacant first below two outs','select boss_private.diamond_transition(c,s,jsonb_build_object(''kind'',''play'',''result'',''dropped_third_strike'',''moves'',jsonb_build_array(pg_temp.dd_move(1,2),pg_temp.dd_move(0,1,''dropped_third_strike''))))from rule_state','PT409');
+select pg_temp.check('run cap closes canonical half','RULE',(select boss_private.diamond_transition(c||'{"run_cap":1}',s,jsonb_build_object('kind','play','result','home_run','moves',jsonb_build_array(pg_temp.dd_move(1,4),pg_temp.dd_move(0,4))))@>'{"status":"half_complete","primary_score":2,"outs":0}'from rule_state));
+select pg_temp.denied('steal disabled finite policy','select boss_private.diamond_transition(c||''{"stealing":false}'',jsonb_set(s,''{pa}'',''null''),jsonb_build_object(''kind'',''advance'',''moves'',jsonb_build_array(pg_temp.dd_move(1,2,''stolen_base''))))from rule_state','PT409');
+select pg_temp.check('home ahead after final top is eligible for explicit final','FINAL',(select boss_private.diamond_final_ready(c,jsonb_set(jsonb_set(jsonb_set(s,'{pa}','null'),'{status}','"half_complete"'),'{opponent_score}','1'))from rule_state));
+select pg_temp.check('walkoff eligible without phantom outs','FINAL',(select boss_private.diamond_final_ready(c,s||'{"pa":null,"half":"bottom","opponent_score":1}')from rule_state));
+select pg_temp.check('tie is not silently final','FINAL',(select not boss_private.diamond_final_ready(c,s||'{"pa":null,"half":"bottom","status":"half_complete"}')from rule_state));
+select pg_temp.denied('extra inning placement is mandatory when configured','select boss_private.diamond_transition(c||''{"tiebreak_from":2}'',s||''{"pa":null,"half":"bottom","status":"half_complete","primary_score":0,"opponent_score":0}'',''{"kind":"half_start"}'')from rule_state','PT409');
+select pg_temp.check('placed runner retains unearned provenance','RULE',(select boss_private.diamond_transition(c||'{"tiebreak_from":2}',s||'{"pa":null,"half":"bottom","status":"half_complete","primary_score":0,"opponent_score":0}','{"kind":"half_start","placed_runner":{"key":"placed","roster_id":null}}')->'bases'->1@>'{"origin":"tiebreak","placed":true}'from rule_state));
+select pg_temp.check('profile quick results are sport qualified','PROFILE',boss_private.tracking_selection('baseball','score_only')->'quick'='["play_state"]'and boss_private.tracking_selection('softball','score_only')->'quick'='["play_state"]');
+select count(*)passed_assertions from pg_temp.phase5a_assertions;rollback;

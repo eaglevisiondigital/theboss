@@ -1,0 +1,12 @@
+"use client";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { isRecord } from "@/lib/coordination/input";
+import { parseAthleteProfileCommand, type AthleteProfileCommand } from "@/lib/athlete-profiles/action";
+export function AthleteProfileActionForm({ label, children, build }: { label: string; children?: ReactNode; build: (fields: FormData) => Omit<AthleteProfileCommand, "request_id"> | null }) {
+  const router = useRouter(), receipt = useRef<{ id: string; signature: string } | null>(null); const [pending, setPending] = useState(false), [message, setMessage] = useState("");
+  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); if (pending) return; const action = build(new FormData(event.currentTarget)); if (!action) { setMessage("Review the profile fields."); return; } const signature = JSON.stringify(action); if (receipt.current?.signature !== signature) receipt.current = { id: crypto.randomUUID(), signature }; const command = parseAthleteProfileCommand({ ...action, request_id: receipt.current.id }); if (!command) { setMessage("Review the profile fields."); return; } setPending(true); setMessage("");
+    try { const response = await fetch("/app/athletes/mutate", { method: "POST", credentials: "same-origin", cache: "no-store", headers: { "content-type": "application/json" }, body: JSON.stringify(command) }); const body: unknown = await response.json(); if (!response.ok || !isRecord(body) || body.ok !== true || body.action !== action.action) { setMessage(response.status === 403 ? "This profile action is restricted." : response.status === 409 ? "The profile changed. Refresh and review it." : "The change could not be confirmed."); return; } receipt.current = null; const share = typeof body.share_url === "string" ? `${window.location.origin}${body.share_url}` : null; if (share) { await navigator.clipboard?.writeText(share); setMessage(`Private recruiting link copied: ${share}`); } else setMessage("Change confirmed."); router.refresh(); } catch { setMessage("The change could not be confirmed. Retry safely."); } finally { setPending(false); }
+  }
+  return <form onSubmit={submit} className="athlete-profile-action"><fieldset className="calendar-fieldset" disabled={pending}>{children}<button type="submit" className="button button-outline button-small">{pending ? "Saving..." : label}</button><p role="status" aria-live="polite">{message}</p></fieldset></form>;
+}

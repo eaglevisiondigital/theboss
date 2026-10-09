@@ -1,0 +1,138 @@
+{
+  "phase": "7B",
+  "checked_in_utc": true,
+  "window": {
+    "start": "2026-10-07T04:10:14.546589Z",
+    "stop_new": "2026-10-07T04:25:14.546589Z",
+    "cleanup_target": "2026-10-07T04:30:14.546589Z",
+    "hard_expiry": "2026-10-07T04:40:14.546589Z",
+    "explicit_restoration": "2026-10-07T04:18:37.275568Z",
+    "extended": false
+  },
+  "raw_cleanup": {
+    "checked_at": "2026-10-07 04:18:43.817778+00",
+    "roles_equal": true,
+    "guardians_equal": false,
+    "modules_equal": true,
+    "households_equal": false,
+    "organizations_equal": true,
+    "teams_equal": true,
+    "active_wallet_access": 0,
+    "active_wallets": 0,
+    "grants": 0,
+    "journals": 0,
+    "postings": 0,
+    "policies": 0,
+    "trusted_sources": 0,
+    "residual_child_membership": 0,
+    "residual_module": 0,
+    "active_preview_charge": 0,
+    "active_preview_registration": 0,
+    "active_preview_offering": 0,
+    "pending_preview_notifications": 0,
+    "pending_wallet_notifications": 0,
+    "original_admin_valid": true,
+    "audit_count": 3
+  },
+  "normalized_relationship_business_baseline": {
+    "checked_at": "2026-10-07 04:19:39.887911+00",
+    "guardian_baseline_equal_except_expected_updated_at": true,
+    "household_baseline_equal_except_expected_updated_at": true
+  },
+  "sports_baseline": {
+    "checked_at": "2026-10-07 04:18:46.374576+00",
+    "original_admin": 1,
+    "temp_active_roles": 0,
+    "temp_active_memberships": 0,
+    "temp_active_guardians": 0,
+    "sports_baseline": true,
+    "falcons_baseline": true,
+    "profile_baseline": true,
+    "event_baseline": true,
+    "game_baseline": true,
+    "changed_current_classifications": 0,
+    "active_shares": 0,
+    "active_consents": 0,
+    "active_controlled_definitions": 0,
+    "pending_achievement_work": 0,
+    "pending_ranking_work": 0,
+    "pending_window_notifications": 0,
+    "temp_active_operators": 0,
+    "pending_stat_work": 0,
+    "current_pending": 5,
+    "current_official": 0,
+    "immutable_hash": "e12a9ac245f511da03eeafc0ecfc1e75",
+    "all_other_active_roles": 0,
+    "historical_active_status_guardians": 1,
+    "temp_module_windows": 0,
+    "showcase_baseline": true,
+    "household_baseline": true,
+    "manual_award_baseline": true,
+    "active_showcase_choices": 0,
+    "migration_count": 89,
+    "effective_guardians": 0
+  },
+  "financial_and_lifecycle": {
+    "checked_at": "2026-10-07 04:19:44.32815+00",
+    "payments": 6,
+    "allocations": 6,
+    "wallet_status": "retired",
+    "wallet_access_status": "ended"
+  },
+  "audit": [
+    {
+      "created_at": "2026-10-07 04:10:14.545455+00",
+      "action": "phase7b.controlled.activate"
+    },
+    {
+      "created_at": "2026-10-07 04:10:43.956837+00",
+      "action": "boss_bucks.wallet.provision"
+    },
+    {
+      "created_at": "2026-10-07 04:10:43.956837+00",
+      "action": "boss_bucks.access.change"
+    },
+    {
+      "created_at": "2026-10-07 04:12:22.957602+00",
+      "action": "boss_bucks.report.read"
+    },
+    {
+      "created_at": "2026-10-07 04:13:55.462409+00",
+      "action": "phase7b.controlled.guardian_revoke"
+    },
+    {
+      "created_at": "2026-10-07 04:17:29.315696+00",
+      "action": "boss_bucks.report.read"
+    },
+    {
+      "created_at": "2026-10-07 04:18:00.069074+00",
+      "action": "boss_bucks.report.read"
+    },
+    {
+      "created_at": "2026-10-07 04:18:37.25194+00",
+      "action": "phase7b.controlled.cleanup"
+    },
+    {
+      "created_at": "2026-10-07 04:18:37.25194+00",
+      "action": "phase7b.controlled.admin_first"
+    }
+  ],
+  "note": "Raw guardian/household full-row hashes differ only in normal updated_at restoration metadata. No trigger was disabled or metadata backdated. Baseline normalization proves every other field and row equal. No real paid source or customer/youth data was used.",
+  "canonical": {
+    "name": "the-boss-platform",
+    "ref": "ilykgwgmxtrrikreacrz",
+    "status": "ACTIVE_HEALTHY",
+    "migration_count": 89,
+    "rls_tables": 11,
+    "raw_acl_grants": 0,
+    "missing_fk_indexes": 0,
+    "routines_without_empty_search_path": 0,
+    "types_match": true
+  },
+  "deployment": {
+    "id": "6ac5c7bf580a5000086c45e5",
+    "sha": "95a044723a921171936e9081f1282f6de35c708d",
+    "published_at": "2026-10-07T04:17:37.462Z",
+    "state": "ready"
+  }
+}

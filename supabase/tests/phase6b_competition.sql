@@ -1,0 +1,28 @@
+begin;
+set local statement_timeout='8s';
+\ir phase6b/fixture.sql
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q(),'standings-scope');
+select pg_temp.check('unconfigured standings expose raw win','STANDINGS',(select (r->>'wins')::numeric=1 from jsonb_array_elements(public.boss_ranking_read(pg_temp.rb_q())->'rows')r where r->>'label'='Synthetic Falcons'));
+select pg_temp.check('unconfigured teams remain tied','TIE',(select bool_and((r->>'rank')::int=1)from jsonb_array_elements(public.boss_ranking_read(pg_temp.rb_q())->'rows')r));
+select pg_temp.rb('policy.activate',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'configuration',pg_temp.rb_policy(),'reason','Explicit disposable standings policy'),'policy');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q());
+select pg_temp.check('configured winner has first rank','STANDINGS',public.boss_ranking_read(pg_temp.rb_q())->'rows'->0->>'label'='Synthetic Falcons');
+select pg_temp.check('winner W L T exact independent oracle','STANDINGS',public.boss_ranking_read(pg_temp.rb_q())->'rows'->0 @>'{"rank":1,"wins":1,"losses":0,"ties":0,"games_played":1,"scoring_for":1,"scoring_against":0}');
+select pg_temp.check('loser exact independent oracle','STANDINGS',public.boss_ranking_read(pg_temp.rb_q())->'rows'->1 @>'{"rank":2,"wins":0,"losses":1,"ties":0,"games_played":1,"scoring_for":0,"scoring_against":1}');
+select pg_temp.rb('ranking.rebuild',pg_temp.rb_q());
+select pg_temp.check('rebuild does not double count','REBUILD',(public.boss_ranking_read(pg_temp.rb_q())->'rows'->0->>'games_played')::int=1);
+select pg_temp.check('paged product bounded','PAGINATION',jsonb_array_length(public.boss_ranking_read(pg_temp.rb_q('standings',null,'{"limit":1}'))->'rows')=1);
+select pg_temp.check('cursor returned','PAGINATION',public.boss_ranking_read(pg_temp.rb_q('standings',null,'{"limit":1}'))->>'next_cursor'is not null);
+select pg_temp.denied('forged group denied',format('select public.boss_ranking_read(%L::jsonb)',pg_temp.rb_q('standings',null,jsonb_build_object('group_id',gen_random_uuid()))),'PT403');
+reset role;
+select pg_temp.check('assignment explicit group bridge','GROUP',(select count(*)=1 from public.competition_game_assignment_groups where assignment_id=pg_temp.rb_id('assignment')));
+select pg_temp.check('no public athlete comparison flag','PRIVACY',(select not athlete_cross_organization and publication_state='unpublished'from public.competition_editions where id=pg_temp.rb_id('edition')));
+select pg_temp.denied('policy immutable',format('update public.standings_policy_revisions set configuration=''{}''where id=%L',pg_temp.rb_id('policy')),'23514');
+select pg_temp.denied('assignment immutable',format('update public.competition_game_assignments set counts_for_standings=false where id=%L',pg_temp.rb_id('assignment')),'23514');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.check('approved team audience safe team results','AUDIENCE',jsonb_array_length(public.boss_ranking_read(pg_temp.rb_q())->'rows')=2);
+select pg_temp.denied('guardian not standings manager',format('select public.boss_ranking_mutate(%L::jsonb)',jsonb_build_object('action','policy.activate','request_id',gen_random_uuid(),'input',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'configuration',pg_temp.rb_policy(),'reason','Forbidden guardian policy'))),'PT403');
+reset role;
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;

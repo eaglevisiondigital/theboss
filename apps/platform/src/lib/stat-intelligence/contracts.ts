@@ -1,0 +1,10 @@
+export const statSports = ["basketball", "soccer", "football", "volleyball", "baseball", "softball"] as const;
+export type StatSport = typeof statSports[number];
+export type StatKind = "athlete_season" | "athlete_career" | "team_season";
+export type StatQuery = { sport_key: StatSport; person_id?: string; season_id?: string; team_id?: string; organization_id?: string };
+export type StatMetric = { observed_value: number | null; complete_value: number | null; complete_games: number; partial_games: number; legacy_unknown_games: number; untracked_games: number; played_complete_games: number; per_tracked_game: number | null };
+export type StatRate = { value: number | null; reason: string | null };
+export type StatSummary = { source_game_count: number; confirmed_gp: number; participation_unknown_games: number; participation_partial_games: number; era_conventions: number[]; metrics: Record<string, StatMetric>; rates: Record<string, StatRate> };
+export type StatSegment = { organization_id: string; team_id: string; season_id: string | null; generation: number; source_watermark: string; refreshed_at: string; summary: StatSummary };
+export type StatData = { is_current: boolean; refresh_pending: boolean; summary: StatSummary | null; segments: StatSegment[]; unassigned_game_count: number; restricted?: boolean; unavailable?: boolean };
+export const emptyStats = (): StatData => ({ is_current: false, refresh_pending: false, summary: null, segments: [], unassigned_game_count: 0 });

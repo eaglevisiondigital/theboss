@@ -1,0 +1,8 @@
+import type { BasketballGame, BasketballPlay, BasketballPlayType, BasketballSide } from "./contracts";
+export const basketballPlayLabels: Record<BasketballPlayType, string> = { made_2: "Made 2", made_3: "Made 3", made_ft: "Made free throw", missed_2: "Missed 2", missed_3: "Missed 3", missed_ft: "Missed free throw", offensive_rebound: "Offensive rebound", defensive_rebound: "Defensive rebound", assist: "Assist", steal: "Steal", block: "Block", turnover: "Turnover", personal_foul: "Personal foul" };
+export function basketballClock(milliseconds: number) { const seconds = Math.ceil(milliseconds / 1000); return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`; }
+export function basketballPeriod(state: Pick<BasketballGame, "period_number" | "regulation_periods">, number = state.period_number) { return number === 0 ? "Before play" : number > state.regulation_periods ? `Overtime ${number - state.regulation_periods}` : `${state.regulation_periods === 2 ? "Half" : "Quarter"} ${number}`; }
+export function shootingPercentage(made: number, attempted: number) { return attempted === 0 ? "--" : `${(made / attempted * 100).toFixed(1)}%`; }
+export function basketballAssistContexts(plays: BasketballPlay[], period: number, options: { side?: BasketballSide; athlete?: string; correctingEvent?: string } = {}) {
+  return plays.filter(play => play.active && play.period_number === period && ["made_2", "made_3"].includes(play.event_type) && play.roster_id && (!options.side || play.side === options.side) && (!options.athlete || play.roster_id !== options.athlete) && !plays.some(assist => assist.active && assist.event_type === "assist" && assist.scoring_event_id === play.id && assist.id !== options.correctingEvent));
+}

@@ -1,0 +1,51 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir phase7d/fixture.sql
+create function pg_temp.pm(a text,i jsonb,r uuid default gen_random_uuid())returns jsonb language sql as $$select public.boss_payments_mutate(jsonb_build_object('action',a,'input',i,'request_id',r))$$;
+grant execute on function pg_temp.pm(text,jsonb,uuid)to authenticated,anon;
+select pg_temp.denied('anonymous cannot call payment projection','set local role anon;select public.boss_payments_read()','42501');
+set local role authenticated;select pg_temp.actor('household-only');
+select pg_temp.check('household alone sees no payable child charges','GUARDIAN',public.boss_payments_read()->'charges'='[]'::jsonb);
+select pg_temp.actor('coach');
+select pg_temp.denied('coach denied organization finance report',format('select public.boss_payments_read(%L)',jsonb_build_object('mode','organization','organization_id',pg_temp.f('org'))));
+select pg_temp.denied('coach denied processing account creation',format('select pg_temp.pm(''account.create'',%L)',jsonb_build_object('organization_id',pg_temp.f('org'))));
+select pg_temp.actor('admin');
+select pg_temp.check('admin sees own configuration','SCOPE',public.boss_payments_read(jsonb_build_object('mode','organization','organization_id',pg_temp.f('org')))->'can_configure'='true');
+select pg_temp.denied('administrator cannot cross tenant',format('select public.boss_payments_read(%L)',jsonb_build_object('mode','organization','organization_id',pg_temp.f('other-org'))));
+insert into payment_results values('draft',pg_temp.pm('account.create',jsonb_build_object('organization_id',pg_temp.f('org'),'provider','nmi','environment','sandbox','name','Synthetic draft only','country','US','currencies',jsonb_build_array('USD'),'merchant_owner','organization','merchant_reference','LOCAL-DRAFT','settlement_mode','direct_provider')));
+select pg_temp.pm('route.create',jsonb_build_object('organization_id',pg_temp.f('org'),'account_id',pg_temp.f('rails-account'),'purpose','fees','currency','USD','scope_type','team','scope_id',pg_temp.f('falcons')));
+select pg_temp.denied('forged cross-org routing denied',format('select pg_temp.pm(''route.create'',%L)',jsonb_build_object('organization_id',pg_temp.f('org'),'account_id',pg_temp.f('rails-account'),'purpose','fees','currency','USD','scope_type','team','scope_id',pg_temp.f('other-team'))));
+select pg_temp.pm('policy.create',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','fees','currency','USD','organization_basis_points',10000,'platform_basis_points',0,'product_cost_basis_points',0,'processor_fee_owner','organization','availability_seconds',0));
+select pg_temp.actor('parent');
+select pg_temp.check('payment guardian sees only authorized charges','GUARDIAN',not exists(select 1 from jsonb_array_elements(public.boss_payments_read()->'charges')ch where ch->>'participant_id'=pg_temp.f('participant-child2')::text));
+insert into payment_results values('prepare',pg_temp.pm('checkout.prepare',jsonb_build_object('organization_id',pg_temp.f('org'),'routing_id',pg_temp.f('rails-route'),'method','card','currency','USD','bucks_minor',3000,'wallet_id',pg_temp.w(),'allocations',jsonb_build_array(jsonb_build_object('charge_id',pg_temp.f('charge-camp'),'amount_minor',10000,'bucks_minor',3000))),pg_temp.f('signed-checkout-request')));
+reset role;
+select pg_temp.check('prepared split reserves Bucks without payment','RESERVATION',boss_private.bucks_available(pg_temp.w())=2000 and not exists(select 1 from public.payments));
+select boss_private.rails_dispatch((select(result->>'checkout_id')::uuid from payment_results where label='prepare'));
+do $$declare checkout uuid;begin select(result->>'checkout_id')::uuid into checkout from payment_results where label='prepare';perform boss_private.rails_receive(checkout,'signed-capture','captured','LOCAL-SIGNED-CAPTURE',7000,'USD',clock_timestamp(),repeat('f',64));end$$;
+select pg_temp.check('split commits canonical external and internal legs','SPLIT',(select count(*)=2 from public.payments)and(select count(*)=1 from public.boss_bucks_tenders)and(select count(*)=1 from public.external_payment_tenders));
+select pg_temp.check('split pays one charge exactly, never overpays','SPLIT',boss_private.registration_charge_balance(pg_temp.f('charge-camp'))->>'balance_due_minor'='0'and boss_private.bucks_available(pg_temp.w())=2000);
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.conflict('cannot request unavailable or direct-provider money',format('select pg_temp.pm(''settlement.request'',%L)',jsonb_build_object('organization_id',pg_temp.f('org'),'currency','USD','amount_minor',1)));
+reset role;
+select pg_temp.check('configuration creates no credential binding','SECURITY',not exists(select 1 from boss_private.processing_bindings where account_id=(select(result->>'id')::uuid from payment_results where label='draft')));
+select pg_temp.check('draft cannot become active through public command','SECURITY',(select status='draft'from public.processing_accounts where id=(select(result->>'id')::uuid from payment_results where label='draft')));
+select pg_temp.check('one settlement dependency per payment','SETTLEMENT',(select count(*)=2 from public.settlement_sources));
+-- A mixed checkout is reversed as two explicit original-tender legs.
+update public.organization_modules set configuration=configuration||'{"refunds":true}'::jsonb where module_id=(select id from public.modules where key='payments');
+do $$declare ep uuid;bp uuid;ea uuid;ba uuid;r jsonb;begin
+ select payment_id into ep from public.external_payment_tenders where checkout_id=(select(result->>'checkout_id')::uuid from payment_results where label='prepare')and original_payment_id is null;
+ select payment_id into bp from public.boss_bucks_tenders where checkout_id=(select(result->>'checkout_id')::uuid from payment_results where label='prepare');
+ select id into ea from public.payment_allocations where payment_id=ep and status='applied';
+ select id into ba from public.payment_allocations where payment_id=bp and status='applied';
+ perform pg_temp.actor('admin');
+ r:=public.boss_payments_mutate(jsonb_build_object('action','refund.prepare','request_id',pg_temp.f('mixed-external-return'),'input',jsonb_build_object('payment_id',ep,'amount_minor',3500,'principal_minor',3500,'allocations',jsonb_build_array(jsonb_build_object('allocation_id',ea,'amount_minor',3500)),'reason','Synthetic explicit external leg')));
+ perform boss_private.rails_refund_dispatch((r->>'refund_id')::uuid);
+ perform boss_private.rails_refund_receive((r->>'refund_id')::uuid,'MIXED-REFUND','refunded','LOCAL-MIXED-REFUND',3500,'USD',clock_timestamp(),repeat('a',64));
+ perform pg_temp.check('external partial refund preserves the separate Bucks leg','SPLIT REFUND',boss_private.bucks_available(pg_temp.w())=2000 and boss_private.registration_charge_balance(pg_temp.f('charge-camp'))->>'balance_due_minor'='3500');
+ perform public.boss_bucks_mutate(jsonb_build_object('action','payment.reverse','request_id',pg_temp.f('mixed-bucks-return'),'input',jsonb_build_object('payment_id',bp,'reason','Synthetic explicit Bucks leg','allocations',jsonb_build_array(jsonb_build_object('allocation_id',ba,'amount_minor',1500)))));
+ perform pg_temp.check('explicit Bucks partial return restores only original wallet value','SPLIT REFUND',boss_private.bucks_available(pg_temp.w())=3500 and boss_private.registration_charge_balance(pg_temp.f('charge-camp'))->>'balance_due_minor'='5000');
+ perform pg_temp.check('mixed returns preserve both original payments and original allocation lineage','SPLIT REFUND',(select count(*)=2 from public.payments where status='recorded')and(select count(*)=2 from public.payments where status='reversed')and not exists(select 1 from public.payment_allocations x join public.payment_allocations original on original.id=x.reversal_of_id where x.payment_id in(select id from public.payments where status='reversed')and x.charge_id<>original.charge_id));
+end$$;
+set constraints all immediate;
+select count(*)passed_assertions,'Phase 7D signed commands and canonical split' suite from phase5a_assertions;rollback;

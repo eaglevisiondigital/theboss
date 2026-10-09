@@ -1,0 +1,35 @@
+begin;
+\ir phase5e/fixture.sql
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.vv_create('coverage');
+select pg_temp.vv_profile('coverage','primary','custom','["kills","assists","digs","player_attribution"]','["kills","assists","digs"]');
+select pg_temp.denied('disabled reception cannot be forged',format('select pg_temp.vv_add(''coverage'',''reception'',''primary'',%L::jsonb)',jsonb_build_object('roster_id',pg_temp.ff_roster('coverage','primary',1))));
+select pg_temp.vv_add('coverage','rally','primary','{"outcome":"team_point"}');
+select pg_temp.check('required point still available','REQUIRED',pg_temp.vv_stats('coverage','primary')->>'points'='1');
+select pg_temp.vv_profile('coverage','primary','custom','["kills","assists","digs","player_attribution","receptions"]','["kills","digs"]');
+select pg_temp.vv_add('coverage','reception','primary',jsonb_build_object('roster_id',pg_temp.ff_roster('coverage','primary',1)));
+reset role;
+select pg_temp.check('midgame toggles remain partial','COVERAGE',boss_private.tracking_coverage(pg_temp.ff_game('coverage'),'primary',999)->>'receptions'='partially_tracked');
+select pg_temp.check('opponent expectation unchanged','COVERAGE',boss_private.tracking_coverage(pg_temp.ff_game('coverage'),'opponent',999)->>'receptions'='tracked');
+select pg_temp.check('snapshots append, never overwrite','SNAPSHOT',(select count(*)=3 from public.game_tracking_snapshots where game_id=pg_temp.ff_game('coverage')and side='primary'));
+select pg_temp.check('untracked is null not zero','COVERAGE',boss_private.tracking_stat_projection('{"digs":0}','{"digs":"not_tracked"}')->'digs'->'recorded_value'='null');
+set local role authenticated;select pg_temp.actor('scorer');
+select pg_temp.denied('scorekeeper cannot configure game profile','select pg_temp.vv_profile(''coverage'',''primary'',''full'')');
+select pg_temp.actor('other-admin');
+select pg_temp.denied('other tenant manager denied game override','select pg_temp.vv_profile(''coverage'',''primary'',''full'')');
+select pg_temp.actor('coach');
+select public.boss_games_mutate(pg_temp.f('coach-tracking-team'),pg_temp.cmd('tracking.profile.set',jsonb_build_object('sport_key','volleyball','scope_type','team','organization_id',pg_temp.f('org'),'team_id',pg_temp.f('falcons'),'expected_profile_version',0,'preset','essential','reason','Synthetic exact-team leadership selection')));
+select pg_temp.denied('coach cannot edit sibling team profile',format('select public.boss_games_mutate(gen_random_uuid(),%L::jsonb)',pg_temp.cmd('tracking.profile.set',jsonb_build_object('sport_key','volleyball','scope_type','team','organization_id',pg_temp.f('org'),'team_id',pg_temp.f('wildcats'),'expected_profile_version',0,'preset','full','reason','Synthetic sibling denial'))));
+select pg_temp.denied('coach cannot edit organization defaults',format('select public.boss_games_mutate(gen_random_uuid(),%L::jsonb)',pg_temp.cmd('tracking.profile.set',jsonb_build_object('sport_key','volleyball','scope_type','organization','organization_id',pg_temp.f('org'),'expected_profile_version',0,'preset','full','reason','Synthetic organization denial'))));
+reset role;
+update public.role_assignments set ends_at=clock_timestamp()where id=pg_temp.f('role-coach');
+set local role authenticated;
+select pg_temp.denied('expired coach receipt denied',format('select public.boss_games_mutate(%L::uuid,%L::jsonb)',pg_temp.f('coach-tracking-team'),pg_temp.cmd('tracking.profile.set',jsonb_build_object('sport_key','volleyball','scope_type','team','organization_id',pg_temp.f('org'),'team_id',pg_temp.f('falcons'),'expected_profile_version',0,'preset','essential','reason','Synthetic exact-team leadership selection'))));
+reset role;
+do $$declare t text;begin foreach t in array array['game_stat_catalog_versions','game_stat_catalog_items','game_tracking_profiles','game_tracking_profile_revisions','game_tracking_snapshots','game_stat_coverage_intervals','game_finalization_tracking_seals','game_volleyball_states','game_volleyball_events','game_volleyball_finalizations','game_volleyball_final_stats']loop
+ perform pg_temp.check(t||' RLS','SECURITY',(select relrowsecurity from pg_class where oid=('public.'||t)::regclass));
+ perform pg_temp.check(t||' denies authenticated select/write','SECURITY',not has_table_privilege('authenticated','public.'||t,'SELECT')and not has_table_privilege('authenticated','public.'||t,'INSERT')and not has_table_privilege('authenticated','public.'||t,'UPDATE')and not has_table_privilege('authenticated','public.'||t,'DELETE'));
+end loop;end$$;
+select pg_temp.check('unknown non-strict server remains partial','COVERAGE',boss_private.volleyball_player_coverage(pg_temp.ff_game('coverage'),'primary',999)->>'service_attempts'='partially_tracked');
+select pg_temp.check('team service attempts fully observed','COVERAGE',boss_private.volleyball_team_coverage(pg_temp.ff_game('coverage'),'primary',999)->>'service_attempts'='tracked');
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;
