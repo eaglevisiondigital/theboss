@@ -1,3 +1,5 @@
+> **2026-10-09 refinement addendum:** The revised multi-tile cart and amount-navigation preview is deployed as `6ac945a91e087b6fb8bf0737` (READY). See [REFINEMENT_REPORT.md](REFINEMENT_REPORT.md) for current implementation, 27 passing tests, actual hosted evidence, inspected local Money Board reference and remaining visual approval differences. The initial report below is preserved as historical evidence; its original single-selection layout and unavailable-reference statements do not describe this new revision.
+
 # Digital Money Board visual preview — 2026-10-09
 
 Design review only. This is a separate static application on `codex/digital-money-board-preview`, based on the completed Phase 8B1 documentation SHA `4b20ba6fec9b0491c3bbcb57d1d56ca3787495b4`. No preview implementation is included in the production branch or PR #3.
