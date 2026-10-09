@@ -1,5 +1,9 @@
 # Phase 8B1 Partner diagnostic readiness
 
+## October 9, 2026: finite attribution v2
+
+The separate client-exception review authorizes only listener attribution and finite registered context. Future Partner records use `boss.partner.diagnostic.v2`: `window_error` or `unhandled_rejection` identifies the actual global listener; `trace_state` is `uninitialized`, `read`, `mutation_response` or `boundary` before the event, null for server/unsupported context. These fields do not identify code origin, recovery or another request. Existing UUID fallback and all unexpected-error stop requirements remain intact. Earlier v1 records/exports and Merchant/Sales schemas are unchanged. Production never automatically labels a generic event recoverable. See [investigation, tests and exact gate recommendation](PHASE_8B1_CLIENT_EXCEPTION_REVIEW.md).
+
 The Main Boss Chat October 9, 2026 assignment authorizes this instrumentation and one limited live-evidence replacement. Phase 8B1 is INCOMPLETE until all remaining gates pass; formal closure remains with Main Boss Chat. Historical provider-log retrieval remains unsatisfied/UNKNOWN. Reopening an existing live export never counts as historical retrieval.
 
 ## Finite independent channel

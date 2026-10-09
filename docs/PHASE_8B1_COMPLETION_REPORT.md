@@ -1,5 +1,13 @@
 # Phase 8B1 completion report
 
+## October 9, 2026 UTC: separately authorized client attribution review
+
+**Phase 8B1 INCOMPLETE; original hosted window UNUSED.** Review of the unchanged five-record export and pinned Next/React source establishes a diagnostic gap: error and rejection listeners were indistinguishable, and an event before effect-time read registration could receive a fresh opaque UUID. The historical cause remains **UNKNOWN**. Actual production-mode local experiments reproduce the broad pattern from global Error, unhandled rejection and controlled hydration recovery; genuine client/server failures activate the native boundary. Similar Merchant timing is not proof of a common cause.
+
+The narrowly authorized Partner-only v2 metadata distinguishes the actual listener and finite registered trace state without changing UUID fallback, business/idempotency semantics, Merchant/Sales behavior or error handling. Seven new assertions fail before the change; all nine pass afterward. Focused diagnostics 30/30, full application 663/663, typecheck, zero-warning lint and production build PASS. Canonical read-only pre-release checks confirm 119/six unchanged hashes/264 baselines/original administrator/zero Partner authority/resources/work/providers OFF. Release CI, READY and any limited diagnostic read are reported only after actual observation. No acceptance preflight, fixture, temporary grant, migration or Phase 8B2 is authorized. Keep the stop rule; do not declare generic pre-render errors recoverable.
+
+See [client exception review](PHASE_8B1_CLIENT_EXCEPTION_REVIEW.md). All previous incidents and evidence below remain preserved.
+
 ## October 9, 2026 UTC: Partner live preflight stopped before hosted activation
 
 **PHASE 8B1 INCOMPLETE. The original single controlled hosted window remains UNUSED.** Partner diagnostic source `afef25e41c616780f81c36db71b53a6a05705927` is published READY on Boss at `2026-10-09T13:03:05.727Z`, deployment `6ac8e5e7801e9100080b4e51`. Main Boss Chat's limited live-monitoring alternative is authorized, but its end-to-end preflight did not pass.
