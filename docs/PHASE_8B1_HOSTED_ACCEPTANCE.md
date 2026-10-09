@@ -1,5 +1,62 @@
 # Phase 8B1 controlled hosted acceptance
 
+## October 9, 2026 UTC: original controlled hosted window executed and cleaned
+
+**Phase 8B1 INCOMPLETE pending Main Boss Chat formal closure/evidence-limit determination.** The one previously unused window is now **USED**; no second window is authorized. All safely executable native scenarios passed without an observed product/security defect. Exact signed replay after confirmed success and signed self-approval denial were not executable through the native controls; they remain SQL/RUNTIME VERIFIED and HOSTED UNVERIFIED DUE TO APPROVED LIMITATION. Independent review, licensed catalog ingestion and approval-dependent suspension likewise retain honest evidence limits. No skipped case is promoted to hosted PASS.
+
+Acceptance application source `bf8342482c35a2fd1c292bd5a5c07ea6a652e2b1`; exact READY deployment `6ac90c444c742b0008fa7c3b`, published `2026-10-09T15:46:42.952Z`. Starting push CI 37954189231 and PR CI 37954195344 passed application and disposable database/security/recovery jobs. This assignment changes documentation only; final documentation-head CI is independently checked after push.
+
+Fixed database UTC activation: **2026-10-09T16:46:29.066149Z**. Stop-new: **17:11:29.066149Z**; cleanup target: **17:21:29.066149Z**; hard expiry: **17:31:29.066149Z**. No extension/reset. Administrator-first cleanup verification: **16:51:55.578628Z**; unsigned draft explicitly terminated **16:52:11.808292Z**; exact synthetic provider archived **16:52:19.258456Z**. Final administrator/security/resource/lineage checks completed **16:52:42.441713Z–16:54:24.577925Z**, before both deadlines. All **264/264** original business count/hash baselines match; canonical **119** migrations/six approved SQL hashes and RLS/raw ACL/helper restrictions are unchanged.
+
+One synthetic prospect, one mock configuration and one unsigned draft were created through native signed controls. Configuration remains `operational=false`, `credentials_ready=false`, with no credential reference. Provider evaluation, legal termination and provider archive confirmed through six total receipts and six matching audit events. Inactive/immutable history is retained separately; no history was deleted. Original administrator was never paused, and no temporary role/module/relationship authority was activated. Zero active controlled providers, territories, snapshots, available sources, pending work, operational adapters, credentials or financial transactions remain. Nonoperational configuration history grants no independent authority after provider archive.
+
+Exact-provider reads, mutation confirmation/router refresh, full reload, safe navigation and a native Merchant workspace read passed. Empty national/travel/gift-card discovery and measured **1280/768/390/320px** populated administration/empty discovery passed with no root horizontal overflow. Focused keyboard progression, labels and status-region checks passed; full screen-reader certification remains unverified. The canonical public directory returned its empty projection under a read-only anonymous database role: SQL/RUNTIME VERIFIED, not anonymous hosted-browser evidence.
+
+Existing Netlify live server diagnostics and browser diagnostics were established before activation and remained active through final verification. Matched finite mutation/response/refresh/read/render lineage covered all six confirmed operations; **37 browser and 54 server records** were retained in session, with zero unexpected error/rejection/hydration/boundary/HTTP/RPC failure. Eight owner-private sanitized exports were promptly retained/reopened (directory 0700, files 0600), including operation, cleanup and baseline evidence. No unrestricted log/request body/header/contract content, credential/session material or redemption proof was exported.
+
+The prior two-read diagnostic preflight remains HOSTED VERIFIED, separately from business acceptance. Historical Netlify retrieval remains **UNSATISFIED** and historical hosted root cause **UNKNOWN**. The proven local shared-timestamp repair is not retrospective attribution; Main Boss Chat's live-observation substitute applies only to this window. Prior failures, security/incident disclosures and Phase 8A release-readiness limits below remain unchanged. No live external integration, real customer/youth data, agreement approval, money movement or Phase 8B2.
+
+See [dated acceptance matrix](PHASE_8B1_HOSTED_ACCEPTANCE.md) and [34-point completion record](PHASE_8B1_COMPLETION_REPORT.md). Recommend Main Boss Chat review closure with the explicitly retained evidence limits; do not reopen acceptance automatically.
+
+### Final window evidence matrix
+
+| Scenario | Classification and actual evidence |
+|---|---|
+| Single synthetic prospect | HOSTED VERIFIED; one canonical provider/create receipt/audit, native HTTP 200 confirmation and correlated refresh. |
+| Mock configuration | HOSTED VERIFIED; one revision, catalog_read only, no credential reference, operational/credentials_ready false. |
+| Unsigned legal draft | HOSTED VERIFIED; one bounded synthetic reference, no legal agreement or licensed availability; existing archived controlled product referenced without modifying it. |
+| Independent self-approval safeguard | HOSTED VERIFIED for the disabled approval option only. Signed self-approval rejection: SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION (native control disabled). |
+| Independent positive reviewer | SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: no second legitimate verified reviewer. |
+| Exact-provider detail/refresh/reload/navigation | HOSTED VERIFIED; canonical consistency and read/render diagnostics matched, no unexpected error. |
+| Same business-request identity replay | SQL/RUNTIME VERIFIED and LOCAL APPLICATION VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION. Native retry is enabled only for an unknown outcome; all six requests confirmed successfully. No outcome loss was deliberately created and no browser state/session was extracted. Six receipts/effects are accounted for; this does not itself verify replay. |
+| Anonymous public Partner directory | SQL/RUNTIME VERIFIED on canonical read-only anon-role execution: benefits=[], operational=false, reason=not_activated. HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: no native anonymous Partner directory page. |
+| Signed empty discovery | HOSTED VERIFIED; national/travel/gift-card categories honestly empty, no protected catalog terms/economics exposed. Membership separation remains SQL/RUNTIME VERIFIED; administrator access is not a fabricated membership. |
+| Native Merchant isolation | HOSTED VERIFIED safe workspace read; original Merchant table hashes/counts unchanged. Earlier Phase 8A offer acceptance retained, not repeated. |
+| Synthetic catalog provenance/quarantine/replay/full-delta | SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: no native ingestion form and no legitimate independent licensed approval. No import/snapshot/source created. |
+| Lifecycle | HOSTED VERIFIED prospect → evaluation → archived and unsigned legal draft → terminated. Approval-dependent configured/suspended states: SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION. |
+| Responsive | HOSTED VERIFIED measured 1280,768,390,320 ×900 for populated administration and empty discovery; no root horizontal overflow. |
+| Accessibility | HOSTED VERIFIED focused label/keyboard progression and native status region. Additional keyboard/screen-reader acceptance HOSTED UNVERIFIED DUE TO APPROVED LIMITATION; no full certification claimed. |
+| Cleanup/security/baselines | HOSTED VERIFIED native explicit legal termination/provider archive; SQL/RUNTIME VERIFIED final 119/six hashes/RLS/ACL/admin/zero active resources-work and 264 original baseline equality. |
+
+No case is FAILED from an observed hosted product/security defect. The native confirmed-success replay and signed-denial execution limits require Main Boss Chat's closure judgment; Phase 8B1 is not formally declared COMPLETE by this report.
+
+### Exact native operation lineage (October 9 UTC)
+
+| Operation | Canonical UTC | Business request ID | Server response correlation |
+|---|---|---|---|
+| provider.create | 16:46:41.721139 | 056739d6-15bc-40af-b8ce-05d5ae03cace | 86b3d2eb-47fd-4a44-b13a-17fb8cfda57d |
+| configuration.create | 16:47:38.503482 | Privately retained | ee015bfb-c5f5-4a2c-9b80-db6c3655bdce |
+| contract.create | 16:48:32.332076 | Privately retained | 28a08e6b-d982-4cde-bb7c-ae09157b2530 |
+| provider.state evaluation | 16:50:23.049202 | 976ab618-9096-4ad0-b643-0c5c99de5a23 | 6f1a9060-404f-4094-bbb5-38038db2f0d2 |
+| contract.review terminated | 16:52:11.808292 | db085233-862f-47f4-9ac1-62a58ff888f9 | 35d106b8-b936-4ecb-a390-83b64c4f1683 |
+| provider.state archived | 16:52:19.258456 | d83a3d3b-8646-4303-bb23-c495a97502f8 | 158640f5-c9f4-4aeb-9c9c-fcd304ce1ba1 |
+
+Exact provider identity/provenance and finite operation/cleanup exports remain owner-private outside Git. No contract contents or personal records are included here.
+
+### Observation/process limits
+
+No unexpected hosted window_error, rejection, hydration exception, boundary, contract rejection or HTTP/RPC failure occurred. One pre-window read-only metadata query used a nonexistent product key column, then was corrected against the source schema. After native cleanup, the local baseline-comparison script initially treated its one aggregate result as table rows; inspection corrected the parser and verified all 264 map entries equal. This was a reporting-script error, not a canonical baseline discrepancy or application defect. No new scenario followed cleanup and no recovery mutation was needed. Prior incidents remain below verbatim.
+
 ## October 9, 2026 UTC: shared timestamp hydration defect isolated and corrected locally
 
 **Phase 8B1 INCOMPLETE; original controlled hosted window UNUSED.** Production-mode local differential tests with pinned Next 16.3.7/React 19.3.0 prove that the shared populated notification drawer rendered timestamps in implicit server/browser timezones. UTC/PDT text mismatch causes recoverable React 418 and same-error global dispatch before Partner trace registration. Static/empty controls are clean; actual shell, Partner admin/discovery, Merchant and listener-off/on reproduce before repair. Clean Chrome Guest also reproduces. The minimal shared timestamp correction renders UTC identically for SSR/first hydration, then preserves browser-local time; all populated browser comparisons are clean afterward.
