@@ -8,11 +8,11 @@ const groups = [
   { title: "Explore The Boss", links: [["Our Vision", "/about"], ["How It Works", "/how-it-works"], ["Request Information", "/request-information"], ["Contact Us", "/contact"]] },
 ];
 
-export default function ApprovedFooter({ showInformationCTA = true }: { showInformationCTA?: boolean }) {
-  return <footer className={s.footer}>
+export default function ApprovedFooter({ showInformationCTA = true, polished = false }: { showInformationCTA?: boolean; polished?: boolean }) {
+  return <footer className={`${s.footer} ${polished ? s.polished : ""}`}>
     {showInformationCTA && <div className={s.information}>
       <div className={s.informationInner}>
-        <div><p className={s.eyebrow}>YOUR NEXT STEP STARTS HERE</p><h2>Let’s find your <span>next step.</span></h2><p>Have questions? Choose what you’d like to learn about, and our team will help you explore the possibilities.</p></div>
+        <div><p className={s.eyebrow}>YOUR NEXT STEP STARTS HERE</p><h2>{polished ? "Let’s Find Your " : "Let’s find your "}<span>{polished ? "Next Step." : "next step."}</span></h2><p>Have questions? Choose what you’d like to learn about, and our team will help you explore the possibilities.</p></div>
         <Link className={s.informationButton} href="/request-information">Request Information <span aria-hidden="true">↗</span></Link>
       </div>
     </div>}
@@ -25,7 +25,7 @@ export default function ApprovedFooter({ showInformationCTA = true }: { showInfo
           <Link className={s.startLink} href="/fundraising/get-started">Start a Fundraiser <span aria-hidden="true">→</span></Link>
         </div>
         <nav className={s.navigation} aria-label="Footer navigation">
-          {groups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.links.map(([label, href]) => <li key={href}><Link href={href}>{label}</Link></li>)}</ul></div>)}
+          {groups.map(group => <div key={group.title}><h2>{polished ? ({"Fundraise & save":"Fundraise & Save","Stay connected":"Stay Connected"}[group.title] || group.title) : group.title}</h2><ul>{group.links.map(([label, href]) => <li key={href}><Link href={href}>{label}</Link></li>)}</ul></div>)}
         </nav>
       </div>
       <div className={s.bottom}><span>© 2026 The Boss. All rights reserved.</span><div><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link></div></div>
