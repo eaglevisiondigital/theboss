@@ -456,3 +456,8 @@ exact location scope. Ownership requires independent reviewed claim approval.
 Sales relationships grant no merchant employee or member rights. Generic
 foundation role assignment cannot mint merchant access. No descendant inheritance.
 See MERCHANT_PLATFORM_ARCHITECTURE.md and MERCHANT_SALES_NETWORK_ARCHITECTURE.md.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+Six exact keys: partners.view, partners.configure, partners.contract_approve, partners.catalog_review, partners.integration_activate, partners.revenue_report. Mapped only to existing super_administrator/platform_administrator (12 mappings); no new role or assignment. Role mapping remains potential capability. Current verified Auth/person, current platform role/permission, commerce state, exact provider/contract/source and current resource policy must still authorize each operation, including replay. Independent legal approval forbids self-approval. The activation permission cannot bypass the Phase 8B1 operational lock. Ordinary merchant permissions create no Partner authority.

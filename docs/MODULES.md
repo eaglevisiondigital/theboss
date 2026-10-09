@@ -355,3 +355,8 @@ are free. Boss Bucks Discounts supplies membership/geographic eligibility;
 Wallet value cannot be spent at merchants. No merchant billing, promotion fees,
 retail payment processing, external partner feed/SSO, travel, SMS or push activation.
 No Phase 8B is started.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+Phase 8B1 reuses the commerce catalog and explicit per-provider configuration revisions/capabilities. It seeds no new module/configuration/provider/relationship. Legal licensing, membership/territory, catalog freshness and operational readiness are distinct controls. SQL CHECKs enforce operational=false and credentials_ready=false; the explicit activation command rejects. Native Merchant Platform and Phase 7E membership remain independent. No real integration, SSO, travel, gift-card, payout, provider billing or Phase 8B2 is enabled.

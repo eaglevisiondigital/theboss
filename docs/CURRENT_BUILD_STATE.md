@@ -1,5 +1,36 @@
 # Current build state
 
+## Phase 8B1 controlled release: INCOMPLETE pending deployment and hosted acceptance
+
+October 9, 2026 UTC: the six authorized, frozen migrations are applied canonically (113 to 119). Security/schema gates and all 264 original business baselines pass. Canonical types and application validation pass; no operational adapter or provider credential is enabled. Release CI/deployment and the single controlled hosted window remain pending. See [release evidence](PHASE_8B1_COMPLETION_REPORT.md). Phase 8A closure and rollout limitations remain intact; Phase 8B2 has not started.
+
+## Historical checkpoint record
+
+## Phase 8B1 Partner Network Architecture + Integration Foundation
+
+**LOCAL IMPLEMENTATION COMPLETE / PRODUCTION RELEASE PENDING EXPLICIT APPROVAL**
+
+October 9, 2026 UTC: implemented and validated locally from unchanged HEAD
+`4fc7ab53d4d23a75c2eaedebfd3485948ebbe009` on `build/boss-platform-v1`.
+Six frozen additive migrations propose 113→119; canonical remains read-only
+ACTIVE_HEALTHY / 113. All live adapters, consumer partner listings, credentials,
+SSO, gift-card/travel operations and commission recognition/settlement stay OFF.
+No production write/deployment, temporary production authority, commit/push or PR
+update occurred. Main Boss Chat must review the exact [manifest](PHASE_8B1_MIGRATION_MANIFEST.md)
+and [release/recovery plan](PHASE_8B1_RELEASE_PLAN.md) before those actions.
+
+Validation: 23,265 historical/generic SQL/bootstrap/sealed checks; 522 new
+Partner checks; 308 historical + 10 new coordinated races; 2,065 independent
+upgrade-preservation checks; typecheck/lint/645 app tests/build PASS. Eight local
+rendered views at measured 1280/768/390/320 pass without horizontal overflow.
+These do not establish hosted 8B1 acceptance or close the Phase 8A rollout items.
+See [checkpoint](PHASE_8B1_CHECKPOINT.md), [validation](PHASE_8B1_VALIDATION.md)
+and [completion report](PHASE_8B1_COMPLETION_REPORT.md).
+PR #3 is OPEN/DRAFT/UNMERGED at unchanged Phase 8A source; no Phase 8B2 started.
+
+The original Phase 8A closure, limitations and historical disclosures follow
+unchanged.
+
 ## Phase 8A Merchant Platform Core + Native Offers + Redemption + Sales Network: COMPLETE
 
 ## Formal Main Boss Chat closure — October 8, 2026

@@ -558,3 +558,8 @@ family/sports records and private proofs. Public directory has no offer terms or
 redemption mechanics. Same-origin bounded JSON, immutable audit and current
 permission rechecks on replay apply. Prior incident disclosures remain unchanged.
 Canonical migration and hosted security evidence remain pending.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+New relations use RLS with no raw API policies/grants; table ACLs deny PUBLIC/anon/authenticated/service_role/payment worker. Private helpers pin empty search paths; only two fresh caller-bound helpers are authenticated-callable. Public signed RPCs are invokers; the anonymous directory is constant empty. Same-origin bounded JSON mutations validate current identity and committed receipt, retain unknown outcomes, and authorize before replay. Immutable revisions/anchors/corrections preserve evidence. Future secrets use references only; no operational secret loader, redirect, SSO, child/family/medical/sports data export or external execution exists. Local fixtures are synthetic/rollback-only. Prior incident disclosures remain unchanged.

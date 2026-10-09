@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+: "${PG_BINDIR:?}" "${PGHOST:?}" "${PGPORT:?}" "${PGDATABASE:?}" "${PGUSER:?}"
+[[ "$PGHOST" == /tmp/boss-db-test.*/socket && "$PGPORT" == 5432 && "$PGDATABASE" == postgres && "$PGUSER" == postgres ]]||exit 1
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.."&&pwd)
+"$PG_BINDIR/psql" --no-psqlrc --no-password --host "$PGHOST" --port "$PGPORT" --username "$PGUSER" --dbname "$PGDATABASE" --set ON_ERROR_STOP=1 --quiet --no-align --tuples-only --command "select jsonb_build_object('tables',(select jsonb_agg(x order by name)from(select c.relname name,(select jsonb_agg(jsonb_build_object('name',a.attname,'type',t.typname,'nullable',not a.attnotnull)order by a.attnum)from pg_attribute a join pg_type t on t.oid=a.atttypid where a.attrelid=c.oid and a.attnum>0 and not a.attisdropped)columns from pg_class c where c.relnamespace='public'::regnamespace and c.relkind='r'and c.relname like'partner_%')x),'functions',(select jsonb_agg(jsonb_build_object('name',proname,'args',coalesce(proargnames,'{}'))order by proname)from pg_proc where pronamespace='public'::regnamespace and proname like'boss_partners_%'));" | python3 "$root/supabase/tests/phase8b1/generate-types.py"

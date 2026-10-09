@@ -483,3 +483,8 @@ private proof intents, immutable redemptions/corrections and sales attribution
 are canonical. Native merchant notification sources carry explicit merchant
 lineage; existing organization sources still require organization context.
 See MERCHANT_PLATFORM_ARCHITECTURE.md and PHASE_8A_MIGRATION_MANIFEST.md.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+Six local additive migrations introduce stable partner_providers; immutable configuration, legal, benefit, commercial-policy and transaction-source revisions; append-only provider/legal/catalog/transaction events; exact territories; ordered bounded import/quarantine/full-snapshot evidence; and private caller-bound receipts. Explicit FKs reuse people, commerce modules, discount_products, merchant_markets and optional native Sales lead attribution. No native merchant/member/Wallet/payment/sports data model is replaced. 16 public tables and one private table; no canonical application yet. See PARTNER_NETWORK_ARCHITECTURE.md and PHASE_8B1_MIGRATION_MANIFEST.md.

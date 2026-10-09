@@ -1260,3 +1260,12 @@ These items require separately authorized follow-up where applicable. No new
 acceptance window, temporary authority, migration, application feature, financial
 operation or Phase 8B is authorized or started by this closure. PR #3 remains
 OPEN / DRAFT / UNMERGED. All prior security and incident disclosures are retained.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+Main Boss Chat authorizes a provider-neutral local foundation and disposable full validation only. The release gate explicitly excludes canonical migrations, production authority, deployment, commit/push and PR updates until the exact tested checkpoint is reviewed. Six additive sources propose 113→119; original migration bytes remain unchanged. No provider has been selected/contracted. Contracts reference legal evidence and require independent review; all operational execution is structurally off. Commercial rates, fixed-fee partial-refund treatment, lawful sharing/consent, real travel comparison/booking/fulfillment and recognition/settlement remain unresolved later decisions. The local malformed timestamp partial-feed defect was demonstrated and narrowly corrected; no production state changed. Phase 8A COMPLETE and its six pre-rollout items/security history are retained.
+
+## Phase 8B1 controlled production authorization: October 9, 2026 UTC
+
+Main Boss Chat approved the six exact frozen sources and controlled release sequence. Canonical history is 119 with matching source hashes, deny-by-default security and no provider/role/relationship seed. Canonical types replace staged RPC assumptions. The single hosted window remains gated on READY Git CD and CI; +25/+35/+45 minute deadlines cannot extend. External integrations, operational credentials, consumer Partner benefits and financial execution remain OFF. Phase 8A closure/evidence limitations remain intact. Phase 8B2 is not started. Final hosted evidence and cleanup will be appended separately.

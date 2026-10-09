@@ -326,3 +326,8 @@ location and approved-market boundaries authorize operations. Boss identity,
 organizations, families and sports remain separate. Multi-location targeting is
 explicit and does not imply sibling/franchise authority. Membership country,
 region and market derive from current Phase 7E discount sources.
+
+
+## Phase 8B1 local Partner Network foundation — October 9, 2026 UTC
+
+Partner providers are platform-wide canonical business resources, distinct from native merchants and organization-owned records. Exact provider-qualified composite FKs prevent sibling-provider contract/source/policy contamination. Markets use current country/region anchors; eligibility also requires exact existing product/subject/source geography. No organization/team descendant inheritance or household-derived personal authority is introduced. Registry permission is never ownership by a merchant role name. All consumer partner availability stays off.

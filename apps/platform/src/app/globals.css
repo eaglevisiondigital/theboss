@@ -1039,3 +1039,23 @@ button:disabled { cursor: wait; opacity: .65; }
 .merchant-panel img { max-width: 100%; height: auto; }
 .merchant-terms p { margin: .35rem 0; }
 .merchant-panel :focus-visible, .merchant-form :focus-visible { outline: 3px solid #095dcc; outline-offset: 3px; }
+
+/* Provider-neutral administration; native merchant styles remain independent. */
+.partner-workspace { min-width: 0; }
+.partner-workspace .admin-panel { display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.75rem); background: var(--surface); border: 1px solid var(--line); }
+.partner-workspace form, .partner-workspace label { display: grid; gap: .5rem; min-width: 0; }
+.partner-workspace fieldset { display: grid; gap: .75rem; min-width: 0; border: 1px solid var(--line); }
+.partner-workspace fieldset label { display: flex; gap: .5rem; align-items: center; }
+.partner-workspace input:not([type=checkbox]), .partner-workspace select { width: 100%; max-width: 100%; min-width: 0; padding: .75rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.partner-workspace dd, .partner-workspace p, .partner-workspace a { overflow-wrap: anywhere; }
+.partner-workspace select:focus-visible { outline: 3px solid var(--orange-dark); outline-offset: 4px; }
+
+.partner-workspace { display: grid; gap: 1rem; }
+.partner-workspace h2, .partner-discovery h1, .partner-discovery h2 { overflow-wrap: anywhere; }
+.partner-workspace .button, .partner-discovery .button { display: inline-flex; justify-content: center; padding: .85rem 1rem; max-width: 100%; white-space: normal; border: 1px solid var(--ink); background: var(--orange); color: var(--ink); font-weight: 700; }
+.partner-workspace .button-outline, .partner-discovery .button-outline { background: var(--ink); color: var(--surface); }
+.partner-workspace button:disabled { opacity: .65; cursor: default; }
+.partner-workspace input[type=checkbox] { justify-self: start; }
+.partner-discovery { display: grid; gap: 1.5rem; min-width: 0; }
+.partner-discovery .admin-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); gap: 1rem; }
+.partner-discovery .admin-panel { display: grid; gap: 1rem; padding: 1.25rem; border: 1px solid var(--line); background: var(--surface); }

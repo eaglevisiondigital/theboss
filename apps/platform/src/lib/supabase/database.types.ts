@@ -11658,6 +11658,962 @@ export type Database = {
           },
         ]
       }
+      partner_benefit_reviews: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          provider_id: string
+          request_id: string
+          revision_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          provider_id: string
+          request_id: string
+          revision_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          provider_id?: string
+          request_id?: string
+          revision_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_benefit_reviews_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_benefit_reviews_provider_id_revision_id_fkey"
+            columns: ["provider_id", "revision_id"]
+            isOneToOne: false
+            referencedRelation: "partner_benefit_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_benefit_revisions: {
+        Row: {
+          category: string
+          contract_id: string
+          country: string
+          created_at: string
+          ends_at: string
+          exclusions: string
+          fulfillment: string
+          id: string
+          market_id: string | null
+          member_terms: string
+          minimum_tier: string
+          product_id: string
+          provider_id: string
+          public_description: string
+          region: string
+          source_digest: string
+          source_id: string
+          source_revision: number
+          starts_at: string
+          title: string
+        }
+        Insert: {
+          category: string
+          contract_id: string
+          country: string
+          created_at?: string
+          ends_at: string
+          exclusions?: string
+          fulfillment: string
+          id?: string
+          market_id?: string | null
+          member_terms: string
+          minimum_tier: string
+          product_id: string
+          provider_id: string
+          public_description: string
+          region?: string
+          source_digest: string
+          source_id: string
+          source_revision: number
+          starts_at: string
+          title: string
+        }
+        Update: {
+          category?: string
+          contract_id?: string
+          country?: string
+          created_at?: string
+          ends_at?: string
+          exclusions?: string
+          fulfillment?: string
+          id?: string
+          market_id?: string | null
+          member_terms?: string
+          minimum_tier?: string
+          product_id?: string
+          provider_id?: string
+          public_description?: string
+          region?: string
+          source_digest?: string
+          source_id?: string
+          source_revision?: number
+          starts_at?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_benefit_revisions_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_benefit_revisions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_benefit_revisions_provider_id_contract_id_fkey"
+            columns: ["provider_id", "contract_id"]
+            isOneToOne: false
+            referencedRelation: "partner_contract_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+          {
+            foreignKeyName: "partner_benefit_revisions_provider_id_source_id_fkey"
+            columns: ["provider_id", "source_id"]
+            isOneToOne: false
+            referencedRelation: "partner_benefit_sources"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_benefit_sources: {
+        Row: {
+          current_digest: string | null
+          current_revision: number
+          external_id: string
+          id: string
+          last_verified_at: string | null
+          provider_id: string
+          status: string
+        }
+        Insert: {
+          current_digest?: string | null
+          current_revision?: number
+          external_id: string
+          id?: string
+          last_verified_at?: string | null
+          provider_id: string
+          status?: string
+        }
+        Update: {
+          current_digest?: string | null
+          current_revision?: number
+          external_id?: string
+          id?: string
+          last_verified_at?: string | null
+          provider_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_benefit_sources_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_catalog_snapshots: {
+        Row: {
+          created_at: string
+          created_by: string
+          expected_items: number
+          id: string
+          provider_id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          expected_items: number
+          id?: string
+          provider_id: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          expected_items?: number
+          id?: string
+          provider_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_catalog_snapshots_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_catalog_snapshots_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_commission_policies: {
+        Row: {
+          basis: string
+          contract_id: string
+          created_at: string
+          created_by: string
+          currency: string
+          ends_at: string
+          fixed_minor: number | null
+          id: string
+          provider_id: string
+          rate_ppm: number | null
+          recognition_condition: string
+          revision: number
+          starts_at: string
+        }
+        Insert: {
+          basis: string
+          contract_id: string
+          created_at?: string
+          created_by: string
+          currency: string
+          ends_at: string
+          fixed_minor?: number | null
+          id?: string
+          provider_id: string
+          rate_ppm?: number | null
+          recognition_condition: string
+          revision: number
+          starts_at: string
+        }
+        Update: {
+          basis?: string
+          contract_id?: string
+          created_at?: string
+          created_by?: string
+          currency?: string
+          ends_at?: string
+          fixed_minor?: number | null
+          id?: string
+          provider_id?: string
+          rate_ppm?: number | null
+          recognition_condition?: string
+          revision?: number
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_commission_policies_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_commission_policies_provider_id_contract_id_fkey"
+            columns: ["provider_id", "contract_id"]
+            isOneToOne: false
+            referencedRelation: "partner_contract_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_config_revisions: {
+        Row: {
+          capabilities: string[]
+          created_at: string
+          created_by: string
+          credential_reference: string | null
+          credentials_ready: boolean
+          ends_at: string | null
+          full_withdraw_missing: boolean
+          id: string
+          max_stale_seconds: number
+          method: string
+          module_id: string
+          operational: boolean
+          provider_id: string
+          revision: number
+          starts_at: string
+        }
+        Insert: {
+          capabilities?: string[]
+          created_at?: string
+          created_by: string
+          credential_reference?: string | null
+          credentials_ready?: boolean
+          ends_at?: string | null
+          full_withdraw_missing?: boolean
+          id?: string
+          max_stale_seconds: number
+          method: string
+          module_id: string
+          operational?: boolean
+          provider_id: string
+          revision: number
+          starts_at: string
+        }
+        Update: {
+          capabilities?: string[]
+          created_at?: string
+          created_by?: string
+          credential_reference?: string | null
+          credentials_ready?: boolean
+          ends_at?: string | null
+          full_withdraw_missing?: boolean
+          id?: string
+          max_stale_seconds?: number
+          method?: string
+          module_id?: string
+          operational?: boolean
+          provider_id?: string
+          revision?: number
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_config_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_config_revisions_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "modules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_config_revisions_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_contract_events: {
+        Row: {
+          actor_id: string
+          approval_reference: string
+          contract_id: string
+          created_at: string
+          id: string
+          provider_id: string
+          request_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          approval_reference: string
+          contract_id: string
+          created_at?: string
+          id?: string
+          provider_id: string
+          request_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          approval_reference?: string
+          contract_id?: string
+          created_at?: string
+          id?: string
+          provider_id?: string
+          request_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_contract_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_contract_events_provider_id_contract_id_fkey"
+            columns: ["provider_id", "contract_id"]
+            isOneToOne: false
+            referencedRelation: "partner_contract_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_contract_revisions: {
+        Row: {
+          attribution_rules: string
+          branding_rules: string
+          caching_rights: boolean
+          categories: string[]
+          countries: string[]
+          created_at: string
+          created_by: string
+          display_rights: boolean
+          document_reference: string
+          ends_at: string
+          id: string
+          methods: string[]
+          minimum_tier: string
+          product_id: string
+          provider_id: string
+          refund_policy_reference: string
+          retention_days: number
+          revision: number
+          rights_holder_reference: string
+          sharing_fields: string[]
+          starts_at: string
+        }
+        Insert: {
+          attribution_rules: string
+          branding_rules: string
+          caching_rights: boolean
+          categories: string[]
+          countries: string[]
+          created_at?: string
+          created_by: string
+          display_rights: boolean
+          document_reference: string
+          ends_at: string
+          id?: string
+          methods: string[]
+          minimum_tier: string
+          product_id: string
+          provider_id: string
+          refund_policy_reference: string
+          retention_days: number
+          revision: number
+          rights_holder_reference: string
+          sharing_fields?: string[]
+          starts_at: string
+        }
+        Update: {
+          attribution_rules?: string
+          branding_rules?: string
+          caching_rights?: boolean
+          categories?: string[]
+          countries?: string[]
+          created_at?: string
+          created_by?: string
+          display_rights?: boolean
+          document_reference?: string
+          ends_at?: string
+          id?: string
+          methods?: string[]
+          minimum_tier?: string
+          product_id?: string
+          provider_id?: string
+          refund_policy_reference?: string
+          retention_days?: number
+          revision?: number
+          rights_holder_reference?: string
+          sharing_fields?: string[]
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_contract_revisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_contract_revisions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "discount_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_contract_revisions_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_import_quarantine: {
+        Row: {
+          category: string
+          created_at: string
+          external_id: string | null
+          id: string
+          item_index: number
+          run_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          item_index: number
+          run_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          item_index?: number
+          run_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_import_quarantine_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "partner_import_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_import_runs: {
+        Row: {
+          accepted: number
+          actor_id: string
+          created_at: string
+          digest: string
+          feed_sequence: number
+          id: string
+          kind: string
+          provider_id: string
+          quarantined: number
+          request_id: string
+          snapshot_id: string | null
+          synthetic: boolean
+          withdrawn: number
+        }
+        Insert: {
+          accepted?: number
+          actor_id: string
+          created_at?: string
+          digest: string
+          feed_sequence: number
+          id?: string
+          kind: string
+          provider_id: string
+          quarantined?: number
+          request_id: string
+          snapshot_id?: string | null
+          synthetic: boolean
+          withdrawn?: number
+        }
+        Update: {
+          accepted?: number
+          actor_id?: string
+          created_at?: string
+          digest?: string
+          feed_sequence?: number
+          id?: string
+          kind?: string
+          provider_id?: string
+          quarantined?: number
+          request_id?: string
+          snapshot_id?: string | null
+          synthetic?: boolean
+          withdrawn?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_import_runs_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_import_runs_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_import_runs_snapshot_id_fkey"
+            columns: ["snapshot_id"]
+            isOneToOne: false
+            referencedRelation: "partner_catalog_snapshots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_provider_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          provider_id: string
+          reason: string
+          request_id: string
+          state: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          provider_id: string
+          reason: string
+          request_id: string
+          state: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          provider_id?: string
+          reason?: string
+          request_id?: string
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_provider_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_provider_events_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "partner_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_providers: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          key: string
+          legal_reference: string | null
+          name: string
+          state: string
+          support_reference: string | null
+          synthetic: boolean
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          key: string
+          legal_reference?: string | null
+          name: string
+          state?: string
+          support_reference?: string | null
+          synthetic?: boolean
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          key?: string
+          legal_reference?: string | null
+          name?: string
+          state?: string
+          support_reference?: string | null
+          synthetic?: boolean
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_providers_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_snapshot_items: {
+        Row: {
+          run_id: string
+          snapshot_id: string
+          source_id: string
+        }
+        Insert: {
+          run_id: string
+          snapshot_id: string
+          source_id: string
+        }
+        Update: {
+          run_id?: string
+          snapshot_id?: string
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_snapshot_items_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "partner_import_runs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_snapshot_items_snapshot_id_fkey"
+            columns: ["snapshot_id"]
+            isOneToOne: false
+            referencedRelation: "partner_catalog_snapshots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_snapshot_items_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "partner_benefit_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_territories: {
+        Row: {
+          contract_id: string
+          country: string
+          created_at: string
+          created_by: string
+          ends_at: string
+          id: string
+          market_id: string | null
+          provider_id: string
+          region: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          contract_id: string
+          country: string
+          created_at?: string
+          created_by: string
+          ends_at: string
+          id?: string
+          market_id?: string | null
+          provider_id: string
+          region?: string
+          starts_at: string
+          status?: string
+        }
+        Update: {
+          contract_id?: string
+          country?: string
+          created_at?: string
+          created_by?: string
+          ends_at?: string
+          id?: string
+          market_id?: string | null
+          provider_id?: string
+          region?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_territories_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_territories_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_territories_provider_id_contract_id_fkey"
+            columns: ["provider_id", "contract_id"]
+            isOneToOne: false
+            referencedRelation: "partner_contract_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_transaction_events: {
+        Row: {
+          actor_id: string
+          adjustment_minor: number
+          corrects_event_id: string | null
+          created_at: string
+          evidence_reference: string
+          external_event_id: string
+          id: string
+          kind: string
+          provider_id: string
+          request_id: string
+          transaction_id: string
+        }
+        Insert: {
+          actor_id: string
+          adjustment_minor?: number
+          corrects_event_id?: string | null
+          created_at?: string
+          evidence_reference: string
+          external_event_id: string
+          id?: string
+          kind: string
+          provider_id: string
+          request_id: string
+          transaction_id: string
+        }
+        Update: {
+          actor_id?: string
+          adjustment_minor?: number
+          corrects_event_id?: string | null
+          created_at?: string
+          evidence_reference?: string
+          external_event_id?: string
+          id?: string
+          kind?: string
+          provider_id?: string
+          request_id?: string
+          transaction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_transaction_events_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_events_corrects_event_id_fkey"
+            columns: ["corrects_event_id"]
+            isOneToOne: false
+            referencedRelation: "partner_transaction_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_events_provider_id_transaction_id_fkey"
+            columns: ["provider_id", "transaction_id"]
+            isOneToOne: false
+            referencedRelation: "partner_transaction_sources"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
+      partner_transaction_sources: {
+        Row: {
+          attributed_person_id: string | null
+          benefit_revision_id: string
+          created_at: string
+          created_by: string
+          currency: string
+          eligible_minor: number
+          evidence_reference: string
+          external_id: string
+          id: string
+          native_sales_lead_id: string | null
+          occurred_at: string
+          policy_id: string
+          provider_id: string
+          synthetic: boolean
+        }
+        Insert: {
+          attributed_person_id?: string | null
+          benefit_revision_id: string
+          created_at?: string
+          created_by: string
+          currency: string
+          eligible_minor: number
+          evidence_reference: string
+          external_id: string
+          id?: string
+          native_sales_lead_id?: string | null
+          occurred_at: string
+          policy_id: string
+          provider_id: string
+          synthetic: boolean
+        }
+        Update: {
+          attributed_person_id?: string | null
+          benefit_revision_id?: string
+          created_at?: string
+          created_by?: string
+          currency?: string
+          eligible_minor?: number
+          evidence_reference?: string
+          external_id?: string
+          id?: string
+          native_sales_lead_id?: string | null
+          occurred_at?: string
+          policy_id?: string
+          provider_id?: string
+          synthetic?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_transaction_sources_attributed_person_id_fkey"
+            columns: ["attributed_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_sources_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_sources_native_sales_lead_id_fkey"
+            columns: ["native_sales_lead_id"]
+            isOneToOne: false
+            referencedRelation: "merchant_sales_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_sources_provider_id_benefit_revision_i_fkey"
+            columns: ["provider_id", "benefit_revision_id"]
+            isOneToOne: false
+            referencedRelation: "partner_benefit_revisions"
+            referencedColumns: ["provider_id", "id"]
+          },
+          {
+            foreignKeyName: "partner_transaction_sources_provider_id_policy_id_fkey"
+            columns: ["provider_id", "policy_id"]
+            isOneToOne: false
+            referencedRelation: "partner_commission_policies"
+            referencedColumns: ["provider_id", "id"]
+          },
+        ]
+      }
       payment_allocations: {
         Row: {
           amount_minor: number
@@ -17128,6 +18084,9 @@ export type Database = {
         Returns: Json
       }
       boss_notifications_read: { Args: { p_query?: Json }; Returns: Json }
+      boss_partners_directory: { Args: never; Returns: Json }
+      boss_partners_mutate: { Args: { command: Json }; Returns: Json }
+      boss_partners_read: { Args: { query?: Json }; Returns: Json }
       boss_payments_mutate: { Args: { command: Json }; Returns: Json }
       boss_payments_read: { Args: { query?: Json }; Returns: Json }
       boss_payments_support: { Args: { command: Json }; Returns: Json }
