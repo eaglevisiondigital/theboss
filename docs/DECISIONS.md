@@ -1269,3 +1269,7 @@ Main Boss Chat authorizes a provider-neutral local foundation and disposable ful
 ## Phase 8B1 controlled production authorization: October 9, 2026 UTC
 
 Main Boss Chat approved the six exact frozen sources and controlled release sequence. Canonical history is 119 with matching source hashes, deny-by-default security and no provider/role/relationship seed. Canonical types replace staged RPC assumptions. The single hosted window remains gated on READY Git CD and CI; +25/+35/+45 minute deadlines cannot extend. External integrations, operational credentials, consumer Partner benefits and financial execution remain OFF. Phase 8A closure/evidence limitations remain intact. Phase 8B2 is not started. Final hosted evidence and cleanup will be appended separately.
+
+## Phase 8B1 release stop at CI: October 9, 2026 UTC
+
+Followed Main Boss Chat's material-gate STOP condition after push/PR database CI failed on `python3: command not found` in the new disposable type probe. Canonical history 119/security/types and 264 unchanged business baselines pass; Git CD release is READY and application CI passes. No hosted window or temporary authority was activated. Phase 8B1 remains INCOMPLETE. A narrow CI probe portability task needs review before continuing; no unapproved repair or Phase 8B2 started. Prior history and all Phase 8A disclosures remain intact.

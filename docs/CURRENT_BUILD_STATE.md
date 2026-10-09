@@ -1,5 +1,9 @@
 # Current build state
 
+## Phase 8B1: INCOMPLETE, stopped at release CI gate
+
+The exact six authorized migrations are applied (canonical 119); generated types, schema/security, 264 unchanged business baselines and local application/database validation pass. Release `3064028c66eb5ab0a380927c4a7ea53aac00f003` is deployed READY through Git CD. Both release CI database jobs fail before assertions because the new type probe needs Python absent from the pinned PostgreSQL image; application jobs pass. No hosted window, controlled provider fixture or temporary authority was activated. Original administrator and zero residual Partner work/authority were verified at 2026-10-09T07:32:20.093797Z. Main Boss Chat must review the narrow CI portability blocker before resumption; no repair or Phase 8B2 was started. See [stop evidence](PHASE_8B1_COMPLETION_REPORT.md). Earlier release/checkpoint entries below are preserved historical progress.
+
 ## Phase 8B1 controlled release: INCOMPLETE pending deployment and hosted acceptance
 
 October 9, 2026 UTC: the six authorized, frozen migrations are applied canonically (113 to 119). Security/schema gates and all 264 original business baselines pass. Canonical types and application validation pass; no operational adapter or provider credential is enabled. Release CI/deployment and the single controlled hosted window remain pending. See [release evidence](PHASE_8B1_COMPLETION_REPORT.md). Phase 8A closure and rollout limitations remain intact; Phase 8B2 has not started.

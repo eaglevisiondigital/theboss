@@ -1,5 +1,31 @@
 # Phase 8B1 completion report
 
+## Release gate stop: October 9, 2026 UTC
+
+**Phase 8B1: INCOMPLETE. No hosted acceptance window was opened.** Main Boss Chat's failed-material-gate stop condition was followed. No repair, temporary authority or provider fixture was introduced after this gate failed.
+
+The release commit `3064028c66eb5ab0a380927c4a7ea53aac00f003` was pushed and existing Git CD published it READY at `2026-10-09T07:29:51.061Z` (deploy `6ac897c7964e350008f45075`). Push CI [37899284519](https://github.com/eaglevisiondigital/theboss/actions/runs/37899284519) and PR CI [37899290416](https://github.com/eaglevisiondigital/theboss/actions/runs/37899290416) FAILED. Their application validation jobs PASS. The database job applies the migrations successfully in its disposable container, then exits before acceptance assertions because `supabase/tests/phase8b1/generate-types.sh:6` invokes `python3`, absent from the pinned `postgres:17.11` CI image. This is a reproducible test-runner dependency/portability blocker; it is not evidence of a failed canonical migration or provider product defect. No CI result is promoted to PASS.
+
+The prepared probe works locally where Python exists. Fresh local Partner 522 assertions/10 races and native Merchant SQL/security/15 races passed; local strict typecheck, zero-warning lint, all 645 application tests and production build passed. The independent prior full 23,787 unique SQL/bootstrap/sealed, 318 races and 2,065 upgrade-preservation checks remain local evidence, not a substitute for the failed release CI gate. Canonical types add only Partner definitions; no existing types or frozen migration source bytes changed.
+
+Final safe read-only verification at `2026-10-09T07:32:20.093797Z`: 119 migrations; original administrator valid; 30 unchanged roles; zero provider rows, active territories, open snapshots, operational configurations, Partner transactions/receipts and pending notification events. All 264 original table hash/count baselines remain equal, including original role/module/relationship, Phase 7D financial, Phase 7E membership, Wallet, sports and achievements records. No temporary authority was activated, so activation/stop-new/cleanup-target/hard-expiry/removal timestamps are NOT APPLICABLE. Immutable controlled Partner history is empty. No acceptance budget was consumed.
+
+### Actual hosted evidence boundary
+
+| Item | Result |
+|---|---|
+| Existing original administrator workspace/session navigation before release | HOSTED VERIFIED; native workspace displayed without credential entry. |
+| Existing Git CD exact release commit READY | Verified deployment metadata; not Partner feature acceptance. |
+| Provider prospect/configuration/legal draft/native refresh/reload/replay | HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: prerequisite CI gate failed before window activation. Underlying contracts remain SQL/RUNTIME VERIFIED and LOCAL APPLICATION VERIFIED. |
+| Anonymous constant directory | SQL/RUNTIME VERIFIED; canonical projection is empty/nonoperational. No hosted anonymous RPC was executed. |
+| Member national/travel/gift-card empty screens and native merchants after release | HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: window not activated. Relevant local application/native SQL regressions pass. |
+| Feed/quarantine/licensing/territory/publication/suspension/archive | SQL/RUNTIME VERIFIED; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: window not activated. No second reviewer fabricated and no legal approval bypassed. |
+| 1280/768/390/320 populated Partner screens and keyboard acceptance | LOCAL APPLICATION VERIFIED for eight earlier rendered responsive views; HOSTED UNVERIFIED DUE TO APPROVED LIMITATION: window not activated. No measured hosted viewport claim. Keyboard/screen-reader acceptance remains pending. |
+| Real provider/travel/gift-card/commission execution | OFF and out of scope. No external connection, operational credential, financial posting, money movement, booking, issuance or payout. |
+
+Recommended next action for Main Boss Chat: review a separate narrow CI-probe portability correction compatible with the existing read-only/offline pinned PostgreSQL image, preserve every exact migration hash, rerun push/PR validation, then resume only the still-unused approved hosted window after its gates pass. Do not install a new production runtime, change migrations, bypass CI or open a second window. Phase 8B2 remains unstarted. Phase 8A closure/history/disclosures and pre-rollout limitations remain intact. PR #3 remains OPEN/DRAFT/UNMERGED.
+
+
 ## Controlled production release addendum: October 9, 2026 UTC
 
 **Canonical foundation applied; Phase 8B1 remains INCOMPLETE pending deployment, CI and the single controlled hosted acceptance window.** Main Boss Chat directly authorized the exact frozen sources and controlled release. Canonical `ilykgwgmxtrrikreacrz` advanced from 113 to 119 with matching SHA-256 content at every migration boundary. The sixteen public tables and private receipt are empty before acceptance. All adapters and credential readiness remain structurally OFF.
