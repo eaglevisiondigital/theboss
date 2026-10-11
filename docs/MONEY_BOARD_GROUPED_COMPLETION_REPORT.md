@@ -50,3 +50,7 @@ Failing-before/passing-after regressions are retained for nonaligned range rende
 ## October 11, 2026 UTC controlled release addendum
 
 The exact reviewed source has now been applied to canonical Boss, bringing history to 129. Original local status/evidence above remains historical. Application/CI/deployment and mandatory protected hosted diagnostics are tracked separately in [the dated controlled release report](GLOBAL_FUNDRAISING_CONTROLLED_RELEASE_REPORT.md). Hosted acceptance remains gated; no financial execution is enabled.
+
+### Controlled release stopped at mandatory diagnostic Gate 4
+
+Schema/application release and full CI pass, but matched protected server/historical diagnostic retrieval remains unverified. The controlled unpaid window is unused, administrator/baselines valid, no temporary authority and payments OFF. Current overall status: **INCOMPLETE**. See [exact retained acceptance evidence](GLOBAL_FUNDRAISING_HOSTED_ACCEPTANCE.md); no unexecuted case is promoted to hosted PASS.

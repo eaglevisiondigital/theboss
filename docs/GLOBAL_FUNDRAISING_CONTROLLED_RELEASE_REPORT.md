@@ -1,6 +1,6 @@
 # Grouped Checkout + Global Fundraising Allocation controlled release
 
-**INCOMPLETE — canonical schema released; application publication and hosted diagnostic gate pending.**
+**INCOMPLETE — schema/application released; mandatory hosted server diagnostic retrieval gate failed.**
 
 ## October 11, 2026 UTC release addendum
 
@@ -40,3 +40,13 @@ Actual acceptance evidence remains SQL/RUNTIME VERIFIED or LOCAL APPLICATION VER
 | 129 | `20261010142108_global_fundraising_reporting_integrity.sql` | `20261011113220` |
 
 Every installed statement MD5 matches the exact original source bytes; the reviewed SHA-256 manifest remains the authoritative source integrity record. Installation timestamp aliases do not authorize rewriting migration history.
+
+## October 11, 2026 UTC — released application, mandatory diagnostic stop
+
+The reviewed implementation is committed/pushed as `4a545fb8ea4809e2d21ee4cb7833e0c97b53e26b`. Push CI `38137160398` and PR CI `38137163838` PASS, including the complete pinned-image database suite and application validation. Exact existing Boss deployment `6acb788162318600085314a2` is READY, published `2026-10-11T11:53:12.835Z`. Original administrator also reloads successfully after release. The earlier publication/CI-pending checkpoint above is superseded by these actual results, without rewriting its history.
+
+**REQUIRED GATE 4 FAILED / HOSTED SERVER RETRIEVAL UNVERIFIED.** Harmless fundraising read yields expected protected presentation and matching finite browser commit/deployment/correlation; no matching server records are observable through protected Netlify live/exact-correlation Last hour/prefix Last hour lookups. Matching server private export and historical retrievability cannot be proved. Cause remains UNKNOWN; no business defect or successful server retrieval is inferred. [Exact gate and unexecuted acceptance matrix](GLOBAL_FUNDRAISING_HOSTED_ACCEPTANCE.md).
+
+The single unpaid window remains UNUSED. No fixture/temporary authority was created; original administrator never paused. Final canonical verification `2026-10-11T12:43:37.295984Z`: 129 migrations, all 283 business and 11 grouped intermediate baselines preserved with disclosed additive-only exceptions, zero temporary authority/work/resources and payment execution OFF. No economic rate, financial source, Wallet/member/sports history or security policy changed.
+
+**GROUPED CHECKOUT + GLOBAL FUNDRAISING ALLOCATION: INCOMPLETE.** Stop before acceptance and return the diagnostic blocker to Main Boss Chat. No automatic monitoring substitute, speculative repair, additional window, provider certification or Phase 8B2. Documentation-only closing SHA/CI are reported after publication; implementation bytes and frozen migrations remain unchanged.

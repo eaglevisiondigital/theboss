@@ -1,5 +1,15 @@
 # Current build state
 
+## October 11, 2026 UTC: grouped fundraising released; required diagnostic gate stopped acceptance
+
+**Grouped Checkout + Global Fundraising Allocation: INCOMPLETE — mandatory protected hosted server diagnostic retrieval UNVERIFIED.** Canonical **129 migrations** and exact application release `4a545fb8ea4809e2d21ee4cb7833e0c97b53e26b` are validated; push/PR CI PASS, including full pinned-image database validation. Existing Boss platform deployment `6acb788162318600085314a2` is READY. Original administrator reloads and remains effective.
+
+One harmless fundraising read produced the expected protected page and matching finite browser correlation/deployment. Protected Netlify live and two bounded historical searches yielded no matching observable server records; matching private server export and historical retrieval remain unproven. Actual emission/delivery/retrieval cause is UNKNOWN. This is the required Gate 4 blocker, not an inferred business failure. No prior Merchant/Partner evidence substitute is authorized.
+
+The controlled unpaid window is **UNUSED**. Zero fixture or temporary person/module/relationship authority was activated; no administrator pause. Final verification `2026-10-11T12:43:37.295984Z` preserves original 283 business/11 grouped baselines with the disclosed migration-only exceptions, zero temporary authority/work and payments OFF. No real financial execution, Kingdom production change or Phase 8B2. Return to Main Boss Chat before further acceptance.
+
+See [release report](GLOBAL_FUNDRAISING_CONTROLLED_RELEASE_REPORT.md) and [exact diagnostic/acceptance matrix](GLOBAL_FUNDRAISING_HOSTED_ACCEPTANCE.md). Earlier checkpoints, incidents and evidence remain below.
+
 ## October 11, 2026 UTC: controlled grouped fundraising release in progress
 
 **Grouped Checkout + Global Fundraising Allocation: INCOMPLETE.** Main Boss Chat authorized the payments-disabled release of the exact reviewed checkpoint and diagnostic overlay. Canonical Boss is now **129 migrations** (119→123→129), with per-file/intermediate RLS/ACL/search-path checks, preserved original 283 business rowsets and original migration history, plus canonical types/contracts validated. The original administrator is valid; payment execution and temporary authority remain OFF.
