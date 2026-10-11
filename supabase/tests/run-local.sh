@@ -26,9 +26,15 @@ phase7e_only=false
 phase8a_only=false
 phase8b1_only=false
 phase8b1_upgrade=false
+grouped_only=false
+global_only=false
 if [[ $# != 0 ]]; then
   if [[ $# == 1 && "$1" == --concurrency ]]; then
     concurrency_only=true
+  elif [[ $# == 1 && "$1" == --testglobal ]]; then
+    global_only=true
+  elif [[ $# == 1 && "$1" == --testgrouped ]]; then
+    grouped_only=true
   elif [[ $# == 1 && "$1" == --test5a ]]; then
     phase5a_only=true
   elif [[ $# == 1 && "$1" == --test5b ]]; then
@@ -67,8 +73,8 @@ if [[ $# != 0 ]]; then
     phase5e_only=true
   elif [[ $# == 1 && "$1" == --test5d ]]; then
     phase5d_only=true
-  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^phase([23][ab]|4[ab]|5[abcdef]|6[abcde]|7[abcde]|8a|8b1)_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
-    printf '%s\n' 'Usage: run-local.sh [--test phase6d_tournament.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c | --test6d | --test6e | --test7a | --test7b | --test7c | --test7d | --test7e | --test8a | --test8b1 | --upgrade8b1 | --concurrency]' >&2
+  elif [[ $# != 2 || "$1" != --test || ! "$2" =~ ^(phase([23][ab]|4[ab]|5[abcdef]|6[abcde]|7[abcde]|8a|8b1)|global_fundraising)_[a-z_]+\.sql$ || ! -s "$test_dir/$2" ]]; then
+    printf '%s\n' 'Usage: run-local.sh [--test phase6d_tournament.sql | --test5a | --test5b | --test5c | --test5d | --test5e | --test5f | --test6a | --test6b | --test6c | --test6d | --test6e | --test7a | --test7b | --test7c | --test7d | --test7e | --test8a | --test8b1 | --upgrade8b1 | --testgrouped | --testglobal | --concurrency]' >&2
     exit 1
   else
     selected_test=$2
@@ -151,6 +157,7 @@ if [[ ${#migrations[@]} == 0 ]]; then
 fi
 applied_count=0
 for migration in "${migrations[@]}"; do
+  if [[ "$phase8b1_upgrade" == true && "$applied_count" == 119 ]]; then break; fi
   if [[ "$phase8b1_upgrade" == true && "$applied_count" == 113 ]]; then
     [[ "${migration##*/}" == 20261009045245_phase8b1_provider_registry.sql ]] || exit 1
     "${psql_command[@]}" --quiet --file "$test_dir/phase8b1/upgrade-baseline.sql"
@@ -174,7 +181,17 @@ if [[ -s "$test_dir/phase8b1/generate-types.sh" ]]; then
  PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase8b1/generate-types.sh" || exit $?
 fi
 
-tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql "$test_dir"/phase6d_*.sql "$test_dir"/phase6e_*.sql "$test_dir"/phase7a_*.sql "$test_dir"/phase7b_*.sql "$test_dir"/phase7c_*.sql "$test_dir"/phase7d_*.sql "$test_dir"/phase7e_*.sql "$test_dir"/phase8a_*.sql "$test_dir"/phase8b1_*.sql)
+if [[ -s "$test_dir/grouped/generate-types.sh" ]];then
+ PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/grouped/generate-types.sh"
+fi
+
+if [[ -s "$test_dir/global/generate-types.sh" ]];then
+ PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/global/generate-types.sh"
+fi
+
+tests=("$test_dir"/phase2[ab]_*.sql "$test_dir"/phase3[ab]_*.sql "$test_dir"/phase4[ab]_*.sql "$test_dir"/phase5a_*.sql "$test_dir"/phase5b_*.sql "$test_dir"/phase5c_*.sql "$test_dir"/phase5d_*.sql "$test_dir"/phase5e_*.sql "$test_dir"/phase5f_*.sql "$test_dir"/phase6a_*.sql "$test_dir"/phase6b_*.sql "$test_dir"/phase6c_*.sql "$test_dir"/phase6d_*.sql "$test_dir"/phase6e_*.sql "$test_dir"/phase7a_*.sql "$test_dir"/phase7b_*.sql "$test_dir"/phase7c_*.sql "$test_dir"/phase7d_*.sql "$test_dir"/phase7e_*.sql "$test_dir"/phase8a_*.sql "$test_dir"/phase8b1_*.sql "$test_dir"/money_board_grouped_*.sql "$test_dir"/global_fundraising_*.sql)
+if [[ "$global_only" == true ]];then tests=("$test_dir"/global_fundraising_*.sql);fi
+if [[ "$grouped_only" == true ]];then tests=("$test_dir"/money_board_grouped_*.sql);fi
 if [[ "$phase5a_only" == true ]]; then tests=("$test_dir"/phase5a_*.sql);fi
 if [[ "$phase5b_only" == true ]]; then tests=("$test_dir"/phase5b_*.sql);fi
 if [[ "$phase5c_only" == true ]]; then tests=("$test_dir"/phase5c_*.sql);fi
@@ -218,10 +235,21 @@ for test_file in "${tests[@]}"; do
 done
 fi
 
+if [[ "$grouped_only" == true ]];then
+ PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/money_board_grouped_concurrency.sh"
+ printf "%s\n" "Focused grouped SQL/concurrency passed; full historical validation remains required."
+ exit 0
+fi
 if [[ "$phase8b1_only" == true ]]; then
   PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase8b1_partners_concurrency.sh" || exit $?
   printf '%s\n' 'Phase 8B1 focused SQL/concurrency passed; full historical validation remains required.'
   exit 0
+fi
+
+if [[ "$global_only" == true ]];then
+ if [[ -s "$test_dir/global_fundraising_concurrency.sh" ]];then PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/global_fundraising_concurrency.sh";fi
+ printf '%s\n' 'Global fundraising focused SQL validation passed; full historical validation remains required.'
+ exit 0
 fi
 
 # Final Phase 8A schema and recovery gates run in full CI and focused validation.
@@ -426,6 +454,10 @@ PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 \
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase8a_merchants_concurrency.sh"
 
 PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/phase8b1_partners_concurrency.sh" || exit $?
+
+PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/money_board_grouped_concurrency.sh"
+
+PG_BINDIR="$postgres_bin_dir" PGHOST="$socket_dir" PGPORT=5432 PGDATABASE=postgres PGUSER=postgres bash "$test_dir/global_fundraising_concurrency.sh"
 
 if [[ "$concurrency_only" == true ]]; then
   printf '%s\n' 'All sealed-source/bootstrap/concurrency checks passed; SQL suites are a separate required validation stage.'

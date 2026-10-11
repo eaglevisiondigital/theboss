@@ -4,11 +4,12 @@ begin;set local statement_timeout='8s';
 -- Real trusted-source paths in bounded fixture-loading batches, not fabricated
 -- mutable balances. This database is disposable and has no network/Auth secrets.
 insert into public.fundraising_donors(id,display_name)values(pg_temp.f('scale-donor'),'Synthetic scale supporter');
+-- Synthetic sources include the canonical metadata emitted by native checkout.
 create function pg_temp.load_wallet_batch(batch integer)returns void language plpgsql as $$declare n integer;x uuid;f public.fundraising_fundraisers;begin
  select *into f from public.fundraising_fundraisers where id=pg_temp.fid('fundraiser');
  for n in batch*100+1..batch*100+100 loop
  insert into public.fundraising_intents(campaign_id,fundraiser_id,donor_id,amount_minor,currency,anonymous,fee_cover,source_kind,provenance,reward_policy,capability_digest,expires_at,request_id)
- values(f.campaign_id,f.id,pg_temp.f('scale-donor'),2,'USD',true,false,'participant_share',jsonb_build_object('organization_id',f.organization_id,'restricted_use_organization_id',f.organization_id,'campaign_id',f.campaign_id,'fundraiser_id',f.id,'participant_id',f.participant_id,'person_id',f.person_id,'team_id',f.team_id,'unit_id',f.unit_id,'household_id',f.household_id),'{}',md5('scale-'||n)||md5('scale2-'||n),clock_timestamp()+interval '1 day',gen_random_uuid())returning id into x;
+ values(f.campaign_id,f.id,pg_temp.f('scale-donor'),2,'USD',true,false,'participant_share',jsonb_build_object('channel','direct_support','currency','USD','amount_minor',2,'organization_id',f.organization_id,'restricted_use_organization_id',f.organization_id,'campaign_id',f.campaign_id,'fundraiser_id',f.id,'participant_id',f.participant_id,'person_id',f.person_id,'team_id',f.team_id,'unit_id',f.unit_id,'household_id',f.household_id),'{}',md5('scale-'||n)||md5('scale2-'||n),clock_timestamp()+interval '1 day',gen_random_uuid())returning id into x;
  perform boss_private.fundraising_ingest_success(x,'disposable-scale','scale-'||n,2,'USD',clock_timestamp());
  end loop;end$$;
 select format('select pg_temp.load_wallet_batch(%s);',n)from generate_series(0,49)n \gexec

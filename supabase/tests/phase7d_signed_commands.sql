@@ -15,6 +15,10 @@ select pg_temp.denied('administrator cannot cross tenant',format('select public.
 insert into payment_results values('draft',pg_temp.pm('account.create',jsonb_build_object('organization_id',pg_temp.f('org'),'provider','nmi','environment','sandbox','name','Synthetic draft only','country','US','currencies',jsonb_build_array('USD'),'merchant_owner','organization','merchant_reference','LOCAL-DRAFT','settlement_mode','direct_provider')));
 select pg_temp.pm('route.create',jsonb_build_object('organization_id',pg_temp.f('org'),'account_id',pg_temp.f('rails-account'),'purpose','fees','currency','USD','scope_type','team','scope_id',pg_temp.f('falcons')));
 select pg_temp.denied('forged cross-org routing denied',format('select pg_temp.pm(''route.create'',%L)',jsonb_build_object('organization_id',pg_temp.f('org'),'account_id',pg_temp.f('rails-account'),'purpose','fees','currency','USD','scope_type','team','scope_id',pg_temp.f('other-team'))));
+select pg_temp.denied('organization finance cannot change platform economics',format('select pg_temp.pm(''policy.create'',%L)',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','fees','currency','USD','organization_basis_points',10000,'platform_basis_points',0,'product_cost_basis_points',0,'processor_fee_owner','organization','availability_seconds',0)));
+reset role;
+insert into public.role_assignments(person_id,role_id,scope_type,starts_at)select pg_temp.f('director'),id,'platform',now()-interval'1 day'from public.roles where key='platform_administrator';
+set local role authenticated;select pg_temp.actor('director');
 select pg_temp.pm('policy.create',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','fees','currency','USD','organization_basis_points',10000,'platform_basis_points',0,'product_cost_basis_points',0,'processor_fee_owner','organization','availability_seconds',0));
 select pg_temp.actor('parent');
 select pg_temp.check('payment guardian sees only authorized charges','GUARDIAN',not exists(select 1 from jsonb_array_elements(public.boss_payments_read()->'charges')ch where ch->>'participant_id'=pg_temp.f('participant-child2')::text));

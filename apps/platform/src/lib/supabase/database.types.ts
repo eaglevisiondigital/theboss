@@ -6371,6 +6371,271 @@ export type Database = {
         }
         Relationships: []
       }
+      fundraising_allocation_delegations: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          created_by: string
+          ends_at: string
+          id: string
+          organization_id: string
+          person_id: string
+          revoked_at: string | null
+          starts_at: string
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          created_by: string
+          ends_at: string
+          id?: string
+          organization_id: string
+          person_id: string
+          revoked_at?: string | null
+          starts_at: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          created_by?: string
+          ends_at?: string
+          id?: string
+          organization_id?: string
+          person_id?: string
+          revoked_at?: string | null
+          starts_at?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_allocation_delegat_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_delegations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_delegations_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_delegations_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_delegations_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_allocation_policies: {
+        Row: {
+          accounting_kind: string
+          basis: string
+          campaign_id: string
+          channel: string
+          created_at: string
+          created_by: string
+          destination_bps: number
+          ends_at: string | null
+          id: string
+          organization_bps: number
+          organization_id: string
+          participant_bps: number
+          platform_policy_id: string
+          revision: number
+          starts_at: string
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          accounting_kind?: string
+          basis?: string
+          campaign_id: string
+          channel: string
+          created_at?: string
+          created_by: string
+          destination_bps: number
+          ends_at?: string | null
+          id?: string
+          organization_bps: number
+          organization_id: string
+          participant_bps: number
+          platform_policy_id: string
+          revision: number
+          starts_at: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          accounting_kind?: string
+          basis?: string
+          campaign_id?: string
+          channel?: string
+          created_at?: string
+          created_by?: string
+          destination_bps?: number
+          ends_at?: string | null
+          id?: string
+          organization_bps?: number
+          organization_id?: string
+          participant_bps?: number
+          platform_policy_id?: string
+          revision?: number
+          starts_at?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_allocation_polici_organization_id_platform_pol_fkey"
+            columns: ["organization_id", "platform_policy_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_platform_policies"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_policie_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_policies_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_policies_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_allocation_policies_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      fundraising_brands: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          key: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_brands_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_campaign_origins: {
+        Row: {
+          brand_id: string
+          campaign_id: string
+          created_at: string
+          created_by: string
+          fund_code: string
+          legal_recipient_organization_id: string
+          organization_id: string
+        }
+        Insert: {
+          brand_id: string
+          campaign_id: string
+          created_at?: string
+          created_by: string
+          fund_code: string
+          legal_recipient_organization_id: string
+          organization_id: string
+        }
+        Update: {
+          brand_id?: string
+          campaign_id?: string
+          created_at?: string
+          created_by?: string
+          fund_code?: string
+          legal_recipient_organization_id?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_campaign_origins_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_brands"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_campaign_origins_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_campaign_origins_legal_recipient_organization__fkey"
+            columns: ["legal_recipient_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_campaign_origins_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
       fundraising_campaigns: {
         Row: {
           allow_adult_self_sharing: boolean
@@ -6472,6 +6737,533 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_cash_rounding_corrections: {
+        Row: {
+          correction_id: string
+          created_at: string
+          organization_minor: number
+          payment_id: string
+          platform_minor: number
+          principal_minor: number
+          product_cost_minor: number
+        }
+        Insert: {
+          correction_id: string
+          created_at?: string
+          organization_minor: number
+          payment_id: string
+          platform_minor: number
+          principal_minor: number
+          product_cost_minor: number
+        }
+        Update: {
+          correction_id?: string
+          created_at?: string
+          organization_minor?: number
+          payment_id?: string
+          platform_minor?: number
+          principal_minor?: number
+          product_cost_minor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_cash_rounding_corrections_correction_id_fkey"
+            columns: ["correction_id"]
+            isOneToOne: true
+            referencedRelation: "external_payment_corrections"
+            referencedColumns: ["reversal_payment_id"]
+          },
+          {
+            foreignKeyName: "fundraising_cash_rounding_corrections_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_cash_rounding_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      fundraising_cash_rounding_sources: {
+        Row: {
+          algorithm: string
+          checkout_id: string
+          created_at: string
+          organization_minor: number
+          payment_id: string
+          platform_minor: number
+          principal_minor: number
+          product_cost_minor: number
+        }
+        Insert: {
+          algorithm?: string
+          checkout_id: string
+          created_at?: string
+          organization_minor: number
+          payment_id: string
+          platform_minor: number
+          principal_minor: number
+          product_cost_minor: number
+        }
+        Update: {
+          algorithm?: string
+          checkout_id?: string
+          created_at?: string
+          organization_minor?: number
+          payment_id?: string
+          platform_minor?: number
+          principal_minor?: number
+          product_cost_minor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_cash_rounding_sources_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_checkout_snapshots"
+            referencedColumns: ["checkout_id"]
+          },
+          {
+            foreignKeyName: "fundraising_cash_rounding_sources_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      fundraising_checkout_snapshots: {
+        Row: {
+          account_id: string
+          allocation_policy_id: string | null
+          brand_id: string
+          campaign_id: string
+          channel: string
+          checkout_id: string
+          created_at: string
+          credited_person_id: string | null
+          currency: string
+          destination_id: string | null
+          fund_code: string | null
+          fundraiser_id: string | null
+          intent_id: string | null
+          organization_id: string
+          origin_person_id: string | null
+          participant_id: string | null
+          platform_policy_id: string | null
+          principal_minor: number
+          product_order_id: string | null
+          provenance: Json
+          referrer_person_id: string | null
+          routing_id: string
+          settlement_policy_id: string | null
+          snapshot_version: number
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          account_id: string
+          allocation_policy_id?: string | null
+          brand_id: string
+          campaign_id: string
+          channel: string
+          checkout_id: string
+          created_at?: string
+          credited_person_id?: string | null
+          currency: string
+          destination_id?: string | null
+          fund_code?: string | null
+          fundraiser_id?: string | null
+          intent_id?: string | null
+          organization_id: string
+          origin_person_id?: string | null
+          participant_id?: string | null
+          platform_policy_id?: string | null
+          principal_minor: number
+          product_order_id?: string | null
+          provenance: Json
+          referrer_person_id?: string | null
+          routing_id: string
+          settlement_policy_id?: string | null
+          snapshot_version?: number
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          account_id?: string
+          allocation_policy_id?: string | null
+          brand_id?: string
+          campaign_id?: string
+          channel?: string
+          checkout_id?: string
+          created_at?: string
+          credited_person_id?: string | null
+          currency?: string
+          destination_id?: string | null
+          fund_code?: string | null
+          fundraiser_id?: string | null
+          intent_id?: string | null
+          organization_id?: string
+          origin_person_id?: string | null
+          participant_id?: string | null
+          platform_policy_id?: string | null
+          principal_minor?: number
+          product_order_id?: string | null
+          provenance?: Json
+          referrer_person_id?: string | null
+          routing_id?: string
+          settlement_policy_id?: string | null
+          snapshot_version?: number
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_checkout_snapshot_organization_id_allocation_p_fkey"
+            columns: ["organization_id", "allocation_policy_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_allocation_policies"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshot_organization_id_campaign_id__fkey"
+            columns: ["organization_id", "campaign_id", "destination_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_destinations"
+            referencedColumns: ["organization_id", "campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshot_organization_id_platform_pol_fkey"
+            columns: ["organization_id", "platform_policy_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_platform_policies"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_brands"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: true
+            referencedRelation: "payment_checkouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_credited_person_id_fkey"
+            columns: ["credited_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_organization_id_account_id_fkey"
+            columns: ["organization_id", "account_id"]
+            isOneToOne: false
+            referencedRelation: "processing_accounts"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_origin_person_id_fkey"
+            columns: ["origin_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_product_order_id_fkey"
+            columns: ["product_order_id"]
+            isOneToOne: false
+            referencedRelation: "discount_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_referrer_person_id_fkey"
+            columns: ["referrer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_routing_id_fkey"
+            columns: ["routing_id"]
+            isOneToOne: false
+            referencedRelation: "payment_routing_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_checkout_snapshots_settlement_policy_id_fkey"
+            columns: ["settlement_policy_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_policy_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraising_credit_entries: {
+        Row: {
+          algorithm: string
+          amount_minor: number
+          beneficiary_id: string
+          category: string
+          correction_id: string | null
+          created_at: string
+          id: string
+          payment_id: string
+        }
+        Insert: {
+          algorithm: string
+          amount_minor: number
+          beneficiary_id: string
+          category: string
+          correction_id?: string | null
+          created_at?: string
+          id?: string
+          payment_id: string
+        }
+        Update: {
+          algorithm?: string
+          amount_minor?: number
+          beneficiary_id?: string
+          category?: string
+          correction_id?: string | null
+          created_at?: string
+          id?: string
+          payment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_credit_entries_correction_id_fkey"
+            columns: ["correction_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_corrections"
+            referencedColumns: ["reversal_payment_id"]
+          },
+          {
+            foreignKeyName: "fundraising_credit_entries_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_credit_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      fundraising_credit_sources: {
+        Row: {
+          accounting_kind: string
+          campaign_id: string
+          checkout_id: string
+          created_at: string
+          currency: string
+          organization_id: string
+          original_minor: number
+          payment_id: string
+          policy_id: string
+        }
+        Insert: {
+          accounting_kind?: string
+          campaign_id: string
+          checkout_id: string
+          created_at?: string
+          currency: string
+          organization_id: string
+          original_minor: number
+          payment_id: string
+          policy_id: string
+        }
+        Update: {
+          accounting_kind?: string
+          campaign_id?: string
+          checkout_id?: string
+          created_at?: string
+          currency?: string
+          organization_id?: string
+          original_minor?: number
+          payment_id?: string
+          policy_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_credit_sources_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_checkout_snapshots"
+            referencedColumns: ["checkout_id"]
+          },
+          {
+            foreignKeyName: "fundraising_credit_sources_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_credit_sources_organization_id_policy_id_fkey"
+            columns: ["organization_id", "policy_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_allocation_policies"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_credit_sources_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: true
+            referencedRelation: "settlement_sources"
+            referencedColumns: ["payment_id"]
+          },
+        ]
+      }
+      fundraising_destinations: {
+        Row: {
+          board_id: string | null
+          campaign_id: string
+          created_at: string
+          created_by: string
+          ends_at: string | null
+          fundraiser_id: string | null
+          goal_minor: number
+          id: string
+          kind: string
+          organization_id: string
+          public_path: string
+          referrer_person_id: string | null
+          starts_at: string
+          status: string
+          team_id: string | null
+          unit_id: string | null
+        }
+        Insert: {
+          board_id?: string | null
+          campaign_id: string
+          created_at?: string
+          created_by: string
+          ends_at?: string | null
+          fundraiser_id?: string | null
+          goal_minor: number
+          id?: string
+          kind: string
+          organization_id: string
+          public_path?: string
+          referrer_person_id?: string | null
+          starts_at?: string
+          status?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Update: {
+          board_id?: string | null
+          campaign_id?: string
+          created_at?: string
+          created_by?: string
+          ends_at?: string | null
+          fundraiser_id?: string | null
+          goal_minor?: number
+          id?: string
+          kind?: string
+          organization_id?: string
+          public_path?: string
+          referrer_person_id?: string | null
+          starts_at?: string
+          status?: string
+          team_id?: string | null
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_destinations_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "money_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_campaign_id_fundraiser_id_fkey"
+            columns: ["campaign_id", "fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["campaign_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_organization_id_team_id_fkey"
+            columns: ["organization_id", "team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_organization_id_unit_id_fkey"
+            columns: ["organization_id", "unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_destinations_referrer_person_id_fkey"
+            columns: ["referrer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
             referencedColumns: ["id"]
           },
         ]
@@ -6812,6 +7604,99 @@ export type Database = {
           },
         ]
       }
+      fundraising_platform_policies: {
+        Row: {
+          agreement_reference: string
+          campaign_id: string | null
+          channel: string
+          created_at: string
+          created_by: string
+          currency: string
+          ends_at: string | null
+          exception_reference: string | null
+          id: string
+          organization_id: string
+          participant_credit_max_bps: number
+          product_revision_id: string | null
+          revision: number
+          settlement_policy_id: string
+          starts_at: string
+          wallet_permitted: boolean
+        }
+        Insert: {
+          agreement_reference: string
+          campaign_id?: string | null
+          channel: string
+          created_at?: string
+          created_by: string
+          currency: string
+          ends_at?: string | null
+          exception_reference?: string | null
+          id?: string
+          organization_id: string
+          participant_credit_max_bps: number
+          product_revision_id?: string | null
+          revision: number
+          settlement_policy_id: string
+          starts_at: string
+          wallet_permitted?: boolean
+        }
+        Update: {
+          agreement_reference?: string
+          campaign_id?: string | null
+          channel?: string
+          created_at?: string
+          created_by?: string
+          currency?: string
+          ends_at?: string | null
+          exception_reference?: string | null
+          id?: string
+          organization_id?: string
+          participant_credit_max_bps?: number
+          product_revision_id?: string | null
+          revision?: number
+          settlement_policy_id?: string
+          starts_at?: string
+          wallet_permitted?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_platform_policies_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_platform_policies_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_platform_policies_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_platform_policies_product_revision_id_fkey"
+            columns: ["product_revision_id"]
+            isOneToOne: false
+            referencedRelation: "discount_product_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_platform_policies_settlement_policy_id_fkey"
+            columns: ["settlement_policy_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_policy_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fundraising_recurring_commitments: {
         Row: {
           amount_minor: number
@@ -7078,6 +7963,67 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organization_units"
             referencedColumns: ["organization_id", "id"]
+          },
+        ]
+      }
+      fundraising_wallet_channel_policies: {
+        Row: {
+          campaign_id: string
+          channel: string
+          created_at: string
+          created_by: string
+          ends_at: string | null
+          id: string
+          organization_id: string
+          revision: number
+          starts_at: string
+          wallet_policy_id: string
+        }
+        Insert: {
+          campaign_id: string
+          channel: string
+          created_at?: string
+          created_by: string
+          ends_at?: string | null
+          id?: string
+          organization_id: string
+          revision: number
+          starts_at: string
+          wallet_policy_id: string
+        }
+        Update: {
+          campaign_id?: string
+          channel?: string
+          created_at?: string
+          created_by?: string
+          ends_at?: string | null
+          id?: string
+          organization_id?: string
+          revision?: number
+          starts_at?: string
+          wallet_policy_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraising_wallet_channel_pol_organization_id_campaign_id_fkey"
+            columns: ["organization_id", "campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["organization_id", "id"]
+          },
+          {
+            foreignKeyName: "fundraising_wallet_channel_policies_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fundraising_wallet_channel_policies_wallet_policy_id_fkey"
+            columns: ["wallet_policy_id"]
+            isOneToOne: false
+            referencedRelation: "boss_bucks_policy_revisions"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -10923,6 +11869,278 @@ export type Database = {
         }
         Relationships: []
       }
+      money_board_cart_history: {
+        Row: {
+          action: string
+          cart_id: string
+          created_at: string
+          id: string
+          request_id: string
+        }
+        Insert: {
+          action: string
+          cart_id: string
+          created_at?: string
+          id?: string
+          request_id: string
+        }
+        Update: {
+          action?: string
+          cart_id?: string
+          created_at?: string
+          id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_cart_history_cart_id_fkey"
+            columns: ["cart_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_carts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_cart_items: {
+        Row: {
+          added_at: string
+          amount_minor: number
+          cart_id: string
+          provenance: Json
+          removed_at: string | null
+          tile_id: string
+        }
+        Insert: {
+          added_at?: string
+          amount_minor: number
+          cart_id: string
+          provenance: Json
+          removed_at?: string | null
+          tile_id: string
+        }
+        Update: {
+          added_at?: string
+          amount_minor?: number
+          cart_id?: string
+          provenance?: Json
+          removed_at?: string | null
+          tile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_cart_items_cart_id_fkey"
+            columns: ["cart_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_carts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_cart_items_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_cart_policies: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          max_tiles: number
+          max_total_minor: number
+          revision: number
+          session_seconds: number
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          max_tiles?: number
+          max_total_minor?: number
+          revision?: number
+          session_seconds?: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          max_tiles?: number
+          max_total_minor?: number
+          revision?: number
+          session_seconds?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_cart_policies_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_carts: {
+        Row: {
+          actor_person_id: string | null
+          board_id: string
+          campaign_id: string
+          capability_digest: string
+          context: Json
+          created_at: string
+          currency: string
+          expires_at: string
+          fundraiser_id: string | null
+          generation_id: string
+          id: string
+          organization_id: string
+          path_digest: string
+          policy_revision: number
+        }
+        Insert: {
+          actor_person_id?: string | null
+          board_id: string
+          campaign_id: string
+          capability_digest: string
+          context: Json
+          created_at?: string
+          currency: string
+          expires_at: string
+          fundraiser_id?: string | null
+          generation_id: string
+          id?: string
+          organization_id: string
+          path_digest: string
+          policy_revision: number
+        }
+        Update: {
+          actor_person_id?: string | null
+          board_id?: string
+          campaign_id?: string
+          capability_digest?: string
+          context?: Json
+          created_at?: string
+          currency?: string
+          expires_at?: string
+          fundraiser_id?: string | null
+          generation_id?: string
+          id?: string
+          organization_id?: string
+          path_digest?: string
+          policy_revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_carts_actor_person_id_fkey"
+            columns: ["actor_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "money_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_fundraisers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_generation_id_fkey"
+            columns: ["generation_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_generations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_carts_policy_revision_fkey"
+            columns: ["policy_revision"]
+            isOneToOne: false
+            referencedRelation: "money_board_cart_policies"
+            referencedColumns: ["revision"]
+          },
+        ]
+      }
+      money_board_checkout_preparations: {
+        Row: {
+          created_at: string
+          group_id: string
+          intent_id: string
+          request_id: string
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          intent_id: string
+          request_id: string
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          intent_id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_checkout_preparations_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: true
+            referencedRelation: "money_board_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_checkout_preparations_intent_id_fkey"
+            columns: ["intent_id"]
+            isOneToOne: true
+            referencedRelation: "fundraising_intents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_correction_plans: {
+        Row: {
+          allocations: Json
+          created_at: string
+          event_id: string
+        }
+        Insert: {
+          allocations: Json
+          created_at?: string
+          event_id: string
+        }
+        Update: {
+          allocations?: Json
+          created_at?: string
+          event_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_correction_plans_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "provider_event_evidence"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       money_board_generations: {
         Row: {
           board_id: string
@@ -10958,6 +12176,136 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "money_boards"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_group_commits: {
+        Row: {
+          checkout_id: string
+          committed_at: string
+          group_id: string
+          snapshot: Json
+        }
+        Insert: {
+          checkout_id: string
+          committed_at?: string
+          group_id: string
+          snapshot: Json
+        }
+        Update: {
+          checkout_id?: string
+          committed_at?: string
+          group_id?: string
+          snapshot?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_group_commits_checkout_id_fkey"
+            columns: ["checkout_id"]
+            isOneToOne: true
+            referencedRelation: "payment_eligibility_commits"
+            referencedColumns: ["checkout_id"]
+          },
+          {
+            foreignKeyName: "money_board_group_commits_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: true
+            referencedRelation: "money_board_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_group_items: {
+        Row: {
+          amount_minor: number
+          group_id: string
+          provenance: Json
+          reservation_id: string
+          tile_id: string
+        }
+        Insert: {
+          amount_minor: number
+          group_id: string
+          provenance: Json
+          reservation_id: string
+          tile_id: string
+        }
+        Update: {
+          amount_minor?: number
+          group_id?: string
+          provenance?: Json
+          reservation_id?: string
+          tile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_group_items_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_group_items_reservation_id_fkey"
+            columns: ["reservation_id"]
+            isOneToOne: true
+            referencedRelation: "money_board_reservations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_group_items_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_groups: {
+        Row: {
+          amount_minor: number
+          cart_id: string
+          currency: string
+          expires_at: string
+          id: string
+          policy_revision: number
+          request_id: string
+          starts_at: string
+        }
+        Insert: {
+          amount_minor: number
+          cart_id: string
+          currency: string
+          expires_at: string
+          id?: string
+          policy_revision: number
+          request_id: string
+          starts_at?: string
+        }
+        Update: {
+          amount_minor?: number
+          cart_id?: string
+          currency?: string
+          expires_at?: string
+          id?: string
+          policy_revision?: number
+          request_id?: string
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_groups_cart_id_fkey"
+            columns: ["cart_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_carts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_groups_policy_revision_fkey"
+            columns: ["policy_revision"]
+            isOneToOne: false
+            referencedRelation: "money_board_cart_policies"
+            referencedColumns: ["revision"]
           },
         ]
       }
@@ -10999,6 +12347,97 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "money_board_tiles"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_tile_claims: {
+        Row: {
+          amount_minor: number
+          claimed_at: string
+          evidence_id: string
+          group_id: string | null
+          provenance: Json
+          tile_id: string
+        }
+        Insert: {
+          amount_minor: number
+          claimed_at: string
+          evidence_id: string
+          group_id?: string | null
+          provenance: Json
+          tile_id: string
+        }
+        Update: {
+          amount_minor?: number
+          claimed_at?: string
+          evidence_id?: string
+          group_id?: string | null
+          provenance?: Json
+          tile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_tile_claims_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "fundraising_success_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_tile_claims_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_board_tile_claims_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: true
+            referencedRelation: "money_board_tiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      money_board_tile_corrections: {
+        Row: {
+          algorithm: string
+          amount_minor: number
+          correction_id: string
+          original_minor: number
+          tie_order: number
+          tile_id: string
+        }
+        Insert: {
+          algorithm: string
+          amount_minor: number
+          correction_id: string
+          original_minor: number
+          tie_order: number
+          tile_id: string
+        }
+        Update: {
+          algorithm?: string
+          amount_minor?: number
+          correction_id?: string
+          original_minor?: number
+          tie_order?: number
+          tile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "money_board_tile_corrections_correction_id_fkey"
+            columns: ["correction_id"]
+            isOneToOne: false
+            referencedRelation: "external_payment_corrections"
+            referencedColumns: ["reversal_payment_id"]
+          },
+          {
+            foreignKeyName: "money_board_tile_corrections_tile_id_fkey"
+            columns: ["tile_id"]
+            isOneToOne: false
+            referencedRelation: "money_board_tile_claims"
+            referencedColumns: ["tile_id"]
           },
         ]
       }
@@ -11059,6 +12498,7 @@ export type Database = {
           team_id: string | null
           tile_count: number
           title: string
+          unit_id: string | null
           version: number
           visibility: string
         }
@@ -11076,6 +12516,7 @@ export type Database = {
           team_id?: string | null
           tile_count: number
           title: string
+          unit_id?: string | null
           version?: number
           visibility?: string
         }
@@ -11093,6 +12534,7 @@ export type Database = {
           team_id?: string | null
           tile_count?: number
           title?: string
+          unit_id?: string | null
           version?: number
           visibility?: string
         }
@@ -11116,6 +12558,13 @@ export type Database = {
             columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "money_boards_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "organization_units"
             referencedColumns: ["id"]
           },
         ]
@@ -18063,6 +19512,11 @@ export type Database = {
       boss_discounts_mutate: { Args: { command: Json }; Returns: Json }
       boss_discounts_read: { Args: { query?: Json }; Returns: Json }
       boss_discounts_support: { Args: { command: Json }; Returns: Json }
+      boss_fundraising_allocation_mutate: {
+        Args: { command: Json }
+        Returns: Json
+      }
+      boss_fundraising_allocation_read: { Args: { query: Json }; Returns: Json }
       boss_fundraising_mutate: { Args: { command: Json }; Returns: Json }
       boss_fundraising_navigation: { Args: never; Returns: boolean }
       boss_fundraising_public: {
@@ -18079,6 +19533,19 @@ export type Database = {
       boss_merchants_directory: { Args: { query?: Json }; Returns: Json }
       boss_merchants_mutate: { Args: { command: Json }; Returns: Json }
       boss_merchants_read: { Args: { query?: Json }; Returns: Json }
+      boss_money_board_candidate: {
+        Args: { excluded?: string[]; path: string }
+        Returns: Json
+      }
+      boss_money_board_cart: {
+        Args: { command: Json; session_capability: string }
+        Returns: Json
+      }
+      boss_money_board_policy: { Args: { command: Json }; Returns: Json }
+      boss_money_board_public: {
+        Args: { after_ordinal?: number; path: string }
+        Returns: Json
+      }
       boss_notifications_mutate: {
         Args: { p_command: Json; p_request_id: string }
         Returns: Json

@@ -1,5 +1,15 @@
 # Current build state
 
+## October 11, 2026 UTC: controlled grouped fundraising release in progress
+
+**Grouped Checkout + Global Fundraising Allocation: INCOMPLETE.** Main Boss Chat authorized the payments-disabled release of the exact reviewed checkpoint and diagnostic overlay. Canonical Boss is now **129 migrations** (119→123→129), with per-file/intermediate RLS/ACL/search-path checks, preserved original 283 business rowsets and original migration history, plus canonical types/contracts validated. The original administrator is valid; payment execution and temporary authority remain OFF.
+
+Fresh application tests **704/704**, strict typecheck, zero-warning lint and production build pass. Full reviewed Linux SQL/concurrency/recovery evidence is retained; fresh published CI and exact READY deployment must pass before the mandatory protected hosted fundraising diagnostic-retrieval gate. The new disposable runner's transport failure is recorded without claiming a fresh SQL result.
+
+The controlled unpaid hosted window is **UNUSED**. No fixture or temporary authority may start until actual protected fundraising/Money Board retrieval, correlation and bounded historical export are proven. Failure stops the release before that window; prior Merchant/Partner substitutes do not apply. No real money movement, payment certification, Kingdom production change or Phase 8B2.
+
+See [current release evidence and remaining gates](GLOBAL_FUNDRAISING_CONTROLLED_RELEASE_REPORT.md). All earlier acceptance, security and incident history is preserved below.
+
 ## October 9, 2026 UTC: Main Boss Chat formal Phase 8B1 closure
 
 **Phase 8B1 Partner Network Architecture + Integration Foundation: COMPLETE within its documented evidence limitations.** Main Boss Chat explicitly accepted the successfully executed single controlled hosted window, preserved SQL/runtime and local evidence, continuous live-monitoring substitute, administrator-first explicit cleanup and all 264 unchanged original business baselines. This decision supersedes the historical INCOMPLETE checkpoints below; it does not rewrite their observations or reclassify any unexecuted test as passed.

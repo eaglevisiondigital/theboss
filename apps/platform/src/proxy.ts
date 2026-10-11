@@ -1,3 +1,4 @@
+import { FUNDRAISING_CORRELATION_HEADER, FUNDRAISING_PARENT_HEADER, fundraisingDiagnosticRoute, validFundraisingCorrelation } from "@/lib/fundraising/diagnostics";
 import type { NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/proxy";
 import { MERCHANT_CORRELATION_HEADER, merchantDiagnosticPath } from "@/lib/merchants/diagnostics";
@@ -8,6 +9,7 @@ export async function proxy(request: NextRequest) {
   // Overwrite caller input. This opaque diagnostic value grants no authority.
   if (merchantDiagnosticPath(request.nextUrl.pathname)) request.headers.set(MERCHANT_CORRELATION_HEADER, crypto.randomUUID());
   if(partnerDiagnosticRoute(request.nextUrl.pathname)){request.headers.set(PARTNER_CORRELATION_HEADER,crypto.randomUUID());if(!validPartnerCorrelation(request.headers.get(PARTNER_PARENT_HEADER)))request.headers.delete(PARTNER_PARENT_HEADER);}
+  if(fundraisingDiagnosticRoute(request.nextUrl.pathname)){request.headers.set(FUNDRAISING_CORRELATION_HEADER,crypto.randomUUID());if(!validFundraisingCorrelation(request.headers.get(FUNDRAISING_PARENT_HEADER)))request.headers.delete(FUNDRAISING_PARENT_HEADER);}
   return updateSession(request);
 }
 

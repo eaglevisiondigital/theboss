@@ -1,0 +1,38 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir global/fixture.sql
+select pg_temp.policy('money_board',pg_temp.f('falcons'));
+select pg_temp.group_checkout('allocation','card',array[5,10,15]);
+select pg_temp.check('exact economic policy captured before payment','SNAPSHOT',exists(select 1 from public.fundraising_checkout_snapshots where checkout_id=pg_temp.f('checkout-allocation')and channel='money_board'and allocation_policy_id is not null and platform_policy_id is not null and participant_id=pg_temp.f('participant-child1')));
+select boss_private.rails_dispatch(pg_temp.f('checkout-allocation'));
+select pg_temp.receive('allocation','captured');
+select pg_temp.check('capture is not settlement or noncash credit','SEPARATION',not exists(select 1 from public.fundraising_credit_sources));
+select pg_temp.settle('allocation',10);
+select pg_temp.check('noncash source uses verified organization portion','CREDIT',(select original_minor=2100 and accounting_kind='noncash_designation'from public.fundraising_credit_sources));
+select pg_temp.check('designation partitions once without extra liability','CREDIT',(select sum(amount_minor)=2100 and count(*)=3 from public.fundraising_credit_entries)and(select count(*)=1 from public.payments where status='recorded'));
+select pg_temp.check('participant earns separate internal credit','CREDIT',(select sum(amount_minor)=1050 from public.fundraising_credit_entries where category='participant_credit'));
+select pg_temp.check('cash Hamilton source conserves original cents','ROUNDING',(select principal_minor=organization_minor+product_cost_minor+platform_minor and principal_minor=3000 from public.fundraising_cash_rounding_sources));
+select pg_temp.settle('allocation',10);
+select pg_temp.check('same settlement replay creates no additional credit','REPLAY',(select count(*)=1 from public.fundraising_credit_sources)and(select count(*)=3 from public.fundraising_credit_entries));
+select pg_temp.refund_group('allocation',101);
+select pg_temp.check('direct-provider refund reverses memo credit too','CORRECTION',(select sum(amount_minor)=2100-(select sum(organization_minor)from public.fundraising_cash_rounding_corrections)from public.fundraising_credit_entries));
+select pg_temp.check('cash correction exactly reconciles principal','CORRECTION',(select principal_minor=101 and organization_minor+product_cost_minor+platform_minor=101 from public.fundraising_cash_rounding_corrections));
+select pg_temp.refund_group('allocation',2899);
+select pg_temp.check('full correction zeroes noncash credit','CORRECTION',(select sum(amount_minor)=0 from public.fundraising_credit_entries));
+select pg_temp.check('refund never frees historical tile','PERMANENCE',(select count(*)=3 from public.money_board_tile_claims));
+select pg_temp.check('credit never adds Wallet issuance','SEPARATION',(select count(*)=1 from public.boss_bucks_grants where intent_id=(select intent_id from public.payment_checkouts where id=pg_temp.f('checkout-allocation'))));
+set local role authenticated;select pg_temp.actor('admin');
+insert into group_results values('report',public.boss_fundraising_allocation_read(jsonb_build_object('campaign_id',pg_temp.fid('campaign'))));
+select pg_temp.check('v3 distinguishes cash donations and products','REPORT',(select data->>'version'='3'and(data->'source_page'->0->>'gross_donation_minor')='3000'and(data->'source_page'->0->>'gross_digital_card_sales_minor')='0'from group_results where label='report'));
+select pg_temp.check('v3 corrected donations are explicit','REPORT',(select data->'source_page'->0->>'confirmed_donation_refunds_minor'='3000'from group_results where label='report'));
+select pg_temp.actor('other-admin');
+select pg_temp.denied('other organization cannot read source report',format('select public.boss_fundraising_allocation_read(%L::jsonb)',jsonb_build_object('campaign_id',pg_temp.fid('campaign'))));
+reset role;
+select pg_temp.check('integer Hamilton stable tie','ROUNDING',boss_private.fundraising_hamilton(2,array[1,1,1]::bigint[])=array[1,1,0]::bigint[]);
+select pg_temp.check('large exact integer Hamilton','ROUNDING',boss_private.fundraising_hamilton(9007199254740991,array[1,1]::bigint[])=array[4503599627370496,4503599627370495]::bigint[]);
+select pg_temp.check('capped allocation conserves all cents','ROUNDING',boss_private.fundraising_hamilton_capped(8,array[10,10,10]::bigint[],array[1,10,10]::bigint[])=array[1,4,3]::bigint[]);
+select pg_temp.conflict('negative allocation rejected','select boss_private.fundraising_hamilton(-1,array[1]::bigint[])');
+select pg_temp.conflict('correction beyond remaining rejected','select boss_private.fundraising_hamilton_capped(5,array[1,1]::bigint[],array[1,1]::bigint[])');
+set constraints all immediate;
+select count(*)passed_assertions,'Global source allocation and corrections' suite from pg_temp.phase5a_assertions;
+rollback;
