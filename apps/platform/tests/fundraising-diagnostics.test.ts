@@ -26,7 +26,7 @@ async function browser(work: () => unknown) {
 }
 test("diagnostic routes normalize private paths and ignore unrelated modules", () => {
  assert.equal(fundraisingDiagnosticRoute(`/fundraise/${"a".repeat(48)}/cart?capability=PRIVATE`), "/fundraise/[path]/cart");
- for (const route of ["/app/payments", "/app/partners", "/fundraise/../cart", "/fundraise/a/cart", "/api/diagnostics"]) assert.equal(fundraisingDiagnosticRoute(route), null);
+ for (const route of ["/app/payments/diagnostics", "/app/partners", "/fundraise/../cart", "/fundraise/a/cart", "/api/diagnostics"]) assert.equal(fundraisingDiagnosticRoute(route), null);
 });
 test("finite record ignores payloads and rejects invalid correlations", () => {
  const record = fundraisingDiagnosticRecord({ ...seed, donor_email: "PRIVATE", session_capability: "PRIVATE", request_id: c } as typeof seed);

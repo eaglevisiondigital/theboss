@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { PaymentData } from "@/lib/payments/data";
 import { bucksMoney, bucksAmount, bucksDecimal } from "@/lib/boss-bucks/money";
 import { paymentRecord, splitPaymentPreview, type PaymentAction } from "@/lib/payments/input";
+import { fundraisingFetch } from "@/lib/fundraising/diagnostics-client";
 const stateLabel = (v: unknown) => ({ ready:"Ready", unknown:"Outcome unresolved; original attempt held", ach_pending:"ACH pending", completed:"Payment confirmed", partially_refunded:"Partially refunded", captured_unallocated:"Captured; financial review required", failed:"Failed", review_required:"Review required" } as Record<string,string>)[String(v)] ?? String(v).replaceAll("_"," ");
 const txt = (v: unknown) => typeof v === "string" || typeof v === "number" ? String(v) : "";
 const money = (row: Record<string, unknown>, field: string) => bucksMoney(txt(row[field]) || "0", txt(row.currency) || "USD");
@@ -13,7 +14,8 @@ export function PaymentsConsole({ data, organizationId }: { data: PaymentData; o
  async function mutate(action: PaymentAction, input: Record<string, unknown>) {
   const key = JSON.stringify({ action, input }); if (!requestIds.current.has(key)) requestIds.current.set(key, crypto.randomUUID());
   setBusy(true); setStatus("Saving your request.");
-  try { const response = await fetch("/app/payments/mutate", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ action, request_id: requestIds.current.get(key), input }), cache: "no-store" }), body: unknown = await response.json();
+  try { const init: RequestInit = { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ action, request_id: requestIds.current.get(key), input }), cache: "no-store" };
+   const response = action === "policy.create" ? await fundraisingFetch("/app/payments/mutate", init, "payments.policy.authorize") : await fetch("/app/payments/mutate", init), body: unknown = await response.json();
    if (!response.ok || !paymentRecord(body) || body.ok !== true) { setStatus(paymentRecord(body) && typeof body.error === "string" ? body.error : "The request could not be confirmed. Retry the same request."); statusRef.current?.focus(); return; }
    setStatus("Request saved."); router.refresh();
   } catch { setStatus("The request could not be confirmed. Retry the same request."); statusRef.current?.focus(); } finally { setBusy(false); }

@@ -14,7 +14,7 @@ export async function fundraisingPageTrace(route: FundraisingRoute, observedAt: 
 }
 export function fundraisingResponse<T extends Response>(trace: FundraisingTrace, response: T): T {
  response.headers.set(FUNDRAISING_CORRELATION_HEADER, trace.correlationId);
- fundraisingResult(trace, trace.route.endsWith("/candidate") ? "board.candidate" : "fundraising.command", response.status, "src/lib/fundraising/diagnostics-server.ts");
+ fundraisingResult(trace, trace.route === "/app/payments/mutate" ? "payments.command" : trace.route.endsWith("/candidate") ? "board.candidate" : "fundraising.command", response.status, "src/lib/fundraising/diagnostics-server.ts");
  return response;
 }
 export function fundraisingRouteException(trace: FundraisingTrace, error: unknown) {
