@@ -1,0 +1,47 @@
+-- Existing bounded shared pipeline; no provider, high-volume score or new channel.
+begin;
+\ir phase5a/fixture.sql
+insert into public.organization_modules(organization_id,module_id,status,configuration,starts_at)
+ select pg_temp.f('org'),id,'active','{"communications":true,"in_app_notifications":true,"guardian_visibility":true,"email_notifications":false}'::jsonb,now()-interval '3 days' from public.modules where key='messaging';
+update public.guardian_relationships set can_receive_communications=true where id=pg_temp.f('guardian-child1');
+set local role authenticated;
+select pg_temp.actor('admin');
+select pg_temp.create_game('external','external');
+select pg_temp.game_op('game.roster.snapshot','external');
+select pg_temp.game_op('game.operator.assign','external',jsonb_build_object('person_id',pg_temp.f('admin'),'role_assignment_id',pg_temp.f('role-admin'),'function_key','game_administrator','team_id',pg_temp.f('falcons'),'ends_at',now()+interval '1 hour'));
+select pg_temp.game_op('game.operator.assign','external',jsonb_build_object('person_id',pg_temp.f('scorer'),'role_assignment_id',pg_temp.f('role-scorer'),'function_key','scorekeeper','team_id',pg_temp.f('falcons'),'ends_at',now()+interval '1 hour'));
+select pg_temp.game_op('game.start','external','{}','notification-start');
+select pg_temp.check('start request replay is accepted','REPLAY',(public.boss_games_mutate(pg_temp.f('notification-start'),pg_temp.game_command('game.start','external','{}',(select version-1 from pg_temp.phase5a_games where label='external')))->>'replayed')::boolean);
+reset role;
+select pg_temp.check('one source from repeated start request','SOURCE',(select count(*)=1 from public.notification_events e join public.game_operations op on op.id=e.source_id where op.game_id=(select id from phase5a_games where label='external') and e.event_type='game.started'));
+select pg_temp.check('operator assignment uses same canonical shared source table','SOURCE',(select count(*)=2 from public.notification_events e join public.game_operations op on op.id=e.source_id where op.game_id=(select id from phase5a_games where label='external') and e.event_type='game.operator_assigned' and e.source_module='sports' and e.source_type='game_operation'));
+select pg_temp.check('source hook leaves delivery in bounded worker','BOUNDED',not exists(select 1 from public.notifications where organization_id=pg_temp.f('org')) and exists(select 1 from boss_private.notification_expansion_jobs j join public.notification_events e on e.id=j.notification_event_id where e.source_type='game_operation' and j.status='queued'));
+create temp table phase5a_source_count as select count(*) n from public.notification_events where source_type='game_operation' and organization_id=pg_temp.f('org');
+set local role authenticated;
+select pg_temp.actor('admin');
+select pg_temp.game_op('game.score.set','external','{"primary_score":5,"opponent_score":2}');
+select pg_temp.game_op('game.score.set','external','{"primary_score":8,"opponent_score":4}');
+reset role;
+select pg_temp.check('manual score updates do not enqueue high-volume notifications','SOURCE',(select count(*)=(select n from phase5a_source_count) from public.notification_events where source_type='game_operation' and organization_id=pg_temp.f('org')));
+set local role authenticated;
+select pg_temp.actor('admin');
+select pg_temp.game_op('game.transition','external','{"status":"delayed"}');
+select pg_temp.game_op('game.transition','external','{"status":"live"}');
+select pg_temp.game_op('game.finalize','external');
+select public.boss_notifications_mutate(pg_temp.f('notification-worker-one'),pg_temp.cmd('delivery.process',jsonb_build_object('organization_id',pg_temp.f('org'),'limit',100)));
+select public.boss_notifications_mutate(pg_temp.f('notification-worker-two'),pg_temp.cmd('delivery.process',jsonb_build_object('organization_id',pg_temp.f('org'),'limit',100)));
+reset role;
+select pg_temp.check('delay and final lifecycle hooks enqueue one source each','SOURCE',(select count(*)=1 from public.notification_events e join public.game_operations op on op.id=e.source_id where op.game_id=(select id from phase5a_games where label='external') and e.event_type='game.delayed') and (select count(*)=1 from public.notification_events e join public.game_operations op on op.id=e.source_id where op.game_id=(select id from phase5a_games where label='external') and e.event_type='game.final'));
+select pg_temp.check('recipient-source deduplication across worker replay','DELIVERY',not exists(select 1 from public.notifications where organization_id=pg_temp.f('org') group by notification_event_id,recipient_person_id having count(*)>1));
+select pg_temp.check('guardian receives authorized lifecycle notice','GUARDIAN',exists(select 1 from public.notifications n join public.notification_events e on e.id=n.notification_event_id join public.notification_deliveries d on d.notification_id=n.id and d.channel='in_app' where n.recipient_person_id=pg_temp.f('parent') and e.event_type='game.started' and d.status='sent'));
+select pg_temp.check('household membership alone receives no game notice','GUARDIAN',not exists(select 1 from public.notifications where recipient_person_id=pg_temp.f('household-only')));
+select pg_temp.check('unrelated child and tenant receive no lifecycle notice','ISOLATION',not exists(select 1 from public.notifications where recipient_person_id in(pg_temp.f('child2'),pg_temp.f('child3'),pg_temp.f('other-admin'))));
+select pg_temp.check('game source safe data has no roster or score-operation contents','PRIVACY',not exists(select 1 from public.notification_events e cross join lateral jsonb_object_keys(e.safe_data) k where e.organization_id=pg_temp.f('org') and e.source_type='game_operation' and k not in('team_id','source_version')));
+select pg_temp.check('no live external email transport activated','PROVIDER',not exists(select 1 from public.notification_deliveries where organization_id=pg_temp.f('org') and channel='email' and status in('queued','processing','sent','delivered')));
+create temp table phase5a_start_source as select e from public.notification_events e where e.organization_id=pg_temp.f('org') and e.event_type='game.started';
+select pg_temp.check('source has safe canonical game destination','PROJECTION',(select boss_private.notification_destination(e)='/app/games?org='||pg_temp.f('org')||'&game='||(select id from phase5a_games where label='external') from phase5a_start_source));
+update public.guardian_relationships set can_receive_communications=false where id=pg_temp.f('guardian-child1');
+select pg_temp.check('communication capability revocation removes source visibility','REVOKE',(select not boss_private.notification_source_visible(e,pg_temp.f('parent')) from phase5a_start_source));
+select pg_temp.check('game schedule visibility does not require communication flag','SEPARATION',(select boss_private.games_can_view(pg_temp.f('parent'),g) from public.games g where id=(select id from phase5a_games where label='external')));
+select count(*) as passed_assertions,category from pg_temp.phase5a_assertions group by category order by category;
+rollback;

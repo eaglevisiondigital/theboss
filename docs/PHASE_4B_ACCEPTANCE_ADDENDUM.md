@@ -1,0 +1,130 @@
+# Phase 4B acceptance addendum
+
+## Current closure status: COMPLETE
+
+Main Boss Chat closed Phase 4B after reviewing the complete acceptance record and
+accepting the hosted forged-request tooling limitation. Adult volunteer positives
+remain SQL/RUNTIME VERIFIED with hosted positives unverified under approved
+eligibility policy. Forged signed mutations remain SQL/RUNTIME VERIFIED with
+hosted execution unavailable through approved tooling; none is HOSTED VERIFIED.
+Neither limitation represents a known production defect.
+
+See [the authoritative closure decision](DECISIONS.md#phase-4b-closure-by-main-boss-chat)
+and [current build state](CURRENT_BUILD_STATE.md). No new test window, implementation,
+schema, Auth or security-policy change accompanies closure; no later phase starts.
+All prior report text below is preserved verbatim as acceptance history, including
+its original INCOMPLETE status, incidents, timing exceptions and proxy disclosure.
+
+Historical October 3 report. The [October 4 final 39-point
+report](PHASE_4B_FINAL_HOSTED_ACCEPTANCE.md) supersedes remaining-case lists below
+without erasing historical failures or timing exceptions.
+
+Status: **INCOMPLETE**. Implementation and controlled-authority cleanup are verified; required hosted acceptance remains unfinished because hosted access failed. This is an acceptance/recovery blocker, not a demonstrated contradiction in the approved architecture. The report distinguishes earlier evidence from both October 3 runs and makes no claim that an unperformed hosted scenario passed.
+
+Latest controlled acceptance began from `22f29f2bdafb4f4f51ae213d0ee89cd3ca29ae95`, using published application source `4247289af8d1aad46379c4597bfd87c19ddddccd`. The fourth window had fixed start **2026-10-03 13:15:40.602045 UTC** and expiry **14:15:40.602045 UTC**. Testing stopped when the guardian Notifications page reported temporary unavailability around 13:37 UTC. Subsequent read-only diagnosis confirms PostgreSQL `57014` statement timeouts for both Notifications reads and Attendance at the eight-second limit; the exact query-performance defect remains unproved. See [the focused diagnosis](PHASE_4B_NOTIFICATIONS_DIAGNOSIS.md). No further acceptance window was opened. Final recovery and zero-residual proof completed by **13:37:42 UTC / 08:37:42 CDT**, before both the internal cleanup target and hard expiry.
+
+Remaining hosted cases are explicitly limited to:
+
+- **UNVERIFIED DUE TO HOSTED ACCESS FAILURE:** canceled recurring occurrence and its Family Hub/reminder exclusion; positive guardian receipt of deadline and missing-response reminders, their repeated preparations, and context-change/reconfirmation notification receipt; remaining restricted-role/guardian and forged event/occurrence/participant/team/unit signed-mutation matrix; Calendar at 320px, remaining interactive mobile views and final repeated navigation/reload stability. The nonexistent-occurrence GET exposed no records/actions, but its generic unavailable result does not prove a mutation denial.
+- **UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION:** positive adult self-signup, duplicate/full-capacity signup, commitment cancellation, eligible manual assignment/reassignment, positive filled/unfilled counts, coordinator positive assignment, shift-change recipient receipt, selected-volunteer communication/attachment access and Family Hub commitments. Both reviewed controlled candidates have unknown adult eligibility. No additional role/candidate, DOB or broader authority was fabricated.
+- **SQL/RUNTIME VERIFIED:** all applicable database policy, integrity, reminder, isolation, concurrency and volunteer cases retain their recorded passing evidence. This does not convert any missing hosted case into a hosted pass.
+
+1. **Starting SHA.** Original Phase 4B start: `1a6b00805c50be5a4fac40d477fc7fa64ac4b390`. Latest remaining-acceptance start: `22f29f2bdafb4f4f51ae213d0ee89cd3ca29ae95` on `build/boss-platform-v1`.
+
+2. **Final SHA.** The final branch SHA is reported in the completion handoff and [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3) head. This document does not invent its own eventual commit hash.
+
+3. **Migrations.** All 29 canonical migrations are verified in `the-boss-platform`, ref `ilykgwgmxtrrikreacrz`. Phase 4B adds six: `20261002151348` controls, `20261002151412` attendance, `20261002151417` volunteers, `20261002151425` integrations, `20261002164701` deadline short-circuit and `20261002165305` projection materialization. Both append SQL hashes match local files. No migration was added during this resumed acceptance; canonical database types remain byte-identical at 151,779 bytes.
+
+4. **Attendance entities.** Event settings, occurrence/person responses, immutable response history, light check-in/history, notification request sources and private operation receipts are implemented. Existing canonical people, participants, events and occurrence identities are reused.
+
+5. **RSVP architecture.** Responses bind the actual event, original occurrence key, person and participant/staff subject kind. Finite commands, optimistic versions, event-row serialization and caller-bound request receipts prevent duplicate transitions and stale overwrites. A retry reauthorizes current context before returning a receipt.
+
+6. **Guardian response — HOSTED VERIFIED.** Dedicated current verified Child1 attendance authority and exact roster are required; older guardian flags remain false. Earlier RSVP states passed. The fourth run saved Maybe for the second recurring occurrence while the first remained NO RESPONSE. Removing only the attendance capability with the administrator inactive then caused the cached ordinary signed response POST to deny the save. Safe pre-cleanup history still contained only the authorized second-occurrence write.
+
+7. **Participant self-response — SQL/RUNTIME VERIFIED; hosted positive UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION.** Explicit feature, current participant eligibility and known age meeting the minimum are required; the minimum cannot be below 18 and unknown age fails closed. No independent eligible participant session or invented DOB was used.
+
+8. **Coach/staff attendance — HOSTED VERIFIED for earlier exact-Falcons check-in; SQL/RUNTIME VERIFIED for the full policy matrix.** Permission mapping alone supplies no authority. Exact current scope/relationship and independent feature controls remain required. The remaining forged-scope hosted mutation matrix is UNVERIFIED DUE TO HOSTED ACCESS FAILURE.
+
+9. **Attendance deadlines.** Absolute or relative deadlines, lock/allow-late policy and permission-gated staff override are implemented. Earlier hosted lock policy removed the response form; allow-late reconfirmation saved. Deadline short-circuit regression coverage passed in the prior complete database run. Neither a browser timeout nor network failure alone proves a deadline or database defect.
+
+10. **Reconfirmation — HOSTED VERIFIED for earlier material event change and late reconfirmation save; SQL/RUNTIME VERIFIED for context/history rules.** Earlier history retains the successful late save and cleared marker before subsequent archival correctly changed context. Canceled-occurrence behavior and remaining notification receipt are UNVERIFIED DUE TO HOSTED ACCESS FAILURE.
+
+11. **Attendance summary — HOSTED VERIFIED.** The resumed staff summary showed total 3 and pending/no response 3, with every other count zero. Authorized counts and bounded status/name drilldown are implemented; private absence notes require subject, exact guardian or management authority. Counts and public schedule visibility grant no mutation capability or broader roster access.
+
+12. **Family Hub — HOSTED VERIFIED for the tested projection and post-fix reload.** The published denial-display fix showed restricted older family records alongside the independently authorized attendance Hub. Only Child1 and two correct pending prompts appeared. Child1 filtering survived full reload; unrelated Child2 and household-child GET filters exposed no family data/actions. The second recurring response saved independently. Final repeated navigation/canceled-occurrence checks remain UNVERIFIED DUE TO HOSTED ACCESS FAILURE.
+
+13. **Check-in foundation.** Expected, checked-in, absent, late and excused states with append-only history are implemented. Earlier hosted Child1 coach check-in passed. No kiosk, biometric, location tracking or advanced check-in workflow is included.
+
+14. **Attendance history — SQL/RUNTIME VERIFIED.** Immutable current-authority history retains the earlier eleven response/one check-in records and third-run successful responses. Fourth-run pre-cleanup metadata confirmed one legitimate second-occurrence response history and no write from the stale denied POST. Cleanup preserves evidence and can append normal context-change history.
+
+15. **Volunteer role architecture.** Organization-owned volunteer duty definitions are separate from the security-role catalog. Role names do not create authority, assignments or module activation. Duty descriptions and lifecycle are bounded and tenant qualified.
+
+16. **Volunteer shifts.** Exact organization/unit/team shifts support status, visibility, capacity, time, signup deadline, reminder offset and optional canonical event occurrence. Standalone shifts do not require Calendar events. Attached event changes block new signup until authorized review; existing commitments retain identity/history.
+
+17. **Capacity — HOSTED VERIFIED for earlier exact-Falcons capacity editing from one to two; SQL/RUNTIME VERIFIED for locking/full/duplicate/release integrity.** Positive hosted full/duplicate/signup-release cases are UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION because the approved candidate picker has no eligible adult.
+
+18. **Volunteer self-signup — SQL/RUNTIME VERIFIED; hosted positive UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION.** Both reviewed controlled candidates have null DOB and fail known-adult eligibility; the eligible picker is empty. No DOB was invented, minimum lowered or new eligible person fabricated. Duplicate/full/cancel/assignment/reassignment positives remain database evidence.
+
+19. **Family commitments — SQL/RUNTIME VERIFIED; positive hosted projection UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION.** Only the signed adult's own legitimate commitments may appear; household/child filtering supplies no another-adult access. No eligible controlled commitment exists for a positive hosted result.
+
+20. **Administrator volunteer view — HOSTED VERIFIED for the empty eligible picker; SQL/RUNTIME VERIFIED for finite scoped management commands.** Positive assignment, reassignment and resulting filled/unfilled counts are UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION. Platform administrator status does not make an ineligible candidate eligible.
+
+21. **Coach/coordinator volunteer view — HOSTED VERIFIED for earlier Falcons management and bounded unrelated-team GET denial; SQL/RUNTIME VERIFIED for exact-team scope.** Head coaches do not inherit manual assignment authority. No new coordinator role was introduced; remaining hosted negatives are UNVERIFIED DUE TO HOSTED ACCESS FAILURE and eligible positive assignment cases remain UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION.
+
+22. **Notifications — HOSTED VERIFIED for guardian requested receipt, drawer, persisted read state and requested-reminder replay.** Each recurring occurrence delivered one requested notification to the attendance-only guardian; one marked read remained read after reload. Two ordinary requested preparations returned Saved without increasing same-version source/recipient counts. The inspected one-hour reminder range contained exactly one occurrence of the new controlled event. Missing-response and deadline preparations also returned Saved and created expected source/recipient metadata; their guardian receipt and remaining replay/context-change cases are UNVERIFIED DUE TO HOSTED ACCESS FAILURE. Canonical in-app delivery status was sent; email stayed suppressed/not_configured with zero external sends. No provider or scheduler was enabled.
+
+23. **Selected-volunteer communications — SQL/RUNTIME VERIFIED; positive hosted UNVERIFIED DUE TO POLICY/ELIGIBILITY LIMITATION.** Existing Messaging availability, announcement permission and exact volunteer context remain independently required. No eligible controlled recipient/assignment was fabricated; communication/attachment paths were not claimed as hosted passes.
+
+24. **Permissions.** Eight keys are implemented: attendance view/respond/manage/check-in and volunteer view/signup/manage/assign. Current identity, role window, actual relationship, scope, feature and resource context must all authorize an operation. Knowing a person/event/shift ID supplies no grant.
+
+25. **Role mappings.** Canonical metadata retains 21 roles, 52 permissions and 393 mappings. Approved potential capabilities are implemented without broader permissions or implicit descendant inheritance. Head-coach volunteer management does not include assignment; the volunteer-coordinator scope remains exact team.
+
+26. **Feature controls.** Attendance is an independent configuration of existing Calendar; Volunteers remains an independent existing module. RSVP, participant self-response, guardian response, reminders, check-in and head/assistant management are separately controlled. Existing guardian flags and legacy Calendar coach settings do not activate attendance authority.
+
+27. **RLS/security.** Canonical checks verify 73 public tables, 14 modules, twelve new closed RLS tables including receipts, four invoker RPCs, 72 private helpers with verified ACLs/empty search paths and 38 indexed new foreign keys. Raw client coordination reads/writes remain closed. Scoped safe RPC projections enforce current authority.
+
+28. **Signed server mutations — HOSTED VERIFIED for ordinary second-occurrence response, RSVP settings, requested/deadline/missing reminder preparation and the stale response denial after capability removal.** Same-origin verified-caller finite commands and database authorization remain the boundary. Remaining raw forged event/occurrence/person/team/unit POST cases are UNVERIFIED DUE TO HOSTED ACCESS FAILURE. No test endpoint or service-role application path was added.
+
+29. **Audit and cleanup — SQL/RUNTIME VERIFIED.** Fourth-run baseline/start, finite module preparation, guardian-only setup, capability removal/reinstatement, three administrator limitations, signed activity and restoration are audited. Final independent admin recovery committed at 13:37:08.159181 UTC; exact baseline restoration at 13:37:23.012809; event archival/queue cleanup at 13:37:33.089883; zero-residual proof by 13:37:42, before the 14:15:40.602045 expiry. All four runs are closed; every baseline-equality check is true and every current temporary authority, unarchived/untracked resource and pending-work count is zero. Original administrator grant is valid. Original adult DOB, rosters and unrelated relationships are unchanged. Historical timing exceptions remain: second-run expiry October 2 18:18:39.200706, admin recovery 18:44:33.554173, baseline 19:45:21.914563 and archive 19:45:29.259326; that deadline was missed. Third-run admin recovery 03:51:02.918401, baseline 03:51:15.959450 and archive 04:01:55.275963 met its 04:11:54.789188 expiry but missed the earlier internal resource target.
+
+30. **Attendance database totals — SQL/RUNTIME VERIFIED, retained evidence.** No completed migration/SQL implementation work was repeated during this fourth window. The prior fresh 29-migration run passed 7,170 SQL assertions, including 28 bootstrap and 690 Phase 4B assertions: 88 attendance, 151 volunteer, 100 integrations and 351 independent security. The full command later exited 1 on volunteer harness synchronization; its seven-case retry passed as recorded below. Hosted results are separately labeled.
+
+31. **Volunteer test totals/results — SQL/RUNTIME VERIFIED.** The fresh full rerun passed 151 volunteer SQL assertions. Positive signup/duplicate/full/cancel/assignment/reassignment remain database-only and do not certify signed hosted behavior. The synchronization failure is reported separately under concurrency.
+
+32. **Concurrency results — SQL/RUNTIME VERIFIED.** All 34 races are now freshly verified across the full run's 27 successful races and a successful seven-case volunteer retry. The original volunteer wait conflated slow and terminated writers. A harness-only correction preserves actual readiness/lock predicates and every invariant, adds a 60-second bound, 75-second statement timeout and value-free participant diagnostics. A new local-only cluster applied all 29 migrations; all seven volunteer races passed, exit 0, and the cluster was removed. This does not relabel the initial full command's exit 1 or assert an unproved product defect. No product SQL changed.
+
+33. **Cross-tenant isolation — SQL/RUNTIME VERIFIED; HOSTED VERIFIED for earlier bounded unrelated-team/organization GETs.** Shared schedule visibility remains distinct from mutation power. The complete raw forged signed POST matrix remains UNVERIFIED DUE TO HOSTED ACCESS FAILURE.
+
+34. **Guardian/family isolation — HOSTED VERIFIED for Child1-only Hub, unrelated Child2/household-child GET exclusion, earlier unchanged expired Child3 and household-only denial, and latest stale signed response POST denial after dedicated flag removal.** Older guardian flags remain false and household membership alone supplies no RSVP authority. Full independent/forged signed-session permutations remain SQL/RUNTIME VERIFIED with remaining hosted cases UNVERIFIED DUE TO HOSTED ACCESS FAILURE.
+
+35. **Hosted acceptance — PARTIAL, NOT COMPLETE.** Published application source `4247289af8d1aad46379c4597bfd87c19ddddccd` served the new fix, Family Hub, recurrence response and requested-notification scenarios. Around 13:37 UTC, the guardian Notifications page displayed temporary unavailability, no authorized organization context and no header drawer. Subsequent bounded logs confirm eight-second PostgreSQL `57014` cancellations for both Notifications reads and Attendance. The empty unavailable projection explains missing Notifications context/drawer; independent administration succeeded. This proves a database request timeout, not a network diagnosis or architecture contradiction. Testing stopped immediately under the user's failure rule, using prepared recovery without another window. Earlier connection-reset/navigation failures remain historical separate evidence. The separate post-cleanup Notifications `PT403` display correction and final 218-test validation are documented in the focused diagnosis; they do not certify the original timeout fixed or add restricted hosted passes.
+
+36. **Desktop — HOSTED VERIFIED for the latest bounded Family/Attendance/requested-notification actions and restored administrator before the failure, plus earlier recorded desktop views.** Full final navigation/reload stability and remaining calendar/volunteer interaction matrix are UNVERIFIED DUE TO HOSTED ACCESS FAILURE or the separately labeled eligibility limitation. No production availability/load certification is claimed.
+
+37. **Mobile — HOSTED VERIFIED for recorded Attendance/Family Hub at 320px, earlier 390px views, and latest requested-notification inbox/drawer/read reload at 320×740.** Drawer screenshot shows readable controls within the viewport. Calendar at 320px and remaining interactive pages/final navigation are UNVERIFIED DUE TO HOSTED ACCESS FAILURE. The latest temporary viewport was reset after stopping, and safe synthetic screenshots remain private outside Git.
+
+38. **Security advisors — SQL/RUNTIME VERIFIED, freshly rechecked after cleanup.** Unchanged: 57 intentionally closed-RLS informational notices and one pre-existing Auth leaked-password-protection warning. No Auth/security setting changed. See [recommended remediation](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection); this run does not authorize changing Auth settings.
+
+39. **Performance advisors — SQL/RUNTIME VERIFIED, freshly rechecked after cleanup.** Unchanged: 114 [unused-index informational notices](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index) and one existing [absolute Auth connection notice](https://supabase.com/docs/guides/deployment/going-into-prod). No infrastructure/policy change was made to bypass hosted failure.
+
+40. **Typecheck — PASS.** Fresh final application typecheck passed. Live generated types exactly match the checked-in 151,779-byte file. Validation used matching isolated locked dependencies and synthetic public configuration, with no production environment or credential files.
+
+41. **Lint — PASS.** Fresh final lint passed with zero warnings.
+
+42. **Application tests — PASS.** Fresh final run passed all 212 tests with no failures, skips or cancellations. Existing six denial-display/projection regressions remain passing; no new code defect was established or source change made in this window.
+
+43. **Production build — PASS.** Fresh final build passed with synthetic public configuration and approved public origin. No new website deployment was made by this acceptance run; the existing dedicated platform remains published.
+
+44. **Changes in this resumption.** Documentation only: this ordered addendum, validation record and current build state. No application code, tests, migration, generated types, module architecture, Auth setting, customer data or public website change. Temporary synthetic controlled lifecycle data and safe audit evidence were restored/archived through the reviewed procedures.
+
+45. **Commit/publication.** Starting branch head `22f29f2bdafb4f4f51ae213d0ee89cd3ca29ae95` passed GitHub platform validation. Hosted evidence used application source `4247289af8d1aad46379c4597bfd87c19ddddccd`, ready deployment `6ac0e0073383210008d7e4df`, published 2026-10-03 10:59:50.819 UTC. The final documentation-only commit is reported in the handoff and PR head; no self-referential eventual hash is invented.
+
+46. **PR #3 status.** [PR #3](https://github.com/eaglevisiondigital/theboss/pull/3) remains OPEN, DRAFT and UNMERGED on `build/boss-platform-v1`. Final publication/CI metadata belongs in the handoff and PR head; no merge is authorized by this report.
+
+47. **Remaining blockers/deviations.** Phase 4B remains INCOMPLETE due to the exact hosted cases listed above. Adult eligibility independently limits positive volunteer acceptance; that limitation is allowed for eventual closure but does not excuse the other unperformed hosted cases. No architecture contradiction was demonstrated. Fourth-run cleanup met both targets; earlier second/third timing exceptions and earlier rejected database-clone attempt remain disclosed. No new authority window or policy workaround followed the hosted failure.
+
+48. **Security confirmations.** This latest resumption requested, entered, retrieved, printed, exposed, stored and committed no password, Boss Auth token/session value, privileged key or other credential material. It reused the existing signed browser session. No real youth/customer data or sensitive document content was used. No DOB was invented and no security policy weakened. Zero temporary role, guardian, household, organization, channel/module authority or active controlled resource remains; the original administrator grant is current. Earlier Netlify proxy output exposure remains a historical exception: treated as EXPIRED BY DESIGN under direct authorization; individual revocation unconfirmed. Its value was never reused, reproduced, copied to files or committed after the incident.
+
+49. **Confirmation no out-of-scope module started.** No Game Center, fundraising, Boss Bucks, Money Board, live payments, new communication/provider infrastructure, commerce, livestreaming, advanced check-in or later phase was started. Existing public website release state was preserved.
+
+50. **STOP.** Acceptance stopped after hosted access failed, as directly instructed. Report the exact unverified cases; do not infer hosted PASS from database results, reopen another temporary window, begin another phase or declare Phase 4B complete. PR #3 stays OPEN, DRAFT and UNMERGED.

@@ -1,0 +1,1042 @@
+{
+  "created_utc": "2026-10-10T15:39:03.953973+00:00",
+  "base_sha": "4b20ba6fec9b0491c3bbcb57d1d56ca3787495b4",
+  "scope": "LOCAL ONLY; 119 canonical baseline supplied by Main Boss Chat; no canonical mutation or connection in this task",
+  "expected_canonical_before": 119,
+  "grouped_intermediate": 123,
+  "proposed_after": 129,
+  "migrations": [
+    {
+      "sequence": 1,
+      "version": "20260930212353",
+      "filename": "20260930212353_phase2a_grant_hardening.sql",
+      "bytes": 2256,
+      "sha256": "bafe5fd841358ff78cb12cf371177d858a5ac9fbd26793e70ea0c3ca2ad1a5f0",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 2,
+      "version": "20260930212410",
+      "filename": "20260930212410_phase2a_identity_organizations.sql",
+      "bytes": 9232,
+      "sha256": "97ef56bfacd5228e1bea263fa17900921cfe04fa4684762b7445fea964dd4d3b",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 3,
+      "version": "20260930212417",
+      "filename": "20260930212417_phase2a_relationships_access_governance.sql",
+      "bytes": 22671,
+      "sha256": "eef11695fb8081223e6cc903df78dfda5a62673f1770bd32229a4b9b7b9b214c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 4,
+      "version": "20260930212421",
+      "filename": "20260930212421_phase2a_integrity.sql",
+      "bytes": 9690,
+      "sha256": "07f38951d690d88db879f5681cc4a31b367b1732f1e03a437edcf515179d1837",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 5,
+      "version": "20260930212426",
+      "filename": "20260930212426_phase2a_authorization_rls.sql",
+      "bytes": 21032,
+      "sha256": "74c3ffedd6b476d74fa87d55d4c33e06a8af6a2d898916e4e6ed344c9fd79a14",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 6,
+      "version": "20260930212430",
+      "filename": "20260930212430_phase2a_catalog_seeds.sql",
+      "bytes": 5999,
+      "sha256": "987dbd39c72c8720a051fc175b6ef1713f4ac169a2deaf5a9464aa6051f6f257",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 7,
+      "version": "20261001134826",
+      "filename": "20261001134826_phase2b_operational_mutations.sql",
+      "bytes": 66337,
+      "sha256": "a95a696b34e9c13d46c7e17fc3720f6c887478f03ff72cf3b64be279d6375325",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 8,
+      "version": "20261001134845",
+      "filename": "20261001134845_phase2b_admin_read_projection.sql",
+      "bytes": 27541,
+      "sha256": "e80af60dd67ca4dfca310f2388fa14459f8a8f672ced608a3a3d21e9e7b11c06",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 9,
+      "version": "20261001140101",
+      "filename": "20261001140101_phase2b_scoped_people_projection.sql",
+      "bytes": 5077,
+      "sha256": "890ccdb1720bb8fe050b146edf0a0ef702c84c20f67f9bcebd4ee28aba876cb9",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 10,
+      "version": "20261001160819",
+      "filename": "20261001160819_phase3a_calendar_core.sql",
+      "bytes": 65696,
+      "sha256": "a47fdabea1a710816a025d727ad6abfc3f950779af1517e898e71630e896cf5f",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 11,
+      "version": "20261001160835",
+      "filename": "20261001160835_phase3a_calendar_mutations.sql",
+      "bytes": 47675,
+      "sha256": "e49986ab9c09885a474c9cc8ffd27569ca2b3495966493b79bfbc36b8226becb",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 12,
+      "version": "20261001160851",
+      "filename": "20261001160851_phase3a_calendar_admin_projection.sql",
+      "bytes": 17770,
+      "sha256": "e8c8a75a389244c39a09ab333d3b9a01d174045755f19ebcedffd46970bd2a84",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 13,
+      "version": "20261001231206",
+      "filename": "20261001231206_phase3b_registration_core.sql",
+      "bytes": 63366,
+      "sha256": "69f70057adb54870957b83473cefd23ceba716c1b0836cae747c288cb1482414",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 14,
+      "version": "20261001231216",
+      "filename": "20261001231216_phase3b_registration_mutations.sql",
+      "bytes": 88245,
+      "sha256": "f32b5890d9319210891803b78451e5f3f0a62a227765ff2933f1f8dc3012f959",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 15,
+      "version": "20261001231224",
+      "filename": "20261001231224_phase3b_registration_read_storage.sql",
+      "bytes": 54090,
+      "sha256": "3a24da05f52c0da520558321269367b9034fe6bc3ba350796a292417b0dc6810",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 16,
+      "version": "20261001232309",
+      "filename": "20261001232309_phase3b_current_document_projection.sql",
+      "bytes": 103635,
+      "sha256": "12c4876ed22b42f20d4da9a857fda544d45bdc924afb3d27d771ebc64d417c0f",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 17,
+      "version": "20261002031816",
+      "filename": "20261002031816_phase3b_storage_upload_preflight.sql",
+      "bytes": 6487,
+      "sha256": "88e03ab0f6b5af099d6f2a98e264967f45a3ef2ed548f07b57a997530f8eabde",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 18,
+      "version": "20261002034037",
+      "filename": "20261002034037_phase3b_storage_download_preflight.sql",
+      "bytes": 2304,
+      "sha256": "5aef25fb1a7c04dd78d9d391294e93dc3f6f712b629a49255d480a3e841e24bd",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 19,
+      "version": "20261002062003",
+      "filename": "20261002062003_phase4a_communications_core.sql",
+      "bytes": 32867,
+      "sha256": "e7bed30d2ca23f2c71481fa02c3ab74d69cf8b171246d202b58d99f93ae7a5bb",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 20,
+      "version": "20261002062020",
+      "filename": "20261002062020_phase4a_communications_operations.sql",
+      "bytes": 58270,
+      "sha256": "5c22dfe4413e6b5178b35ed1f718d99380d3bbe4a481759207cff09c180d7f5e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 21,
+      "version": "20261002062028",
+      "filename": "20261002062028_phase4a_notifications_core.sql",
+      "bytes": 32731,
+      "sha256": "66b1686ffe232bb9a8a36b8d70457b30a1cec6f61b2e132d22fbf6b4053643c6",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 22,
+      "version": "20261002062035",
+      "filename": "20261002062035_phase4a_notifications_engine.sql",
+      "bytes": 34970,
+      "sha256": "017ea3d429e6e32f2ec13da74196e6eb3c4a5adb0b1ad4d69d70ee265ed2c5b9",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 23,
+      "version": "20261002062040",
+      "filename": "20261002062040_phase4a_communications_catalog_projection.sql",
+      "bytes": 18020,
+      "sha256": "7397f93e3d9d1e9d5bab1f3472cb23c40ab09b32989b7e06e2b1115e927e2c03",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 24,
+      "version": "20261002151348",
+      "filename": "20261002151348_phase4b_coordination_controls.sql",
+      "bytes": 8371,
+      "sha256": "f9b3e8b9b15fa9aa16dc47c69b6b4feb94a9816758cd6cadc7b5a18b97dff4e6",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 25,
+      "version": "20261002151412",
+      "filename": "20261002151412_phase4b_attendance_core.sql",
+      "bytes": 71901,
+      "sha256": "0bbe41322d4736863f414c1a67ca0eedf245285013a22a7a166855a4f1697acf",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 26,
+      "version": "20261002151417",
+      "filename": "20261002151417_phase4b_volunteers_core.sql",
+      "bytes": 63187,
+      "sha256": "d7c423370ebf2e2e89b339600bcf0f02aa5a10b3abb99e7b7cc0d30a58b6e54d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 27,
+      "version": "20261002151425",
+      "filename": "20261002151425_phase4b_coordination_integrations.sql",
+      "bytes": 179411,
+      "sha256": "389d5123aa19d791465fe4923ab53d94d5df87ef1e5552124970687730aaae8c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 28,
+      "version": "20261002164701",
+      "filename": "20261002164701_phase4b_deadline_short_circuit.sql",
+      "bytes": 934,
+      "sha256": "7986b308b9b29272cdd62089618f3ab46af601916b2a2c86471730d5c2607099",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 29,
+      "version": "20261002165305",
+      "filename": "20261002165305_phase4b_projection_materialization.sql",
+      "bytes": 17688,
+      "sha256": "da76aa96c0012f8433482992c1fc7ff2838f44dee443cac4dcecb5caebc187d0",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 30,
+      "version": "20261003175623",
+      "filename": "20261003175623_phase4b_read_evaluation_reuse.sql",
+      "bytes": 5959,
+      "sha256": "ea01c1b3d3999374d78abae89cb53a468e28b8e4d2c1d67ab861d325691adaca",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 31,
+      "version": "20261004052521",
+      "filename": "20261004052521_phase5a_game_center_core.sql",
+      "bytes": 32347,
+      "sha256": "4eaf32ea699c09342a222e68873aae6c9e94e6f1b119c81f9270408323e257c1",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 32,
+      "version": "20261004052534",
+      "filename": "20261004052534_phase5a_game_center_operations.sql",
+      "bytes": 53317,
+      "sha256": "fdebf932c7cd4233f8243ae982695abe591cd88df7b756e3ac994385a41127ea",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 33,
+      "version": "20261004052544",
+      "filename": "20261004052544_phase5a_game_center_integrations.sql",
+      "bytes": 16713,
+      "sha256": "5b115821b7462f573deb04733c6ca2732fbf389536fbea3fd46badcc8d7654c9",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 34,
+      "version": "20261004140729",
+      "filename": "20261004140729_phase5b_basketball_core.sql",
+      "bytes": 15850,
+      "sha256": "1bfdfe987806ba89dac76439ff32494fc7f6b7bc829dcc54519afb71eeef1104",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 35,
+      "version": "20261004140736",
+      "filename": "20261004140736_phase5b_basketball_operations.sql",
+      "bytes": 19848,
+      "sha256": "2f8a7f8ab907fda7328615218b437101daac2828a16154d09c53c53d949a2aea",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 36,
+      "version": "20261004140744",
+      "filename": "20261004140744_phase5b_basketball_integration.sql",
+      "bytes": 25384,
+      "sha256": "03ddb55c0f11b42b74a1e591d410c19584f11e0f1b52fa435e7dc4ad83b5112a",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 37,
+      "version": "20261004141529",
+      "filename": "20261004141529_phase5b_final_stats_identity.sql",
+      "bytes": 273,
+      "sha256": "3e12ab5fe4e60f01ecaf605205cfcad5610fcda1819c22c7cd126e4101a1d88d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 38,
+      "version": "20261004172028",
+      "filename": "20261004172028_phase5c_soccer_core.sql",
+      "bytes": 19764,
+      "sha256": "51383ad46a715db1ace6fd6662f176c2f250732e121bac39f316bdcadcd2939b",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 39,
+      "version": "20261004172031",
+      "filename": "20261004172031_phase5c_soccer_operations.sql",
+      "bytes": 36147,
+      "sha256": "3f8c8a72c8cb024d98f3d7a95668452b48d30daf567f00ed6cd42c122267d3b2",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 40,
+      "version": "20261004172034",
+      "filename": "20261004172034_phase5c_soccer_integration.sql",
+      "bytes": 29086,
+      "sha256": "7f9f4cc66f7e0845a9fdd6daf7b911807f2c779d82f22ddb323a4d8c7c0be21f",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 41,
+      "version": "20261004232222",
+      "filename": "20261004232222_phase5d_football_core.sql",
+      "bytes": 38577,
+      "sha256": "a25ee5c6241b111df56de09dda0f8687cf72297eaa40660e0129e6bebf4a6253",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 42,
+      "version": "20261004232234",
+      "filename": "20261004232234_phase5d_football_operations.sql",
+      "bytes": 36692,
+      "sha256": "b42a29ae0f7635fe07040e0ccf972910adb86ef9270d7c49f7d6496b63a2b77e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 43,
+      "version": "20261004232241",
+      "filename": "20261004232241_phase5d_football_integration.sql",
+      "bytes": 29084,
+      "sha256": "9dc6e4e5410b51f7a347d8faa29ad9e1e351d65d8f3b82a3becee9a0750f367c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 44,
+      "version": "20261004232246",
+      "filename": "20261004232246_phase5d_athlete_history.sql",
+      "bytes": 14420,
+      "sha256": "864d7e8b3d82eef994e2767e48ac9718281d1bd406f7d84651b475553c3c6d7e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 45,
+      "version": "20261005110330",
+      "filename": "20261005110330_phase5d_game_candidate_validation.sql",
+      "bytes": 12602,
+      "sha256": "2eed671c7a09fbff77b359d746a7eff4c08213d48c1af8c7fc456250dd0a0b03",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 46,
+      "version": "20261005122349",
+      "filename": "20261005122349_phase5d_football_conversion_state.sql",
+      "bytes": 1169,
+      "sha256": "bd08a29275a545b633c867d5d30faae8a8b564993d9b988d1e8744d78f915ca7",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 47,
+      "version": "20261005142049",
+      "filename": "20261005142049_phase5e_volleyball_core.sql",
+      "bytes": 24835,
+      "sha256": "54c358e9e6feae7fadf53cb15893fdbffffcda0617b5b0fdf0b9b6a5b3acab82",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 48,
+      "version": "20261005142103",
+      "filename": "20261005142103_phase5e_stat_tracking.sql",
+      "bytes": 76421,
+      "sha256": "6a12a0cda3c0254aea5598ddb8f751a758cca2d20153e60d868302daa92fd7d6",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 49,
+      "version": "20261005142111",
+      "filename": "20261005142111_phase5e_tracking_commands.sql",
+      "bytes": 12777,
+      "sha256": "25f06d24091c31ec70e82a2bfbd4b8ed0d15f40fe59a833d0dd50cf2379ede6a",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 50,
+      "version": "20261005142121",
+      "filename": "20261005142121_phase5e_volleyball_operations.sql",
+      "bytes": 22510,
+      "sha256": "4a2591abf867e5908654066c1282c5e4f00b92f0355433a98bce2e30071aa200",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 51,
+      "version": "20261005142133",
+      "filename": "20261005142133_phase5e_volleyball_integration.sql",
+      "bytes": 25326,
+      "sha256": "edb72d450dce2eabe5a68edbf21ea5581f5b9d19cf5143586fa53f586710d43e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 52,
+      "version": "20261005142141",
+      "filename": "20261005142141_phase5e_volleyball_history.sql",
+      "bytes": 10006,
+      "sha256": "e8dc4f504a3ba7a7d58464e1a5956d12cda740f0d9c31c8bbfd19d530d02e23d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 53,
+      "version": "20261005163647",
+      "filename": "20261005163647_phase5f_diamond_core.sql",
+      "bytes": 32784,
+      "sha256": "d60aa724394842f271c3f642679023122a59e93a72d75adbc58cd7b9a8c968f7",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 54,
+      "version": "20261005163656",
+      "filename": "20261005163656_phase5f_diamond_operations.sql",
+      "bytes": 31864,
+      "sha256": "9bbe8a2a8f2ad6d576e70eb644095e71252164558d6de01d7e98317fc2c9d287",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 55,
+      "version": "20261005163704",
+      "filename": "20261005163704_phase5f_diamond_integration.sql",
+      "bytes": 66580,
+      "sha256": "142b9002aecd25e592b4756482c26e9ff021b3f4c99a17efea7da7fed43651bf",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 56,
+      "version": "20261005163717",
+      "filename": "20261005163717_phase5f_diamond_seals_history.sql",
+      "bytes": 24753,
+      "sha256": "30983671064c72c0652467e29be718ca745c269da81b21c219daa4fd8f4df274",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 57,
+      "version": "20261005165247",
+      "filename": "20261005165247_phase5f_runner_projection_fix.sql",
+      "bytes": 6634,
+      "sha256": "4c0d99c1e8d234e7df6dc1b667990db466ff6ebe500bb07ee5264fd9ab824796",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 58,
+      "version": "20261005210800",
+      "filename": "20261005210800_phase6a_intelligence_core.sql",
+      "bytes": 6965,
+      "sha256": "12e933b93c9d7d623a69702fd6d99ef3c266122afd606b34cb28eace0b4c2cac",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 59,
+      "version": "20261005210806",
+      "filename": "20261005210806_phase6a_intelligence_sources.sql",
+      "bytes": 9339,
+      "sha256": "bba601e64a6bc8d00804d5560c0a3ddb3bbf253bbd177d6d73bb1477ac97ad3c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 60,
+      "version": "20261005210813",
+      "filename": "20261005210813_phase6a_intelligence_materialization.sql",
+      "bytes": 16787,
+      "sha256": "4dfc086098646943cf49b15d75f99892c1ff955848fa80fb1314368659db03f5",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 61,
+      "version": "20261005210820",
+      "filename": "20261005210820_phase6a_intelligence_reads.sql",
+      "bytes": 19846,
+      "sha256": "2628a157d21bd7d9ee7513737859ca4a15b6335123e2077171b8bfd34265b6f1",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 62,
+      "version": "20261005234038",
+      "filename": "20261005234038_phase6b_competition_core.sql",
+      "bytes": 21447,
+      "sha256": "e84464dda49386821213d8156c7286ae4140a60d61f0cd06b84ab4db3c068281",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 63,
+      "version": "20261005234047",
+      "filename": "20261005234047_phase6b_policy_sources.sql",
+      "bytes": 23414,
+      "sha256": "ddd17ab22a996bc3e29c2cffa0914d86011da9b0a7c1200f216b5786943f304c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 64,
+      "version": "20261005234054",
+      "filename": "20261005234054_phase6b_ranking_materialization.sql",
+      "bytes": 38266,
+      "sha256": "7f67c0d1b1bffb38a283d2c6d7673eca89db6672d4fbbf11208179b8cf0a2825",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 65,
+      "version": "20261005234102",
+      "filename": "20261005234102_phase6b_authorized_api.sql",
+      "bytes": 42479,
+      "sha256": "aec59628d228a6951741f14af5d78f753c09ecb059461862f0460bb9c5ef7f43",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 66,
+      "version": "20261006000853",
+      "filename": "20261006000853_phase6b_rank_publication_plan.sql",
+      "bytes": 4450,
+      "sha256": "4df8c31a0e23ed710cc9d08aa93652cd4402ed39673a475cbd3ef314548df2d6",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 67,
+      "version": "20261006004902",
+      "filename": "20261006004902_phase6b_bounded_private_page.sql",
+      "bytes": 13801,
+      "sha256": "df19b4078ed6e3cb93949db98846c74dba0c8903de6f3499179b1d84ac59d508",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 68,
+      "version": "20261006095630",
+      "filename": "20261006095630_phase6c_athlete_profile_core.sql",
+      "bytes": 16707,
+      "sha256": "07ed94d9ab23bef4f12e2c69a2f617b9d744126ed395fa3f2c476e38f4c5d433",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 69,
+      "version": "20261006095635",
+      "filename": "20261006095635_phase6c_athlete_profile_operations.sql",
+      "bytes": 31405,
+      "sha256": "620b6d208a78b0ceb183c7fe4296ff2cd25924f5785caaeb946aca1f045e29a2",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 70,
+      "version": "20261006095640",
+      "filename": "20261006095640_phase6c_athlete_profile_reads.sql",
+      "bytes": 19448,
+      "sha256": "cbd9c508a12b1ea5994c18058c3a557bd4a11fd8d66249edfbcf9ea33ef941fa",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 71,
+      "version": "20261006112000",
+      "filename": "20261006112000_phase6d_tournament_core.sql",
+      "bytes": 12291,
+      "sha256": "944e2ea6937ae5c10fc63a21cde6fb1ea1087552f006717393f9ab57e225aa54",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 72,
+      "version": "20261006112010",
+      "filename": "20261006112010_phase6d_tournament_operations.sql",
+      "bytes": 28782,
+      "sha256": "15bbc59aac5de7d74c7646dcc5b08ba5ef0ada103d090c19923f2b9f69f59cd0",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 73,
+      "version": "20261006112020",
+      "filename": "20261006112020_phase6d_tournament_reads.sql",
+      "bytes": 16438,
+      "sha256": "fe061b82552f50331ed780a8d94eab262882feda8bae2967ce8638465e292ae9",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 74,
+      "version": "20261006123216",
+      "filename": "20261006123216_phase6e_achievement_core.sql",
+      "bytes": 14996,
+      "sha256": "f5c76aaf02cf36e053ffd3395b5765d7e85b5e5dd73158d1bc1972e5d3eceaeb",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 75,
+      "version": "20261006123219",
+      "filename": "20261006123219_phase6e_achievement_sources.sql",
+      "bytes": 21467,
+      "sha256": "5a64f69b8bd323b7c5d23bc6964aa1a95957e77405276d82197e0a31a5fee6a1",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 76,
+      "version": "20261006123222",
+      "filename": "20261006123222_phase6e_achievement_operations.sql",
+      "bytes": 31701,
+      "sha256": "cebaafffe40ff305f80c3ed0ff4a64bbe71c85350fab589d2bbe89a7dc056a03",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 77,
+      "version": "20261006123227",
+      "filename": "20261006123227_phase6e_achievement_reads.sql",
+      "bytes": 27808,
+      "sha256": "79b772d43e7c2bf764d8511db4264011e3c4b2c71134699612579915ea19d2de",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 78,
+      "version": "20261006134900",
+      "filename": "20261006134900_phase6e_manual_decision_timing.sql",
+      "bytes": 20531,
+      "sha256": "d7b72b04520b61b1383704e76edc97d9733464e6ed728ee5805a79ba8f3aca4a",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 79,
+      "version": "20261007000429",
+      "filename": "20261007000429_phase7a_fundraising_core.sql",
+      "bytes": 16743,
+      "sha256": "b30f11cf28c66f4e84915c046b4fa10270d00b9fd4e7a047e2b7176f5731c588",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 80,
+      "version": "20261007000437",
+      "filename": "20261007000437_phase7a_fundraising_authority.sql",
+      "bytes": 9250,
+      "sha256": "ef58e038736a9a5154775585f15022549a6320ddd050bff63756622a13d29e81",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 81,
+      "version": "20261007000446",
+      "filename": "20261007000446_phase7a_fundraising_operations.sql",
+      "bytes": 19569,
+      "sha256": "6e883ae648809871114749b2a53e297dc485ffb21f17da74ee6c4f23b13c1692",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 82,
+      "version": "20261007000455",
+      "filename": "20261007000455_phase7a_money_board_support.sql",
+      "bytes": 16648,
+      "sha256": "9d477e137d13988b6c896d2613b3b8ad200659927621856bf10431cef6bccac8",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 83,
+      "version": "20261007000503",
+      "filename": "20261007000503_phase7a_fundraising_reads_notifications.sql",
+      "bytes": 37079,
+      "sha256": "b0a8a0a5cd62f108cad95ea700c174365117509f96d945556e1c0e4a3ef82721",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 84,
+      "version": "20261007035435",
+      "filename": "20261007035435_phase7b_wallet_core.sql",
+      "bytes": 13084,
+      "sha256": "a0a0335e9011c8c75f3c5e75cdd0516ebd6b984cb3d435955d03bc660a7bf8f1",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 85,
+      "version": "20261007035439",
+      "filename": "20261007035439_phase7b_wallet_authority.sql",
+      "bytes": 6392,
+      "sha256": "e6cece6e75247a118a613c32c05375a0176c9b89676868a3b36feecdb6befbcf",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 86,
+      "version": "20261007035442",
+      "filename": "20261007035442_phase7b_wallet_accounting.sql",
+      "bytes": 17353,
+      "sha256": "0f23ee2c291099af836e2a9de0ef3cb7df3677518583d42a2810eb04f382aff2",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 87,
+      "version": "20261007035446",
+      "filename": "20261007035446_phase7b_wallet_operations.sql",
+      "bytes": 14460,
+      "sha256": "71ef3907a9a25499e3c12e09eecc53bd0300dde2b8c4de8b7ca80ec4ca3e4fd8",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 88,
+      "version": "20261007035450",
+      "filename": "20261007035450_phase7b_wallet_projections.sql",
+      "bytes": 26417,
+      "sha256": "e579929930be4a44e2df1c9ecd475c39c04f07cb3bcbefbbe1ea7a3de948693e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 89,
+      "version": "20261007040726",
+      "filename": "20261007040726_phase7b_access_identity_dispatch.sql",
+      "bytes": 993,
+      "sha256": "8747da9c733992bc26000549cd5daf6e8f351fdb440fdfeb8e0d61aa9b82d015",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 90,
+      "version": "20261007080035",
+      "filename": "20261007080035_phase7c_payment_ledger.sql",
+      "bytes": 8791,
+      "sha256": "0c222096fbb7f66000e7ea22e8db53576802d0c94cdfdc7542689b949c47c818",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 91,
+      "version": "20261007080046",
+      "filename": "20261007080046_phase7c_payment_accounting.sql",
+      "bytes": 14911,
+      "sha256": "829441ea8dd26acaf4df6eca6d3e19774b24b6e11bcce370c9dbd07722053cef",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 92,
+      "version": "20261007080050",
+      "filename": "20261007080050_phase7c_payment_execution.sql",
+      "bytes": 14650,
+      "sha256": "56039ffa6667771f4446b18b5166c2629cd48f14a6d510e23500dc963f9a727d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 93,
+      "version": "20261007080053",
+      "filename": "20261007080053_phase7c_source_recovery.sql",
+      "bytes": 17613,
+      "sha256": "6b97b31cc2a80c10cdffaae46e13a8348c64df345ebfe95abdd198b2385991fc",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 94,
+      "version": "20261007080057",
+      "filename": "20261007080057_phase7c_payment_projections.sql",
+      "bytes": 15776,
+      "sha256": "993fd73004c818474f60d0d196b131c80f48fa8dcd2bad82021dcafecc4a1b70",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 95,
+      "version": "20261007080100",
+      "filename": "20261007080100_phase7c_payment_reversal.sql",
+      "bytes": 13412,
+      "sha256": "6261884004d9d96be633bfd7ec1522bc61f01f8e503c391f759b5627206e78ba",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 96,
+      "version": "20261007174954",
+      "filename": "20261007174954_phase7d_processing_checkout_core.sql",
+      "bytes": 23577,
+      "sha256": "7049ce7d6810bf4ab68454f0af89925c8b1b421caf2e4ce500a66ff357b665c0",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 97,
+      "version": "20261007174957",
+      "filename": "20261007174957_phase7d_authority_reservations.sql",
+      "bytes": 19804,
+      "sha256": "cc74262c33cd7070bc4607081c3c4d6bcf7df6c6657f61e5d8506963acf64998",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 98,
+      "version": "20261007175000",
+      "filename": "20261007175000_phase7d_payment_execution.sql",
+      "bytes": 38917,
+      "sha256": "1323bc4f5dd5484e90d1c7028ff957b963c9421518f3ed3e1896087ed59c9bb7",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 99,
+      "version": "20261007175003",
+      "filename": "20261007175003_phase7d_settlement_accounting.sql",
+      "bytes": 19282,
+      "sha256": "a317370ac793ea9a97892c8408be9016092aeff184816b5daeeeccfe2c5eb97c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 100,
+      "version": "20261007175006",
+      "filename": "20261007175006_phase7d_refunds_reconciliation.sql",
+      "bytes": 35247,
+      "sha256": "bef02162374847e633fdacc50a6e57755da02552369658e5f1bd464e7d410ec8",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 101,
+      "version": "20261007175009",
+      "filename": "20261007175009_phase7d_projections_integrity.sql",
+      "bytes": 56547,
+      "sha256": "26cb52c15f6b137e0ee70c34d7553726e81f911639015b64fb947d6422a32811",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 102,
+      "version": "20261007221840",
+      "filename": "20261007221840_phase7e_membership_product_core.sql",
+      "bytes": 15783,
+      "sha256": "33367ab6ed1c0aaab4272ef6278b92d68f9e4b32f36627980fd769a17053c14d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 103,
+      "version": "20261007221848",
+      "filename": "20261007221848_phase7e_membership_access_claims.sql",
+      "bytes": 23632,
+      "sha256": "bef6d568fc9c5614dfaa2d05c8f3dcf681d841b3e1c5bfe15a9fd2f842667582",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 104,
+      "version": "20261007221851",
+      "filename": "20261007221851_phase7e_physical_inventory.sql",
+      "bytes": 20954,
+      "sha256": "589d1d74bde3ea89e7621a04814c8a6adc23913387f027774e47029936086e5f",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 105,
+      "version": "20261007221854",
+      "filename": "20261007221854_phase7e_product_payment_fulfillment.sql",
+      "bytes": 44826,
+      "sha256": "ccc6c376d7eda080501e19fa917c5fde39a2ebf47e1ec5ecf0040193e9da0ca7",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 106,
+      "version": "20261007221856",
+      "filename": "20261007221856_phase7e_membership_projections.sql",
+      "bytes": 59585,
+      "sha256": "c4aef7f2441af73503a15afbc69bd7ca9504c40fa7f92ef1882998691faefe48",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 107,
+      "version": "20261007221859",
+      "filename": "20261007221859_phase7e_membership_integrity.sql",
+      "bytes": 23750,
+      "sha256": "6259ba9e54eae2bc55677757b217c8c7d4e5c0b8568e5b9439473297258cc85d",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 108,
+      "version": "20261008040716",
+      "filename": "20261008040716_phase8a_merchant_core.sql",
+      "bytes": 11417,
+      "sha256": "e8b67d9bac53760b499631b301cea776cda56a42fb3328c541296658f0d5a37c",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 109,
+      "version": "20261008040722",
+      "filename": "20261008040722_phase8a_offers_access.sql",
+      "bytes": 19183,
+      "sha256": "bd79b05a561ca7849edd01a300e62202f5bd66e888385d3ab73d56729ec3b6d5",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 110,
+      "version": "20261008040725",
+      "filename": "20261008040725_phase8a_merchant_operations.sql",
+      "bytes": 16724,
+      "sha256": "fef6c0594964cfe8a083422599f6769d881160e29a3cb61d95221d4fb2db6df6",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 111,
+      "version": "20261008040728",
+      "filename": "20261008040728_phase8a_redemption_sales.sql",
+      "bytes": 18703,
+      "sha256": "fcc87c502771f7024709de11d1a686a2ede55c9d9cc29939c95a06858f85ed80",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 112,
+      "version": "20261008040731",
+      "filename": "20261008040731_phase8a_projections.sql",
+      "bytes": 31699,
+      "sha256": "cc6d7a1f67923989533aa4f76d2868c6e04adc256fee3f1f73cc2f199d1a4c53",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 113,
+      "version": "20261008040734",
+      "filename": "20261008040734_phase8a_integrity_notifications.sql",
+      "bytes": 19140,
+      "sha256": "b61f4e13bedf0b2730608977267cb01dba3953afbfc77bf21a376df9446aecaa",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 114,
+      "version": "20261009045245",
+      "filename": "20261009045245_phase8b1_provider_registry.sql",
+      "bytes": 5073,
+      "sha256": "980e0219c20eaa01542f132fd2fcf284f8160c82b20dd13fe5ebb0aa3abcfd74",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 115,
+      "version": "20261009045300",
+      "filename": "20261009045300_phase8b1_contract_licensing.sql",
+      "bytes": 4582,
+      "sha256": "cdc54fb6ae37862a33949125ce9fd9587c8bb1626219ca1a2a563776b5556ce2",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 116,
+      "version": "20261009045301",
+      "filename": "20261009045301_phase8b1_catalog_evidence.sql",
+      "bytes": 6322,
+      "sha256": "5ecdfc6f808e902c575bc854b434ae6cd32574e248b7fe2cd2543b5d304cbcd9",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 117,
+      "version": "20261009045322",
+      "filename": "20261009045322_phase8b1_revenue_foundation.sql",
+      "bytes": 4515,
+      "sha256": "be07073abb5631837d2bc185c45a11ef34e82c692b2066d9e4928159774e0fd8",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 118,
+      "version": "20261009045337",
+      "filename": "20261009045337_phase8b1_commands_ingestion.sql",
+      "bytes": 28862,
+      "sha256": "42bea2325716c2b8a083643827530903deffe61d70b1e7c4b1a4a4f621262c1e",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 119,
+      "version": "20261009045339",
+      "filename": "20261009045339_phase8b1_projections_integrity.sql",
+      "bytes": 18489,
+      "sha256": "7a3d14b1c6e4b7953afe86b8e00e3c7fa41f7393d3bbeafcaf9b6936620ea250",
+      "classification": "canonical_baseline_source"
+    },
+    {
+      "sequence": 120,
+      "version": "20261009230001",
+      "filename": "20261009230001_money_board_grouped_core.sql",
+      "bytes": 13395,
+      "sha256": "a4c7746c8fd29a1c43eb76a5e056afdbaf330de43428e19d34598d47e4f7a66f",
+      "classification": "frozen_grouped_proposal"
+    },
+    {
+      "sequence": 121,
+      "version": "20261009230002",
+      "filename": "20261009230002_money_board_cart_commands.sql",
+      "bytes": 20132,
+      "sha256": "65d130ef36e8945f467eca36748020619c7ddcb0ea1ddf5bbfc60dff0bc70f2e",
+      "classification": "frozen_grouped_proposal"
+    },
+    {
+      "sequence": 122,
+      "version": "20261009230003",
+      "filename": "20261009230003_money_board_financial_lineage.sql",
+      "bytes": 19621,
+      "sha256": "428c9d5d50b8d2a850cb08007e43e0eb47de9e048fedef2a8706409cd27960f5",
+      "classification": "frozen_grouped_proposal"
+    },
+    {
+      "sequence": 123,
+      "version": "20261009230004",
+      "filename": "20261009230004_money_board_projections.sql",
+      "bytes": 9365,
+      "sha256": "2f8a30cc4aa114606fe0c7d497b4948697f01422ca530a2c69831b804499bab9",
+      "classification": "frozen_grouped_proposal"
+    },
+    {
+      "sequence": 124,
+      "version": "20261010140424",
+      "filename": "20261010140424_global_fundraising_compatibility.sql",
+      "bytes": 7611,
+      "sha256": "0d822173919a123774c10d85a994d157b55649b47303927fa91a26fcdf8524fc",
+      "classification": "additive_amendment_proposal"
+    },
+    {
+      "sequence": 125,
+      "version": "20261010140911",
+      "filename": "20261010140911_global_fundraising_contracts.sql",
+      "bytes": 22355,
+      "sha256": "150a2ef11cbe2a883aec7707dd2668d89fa1010b05f82171e6c252666dac6907",
+      "classification": "additive_amendment_proposal"
+    },
+    {
+      "sequence": 126,
+      "version": "20261010141219",
+      "filename": "20261010141219_global_fundraising_policies.sql",
+      "bytes": 16072,
+      "sha256": "d8703f6ae1715ba1f1915fa80e9e5137178c96957d56bd93eb86d245d9ff6040",
+      "classification": "additive_amendment_proposal"
+    },
+    {
+      "sequence": 127,
+      "version": "20261010141408",
+      "filename": "20261010141408_global_fundraising_source_allocation.sql",
+      "bytes": 22284,
+      "sha256": "9fd28420921f08c3dcf2b1bc3ab783fd2c0f36e7330c2519ea13c15140321163",
+      "classification": "additive_amendment_proposal"
+    },
+    {
+      "sequence": 128,
+      "version": "20261010141758",
+      "filename": "20261010141758_global_fundraising_destinations.sql",
+      "bytes": 14820,
+      "sha256": "5c670c3f8af65b3f6cd4aac4389f9fe64a900c38c9dba14bc2a7f6645417b227",
+      "classification": "additive_amendment_proposal"
+    },
+    {
+      "sequence": 129,
+      "version": "20261010142108",
+      "filename": "20261010142108_global_fundraising_reporting_integrity.sql",
+      "bytes": 24356,
+      "sha256": "7df8146f4eb4744ec4a7e263dd9bf4e2cf75b6d2a537f71a7724d51bbd6182f4",
+      "classification": "additive_amendment_proposal"
+    }
+  ]
+}

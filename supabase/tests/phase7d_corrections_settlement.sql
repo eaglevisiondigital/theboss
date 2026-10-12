@@ -1,0 +1,30 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir phase7d/fixture.sql
+update public.organization_modules set configuration=configuration||'{"refunds":true,"reconciliation":true}'::jsonb where module_id=(select id from public.modules where key='payments');
+select pg_temp.checkout('correction');select boss_private.rails_dispatch(pg_temp.f('checkout-correction'));select pg_temp.receive('correction','captured');
+select pg_temp.check('capture has one pending settlement dependency','SEPARATION',exists(select 1 from public.settlement_sources s join public.external_payment_tenders t on t.payment_id=s.payment_id where t.checkout_id=pg_temp.f('checkout-correction')and not exists(select 1 from public.settlement_events e where e.payment_id=s.payment_id and e.kind='settled')));
+select pg_temp.check('capture does not create available payout','SEPARATION',boss_private.rails_payable(pg_temp.f('org'),'USD')=0);
+do $$declare c public.payment_checkouts;begin select *into c from public.payment_checkouts where id=pg_temp.f('checkout-correction');perform boss_private.rails_receive(c.id,'settlement-fee','settled','LOCAL-TRANSACTION-correction',c.external_minor,c.currency,clock_timestamp(),repeat('a',64),'{"processor_fee_minor":100}'::jsonb);end$$;
+insert into payment_results select 'settlement',boss_private.rails_settlement_match(t.payment_id,e.id,100)from public.external_payment_tenders t join public.provider_event_evidence e on e.account_id=pg_temp.f('rails-account')and e.event_reference='settlement-fee'where t.checkout_id=pg_temp.f('checkout-correction');
+select pg_temp.check('provider settlement uses frozen original policy','SETTLEMENT',(select result->>'organization_payable_minor'='7000'from payment_results where label='settlement'));
+select pg_temp.check('direct-provider settlement cannot request duplicate payout','SETTLEMENT',boss_private.rails_payable(pg_temp.f('org'),'USD')=0);
+select pg_temp.check('batch settlement leaves success and earnings unduplicated','SETTLEMENT',(select count(*)=2 from public.boss_bucks_grants)and(select count(*)=2 from public.fundraising_success_evidence));
+create temp table correction_ids(label text primary key,id uuid);grant all on correction_ids to authenticated;
+insert into correction_ids select 'original',payment_id from public.external_payment_tenders where checkout_id=pg_temp.f('checkout-correction');
+set local role authenticated;select pg_temp.actor('admin');
+insert into payment_results values('refund',public.boss_payments_mutate(jsonb_build_object('action','refund.prepare','request_id',pg_temp.f('partial-refund-request'),'input',jsonb_build_object('payment_id',(select id from correction_ids where label='original'),'amount_minor',5000,'principal_minor',5000,'allocations',jsonb_build_array(),'reason','Synthetic partial refund'))));
+reset role;
+select boss_private.rails_refund_dispatch((select(result->>'refund_id')::uuid from payment_results where label='refund'));
+select boss_private.rails_refund_receive((select(result->>'refund_id')::uuid from payment_results where label='refund'),'partial-refund-result','refunded','LOCAL-REFUND-CORRECTION',5000,'USD',clock_timestamp(),repeat('b',64));
+select pg_temp.check('partial refund appends canonical reversal','REFUND',(select count(*)=1 from public.payments where status='reversed'and amount_minor=5000));
+select pg_temp.check('partial refund executes existing earning-source correction','DEPENDENCY',exists(select 1 from public.boss_bucks_source_corrections where remaining_source_minor=5000));
+select pg_temp.check('partial refund reduces source-derived earning only','DEPENDENCY',exists(select 1 from public.boss_bucks_source_corrections where entitlement_minor=2500));
+select pg_temp.check('direct settled refund opens explicit same-org deficit','DEFICIT',exists(select 1 from public.settlement_deficits where organization_id=pg_temp.f('org')and amount_minor=3500));
+select pg_temp.checkout('chargeback');select boss_private.rails_dispatch(pg_temp.f('checkout-chargeback'));select pg_temp.receive('chargeback','captured');select pg_temp.receive('chargeback','disputed');
+select boss_private.rails_external_correct(t.payment_id,e.id,'chargeback',10000)from public.external_payment_tenders t join public.provider_event_evidence e on e.event_reference='chargeback-disputed'where t.checkout_id=pg_temp.f('checkout-chargeback')and t.original_payment_id is null;
+select pg_temp.check('chargeback preserves prior valid capture chronology','CHRONOLOGY',exists(select 1 from public.fundraising_success_evidence e join public.fundraising_intents i on i.id=e.intent_id where i.request_id=pg_temp.f('intent-chargeback')and e.captured_at is not null));
+select pg_temp.check('chargeback dependency removes source entitlement','DEPENDENCY',exists(select 1 from public.boss_bucks_source_corrections sc join public.boss_bucks_grants g on g.id=sc.grant_id join public.fundraising_intents i on i.id=g.intent_id where i.request_id=pg_temp.f('intent-chargeback')and sc.entitlement_minor=0));
+select pg_temp.check('source correction never reopens permanently claimed tile','TILE',not exists(select tile_id from public.fundraising_success_evidence where tile_id is not null group by tile_id having count(*)>1));
+set constraints all immediate;
+select count(*)passed_assertions,'Phase 7D corrections and settlement separation' suite from phase5a_assertions;rollback;

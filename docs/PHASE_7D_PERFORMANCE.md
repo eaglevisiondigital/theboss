@@ -1,0 +1,9 @@
+# Phase 7D performance evidence
+
+Disposable PostgreSQL 17 uses the unchanged eight-second statement budget, JIT off, private Unix socket/no TCP and synthetic fixtures. Five performance assertions PASS within the full 20,442-assertion release run. Measured checkout preparation, frozen eligibility, captured payment/fundraising/wallet effects, exact-tenant settlement projection, 100-item reconciliation and refund/source recovery all complete below that budget. No database timeout was increased.
+
+Bounds: 50 checkout/refund allocation legs, 200 necessary grant lots, 100 reconciliation items, 31-day report range, finite safe provider pages, account-scoped stable-reference unique lookup, tenant-scoped finite finance views. Prior Phase 7C 200-lot/50-allocation/many-charge cases and all historical performance assertions remain covered. Source/charge/wallet/org fences and index additions are described in the tested six migrations.
+
+Provider transport is bounded to 12 seconds and 256 KiB with no redirects/retries; webhook input is 64 KiB and signed application input 8 KiB. A transport timeout remains unknown and preserves the original durable attempt. These are local contract bounds, not measured external provider latency or a production scale/load claim.
+
+Post-migration performance advisor has only unused-index and existing absolute Auth connection allocation informational categories. Protective indexes remain intact. Hosted family and finance views pass 1280/768/390/320 with document width equal to viewport, zero missing labels/unnamed buttons and stable navigation/reload. Results and exact controlled restoration times are in [acceptance](PHASE_7D_ACCEPTANCE_ADDENDUM.md). This is functional/rendered hosted evidence, not a production concurrency/load or measured provider latency claim.

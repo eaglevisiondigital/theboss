@@ -1,0 +1,277 @@
+{
+  "branch": "build/boss-platform-v1",
+  "base_sha": "4fc7ab53d4d23a75c2eaedebfd3485948ebbe009",
+  "status": "local_uncommitted_production_release_pending_approval",
+  "files": [
+    {
+      "path": "apps/platform/scripts/phase8b1-layout.tsx",
+      "sha256": "93ed525127867ab1c5d0a5941b494c369c55a9b331e1d60907644d341358af9c",
+      "bytes": 2765
+    },
+    {
+      "path": "apps/platform/src/app/app/partners/discovery/page.tsx",
+      "sha256": "1239267baceba0fc5263bf1289a827430a8c41ec697c153fae25084701d3ce8f",
+      "bytes": 289
+    },
+    {
+      "path": "apps/platform/src/app/app/partners/mutate/route.ts",
+      "sha256": "b6d13423752ed03fac303ff3f728863aa90fcfbf486d2d3b23e16743530d0f78",
+      "bytes": 998
+    },
+    {
+      "path": "apps/platform/src/app/app/partners/page.tsx",
+      "sha256": "483c81559da5fa02b63ff38fa3679a3e72f32a71ac25fa8c26135ef5cb87bcd8",
+      "bytes": 762
+    },
+    {
+      "path": "apps/platform/src/app/globals.css",
+      "sha256": "00636162c52d6e4395cd31256eea038696033185e1cc03d8edb0d0c35fbde7fa",
+      "bytes": 98170
+    },
+    {
+      "path": "apps/platform/src/components/partners/discovery.tsx",
+      "sha256": "85d10fa7f06a22d0ab9f8560cfc52b3bc195e3720843eb8e2a9bd1f5c203fa56",
+      "bytes": 640
+    },
+    {
+      "path": "apps/platform/src/components/partners/workspace.tsx",
+      "sha256": "f553e7837c2100bf84ccc31e814854522d573af97e94921f395d625bf783be1b",
+      "bytes": 10811
+    },
+    {
+      "path": "apps/platform/src/lib/partners/adapters.ts",
+      "sha256": "4df74591a84462b0e57336c7d0d97586fc2726c8aed774402e4107360839619e",
+      "bytes": 9491
+    },
+    {
+      "path": "apps/platform/src/lib/partners/contracts.ts",
+      "sha256": "af72b3b50f4a35aa41ed32f8b9a8ccdf5cd3811a4516b9fe9ae3043e64c83c5f",
+      "bytes": 7832
+    },
+    {
+      "path": "apps/platform/src/lib/partners/data.ts",
+      "sha256": "7380e2e1b0ade06d275f4b9c597020dc08b1f2e0c6f8bfc1ac8ac0f6d40597ca",
+      "bytes": 841
+    },
+    {
+      "path": "apps/platform/src/lib/partners/database.types.ts",
+      "sha256": "79b6c1c4dbfac97a15e8bf57fbd00ada40bd1b262c35d0a526c6fe8290e480c1",
+      "bytes": 4848
+    },
+    {
+      "path": "apps/platform/src/lib/partners/fields.ts",
+      "sha256": "215d5cd9f105d3838b31f67f52068206f20cdea7ab9d3b8502e66619035e2bb5",
+      "bytes": 2238
+    },
+    {
+      "path": "apps/platform/src/lib/partners/input.ts",
+      "sha256": "1a44289718dd2dc8ef4187a88ce0c52b62c6b98ef4a34be3e4d047d1781203fd",
+      "bytes": 2178
+    },
+    {
+      "path": "apps/platform/src/lib/partners/mutation.ts",
+      "sha256": "2e2f5aeaad78134380c0e792976a6aa719d9f1201fa3af8fb306488148c9b156",
+      "bytes": 1575
+    },
+    {
+      "path": "apps/platform/tests/partners.test.ts",
+      "sha256": "820a89db0cc387e47f052e7eedbddad7d3c06913fb4294841c208063d95c98a6",
+      "bytes": 13329
+    },
+    {
+      "path": "supabase/migrations/20261009045245_phase8b1_provider_registry.sql",
+      "sha256": "980e0219c20eaa01542f132fd2fcf284f8160c82b20dd13fe5ebb0aa3abcfd74",
+      "bytes": 5073
+    },
+    {
+      "path": "supabase/migrations/20261009045300_phase8b1_contract_licensing.sql",
+      "sha256": "cdc54fb6ae37862a33949125ce9fd9587c8bb1626219ca1a2a563776b5556ce2",
+      "bytes": 4582
+    },
+    {
+      "path": "supabase/migrations/20261009045301_phase8b1_catalog_evidence.sql",
+      "sha256": "5ecdfc6f808e902c575bc854b434ae6cd32574e248b7fe2cd2543b5d304cbcd9",
+      "bytes": 6322
+    },
+    {
+      "path": "supabase/migrations/20261009045322_phase8b1_revenue_foundation.sql",
+      "sha256": "be07073abb5631837d2bc185c45a11ef34e82c692b2066d9e4928159774e0fd8",
+      "bytes": 4515
+    },
+    {
+      "path": "supabase/migrations/20261009045337_phase8b1_commands_ingestion.sql",
+      "sha256": "42bea2325716c2b8a083643827530903deffe61d70b1e7c4b1a4a4f621262c1e",
+      "bytes": 28862
+    },
+    {
+      "path": "supabase/migrations/20261009045339_phase8b1_projections_integrity.sql",
+      "sha256": "7a3d14b1c6e4b7953afe86b8e00e3c7fa41f7393d3bbeafcaf9b6936620ea250",
+      "bytes": 18489
+    },
+    {
+      "path": "supabase/tests/bootstrap-cases.sql",
+      "sha256": "ed7021d742602d9cf05a1f646df657fca61c86275c07ea95344e0f7f3e91bf35",
+      "bytes": 15291
+    },
+    {
+      "path": "supabase/tests/phase2a_authorization.sql",
+      "sha256": "cda6ff415b3aa68945b8c2fe9e739f0eb410d211947fa9d5dc3f67e9a546df86",
+      "bytes": 92298
+    },
+    {
+      "path": "supabase/tests/phase2b_live_verification.sql",
+      "sha256": "3db3fd172f1667eaae55cb5449d503773d92b051ee2f39bb0bb22f91e1c63f20",
+      "bytes": 37179
+    },
+    {
+      "path": "supabase/tests/phase3a_acceptance.sql",
+      "sha256": "03bcd2a83fd8549f19cfcc5fec1d321f77b5779b8c0acb6ae66b1bab4a7925ba",
+      "bytes": 55171
+    },
+    {
+      "path": "supabase/tests/phase3a_live_verification.sql",
+      "sha256": "ccb242bf4d08540eb8f7313745df229a2cdf48d84ba9154aad6c5c2068864dd4",
+      "bytes": 165622
+    },
+    {
+      "path": "supabase/tests/phase3a_security.sql",
+      "sha256": "0bd2ac1561ef1a0349bc3fd34127292b83e57a9e5f7aff8116f2b7f5a8689646",
+      "bytes": 8868
+    },
+    {
+      "path": "supabase/tests/phase3b_acceptance.sql",
+      "sha256": "a3d3927ac769bfe6e864afe2bf973d3116e9865ad75900a990fce4e9602f6a2d",
+      "bytes": 143932
+    },
+    {
+      "path": "supabase/tests/phase3b_live_verification.sql",
+      "sha256": "40fe3ab780002a50fccf17e8eba130e7fa96c53526748d0b6bdd503694bd072b",
+      "bytes": 310157
+    },
+    {
+      "path": "supabase/tests/phase4a_security.sql",
+      "sha256": "9ec760afbd17e593fe426fa137c14459545add085b225dd46cc6802c5650e8ef",
+      "bytes": 14597
+    },
+    {
+      "path": "supabase/tests/phase4b_security.sql",
+      "sha256": "0f0cdfe1e902c3d7a8a82822d1d4a0bc624d055af80b8eadb01347aa07936b74",
+      "bytes": 17463
+    },
+    {
+      "path": "supabase/tests/phase5a_live_verification.sql",
+      "sha256": "14269a15a5c1f36f1d2432f1de457e6dd332bf5ab602d1d175282bb2bca0ebe6",
+      "bytes": 24280
+    },
+    {
+      "path": "supabase/tests/phase5b_live_verification.sql",
+      "sha256": "04b5239851d504e65e9f053c058836bd3204442aefdac4a078f39ef018e22c31",
+      "bytes": 11008
+    },
+    {
+      "path": "supabase/tests/phase5b_security.sql",
+      "sha256": "6540bf19bf02c753cf489d8a4242ffe8b775e27a8ad54ddfc6e540ded23d801c",
+      "bytes": 18350
+    },
+    {
+      "path": "supabase/tests/phase5c_live_verification.sql",
+      "sha256": "92352a220123f264cf7c137ebb1e74ab53d2ce11a8a42a299c4faed08965643f",
+      "bytes": 11193
+    },
+    {
+      "path": "supabase/tests/phase5c_security.sql",
+      "sha256": "64f4a89da6194162a90c7551e5b7bc08846d552aff36c727a52c4795a72e9fa6",
+      "bytes": 27435
+    },
+    {
+      "path": "supabase/tests/phase5d_live_verification.sql",
+      "sha256": "fd600b01e98d0fbe13eabb69e8c0ef29e651e30cc57401954c001692cac2668b",
+      "bytes": 11881
+    },
+    {
+      "path": "supabase/tests/phase5d_security.sql",
+      "sha256": "c376dadbd927a1c8ace42fee7b6f09d7a6673b2a9e96c0be8027cd086cae1e49",
+      "bytes": 15542
+    },
+    {
+      "path": "supabase/tests/phase5e_security.sql",
+      "sha256": "1e27d390135f15b9b7b3943bf8b47f77c5907761887c97f431f9f984b71bf15f",
+      "bytes": 8427
+    },
+    {
+      "path": "supabase/tests/phase5f_security.sql",
+      "sha256": "973a212aa1c93657455a10849ff024d4ccd720c67d5b6bf308933b74163db7bc",
+      "bytes": 9761
+    },
+    {
+      "path": "supabase/tests/phase8b1/fixture.sql",
+      "sha256": "3b32fe4934c3d60a6cf243bf08831ada35aea44dda5c4104d9dbcfecc2f6f3f7",
+      "bytes": 5644
+    },
+    {
+      "path": "supabase/tests/phase8b1/generate-types.py",
+      "sha256": "a2ad32459125ec7954a6f35a1dc50e2f7fe9aab3018e910a81dc0cda6da8681a",
+      "bytes": 1398
+    },
+    {
+      "path": "supabase/tests/phase8b1/generate-types.sh",
+      "sha256": "61d20e3e2f7cbe4f3e59854c8f9a425a455fc679cb5e78fa8d5057db5afa9b9f",
+      "bytes": 1213
+    },
+    {
+      "path": "supabase/tests/phase8b1/upgrade-baseline.sql",
+      "sha256": "b0d5682a5a497a24d101ac911bf842e889b3b12bfa2e25312f14b0d8a38af143",
+      "bytes": 1904
+    },
+    {
+      "path": "supabase/tests/phase8b1/upgrade-check.sql",
+      "sha256": "9bca2a9076be8169c62fef01960a40cacf87e9c4f2af9cd082d69d63249b71e8",
+      "bytes": 2856
+    },
+    {
+      "path": "supabase/tests/phase8b1_catalog.sql",
+      "sha256": "f99b4e8b7c2298cfa9f1bbaddba57bc3e08b7608735af64e677fd7c93688acd9",
+      "bytes": 6527
+    },
+    {
+      "path": "supabase/tests/phase8b1_entitlements.sql",
+      "sha256": "f0937aa5536eb21d4197451194125ddcc6ce684c178bd7bf8bc0a4462e5ceb01",
+      "bytes": 4610
+    },
+    {
+      "path": "supabase/tests/phase8b1_failures.sql",
+      "sha256": "55f5fe205e4ab73df1e4e04d0b2a530b40c14956be2a3e100d5236f657c76ce6",
+      "bytes": 1337
+    },
+    {
+      "path": "supabase/tests/phase8b1_foundation.sql",
+      "sha256": "f20851f4fb19653fb8c97a5e8eafd9e0d42e90f76be66c5aa844190de0758db0",
+      "bytes": 5508
+    },
+    {
+      "path": "supabase/tests/phase8b1_lifecycle.sql",
+      "sha256": "58df0132bf20dc450310e0f8920d6c1ecc401ec48024df8a0a1870cabacdfac4",
+      "bytes": 5028
+    },
+    {
+      "path": "supabase/tests/phase8b1_partners_concurrency.sh",
+      "sha256": "a45641cce884a60aea83fb7decaa00349dc068b4eebe2cb084b69b447b25dcde",
+      "bytes": 13578
+    },
+    {
+      "path": "supabase/tests/phase8b1_performance.sql",
+      "sha256": "b22963f6ada41080e1a08cf83002cbd0be7a8896b30788ec1ebaa51ca39c589b",
+      "bytes": 2418
+    },
+    {
+      "path": "supabase/tests/phase8b1_revenue.sql",
+      "sha256": "ec105ed34feb1b0cc147bfc0b2786317e78f3a7edb7ebaf2950327e6944edbe6",
+      "bytes": 7859
+    },
+    {
+      "path": "supabase/tests/run-local.sh",
+      "sha256": "65de5c02e6230f33583a299d177f29fc4c7384dd3f55ec426095d021b2d439c5",
+      "bytes": 22611
+    }
+  ]
+}

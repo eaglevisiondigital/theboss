@@ -1,0 +1,60 @@
+begin;
+set local statement_timeout='8s';
+\ir phase6d/fixture.sql
+select pg_temp.check('four accepted seeds','SEEDING',(select count(*)=4 from public.tournament_seeds where bracket_id=pg_temp.td_id('bracket')));
+select pg_temp.check('single elimination produces three main matches','STRUCTURE',(select count(*)=3 from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label<>'Third place'));
+select pg_temp.check('optional third-place match exists','STRUCTURE',(select count(*)=1 from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Third place'));
+select pg_temp.check('top seed paired with fourth seed','SEEDING',(select primary_entry_id=pg_temp.rb_id('falcons-entry')and opponent_entry_id=pg_temp.rb_id('wildcats-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and round_number=1 and match_number=1));
+select pg_temp.check('second and third seeds paired','SEEDING',(select primary_entry_id=pg_temp.rb_id('hawks-entry')and opponent_entry_id=pg_temp.rb_id('eagles-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and round_number=1 and match_number=2));
+select pg_temp.check('final depends on semifinal winners','DEPENDENCY',(select primary_source_kind='prior_winner'and opponent_source_kind='prior_winner'and primary_source_match_id is not null and opponent_source_match_id is not null from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1'));
+select pg_temp.check('third place depends on semifinal losers','DEPENDENCY',(select primary_source_kind='prior_loser'and opponent_source_kind='prior_loser'from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Third place'));
+insert into pg_temp.phase6d_ids select'match-one',id from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and round_number=1 and match_number=1;
+insert into pg_temp.phase6d_ids select'match-two',id from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and round_number=1 and match_number=2;
+insert into pg_temp.phase6d_ids select'final',id from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1';
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.td('match.link_game',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('match-one'),'expected_version',1,'game_id',(select id from pg_temp.phase5a_games where label='tournament-first')),'linked-match');
+reset role;
+select pg_temp.check('canonical game and event linked once','CALENDAR',(select tm.game_id=g.id and g.event_id=pg_temp.f('event-neutral')from public.tournament_matches tm join public.games g on g.id=tm.game_id where tm.id=pg_temp.td_id('linked-match')));
+update public.games set status='final',roster_revision=1,started_at=clock_timestamp()-interval'2 hours',finalized_at=clock_timestamp(),finalized_by_person_id=pg_temp.f('admin'),winner_side='primary',tied=false,primary_score=3,opponent_score=1,final_primary_score=3,final_opponent_score=1,finalization_count=1 where id=(select id from pg_temp.phase5a_games where label='tournament-first');
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.td('result.process',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('linked-match'),'expected_version',2,'reason','Disposable official final advancement'),'processed-match',pg_temp.f('td-process-one'));
+select pg_temp.td('result.process',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('linked-match'),'expected_version',2,'reason','Disposable official final advancement'),null,pg_temp.f('td-process-one'));
+reset role;
+select pg_temp.check('one idempotent official advancement','ADVANCEMENT',(select count(*)=1 from public.tournament_advancements where source_match_id=pg_temp.td_id('linked-match')));
+select pg_temp.check('winner projected into final','ADVANCEMENT',(select primary_entry_id=pg_temp.rb_id('falcons-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1'));
+select pg_temp.check('loser projected into third place','ADVANCEMENT',(select primary_entry_id=pg_temp.rb_id('wildcats-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Third place'));
+-- A correction before downstream play is an explicit new finalization epoch.
+update public.games set winner_side='opponent',primary_score=2,opponent_score=4,final_primary_score=2,final_opponent_score=4,finalization_count=2 where id=(select id from pg_temp.phase5a_games where label='tournament-first');
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.td('result.process',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('linked-match'),'expected_version',3,'reason','Disposable corrected official final'));reset role;
+select pg_temp.check('correction appends a second advancement epoch','CORRECTION',(select count(*)=2 and max(generation)=2 from public.tournament_advancements where source_match_id=pg_temp.td_id('linked-match')));
+select pg_temp.check('latest corrected winner projected before downstream start','CORRECTION',(select primary_entry_id=pg_temp.rb_id('wildcats-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1'));
+select pg_temp.check('advancement provenance preserves canonical final epoch','PROVENANCE',(select source_game_id=(select id from pg_temp.phase5a_games where label='tournament-first')and source_finalization_count=2 and supersedes_id is not null from public.tournament_advancements where source_match_id=pg_temp.td_id('linked-match')order by generation desc limit 1));
+-- Resolve the other semifinal by an audited ruling so the final is ready.
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.td('ruling.create',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('match-two'),'expected_version',1,'kind','forfeit','winner_entry_id',pg_temp.rb_id('hawks-entry'),'loser_entry_id',pg_temp.rb_id('eagles-entry'),'reason','Disposable unplayed forfeit ruling'),'ruling');
+reset role;
+select pg_temp.check('ruling makes final ready','RULING',(select status='ready'and primary_entry_id=pg_temp.rb_id('wildcats-entry')and opponent_entry_id=pg_temp.rb_id('hawks-entry')from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1'));
+select pg_temp.check('ruling is immutable audit evidence','AUDIT',(select kind='forfeit'and actor_person_id=pg_temp.f('admin')from public.tournament_rulings where id=pg_temp.td_id('ruling')));
+insert into public.events(id,organization_id,title,event_type_key,start_at,end_at,timezone,status,visibility,rsvp_mode,created_by_person_id,updated_by_person_id)values(pg_temp.f('event-tournament-final'),pg_temp.f('org'),'Synthetic Tournament Final','game',date_trunc('day',now())+interval'20 days 20 hours 30 minutes',date_trunc('day',now())+interval'20 days 22 hours 30 minutes','UTC','scheduled','member','optional',pg_temp.f('admin'),pg_temp.f('admin'));
+insert into public.event_targets(event_id,organization_id,target_type,target_id)values(pg_temp.f('event-tournament-final'),pg_temp.f('org'),'team',pg_temp.f('wildcats')),(pg_temp.f('event-tournament-final'),pg_temp.f('org'),'team',pg_temp.f('hawks'));
+insert into public.event_game_details(event_id,organization_id,opponent_team_id,home_away)values(pg_temp.f('event-tournament-final'),pg_temp.f('org'),pg_temp.f('hawks'),'neutral');
+set local role authenticated;select pg_temp.actor('admin');
+select(public.boss_games_mutate(gen_random_uuid(),pg_temp.cmd('game.create',jsonb_build_object('organization_id',pg_temp.f('org'),'event_id',pg_temp.f('event-tournament-final'),'expected_event_version',1,'occurrence_key',to_char((date_trunc('day',now())+interval'20 days 20 hours 30 minutes')at time zone'UTC','YYYY-MM-DD"T"HH24:MI:SS'),'primary_team_id',pg_temp.f('wildcats'),'sport_key','baseball','competition_type','tournament')))->>'game_id')::uuid rest_game \gset
+reset role;
+insert into pg_temp.phase6d_ids values('rest-game',:'rest_game'),('rest-final',(select id from public.tournament_matches where bracket_id=pg_temp.td_id('bracket')and label='Round 2 · Match 1'));
+select version rest_version from public.tournament_matches where id=pg_temp.td_id('rest-final')\gset
+update public.tournament_brackets set configuration='{"rest_policy":"block","minimum_rest_minutes":60}'where id=pg_temp.td_id('bracket');
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.denied('configured minimum rest blocks too-early final',format('select public.boss_tournament_mutate(%L::jsonb)',jsonb_build_object('action','match.link_game','request_id',gen_random_uuid(),'input',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('rest-final'),'expected_version',:rest_version,'game_id',pg_temp.td_id('rest-game')))),'PT409');
+reset role;
+update public.tournament_brackets set configuration='{"rest_policy":"warn","minimum_rest_minutes":60}'where id=pg_temp.td_id('bracket');
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.check('configured minimum rest warning preserves authorized schedule','REST_POLICY',(public.boss_tournament_mutate(jsonb_build_object('action','match.link_game','request_id',gen_random_uuid(),'input',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'match_id',pg_temp.td_id('rest-final'),'expected_version',:rest_version,'game_id',pg_temp.td_id('rest-game'))))->>'rest_warning')::boolean);
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.check('authorized guardian sees safe bracket','FAMILY',jsonb_array_length(public.boss_tournament_read(jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'bracket_id',pg_temp.td_id('bracket')))->'matches')=4);
+select pg_temp.denied('guardian cannot mutate bracket',format('select public.boss_tournament_mutate(%L::jsonb)',jsonb_build_object('action','bracket.archive','request_id',gen_random_uuid(),'input',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'bracket_id',pg_temp.td_id('bracket'),'expected_version',2))),'PT403');
+select pg_temp.actor('household-only');select pg_temp.denied('household membership alone gives no bracket access',format('select public.boss_tournament_read(%L::jsonb)',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'bracket_id',pg_temp.td_id('bracket'))),'PT403');
+select pg_temp.actor('other-admin');select pg_temp.denied('cross-tenant administrator cannot read bracket',format('select public.boss_tournament_read(%L::jsonb)',jsonb_build_object('edition_id',pg_temp.rb_id('edition'),'bracket_id',pg_temp.td_id('bracket'))),'PT403');
+reset role;
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;

@@ -1,0 +1,47 @@
+begin;
+
+
+\ir phase5e/fixture.sql
+set local role authenticated;select pg_temp.actor('admin');select pg_temp.vv_create('oracle',true);
+select pg_temp.vv_add('oracle','rally','primary',jsonb_build_object('outcome','kill','roster_id',pg_temp.ff_roster('oracle','primary',1)),'kill-one');
+select pg_temp.vv_add('oracle','assist','primary',jsonb_build_object('kill_event_id',(select (r->>'id')::uuid from jsonb_array_elements(public.boss_games_read(pg_temp.query('oracle'))->'games')g cross join lateral jsonb_array_elements(g->'volleyball'->'plays')r where r->'payload'->>'outcome'='kill'),'roster_id',pg_temp.ff_roster('oracle','primary',2)));
+select pg_temp.vv_add('oracle','dig','primary',jsonb_build_object('roster_id',pg_temp.ff_roster('oracle','primary',1)));
+select pg_temp.vv_add('oracle','rally','primary',jsonb_build_object('outcome','attack_error','roster_id',pg_temp.ff_roster('oracle','primary',1)));
+select pg_temp.vv_add('oracle','rally','opponent',jsonb_build_object('outcome','service_error','roster_id',pg_temp.ff_roster('oracle','opponent',2)));
+select pg_temp.vv_add('oracle','rally','primary',jsonb_build_object('outcome','ace','roster_id',pg_temp.ff_roster('oracle','primary',2)));
+select pg_temp.check('primary points 3','ORACLE',pg_temp.vv_stats('oracle','primary')->>'points'='3');
+select pg_temp.check('primary attacks 2 K1 ERR1 HIT0','ORACLE',pg_temp.vv_stats('oracle','primary')@>'{"kills":1,"attack_attempts":2,"attack_errors":1,"hitting_percentage":0,"assists":1,"digs":1,"service_aces":1,"set_wins":1}');
+select pg_temp.game_op('volleyball.set.start','oracle','{"side":"opponent"}');
+select pg_temp.vv_add('oracle','rally','opponent','{"outcome":"team_point"}');
+select pg_temp.vv_add('oracle','rally','opponent','{"outcome":"team_point"}');
+select pg_temp.vv_add('oracle','rally','opponent','{"outcome":"team_point"}');
+select pg_temp.game_op('volleyball.set.start','oracle','{"side":"primary"}');
+select pg_temp.game_op('volleyball.substitute','oracle',jsonb_build_object('side','primary','payload',jsonb_build_object('out_roster_id',pg_temp.ff_roster('oracle','primary',1),'in_roster_id',pg_temp.ff_roster('oracle','primary',3))));
+select pg_temp.vv_add('oracle','rally','primary',jsonb_build_object('outcome','assisted_block','blocker_roster_ids',jsonb_build_array(pg_temp.ff_roster('oracle','primary',2),pg_temp.ff_roster('oracle','primary',3))));
+select pg_temp.vv_add('oracle','rally','primary',jsonb_build_object('outcome','solo_block','roster_id',pg_temp.ff_roster('oracle','primary',3)));
+select pg_temp.check('two BA are one team block plus solo block','ORACLE',pg_temp.vv_stats('oracle','primary')@>'{"block_assists":2,"solo_blocks":1,"blocks":2,"points":5,"set_wins":2}');
+select pg_temp.game_op('game.finalize','oracle');
+reset role;
+select pg_temp.check('service attempts include all nine rallies','ORACLE',pg_temp.vv_stats('oracle','primary')->>'service_attempts'='5'and pg_temp.vv_stats('oracle','opponent')->>'service_attempts'='4');
+select pg_temp.check('sealed sets 2-1','SEAL',exists(select 1 from public.game_volleyball_finalizations where game_id=pg_temp.ff_game('oracle')and state->>'primary_sets'='2'and state->>'opponent_sets'='1'));
+select pg_temp.check('two coverage seals','SEAL',(select count(*)=2 from public.game_finalization_tracking_seals where game_id=pg_temp.ff_game('oracle')));
+select pg_temp.check('current state replays exactly','REPLAY',(select state=boss_private.volleyball_rebuild(game_id)from public.game_volleyball_states where game_id=pg_temp.ff_game('oracle')));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.game_op('game.reopen','oracle','{"reason":"Synthetic attribution review"}');
+select pg_temp.denied('correction cannot turn kill into assisted self-credit',format('select pg_temp.game_op(''volleyball.event.correct'',''oracle'',%L::jsonb)',jsonb_build_object('event_id',pg_temp.vv_event('oracle','rally'),'event_type','rally','side','primary','payload',jsonb_build_object('outcome','kill','roster_id',pg_temp.ff_roster('oracle','primary',2)),'reason','Synthetic self-assist contradiction')),'PT409');
+select pg_temp.game_op('volleyball.event.reverse','oracle',jsonb_build_object('event_id',pg_temp.vv_event('oracle','assist'),'reason','Synthetic assist removed before attribution correction'));
+select pg_temp.game_op('volleyball.event.correct','oracle',jsonb_build_object('event_id',pg_temp.vv_event('oracle','rally'),'event_type','rally','side','primary','payload',jsonb_build_object('outcome','kill','roster_id',pg_temp.ff_roster('oracle','primary',2)),'reason','Synthetic corrected scorer'));
+select pg_temp.check('corrected K moves to athlete2','CORRECTION',pg_temp.vv_stats('oracle','primary',2)->>'kills'='1'and pg_temp.vv_stats('oracle','primary',1)->>'kills'='0');
+select pg_temp.denied('rally outcome cannot invalidate later set boundary',format('select pg_temp.game_op(''volleyball.event.correct'',''oracle'',%L::jsonb)',jsonb_build_object('event_id',pg_temp.vv_event('oracle','rally'),'event_type','rally','side','primary','payload',jsonb_build_object('outcome','attack_error','roster_id',pg_temp.ff_roster('oracle','primary',2)),'reason','Synthetic invalid later boundary')),'PT409');
+select pg_temp.game_op('game.finalize','oracle');
+reset role;
+select pg_temp.check('two immutable epochs','SEAL',(select count(*)=2 from public.game_volleyball_finalizations where game_id=pg_temp.ff_game('oracle')));
+select pg_temp.check('old athlete seal unchanged','SEAL',exists(select 1 from public.game_volleyball_final_stats t join public.game_volleyball_finalizations f on f.finalization_id=t.finalization_id where f.game_id=pg_temp.ff_game('oracle')and f.epoch=1 and t.roster_id=pg_temp.ff_roster('oracle','primary',1)and t.stats->>'kills'='1'));
+update public.team_memberships set status='inactive',ends_at=clock_timestamp()where person_id=pg_temp.f('child1')and team_id=pg_temp.f('falcons');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.check('guardian history persists after old team ends','HISTORY',jsonb_array_length(public.boss_athlete_history_read(jsonb_build_object('child_person_id',pg_temp.f('child1'),'sport_key','volleyball'))->'records')=2);
+select pg_temp.actor('household-only');
+select pg_temp.denied('household-only lacks private historical authority',format('select public.boss_athlete_history_read(%L::jsonb)',jsonb_build_object('child_person_id',pg_temp.f('child1'),'sport_key','volleyball')));
+reset role;
+select count(*)passed_assertions from pg_temp.phase5a_assertions;
+rollback;

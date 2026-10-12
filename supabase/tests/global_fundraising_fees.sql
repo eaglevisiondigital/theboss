@@ -1,0 +1,28 @@
+\set ON_ERROR_STOP on
+\set VERBOSITY default
+begin;set local statement_timeout='8s';
+\ir global/fixture.sql
+set local role authenticated;select pg_temp.actor('director');
+select pg_temp.denied('unsupported fixed charge cannot silently disappear from a fee checkout',format('select public.boss_payments_mutate(%L::jsonb)',jsonb_build_object('action','policy.create','request_id',pg_temp.f('invalid-fixed-fees'),'input',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','fees','currency','USD','organization_basis_points',7000,'platform_basis_points',3000,'product_cost_basis_points',0,'platform_fee_minor',100,'processor_fee_owner','platform','availability_seconds',0))),'PT422');
+select pg_temp.denied('card fixed economics cannot receive an unsupported extra charge',format('select public.boss_payments_mutate(%L::jsonb)',jsonb_build_object('action','policy.create','request_id',pg_temp.f('invalid-fixed-products'),'input',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','products','currency','USD','organization_basis_points',7000,'platform_basis_points',3000,'product_cost_basis_points',0,'platform_fee_minor',100,'processor_fee_owner','platform','availability_seconds',0))),'PT422');
+insert into group_results values('fixed-policy',public.boss_payments_mutate(jsonb_build_object('action','policy.create','request_id',pg_temp.f('fixed-policy-request'),'input',jsonb_build_object('organization_id',pg_temp.f('org'),'purpose','fundraising','currency','USD','organization_basis_points',7000,'platform_basis_points',3000,'product_cost_basis_points',0,'platform_fee_minor',100,'processor_fee_owner','platform','availability_seconds',0))));
+select pg_temp.am('platform_policy.create',jsonb_build_object('organization_id',pg_temp.f('org'),'campaign_id',pg_temp.fid('campaign'),'channel','direct_support','currency','USD','settlement_policy_id',(select(data->>'id')::uuid from group_results where label='fixed-policy'),'agreement_reference','LOCAL-SYNTHETIC-FIXED-FEE','participant_credit_max_bps',10000,'wallet_permitted',false,'starts_at',clock_timestamp()-interval'1 hour'),'fixed-envelope');
+select pg_temp.actor('admin');select pg_temp.am('allocation_policy.create',jsonb_build_object('campaign_id',pg_temp.fid('campaign'),'channel','direct_support','platform_policy_id',(select(data->>'id')::uuid from group_results where label='fixed-envelope'),'organization_bps',10000,'destination_bps',0,'participant_bps',0,'starts_at',clock_timestamp()),'fixed-allocation');
+reset role;
+select public.boss_fundraising_support(jsonb_build_object('action','intent','request_id',pg_temp.f('fixed-intent'),'input',jsonb_build_object('path',pg_temp.fpath('share'),'capability',repeat('f',64),'display_name','Synthetic fixed-fee donor','anonymous',true,'amount_minor',10001)));
+insert into group_results values('fixed-checkout',public.boss_payments_support(jsonb_build_object('action','prepare','request_id',pg_temp.f('fixed-checkout'),'input',jsonb_build_object('path',pg_temp.fpath('share'),'capability',repeat('f',64),'method','card'))));
+select pg_temp.check('native prepare captures platform-controlled fixed fee','FEES',(select principal_minor=10001 and platform_fee_minor=100 and external_minor=10101 and donor_covered_fee_minor=0 from public.payment_checkouts where id=(select(data->>'checkout_id')::uuid from group_results where label='fixed-checkout')));
+select pg_temp.check('snapshot retains exact configured policy and principal','SNAPSHOT',(select s.platform_policy_id=(select(data->>'id')::uuid from group_results where label='fixed-envelope')and s.principal_minor=10001 and s.settlement_policy_id=(select(data->>'id')::uuid from group_results where label='fixed-policy')from public.fundraising_checkout_snapshots s));
+do $$declare c public.payment_checkouts;p uuid;e uuid;begin
+ select *into c from public.payment_checkouts where id=(select(data->>'checkout_id')::uuid from group_results where label='fixed-checkout');
+ perform boss_private.rails_dispatch(c.id);perform boss_private.rails_receive(c.id,'LOCAL-FIXED-CAPTURE','captured','LOCAL-FIXED',c.external_minor,c.currency,clock_timestamp(),repeat('a',64));
+ perform boss_private.rails_receive(c.id,'LOCAL-FIXED-SETTLEMENT','settled','LOCAL-FIXED',c.external_minor,c.currency,clock_timestamp(),repeat('b',64),jsonb_build_object('processor_fee_minor',1));
+ select payment_id into p from public.external_payment_tenders where checkout_id=c.id and original_payment_id is null;select id into e from public.provider_event_evidence where event_reference='LOCAL-FIXED-SETTLEMENT';
+ perform boss_private.rails_settlement_match(p,e,1);
+end$$;
+select pg_temp.check('principal Hamilton and fixed fee remain separate','ROUNDING',(select organization_minor=7001 and platform_minor=3000 and principal_minor=10001 from public.fundraising_cash_rounding_sources));
+select pg_temp.check('actual processor fee affects configured owner only','FEES',(select amount_minor=7001 and processor_fee_minor=1 from public.settlement_events where kind='settled'));
+select pg_temp.check('participant credit is not a second liability','SEPARATION',(select sum(amount_minor)=7001 from public.fundraising_credit_entries)and(select count(*)=1 from public.payments));
+select pg_temp.check('captured envelope disables Wallet independently','WALLET',not exists(select 1 from public.boss_bucks_grants where intent_id=(select id from public.fundraising_intents where request_id=pg_temp.f('fixed-intent'))));
+set constraints all immediate;
+select count(*)passed_assertions,'Platform fixed fee/native checkout/processor separation' suite from phase5a_assertions;rollback;

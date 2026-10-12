@@ -1,0 +1,105 @@
+name: Platform foundation validation
+
+on:
+  pull_request:
+    paths:
+      - "apps/platform/**"
+      - "supabase/**"
+      - ".github/workflows/platform-validation.yml"
+      - "docs/CURRENT_BUILD_STATE.md"
+      - "docs/PHASE_1A_NETLIFY.md"
+      - "docs/PLATFORM_PREPARATION.md"
+      - "docs/SECURITY_MODEL.md"
+      - "docs/SOURCE_PROVENANCE.md"
+      - "docs/PHASE_1B_HOSTED_VALIDATION.md"
+      - "docs/DATA_MODEL.md"
+      - "docs/PERMISSIONS_MODEL.md"
+      - "docs/TENANCY_MODEL.md"
+      - "docs/DECISIONS.md"
+      - "docs/MODULES.md"
+      - "docs/OPERATIONAL_CORE.md"
+      - "docs/REGISTRATION_ARCHITECTURE.md"
+      - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
+      - "docs/DOCUMENT_SECURITY.md"
+      - "docs/FEES_CHARGES_ARCHITECTURE.md"
+      - "docs/COMMUNICATIONS_ARCHITECTURE.md"
+      - "docs/NOTIFICATION_ARCHITECTURE.md"
+      - "docs/MINOR_COMMUNICATION_SAFETY.md"
+      - "docs/EMAIL_DELIVERY_ARCHITECTURE.md"
+      - "docs/PHASE_4A_VALIDATION.md"
+  push:
+    branches: ["build/boss-platform-v1"]
+    paths:
+      - "apps/platform/**"
+      - "supabase/**"
+      - ".github/workflows/platform-validation.yml"
+      - "docs/CURRENT_BUILD_STATE.md"
+      - "docs/PHASE_1A_NETLIFY.md"
+      - "docs/PLATFORM_PREPARATION.md"
+      - "docs/SECURITY_MODEL.md"
+      - "docs/SOURCE_PROVENANCE.md"
+      - "docs/PHASE_1B_HOSTED_VALIDATION.md"
+      - "docs/DATA_MODEL.md"
+      - "docs/PERMISSIONS_MODEL.md"
+      - "docs/TENANCY_MODEL.md"
+      - "docs/DECISIONS.md"
+      - "docs/MODULES.md"
+      - "docs/OPERATIONAL_CORE.md"
+      - "docs/REGISTRATION_ARCHITECTURE.md"
+      - "docs/FORMS_WAIVERS_ARCHITECTURE.md"
+      - "docs/DOCUMENT_SECURITY.md"
+      - "docs/FEES_CHARGES_ARCHITECTURE.md"
+      - "docs/COMMUNICATIONS_ARCHITECTURE.md"
+      - "docs/NOTIFICATION_ARCHITECTURE.md"
+      - "docs/MINOR_COMMUNICATION_SAFETY.md"
+      - "docs/EMAIL_DELIVERY_ARCHITECTURE.md"
+      - "docs/PHASE_4A_VALIDATION.md"
+
+permissions:
+  contents: read
+
+jobs:
+  database:
+    runs-on: ubuntu-latest
+    # Full historical SQL and 177 races now exceed the original ten-minute job budget.
+    # Phase 6B requests retain their independently enforced eight-second limit.
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Pull pinned PostgreSQL 17 test image
+        run: docker pull postgres:17.11@sha256:d74eeac9a635390a49bc21bd49fccd973de707e2a53a76ac49b552b8712ec46f
+      - name: Test migrations and Data API role isolation without network or credentials
+        run: |
+          docker run --rm --network none --read-only --user postgres \
+            --cap-drop ALL --security-opt no-new-privileges \
+            --tmpfs /tmp:rw,nosuid,nodev,mode=1777 \
+            --volume "$GITHUB_WORKSPACE:/workspace:ro" --workdir /workspace \
+            --env PG_BINDIR=/usr/lib/postgresql/17/bin --entrypoint bash \
+            postgres:17.11@sha256:d74eeac9a635390a49bc21bd49fccd973de707e2a53a76ac49b552b8712ec46f \
+            supabase/tests/run-local.sh
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: apps/platform
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Format-only fixtures for compilation. Not working API credentials.
+      # This workflow never deploys or authenticates against the backend.
+      NEXT_PUBLIC_SUPABASE_URL: "https://ilykgwgmxtrrikreacrz.supabase.co"
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_aA9bB8cC7dD6eE5fF4gG3hH2iI1jJ0kK"
+      BOSS_PLATFORM_ORIGIN: "https://platform.boss.invalid"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: apps/platform/.nvmrc
+          cache: npm
+          cache-dependency-path: apps/platform/package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run validate

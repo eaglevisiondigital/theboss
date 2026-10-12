@@ -1,0 +1,17 @@
+export const basketballOperations = ["basketball.configure", "basketball.period.start", "basketball.period.end", "basketball.clock.start", "basketball.clock.stop", "basketball.clock.set", "basketball.lineup.set", "basketball.substitute", "basketball.event.add", "basketball.event.correct", "basketball.event.reverse"] as const;
+export const basketballPlayTypes = ["made_2", "made_3", "made_ft", "missed_2", "missed_3", "missed_ft", "offensive_rebound", "defensive_rebound", "assist", "steal", "block", "turnover", "personal_foul"] as const;
+export const basketballControlTypes = ["period_start", "period_end", "clock_start", "clock_stop", "clock_set", "lineup_set", "substitution", "engine_configure", "reversal"] as const;
+export type BasketballSide = "primary" | "opponent";
+export type BasketballPlayType = typeof basketballPlayTypes[number];
+export type BasketballEventType = BasketballPlayType | typeof basketballControlTypes[number];
+export type BasketballCapabilities = { configure: boolean; operate: boolean; correct: boolean; stats: boolean; lineups: boolean };
+export const basketballStatKeys = ["points", "offensive_rebounds", "defensive_rebounds", "rebounds", "assists", "steals", "blocks", "turnovers", "personal_fouls", "fgm", "fga", "tpm", "tpa", "ftm", "fta"] as const;
+export type BasketballTotals = Record<typeof basketballStatKeys[number], number>;
+export type BasketballPlayer = BasketballTotals & { roster_id: string; side: BasketballSide; display_name: string; jersey_number: string | null };
+export type BasketballTeam = BasketballTotals & { side: BasketballSide };
+export type BasketballEntry = { id: string; side: BasketballSide; display_name: string; jersey_number: string | null; active: boolean };
+export type BasketballPlay = { id: string; sequence: number; period_number: number; clock_ms: number; side: BasketballSide | null; event_type: BasketballEventType; points: number; display_name: string | null; jersey_number: string | null; roster_id: string | null; scoring_event_id: string | null; active: boolean };
+export type BasketballFinalEpoch = { epoch: number; event_sequence: number; roster_revision: number; engine_version: string; current_authoritative: boolean; players: BasketballPlayer[]; teams: BasketballTeam[] };
+export type BasketballSetup = { configured: false; capabilities: BasketballCapabilities };
+export type BasketballGame = { configured: true; engine_version: string; regulation_periods: 2 | 4; period_seconds: number; overtime_seconds: number; lineup_size: number; enforce_lineup: boolean; period_number: number; overtime_number: number; period_status: "pending" | "active" | "ended"; clock_ms: number; clock_running: boolean; clock_observed_at: string; capabilities: BasketballCapabilities; entry_roster: BasketballEntry[]; lineups: { side: BasketballSide; roster_ids: string[] }[]; players: BasketballPlayer[]; teams: BasketballTeam[]; plays: BasketballPlay[]; period_fouls: { period_number: number; primary: number; opponent: number }[]; more_plays: boolean; final_epochs: BasketballFinalEpoch[] };
+export type Basketball = BasketballSetup | BasketballGame;

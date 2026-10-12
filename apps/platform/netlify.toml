@@ -1,0 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24.20.0"
+  NPM_FLAGS = "--ignore-scripts"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# This configuration is selected by the platform site's apps/platform base.
+# It intentionally contains no environment keys, root base override, or secrets.
+# Next.js's Netlify adapter is installed automatically by framework detection.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"

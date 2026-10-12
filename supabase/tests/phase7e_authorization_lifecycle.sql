@@ -1,0 +1,47 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir phase7e/fixture.sql
+set local role authenticated;select pg_temp.actor('other-admin');
+select pg_temp.denied('organization administrator cannot create platform catalog',format('select pg_temp.dm(''org-global-product'',''product.create'',%L)','{"code":"forged_catalog","name":"Forged","kind":"digital"}'));
+select pg_temp.denied('other organization product report denied',format('select public.boss_discounts_read(%L)',jsonb_build_object('mode','organization','organization_id',pg_temp.f('org'))));
+select pg_temp.actor('parent');
+select pg_temp.denied('parent pricing activation denied',format('select pg_temp.dm(''parent-price'',''revision.status'',%L)',jsonb_build_object('revision_id',pg_temp.did('base30','revision_id'),'state','active')));
+select pg_temp.denied('forged source revoke denied',format('select pg_temp.dm(''forged-source'',''source.revoke'',%L)',jsonb_build_object('source_id',pg_temp.f('forged-source'))));
+select pg_temp.denied('raw entitlement insertion cannot escalate',format('insert into public.entitlements(subject_type,subject_id,entitlement_type,entitlement_key,starts_at)values(''person'',%L,''product'',''boss_bucks.discounts:forged'',clock_timestamp())',pg_temp.f('parent')),'42501');
+select pg_temp.denied('unrelated private delivery read denied',format('select public.boss_discounts_read(%L)',jsonb_build_object('mode','delivery','organization_id',pg_temp.f('org'),'order_id',pg_temp.f('forged-order'))));
+select pg_temp.check('guardian sees exact own fundraiser minimum report','REPORT',(public.boss_discounts_read(jsonb_build_object('mode','fundraiser','fundraiser_id',pg_temp.fid('fundraiser')))->>'mode')='fundraiser');
+select pg_temp.actor('household-only');
+select pg_temp.denied('household membership is not fundraiser guardian authority',format('select public.boss_discounts_read(%L)',jsonb_build_object('mode','fundraiser','fundraiser_id',pg_temp.fid('fundraiser'))));
+select pg_temp.actor('admin');
+select pg_temp.revision('household','digital','{"subject_type":"household","claim_policy":"household_primary_contact","gift_enabled":false}');
+select pg_temp.dm('household-binding','campaign.configure',jsonb_build_object('campaign_id',pg_temp.fid('campaign'),'revision_id',pg_temp.did('household','revision_id'),'trial_enabled',true,'gift_enabled',false,'sale_enabled',false));
+select pg_temp.actor('parent');
+select pg_temp.denied('household claim requires explicit primary contact policy',format('select pg_temp.dm(''hh-not-primary'',''trial.start'',%L)',jsonb_build_object('revision_id',pg_temp.did('household','revision_id'),'path',pg_temp.fpath('share'),'household_id',pg_temp.f('household'))));
+reset role;
+update public.household_memberships set is_primary_contact=true where person_id=pg_temp.f('parent')and household_id=pg_temp.f('household');
+set local role authenticated;select pg_temp.actor('parent');
+select pg_temp.dm('hh-trial','trial.start',jsonb_build_object('revision_id',pg_temp.did('household','revision_id'),'path',pg_temp.fpath('share'),'household_id',pg_temp.f('household')));
+select pg_temp.check('household subject distinct from personal subject','SUBJECT',(public.boss_discounts_read(jsonb_build_object('membership_id',pg_temp.did('hh-trial')))->'memberships'->0->>'subject_type')='household');
+select pg_temp.actor('household-only');
+select pg_temp.denied('non-primary cannot manage household benefit',format('select pg_temp.dm(''hh-rebuild-denied'',''membership.rebuild'',%L)',jsonb_build_object('membership_id',pg_temp.did('hh-trial'))));
+reset role;
+select pg_temp.check('household product grants no Wallet authority','SEPARATION',not boss_private.bucks_accessible(pg_temp.f('household-only'),pg_temp.f('wallet')));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.dm('replay-batch','batch.create',jsonb_build_object('revision_id',pg_temp.did('card90','revision_id'),'organization_id',pg_temp.f('org'),'owner_type','organization','name','SYNTHETIC stale authority test','quantity',1,'controlled',true));
+reset role;
+update public.role_assignments set status='inactive'where person_id=pg_temp.f('admin');
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.denied('stale signed creation receipt denied after role removal',format('select pg_temp.dm(''replay-batch'',''batch.create'',%L)',jsonb_build_object('revision_id',pg_temp.did('card90','revision_id'),'organization_id',pg_temp.f('org'),'owner_type','organization','name','SYNTHETIC stale authority test','quantity',1,'controlled',true)));
+reset role;
+update public.role_assignments set status='active'where person_id=pg_temp.f('admin');
+-- Explicit dated synthetic sources prove natural expiry without editing history.
+insert into public.discount_memberships(id,product_id,subject_type,subject_id,country,region,market,state)values(pg_temp.f('expired-member'),pg_temp.did('digital','product_id'),'person',pg_temp.f('staff'),'US','VA','SYNTHETIC LOCAL MARKET','active');
+insert into public.discount_member_sources(id,membership_id,revision_id,kind,source_key,organization_id,tier,starts_at,ends_at)values(pg_temp.f('expired-source'),pg_temp.f('expired-member'),pg_temp.did('base30','revision_id'),'fundraising_trial','SYNTHETIC expired trial',pg_temp.f('org'),'local',clock_timestamp()-interval'31 days',clock_timestamp()-interval'1 day');
+select boss_private.discount_rebuild(pg_temp.f('expired-member'));
+select pg_temp.check('expired source remains history with no current access','EXPIRY',(boss_private.discount_effective(pg_temp.f('expired-member'))->>'state')='expired'and not boss_private.discount_source_valid(pg_temp.f('expired-source')));
+select pg_temp.denied('immutable source term cannot be extended',format('update public.discount_member_sources set ends_at=clock_timestamp()+interval''1 day''where id=%L',pg_temp.f('expired-source')),'23514');
+select pg_temp.denied('persistent membership identity cannot be deleted',format('delete from public.discount_memberships where id=%L',pg_temp.f('expired-member')),'23514');
+select pg_temp.denied('personal membership cannot transfer by knowing identity',format('update public.discount_memberships set subject_id=%L where id=%L',pg_temp.f('child2'),pg_temp.f('expired-member')),'23514');
+select pg_temp.check('expired projection is canonical inactive entitlement','ENTITLEMENT',exists(select 1 from public.entitlements where source_id=pg_temp.f('expired-source')and status='inactive'));
+set constraints all immediate;
+select count(*)passed_assertions,'Phase 7E authority lifecycle and exact subject'::text suite from phase5a_assertions;rollback;

@@ -1,0 +1,38 @@
+\set ON_ERROR_STOP on
+begin;set local statement_timeout='8s';
+\ir phase8a/fixture.sql
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.mm('sales-manager','sales.grant',jsonb_build_object('person_id',pg_temp.f('director'),'role','regional_manager','market_id',pg_temp.mid('market','market_id')));
+select pg_temp.mm('sales-rep','sales.grant',jsonb_build_object('person_id',pg_temp.f('coach'),'role','sales_rep','market_id',pg_temp.mid('market','market_id'),'manager_id',pg_temp.f('director')));
+select pg_temp.mm('sales-rep2','sales.grant',jsonb_build_object('person_id',pg_temp.f('assistant'),'role','sales_rep','market_id',pg_temp.mid('market','market_id'),'manager_id',pg_temp.f('director')));
+select pg_temp.mm('sales-other','sales.grant',jsonb_build_object('person_id',pg_temp.f('other-admin'),'role','regional_manager','market_id',pg_temp.mid('market-other','market_id')));
+select pg_temp.actor('coach');
+select pg_temp.mm('lead','lead.create',jsonb_build_object('market_id',pg_temp.mid('market','market_id'),'name','SYNTHETIC prospect','category','services','source','Synthetic rep referral','manager_id',pg_temp.f('director')));
+select pg_temp.mm('activity','lead.activity',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'kind','follow_up','note','Synthetic onboarding follow-up only'));
+select pg_temp.check('rep sees one assigned lead','SALES',jsonb_array_length(public.boss_merchants_read('{"mode":"sales"}')->'leads')=1);
+select pg_temp.denied('rep unrelated territory cannot create',format('select pg_temp.mm(''bad-lead'',''lead.create'',%L)',jsonb_build_object('market_id',pg_temp.mid('market-other','market_id'),'name','FORGED','category','services','source','Forged territory')));
+select pg_temp.denied('rep cannot grant sales assignment',format('select pg_temp.mm(''rep-grant'',''sales.grant'',%L)',jsonb_build_object('person_id',pg_temp.f('coach'),'role','regional_manager','market_id',pg_temp.mid('market','market_id'))));
+select pg_temp.actor('director');
+select pg_temp.check('manager sees assigned rep market','SALES',jsonb_array_length(public.boss_merchants_read('{"mode":"sales"}')->'leads')=1);
+select pg_temp.mm('reassign','lead.reassign',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'expected_version',1,'rep_id',pg_temp.f('assistant'),'manager_id',pg_temp.f('director')));
+select pg_temp.actor('coach');
+select pg_temp.check('former rep loses opportunity','SALES',jsonb_array_length(public.boss_merchants_read('{"mode":"sales"}')->'leads')=0);
+select pg_temp.denied('former rep cannot replay activity',format('select pg_temp.mm(''activity'',''lead.activity'',%L)',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'kind','follow_up','note','Synthetic onboarding follow-up only')));
+select pg_temp.actor('other-admin');select pg_temp.check('other territory manager sees no lead','ISOLATION',jsonb_array_length(public.boss_merchants_read('{"mode":"sales"}')->'leads')=0);
+select pg_temp.actor('director');select pg_temp.mm('convert','lead.convert',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'expected_version',2,'controlled',true));
+select pg_temp.check('conversion retry safe','IDEMPOTENCY',(pg_temp.mm('convert','lead.convert',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'expected_version',2,'controlled',true))->>'replayed')::boolean);
+select pg_temp.denied('new conversion request cannot duplicate',format('select pg_temp.mm(''convert-again'',''lead.convert'',%L)',jsonb_build_object('lead_id',pg_temp.mid('lead','lead_id'),'expected_version',3,'controlled',true)),'PT409');
+reset role;
+select pg_temp.check('one conversion merchant','CONVERSION',(select count(*)=1 from public.merchants where id=(pg_temp.mr('convert')->>'merchant_id')::uuid));
+select pg_temp.check('conversion preserves source rep history','ATTRIBUTION',(select count(*)=3 and count(distinct rep_id)=2 from public.merchant_sales_history where lead_id=pg_temp.mid('lead','lead_id')));
+select pg_temp.check('conversion does not create owner','SEPARATION',not exists(select 1 from public.merchant_access_assignments where merchant_id=(pg_temp.mr('convert')->>'merchant_id')::uuid));
+select pg_temp.check('conversion is unapproved listing','REVIEW',(select status='prospect'and claim_state='unclaimed'from public.merchants where id=(pg_temp.mr('convert')->>'merchant_id')::uuid));
+select pg_temp.check('merchant events have no invented organization','NOTIFICATIONS',(select count(*)>=2 and bool_and(organization_id is null and safe_data='{}')from public.notification_events where source_type='merchant_history'));
+select pg_temp.check('merchant native templates use existing inbox','NOTIFICATIONS',exists(select 1 from public.notifications n join public.notification_events e on e.id=n.notification_event_id where e.source_type='merchant_history'and n.recipient_person_id=pg_temp.f('parent')));
+select pg_temp.check('provider-independent email remains suppressed','NOTIFICATIONS',not exists(select 1 from public.notification_deliveries d join public.notifications n on n.id=d.notification_id join public.notification_events e on e.id=n.notification_event_id where e.source_type='merchant_history'and d.channel='email'and d.status not in('suppressed','canceled')));
+select pg_temp.check('new sources have explicit merchant or sales provenance','NOTIFICATIONS',not exists(select 1 from public.notification_events e where e.source_type='merchant_history'and not exists(select 1 from public.merchant_history h where h.id=e.source_id and h.merchant_id is not distinct from e.merchant_id)));
+set local role authenticated;select pg_temp.actor('admin');
+select pg_temp.mm('end-rep','sales.end',jsonb_build_object('assignment_id',pg_temp.mid('sales-rep')));
+select pg_temp.actor('coach');select pg_temp.check('ended sales assignment receives no follow-up','NOTIFICATIONS',not exists(select 1 from jsonb_array_elements(public.boss_notifications_read('{"view":"inbox"}')->'notifications')n where n->>'event_type'='merchant.follow_up'));
+reset role;set constraints all immediate;
+select count(*)passed_assertions,'Phase 8A CRM attribution isolation notifications'::text suite from phase5a_assertions;rollback;
