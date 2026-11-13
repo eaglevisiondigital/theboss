@@ -1,0 +1,68 @@
+name: BOSS one-use native provenance v1
+on:
+  push:
+    branches: ["qualification/boss-native-provenance-v1"]
+    paths: [".github/workflows/boss-native-provenance-v1.yml"]
+permissions: {}
+jobs:
+  native-file-provenance:
+    if: github.repository == 'eaglevisiondigital/theboss' && github.ref == 'refs/heads/qualification/boss-native-provenance-v1' && github.event_name == 'push' && github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Read fixed Linux provenance
+        shell: bash --noprofile --norc {0}
+        env:
+          BOSS_PUSH_AUTHORIZATION: ${{ github.event.head_commit.message }}
+        run: |
+          /usr/bin/python3 -I - <<'BOSS_FIXED_PROVENANCE'
+          import os,json,hashlib,time,stat,re,datetime
+          from pathlib import Path
+          started=time.monotonic()
+          authorization=os.environ.get("BOSS_PUSH_AUTHORIZATION","").strip()
+          match=re.fullmatch(r"BOSS provenance capture receipt=([a-f0-9]{64}) profile=([a-f0-9]{64})",authorization)
+          if not match or match.group(2)!="355524898bb58b71e120d5140fb154fe81c7066088919f34def6969fe2181768":raise SystemExit("STOP: unbound profile/receipt")
+          approval=match.group(1)
+          output=Path(os.environ["RUNNER_TEMP"])/"boss-native-provenance"
+          output.mkdir(mode=0o700)
+          paths=["/usr/bin/python3","/usr/bin/docker","/usr/bin/dockerd","/usr/bin/containerd","/usr/bin/runc","/usr/bin/gcc","/usr/bin/ld","/lib/x86_64-linux-gnu/libc.so.6"]
+          records=[]
+          for path in paths:
+           q=Path(path)
+           if not q.exists():records.append({"requested":path,"status":"MISSING"});continue
+           resolved=q.resolve(strict=True);s=resolved.stat()
+           if not stat.S_ISREG(s.st_mode):raise SystemExit("STOP: tool is not a regular file")
+           if s.st_size>268435456:raise SystemExit("STOP: file exceeds fixed bound")
+           digest=hashlib.sha256()
+           with resolved.open("rb") as stream:
+            while True:
+             if time.monotonic()-started>40:raise SystemExit("STOP: source observation deadline")
+             chunk=stream.read(65536)
+             if not chunk:break
+             digest.update(chunk)
+           records.append({"requested":path,"resolved":str(resolved),"sha256":digest.hexdigest(),"bytes":s.st_size,"uid":s.st_uid,"mode":format(stat.S_IMODE(s.st_mode),"04o")})
+          def bounded_text(path):
+           if time.monotonic()-started>40:raise SystemExit("STOP: metadata deadline")
+           with open(path,"rb") as stream:data=stream.read(65537)
+           if len(data)>65536:raise SystemExit("STOP: metadata bound")
+           return data.decode("utf-8",errors="strict")
+          result={"schema":"boss-linux-provenance-only-v2","profile_sha256":"355524898bb58b71e120d5140fb154fe81c7066088919f34def6969fe2181768","repository":os.environ["GITHUB_REPOSITORY"],"ref":os.environ["GITHUB_REF"],"event":os.environ["GITHUB_EVENT_NAME"],"run_number":os.environ["GITHUB_RUN_NUMBER"],"owner_reference_sha256_reported":approval,"run_id":os.environ["GITHUB_RUN_ID"],"run_attempt":os.environ["GITHUB_RUN_ATTEMPT"],"workflow_commit":os.environ["GITHUB_SHA"],"runner_os":os.environ.get("RUNNER_OS"),"utc_observed":datetime.datetime.now(datetime.timezone.utc).isoformat(),"fixed_tool_files":records,"os_release":bounded_text("/etc/os-release"),"kernel_release":bounded_text("/proc/sys/kernel/osrelease"),"cgroup_controllers":bounded_text("/sys/fs/cgroup/cgroup.controllers"),"qualification":"NOT_ESTABLISHED","fixture_executions":0,"compiler_executions":0,"children_spawned_by_collector":0,"elapsed_seconds":time.monotonic()-started}
+          def write(name,data):
+           if time.monotonic()-started>40:raise SystemExit("STOP: publication deadline")
+           fd=os.open(output/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+           with os.fdopen(fd,"wb") as stream:stream.write(data);stream.flush();os.fsync(stream.fileno())
+          raw=(json.dumps(result,sort_keys=True,separators=(",",":"))+"\n").encode()
+          write("PROVENANCE.json",raw)
+          write("MANIFEST.json",(json.dumps({"schema":"boss-native-provenance-manifest-v1","files":{"PROVENANCE.json":hashlib.sha256(raw).hexdigest()},"manifest_self_hash_excluded":True},sort_keys=True,separators=(",",":"))+"\n").encode())
+          if time.monotonic()-started>40:raise SystemExit("STOP: completed after source deadline")
+          print("Provenance recorded; isolation NOT ESTABLISHED; fixture/compiler NOT_RUN")
+          BOSS_FIXED_PROVENANCE
+      - name: Retain provenance for independent review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: boss-native-provenance-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/boss-native-provenance/
+          if-no-files-found: error
+          overwrite: false
+          retention-days: 7
+          compression-level: 0
