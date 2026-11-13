@@ -1,0 +1,310 @@
+name: BOSS fixed native input capture v1
+on:
+  push:
+    branches: [qualification/boss-native-inputs-v1]
+    paths: [.github/workflows/boss-native-inputs-v1.yml]
+permissions: {}
+jobs:
+  capture:
+    if: github.repository == 'eaglevisiondigital/theboss' && github.ref == 'refs/heads/qualification/boss-native-inputs-v1' && github.event_name == 'push' && github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Capture fixed native inputs
+        shell: /usr/bin/python3 -I {0}
+        env:
+          BOSS_PROFILE_SHA256: eaffd94e6951a879f4cec0e64ecc4da95d81b0804149290315f4350d3ce7d27e
+          BOSS_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          import os,re
+          m=re.fullmatch(r'BOSS provenance capture receipt=([0-9a-f]{64}) profile=eaffd94e6951a879f4cec0e64ecc4da95d81b0804149290315f4350d3ce7d27e',os.environ['BOSS_COMMIT_MESSAGE'].strip())
+          if not m:raise SystemExit('STOP: native commit owner/profile binding')
+          os.environ['BOSS_OWNER_RECEIPT_SHA256']=m.group(1)
+          """Static fixture/loader/library identity verification; source-only, NOT_RUN.
+          
+          Reads a future sealed build result. Never loads or executes an ELF. Does not
+          invent a fixture digest or treat a GCC driver hash as a complete toolchain.
+          """
+          import hashlib
+          import os
+          from pathlib import PurePosixPath
+          import stat
+          import struct
+          
+          def need(ok, reason):
+              if not ok:
+                  raise ValueError('STOP: '+reason)
+          
+          def elf_dependencies(raw):
+              need(len(raw)>=64 and raw[:7]==b'\x7fELF\x02\x01\x01', 'ELF64 little-endian identity')
+              header=struct.unpack_from('<HHIQQQIHHHHHH',raw,16)
+              kind,machine,version,entry,phoff,shoff,flags,ehsize,phsize,phnum,*_=header
+              need(machine==62 and version==1 and kind in (2,3) and ehsize==64,
+                   'fixed Linux amd64 ELF format')
+              need(phsize==56 and 0<phnum<=128 and phoff+phsize*phnum<=len(raw), 'program-header bounds')
+              segments=[struct.unpack_from('<IIQQQQQQ',raw,phoff+i*phsize) for i in range(phnum)]
+              for typ,flg,offset,vaddr,paddr,filesz,memsz,align in segments:
+                  need(offset+filesz<=len(raw) and filesz<=memsz,'segment bounds')
+              def bounded_string(offset, end):
+                  need(0<=offset<end<=len(raw),'string bounds')
+                  stop=raw.find(b'\0',offset,end);need(stop>=offset,'unterminated ELF string')
+                  return raw[offset:stop].decode('ascii')
+              interpreters=[bounded_string(s[2],s[2]+s[5]) for s in segments if s[0]==3]
+              need(len(interpreters)<=1,'multiple ELF interpreters')
+              dynamic=[s for s in segments if s[0]==2]
+              need(len(dynamic)<=1,'multiple dynamic tables')
+              if not dynamic:return {'interpreter':interpreters[0] if interpreters else None,'needed':[]}
+              table=dynamic[0];need(table[5]%16==0,'dynamic table alignment')
+              entries=[];terminated=False
+              for offset in range(table[2],table[2]+table[5],16):
+                  tag,value=struct.unpack_from('<qQ',raw,offset)
+                  if tag==0:terminated=True;break
+                  entries.append((tag,value))
+              need(terminated,'unterminated dynamic table')
+              need(not any(t in (15,29,0x6ffffefc,0x6ffffefb,0x7fffffff,0x7ffffffd) for t,v in entries),
+                   'unapproved RPATH/RUNPATH/audit/filter dependency')
+              needed=[v for t,v in entries if t==1]
+              if not needed:return {'interpreter':interpreters[0] if interpreters else None,'needed':[]}
+              strings=[v for t,v in entries if t==5];sizes=[v for t,v in entries if t==10]
+              need(len(strings)==len(sizes)==1,'dynamic string-table identity')
+              load=[s for s in segments if s[0]==1 and s[3]<=strings[0]<s[3]+s[5]]
+              need(len(load)==1,'dynamic string-table mapping')
+              start=load[0][2]+strings[0]-load[0][3];end=start+sizes[0]
+              names=[bounded_string(start+n,end) for n in needed]
+              need(all('/' not in n and n not in ('','.','..') for n in names),'dependency path traversal')
+              return {'interpreter':interpreters[0] if interpreters else None,'needed':names}
+          
+          def verify(root, fixture_path, expected_binary_sha256, material_manifest):
+              root=os.path.realpath(root)
+              def read(relative):
+                  pp=PurePosixPath(relative)
+                  need(pp.is_absolute() and '..' not in pp.parts,'absolute sealed ELF path')
+                  fd=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+                  try:
+                      for component in pp.parts[1:-1]:
+                          nextfd=os.open(component,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=fd)
+                          os.close(fd);fd=nextfd
+                      leaf=os.open(pp.name,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=fd)
+                      with os.fdopen(leaf,'rb') as f:
+                          need(stat.S_ISREG(os.fstat(f.fileno()).st_mode),'regular ELF input')
+                          b=f.read()
+                      need(hashlib.sha256(b).hexdigest()==material_manifest['files'][relative],
+                           'sealed ELF material drift')
+                      return b
+                  finally:os.close(fd)
+              need(material_manifest['files'][fixture_path]==expected_binary_sha256,'expected fixture digest')
+              queue=[fixture_path];seen={}
+              while queue:
+                  path=queue.pop()
+                  if path in seen:continue
+                  facts=elf_dependencies(read(path));seen[path]=facts
+                  if facts['interpreter']:
+                      need(facts['interpreter']==material_manifest['approved_interpreter'],'ELF interpreter')
+                      queue.append(facts['interpreter'])
+                  for name in facts['needed']:
+                      need(name in material_manifest['needed_library_paths'],'missing required ELF library')
+                      queue.append(material_manifest['needed_library_paths'][name])
+              return {'result':'STATIC_ELF_IDENTITY_ONLY','files':seen,
+                      'symbol_version_compatibility':'REQUIRES_SEPARATE_BUILD_AND_RUNTIME_ACCEPTANCE',
+                      'execution':'NOT_RUN'}
+          
+          """Fixed metadata capture. No subprocess, sockets, compiler, container or probe.
+          
+          The reviewed ELF reader is prepended into the sealed workflow. Nothing here
+          executes a captured file. Read-only system code identities are not enforcement.
+          """
+          import datetime
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+          import stat
+          import time
+          
+          def capture(profile):
+              started=time.monotonic()
+              sha=lambda b:hashlib.sha256(b).hexdigest()
+              def check(ok, why):
+                  if not ok:raise ValueError('STOP: '+why)
+              def budget():check(time.monotonic()-started<35,'capture source deadline')
+              check(os.uname().sysname=='Linux' and os.uname().machine=='x86_64','fixed Linux amd64')
+              check(os.uname().release==profile['kernel_release'],'kernel changed')
+              check(os.environ.get('ImageVersion')==profile['runner_image_version'],'hosted image changed')
+              check(os.environ.get('GITHUB_REPOSITORY')==profile['repository'],'repository')
+              check(os.environ.get('GITHUB_REF')=='refs/heads/'+profile['branch'],'branch')
+              check(os.environ.get('GITHUB_RUN_ATTEMPT')==os.environ.get('GITHUB_RUN_NUMBER')=='1','one native attempt')
+              owner=os.environ.get('BOSS_OWNER_RECEIPT_SHA256','')
+              check(re.fullmatch('[0-9a-f]{64}',owner) is not None,'owner receipt digest')
+              records={}; hashed={}; total=[0]
+              allowed=('/usr/','/lib/','/lib64/','/etc/alternatives/')
+              def system_path(path):
+                  p=Path(path);check(p.is_absolute() and '..' not in p.parts,'absolute system path')
+                  # Only root-owned system links, bounded depth. Never read home, runtime
+                  # credentials, process environments, application or provider data.
+                  for _ in range(32):
+                      changed=False;current=Path('/')
+                      for part in p.parts[1:]:
+                          current=current/part;st=current.lstat()
+                          if stat.S_ISDIR(st.st_mode):
+                              check(st.st_uid==0 and not st.st_mode&0o022,'untrusted system directory')
+                          if stat.S_ISLNK(st.st_mode):
+                              check(st.st_uid==0,'untrusted system link owner')
+                              target=Path(os.readlink(current))
+                              target=target if target.is_absolute() else current.parent/target
+                              remainder=p.relative_to(current)
+                              p=Path(os.path.normpath(target/remainder))
+                              check(str(p).startswith(allowed),'system link escaped code roots')
+                              changed=True;break
+                      if not changed:return p
+                  raise ValueError('STOP: system link depth')
+              def record(path, required=True):
+                  budget();key=str(path)
+                  if key in records:return records[key]
+                  if not os.path.lexists(path):
+                      check(not required,'missing required system input '+key)
+                      records[key]={'status':'ABSENT'};return records[key]
+                  leaf=Path(path).lstat();p=system_path(path);st=p.lstat()
+                  check(st.st_uid==0 and not st.st_mode&0o022,'system input owner/mode '+key)
+                  item={'requested':key,'resolved':str(p),'uid':st.st_uid,
+                        'mode':format(stat.S_IMODE(st.st_mode),'04o')}
+                  if stat.S_ISDIR(st.st_mode):
+                      item['type']='directory'
+                  else:
+                      check(stat.S_ISREG(st.st_mode),'nonregular system input '+key)
+                      cache=(st.st_dev,st.st_ino,st.st_size,st.st_mtime_ns)
+                      if cache not in hashed:
+                          check(st.st_size<=256*1024*1024,'single system file bound')
+                          h=hashlib.sha256();count=0
+                          fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+                          with os.fdopen(fd,'rb') as f:
+                              opened=os.fstat(f.fileno())
+                              check((opened.st_dev,opened.st_ino)==(st.st_dev,st.st_ino),'input replacement')
+                              while True:
+                                  budget();b=f.read(1024*1024)
+                                  if not b:break
+                                  count+=len(b);total[0]+=len(b)
+                                  check(total[0]<=8*1024**3,'aggregate read bound');h.update(b)
+                              end=os.fstat(f.fileno())
+                          check((end.st_size,end.st_mtime_ns)==(st.st_size,st.st_mtime_ns),'input changed')
+                          hashed[cache]=h.hexdigest()
+                      item.update(type='regular',bytes=st.st_size,sha256=hashed[cache])
+                  if stat.S_ISLNK(leaf.st_mode):item['link_text']=os.readlink(path)
+                  records[key]=item
+                  check(len(records)<=100000,'system inventory bound')
+                  return item
+              fixed=[]
+              for expected in profile['expected_tools']:
+                  observed=record(expected['requested'])
+                  check(all(observed[k]==expected[k] for k in ['sha256','resolved','uid','mode','bytes']),'accepted tool changed')
+                  fixed.append(observed)
+              for name in profile['required_files']:record(name)
+              completed=[];visited=set()
+              def tree(path):
+                  budget();r=record(path);check(r.get('type')=='directory','tree root')
+                  st=Path(r['resolved']).stat();identity=(st.st_dev,st.st_ino)
+                  if identity in visited:return
+                  visited.add(identity)
+                  for name in sorted(os.listdir(r['resolved'])):
+                      check(not name.startswith('.env'),'unexpected credential-like input')
+                      child=str(Path(r['resolved'])/name);rchild=record(child)
+                      if rchild.get('type')=='directory':tree(child)
+              for path in profile['required_trees']:
+                  tree(path);completed.append(path)
+              for path in profile['optional_trees']:
+                  if os.path.lexists(path):tree(path)
+                  else:record(path,False)
+              for path in profile['optional_files']:record(path,False)
+              # Independently list dynamic dependencies of compiler executables, without
+              # ldd, GCC queries or a dynamic loader. Ambiguous paths are reported, not
+              # silently selected. The later hermetic build must resolve every candidate.
+              elf={};queue=list(profile['elf_seeds']);seen=set()
+              while queue:
+                  path=queue.pop();budget()
+                  if path in seen:continue
+                  seen.add(path);r=record(path)
+                  raw=Path(r['resolved']).read_bytes()
+                  check(sha(raw)==r['sha256'],'ELF changed between reads')
+                  facts=elf_dependencies(raw);elf[path]=facts
+                  if facts['interpreter']:queue.append(facts['interpreter'])
+                  candidates={}
+                  for lib in facts['needed']:
+                      found=[]
+                      for directory in profile['library_search_roots']:
+                          logical=str(Path(directory)/lib)
+                          if os.path.lexists(logical):
+                              rr=record(logical);found.append(rr);queue.append(logical)
+                      check(found,'unlocated ELF dependency '+lib)
+                      candidates[lib]=found
+                  facts['candidates']=candidates
+              raw_metadata={}
+              for path in profile['metadata_files']:
+                  budget();p=path.replace('/proc/self/', '/proc/'+str(os.getpid())+'/')
+                  if not os.path.exists(p):raw_metadata[path]={'status':'ABSENT'};continue
+                  try:
+                      with open(p,'rb') as f:b=f.read(1024*1024+1)
+                  except PermissionError:
+                      raw_metadata[path]={'status':'UNREADABLE_NOT_DISABLED'};continue
+                  check(len(b)<=1024*1024,'metadata bound')
+                  raw_metadata[path]={'sha256':sha(b),'text':b.decode('utf-8')}
+              check(raw_metadata['/etc/os-release']['sha256']==profile['os_release_sha256'],'OS release changed')
+              interfaces={}
+              for path in profile['interface_paths']:
+                  budget()
+                  try:st=os.lstat(path)
+                  except FileNotFoundError:
+                      interfaces[path]={'status':'ABSENT_NOT_ENFORCEMENT_TESTED'};continue
+                  interfaces[path]={'mode':format(stat.S_IMODE(st.st_mode),'04o'),
+                                    'uid':st.st_uid,'gid':st.st_gid,
+                                    'type':'directory' if stat.S_ISDIR(st.st_mode) else
+                                    'regular' if stat.S_ISREG(st.st_mode) else 'other',
+                                    'meaning':'INTERFACE_METADATA_NOT_DELEGATION_OR_ENFORCEMENT'}
+              # daemon.json may contain proxy credentials. Do not open it, environment
+              # files, Docker sockets, other processes' /proc records or secret stores.
+              daemon={'effective_configuration':'NOT_OBSERVED_NO_DAEMON_QUERY',
+                      'daemon_json':'NOT_READ_CREDENTIAL_BOUNDARY'}
+              policies={}
+              for path in profile['policy_candidate_files']:
+                  budget();p=Path(path)
+                  if not p.exists():policies[path]={'status':'ABSENT'};continue
+                  check(not p.is_symlink() and p.lstat().st_uid==0 and not p.lstat().st_mode&0o022,'policy file trust')
+                  b=p.read_bytes();check(len(b)<=2*1024*1024,'policy source bound')
+                  policy=json.loads(b)
+                  check(isinstance(policy,dict) and set(policy)<=set(('defaultAction',
+                      'defaultErrnoRet','architectures','archMap','syscalls','flags')),
+                      'not a narrowly identified seccomp policy')
+                  policies[path]={'sha256':sha(b),'text':b.decode('utf-8'),'meaning':'CANDIDATE_FILE_NOT_EFFECTIVE_POLICY_ATTESTATION'}
+              result={'schema':'boss-native-input-capture-v1','scan_complete':True,
+                  'qualification':'NOT_ESTABLISHED','fixed_tool_files':fixed,
+                  'system_inputs':records,'header_roots_completed':completed,
+                  'elf_dependency_candidates':elf,'native_metadata':raw_metadata,
+                  'containment_interfaces':interfaces,
+                  'daemon_configuration':daemon,'policy_candidates':policies,
+                  'owner_reference_sha256_reported':owner,'profile_sha256':os.environ['BOSS_PROFILE_SHA256'],
+                  'workflow_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],
+                  'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],'run_number':os.environ['GITHUB_RUN_NUMBER'],
+                  'runner_image_version':os.environ['ImageVersion'],'kernel_release':os.uname().release,
+                  'fixture_executions':0,'compiler_executions':0,'children_spawned_by_collector':0,
+                  'elapsed_seconds':time.monotonic()-started,'utc_observed':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                  'not_established':['actual preprocessor dependency trace','successful fixture build and ELF hash',
+                      'live Docker/cgroup admission driver','delegation and watchdog operation',
+                      'effective seccomp/LSM policy','network denial and descendant cleanup']}
+              payload=(json.dumps(result,sort_keys=True,separators=(',',':'))+'\n').encode()
+              check(len(payload)<=32*1024*1024,'artifact metadata size')
+              manifest=(json.dumps({'files':{'INPUTS.json':sha(payload)},'self_hash_excluded':True},sort_keys=True,separators=(',',':'))+'\n').encode()
+              os.mkdir('native-input-evidence',0o700)
+              for name,b in [('INPUTS.json',payload),('MANIFEST.json',manifest)]:
+                  fd=os.open('native-input-evidence/'+name,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+                  with os.fdopen(fd,'wb') as f:f.write(b);f.flush();os.fsync(f.fileno())
+              check(time.monotonic()-started<40,'metadata output deadline')
+          
+          PROFILE={'artifact_action_commit': 'ea165f8d65b6e75b540449e92b4886f43607fa02', 'base_commit': '22156bbdc07bd0c82dda61a8db9eb92f442e63e7', 'branch': 'qualification/boss-native-inputs-v1', 'collector_deadline_seconds': 40, 'elf_seeds': ['/usr/bin/python3', '/usr/bin/gcc', '/usr/bin/ld', '/usr/lib/gcc/x86_64-linux-gnu/13/cc1', '/usr/bin/x86_64-linux-gnu-as'], 'expected_tools': [{'bytes': 8020928, 'mode': '0755', 'requested': '/usr/bin/python3', 'resolved': '/usr/bin/python3.12', 'sha256': 'e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f', 'uid': 0}, {'bytes': 43134496, 'mode': '0755', 'requested': '/usr/bin/docker', 'resolved': '/usr/bin/docker', 'sha256': '6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d', 'uid': 0}, {'bytes': 83666424, 'mode': '0755', 'requested': '/usr/bin/dockerd', 'resolved': '/usr/bin/dockerd', 'sha256': 'b8644399e73e2c9b32ea3983daf3a9856a483a79196bea10c01977d2b021fe71', 'uid': 0}, {'bytes': 44299016, 'mode': '0755', 'requested': '/usr/bin/containerd', 'resolved': '/usr/bin/containerd', 'sha256': 'fc185d75979d92a4f8de99b76293dca7fe81142e9c5fd01d7da59f786f0fc8d1', 'uid': 0}, {'bytes': 9719248, 'mode': '0755', 'requested': '/usr/bin/runc', 'resolved': '/usr/bin/runc', 'sha256': '1248fee8f9a0dc5382f888990d669e2bd225045869b9246f848a1681161abc96', 'uid': 0}, {'bytes': 1023032, 'mode': '0755', 'requested': '/usr/bin/gcc', 'resolved': '/usr/bin/x86_64-linux-gnu-gcc-13', 'sha256': '1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26', 'uid': 0}, {'bytes': 1359128, 'mode': '0755', 'requested': '/usr/bin/ld', 'resolved': '/usr/bin/x86_64-linux-gnu-ld.bfd', 'sha256': 'e9ceb054c12207970f2726dfc07e9a66b411602748628baf27399f02a9bbb31b', 'uid': 0}, {'bytes': 2129424, 'mode': '0755', 'requested': '/lib/x86_64-linux-gnu/libc.so.6', 'resolved': '/usr/lib/x86_64-linux-gnu/libc.so.6', 'sha256': '3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf', 'uid': 0}], 'first_attempt_only': True, 'first_workflow_run_only': True, 'github_job_timeout_minutes': 1, 'host_label': 'ubuntu-24.04', 'host_label_is_immutable': False, 'interface_paths': ['/sys/fs/cgroup', '/sys/fs/cgroup/cgroup.procs', '/sys/fs/cgroup/cgroup.kill', '/sys/fs/cgroup/cgroup.freeze', '/sys/fs/cgroup/pids.max', '/sys/fs/cgroup/cgroup.subtree_control', '/sys/kernel/security/apparmor'], 'kernel_release': '7.0.0-1017-azure', 'library_search_roots': ['/usr/lib/x86_64-linux-gnu', '/lib/x86_64-linux-gnu', '/usr/lib64', '/lib64'], 'metadata_files': ['/etc/os-release', '/proc/self/status', '/proc/self/cgroup', '/proc/self/mountinfo', '/proc/sys/kernel/osrelease', '/proc/sys/kernel/seccomp/actions_avail', '/sys/fs/cgroup/cgroup.controllers', '/sys/fs/cgroup/cgroup.subtree_control', '/sys/fs/cgroup/cgroup.type', '/sys/fs/cgroup/cgroup.events', '/sys/fs/cgroup/pids.max', '/sys/fs/cgroup/pids.current', '/sys/fs/cgroup/memory.max', '/sys/fs/cgroup/cpu.max', '/sys/kernel/security/lsm', '/sys/module/apparmor/parameters/enabled'], 'optional_files': ['/usr/bin/strace', '/usr/sbin/apparmor_parser', '/usr/bin/systemd-run', '/usr/bin/timeout', '/usr/lib/x86_64-linux-gnu/libgcc_s.so.1'], 'optional_trees': ['/usr/local/include'], 'os_release_sha256': '87458b3b1f1ca0e5c693ade771de7007c3783bdc692fa6b39eb6414bf2af2763', 'policy_candidate_files': ['/etc/docker/seccomp.json', '/etc/docker/seccomp-profile.json', '/usr/share/docker/seccomp.json', '/usr/share/containers/seccomp.json'], 'qualifications_granted': [], 'repository': 'eaglevisiondigital/theboss', 'required_files': ['/usr/lib/gcc/x86_64-linux-gnu/13/cc1', '/usr/bin/x86_64-linux-gnu-as', '/usr/lib/x86_64-linux-gnu/crt1.o', '/usr/lib/x86_64-linux-gnu/crti.o', '/usr/lib/x86_64-linux-gnu/crtn.o', '/usr/lib/x86_64-linux-gnu/libc.so', '/usr/lib/x86_64-linux-gnu/libc_nonshared.a', '/usr/lib/gcc/x86_64-linux-gnu/13/crtbegin.o', '/usr/lib/gcc/x86_64-linux-gnu/13/crtend.o', '/usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a', '/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so', '/usr/include/errno.h', '/usr/include/signal.h', '/usr/include/spawn.h', '/usr/include/stdio.h', '/usr/include/string.h', '/usr/include/time.h', '/usr/include/unistd.h', '/usr/include/netinet/in.h', '/usr/include/x86_64-linux-gnu/sys/socket.h', '/usr/include/x86_64-linux-gnu/sys/types.h', '/usr/include/x86_64-linux-gnu/sys/wait.h'], 'required_trees': ['/usr/include', '/usr/lib/gcc/x86_64-linux-gnu/13'], 'runner_image_version': '20261101.360.1', 'schema': 'boss-fixed-native-input-capture-profile-v1', 'scope': 'One read-only system code/interface metadata capture. No child, compiler query/build, fixture, container, daemon API, external network probe or application execution. Only pinned artifact upload transmits metadata.', 'tool_files': ['/usr/bin/python3', '/usr/bin/docker', '/usr/bin/dockerd', '/usr/bin/containerd', '/usr/bin/runc', '/usr/bin/gcc', '/usr/bin/ld', '/lib/x86_64-linux-gnu/libc.so.6'], 'workflow_path': '.github/workflows/boss-native-inputs-v1.yml'}
+          capture(PROFILE)
+      - name: Retain native input evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: boss-native-inputs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: native-input-evidence/
+          if-no-files-found: error
+          retention-days: 7
